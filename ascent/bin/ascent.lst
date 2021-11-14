@@ -1,0 +1,138 @@
+    1 00:0000 -  -  -  -  
+    2 00:0000 -  -  -  -   .assume ADL=1
+    3 00:0000 -  -  -  -   .org userMem-2
+    4 00:0000 EF 7B -  -   .db tExtTok,tAsm84CeCmp
+    5 00:0002 -  -  -  -  
+    6 00:0002 -  -  -  -  draw_buffer:
+    7 00:0002 00 00 00 -  	.dl 0
+    8 00:0005 -  -  -  -  ;0E30000h + 0200h
+    9 00:0005 -  -  -  -  
+   10 00:0005 CD 28 08 02 	call _homeup
+   11 00:0009 CD 10 08 02 	call _ClrScrnFull
+   12 00:000D -  -  -  -  
+   13 00:000D CD 48 08 02 	call _RunIndicOff		; turn off run indicator
+   14 00:0011 F3 -  -  -  	di				; disable interrupts
+   15 00:0012 21 00 02 E3 	ld	hl,mpLcdPalette
+   16 00:0016 -  -  -  -  
+   17 00:0016 3E 00 -  -  	ld	a,%00000000 ;GGGBBBBB
+   18 00:0018 77 -  -  -  	ld	(hl),a
+   19 00:0019 3E 00 -  -  	ld  a,%00000000 ; GRRRRRGG
+   20 00:001B 23 -  -  -  	inc hl
+   21 00:001C 77 -  -  -  	ld	(hl),a
+   22 00:001D 23 -  -  -  	inc hl
+   23 00:001E 3E E0 -  -  	ld	a,%11100000 ;GGGBBBBB
+   24 00:0020 77 -  -  -  	ld	(hl),a
+   25 00:0021 3E FF -  -  	ld  a,%11111111 ; GRRRRRGG
+   26 00:0023 23 -  -  -  	inc hl
+   27 00:0024 77 -  -  -  	ld	(hl),a
+   28 00:0025 -  -  -  -  
+   29 00:0025 CD E0 1D 02 	call _os_ClearVRAMLines	; set all of vram to index 255 (white)
+   30 00:0029 3E 25 -  -  	ld	a,lcdBpp4
+   31 00:002B 32 18 00 E3 	ld	(mpLcdCtrl),a	
+   32 00:002F -  -  -  -  
+   33 00:002F -  -  -  -  
+   34 00:002F 21 00 00 D4 	ld hl,vRam
+   35 00:0033 22 02 00 00 	ld (draw_buffer),hl
+   36 00:0037 01 00 96 00 	ld bc,320*120
+   37 00:003B 3E 11 -  -  	ld a,$11
+   38 00:003D CD E0 10 02 	call _MemSet
+   39 00:0041 FB -  -  -  	ei
+   40 00:0042 CD 8C 0D 02 	call _GetKey
+   41 00:0046 F3 -  -  -  	di
+   42 00:0047 -  -  -  -  
+   43 00:0047 -  -  -  -  exit_prgm:
+   44 00:0047 CD 10 08 02 	call _ClrScrnFull
+   45 00:004B 3E 2D -  -  	ld	a,lcdBpp16
+   46 00:004D 32 18 00 E3 	ld	(mpLcdCtrl),a
+   47 00:0051 CD 3C 1A 02 	call _DrawStatusBar
+   48 00:0055 -  -  -  -  	
+   49 00:0055 FB -  -  -  	ei				; reset screen back to normal
+   50 00:0056 C9 -  -  -  	ret				; return to os
+   51 00:0057 -  -  -  -  	
+   52 00:0057 -  -  -  -  	
+   53 00:0057 -  -  -  -  #include "includes\ti84pce.inc"
+Listing for file "C:\Users\jax9h\OneDrive\Desktop\ti84\ascent\includes\ti84pce.inc"
+    1 00:0057 -  -  -  -  ;TI-84 Plus CE Include File
+    2 00:0057 -  -  -  -  
+    3 00:0057 -  -  -  -  ;Various Parts Contributed by
+    4 00:0057 -  -  -  -  ;- BrandonW
+    5 00:0057 -  -  -  -  ;- calc84
+    6 00:0057 -  -  -  -  ;- MateoConLechuga
+    7 00:0057 -  -  -  -  ;- Runer112
+    8 00:0057 -  -  -  -  ;- tr1p1ea
+    9 00:0057 -  -  -  -  ;- Kerm Martian
+   10 00:0057 -  -  -  -  ;- Texas Instruments (ti83plus.inc)
+Listing for file "ascent.asm"
+   54 00:0057 -  -  -  -  #include "drawSprite.txt"
+Listing for file "C:\Users\jax9h\OneDrive\Desktop\ti84\ascent\drawSprite.txt"
+    1 00:0057 -  -  -  -  
+    2 00:0057 -  -  -  -  
+    3 00:0057 -  -  -  -  ; hl = line number
+    4 00:0057 -  -  -  -  draw_bg_line:
+    5 00:0057 DD 21 84 00 
+              00 -  -  -  	ld ix, bg_data
+    6 00:005C DD 07 00 -  	ld bc,(ix)
+    7 00:005F 37 -  -  -  	scf
+    8 00:0060 3F -  -  -  	ccf
+    9 00:0061 E5 -  -  -  	push hl
+   10 00:0062 ED 42 -  -  	sbc hl,bc
+   11 00:0064 D2 83 00 00 	jp nc, draw_bg_line_skip
+   12 00:0068 -  -  -  -  	;hl holds difference between line num and sprite y
+   13 00:0068 DD 7E 05 -  	ld a,(ix+5);a is sprite height
+   14 00:006B 85 -  -  -  	add a,l
+   15 00:006C D2 83 00 00 	jp nc,draw_bg_line_skip
+   16 00:0070 95 -  -  -  	sub a,l
+   17 00:0071 ED 44 -  -  	neg ;a is row in sprite
+   18 00:0073 DD 66 06 -  	ld h,(ix+6);h is sprite index
+   19 00:0076 2E 06 -  -  	ld l,6
+   20 00:0078 ED 6C -  -  	mlt hl
+   21 00:007A 01 84 00 00 	ld bc, bg_sprite_indices
+   22 00:007E 09 -  -  -  	add hl,bc;hl is pointer to sprite data
+   23 00:007F E5 -  -  -  	push hl
+   24 00:0080 ED 27 -  -  	ld hl,(hl); hl is sprite data
+   25 00:0082 46 -  -  -  	ld b,(hl)
+   26 00:0083 -  -  -  -  	
+   27 00:0083 -  -  -  -  	
+   28 00:0083 -  -  -  -  	
+   29 00:0083 -  -  -  -  	
+   30 00:0083 -  -  -  -  	
+   31 00:0083 -  -  -  -  draw_bg_line_skip:
+   32 00:0083 -  -  -  -  	
+   33 00:0083 -  -  -  -  
+   34 00:0083 -  -  -  -  	
+   35 00:0083 -  -  -  -  
+   36 00:0083 -  -  -  -  
+   37 00:0083 -  -  -  -  ;hl = vram position  de = sprdata, de' = alpha b= width a = 11110000 or 00001111
+   38 00:0083 -  -  -  -  draw_bg_sprite_line:
+   39 00:0083 A6 -  -  -  	and (hl)
+   40 00:0084 -  -  -  -  	
+   41 00:0084 -  -  -  -  	
+Listing for file "ascent.asm"
+   55 00:0084 -  -  -  -  #include "spriteData.txt"
+Listing for file "C:\Users\jax9h\OneDrive\Desktop\ti84\ascent\spriteData.txt"
+    1 00:0084 -  -  -  -  
+    2 00:0084 -  -  -  -  
+    3 00:0084 -  -  -  -  testSprite:
+    4 00:0084 -  -  -  -  	;.db width
+    5 00:0084 -  -  -  -  	;.db col 1 , 2 ,3 ,4
+    6 00:0084 -  -  -  -  	;spr data 2bpp
+    7 00:0084 -  -  -  -  	;line length in bytes, data
+    8 00:0084 -  -  -  -  	;line length, data
+    9 00:0084 -  -  -  -  	;line length, data
+   10 00:0084 -  -  -  -  	
+   11 00:0084 -  -  -  -  testSprite_t:
+   12 00:0084 -  -  -  -  	;.db transparency data 
+Listing for file "ascent.asm"
+   56 00:0084 -  -  -  -  #include "levelData.txt"
+Listing for file "C:\Users\jax9h\OneDrive\Desktop\ti84\ascent\levelData.txt"
+    1 00:0084 -  -  -  -  bg_sprite_indices:
+    2 00:0084 -  -  -  -  	;.dl sprite data, transparent data
+    3 00:0084 -  -  -  -  
+    4 00:0084 -  -  -  -  
+    5 00:0084 -  -  -  -  
+    6 00:0084 -  -  -  -  
+    7 00:0084 -  -  -  -  bg_data:
+    8 00:0084 -  -  -  -  	;.db y y y x x 
+    9 00:0084 -  -  -  -  	;.db height .db index
+   10 00:0084 -  -  -  -  	;7 bytes
+Listing for file "ascent.asm"

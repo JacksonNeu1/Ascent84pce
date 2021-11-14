@@ -1,0 +1,169 @@
+
+
+; hl = line number
+draw_bg_line:
+	ld ix, bg_data
+	ld bc,(ix)
+	scf
+	ccf
+	push hl
+	sbc hl,bc
+	jp nc, draw_bg_line_skip
+	;hl holds difference between line num and sprite y
+	ld a,(ix+5);a is sprite height
+	add a,l
+	jp nc,draw_bg_line_skip
+	sub a,l
+	neg ;a is row in sprite
+	
+	ld h,(ix+6);h is sprite index
+	ld l,3
+	mlt hl
+	ld bc, bg_sprite_indices
+	add hl,bc;hl is pointer to sprite data
+	ld hl,(hl);hl is sprite data
+	
+	ld b,(hl); b is width
+	inc hl
+	ld c,a
+	ld a,(hl)
+	ld (current_color_0),a
+	
+	inc hl
+	ld a,(hl)
+	ld (current_color_1),a
+	
+	inc hl
+	ld a,(hl)
+	ld (current_color_2),a
+	inc hl
+	ld a,(hl)
+	ld (current_color_3),a
+	
+	ld de,5
+	add hl,de; hl is line length
+get_sprite_data_row_loop:
+	ld e,(hl)
+	add hl,de
+	dec c
+	jp nz, get_sprite_data_row_loop
+	
+	inc hl
+	;hl points to sprite data row
+	push hl
+	exx
+	pop de;transparency data ptr
+	exx
+	ld a,b
+	dec a
+	srl a
+	srl a
+	srl a
+	inc a
+	ld e,a
+	add hl,de;hl points to color data
+	push hl
+draw_bg_vram_addr .equ $+1
+	ld hl,0
+	ld e,(ix+3)
+	add hl,de; hl is vram byte
+	ld a,(ix+4);a is vram nibble
+	pop de ; de is color data
+	call draw_bg_sprite_line
+	
+	
+draw_bg_line_skip:
+	
+
+	
+
+current_color_0:
+.db 0
+current_color_1:
+.db 0
+current_color_2:
+.db 0
+current_color_3:
+.db 0
+
+;hl' = vram position  de = colordata, de' = alpha b= width
+draw_bg_sprite_line:
+	push hl
+	ld c,%11000000
+	exx
+	pop hl
+	ld c,%00000001
+	exx
+draw_bg_sprite_line_loop:
+	exx
+	rrc c
+	jp nc, dbgs_alpha_inc_skip
+	inc de
+dbgs_alpha_inc_skip:
+	ld a,(de)
+	and c
+	jp z, dbgs_alphaskip
+	exx
+	ld a,(de)
+	and c
+	jp z, dbgs_color0
+	and %10101010
+	jp z, dbgs_color1
+	and %01010101
+	jp z, dbgs_color2
+	jp dbgs_color3
+	
+dbgs_color0:
+	exx
+	ld a,(current_color_0)
+	jp dbgs_color_write
+dbgs_color1:
+	exx
+	ld a,(current_color_1)
+	jp dbgs_color_write
+dbgs_color2:
+	exx
+	ld a,(current_color_2)
+	jp dbgs_color_write
+dbgs_color3:
+	exx
+	ld a,(current_color_3)
+dbgs_color_write:
+dbgs_color_nibble_1 .equ $+1
+	and %11110000
+	ld b,a;b has color nibble
+dbgs_color_nibble_2 .equ $+1
+	ld a,%11110000
+	xor %11111111
+	ld (dbgs_color_nibble_1),a
+	ld (dbgs_color_nibble_2),a
+	bit 0,a
+	jp z, dbgs_skip_inc_hl
+	inc hl
+dbgs_skip_inc_hl:
+	and (hl);a has other nibble
+	or b 
+	ld (hl),a;write to vram 
+	exx
+	
+
+	
+	
+	
+	
+	
+dbgs_alphaskip:
+	
+	exx
+	
+
+
+
+
+
+
+
+
+
+
+

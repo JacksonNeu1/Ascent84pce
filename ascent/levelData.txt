@@ -1,0 +1,10 @@
+bg_sprite_indices:
+	;.dl sprite data
+
+
+
+
+bg_data:
+	;.db y y y x(byte) x(00001111) 
+	;.db height .db index
+	;7 bytes
