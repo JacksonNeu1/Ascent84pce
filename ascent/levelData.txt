@@ -1,10 +1,99 @@
 bg_sprite_indices:
+	.dl testSprite
+	.dl testSprite2
 	;.dl sprite data
 
 
 
 
 bg_data:
-	;.db y y y x(byte) x(00001111) 
-	;.db height .db index
-	;7 bytes
+
+	;y y 
+	;x (byte) 
+	;flags  (7 = odd pixel  6 = spriteFlip , 0 = data cont)    0 to end data   if sprite starts on even pixel, inc x by 1
+	;height
+	;index
+	
+	
+	;even pixel noflip  x = (pixel - 1) /2
+	;odd pixel noflip   x = (pixel) /2
+	
+	;even pixel, flip, odd width   x = (pixel + width)/2
+	;odd pixel, flip, odd width	   x = (pixel + width)/2
+	
+	
+	;even pixel, flip, even width   x = (pixel + width)/2
+	;odd pixel, flip, even width	   x = (pixel + width)/2
+	
+	
+	
+	
+	
+	;6 bytes
+	.db $00,$84
+	.db 5
+	.db %00000001
+	.db 5
+	.db 0
+	
+	.db $00,$84
+	.db 10
+	.db %10000001
+	.db 5
+	.db 0
+	
+	.db $00,$83
+	.db 20
+	.db %01000001
+	.db 5
+	.db 0
+	
+	.db $00,$83
+	.db 30
+	.db %11000001
+	.db 5
+	.db 0
+	
+	
+	.db $00,$80
+	.db 5
+	.db %00000001
+	.db 5
+	.db 0
+	
+	.db $00,$81
+	.db 10
+	.db %10000001
+	.db 5
+	.db 0
+	
+	.db $00,$80
+	.db 20
+	.db %01000001
+	.db 5
+	.db 0
+	
+	.db $00,$81
+	.db 30
+	.db %11000001
+	.db 5
+	.db 0
+	
+		.db $00,$84
+	.db 5
+	.db %00000001
+	.db 5
+	.db 0
+	
+	.db $00,$84
+	.db 10
+	.db %10000000
+	.db 5
+	.db 0
+
+
+	;.dl $000081
+	;.db 10,%00001111
+	;.db 5,0
+		
+	.db 0,0,0,0,0

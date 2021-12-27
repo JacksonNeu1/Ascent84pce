@@ -1,138 +1,811 @@
     1 00:0000 -  -  -  -  
-    2 00:0000 -  -  -  -   .assume ADL=1
-    3 00:0000 -  -  -  -   .org userMem-2
-    4 00:0000 EF 7B -  -   .db tExtTok,tAsm84CeCmp
-    5 00:0002 -  -  -  -  
-    6 00:0002 -  -  -  -  draw_buffer:
-    7 00:0002 00 00 00 -  	.dl 0
-    8 00:0005 -  -  -  -  ;0E30000h + 0200h
-    9 00:0005 -  -  -  -  
-   10 00:0005 CD 28 08 02 	call _homeup
-   11 00:0009 CD 10 08 02 	call _ClrScrnFull
-   12 00:000D -  -  -  -  
-   13 00:000D CD 48 08 02 	call _RunIndicOff		; turn off run indicator
-   14 00:0011 F3 -  -  -  	di				; disable interrupts
-   15 00:0012 21 00 02 E3 	ld	hl,mpLcdPalette
-   16 00:0016 -  -  -  -  
-   17 00:0016 3E 00 -  -  	ld	a,%00000000 ;GGGBBBBB
-   18 00:0018 77 -  -  -  	ld	(hl),a
-   19 00:0019 3E 00 -  -  	ld  a,%00000000 ; GRRRRRGG
-   20 00:001B 23 -  -  -  	inc hl
-   21 00:001C 77 -  -  -  	ld	(hl),a
-   22 00:001D 23 -  -  -  	inc hl
-   23 00:001E 3E E0 -  -  	ld	a,%11100000 ;GGGBBBBB
-   24 00:0020 77 -  -  -  	ld	(hl),a
-   25 00:0021 3E FF -  -  	ld  a,%11111111 ; GRRRRRGG
-   26 00:0023 23 -  -  -  	inc hl
-   27 00:0024 77 -  -  -  	ld	(hl),a
-   28 00:0025 -  -  -  -  
-   29 00:0025 CD E0 1D 02 	call _os_ClearVRAMLines	; set all of vram to index 255 (white)
-   30 00:0029 3E 25 -  -  	ld	a,lcdBpp4
-   31 00:002B 32 18 00 E3 	ld	(mpLcdCtrl),a	
-   32 00:002F -  -  -  -  
-   33 00:002F -  -  -  -  
-   34 00:002F 21 00 00 D4 	ld hl,vRam
-   35 00:0033 22 02 00 00 	ld (draw_buffer),hl
-   36 00:0037 01 00 96 00 	ld bc,320*120
-   37 00:003B 3E 11 -  -  	ld a,$11
-   38 00:003D CD E0 10 02 	call _MemSet
-   39 00:0041 FB -  -  -  	ei
-   40 00:0042 CD 8C 0D 02 	call _GetKey
-   41 00:0046 F3 -  -  -  	di
-   42 00:0047 -  -  -  -  
-   43 00:0047 -  -  -  -  exit_prgm:
-   44 00:0047 CD 10 08 02 	call _ClrScrnFull
-   45 00:004B 3E 2D -  -  	ld	a,lcdBpp16
-   46 00:004D 32 18 00 E3 	ld	(mpLcdCtrl),a
-   47 00:0051 CD 3C 1A 02 	call _DrawStatusBar
-   48 00:0055 -  -  -  -  	
-   49 00:0055 FB -  -  -  	ei				; reset screen back to normal
-   50 00:0056 C9 -  -  -  	ret				; return to os
-   51 00:0057 -  -  -  -  	
-   52 00:0057 -  -  -  -  	
-   53 00:0057 -  -  -  -  #include "includes\ti84pce.inc"
+    2 00:0000 -  -  -  -  #include "includes\ti84pce.inc"
 Listing for file "C:\Users\jax9h\OneDrive\Desktop\ti84\ascent\includes\ti84pce.inc"
-    1 00:0057 -  -  -  -  ;TI-84 Plus CE Include File
-    2 00:0057 -  -  -  -  
-    3 00:0057 -  -  -  -  ;Various Parts Contributed by
-    4 00:0057 -  -  -  -  ;- BrandonW
-    5 00:0057 -  -  -  -  ;- calc84
-    6 00:0057 -  -  -  -  ;- MateoConLechuga
-    7 00:0057 -  -  -  -  ;- Runer112
-    8 00:0057 -  -  -  -  ;- tr1p1ea
-    9 00:0057 -  -  -  -  ;- Kerm Martian
-   10 00:0057 -  -  -  -  ;- Texas Instruments (ti83plus.inc)
+    1 00:0000 -  -  -  -  ;TI-84 Plus CE Include File
+    2 00:0000 -  -  -  -  
+    3 00:0000 -  -  -  -  ;Various Parts Contributed by
+    4 00:0000 -  -  -  -  ;- BrandonW
+    5 00:0000 -  -  -  -  ;- calc84
+    6 00:0000 -  -  -  -  ;- MateoConLechuga
+    7 00:0000 -  -  -  -  ;- Runer112
+    8 00:0000 -  -  -  -  ;- tr1p1ea
+    9 00:0000 -  -  -  -  ;- Kerm Martian
+   10 00:0000 -  -  -  -  ;- Texas Instruments (ti83plus.inc)
 Listing for file "ascent.asm"
-   54 00:0057 -  -  -  -  #include "drawSprite.txt"
+    3 00:0000 -  -  -  -  
+    4 00:0000 -  -  -  -   .assume ADL=1
+    5 00:0000 -  -  -  -   .org userMem-2
+    6 D1:A87F EF 7B -  -   .db tExtTok,tAsm84CeCmp
+    7 D1:A881 -  -  -  -  
+    8 D1:A881 -  -  -  -  
+    9 D1:A881 -  -  -  -  
+   10 D1:A881 -  -  -  -  ;0E30000h + 0200h
+   11 D1:A881 -  -  -  -  
+   12 D1:A881 CD 28 08 02 	call _homeup
+   13 D1:A885 CD 10 08 02 	call _ClrScrnFull
+   14 D1:A889 -  -  -  -  
+   15 D1:A889 CD 48 08 02 	call _RunIndicOff		; turn off run indicator
+   16 D1:A88D F3 -  -  -  	di			
+   17 D1:A88E -  -  -  -  	
+   18 D1:A88E -  -  -  -  	
+   19 D1:A88E -  -  -  -  	;jp time_test_start
+   20 D1:A88E -  -  -  -  	
+   21 D1:A88E 21 00 02 E3 	ld	hl,mpLcdPalette
+   22 D1:A892 -  -  -  -  
+   23 D1:A892 3E 00 -  -  	ld	a,%00000000 ;GGGBBBBB
+   24 D1:A894 77 -  -  -  	ld	(hl),a
+   25 D1:A895 3E 00 -  -  	ld  a,%00000000 ; GRRRRRGG
+   26 D1:A897 23 -  -  -  	inc hl
+   27 D1:A898 77 -  -  -  	ld	(hl),a
+   28 D1:A899 23 -  -  -  	inc hl;1yellow
+   29 D1:A89A 3E E0 -  -  	ld	a,%11100000 ;GGGBBBBB
+   30 D1:A89C 77 -  -  -  	ld	(hl),a
+   31 D1:A89D 3E FF -  -  	ld  a,%11111111 ; GRRRRRGG
+   32 D1:A89F 23 -  -  -  	inc hl
+   33 D1:A8A0 77 -  -  -  	ld	(hl),a
+   34 D1:A8A1 -  -  -  -  	
+   35 D1:A8A1 23 -  -  -  	inc hl;2blue
+   36 D1:A8A2 3E 1F -  -  	ld	a,%00011111 ;GGGBBBBB
+   37 D1:A8A4 77 -  -  -  	ld	(hl),a
+   38 D1:A8A5 3E 00 -  -  	ld  a,%00000000 ; GRRRRRGG
+   39 D1:A8A7 23 -  -  -  	inc hl
+   40 D1:A8A8 77 -  -  -  	ld	(hl),a
+   41 D1:A8A9 -  -  -  -  	
+   42 D1:A8A9 23 -  -  -  	inc hl;3r
+   43 D1:A8AA 3E 00 -  -  	ld	a,%00000000 ;GGGBBBBB
+   44 D1:A8AC 77 -  -  -  	ld	(hl),a
+   45 D1:A8AD 3E 7C -  -  	ld  a,%01111100 ; GRRRRRGG
+   46 D1:A8AF 23 -  -  -  	inc hl
+   47 D1:A8B0 77 -  -  -  	ld	(hl),a
+   48 D1:A8B1 -  -  -  -  	
+   49 D1:A8B1 23 -  -  -  	inc hl;4g
+   50 D1:A8B2 3E E0 -  -  	ld	a,%11100000 ;GGGBBBBB
+   51 D1:A8B4 77 -  -  -  	ld	(hl),a
+   52 D1:A8B5 3E 83 -  -  	ld  a,%10000011 ; GRRRRRGG
+   53 D1:A8B7 23 -  -  -  	inc hl
+   54 D1:A8B8 77 -  -  -  	ld	(hl),a
+   55 D1:A8B9 -  -  -  -  	
+   56 D1:A8B9 23 -  -  -  	inc hl;5 white
+   57 D1:A8BA 3E FF -  -  	ld	a,%11111111 ;GGGBBBBB
+   58 D1:A8BC 77 -  -  -  	ld	(hl),a
+   59 D1:A8BD 3E FF -  -  	ld  a,%11111111 ; GRRRRRGG
+   60 D1:A8BF 23 -  -  -  	inc hl
+   61 D1:A8C0 77 -  -  -  	ld	(hl),a
+   62 D1:A8C1 -  -  -  -  
+   63 D1:A8C1 CD E0 1D 02 	call _os_ClearVRAMLines	; set all of vram to index 255 (white)
+   64 D1:A8C5 3E 25 -  -  	ld	a,lcdBpp4
+   65 D1:A8C7 32 18 00 E3 	ld (mpLcdCtrl),a	
+   66 D1:A8CB -  -  -  -  	
+   67 D1:A8CB C3 15 A9 D1 	jp time_test_start
+   68 D1:A8CF -  -  -  -  	
+   69 D1:A8CF 21 20 03 D4 	ld hl,vRam + (160*5)
+   70 D1:A8D3 22 AE A9 D1 	ld (draw_bg_vram_addr),hl
+   71 D1:A8D7 21 80 00 00 	ld hl,$000080
+   72 D1:A8DB CD 36 A9 D1 	call draw_bg_line
+   73 D1:A8DF -  -  -  -  	
+   74 D1:A8DF -  -  -  -  
+   75 D1:A8DF -  -  -  -  	
+   76 D1:A8DF -  -  -  -  	
+   77 D1:A8DF FB -  -  -  	ei
+   78 D1:A8E0 CD 8C 0D 02 	call _GetKey
+   79 D1:A8E4 F3 -  -  -  	di
+   80 D1:A8E5 -  -  -  -  
+   81 D1:A8E5 -  -  -  -  exit_prgm:
+   82 D1:A8E5 CD 10 08 02 	call _ClrScrnFull
+   83 D1:A8E9 3E 2D -  -  	ld	a,lcdBpp16
+   84 D1:A8EB 32 18 00 E3 	ld	(mpLcdCtrl),a
+   85 D1:A8EF CD 3C 1A 02 	call _DrawStatusBar
+   86 D1:A8F3 -  -  -  -  	
+   87 D1:A8F3 FB -  -  -  	ei				; reset screen back to normal
+   88 D1:A8F4 C9 -  -  -  	ret				; return to os
+   89 D1:A8F5 -  -  -  -  	
+   90 D1:A8F5 -  -  -  -  
+   91 D1:A8F5 -  -  -  -  printHL:;=================REMOVE
+   92 D1:A8F5 E5 -  -  -  	push hl
+   93 D1:A8F6 CD E0 1D 02 	call _os_ClearVRAMLines	; set all of vram to index 255 (white)
+   94 D1:A8FA 3E 2D -  -  	ld	a,lcdBpp16
+   95 D1:A8FC 32 18 00 E3 	ld (mpLcdCtrl),a
+   96 D1:A900 E1 -  -  -  	pop hl
+   97 D1:A901 CD E0 1E 02 	call _DispHL
+   98 D1:A905 FB -  -  -  	ei
+   99 D1:A906 CD 8C 0D 02 	call _GetKey
+  100 D1:A90A F3 -  -  -  	di
+  101 D1:A90B C3 E5 A8 D1 	jp exit_prgm
+  102 D1:A90F -  -  -  -  
+  103 D1:A90F -  -  -  -  
+  104 D1:A90F -  -  -  -  test_addr:
+  105 D1:A90F 00 00 00 -  	.dl 0
+  106 D1:A912 -  -  -  -  
+  107 D1:A912 -  -  -  -  draw_buffer:
+  108 D1:A912 00 00 00 -  	.dl 0
+  109 D1:A915 -  -  -  -  
+  110 D1:A915 -  -  -  -  	
+  111 D1:A915 -  -  -  -  #include "timeTesting.txt"
+Listing for file "C:\Users\jax9h\OneDrive\Desktop\ti84\ascent\timeTesting.txt"
+    1 D1:A915 -  -  -  -  
+    2 D1:A915 -  -  -  -  
+    3 D1:A915 -  -  -  -  
+    4 D1:A915 -  -  -  -  time_test_start:
+    5 D1:A915 21 40 42 0F 	ld hl,1000000
+    6 D1:A919 -  -  -  -  time_testing_loop:
+    7 D1:A919 E5 -  -  -  	push hl
+    8 D1:A91A -  -  -  -  	;instruction here
+    9 D1:A91A 21 20 03 D4 	ld hl,vRam + (160*5)
+   10 D1:A91E 22 AE A9 D1 	ld (draw_bg_vram_addr),hl
+   11 D1:A922 21 80 00 00 	ld hl,$000080
+   12 D1:A926 CD 36 A9 D1 	call draw_bg_line
+   13 D1:A92A -  -  -  -  	
+   14 D1:A92A E1 -  -  -  	pop hl
+   15 D1:A92B 2B -  -  -  	dec hl
+   16 D1:A92C 7D -  -  -  	ld a,l
+   17 D1:A92D B4 -  -  -  	or h
+   18 D1:A92E C2 19 A9 D1 	jp nz,time_testing_loop
+   19 D1:A932 C3 E5 A8 D1 	jp exit_prgm
+   20 D1:A936 -  -  -  -  	
+   21 D1:A936 -  -  -  -  
+   22 D1:A936 -  -  -  -  ;60fps = .0166sec/f	
+   23 D1:A936 -  -  -  -  
+   24 D1:A936 -  -  -  -  ;1000 ldir in vram of 160*240 bytes
+   25 D1:A936 -  -  -  -  ;6.8sec, .0068 sec/instruction   0.4 of a frame
+   26 D1:A936 -  -  -  -  
+   27 D1:A936 -  -  -  -  
+   28 D1:A936 -  -  -  -  ;10000000 draw 1 bg line of 4 sprites 
+   29 D1:A936 -  -  -  -  ;7.5 sec  .00045 of frame
+Listing for file "ascent.asm"
+  112 D1:A936 -  -  -  -  #include "drawSprite.txt"
 Listing for file "C:\Users\jax9h\OneDrive\Desktop\ti84\ascent\drawSprite.txt"
-    1 00:0057 -  -  -  -  
-    2 00:0057 -  -  -  -  
-    3 00:0057 -  -  -  -  ; hl = line number
-    4 00:0057 -  -  -  -  draw_bg_line:
-    5 00:0057 DD 21 84 00 
-              00 -  -  -  	ld ix, bg_data
-    6 00:005C DD 07 00 -  	ld bc,(ix)
-    7 00:005F 37 -  -  -  	scf
-    8 00:0060 3F -  -  -  	ccf
-    9 00:0061 E5 -  -  -  	push hl
-   10 00:0062 ED 42 -  -  	sbc hl,bc
-   11 00:0064 D2 83 00 00 	jp nc, draw_bg_line_skip
-   12 00:0068 -  -  -  -  	;hl holds difference between line num and sprite y
-   13 00:0068 DD 7E 05 -  	ld a,(ix+5);a is sprite height
-   14 00:006B 85 -  -  -  	add a,l
-   15 00:006C D2 83 00 00 	jp nc,draw_bg_line_skip
-   16 00:0070 95 -  -  -  	sub a,l
-   17 00:0071 ED 44 -  -  	neg ;a is row in sprite
-   18 00:0073 DD 66 06 -  	ld h,(ix+6);h is sprite index
-   19 00:0076 2E 06 -  -  	ld l,6
-   20 00:0078 ED 6C -  -  	mlt hl
-   21 00:007A 01 84 00 00 	ld bc, bg_sprite_indices
-   22 00:007E 09 -  -  -  	add hl,bc;hl is pointer to sprite data
-   23 00:007F E5 -  -  -  	push hl
-   24 00:0080 ED 27 -  -  	ld hl,(hl); hl is sprite data
-   25 00:0082 46 -  -  -  	ld b,(hl)
-   26 00:0083 -  -  -  -  	
-   27 00:0083 -  -  -  -  	
-   28 00:0083 -  -  -  -  	
-   29 00:0083 -  -  -  -  	
-   30 00:0083 -  -  -  -  	
-   31 00:0083 -  -  -  -  draw_bg_line_skip:
-   32 00:0083 -  -  -  -  	
-   33 00:0083 -  -  -  -  
-   34 00:0083 -  -  -  -  	
-   35 00:0083 -  -  -  -  
-   36 00:0083 -  -  -  -  
-   37 00:0083 -  -  -  -  ;hl = vram position  de = sprdata, de' = alpha b= width a = 11110000 or 00001111
-   38 00:0083 -  -  -  -  draw_bg_sprite_line:
-   39 00:0083 A6 -  -  -  	and (hl)
-   40 00:0084 -  -  -  -  	
-   41 00:0084 -  -  -  -  	
+    1 D1:A936 -  -  -  -  
+    2 D1:A936 -  -  -  -  
+    3 D1:A936 -  -  -  -  ; hl = line number
+    4 D1:A936 -  -  -  -  draw_bg_line:
+    5 D1:A936 01 00 00 00 	ld bc,0
+    6 D1:A93A DD 21 D1 AA 
+              D1 -  -  -  	ld ix, bg_data
+    7 D1:A93F -  -  -  -  draw_bg_line_loop:
+    8 D1:A93F DD 46 00 -  	ld b,(ix)
+    9 D1:A942 DD 4E 01 -  	ld c,(ix+1);bc holds y position of sprite
+   10 D1:A945 37 -  -  -  	scf
+   11 D1:A946 E5 -  -  -  	push hl
+   12 D1:A947 ED 42 -  -  	sbc hl,bc;sub y position+1 from line number, hl holds difference
+   13 D1:A949 D2 DA A9 D1 	jp nc, draw_bg_line_skip;if not negative, skip
+   14 D1:A94D -  -  -  -  	
+   15 D1:A94D -  -  -  -  	;hl holds difference between line num and sprite y
+   16 D1:A94D 7C -  -  -  	ld a,h
+   17 D1:A94E EE FF -  -  	xor %11111111
+   18 D1:A950 C2 DA A9 D1 	jp nz,draw_bg_line_skip;if hl is less than -256, too far below sprite
+   19 D1:A954 7D -  -  -  	ld a,l
+   20 D1:A955 B7 -  -  -  	or a
+   21 D1:A956 CA DA A9 D1 	jp z,draw_bg_line_skip;if hl = -256 skip
+   22 D1:A95A -  -  -  -  	
+   23 D1:A95A DD 7E 04 -  	ld a,(ix+4);a is sprite height
+   24 D1:A95D 85 -  -  -  	add a,l
+   25 D1:A95E D2 DA A9 D1 	jp nc,draw_bg_line_skip
+   26 D1:A962 7D -  -  -  	ld a,l
+   27 D1:A963 ED 44 -  -  	neg ;a is row in sprite starting from 1
+   28 D1:A965 -  -  -  -  	
+   29 D1:A965 DD 66 06 -  	ld h,(ix+6);h is sprite index
+   30 D1:A968 2E 03 -  -  	ld l,3
+   31 D1:A96A ED 6C -  -  	mlt hl
+   32 D1:A96C 01 CB AA D1 	ld bc, bg_sprite_indices
+   33 D1:A970 09 -  -  -  	add hl,bc;hl is pointer to sprite data
+   34 D1:A971 ED 27 -  -  	ld hl,(hl);hl is sprite data
+   35 D1:A973 -  -  -  -  	
+   36 D1:A973 46 -  -  -  	ld b,(hl); b is width
+   37 D1:A974 23 -  -  -  	inc hl
+   38 D1:A975 4F -  -  -  	ld c,a; c is row of sprite
+   39 D1:A976 -  -  -  -  	;load colors
+   40 D1:A976 7E -  -  -  	ld a,(hl)
+   41 D1:A977 32 EA A9 D1 	ld (current_color_0),a
+   42 D1:A97B 23 -  -  -  	inc hl
+   43 D1:A97C 7E -  -  -  	ld a,(hl)
+   44 D1:A97D 32 EB A9 D1 	ld (current_color_1),a
+   45 D1:A981 23 -  -  -  	inc hl
+   46 D1:A982 7E -  -  -  	ld a,(hl)
+   47 D1:A983 32 EC A9 D1 	ld (current_color_2),a
+   48 D1:A987 23 -  -  -  	inc hl
+   49 D1:A988 7E -  -  -  	ld a,(hl)
+   50 D1:A989 32 ED A9 D1 	ld (current_color_3),a
+   51 D1:A98D -  -  -  -  	
+   52 D1:A98D 23 -  -  -  	inc hl; hl is line length
+   53 D1:A98E -  -  -  -  	
+   54 D1:A98E 11 00 00 00 	ld de,0
+   55 D1:A992 -  -  -  -  get_sprite_data_row_loop:
+   56 D1:A992 0D -  -  -  	dec c
+   57 D1:A993 CA 9D A9 D1 	jp z, get_sprite_data_row_loop_exit
+   58 D1:A997 5E -  -  -  	ld e,(hl)
+   59 D1:A998 19 -  -  -  	add hl,de
+   60 D1:A999 C3 92 A9 D1 	jp get_sprite_data_row_loop
+   61 D1:A99D -  -  -  -  get_sprite_data_row_loop_exit:
+   62 D1:A99D -  -  -  -  	;hl points to sprite data row
+   63 D1:A99D E5 -  -  -  	push hl
+   64 D1:A99E D9 -  -  -  	exx
+   65 D1:A99F D1 -  -  -  	pop de;transparency data ptr -1
+   66 D1:A9A0 D9 -  -  -  	exx
+   67 D1:A9A1 78 -  -  -  	ld a,b;load sprite width
+   68 D1:A9A2 3D -  -  -  	dec a
+   69 D1:A9A3 CB 3F -  -  	srl a
+   70 D1:A9A5 CB 3F -  -  	srl a
+   71 D1:A9A7 CB 3F -  -  	srl a
+   72 D1:A9A9 3C -  -  -  	inc a
+   73 D1:A9AA 5F -  -  -  	ld e,a;number of bytes of alpha data
+   74 D1:A9AB 19 -  -  -  	add hl,de;hl points to color data-1
+   75 D1:A9AC E5 -  -  -  	push hl
+   76 D1:A9AD -  -  -  -  	
+   77 D1:A9AD -  -  -  -  draw_bg_vram_addr .equ $+1
+   78 D1:A9AD 21 00 00 00 	ld hl,$000000;load h w vram add
+   79 D1:A9B1 DD 5E 02 -  	ld e,(ix+2);x position/2 -1
+   80 D1:A9B4 19 -  -  -  	add hl,de; hl is vram byte
+   81 D1:A9B5 3E 0F -  -  	ld a,%00001111
+   82 D1:A9B7 DD CB 03 7E 	bit 7,(ix+3)
+   83 D1:A9BB CA C1 A9 D1 	jp z,draw_bg_line_evenpixel
+   84 D1:A9BF EE FF -  -  	xor %11111111
+   85 D1:A9C1 -  -  -  -  draw_bg_line_evenpixel:
+   86 D1:A9C1 32 73 AA D1 	ld (dbgs_color_nibble),a;load color nibble
+   87 D1:A9C5 D1 -  -  -  	pop de ; de is color data
+   88 D1:A9C6 DD CB 03 76 	bit 6 , (ix+3)
+   89 D1:A9CA C2 D6 A9 D1 	jp nz ,draw_bg_line_flip
+   90 D1:A9CE CD 06 AA D1 	call dbgs_reset_flip
+   91 D1:A9D2 C3 DA A9 D1 	jp draw_bg_line_skip
+   92 D1:A9D6 -  -  -  -  draw_bg_line_flip:
+   93 D1:A9D6 CD EE A9 D1 	call dbgs_set_flip
+   94 D1:A9DA -  -  -  -  draw_bg_line_skip:
+   95 D1:A9DA E1 -  -  -  	pop hl;return original line number
+   96 D1:A9DB -  -  -  -  	
+   97 D1:A9DB DD CB 03 46 	bit 0 ,(ix+3)
+   98 D1:A9DF C8 -  -  -  	ret z
+   99 D1:A9E0 01 06 00 00 	ld bc,6
+  100 D1:A9E4 DD 09 -  -  	add ix,bc
+  101 D1:A9E6 C3 3F A9 D1 	jp draw_bg_line_loop
+  102 D1:A9EA -  -  -  -  	
+  103 D1:A9EA -  -  -  -  
+  104 D1:A9EA -  -  -  -  current_color_0:
+  105 D1:A9EA 33 -  -  -  .db %00110011
+  106 D1:A9EB -  -  -  -  current_color_1:
+  107 D1:A9EB 44 -  -  -  .db %01000100
+  108 D1:A9EC -  -  -  -  current_color_2:
+  109 D1:A9EC 22 -  -  -  .db %00100010
+  110 D1:A9ED -  -  -  -  current_color_3:
+  111 D1:A9ED 55 -  -  -  .db %01010101
+  112 D1:A9EE -  -  -  -  
+  113 D1:A9EE -  -  -  -  
+  114 D1:A9EE -  -  -  -  
+  115 D1:A9EE -  -  -  -  
+  116 D1:A9EE -  -  -  -  
+  117 D1:A9EE -  -  -  -  
+  118 D1:A9EE -  -  -  -  
+  119 D1:A9EE -  -  -  -  dbgs_set_flip:
+  120 D1:A9EE 3E CA -  -  	ld a, %11001010
+  121 D1:A9F0 32 81 AA D1 	ld (dbgs_flip_1),a
+  122 D1:A9F4 32 99 AA D1 	ld (dbgs_flip_3),a
+  123 D1:A9F8 -  -  -  -  	
+  124 D1:A9F8 3E 2B -  -  	ld a, %00101011
+  125 D1:A9FA 32 85 AA D1 	ld (dbgs_flip_2),a
+  126 D1:A9FE 32 9D AA D1 	ld (dbgs_flip_4),a
+  127 D1:AA02 -  -  -  -  	
+  128 D1:AA02 C3 1A AA D1 	jp draw_bg_sprite_line
+  129 D1:AA06 -  -  -  -  	
+  130 D1:AA06 -  -  -  -  dbgs_reset_flip:
+  131 D1:AA06 3E C2 -  -  	ld a, %11000010
+  132 D1:AA08 32 81 AA D1 	ld (dbgs_flip_1),a
+  133 D1:AA0C 32 99 AA D1 	ld (dbgs_flip_3),a
+  134 D1:AA10 -  -  -  -  	
+  135 D1:AA10 3E 23 -  -  	ld a, %00100011
+  136 D1:AA12 32 85 AA D1 	ld (dbgs_flip_2),a
+  137 D1:AA16 32 9D AA D1 	ld (dbgs_flip_4),a
+  138 D1:AA1A -  -  -  -  ;hl = vram position-1  de = colordata-1, de' = alpha-1 b= width
+  139 D1:AA1A -  -  -  -  draw_bg_sprite_line:
+  140 D1:AA1A E5 -  -  -  	push hl
+  141 D1:AA1B 0E 03 -  -  	ld c,%00000011
+  142 D1:AA1D D9 -  -  -  	exx
+  143 D1:AA1E E1 -  -  -  	pop hl
+  144 D1:AA1F 0E 01 -  -  	ld c,%00000001
+  145 D1:AA21 D9 -  -  -  	exx
+  146 D1:AA22 -  -  -  -  draw_bg_sprite_line_loop:
+  147 D1:AA22 D9 -  -  -  	exx;toShadow
+  148 D1:AA23 CB 09 -  -  	rrc c
+  149 D1:AA25 D2 2A AA D1 	jp nc, dbgs_alpha_inc_skip
+  150 D1:AA29 13 -  -  -  	inc de
+  151 D1:AA2A -  -  -  -  dbgs_alpha_inc_skip:
+  152 D1:AA2A 1A -  -  -  	ld a,(de)
+  153 D1:AA2B A1 -  -  -  	and c
+  154 D1:AA2C CA 8D AA D1 	jp z, dbgs_alphaskip
+  155 D1:AA30 D9 -  -  -  	exx
+  156 D1:AA31 CB 09 -  -  	rrc c
+  157 D1:AA33 CB 09 -  -  	rrc c
+  158 D1:AA35 D2 3A AA D1 	jp nc, dbgs_color_inc_skip
+  159 D1:AA39 13 -  -  -  	inc de
+  160 D1:AA3A -  -  -  -  dbgs_color_inc_skip:
+  161 D1:AA3A 1A -  -  -  	ld a,(de)
+  162 D1:AA3B A1 -  -  -  	and c
+  163 D1:AA3C CA 52 AA D1 	jp z, dbgs_color0;color is 00
+  164 D1:AA40 6F -  -  -  	ld l,a
+  165 D1:AA41 E6 AA -  -  	and %10101010
+  166 D1:AA43 CA 5B AA D1 	jp z, dbgs_color1;first bit is 0, second must be 1
+  167 D1:AA47 7D -  -  -  	ld a,l ;original a
+  168 D1:AA48 E6 55 -  -  	and %01010101 ;we know first bit is 1
+  169 D1:AA4A CA 64 AA D1 	jp z, dbgs_color2;second bit is 0
+  170 D1:AA4E C3 6D AA D1 	jp dbgs_color3;second bit is 1
+  171 D1:AA52 -  -  -  -  dbgs_color0:
+  172 D1:AA52 -  -  -  -  	;jp exit_prgm
+  173 D1:AA52 D9 -  -  -  	exx;shadow
+  174 D1:AA53 3A EA A9 D1 	ld a,(current_color_0)
+  175 D1:AA57 C3 72 AA D1 	jp dbgs_color_write
+  176 D1:AA5B -  -  -  -  dbgs_color1:
+  177 D1:AA5B -  -  -  -  	;jp exit_prgm
+  178 D1:AA5B D9 -  -  -  	exx;shadow
+  179 D1:AA5C 3A EB A9 D1 	ld a,(current_color_1)
+  180 D1:AA60 C3 72 AA D1 	jp dbgs_color_write
+  181 D1:AA64 -  -  -  -  dbgs_color2:
+  182 D1:AA64 -  -  -  -  	;jp exit_prgm
+  183 D1:AA64 D9 -  -  -  	exx;shadow
+  184 D1:AA65 3A EC A9 D1 	ld a,(current_color_2)
+  185 D1:AA69 C3 72 AA D1 	jp dbgs_color_write
+  186 D1:AA6D -  -  -  -  dbgs_color3:
+  187 D1:AA6D -  -  -  -  	;jp exit_prgm
+  188 D1:AA6D D9 -  -  -  	exx;toShadow
+  189 D1:AA6E 3A ED A9 D1 	ld a,(current_color_3)
+  190 D1:AA72 -  -  -  -  dbgs_color_write:
+  191 D1:AA72 -  -  -  -  dbgs_color_nibble .equ $+1
+  192 D1:AA72 E6 0F -  -  	and %00001111;writing to second nibble of hl, first pixel
+  193 D1:AA74 47 -  -  -  	ld b,a;b has color nibble
+  194 D1:AA75 3A 73 AA D1 	ld a,(dbgs_color_nibble)
+  195 D1:AA79 EE FF -  -  	xor %11111111
+  196 D1:AA7B 32 73 AA D1 	ld (dbgs_color_nibble),a
+  197 D1:AA7F -  -  -  -  	
+  198 D1:AA7F CB 47 -  -  	bit 0,a
+  199 D1:AA81 -  -  -  -  dbgs_flip_1 .equ $
+  200 D1:AA81 C2 86 AA D1 	jp nz, dbgs_skip_inc_hl;if writing to first pixel inc hl
+  201 D1:AA85 -  -  -  -  dbgs_flip_2 .equ $
+  202 D1:AA85 23 -  -  -  	inc hl
+  203 D1:AA86 -  -  -  -  dbgs_skip_inc_hl:
+  204 D1:AA86 A6 -  -  -  	and (hl);a has other nibble
+  205 D1:AA87 B0 -  -  -  	or b 
+  206 D1:AA88 77 -  -  -  	ld (hl),a;write to vram 
+  207 D1:AA89 D9 -  -  -  	exx;normal
+  208 D1:AA8A -  -  -  -  	
+  209 D1:AA8A 10 96 -  -  	djnz draw_bg_sprite_line_loop
+  210 D1:AA8C C9 -  -  -  	ret
+  211 D1:AA8D -  -  -  -  dbgs_alphaskip:
+  212 D1:AA8D -  -  -  -  	
+  213 D1:AA8D 3A 73 AA D1 	ld a,(dbgs_color_nibble)
+  214 D1:AA91 EE FF -  -  	xor %11111111
+  215 D1:AA93 32 73 AA D1 	ld (dbgs_color_nibble),a
+  216 D1:AA97 CB 47 -  -  	bit 0,a
+  217 D1:AA99 -  -  -  -  dbgs_flip_3 .equ $
+  218 D1:AA99 C2 9E AA D1 	jp nz, dbgs_skip_inc_hl_2
+  219 D1:AA9D -  -  -  -  dbgs_flip_4 .equ $
+  220 D1:AA9D 23 -  -  -  	inc hl
+  221 D1:AA9E -  -  -  -  dbgs_skip_inc_hl_2:
+  222 D1:AA9E D9 -  -  -  	exx;normal
+  223 D1:AA9F 05 -  -  -  	dec b
+  224 D1:AAA0 C2 22 AA D1 	jp nz, draw_bg_sprite_line_loop
+  225 D1:AAA4 C9 -  -  -  	ret
+  226 D1:AAA5 -  -  -  -  
+  227 D1:AAA5 -  -  -  -  
+  228 D1:AAA5 -  -  -  -  
+  229 D1:AAA5 -  -  -  -  
+  230 D1:AAA5 -  -  -  -  
+  231 D1:AAA5 -  -  -  -  
+  232 D1:AAA5 -  -  -  -  
+  233 D1:AAA5 -  -  -  -  
+  234 D1:AAA5 -  -  -  -  
+  235 D1:AAA5 -  -  -  -  
+  236 D1:AAA5 -  -  -  -  
 Listing for file "ascent.asm"
-   55 00:0084 -  -  -  -  #include "spriteData.txt"
+  113 D1:AAA5 -  -  -  -  #include "spriteData.txt"
 Listing for file "C:\Users\jax9h\OneDrive\Desktop\ti84\ascent\spriteData.txt"
-    1 00:0084 -  -  -  -  
-    2 00:0084 -  -  -  -  
-    3 00:0084 -  -  -  -  testSprite:
-    4 00:0084 -  -  -  -  	;.db width
-    5 00:0084 -  -  -  -  	;.db col 1 , 2 ,3 ,4
-    6 00:0084 -  -  -  -  	;spr data 2bpp
-    7 00:0084 -  -  -  -  	;line length in bytes, data
-    8 00:0084 -  -  -  -  	;line length, data
-    9 00:0084 -  -  -  -  	;line length, data
-   10 00:0084 -  -  -  -  	
-   11 00:0084 -  -  -  -  testSprite_t:
-   12 00:0084 -  -  -  -  	;.db transparency data 
+    1 D1:AAA5 -  -  -  -  
+    2 D1:AAA5 -  -  -  -  
+    3 D1:AAA5 -  -  -  -  
+    4 D1:AAA5 -  -  -  -  
+    5 D1:AAA5 -  -  -  -  ;BG SPRITES
+    6 D1:AAA5 -  -  -  -  testSprite:
+    7 D1:AAA5 -  -  -  -  	;.db width
+    8 D1:AAA5 -  -  -  -  	;.db col 1 , 2 ,3 ,4
+    9 D1:AAA5 -  -  -  -  	;spr data 2bpp
+   10 D1:AAA5 -  -  -  -  	;line length in bytes, transparency, color data
+   11 D1:AAA5 -  -  -  -  	;line length, data
+   12 D1:AAA5 -  -  -  -  	;line length, data
+   13 D1:AAA5 -  -  -  -  
+   14 D1:AAA5 -  -  -  -  
+   15 D1:AAA5 08 -  -  -  	.db 8;h=5
+   16 D1:AAA6 33 44 22 55 	.db %00110011, %01000100,%00100010, %01010101 ;rgbw
+   17 D1:AAAA 04 FF 05 8C 	.db 4, %11111111, %00000101, %10001100;rrggbrwr
+   18 D1:AAAE 04 EF 07 B4 	.db 4, %11101111, %00000111, %10110100;RRGXWBWG 
+   19 D1:AAB2 04 53 0F 40 	.db 4, %01010011, %00001111, %01000000 
+   20 D1:AAB6 02 00 -  -  	.db 2, %00000000 
+   21 D1:AAB8 03 C2 F7 -  	.db 3, %11000010, %11110111 ;WWXXXXGX
+   22 D1:AABB -  -  -  -  	
+   23 D1:AABB -  -  -  -  testSprite2:;h=4
+   24 D1:AABB 04 -  -  -  	.db 4
+   25 D1:AABC 11 44 22 55 	.db %00010001, %01000100,%00100010, %01010101
+   26 D1:AAC0 03 F0 05 -  	.db 3,%11110000, %00000101
+   27 D1:AAC3 03 90 AF -  	.db 3,%10010000,%10101111
+   28 D1:AAC6 02 00 -  -  	.db 2,%00000000
+   29 D1:AAC8 03 E0 E4 -  	.db 3,%11100000,%11100100
+   30 D1:AACB -  -  -  -  	
+   31 D1:AACB -  -  -  -  	
 Listing for file "ascent.asm"
-   56 00:0084 -  -  -  -  #include "levelData.txt"
+  114 D1:AACB -  -  -  -  #include "levelData.txt"
 Listing for file "C:\Users\jax9h\OneDrive\Desktop\ti84\ascent\levelData.txt"
-    1 00:0084 -  -  -  -  bg_sprite_indices:
-    2 00:0084 -  -  -  -  	;.dl sprite data, transparent data
-    3 00:0084 -  -  -  -  
-    4 00:0084 -  -  -  -  
-    5 00:0084 -  -  -  -  
-    6 00:0084 -  -  -  -  
-    7 00:0084 -  -  -  -  bg_data:
-    8 00:0084 -  -  -  -  	;.db y y y x x 
-    9 00:0084 -  -  -  -  	;.db height .db index
-   10 00:0084 -  -  -  -  	;7 bytes
+    1 D1:AACB -  -  -  -  bg_sprite_indices:
+    2 D1:AACB A5 AA D1 -  	.dl testSprite
+    3 D1:AACE BB AA D1 -  	.dl testSprite2
+    4 D1:AAD1 -  -  -  -  	;.dl sprite data
+    5 D1:AAD1 -  -  -  -  
+    6 D1:AAD1 -  -  -  -  
+    7 D1:AAD1 -  -  -  -  
+    8 D1:AAD1 -  -  -  -  
+    9 D1:AAD1 -  -  -  -  bg_data:
+   10 D1:AAD1 -  -  -  -  
+   11 D1:AAD1 -  -  -  -  	;y y 
+   12 D1:AAD1 -  -  -  -  	;x (byte) 
+   13 D1:AAD1 -  -  -  -  	;flags  (7 = odd pixel  6 = spriteFlip , 0 = data cont)    0 to end data   if sprite starts on even pixel, inc x by 1
+   14 D1:AAD1 -  -  -  -  	;height
+   15 D1:AAD1 -  -  -  -  	;index
+   16 D1:AAD1 -  -  -  -  	
+   17 D1:AAD1 -  -  -  -  	
+   18 D1:AAD1 -  -  -  -  	;even pixel noflip  x = (pixel - 1) /2
+   19 D1:AAD1 -  -  -  -  	;odd pixel noflip   x = (pixel) /2
+   20 D1:AAD1 -  -  -  -  	
+   21 D1:AAD1 -  -  -  -  	;even pixel, flip, odd width   x = (pixel + width)/2
+   22 D1:AAD1 -  -  -  -  	;odd pixel, flip, odd width	   x = (pixel + width)/2
+   23 D1:AAD1 -  -  -  -  	
+   24 D1:AAD1 -  -  -  -  	
+   25 D1:AAD1 -  -  -  -  	;even pixel, flip, even width   x = (pixel + width)/2
+   26 D1:AAD1 -  -  -  -  	;odd pixel, flip, even width	   x = (pixel + width)/2
+   27 D1:AAD1 -  -  -  -  	
+   28 D1:AAD1 -  -  -  -  	
+   29 D1:AAD1 -  -  -  -  	
+   30 D1:AAD1 -  -  -  -  	
+   31 D1:AAD1 -  -  -  -  	
+   32 D1:AAD1 -  -  -  -  	;6 bytes
+   33 D1:AAD1 00 84 -  -  	.db $00,$84
+   34 D1:AAD3 05 -  -  -  	.db 5
+   35 D1:AAD4 01 -  -  -  	.db %00000001
+   36 D1:AAD5 05 -  -  -  	.db 5
+   37 D1:AAD6 00 -  -  -  	.db 0
+   38 D1:AAD7 -  -  -  -  	
+   39 D1:AAD7 00 84 -  -  	.db $00,$84
+   40 D1:AAD9 0A -  -  -  	.db 10
+   41 D1:AADA 81 -  -  -  	.db %10000001
+   42 D1:AADB 05 -  -  -  	.db 5
+   43 D1:AADC 00 -  -  -  	.db 0
+   44 D1:AADD -  -  -  -  	
+   45 D1:AADD 00 83 -  -  	.db $00,$83
+   46 D1:AADF 14 -  -  -  	.db 20
+   47 D1:AAE0 41 -  -  -  	.db %01000001
+   48 D1:AAE1 05 -  -  -  	.db 5
+   49 D1:AAE2 00 -  -  -  	.db 0
+   50 D1:AAE3 -  -  -  -  	
+   51 D1:AAE3 00 83 -  -  	.db $00,$83
+   52 D1:AAE5 1E -  -  -  	.db 30
+   53 D1:AAE6 C1 -  -  -  	.db %11000001
+   54 D1:AAE7 05 -  -  -  	.db 5
+   55 D1:AAE8 00 -  -  -  	.db 0
+   56 D1:AAE9 -  -  -  -  	
+   57 D1:AAE9 -  -  -  -  	
+   58 D1:AAE9 00 80 -  -  	.db $00,$80
+   59 D1:AAEB 05 -  -  -  	.db 5
+   60 D1:AAEC 01 -  -  -  	.db %00000001
+   61 D1:AAED 05 -  -  -  	.db 5
+   62 D1:AAEE 00 -  -  -  	.db 0
+   63 D1:AAEF -  -  -  -  	
+   64 D1:AAEF 00 81 -  -  	.db $00,$81
+   65 D1:AAF1 0A -  -  -  	.db 10
+   66 D1:AAF2 81 -  -  -  	.db %10000001
+   67 D1:AAF3 05 -  -  -  	.db 5
+   68 D1:AAF4 00 -  -  -  	.db 0
+   69 D1:AAF5 -  -  -  -  	
+   70 D1:AAF5 00 80 -  -  	.db $00,$80
+   71 D1:AAF7 14 -  -  -  	.db 20
+   72 D1:AAF8 41 -  -  -  	.db %01000001
+   73 D1:AAF9 05 -  -  -  	.db 5
+   74 D1:AAFA 00 -  -  -  	.db 0
+   75 D1:AAFB -  -  -  -  	
+   76 D1:AAFB 00 81 -  -  	.db $00,$81
+   77 D1:AAFD 1E -  -  -  	.db 30
+   78 D1:AAFE C1 -  -  -  	.db %11000001
+   79 D1:AAFF 05 -  -  -  	.db 5
+   80 D1:AB00 00 -  -  -  	.db 0
+   81 D1:AB01 -  -  -  -  	
+   82 D1:AB01 00 84 -  -  		.db $00,$84
+   83 D1:AB03 05 -  -  -  	.db 5
+   84 D1:AB04 01 -  -  -  	.db %00000001
+   85 D1:AB05 05 -  -  -  	.db 5
+   86 D1:AB06 00 -  -  -  	.db 0
+   87 D1:AB07 -  -  -  -  	
+   88 D1:AB07 00 84 -  -  	.db $00,$84
+   89 D1:AB09 0A -  -  -  	.db 10
+   90 D1:AB0A 81 -  -  -  	.db %10000001
+   91 D1:AB0B 05 -  -  -  	.db 5
+   92 D1:AB0C 00 -  -  -  	.db 0
+   93 D1:AB0D -  -  -  -  	
+   94 D1:AB0D 00 83 -  -  	.db $00,$83
+   95 D1:AB0F 14 -  -  -  	.db 20
+   96 D1:AB10 41 -  -  -  	.db %01000001
+   97 D1:AB11 05 -  -  -  	.db 5
+   98 D1:AB12 00 -  -  -  	.db 0
+   99 D1:AB13 -  -  -  -  	
+  100 D1:AB13 00 83 -  -  	.db $00,$83
+  101 D1:AB15 1E -  -  -  	.db 30
+  102 D1:AB16 C1 -  -  -  	.db %11000001
+  103 D1:AB17 05 -  -  -  	.db 5
+  104 D1:AB18 00 -  -  -  	.db 0
+  105 D1:AB19 -  -  -  -  	
+  106 D1:AB19 -  -  -  -  	
+  107 D1:AB19 00 80 -  -  	.db $00,$80
+  108 D1:AB1B 05 -  -  -  	.db 5
+  109 D1:AB1C 01 -  -  -  	.db %00000001
+  110 D1:AB1D 05 -  -  -  	.db 5
+  111 D1:AB1E 00 -  -  -  	.db 0
+  112 D1:AB1F -  -  -  -  	
+  113 D1:AB1F 00 81 -  -  	.db $00,$81
+  114 D1:AB21 0A -  -  -  	.db 10
+  115 D1:AB22 81 -  -  -  	.db %10000001
+  116 D1:AB23 05 -  -  -  	.db 5
+  117 D1:AB24 00 -  -  -  	.db 0
+  118 D1:AB25 -  -  -  -  	
+  119 D1:AB25 00 80 -  -  	.db $00,$80
+  120 D1:AB27 14 -  -  -  	.db 20
+  121 D1:AB28 41 -  -  -  	.db %01000001
+  122 D1:AB29 05 -  -  -  	.db 5
+  123 D1:AB2A 00 -  -  -  	.db 0
+  124 D1:AB2B -  -  -  -  	
+  125 D1:AB2B 00 81 -  -  	.db $00,$81
+  126 D1:AB2D 1E -  -  -  	.db 30
+  127 D1:AB2E C1 -  -  -  	.db %11000001
+  128 D1:AB2F 05 -  -  -  	.db 5
+  129 D1:AB30 00 -  -  -  	.db 0
+  130 D1:AB31 -  -  -  -  	
+  131 D1:AB31 00 84 -  -  		.db $00,$84
+  132 D1:AB33 05 -  -  -  	.db 5
+  133 D1:AB34 01 -  -  -  	.db %00000001
+  134 D1:AB35 05 -  -  -  	.db 5
+  135 D1:AB36 00 -  -  -  	.db 0
+  136 D1:AB37 -  -  -  -  	
+  137 D1:AB37 00 84 -  -  	.db $00,$84
+  138 D1:AB39 0A -  -  -  	.db 10
+  139 D1:AB3A 81 -  -  -  	.db %10000001
+  140 D1:AB3B 05 -  -  -  	.db 5
+  141 D1:AB3C 00 -  -  -  	.db 0
+  142 D1:AB3D -  -  -  -  	
+  143 D1:AB3D 00 83 -  -  	.db $00,$83
+  144 D1:AB3F 14 -  -  -  	.db 20
+  145 D1:AB40 41 -  -  -  	.db %01000001
+  146 D1:AB41 05 -  -  -  	.db 5
+  147 D1:AB42 00 -  -  -  	.db 0
+  148 D1:AB43 -  -  -  -  	
+  149 D1:AB43 00 83 -  -  	.db $00,$83
+  150 D1:AB45 1E -  -  -  	.db 30
+  151 D1:AB46 C1 -  -  -  	.db %11000001
+  152 D1:AB47 05 -  -  -  	.db 5
+  153 D1:AB48 00 -  -  -  	.db 0
+  154 D1:AB49 -  -  -  -  	
+  155 D1:AB49 -  -  -  -  	
+  156 D1:AB49 00 80 -  -  	.db $00,$80
+  157 D1:AB4B 05 -  -  -  	.db 5
+  158 D1:AB4C 01 -  -  -  	.db %00000001
+  159 D1:AB4D 05 -  -  -  	.db 5
+  160 D1:AB4E 00 -  -  -  	.db 0
+  161 D1:AB4F -  -  -  -  	
+  162 D1:AB4F 00 81 -  -  	.db $00,$81
+  163 D1:AB51 0A -  -  -  	.db 10
+  164 D1:AB52 81 -  -  -  	.db %10000001
+  165 D1:AB53 05 -  -  -  	.db 5
+  166 D1:AB54 00 -  -  -  	.db 0
+  167 D1:AB55 -  -  -  -  	
+  168 D1:AB55 00 80 -  -  	.db $00,$80
+  169 D1:AB57 14 -  -  -  	.db 20
+  170 D1:AB58 41 -  -  -  	.db %01000001
+  171 D1:AB59 05 -  -  -  	.db 5
+  172 D1:AB5A 00 -  -  -  	.db 0
+  173 D1:AB5B -  -  -  -  	
+  174 D1:AB5B 00 81 -  -  	.db $00,$81
+  175 D1:AB5D 1E -  -  -  	.db 30
+  176 D1:AB5E C1 -  -  -  	.db %11000001
+  177 D1:AB5F 05 -  -  -  	.db 5
+  178 D1:AB60 00 -  -  -  	.db 0
+  179 D1:AB61 -  -  -  -  	
+  180 D1:AB61 00 84 -  -  		.db $00,$84
+  181 D1:AB63 05 -  -  -  	.db 5
+  182 D1:AB64 01 -  -  -  	.db %00000001
+  183 D1:AB65 05 -  -  -  	.db 5
+  184 D1:AB66 00 -  -  -  	.db 0
+  185 D1:AB67 -  -  -  -  	
+  186 D1:AB67 00 84 -  -  	.db $00,$84
+  187 D1:AB69 0A -  -  -  	.db 10
+  188 D1:AB6A 81 -  -  -  	.db %10000001
+  189 D1:AB6B 05 -  -  -  	.db 5
+  190 D1:AB6C 00 -  -  -  	.db 0
+  191 D1:AB6D -  -  -  -  	
+  192 D1:AB6D 00 83 -  -  	.db $00,$83
+  193 D1:AB6F 14 -  -  -  	.db 20
+  194 D1:AB70 41 -  -  -  	.db %01000001
+  195 D1:AB71 05 -  -  -  	.db 5
+  196 D1:AB72 00 -  -  -  	.db 0
+  197 D1:AB73 -  -  -  -  	
+  198 D1:AB73 00 83 -  -  	.db $00,$83
+  199 D1:AB75 1E -  -  -  	.db 30
+  200 D1:AB76 C1 -  -  -  	.db %11000001
+  201 D1:AB77 05 -  -  -  	.db 5
+  202 D1:AB78 00 -  -  -  	.db 0
+  203 D1:AB79 -  -  -  -  	
+  204 D1:AB79 -  -  -  -  	
+  205 D1:AB79 00 80 -  -  	.db $00,$80
+  206 D1:AB7B 05 -  -  -  	.db 5
+  207 D1:AB7C 01 -  -  -  	.db %00000001
+  208 D1:AB7D 05 -  -  -  	.db 5
+  209 D1:AB7E 00 -  -  -  	.db 0
+  210 D1:AB7F -  -  -  -  	
+  211 D1:AB7F 00 81 -  -  	.db $00,$81
+  212 D1:AB81 0A -  -  -  	.db 10
+  213 D1:AB82 81 -  -  -  	.db %10000001
+  214 D1:AB83 05 -  -  -  	.db 5
+  215 D1:AB84 00 -  -  -  	.db 0
+  216 D1:AB85 -  -  -  -  	
+  217 D1:AB85 00 80 -  -  	.db $00,$80
+  218 D1:AB87 14 -  -  -  	.db 20
+  219 D1:AB88 41 -  -  -  	.db %01000001
+  220 D1:AB89 05 -  -  -  	.db 5
+  221 D1:AB8A 00 -  -  -  	.db 0
+  222 D1:AB8B -  -  -  -  	
+  223 D1:AB8B 00 81 -  -  	.db $00,$81
+  224 D1:AB8D 1E -  -  -  	.db 30
+  225 D1:AB8E C1 -  -  -  	.db %11000001
+  226 D1:AB8F 05 -  -  -  	.db 5
+  227 D1:AB90 00 -  -  -  	.db 0
+  228 D1:AB91 -  -  -  -  	
+  229 D1:AB91 00 84 -  -  		.db $00,$84
+  230 D1:AB93 05 -  -  -  	.db 5
+  231 D1:AB94 01 -  -  -  	.db %00000001
+  232 D1:AB95 05 -  -  -  	.db 5
+  233 D1:AB96 00 -  -  -  	.db 0
+  234 D1:AB97 -  -  -  -  	
+  235 D1:AB97 00 84 -  -  	.db $00,$84
+  236 D1:AB99 0A -  -  -  	.db 10
+  237 D1:AB9A 81 -  -  -  	.db %10000001
+  238 D1:AB9B 05 -  -  -  	.db 5
+  239 D1:AB9C 00 -  -  -  	.db 0
+  240 D1:AB9D -  -  -  -  	
+  241 D1:AB9D 00 83 -  -  	.db $00,$83
+  242 D1:AB9F 14 -  -  -  	.db 20
+  243 D1:ABA0 41 -  -  -  	.db %01000001
+  244 D1:ABA1 05 -  -  -  	.db 5
+  245 D1:ABA2 00 -  -  -  	.db 0
+  246 D1:ABA3 -  -  -  -  	
+  247 D1:ABA3 00 83 -  -  	.db $00,$83
+  248 D1:ABA5 1E -  -  -  	.db 30
+  249 D1:ABA6 C1 -  -  -  	.db %11000001
+  250 D1:ABA7 05 -  -  -  	.db 5
+  251 D1:ABA8 00 -  -  -  	.db 0
+  252 D1:ABA9 -  -  -  -  	
+  253 D1:ABA9 -  -  -  -  	
+  254 D1:ABA9 00 80 -  -  	.db $00,$80
+  255 D1:ABAB 05 -  -  -  	.db 5
+  256 D1:ABAC 01 -  -  -  	.db %00000001
+  257 D1:ABAD 05 -  -  -  	.db 5
+  258 D1:ABAE 00 -  -  -  	.db 0
+  259 D1:ABAF -  -  -  -  	
+  260 D1:ABAF 00 81 -  -  	.db $00,$81
+  261 D1:ABB1 0A -  -  -  	.db 10
+  262 D1:ABB2 81 -  -  -  	.db %10000001
+  263 D1:ABB3 05 -  -  -  	.db 5
+  264 D1:ABB4 00 -  -  -  	.db 0
+  265 D1:ABB5 -  -  -  -  	
+  266 D1:ABB5 00 80 -  -  	.db $00,$80
+  267 D1:ABB7 14 -  -  -  	.db 20
+  268 D1:ABB8 41 -  -  -  	.db %01000001
+  269 D1:ABB9 05 -  -  -  	.db 5
+  270 D1:ABBA 00 -  -  -  	.db 0
+  271 D1:ABBB -  -  -  -  	
+  272 D1:ABBB 00 81 -  -  	.db $00,$81
+  273 D1:ABBD 1E -  -  -  	.db 30
+  274 D1:ABBE C1 -  -  -  	.db %11000001
+  275 D1:ABBF 05 -  -  -  	.db 5
+  276 D1:ABC0 00 -  -  -  	.db 0
+  277 D1:ABC1 -  -  -  -  	
+  278 D1:ABC1 00 84 -  -  		.db $00,$84
+  279 D1:ABC3 05 -  -  -  	.db 5
+  280 D1:ABC4 01 -  -  -  	.db %00000001
+  281 D1:ABC5 05 -  -  -  	.db 5
+  282 D1:ABC6 00 -  -  -  	.db 0
+  283 D1:ABC7 -  -  -  -  	
+  284 D1:ABC7 00 84 -  -  	.db $00,$84
+  285 D1:ABC9 0A -  -  -  	.db 10
+  286 D1:ABCA 81 -  -  -  	.db %10000001
+  287 D1:ABCB 05 -  -  -  	.db 5
+  288 D1:ABCC 00 -  -  -  	.db 0
+  289 D1:ABCD -  -  -  -  	
+  290 D1:ABCD 00 83 -  -  	.db $00,$83
+  291 D1:ABCF 14 -  -  -  	.db 20
+  292 D1:ABD0 41 -  -  -  	.db %01000001
+  293 D1:ABD1 05 -  -  -  	.db 5
+  294 D1:ABD2 00 -  -  -  	.db 0
+  295 D1:ABD3 -  -  -  -  	
+  296 D1:ABD3 00 83 -  -  	.db $00,$83
+  297 D1:ABD5 1E -  -  -  	.db 30
+  298 D1:ABD6 C1 -  -  -  	.db %11000001
+  299 D1:ABD7 05 -  -  -  	.db 5
+  300 D1:ABD8 00 -  -  -  	.db 0
+  301 D1:ABD9 -  -  -  -  	
+  302 D1:ABD9 -  -  -  -  	
+  303 D1:ABD9 00 80 -  -  	.db $00,$80
+  304 D1:ABDB 05 -  -  -  	.db 5
+  305 D1:ABDC 01 -  -  -  	.db %00000001
+  306 D1:ABDD 05 -  -  -  	.db 5
+  307 D1:ABDE 00 -  -  -  	.db 0
+  308 D1:ABDF -  -  -  -  	
+  309 D1:ABDF 00 81 -  -  	.db $00,$81
+  310 D1:ABE1 0A -  -  -  	.db 10
+  311 D1:ABE2 81 -  -  -  	.db %10000001
+  312 D1:ABE3 05 -  -  -  	.db 5
+  313 D1:ABE4 00 -  -  -  	.db 0
+  314 D1:ABE5 -  -  -  -  	
+  315 D1:ABE5 00 80 -  -  	.db $00,$80
+  316 D1:ABE7 14 -  -  -  	.db 20
+  317 D1:ABE8 41 -  -  -  	.db %01000001
+  318 D1:ABE9 05 -  -  -  	.db 5
+  319 D1:ABEA 00 -  -  -  	.db 0
+  320 D1:ABEB -  -  -  -  	
+  321 D1:ABEB 00 81 -  -  	.db $00,$81
+  322 D1:ABED 1E -  -  -  	.db 30
+  323 D1:ABEE C1 -  -  -  	.db %11000001
+  324 D1:ABEF 05 -  -  -  	.db 5
+  325 D1:ABF0 00 -  -  -  	.db 0
+  326 D1:ABF1 -  -  -  -  	
+  327 D1:ABF1 00 84 -  -  		.db $00,$84
+  328 D1:ABF3 05 -  -  -  	.db 5
+  329 D1:ABF4 01 -  -  -  	.db %00000001
+  330 D1:ABF5 05 -  -  -  	.db 5
+  331 D1:ABF6 00 -  -  -  	.db 0
+  332 D1:ABF7 -  -  -  -  	
+  333 D1:ABF7 00 84 -  -  	.db $00,$84
+  334 D1:ABF9 0A -  -  -  	.db 10
+  335 D1:ABFA 81 -  -  -  	.db %10000001
+  336 D1:ABFB 05 -  -  -  	.db 5
+  337 D1:ABFC 00 -  -  -  	.db 0
+  338 D1:ABFD -  -  -  -  	
+  339 D1:ABFD 00 83 -  -  	.db $00,$83
+  340 D1:ABFF 14 -  -  -  	.db 20
+  341 D1:AC00 41 -  -  -  	.db %01000001
+  342 D1:AC01 05 -  -  -  	.db 5
+  343 D1:AC02 00 -  -  -  	.db 0
+  344 D1:AC03 -  -  -  -  	
+  345 D1:AC03 00 83 -  -  	.db $00,$83
+  346 D1:AC05 1E -  -  -  	.db 30
+  347 D1:AC06 C1 -  -  -  	.db %11000001
+  348 D1:AC07 05 -  -  -  	.db 5
+  349 D1:AC08 00 -  -  -  	.db 0
+  350 D1:AC09 -  -  -  -  	
+  351 D1:AC09 -  -  -  -  	
+  352 D1:AC09 00 80 -  -  	.db $00,$80
+  353 D1:AC0B 05 -  -  -  	.db 5
+  354 D1:AC0C 01 -  -  -  	.db %00000001
+  355 D1:AC0D 05 -  -  -  	.db 5
+  356 D1:AC0E 00 -  -  -  	.db 0
+  357 D1:AC0F -  -  -  -  	
+  358 D1:AC0F 00 81 -  -  	.db $00,$81
+  359 D1:AC11 0A -  -  -  	.db 10
+  360 D1:AC12 81 -  -  -  	.db %10000001
+  361 D1:AC13 05 -  -  -  	.db 5
+  362 D1:AC14 00 -  -  -  	.db 0
+  363 D1:AC15 -  -  -  -  	
+  364 D1:AC15 00 80 -  -  	.db $00,$80
+  365 D1:AC17 14 -  -  -  	.db 20
+  366 D1:AC18 41 -  -  -  	.db %01000001
+  367 D1:AC19 05 -  -  -  	.db 5
+  368 D1:AC1A 00 -  -  -  	.db 0
+  369 D1:AC1B -  -  -  -  	
+  370 D1:AC1B 00 81 -  -  	.db $00,$81
+  371 D1:AC1D 1E -  -  -  	.db 30
+  372 D1:AC1E C0 -  -  -  	.db %11000000
+  373 D1:AC1F 05 -  -  -  	.db 5
+  374 D1:AC20 00 -  -  -  	.db 0
+  375 D1:AC21 -  -  -  -  	;.dl $000081
+  376 D1:AC21 -  -  -  -  	;.db 10,%00001111
+  377 D1:AC21 -  -  -  -  	;.db 5,0
+  378 D1:AC21 -  -  -  -  		
+  379 D1:AC21 00 00 00 00 
+              00 -  -  -  	.db 0,0,0,0,0
 Listing for file "ascent.asm"

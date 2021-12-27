@@ -1,0 +1,29 @@
+
+
+
+time_test_start:
+	ld hl,1000000
+time_testing_loop:
+	push hl
+	;instruction here
+	ld hl,vRam + (160*5)
+	ld (draw_bg_vram_addr),hl
+	ld hl,$000080
+	call draw_bg_line
+	
+	pop hl
+	dec hl
+	ld a,l
+	or h
+	jp nz,time_testing_loop
+	jp exit_prgm
+	
+
+;60fps = .0166sec/f	
+
+;1000 ldir in vram of 160*240 bytes
+;6.8sec, .0068 sec/instruction   0.4 of a frame
+
+
+;10000000 draw 1 bg line of 4 sprites 
+;7.5 sec  .00045 of frame
