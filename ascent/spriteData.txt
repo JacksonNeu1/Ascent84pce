@@ -29,3 +29,77 @@ testSprite2:;h=4
 	.db 3,%11100000,%11100100
 	
 	
+	
+	
+	
+;FG _ SPRITES
+
+;YBRGW
+
+;FAST_Sprite,  Double pixel transparency
+;.db width(px*2),height
+;.db bytes/line , sprite data .....
+
+;.db transparency data, column based  first bit is row 1, second is row 2 ...
+testFastSprite:
+	.db 8,8
+	.db 9,%00010010,%00010010,%00010010,%00010010,%00010010,%00010010,%00010010,%00010010	;YBYBYBYBYBYBYBYB
+	.db 5,%00010010,%01010100,%00110011,%00100001 											;YBXXXXWGXXRRXXBY
+	.db 5,%00110011,%00100001,%00010010,%00010010											;XXXXXXXXRRBYYBYB
+	.db 1																					;XXXXXXXXXXXXXXXX
+	.db 9,%01010100,%01010100,%01010100,%01010100,%01010100,%01010100,%01010100,%01010100	;WGWGWGWGWGWGWGWG	
+	.db 5,%00010010,%01010100,%00110011,%00100001 											;YBXXWGXXRRXXBYXX
+	.db 5,%00010010,%01010100,%00110011,%00100001 											;XXYBXXWGXXRRXXBY
+	.db 0,%01010100,%01010100,%00110011,%00100001,%00010010									;XXWGWGRRXXBYYBXX
+	
+testFastSprite_t:
+	.db %11001100,%10001011,%10001101,%11001011,%10101100,%11101011,%10101101,%11101010
+	
+	;oooooooo
+	;oxxoxoxo
+	;xxxxoooo
+	;xxxxxxxx
+	;oooooooo
+	;oxoxoxox
+	;xoxoxoxo
+	;xoooxoox
+	
+	
+	
+	
+	
+;FASTER_SPRITE	
+;double pixel transparency, no gaps
+;.db height
+;.db to next ldir start, color length, data
+
+test_faster_sprite:
+	.db 4
+	.db 2,2,%00010010,%01000101 ;BYWG
+	.db 156,4,%00110010,%01000101,%00110010,%01000101 ;BYWGBYWG
+	.db 156,1,%00010010;BY
+	.db 159,1,%00110101;WG
+
+
+
+;COMPLEX_SPRITE
+;16 color, per pixel transparency, even or odd start
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

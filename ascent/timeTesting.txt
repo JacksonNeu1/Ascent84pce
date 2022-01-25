@@ -2,15 +2,25 @@
 
 
 time_test_start:
-	ld hl,1000000
+	ld hl,10
+	
 time_testing_loop:
 	push hl
+	ld bc,1000
+time_testing_loop_2:
+	push bc
 	;instruction here
 	ld hl,vRam + (160*5)
 	ld (draw_bg_vram_addr),hl
 	ld hl,$000080
 	call draw_bg_line
-	
+
+	;Instruction end
+	pop bc
+	dec bc
+	ld a,c
+	or b
+	jp nz,time_testing_loop_2
 	pop hl
 	dec hl
 	ld a,l
@@ -25,5 +35,14 @@ time_testing_loop:
 ;6.8sec, .0068 sec/instruction   0.4 of a frame
 
 
-;10000000 draw 1 bg line of 4 sprites 
-;7.5 sec  .00045 of frame
+;10,000 draw 1 bg line very complex 
+;9 sec  .07 of frame/instruction
+
+;100,000 draw fast fg sprite 16*8 px
+;14 sec  .0084 of frame
+;full screen of sprites = 5 frames  ~11x slower than ldir
+;1 frame = 1/5 screen sprites
+
+;1,000,000 faster fg sprite 8*4 px
+;12 sec , full screen = 1.7 frames 
+;1 frame = .6 screen of sprites

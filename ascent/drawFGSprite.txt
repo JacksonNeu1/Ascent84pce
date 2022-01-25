@@ -1,0 +1,230 @@
+
+
+;de = vram , hl = data
+draw_faster_fg_sprite:
+	ld bc,0
+	ld a,(hl);ld a with height
+	inc hl
+	ld c,(hl);load alpha length
+	ex de,hl
+	
+;a = height, c = alphaLength
+dfgs_loop:
+	
+	add hl,bc;add alpha length
+	ex de,hl;swap, hl is data, de is vram
+	inc hl
+	ld c,(hl);get ldir length
+	inc hl
+	ldir
+	ld c,(hl);load c with next alpha length
+	ex de,hl;swap, hl is vram
+	dec a
+	jp nz,dfgs_loop
+	ret
+	
+	
+
+
+draw_fast_fg_sprite:
+
+;de' = starting vram pos b = width l = height hl' = color data de = transparency-1 c = alphamask
+dffgs_col_loop:
+	
+	push de;push transparency
+	push bc;push width and alphamask
+	exx;to shadow
+	push de;push vram
+	exx
+	
+dffgs_line_loop:
+
+	inc de
+	ld a,(de);load a with transparency data
+	and c
+	jp z,dffgs_alpha_skip	
+	;Not transparency
+	exx;to shadow
+	ldi;transfer to vram and increment, can ignore shadow bc decrement
+	exx
+	djnz dffgs_line_loop
+	jp dffgs_line_end
+dffgs_alpha_skip:
+	exx
+	inc de ;inc shadow de
+	exx
+	djnz dffgs_line_loop
+
+dffgs_line_end:
+		
+	dec l
+	jp z,dffgs_exit
+	exx;shadow
+	pop de;pop vram
+	ex de,hl
+	ld bc,160
+	add hl,bc;next line in vram
+	ex de,hl
+	inc hl;inc color data
+	exx
+	pop bc;pop width and alphamask
+	rrc c;rotate transparency mask
+	jp nc,dffgs_transparency_pop
+	pop af
+	jp dffgs_col_loop
+dffgs_transparency_pop
+	pop de
+	jp dffgs_col_loop
+dffgs_exit:
+	pop de
+	pop de
+	pop de
+	ret
+	
+	
+
+
+
+
+
+
+
+;hl = color data, de = vram, de' = transparency, c' = transparency mask
+draw_complex_fg_sprite:
+
+
+	exx
+	ld c,%00000001;ld c' with transparency mask
+	exx
+dfcs_col_loop:
+
+dcfs_line_loop:
+	;START IN SHADOW
+	
+	;FLIP VRAM MASK
+	ld hl, dcfs_vram_data_mask
+	ld a,%11111111
+	xor (hl)
+	ld (hl),a 
+	jp m,dcfs_inc_vram_skip; writing to second pixel, dont inc
+	exx
+	inc de
+	exx
+dcfs_inc_vram_skip:
+	inc de; inc transparency data
+	ld a,(de)
+	and c;check transparency
+	jp z, dcfs_alpha_skip
+	
+	
+	
+	
+	
+	exx;exit shadow
+	;do color data
+dcfs_vram_data_mask .equ $+1
+	ld b,%00001111 ; VRAM DATA MASK
+	ld a,(de);load a with vram data
+	and b;a holds  kept vram nibble
+	ld c,a; kept vram data saved to c
+dcfs_color_data_mask .equ $+1
+	ld a,%11110000; COLOR DATA MASK
+	cp b;if the same, rotate color data
+	jp nz, dcfs_color_rotate_skip
+	and (hl); a holds color data
+	rlca
+	rlca
+	rlca
+	rlca
+	
+	or c;c hold final vram data
+	ld (de),a; write to vram
+	exx;to shadow
+	djnz dcfs_line_loop
+	
+dcfs_color_rotate_skip:
+	and (hl); a holds color data
+	or c;c hold final vram data
+	ld (de),a; write to vram
+	exx;to shadow
+	djnz dcfs_line_loop
+	
+	
+	
+
+	exx
+	rrc c
+	jp nc, dcfs_alpha_pop_skip:
+	pop de
+dcfs_alpha_pop_skip:
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	

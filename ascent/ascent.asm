@@ -64,14 +64,29 @@
 	ld	a,lcdBpp4
 	ld (mpLcdCtrl),a	
 	
+	jp time_test_start
 
 	ld hl,vRam + (160*5)
 	ld (draw_bg_vram_addr),hl
 	ld hl,$000080
 	call draw_bg_line
 	
-
 	
+	
+	
+	ld de,vram +(160*10)
+	ld hl,testFastSprite+3
+	exx
+	ld b,8
+	ld hl,8
+	ld de,testFastSprite_t - 1
+	ld c,%10000000
+	call draw_fast_fg_sprite
+	
+	
+	ld de,vram +(160*20)
+	ld hl,test_faster_sprite
+	call draw_faster_fg_sprite
 	
 	ei
 	call _GetKey
@@ -109,5 +124,6 @@ draw_buffer:
 	
 #include "timeTesting.txt"
 #include "drawSprite.txt"
+#include "drawFGSprite.txt"
 #include "spriteData.txt"
 #include "levelData.txt"
