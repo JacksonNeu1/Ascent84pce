@@ -1,15 +1,82 @@
 
 
-;de = vram , hl = data
-draw_faster_fg_sprite:
+;de = vram , hl = data, a = number lines to draw
+draw_fast_sprite_bottom_cut:
+
 	ld bc,0
-	ld a,(hl);ld a with height
+	ld c,a
+	push hl
+	ld a,(hl);height
+	add hl,bc;hl points to num loops required
+	ld c,a;height
+	ld a,(hl);a holds num loops
+	pop hl
 	inc hl
+	add hl,bc;beginning of pixel data
+
 	ld c,(hl);load alpha length
-	ex de,hl
+	ex de,hl;hl is vram, de is data
+	jp dfgs_loop
 	
-;a = height, c = alphaLength
-dfgs_loop:
+;de = vram , hl = data, a = top lines to skip	
+draw_fast_sprite_top_cut:
+	
+	ld bc,0
+	ld c,a
+	push de
+	ld de,0
+	push hl
+	ld e,(hl);height
+	add hl,bc;hl points to num skip loops 
+
+	ld c,(hl);c holds num skip loops
+	pop hl;start of data
+	add hl,de
+	ld b,(hl);total number of loops
+	inc hl;hl is pixel data
+	pop de
+	push bc;save total and skipped loops
+	ld a,c;loops to skip
+	ld bc,0
+	
+
+draw_fast_sprite_top_loop:
+	ld c,(hl);load with first gap length	
+	ex de,hl;hl is vram
+	add hl,bc
+	ex de,hl;hl is data
+	inc hl
+	ld c,(hl);ldir length
+	add hl,bc;add ldir length
+	ex de,hl;hl is vram
+	add hl,bc;add ldir length
+	inc de
+	ex de,hl;hl is data
+	dec a
+	jp nz,draw_fast_sprite_top_loop
+	
+	
+	pop bc
+	ld a,b
+	sub a,c;subtract skipped from total, a holds remaining number of loops
+		
+	ld bc,0
+	ld c,(hl)
+	ex de,hl
+	jp dfgs_loop
+
+
+;de = vram , hl = data
+draw_fast_sprite_full:
+	ld bc,0
+	ld c,(hl)
+	add hl,bc
+	ld a,(hl)
+	inc hl
+	ld c,(hl)
+	ex de,hl
+;a = num loops, c = alphaLength,hl = vram
+dfgs_loop:;gap, colors
 	
 	add hl,bc;add alpha length
 	ex de,hl;swap, hl is data, de is vram
@@ -24,139 +91,151 @@ dfgs_loop:
 	ret
 	
 	
-
-
-draw_fast_fg_sprite:
-
-;de' = starting vram pos b = width l = height hl' = color data de = transparency-1 c = alphamask
-dffgs_col_loop:
 	
-	push de;push transparency
-	push bc;push width and alphamask
-	exx;to shadow
-	push de;push vram
-	exx
 	
-dffgs_line_loop:
 
-	inc de
-	ld a,(de);load a with transparency data
-	and c
-	jp z,dffgs_alpha_skip	
-	;Not transparency
-	exx;to shadow
-	ldi;transfer to vram and increment, can ignore shadow bc decrement
-	exx
-	djnz dffgs_line_loop
-	jp dffgs_line_end
-dffgs_alpha_skip:
-	exx
-	inc de ;inc shadow de
-	exx
-	djnz dffgs_line_loop
 
-dffgs_line_end:
-		
-	dec l
-	jp z,dffgs_exit
-	exx;shadow
-	pop de;pop vram
-	ex de,hl
-	ld bc,160
-	add hl,bc;next line in vram
-	ex de,hl
-	inc hl;inc color data
+;hl = data, de = vram
+draw_slow_fg_sprite_full:
+	ld bc,0
+	inc hl
+	ld c,(hl);height
+	add hl,bc
+	ld a,(hl);num loops
 	exx
-	pop bc;pop width and alphamask
-	rrc c;rotate transparency mask
-	jp nc,dffgs_transparency_pop
-	pop af
-	jp dffgs_col_loop
-dffgs_transparency_pop
-	pop de
-	jp dffgs_col_loop
-dffgs_exit:
-	pop de
-	pop de
-	pop de
+	ld c,a
+	exx
+	dec de
+	;hl = (gap length) -1 de = vram-1 c' = loops
+dsfgs_line_loop:
+	inc hl;gap length
+	ld c,(hl);gap length
+	ex de,hl;hl is vram
+	add hl,bc;add aplha gap
+	ex de,hl;hl is data
+	inc hl;hl points to single pix mask
+	ld a,(de);vram data
+	and (hl)
+	inc hl;pixel data
+	or (hl)
+	ld (de),a
+	inc hl;ldir length
+	
+	inc de;move to next pixel
+	
+	ld a,(hl);ldir length
+	inc hl;data
+	ld c,a
+	or a
+	jp z,dsfgs_ldir_skip
+	ldir
+dsfgs_ldir_skip:
+	ld a,(de);vram data
+	and (hl)
+	inc hl;pixel data
+	or (hl)
+	ld (de),a
+	
+	exx 
+	dec c
+	exx
+	jp nz,dsfgs_line_loop
 	ret
-	
-	
 
 
+;de = vram , hl = data, a = top lines to skip	
+draw_slow_sprite_top_cut:
 
-
-
-
-
-;hl = color data, de = vram, de' = transparency, c' = transparency mask
-draw_complex_fg_sprite:
-
-
+	inc hl;height
+	push hl
+	ld bc,0
+	ld c,a
+	add hl,bc
+	ld a,(hl);loops to skip
+	ld (dsstc_loops_skipped),a
 	exx
-	ld c,%00000001;ld c' with transparency mask
+	ld b,a;loops to skip
 	exx
-dfcs_col_loop:
+	pop hl
+	ld c,(hl)
+	add hl,bc;total loops
+	ld a,(hl);total loops
+	inc hl;gap length
 
-dcfs_line_loop:
-	;START IN SHADOW
-	
-	;FLIP VRAM MASK
-	ld hl, dcfs_vram_data_mask
-	ld a,%11111111
-	xor (hl)
-	ld (hl),a 
-	jp m,dcfs_inc_vram_skip; writing to second pixel, dont inc
+;hl = data start, b' = num loops,bc = 0
 	exx
-	inc de
+slow_sprite_data_traverse:
 	exx
-dcfs_inc_vram_skip:
-	inc de; inc transparency data
-	ld a,(de)
-	and c;check transparency
-	jp z, dcfs_alpha_skip
+	ld c,(hl);gap length
+	ex de,hl;hl is vram
+	add hl,bc
+	ex de,hl
 	
-	
-	
-	
-	
-	exx;exit shadow
-	;do color data
-dcfs_vram_data_mask .equ $+1
-	ld b,%00001111 ; VRAM DATA MASK
-	ld a,(de);load a with vram data
-	and b;a holds  kept vram nibble
-	ld c,a; kept vram data saved to c
-dcfs_color_data_mask .equ $+1
-	ld a,%11110000; COLOR DATA MASK
-	cp b;if the same, rotate color data
-	jp nz, dcfs_color_rotate_skip
-	and (hl); a holds color data
-	rlca
-	rlca
-	rlca
-	rlca
-	
-	or c;c hold final vram data
-	ld (de),a; write to vram
-	exx;to shadow
-	djnz dcfs_line_loop
-	
-dcfs_color_rotate_skip:
-	and (hl); a holds color data
-	or c;c hold final vram data
-	ld (de),a; write to vram
-	exx;to shadow
-	djnz dcfs_line_loop
-	
-	
-	
+	inc hl
+	inc hl
+	inc hl;ldir length
+	ld c,(hl)
+	add hl,bc
+	ex de,hl
+	add hl,bc
+	ex de,hl
+	inc de;single pix
+	inc hl
+	inc hl
+	inc hl;gap length
+	exx
+	djnz slow_sprite_data_traverse
+	exx
 
+dsstc_loops_skipped .equ $ + 1
+	sub a,0;loops skipped
 	exx
-	rrc c
-	jp nc, dcfs_alpha_pop_skip:
-	pop de
-dcfs_alpha_pop_skip:
+	ld c,a
+	exx
+	
+	dec de
+	dec hl	
+	jp dsfgs_line_loop
+	
+;de = vram , hl = data, a = number lines to draw
+draw_slow_sprite_bottom_cut:
+	ld bc,0
+	inc hl
+	push hl
+	ld c,a;height
+	add hl,bc
+	ld a,(hl);num loops
+	exx
+	ld c,a
+	exx
+	pop hl
+	ld c,(hl)
+	add hl,bc
+
+	dec de
+	jp dsfgs_line_loop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

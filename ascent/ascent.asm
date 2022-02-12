@@ -64,7 +64,9 @@
 	ld	a,lcdBpp4
 	ld (mpLcdCtrl),a	
 	
-	jp time_test_start
+	
+	;call fast_fg_sprite_set_flip
+	;jp time_test_start
 
 	ld hl,vRam + (160*5)
 	ld (draw_bg_vram_addr),hl
@@ -74,19 +76,35 @@
 	
 	
 	
-	ld de,vram +(160*10)
-	ld hl,testFastSprite+3
-	exx
-	ld b,8
-	ld hl,8
-	ld de,testFastSprite_t - 1
-	ld c,%10000000
-	call draw_fast_fg_sprite
+	;ld de,vram +(160*10)
+	;ld hl,testFastSprite+3
+	;exx
+	;ld b,8
+	;ld hl,8
+	;ld de,testFastSprite_t - 1
+	;ld c,%10000000
+	;call draw_fast_fg_sprite
 	
 	
 	ld de,vram +(160*20)
-	ld hl,test_faster_sprite
-	call draw_faster_fg_sprite
+	ld hl,test_fast_sprite
+	ld a,1
+	call draw_fast_sprite_top_cut
+	
+	
+	ld de,vram +(160*40)
+	ld hl,testSlowSprite
+	call draw_slow_fg_sprite_full
+	
+	ld de,vram +(160*30)
+	ld hl,testSlowSprite
+	ld a,2
+	call draw_slow_sprite_bottom_cut
+	
+	ld de,vram +(160*30) + 6
+	ld hl,testSlowSprite
+	ld a,2
+	call draw_slow_sprite_top_cut
 	
 	ei
 	call _GetKey
@@ -121,9 +139,9 @@ test_addr:
 draw_buffer:
 	.dl 0
 
-	
 #include "timeTesting.txt"
 #include "drawSprite.txt"
 #include "drawFGSprite.txt"
 #include "spriteData.txt"
 #include "levelData.txt"
+#include "spriteDecompress.txt"

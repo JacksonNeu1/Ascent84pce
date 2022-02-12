@@ -36,49 +36,90 @@ testSprite2:;h=4
 
 ;YBRGW
 
-;FAST_Sprite,  Double pixel transparency
-;.db width(px*2),height
-;.db bytes/line , sprite data .....
+;SLOW_Sprite,  even pixel start
+;.db width-1 in pairs,height
+;.num loops per num lines
 
-;.db transparency data, column based  first bit is row 1, second is row 2 ...
-testFastSprite:
-	.db 8,8
-	.db 9,%00010010,%00010010,%00010010,%00010010,%00010010,%00010010,%00010010,%00010010	;YBYBYBYBYBYBYBYB
-	.db 5,%00010010,%01010100,%00110011,%00100001 											;YBXXXXWGXXRRXXBY
-	.db 5,%00110011,%00100001,%00010010,%00010010											;XXXXXXXXRRBYYBYB
-	.db 1																					;XXXXXXXXXXXXXXXX
-	.db 9,%01010100,%01010100,%01010100,%01010100,%01010100,%01010100,%01010100,%01010100	;WGWGWGWGWGWGWGWG	
-	.db 5,%00010010,%01010100,%00110011,%00100001 											;YBXXWGXXRRXXBYXX
-	.db 5,%00010010,%01010100,%00110011,%00100001 											;XXYBXXWGXXRRXXBY
-	.db 0,%01010100,%01010100,%00110011,%00100001,%00010010									;XXWGWGRRXXBYYBXX
+;.db alpha length(gap between single pixels, 0 for a gap of -1, 1 for no gap),single pixel mask(%00001111) or (%11111111) single pixel data (%data0000) or (%00000000),
+; ldir length, main pixel data,pixel mask,pixel data.....
+
+testSlowSprite:
+	.db 5,5
+	.db 2,4,7,11,12
+	.db 0,%11111111,%00000000,2,$35,$35,%11111111,%00000000,0,%11111111,%00000000,2,$24,$24,%11111111,%00000000
+	.db 155, %11111111,%00000000,2,$31,$31,%11110000,$01,1,%11111111,%00000000,1,$11,%11111111,%00000000
+	.db 154,%00001111,$50,1,$53,%11111111,%00000000,0,%11111111,%00000000,1,$35,%11110000,$05,1,%00001111,$50,0,%11111111,%00000000
+	.db 154,%00001111,$30,0,%11110000,$03,0,%11111111,%00000000,0,%11110000,$03,1,%00001111,$30,0,%1111111,00000000,0,%00001111,$30,0,%11111111,%00000000
+	.db 155,%00001111,$50,4,$55,$55,$55,$55,%11110000,$05
 	
-testFastSprite_t:
-	.db %11001100,%10001011,%10001101,%11001011,%10101100,%11101011,%10101101,%11101010
+	;WRWRXXGBGBXX
 	
-	;oooooooo
-	;oxxoxoxo
-	;xxxxoooo
-	;xxxxxxxx
-	;oooooooo
-	;oxoxoxox
-	;xoxoxoxo
-	;xoooxoox
+	;XXYRYRYXXXYY
+	
+	;XW RW XX WR WX XW
+	
+	;XR RX RX XR XR XX
+	
+	;XW WW WW WW WW WX
 	
 	
+testSlowSpriteBestCase:
+	.db 5,5
+	.db 1,2,3,4,5
+	.db 0,%00001111,$50,4,$55,$55,$55,$55,%11110000,$05
+	.db 155,%00001111,$50,4,$55,$55,$55,$55,%11110000,$05
+	.db 155,%00001111,$50,4,$55,$55,$55,$55,%11110000,$05
+	.db 155,%00001111,$50,4,$55,$55,$55,$55,%11110000,$05
+	.db 155,%00001111,$50,4,$55,$55,$55,$55,%11110000,$05
+	
+;XW WW WW WW WW WX
+;XW WW WW WW WW WX
+;XW WW WW WW WW WX
+;XW WW WW WW WW WX
+;XW WW WW WW WW WX
+
+;YBRGW
+
+
+;.db width,height
+;.db alpha data 
+;.db color data
+
+	
+testSpriteCompressed:
 	
 	
 	
-;FASTER_SPRITE	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+;FAST_SPRITE	
 ;double pixel transparency, no gaps
 ;.db height
+;.db num loops for num lines
 ;.db to next ldir start, color length, data
 
-test_faster_sprite:
+test_fast_sprite:;20x4px,complex
 	.db 4
-	.db 2,2,%00010010,%01000101 ;BYWG
-	.db 156,4,%00110010,%01000101,%00110010,%01000101 ;BYWGBYWG
-	.db 156,1,%00010010;BY
-	.db 159,1,%00110101;WG
+	.db 2,6,7,9
+	.db 2,2,%00010010,%01000101,3,4,%00110011,%00110010,%01000101,%01000100 ;gap, length,    						XXBYWGXXXXXXRRBRWGGG
+	.db 151,2,%00100001,%00100001,1,2,%00110101,%00110101,1,1,%01000011,1,1,%00110101; 								XXYBYBXXWRWRXXRGXXWR
+	.db 150,10,%00110101,%00110101,%01000101,%01000101,%00010010,%00010010,%00110100,%00110100,%00110100,%00110100; WRWRWGWGBYBYGRGRGRGR
+	.db 152,5,%01010101,%00010001,%00100010,%00110011,%01000100,1,2,%01000100,%01010011;							XXXXWWYYBBRRGGXXGGRW
 
 
 

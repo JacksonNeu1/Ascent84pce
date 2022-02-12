@@ -1,0 +1,105 @@
+
+
+;hl = sprite data start, de = decompress location
+slow_sprite_decompress:
+	ld b,(hl);width
+	inc hl
+	ld c,(hl);height
+	inc hl;alpha data start
+	push hl
+	push hl
+	ld h,c
+	ld l,b
+	mlt hl;number of pixels
+	srl h
+	rr l
+	srl h
+	rr l 
+	srl h 
+	rr l ;divide by 8
+	pop bc
+	add hl,bc;hl holds start of color data
+	exx 
+	pop hl;alpha data
+	ld c,%10000000;alpha mask
+	exx
+
+sdcompress_loop_gen_loop:
+	exx;to shadow
+sdcomp_gap_finder_loop:
+	ld a,(hl);alpha
+	and c 
+	rrc c 
+	jp nz,sdcomp_skip_alpha_inc
+	inc hl
+sdcomp_skip_alpha_inc:
+	inc b
+	or a
+	jp z,sdcomp_gap_finder_loop
+	dec b;b holds number of zeroes(alpha)
+	bit 0,b
+	jp z,sdcomp_even_gap_length
+	jp sdcomp_odd_gap_length
+	
+sdcomp_even_gap_length:;ends in (11) or (10)
+	ld a,c
+	or a
+	jp z,sdcomp_left_pixel;ends in 10, only drawing left pixel this loop
+	;ends in 11, ldir start
+	srl b;gap length becore ldir
+	ld a,b
+	exx
+	ld (de),a;write gap length
+	inc de
+	ld a,%11111111;no starting pixel
+	ld (de),a
+	inc de
+	ld a,%00000000
+	ld (de),a
+	inc de
+	exx
+	jp sdcomp_ldir_gen:
+	
+
+;in shadow, alpha points to second bit of first pixel pair,de points to ldir length byte
+sdcomp_ldir_gen:
+	ld b,0;ldir length
+sdcomp_ldir_gen_loop:
+	inc b
+	rrc c 
+	jp nz,sdcomp_skip_alpha_inc2
+	inc hl
+sdcomp_skip_alpha_inc2:
+	ld a,(hl);alpha
+	and c 
+	or a
+	jp nz,sdcomp_ldir_gen_loop;loops until alpha(0) found
+	dec b 
+	;b holds number of (1)s found (opaque)
+	bit 0,b
+	jp z,sdcomp_no_ending_pix;even number of 1s ,no ending pixel
+	jp sdcomp_ending_pix:
+	
+sdcomp_no_ending_pix:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
