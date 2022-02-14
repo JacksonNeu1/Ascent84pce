@@ -98,7 +98,6 @@ dfgs_loop:;gap, colors
 ;hl = data, de = vram
 draw_slow_fg_sprite_full:
 	ld bc,0
-	inc hl
 	ld c,(hl);height
 	add hl,bc
 	ld a,(hl);num loops
@@ -146,7 +145,6 @@ dsfgs_ldir_skip:
 ;de = vram , hl = data, a = top lines to skip	
 draw_slow_sprite_top_cut:
 
-	inc hl;height
 	push hl
 	ld bc,0
 	ld c,a
@@ -200,7 +198,6 @@ dsstc_loops_skipped .equ $ + 1
 ;de = vram , hl = data, a = number lines to draw
 draw_slow_sprite_bottom_cut:
 	ld bc,0
-	inc hl
 	push hl
 	ld c,a;height
 	add hl,bc

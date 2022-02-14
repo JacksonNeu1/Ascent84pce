@@ -67,7 +67,27 @@
 	
 	;call fast_fg_sprite_set_flip
 	;jp time_test_start
-
+	
+	
+	
+	ld hl,testSpriteCompressed
+	ld de,vRam 
+	call slow_sprite_decompress
+	
+	
+	ld de,vRam +(160*40)
+	ld hl,vRam
+	call draw_slow_fg_sprite_full
+	
+	ei
+	call _GetKey
+	di
+	
+	
+	
+	
+	
+	
 	ld hl,vRam + (160*5)
 	ld (draw_bg_vram_addr),hl
 	ld hl,$000080
@@ -117,8 +137,8 @@ exit_prgm:
 	call _DrawStatusBar
 	
 	ei				; reset screen back to normal
-	ret				; return to os
-	
+	ret			; return to os
+
 
 printHL:;=================REMOVE
 	push hl
@@ -132,6 +152,12 @@ printHL:;=================REMOVE
 	di
 	jp exit_prgm
 
+
+prgmpause:
+	ei
+	call _GetKey
+	di
+	ret
 
 test_addr:
 	.dl 0

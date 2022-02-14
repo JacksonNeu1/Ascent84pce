@@ -37,14 +37,14 @@ testSprite2:;h=4
 ;YBRGW
 
 ;SLOW_Sprite,  even pixel start
-;.db width-1 in pairs,height
+;.height
 ;.num loops per num lines
 
 ;.db alpha length(gap between single pixels, 0 for a gap of -1, 1 for no gap),single pixel mask(%00001111) or (%11111111) single pixel data (%data0000) or (%00000000),
 ; ldir length, main pixel data,pixel mask,pixel data.....
 
 testSlowSprite:
-	.db 5,5
+	.db 5
 	.db 2,4,7,11,12
 	.db 0,%11111111,%00000000,2,$35,$35,%11111111,%00000000,0,%11111111,%00000000,2,$24,$24,%11111111,%00000000
 	.db 155, %11111111,%00000000,2,$31,$31,%11110000,$01,1,%11111111,%00000000,1,$11,%11111111,%00000000
@@ -64,7 +64,7 @@ testSlowSprite:
 	
 	
 testSlowSpriteBestCase:
-	.db 5,5
+	.db 5
 	.db 1,2,3,4,5
 	.db 0,%00001111,$50,4,$55,$55,$55,$55,%11110000,$05
 	.db 155,%00001111,$50,4,$55,$55,$55,$55,%11110000,$05
@@ -81,24 +81,29 @@ testSlowSpriteBestCase:
 ;YBRGW
 
 
-;.db width,height
+;.db width(px),height
 ;.db alpha data 
 ;.db color data
 
 	
 testSpriteCompressed:
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	.db 8,8
+	.db %00011111
+	.db %01111110
+	.db %11001110
+	.db %11111111
+	.db %11111111
+	.db %11111111
+	.db %11111111
+	.db %11111111
+	.db $54,$55,$55,$55
+	.db $55,$55,$55,$55
+	.db $55,$55,$55,$55
+	.db $55,$55,$55,$55
+	.db $55,$55,$55,$55
+	.db $55,$55,$55,$55
+	.db $55,$55,$55,$55
+	.db $55,$55,$55,$55	
 	
 	
 	
