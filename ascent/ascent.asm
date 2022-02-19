@@ -70,8 +70,8 @@
 	
 	
 	
-	ld hl,testSpriteCompressed
-	ld de,vRam 
+	ld hl,testSpriteCompressed3
+	ld de,vRam
 	call slow_sprite_decompress
 	
 	

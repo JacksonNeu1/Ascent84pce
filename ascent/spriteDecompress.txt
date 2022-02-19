@@ -40,12 +40,14 @@ slow_sprite_decompress:
 	ld h,a;height
 	ld l,b;width
 	mlt hl;number of pixels
+	dec hl
 	srl h
 	rr l
 	srl h
 	rr l 
 	srl h 
 	rr l ;divide by 8
+	inc hl 
 	pop bc
 	add hl,bc;hl holds start of color data
 	;HL POINTING TO COLOR DATA
@@ -57,169 +59,198 @@ slow_sprite_decompress:
 	ex de,hl;de points to data write location
 	
 	
+	
+	
+	
 	exx;to shadow 
 	pop hl;alpha data	
 	;HL IS POINTING TO ALPHA DATA
 	ld c,%10000000;alpha mask
 	exx
 	ld c,%11110000;color mask
-sdcompress_loop_gen_loop:
-	exx;to shadow
-	push hl
-	ld hl,0 
-	ld (sdcomp_starting_zeroes_found),hl
-	pop hl
-sdcomp_inc_loop_counter:
-	push af
+
+;START OF LOOP
+;add amount to get from ending pixels to first nonzero pair
+sdcomp_find_gap_length:
 sdcomp_loop_counter .equ $ + 1
-	ld a,0
+	ld a,0;inc number of loops
 	inc a 
-	ld (sdcomp_loop_counter) ,a
-	pop af
+	ld (sdcomp_loop_counter),a
+	exx ;toshadow
+	ld b,0;pairs found, always < 255 
+sdcomp_add_1_gap_length .equ $
+	nop
+	ld a,0;nop
+	ld (sdcomp_add_1_gap_length),a
+sdcomp_find_gap_length_loop:
 	
-	push hl
-sdcomp_starting_zeroes_found .equ $ + 1;for ldir with no end pixel,must be -1
-	ld hl,0
-	ld (sdcomp_gap_zeroes_found),hl
-	pop hl
-sdcomp_gap_finder_loop:
-	scf
-sdcomp_end_reached_flag .equ $
+	scf 
+sdcomp_end_reached_flag .equ $;check if end of sprite reached
 	jp nc,sdcomp_end
-	call sdcomp_get_next_alpha
-	
-	push hl
-sdcomp_gap_zeroes_found .equ $ + 1
-	ld hl,0
-	inc hl 
-	ld (sdcomp_gap_zeroes_found),hl
-	pop hl
-	
-	or a
-	jp z,sdcomp_gap_finder_loop
-	
-	
-	push hl 
-	ld hl,(sdcomp_gap_zeroes_found)
-	;holds number of zeroes(alpha) + 1  CORRECT 1st loop
 
-	bit 0,l
-	jp nz,sdcomp_even_gap_length
-;odd gap length, has leading pixel
-	srl h 
-	rr l ;l holds gap length
-	ld a,l
-	pop hl
-	exx;out of shadow
-	ld (de),a;write gap length
-	inc de
-	ld a,%00001111;save first pixel
-	ld (de),a
-	inc de
-	call sdcomp_get_next_color_leading_nibble
-	ld (de),a;write leading pixel
-	inc de
-	exx;toshadow
-		
-	ld b,0;for gap finder loop
-	ld a,(hl);alpha
-	and c ;points to start of next pixel pair
-	or a
-	exx
-	jp z,sdcompress_loop_gen_loop;after leading pix is either 00 or 01, start of new loop
-	exx
-	;after leading pix is 11 or 10
-	;move alpha pointer to second bit of 11 or 10
-	call sdcomp_get_next_alpha
-	jp sdcomp_ldir_or_end_pix
-	
-	
-sdcomp_even_gap_length:;ends in (11) or (10),no start pixel
-	
-	srl h 
-	rr l 
-	ld a,l;ldir length
-	pop hl
-	exx;out of shadow
-	ld (de),a;write gap length
-	inc de
-	ld a,%11111111;no starting pixel
-	ld (de),a
-	inc de
-	ld a,%00000000
-	ld (de),a
-	inc de
-	exx;into shadow
-sdcomp_ldir_or_end_pix:
-	ld a,(hl)
-	and c
-	or a
-	jp nz,sdcomp_ldir_gen;ends in 11, has ldir length
-	;ends in 10, only drawing end pixel
-	call sdcomp_get_next_alpha;inc alpha pointer to new loop
-	jp sdcomp_write_end_pixel
-
-;in shadow, alpha points to second bit of first pixel pair,de points to ldir length byte, hl/c to color data
-sdcomp_ldir_gen:;know ldir length is at least 1
-	ld b,0;ldir length
-	call sdcomp_get_next_alpha;inc alpha pointer to start of next 
-sdcomp_ldir_gen_loop:
+	call sdcomp_get_next_alpha_pair
+	;a holds alpha data 
 	inc b
-	call sdcomp_get_next_alpha
-	or a
-	jp nz,sdcomp_ldir_gen_loop;loops until alpha(0) found
-	dec b 
-	;b holds number of (1)s found (opaque) after first known ldir
+	or a 
+	jp z,sdcomp_find_gap_length_loop
+	;END OF LOOP, B HOLDS NUMBER OF 00 PAIRS  +1
+		
 	
-	
-	bit 0,b
-	jp z,sdcomp_no_ending_pix;even number of 1s ,no ending pixel ;alpha pointer is one after the 0
-	;odd number of 1s, has ending pixel
-	srl b
-	inc b;ldir length
-	ld a,b
-	exx;out of shadow
-	ld (de),a 
-	inc de
-	call sdcomp_write_ldir_data_loop
-	;write ending pixel
-	exx;into shadow
-sdcomp_write_end_pixel:;in shadow
 
-	exx;out of shadow
-	ld a,%11110000;keep second pixel
-	ld (de),a
+	
+	
+	
+	push af;saves leading pixel alpha data 
+	ld a,b 
+	exx;out of shadow 
+	ld (de),a;GAP LENGTH 
 	inc de 
+	exx;into shadow 
+	
+	
+;LEADING PIXELS
+	pop af;alpha data after gap, 11 01 10
+	exx;out of shadow
+	push de 
+	
+	ld b,a;save for later
+	bit 4,a ;check if first pixel has color 
+	ld a,0
+	ld d,%11111111;assuming no colors 
+	jp z,sdcomp_leading_pixel_first_skip
+	;has first color
+	ld d,%11110000;save second pixel of bg 
 	call sdcomp_get_next_color_ending_nibble
-	ld (de),a
+sdcomp_leading_pixel_first_skip:
+	;a is either $00 or $0color1
+	
+	ld e,%11111111;assuming no colors
+	
+	bit 0,b;check second pixel alpha
+	ld b,a;save for later 
+	ld a,0
+	jp z,sdcomp_leading_pixel_second_skip;
+	;has second color 
+	call sdcomp_get_next_color_leading_nibble
+	;a = color2 0 
+	ld e,%00001111;save first pixel of bg
+	
+sdcomp_leading_pixel_second_skip:
+	;a is either 00 or c2 0 
+	;b is either 00 or 0 c1 
+	or b 
+	ld b,a;final color data
+	ld a,d 
+	and e ;final mask data 
+	
+	pop de;return to pointer 
+	
+	ld (de),a;write mask data 
 	inc de 
-	jp sdcompress_loop_gen_loop;back to start of next loop
+	ld a,b;color data 
+	ld (de),a;write color data 
+	inc de 
+	exx;into shadow 
 	
 	
-sdcomp_no_ending_pix:
-	srl b
-	inc b;ldir length  ,add one known ldir
+;CHECK FOR LDIR 
+	ld b,0;pairs found 
+sdcomp_ldir_loop:
+	call sdcomp_get_next_alpha_pair
+	inc b
+	xor %11111111;flip bits
+	jp z,sdcomp_ldir_loop;alpha data was 11
+	;b holds pairs found+1
+	xor %11111111;flip back
+	;a holds first non 11 pair 
+	dec b ;b holds pairs found
+	jp z,sdcomp_no_ldir;no pairs found,no ldir length
+	or a
+	jp nz,sdcomp_ldir_write;ends not in 00, has single ending pixel
+	;ends in 00,ending pixels will be 11 
+	;must add 1 to next gap length, have already read first 00
+	ld a,%00000100;inc b 
+	ld (sdcomp_add_1_gap_length),a 
+	ld a,$ff;ending pixels 11
+	
+	dec b;reduce length by 1, final pair is end pixels
+	jp z,sdcomp_no_ldir;no ldir length,ending pixels is 11 
+	;b holds ldir length 
+	
+;b holds ldir length, a holds ending pixels
+sdcomp_ldir_write:
+	push af;save ending pixels
 	ld a,b
-	exx;out of shadow
-	ld (de),a 
-	inc de
-	call sdcomp_write_ldir_data_loop
-	;no ending pixel, loop is done
-	ld a,%11111111
-	ld (de),a
+	exx 
+	ld (de),a;write ldir length
 	inc de 
-	ld a,%00000000
+	call sdcomp_write_ldir_data_loop
+	exx ;toshadow
+	pop af;return ending pixels
+	jp sdcomp_write_end_pixels
+sdcomp_no_ldir:;no ldir length, a holds ending pixels,00,10,01,11
+	push af;save end pixels
+	
+	exx;out of shadow
+	ld a,0
 	ld (de),a 
-	inc de
-	exx;to shadow 
-	;at end of ldir, data write location is incremented, gap length must decrease by 1 bc no end pixel
+	inc de 
+	exx 
+	pop af;return ending pixels
+
+
+;WRITE ENDING PIXELS 
+
+sdcomp_write_end_pixels:;a holds end pixels
 	
-	push hl 
-	ld hl,-1 
-	ld (sdcomp_starting_zeroes_found),hl
-	pop hl
-	jp sdcomp_inc_loop_counter;back to start of next loop,with -1 gap length
+	exx;out of shadow
+	push de 
 	
+	ld b,a;save for later
+	bit 4,a ;check if first pixel has color 
+	ld a,0
+	ld d,%11111111;assuming no colors 
+	jp z,sdcomp_ending_pixel_first_skip
+	;has first color
+	ld d,%11110000;save second pixel of bg 
+	call sdcomp_get_next_color_ending_nibble
+sdcomp_ending_pixel_first_skip:
+	;a is either $00 or $0color1
+	
+	ld e,%11111111;assuming no colors
+	
+	bit 0,b;check second pixel alpha
+	ld b,a;save for later 
+	ld a,0
+	jp z,sdcomp_ending_pixel_second_skip;
+	;has second color 
+	call sdcomp_get_next_color_leading_nibble
+	;a = color2 0 
+	ld e,%00001111;save first pixel of bg
+	
+sdcomp_ending_pixel_second_skip:
+	;a is either 00 or c2 0 
+	;b is either 00 or 0 c1 
+	or b 
+	ld b,a;final color data
+	ld a,d 
+	and e ;final mask data 
+	
+	pop de;return to pointer 
+	
+	ld (de),a;write mask data 
+	inc de 
+	ld a,b;color data 
+	ld (de),a;write color data 
+	inc de 
+	
+	
+	jp sdcomp_find_gap_length;BACK TO START
+	
+	
+
+
+
 ;hl/c is color data, de is ldir write pos, b' is ldir length, not in shadow 
 sdcomp_write_ldir_data_loop:
 	call sdcomp_get_next_color_ending_nibble	
@@ -238,31 +269,60 @@ sdcomp_write_ldir_data_loop:
 	
 	
 	
-;in shadow,returns a 0 or not 0
-sdcomp_get_next_alpha:
-
-	ex af,af' ;'
+;in shadow,returns a $FF,$0F,$F0,$00
+sdcomp_get_next_alpha_pair:
+	call sdcomp_get_next_alpha_bit
 	or a 
+	jp z,sdcomp_get_next_alpha_pair0
+	ld a,$F0;FIRST BIT WAS 1
+	jp sdcomp_get_next_alpha_pair1
+sdcomp_get_next_alpha_pair0:
+	ld a,0
+sdcomp_get_next_alpha_pair1:
+	ld (sdcomp_get_next_alpha_pair_or),a 
+	
+	call sdcomp_get_next_alpha_bit
+	or a 
+	jp z,sdcomp_get_next_alpha_pair2
+	ld a,$0F;SECOND BIT WAS 1
+	jp sdcomp_get_next_alpha_pair3
+sdcomp_get_next_alpha_pair2:
+	ld a,0;SECOND BIT WAS 0
+sdcomp_get_next_alpha_pair3:	
+sdcomp_get_next_alpha_pair_or .equ $ + 1
+	or 0;AND WITH FIRST BIT 
+	
+	ret 
+
+
+sdcomp_get_next_alpha_bit:
+	;CHECKS IF OUTSIDE OF SPRITE,VIRTUAL 0s
+	ex af,af' ;'
+	or a
 	jp z,sdcomp_line_end
 	ex af,af' ;'
 
+	;LOAD NEXT BIT
 	ld a,(hl)
 	and c 
 	rrc c 
 	jp nc,sdcomp_skip_alpha_inc
 	inc hl
 sdcomp_skip_alpha_inc:
-
+	
+	;DEC WIDTH COUNTER
 	ex af,af' ;';to shadow
 	dec a;dec width counter
 	jp nz,sdcomp_setup_line_gap_skip
 	
 	;END OF LINE REACHED
 	
+	;AT LINE END,WRITE LOOPS/LINE DATA
 	push af;
 	ld a,(sdcomp_loop_counter)
 	ld (de),a;write loops per line data
 	inc de
+	;DEC NUMBER LINES REMAINING
 sdcomp_lines_remaining .equ $ + 1
 	ld a,0
 	dec a 
@@ -272,6 +332,7 @@ sdcomp_lines_remaining .equ $ + 1
 	ld a,%11011010;jp c
 	ld (sdcomp_end_reached_flag) , a
 sdcomp_set_end_flag_skip:
+	;SET UP NUMBER OF VIRTUAL ZEROES
 	push hl
 sdcomp_zeroes_between_lines .equ $ + 1 
 	ld hl,0;320-width
@@ -282,10 +343,14 @@ sdcomp_zeroes_between_lines .equ $ + 1
 	
 sdcomp_setup_line_gap_skip:
 	ex af,af' ;';out of shadow
-	ret
-sdcomp_line_end:;previous alpha read was last of line 
+	ret;A HOLDS 0 OR NOT 0
+	
+	
+	;IF OUTSIDE OF SPRITE,RETURN VIRTUAL 0
+sdcomp_line_end:
 	ex af,af' ;';out of shadow keep a' at 0 until next line start reached 
 	push hl
+	;DEC REMAINING ZEROES
 sdcomp_remaining_zeroes_between_lines .equ $ + 1 
 	ld hl,0;320 - width 
 	dec hl
@@ -293,16 +358,16 @@ sdcomp_remaining_zeroes_between_lines .equ $ + 1
 	ld a,l
 	or h
 	pop hl
-	jp z,sdcomp_line_gap_end
+	jp z,sdcomp_line_gap_end;IF END OF VIRTUAL ZEROES
 	ld a,0
-	ret
+	ret;return 0
 	
 sdcomp_line_gap_end:
-	ex af,af' ;'
+	ex af,af' ;';to shadow
 sdcomp_sprite_width .equ $ + 1
-	ld a,0
-	ex af,af' ;'
-	ld a,0
+	ld a,0;ld shadow a with width
+	ex af,af' ;';out of shadow
+	ld a,0;ret 0
 	ret
 	
 
@@ -348,6 +413,89 @@ sdcomp_color_inc_skip:
 
 sdcomp_end:
 	ret 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;FIND GAP LENGTH
+;read bitsteam in pairs
+;gap length = number of full pairs found 
+
+;STARTING PIXEL(S);have read either 11,01,10 in bitstream
+;write either both, start,or end pixel 
+
+;LDIR
+;read number of pairs of 11 in bitstream 
+;if 0 move to ending pixels
+;if ends in 00, last full 11 pair will be ending pixels 
+;write ldir length 
+;if 0 move to next step
+;else write ldir data 
+
+
+;ENDING PIXEL(S)
+;00 if there is nothing after leading pixels 
+;11 10 01 otherwise
+
+;BACK TO GAP LENGTH
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

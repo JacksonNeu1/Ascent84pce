@@ -82,9 +82,9 @@ Listing for file "ascent.asm"
    70 D1:A8CB -  -  -  -  	
    71 D1:A8CB -  -  -  -  	
    72 D1:A8CB -  -  -  -  	
-   73 D1:A8CB 21 C1 AC D1 	ld hl,testSpriteCompressed
-   74 D1:A8CF 11 00 00 D4 	ld de,vRam 
-   75 D1:A8D3 CD B0 AE D1 	call slow_sprite_decompress
+   73 D1:A8CB 21 00 AD D1 	ld hl,testSpriteCompressed4
+   74 D1:A8CF 11 00 00 D4 	ld de,vRam
+   75 D1:A8D3 CD CE AE D1 	call slow_sprite_decompress
    76 D1:A8D7 -  -  -  -  	
    77 D1:A8D7 -  -  -  -  	
    78 D1:A8D7 11 00 19 D4 	ld de,vRam +(160*40)
@@ -119,7 +119,7 @@ Listing for file "ascent.asm"
   107 D1:A8F9 -  -  -  -  	
   108 D1:A8F9 -  -  -  -  	
   109 D1:A8F9 11 80 0C D4 	ld de,vram +(160*20)
-  110 D1:A8FD 21 EB AC D1 	ld hl,test_fast_sprite
+  110 D1:A8FD 21 09 AD D1 	ld hl,test_fast_sprite
   111 D1:A901 3E 01 -  -  	ld a,1
   112 D1:A903 CD 42 AB D1 	call draw_fast_sprite_top_cut
   113 D1:A907 -  -  -  -  	
@@ -277,7 +277,7 @@ Listing for file "C:\Users\jax9h\OneDrive\Desktop\ti84\ascent\drawSprite.txt"
     3 D1:A9C0 -  -  -  -  ; hl = line number
     4 D1:A9C0 -  -  -  -  draw_bg_line:
     5 D1:A9C0 01 00 00 00 	ld bc,0
-    6 D1:A9C4 DD 21 25 AD 
+    6 D1:A9C4 DD 21 43 AD 
               D1 -  -  -  	ld ix, bg_data
     7 D1:A9C9 -  -  -  -  draw_bg_line_loop:
     8 D1:A9C9 DD 46 00 -  	ld b,(ix)
@@ -304,7 +304,7 @@ Listing for file "C:\Users\jax9h\OneDrive\Desktop\ti84\ascent\drawSprite.txt"
    29 D1:A9EF DD 66 06 -  	ld h,(ix+6);h is sprite index
    30 D1:A9F2 2E 03 -  -  	ld l,3
    31 D1:A9F4 ED 6C -  -  	mlt hl
-   32 D1:A9F6 01 1F AD D1 	ld bc, bg_sprite_indices
+   32 D1:A9F6 01 3D AD D1 	ld bc, bg_sprite_indices
    33 D1:A9FA 09 -  -  -  	add hl,bc;hl is pointer to sprite data
    34 D1:A9FB ED 27 -  -  	ld hl,(hl);hl is sprite data
    35 D1:A9FD -  -  -  -  	
@@ -943,11 +943,11 @@ Listing for file "C:\Users\jax9h\OneDrive\Desktop\ti84\ascent\spriteData.txt"
    91 D1:ACC3 1F -  -  -  	.db %00011111
    92 D1:ACC4 7E -  -  -  	.db %01111110
    93 D1:ACC5 CE -  -  -  	.db %11001110
-   94 D1:ACC6 FF -  -  -  	.db %11111111
-   95 D1:ACC7 FF -  -  -  	.db %11111111
-   96 D1:ACC8 FF -  -  -  	.db %11111111
-   97 D1:ACC9 FF -  -  -  	.db %11111111
-   98 D1:ACCA FF -  -  -  	.db %11111111
+   94 D1:ACC6 55 -  -  -  	.db %01010101
+   95 D1:ACC7 AA -  -  -  	.db %10101010
+   96 D1:ACC8 6E -  -  -  	.db %01101110
+   97 D1:ACC9 3B -  -  -  	.db %00111011
+   98 D1:ACCA 67 -  -  -  	.db %01100111
    99 D1:ACCB 54 55 55 55 	.db $54,$55,$55,$55
   100 D1:ACCF 55 55 55 55 	.db $55,$55,$55,$55
   101 D1:ACD3 55 55 55 55 	.db $55,$55,$55,$55
@@ -958,803 +958,975 @@ Listing for file "C:\Users\jax9h\OneDrive\Desktop\ti84\ascent\spriteData.txt"
   106 D1:ACE7 55 55 55 55 	.db $55,$55,$55,$55	
   107 D1:ACEB -  -  -  -  	
   108 D1:ACEB -  -  -  -  	
-  109 D1:ACEB -  -  -  -  	
-  110 D1:ACEB -  -  -  -  	
-  111 D1:ACEB -  -  -  -  	
-  112 D1:ACEB -  -  -  -  	
-  113 D1:ACEB -  -  -  -  	
-  114 D1:ACEB -  -  -  -  	
-  115 D1:ACEB -  -  -  -  ;FAST_SPRITE	
-  116 D1:ACEB -  -  -  -  ;double pixel transparency, no gaps
-  117 D1:ACEB -  -  -  -  ;.db height
-  118 D1:ACEB -  -  -  -  ;.db num loops for num lines
-  119 D1:ACEB -  -  -  -  ;.db to next ldir start, color length, data
-  120 D1:ACEB -  -  -  -  
-  121 D1:ACEB -  -  -  -  test_fast_sprite:;20x4px,complex
-  122 D1:ACEB 04 -  -  -  	.db 4
-  123 D1:ACEC 02 06 07 09 	.db 2,6,7,9
-  124 D1:ACF0 02 02 12 45 
+  109 D1:ACEB -  -  -  -  testSpriteCompressed2:
+  110 D1:ACEB 03 04 -  -  	.db 3,4
+  111 D1:ACED CD 50 -  -  	.db %11001101,%01010000
+  112 D1:ACEF 23 23 23 23 
+              23 -  -  -  	.db $23,$23,$23,$23,$23
+  113 D1:ACF4 -  -  -  -  	;110
+  114 D1:ACF4 -  -  -  -  	;011
+  115 D1:ACF4 -  -  -  -  	;010
+  116 D1:ACF4 -  -  -  -  	;101
+  117 D1:ACF4 -  -  -  -  	
+  118 D1:ACF4 -  -  -  -  
+  119 D1:ACF4 -  -  -  -  testSpriteCompressed3:
+  120 D1:ACF4 05 04 -  -  	.db 5,4
+  121 D1:ACF6 76 B2 70 -  	.db %01110110,%10110010,%01110000
+  122 D1:ACF9 55 55 55 55 
+              55 55 55 -  	.db $55,$55,$55,$55,$55,$55,$55
+  123 D1:AD00 -  -  -  -  	;01110
+  124 D1:AD00 -  -  -  -  	;11010
+  125 D1:AD00 -  -  -  -  	;11001
+  126 D1:AD00 -  -  -  -  	;00111
+  127 D1:AD00 -  -  -  -  
+  128 D1:AD00 -  -  -  -  
+  129 D1:AD00 -  -  -  -  testSpriteCompressed4:
+  130 D1:AD00 01 0A -  -  	.db 1,10
+  131 D1:AD02 CA 40 -  -  	.db %11001010,%01000000
+  132 D1:AD04 55 55 55 55 
+              55 -  -  -  	.db $55,$55,$55,$55,$55
+  133 D1:AD09 -  -  -  -  
+  134 D1:AD09 -  -  -  -  	
+  135 D1:AD09 -  -  -  -  	
+  136 D1:AD09 -  -  -  -  ;FAST_SPRITE	
+  137 D1:AD09 -  -  -  -  ;double pixel transparency, no gaps
+  138 D1:AD09 -  -  -  -  ;.db height
+  139 D1:AD09 -  -  -  -  ;.db num loops for num lines
+  140 D1:AD09 -  -  -  -  ;.db to next ldir start, color length, data
+  141 D1:AD09 -  -  -  -  
+  142 D1:AD09 -  -  -  -  test_fast_sprite:;20x4px,complex
+  143 D1:AD09 04 -  -  -  	.db 4
+  144 D1:AD0A 02 06 07 09 	.db 2,6,7,9
+  145 D1:AD0E 02 02 12 45 
               03 04 33 32 
               45 44 -  -  	.db 2,2,%00010010,%01000101,3,4,%00110011,%00110010,%01000101,%01000100 ;gap, length,    						XXBYWGXXXXXXRRBRWGGG
-  125 D1:ACFA 97 02 21 21 
+  146 D1:AD18 97 02 21 21 
               01 02 35 35 
               01 01 43 01 
               01 35 -  -  	.db 151,2,%00100001,%00100001,1,2,%00110101,%00110101,1,1,%01000011,1,1,%00110101; 								XXYBYBXXWRWRXXRGXXWR
-  126 D1:AD08 96 0A 35 35 
+  147 D1:AD26 96 0A 35 35 
               45 45 12 12 
               34 34 34 34 	.db 150,10,%00110101,%00110101,%01000101,%01000101,%00010010,%00010010,%00110100,%00110100,%00110100,%00110100; WRWRWGWGBYBYGRGRGRGR
-  127 D1:AD14 98 05 55 11 
+  148 D1:AD32 98 05 55 11 
               22 33 44 01 
               02 44 53 -  	.db 152,5,%01010101,%00010001,%00100010,%00110011,%01000100,1,2,%01000100,%01010011;							XXXXWWYYBBRRGGXXGGRW
-  128 D1:AD1F -  -  -  -  
-  129 D1:AD1F -  -  -  -  
-  130 D1:AD1F -  -  -  -  
-  131 D1:AD1F -  -  -  -  ;COMPLEX_SPRITE
-  132 D1:AD1F -  -  -  -  ;16 color, per pixel transparency, even or odd start
-  133 D1:AD1F -  -  -  -  
-  134 D1:AD1F -  -  -  -  
-  135 D1:AD1F -  -  -  -  
-  136 D1:AD1F -  -  -  -  
-  137 D1:AD1F -  -  -  -  
-  138 D1:AD1F -  -  -  -  
-  139 D1:AD1F -  -  -  -  
-  140 D1:AD1F -  -  -  -  
-  141 D1:AD1F -  -  -  -  
-  142 D1:AD1F -  -  -  -  
-  143 D1:AD1F -  -  -  -  
-  144 D1:AD1F -  -  -  -  
-  145 D1:AD1F -  -  -  -  
-  146 D1:AD1F -  -  -  -  
-  147 D1:AD1F -  -  -  -  
-  148 D1:AD1F -  -  -  -  
-  149 D1:AD1F -  -  -  -  
-  150 D1:AD1F -  -  -  -  
-  151 D1:AD1F -  -  -  -  	
+  149 D1:AD3D -  -  -  -  
+  150 D1:AD3D -  -  -  -  
+  151 D1:AD3D -  -  -  -  
+  152 D1:AD3D -  -  -  -  ;COMPLEX_SPRITE
+  153 D1:AD3D -  -  -  -  ;16 color, per pixel transparency, even or odd start
+  154 D1:AD3D -  -  -  -  
+  155 D1:AD3D -  -  -  -  
+  156 D1:AD3D -  -  -  -  
+  157 D1:AD3D -  -  -  -  
+  158 D1:AD3D -  -  -  -  
+  159 D1:AD3D -  -  -  -  
+  160 D1:AD3D -  -  -  -  
+  161 D1:AD3D -  -  -  -  
+  162 D1:AD3D -  -  -  -  
+  163 D1:AD3D -  -  -  -  
+  164 D1:AD3D -  -  -  -  
+  165 D1:AD3D -  -  -  -  
+  166 D1:AD3D -  -  -  -  
+  167 D1:AD3D -  -  -  -  
+  168 D1:AD3D -  -  -  -  
+  169 D1:AD3D -  -  -  -  
+  170 D1:AD3D -  -  -  -  
+  171 D1:AD3D -  -  -  -  
+  172 D1:AD3D -  -  -  -  	
 Listing for file "ascent.asm"
-  172 D1:AD1F -  -  -  -  #include "levelData.txt"
+  172 D1:AD3D -  -  -  -  #include "levelData.txt"
 Listing for file "C:\Users\jax9h\OneDrive\Desktop\ti84\ascent\levelData.txt"
-    1 D1:AD1F -  -  -  -  bg_sprite_indices:
-    2 D1:AD1F 08 AC D1 -  	.dl testSprite
-    3 D1:AD22 1E AC D1 -  	.dl testSprite2
-    4 D1:AD25 -  -  -  -  	;.dl sprite data
-    5 D1:AD25 -  -  -  -  
-    6 D1:AD25 -  -  -  -  
-    7 D1:AD25 -  -  -  -  
-    8 D1:AD25 -  -  -  -  
-    9 D1:AD25 -  -  -  -  bg_data:
-   10 D1:AD25 -  -  -  -  
-   11 D1:AD25 -  -  -  -  	;y y 
-   12 D1:AD25 -  -  -  -  	;x (byte) 
-   13 D1:AD25 -  -  -  -  	;flags  (7 = odd pixel  6 = spriteFlip , 0 = data cont)    0 to end data   if sprite starts on even pixel, inc x by 1
-   14 D1:AD25 -  -  -  -  	;height
-   15 D1:AD25 -  -  -  -  	;index
-   16 D1:AD25 -  -  -  -  	
-   17 D1:AD25 -  -  -  -  	
-   18 D1:AD25 -  -  -  -  	;even pixel noflip  x = (pixel - 1) /2
-   19 D1:AD25 -  -  -  -  	;odd pixel noflip   x = (pixel) /2
-   20 D1:AD25 -  -  -  -  	
-   21 D1:AD25 -  -  -  -  	;even pixel, flip, odd width   x = (pixel + width)/2
-   22 D1:AD25 -  -  -  -  	;odd pixel, flip, odd width	   x = (pixel + width)/2
-   23 D1:AD25 -  -  -  -  	
-   24 D1:AD25 -  -  -  -  	
-   25 D1:AD25 -  -  -  -  	;even pixel, flip, even width   x = (pixel + width)/2
-   26 D1:AD25 -  -  -  -  	;odd pixel, flip, even width	   x = (pixel + width)/2
-   27 D1:AD25 -  -  -  -  	
-   28 D1:AD25 -  -  -  -  	
-   29 D1:AD25 -  -  -  -  	
-   30 D1:AD25 -  -  -  -  	
-   31 D1:AD25 -  -  -  -  	
-   32 D1:AD25 -  -  -  -  	;6 bytes
-   33 D1:AD25 00 84 -  -  	.db $00,$84
-   34 D1:AD27 05 -  -  -  	.db 5
-   35 D1:AD28 01 -  -  -  	.db %00000001
-   36 D1:AD29 05 -  -  -  	.db 5
-   37 D1:AD2A 00 -  -  -  	.db 0
-   38 D1:AD2B -  -  -  -  	
-   39 D1:AD2B 00 84 -  -  	.db $00,$84
-   40 D1:AD2D 0A -  -  -  	.db 10
-   41 D1:AD2E 81 -  -  -  	.db %10000001
-   42 D1:AD2F 05 -  -  -  	.db 5
-   43 D1:AD30 00 -  -  -  	.db 0
-   44 D1:AD31 -  -  -  -  	
-   45 D1:AD31 00 83 -  -  	.db $00,$83
-   46 D1:AD33 14 -  -  -  	.db 20
-   47 D1:AD34 41 -  -  -  	.db %01000001
-   48 D1:AD35 05 -  -  -  	.db 5
-   49 D1:AD36 00 -  -  -  	.db 0
-   50 D1:AD37 -  -  -  -  	
-   51 D1:AD37 00 83 -  -  	.db $00,$83
-   52 D1:AD39 1E -  -  -  	.db 30
-   53 D1:AD3A C1 -  -  -  	.db %11000001
-   54 D1:AD3B 05 -  -  -  	.db 5
-   55 D1:AD3C 00 -  -  -  	.db 0
-   56 D1:AD3D -  -  -  -  	
-   57 D1:AD3D -  -  -  -  	
-   58 D1:AD3D 00 80 -  -  	.db $00,$80
-   59 D1:AD3F 05 -  -  -  	.db 5
-   60 D1:AD40 01 -  -  -  	.db %00000001
-   61 D1:AD41 05 -  -  -  	.db 5
-   62 D1:AD42 00 -  -  -  	.db 0
-   63 D1:AD43 -  -  -  -  	
-   64 D1:AD43 00 81 -  -  	.db $00,$81
-   65 D1:AD45 0A -  -  -  	.db 10
-   66 D1:AD46 81 -  -  -  	.db %10000001
-   67 D1:AD47 05 -  -  -  	.db 5
-   68 D1:AD48 00 -  -  -  	.db 0
-   69 D1:AD49 -  -  -  -  	
-   70 D1:AD49 00 80 -  -  	.db $00,$80
-   71 D1:AD4B 14 -  -  -  	.db 20
-   72 D1:AD4C 41 -  -  -  	.db %01000001
-   73 D1:AD4D 05 -  -  -  	.db 5
-   74 D1:AD4E 00 -  -  -  	.db 0
-   75 D1:AD4F -  -  -  -  	
-   76 D1:AD4F 00 81 -  -  	.db $00,$81
-   77 D1:AD51 1E -  -  -  	.db 30
-   78 D1:AD52 C1 -  -  -  	.db %11000001
-   79 D1:AD53 05 -  -  -  	.db 5
-   80 D1:AD54 00 -  -  -  	.db 0
-   81 D1:AD55 -  -  -  -  	
-   82 D1:AD55 -  -  -  -  	
-   83 D1:AD55 00 98 -  -  	.db $00,$98
-   84 D1:AD57 05 -  -  -  	.db 5
-   85 D1:AD58 01 -  -  -  	.db %00000001
-   86 D1:AD59 05 -  -  -  	.db 5
-   87 D1:AD5A 00 -  -  -  	.db 0
-   88 D1:AD5B -  -  -  -  	
-   89 D1:AD5B 00 98 -  -  		.db $00,$98
-   90 D1:AD5D 05 -  -  -  	.db 5
-   91 D1:AD5E 01 -  -  -  	.db %00000001
-   92 D1:AD5F 05 -  -  -  	.db 5
-   93 D1:AD60 00 -  -  -  	.db 0
-   94 D1:AD61 00 98 -  -  		.db $00,$98
-   95 D1:AD63 05 -  -  -  	.db 5
-   96 D1:AD64 01 -  -  -  	.db %00000001
-   97 D1:AD65 05 -  -  -  	.db 5
-   98 D1:AD66 00 -  -  -  	.db 0
-   99 D1:AD67 00 98 -  -  		.db $00,$98
-  100 D1:AD69 05 -  -  -  	.db 5
-  101 D1:AD6A 01 -  -  -  	.db %00000001
-  102 D1:AD6B 05 -  -  -  	.db 5
-  103 D1:AD6C 00 -  -  -  	.db 0
-  104 D1:AD6D 00 98 -  -  		.db $00,$98
-  105 D1:AD6F 05 -  -  -  	.db 5
-  106 D1:AD70 01 -  -  -  	.db %00000001
-  107 D1:AD71 05 -  -  -  	.db 5
-  108 D1:AD72 00 -  -  -  	.db 0
-  109 D1:AD73 00 98 -  -  		.db $00,$98
-  110 D1:AD75 05 -  -  -  	.db 5
-  111 D1:AD76 01 -  -  -  	.db %00000001
-  112 D1:AD77 05 -  -  -  	.db 5
-  113 D1:AD78 00 -  -  -  	.db 0
-  114 D1:AD79 00 98 -  -  		.db $00,$98
-  115 D1:AD7B 05 -  -  -  	.db 5
-  116 D1:AD7C 01 -  -  -  	.db %00000001
-  117 D1:AD7D 05 -  -  -  	.db 5
-  118 D1:AD7E 00 -  -  -  	.db 0
-  119 D1:AD7F 00 98 -  -  		.db $00,$98
-  120 D1:AD81 05 -  -  -  	.db 5
-  121 D1:AD82 01 -  -  -  	.db %00000001
-  122 D1:AD83 05 -  -  -  	.db 5
-  123 D1:AD84 00 -  -  -  	.db 0
-  124 D1:AD85 00 98 -  -  		.db $00,$98
-  125 D1:AD87 05 -  -  -  	.db 5
-  126 D1:AD88 01 -  -  -  	.db %00000001
-  127 D1:AD89 05 -  -  -  	.db 5
-  128 D1:AD8A 00 -  -  -  	.db 0
-  129 D1:AD8B 00 98 -  -  		.db $00,$98
-  130 D1:AD8D 05 -  -  -  	.db 5
-  131 D1:AD8E 01 -  -  -  	.db %00000001
-  132 D1:AD8F 05 -  -  -  	.db 5
-  133 D1:AD90 00 -  -  -  	.db 0
-  134 D1:AD91 00 98 -  -  		.db $00,$98
-  135 D1:AD93 05 -  -  -  	.db 5
-  136 D1:AD94 01 -  -  -  	.db %00000001
-  137 D1:AD95 05 -  -  -  	.db 5
-  138 D1:AD96 00 -  -  -  	.db 0
-  139 D1:AD97 00 98 -  -  		.db $00,$98
-  140 D1:AD99 05 -  -  -  	.db 5
-  141 D1:AD9A 01 -  -  -  	.db %00000001
-  142 D1:AD9B 05 -  -  -  	.db 5
-  143 D1:AD9C 00 -  -  -  	.db 0
-  144 D1:AD9D 00 98 -  -  		.db $00,$98
-  145 D1:AD9F 05 -  -  -  	.db 5
-  146 D1:ADA0 01 -  -  -  	.db %00000001
-  147 D1:ADA1 05 -  -  -  	.db 5
-  148 D1:ADA2 00 -  -  -  	.db 0
-  149 D1:ADA3 00 98 -  -  		.db $00,$98
-  150 D1:ADA5 05 -  -  -  	.db 5
-  151 D1:ADA6 01 -  -  -  	.db %00000001
-  152 D1:ADA7 05 -  -  -  	.db 5
-  153 D1:ADA8 00 -  -  -  	.db 0
-  154 D1:ADA9 00 98 -  -  		.db $00,$98
-  155 D1:ADAB 05 -  -  -  	.db 5
-  156 D1:ADAC 01 -  -  -  	.db %00000001
-  157 D1:ADAD 05 -  -  -  	.db 5
-  158 D1:ADAE 00 -  -  -  	.db 0
-  159 D1:ADAF 00 98 -  -  		.db $00,$98
-  160 D1:ADB1 05 -  -  -  	.db 5
-  161 D1:ADB2 01 -  -  -  	.db %00000001
-  162 D1:ADB3 05 -  -  -  	.db 5
-  163 D1:ADB4 00 -  -  -  	.db 0
-  164 D1:ADB5 00 98 -  -  		.db $00,$98
-  165 D1:ADB7 05 -  -  -  	.db 5
-  166 D1:ADB8 01 -  -  -  	.db %00000001
-  167 D1:ADB9 05 -  -  -  	.db 5
-  168 D1:ADBA 00 -  -  -  	.db 0
-  169 D1:ADBB -  -  -  -  	
-  170 D1:ADBB 00 98 -  -  			.db $00,$98
-  171 D1:ADBD 05 -  -  -  	.db 5
-  172 D1:ADBE 01 -  -  -  	.db %00000001
-  173 D1:ADBF 05 -  -  -  	.db 5
-  174 D1:ADC0 00 -  -  -  	.db 0
-  175 D1:ADC1 00 98 -  -  		.db $00,$98
-  176 D1:ADC3 05 -  -  -  	.db 5
-  177 D1:ADC4 01 -  -  -  	.db %00000001
-  178 D1:ADC5 05 -  -  -  	.db 5
-  179 D1:ADC6 00 -  -  -  	.db 0
-  180 D1:ADC7 00 98 -  -  		.db $00,$98
-  181 D1:ADC9 05 -  -  -  	.db 5
-  182 D1:ADCA 01 -  -  -  	.db %00000001
-  183 D1:ADCB 05 -  -  -  	.db 5
-  184 D1:ADCC 00 -  -  -  	.db 0
-  185 D1:ADCD 00 98 -  -  		.db $00,$98
-  186 D1:ADCF 05 -  -  -  	.db 5
-  187 D1:ADD0 01 -  -  -  	.db %00000001
-  188 D1:ADD1 05 -  -  -  	.db 5
-  189 D1:ADD2 00 -  -  -  	.db 0
-  190 D1:ADD3 00 98 -  -  		.db $00,$98
-  191 D1:ADD5 05 -  -  -  	.db 5
-  192 D1:ADD6 01 -  -  -  	.db %00000001
-  193 D1:ADD7 05 -  -  -  	.db 5
-  194 D1:ADD8 00 -  -  -  	.db 0
-  195 D1:ADD9 00 98 -  -  			.db $00,$98
-  196 D1:ADDB 05 -  -  -  	.db 5
-  197 D1:ADDC 01 -  -  -  	.db %00000001
-  198 D1:ADDD 05 -  -  -  	.db 5
-  199 D1:ADDE 00 -  -  -  	.db 0
-  200 D1:ADDF 00 98 -  -  		.db $00,$98
-  201 D1:ADE1 05 -  -  -  	.db 5
-  202 D1:ADE2 01 -  -  -  	.db %00000001
-  203 D1:ADE3 05 -  -  -  	.db 5
-  204 D1:ADE4 00 -  -  -  	.db 0
-  205 D1:ADE5 00 98 -  -  		.db $00,$98
-  206 D1:ADE7 05 -  -  -  	.db 5
-  207 D1:ADE8 01 -  -  -  	.db %00000001
-  208 D1:ADE9 05 -  -  -  	.db 5
-  209 D1:ADEA 00 -  -  -  	.db 0
-  210 D1:ADEB 00 98 -  -  		.db $00,$98
-  211 D1:ADED 05 -  -  -  	.db 5
-  212 D1:ADEE 01 -  -  -  	.db %00000001
-  213 D1:ADEF 05 -  -  -  	.db 5
-  214 D1:ADF0 00 -  -  -  	.db 0
-  215 D1:ADF1 00 98 -  -  		.db $00,$98
-  216 D1:ADF3 05 -  -  -  	.db 5
-  217 D1:ADF4 01 -  -  -  	.db %00000001
-  218 D1:ADF5 05 -  -  -  	.db 5
-  219 D1:ADF6 00 -  -  -  	.db 0
-  220 D1:ADF7 00 98 -  -  			.db $00,$98
-  221 D1:ADF9 05 -  -  -  	.db 5
-  222 D1:ADFA 01 -  -  -  	.db %00000001
-  223 D1:ADFB 05 -  -  -  	.db 5
-  224 D1:ADFC 00 -  -  -  	.db 0
-  225 D1:ADFD 00 98 -  -  		.db $00,$98
-  226 D1:ADFF 05 -  -  -  	.db 5
-  227 D1:AE00 01 -  -  -  	.db %00000001
-  228 D1:AE01 05 -  -  -  	.db 5
-  229 D1:AE02 00 -  -  -  	.db 0
-  230 D1:AE03 00 98 -  -  		.db $00,$98
-  231 D1:AE05 05 -  -  -  	.db 5
-  232 D1:AE06 01 -  -  -  	.db %00000001
-  233 D1:AE07 05 -  -  -  	.db 5
-  234 D1:AE08 00 -  -  -  	.db 0
-  235 D1:AE09 00 98 -  -  		.db $00,$98
-  236 D1:AE0B 05 -  -  -  	.db 5
-  237 D1:AE0C 01 -  -  -  	.db %00000001
-  238 D1:AE0D 05 -  -  -  	.db 5
-  239 D1:AE0E 00 -  -  -  	.db 0
-  240 D1:AE0F 00 40 -  -  	.db $00,$40
-  241 D1:AE11 05 -  -  -  	.db 5
-  242 D1:AE12 01 -  -  -  	.db %00000001
-  243 D1:AE13 05 -  -  -  	.db 5
-  244 D1:AE14 00 -  -  -  	.db 0
-  245 D1:AE15 00 40 -  -  	.db $00,$40
-  246 D1:AE17 05 -  -  -  	.db 5
-  247 D1:AE18 01 -  -  -  	.db %00000001
-  248 D1:AE19 05 -  -  -  	.db 5
-  249 D1:AE1A 00 -  -  -  	.db 0
-  250 D1:AE1B 00 40 -  -  	.db $00,$40
-  251 D1:AE1D 05 -  -  -  	.db 5
-  252 D1:AE1E 01 -  -  -  	.db %00000001
-  253 D1:AE1F 05 -  -  -  	.db 5
-  254 D1:AE20 00 -  -  -  	.db 0
-  255 D1:AE21 00 40 -  -  	.db $00,$40
-  256 D1:AE23 05 -  -  -  	.db 5
-  257 D1:AE24 01 -  -  -  	.db %00000001
-  258 D1:AE25 05 -  -  -  	.db 5
-  259 D1:AE26 00 -  -  -  	.db 0
-  260 D1:AE27 00 40 -  -  	.db $00,$40
-  261 D1:AE29 05 -  -  -  	.db 5
-  262 D1:AE2A 01 -  -  -  	.db %00000001
-  263 D1:AE2B 05 -  -  -  	.db 5
-  264 D1:AE2C 00 -  -  -  	.db 0
-  265 D1:AE2D -  -  -  -  	
-  266 D1:AE2D 00 40 -  -  		.db $00,$40
-  267 D1:AE2F 05 -  -  -  	.db 5
-  268 D1:AE30 01 -  -  -  	.db %00000001
-  269 D1:AE31 05 -  -  -  	.db 5
-  270 D1:AE32 00 -  -  -  	.db 0
-  271 D1:AE33 00 40 -  -  	.db $00,$40
-  272 D1:AE35 05 -  -  -  	.db 5
-  273 D1:AE36 01 -  -  -  	.db %00000001
-  274 D1:AE37 05 -  -  -  	.db 5
-  275 D1:AE38 00 -  -  -  	.db 0
-  276 D1:AE39 00 40 -  -  	.db $00,$40
-  277 D1:AE3B 05 -  -  -  	.db 5
-  278 D1:AE3C 01 -  -  -  	.db %00000001
-  279 D1:AE3D 05 -  -  -  	.db 5
-  280 D1:AE3E 00 -  -  -  	.db 0
-  281 D1:AE3F 00 40 -  -  	.db $00,$40
-  282 D1:AE41 05 -  -  -  	.db 5
-  283 D1:AE42 01 -  -  -  	.db %00000001
-  284 D1:AE43 05 -  -  -  	.db 5
-  285 D1:AE44 00 -  -  -  	.db 0
-  286 D1:AE45 00 40 -  -  	.db $00,$40
-  287 D1:AE47 05 -  -  -  	.db 5
-  288 D1:AE48 01 -  -  -  	.db %00000001
-  289 D1:AE49 05 -  -  -  	.db 5
-  290 D1:AE4A 00 -  -  -  	.db 0
-  291 D1:AE4B 00 40 -  -  		.db $00,$40
-  292 D1:AE4D 05 -  -  -  	.db 5
-  293 D1:AE4E 01 -  -  -  	.db %00000001
-  294 D1:AE4F 05 -  -  -  	.db 5
-  295 D1:AE50 00 -  -  -  	.db 0
-  296 D1:AE51 00 40 -  -  	.db $00,$40
-  297 D1:AE53 05 -  -  -  	.db 5
-  298 D1:AE54 01 -  -  -  	.db %00000001
-  299 D1:AE55 05 -  -  -  	.db 5
-  300 D1:AE56 00 -  -  -  	.db 0
-  301 D1:AE57 00 40 -  -  	.db $00,$40
-  302 D1:AE59 05 -  -  -  	.db 5
-  303 D1:AE5A 01 -  -  -  	.db %00000001
-  304 D1:AE5B 05 -  -  -  	.db 5
-  305 D1:AE5C 00 -  -  -  	.db 0
-  306 D1:AE5D 00 40 -  -  	.db $00,$40
-  307 D1:AE5F 05 -  -  -  	.db 5
-  308 D1:AE60 01 -  -  -  	.db %00000001
-  309 D1:AE61 05 -  -  -  	.db 5
-  310 D1:AE62 00 -  -  -  	.db 0
-  311 D1:AE63 00 40 -  -  	.db $00,$40
-  312 D1:AE65 05 -  -  -  	.db 5
-  313 D1:AE66 01 -  -  -  	.db %00000001
-  314 D1:AE67 05 -  -  -  	.db 5
-  315 D1:AE68 00 -  -  -  	.db 0
-  316 D1:AE69 00 40 -  -  		.db $00,$40
-  317 D1:AE6B 05 -  -  -  	.db 5
-  318 D1:AE6C 01 -  -  -  	.db %00000001
-  319 D1:AE6D 05 -  -  -  	.db 5
-  320 D1:AE6E 00 -  -  -  	.db 0
-  321 D1:AE6F 00 40 -  -  	.db $00,$40
-  322 D1:AE71 05 -  -  -  	.db 5
-  323 D1:AE72 01 -  -  -  	.db %00000001
-  324 D1:AE73 05 -  -  -  	.db 5
-  325 D1:AE74 00 -  -  -  	.db 0
-  326 D1:AE75 00 40 -  -  	.db $00,$40
-  327 D1:AE77 05 -  -  -  	.db 5
-  328 D1:AE78 01 -  -  -  	.db %00000001
-  329 D1:AE79 05 -  -  -  	.db 5
-  330 D1:AE7A 00 -  -  -  	.db 0
-  331 D1:AE7B 00 40 -  -  	.db $00,$40
-  332 D1:AE7D 05 -  -  -  	.db 5
-  333 D1:AE7E 01 -  -  -  	.db %00000001
-  334 D1:AE7F 05 -  -  -  	.db 5
-  335 D1:AE80 00 -  -  -  	.db 0
-  336 D1:AE81 00 40 -  -  	.db $00,$40
-  337 D1:AE83 05 -  -  -  	.db 5
-  338 D1:AE84 01 -  -  -  	.db %00000001
-  339 D1:AE85 05 -  -  -  	.db 5
-  340 D1:AE86 00 -  -  -  	.db 0
-  341 D1:AE87 00 40 -  -  		.db $00,$40
-  342 D1:AE89 05 -  -  -  	.db 5
-  343 D1:AE8A 01 -  -  -  	.db %00000001
-  344 D1:AE8B 05 -  -  -  	.db 5
-  345 D1:AE8C 00 -  -  -  	.db 0
-  346 D1:AE8D 00 40 -  -  	.db $00,$40
-  347 D1:AE8F 05 -  -  -  	.db 5
-  348 D1:AE90 01 -  -  -  	.db %00000001
-  349 D1:AE91 05 -  -  -  	.db 5
-  350 D1:AE92 00 -  -  -  	.db 0
-  351 D1:AE93 00 40 -  -  	.db $00,$40
-  352 D1:AE95 05 -  -  -  	.db 5
-  353 D1:AE96 01 -  -  -  	.db %00000001
-  354 D1:AE97 05 -  -  -  	.db 5
-  355 D1:AE98 00 -  -  -  	.db 0
-  356 D1:AE99 00 40 -  -  	.db $00,$40
-  357 D1:AE9B 05 -  -  -  	.db 5
-  358 D1:AE9C 01 -  -  -  	.db %00000001
-  359 D1:AE9D 05 -  -  -  	.db 5
-  360 D1:AE9E 00 -  -  -  	.db 0
-  361 D1:AE9F 00 40 -  -  	.db $00,$40
-  362 D1:AEA1 05 -  -  -  	.db 5
-  363 D1:AEA2 01 -  -  -  	.db %00000001
-  364 D1:AEA3 05 -  -  -  	.db 5
-  365 D1:AEA4 00 -  -  -  	.db 0
-  366 D1:AEA5 -  -  -  -  	
-  367 D1:AEA5 -  -  -  -  	
-  368 D1:AEA5 -  -  -  -  	
-  369 D1:AEA5 -  -  -  -  	
-  370 D1:AEA5 -  -  -  -  	
-  371 D1:AEA5 -  -  -  -  	
-  372 D1:AEA5 00 84 -  -  	.db $00,$84
-  373 D1:AEA7 0A -  -  -  	.db 10
-  374 D1:AEA8 80 -  -  -  	.db %10000000
-  375 D1:AEA9 05 -  -  -  	.db 5
-  376 D1:AEAA 00 -  -  -  	.db 0
-  377 D1:AEAB -  -  -  -  
-  378 D1:AEAB -  -  -  -  
-  379 D1:AEAB -  -  -  -  	;.dl $000081
-  380 D1:AEAB -  -  -  -  	;.db 10,%00001111
-  381 D1:AEAB -  -  -  -  	;.db 5,0
-  382 D1:AEAB -  -  -  -  		
-  383 D1:AEAB 00 00 00 00 
+    1 D1:AD3D -  -  -  -  bg_sprite_indices:
+    2 D1:AD3D 08 AC D1 -  	.dl testSprite
+    3 D1:AD40 1E AC D1 -  	.dl testSprite2
+    4 D1:AD43 -  -  -  -  	;.dl sprite data
+    5 D1:AD43 -  -  -  -  
+    6 D1:AD43 -  -  -  -  
+    7 D1:AD43 -  -  -  -  
+    8 D1:AD43 -  -  -  -  
+    9 D1:AD43 -  -  -  -  bg_data:
+   10 D1:AD43 -  -  -  -  
+   11 D1:AD43 -  -  -  -  	;y y 
+   12 D1:AD43 -  -  -  -  	;x (byte) 
+   13 D1:AD43 -  -  -  -  	;flags  (7 = odd pixel  6 = spriteFlip , 0 = data cont)    0 to end data   if sprite starts on even pixel, inc x by 1
+   14 D1:AD43 -  -  -  -  	;height
+   15 D1:AD43 -  -  -  -  	;index
+   16 D1:AD43 -  -  -  -  	
+   17 D1:AD43 -  -  -  -  	
+   18 D1:AD43 -  -  -  -  	;even pixel noflip  x = (pixel - 1) /2
+   19 D1:AD43 -  -  -  -  	;odd pixel noflip   x = (pixel) /2
+   20 D1:AD43 -  -  -  -  	
+   21 D1:AD43 -  -  -  -  	;even pixel, flip, odd width   x = (pixel + width)/2
+   22 D1:AD43 -  -  -  -  	;odd pixel, flip, odd width	   x = (pixel + width)/2
+   23 D1:AD43 -  -  -  -  	
+   24 D1:AD43 -  -  -  -  	
+   25 D1:AD43 -  -  -  -  	;even pixel, flip, even width   x = (pixel + width)/2
+   26 D1:AD43 -  -  -  -  	;odd pixel, flip, even width	   x = (pixel + width)/2
+   27 D1:AD43 -  -  -  -  	
+   28 D1:AD43 -  -  -  -  	
+   29 D1:AD43 -  -  -  -  	
+   30 D1:AD43 -  -  -  -  	
+   31 D1:AD43 -  -  -  -  	
+   32 D1:AD43 -  -  -  -  	;6 bytes
+   33 D1:AD43 00 84 -  -  	.db $00,$84
+   34 D1:AD45 05 -  -  -  	.db 5
+   35 D1:AD46 01 -  -  -  	.db %00000001
+   36 D1:AD47 05 -  -  -  	.db 5
+   37 D1:AD48 00 -  -  -  	.db 0
+   38 D1:AD49 -  -  -  -  	
+   39 D1:AD49 00 84 -  -  	.db $00,$84
+   40 D1:AD4B 0A -  -  -  	.db 10
+   41 D1:AD4C 81 -  -  -  	.db %10000001
+   42 D1:AD4D 05 -  -  -  	.db 5
+   43 D1:AD4E 00 -  -  -  	.db 0
+   44 D1:AD4F -  -  -  -  	
+   45 D1:AD4F 00 83 -  -  	.db $00,$83
+   46 D1:AD51 14 -  -  -  	.db 20
+   47 D1:AD52 41 -  -  -  	.db %01000001
+   48 D1:AD53 05 -  -  -  	.db 5
+   49 D1:AD54 00 -  -  -  	.db 0
+   50 D1:AD55 -  -  -  -  	
+   51 D1:AD55 00 83 -  -  	.db $00,$83
+   52 D1:AD57 1E -  -  -  	.db 30
+   53 D1:AD58 C1 -  -  -  	.db %11000001
+   54 D1:AD59 05 -  -  -  	.db 5
+   55 D1:AD5A 00 -  -  -  	.db 0
+   56 D1:AD5B -  -  -  -  	
+   57 D1:AD5B -  -  -  -  	
+   58 D1:AD5B 00 80 -  -  	.db $00,$80
+   59 D1:AD5D 05 -  -  -  	.db 5
+   60 D1:AD5E 01 -  -  -  	.db %00000001
+   61 D1:AD5F 05 -  -  -  	.db 5
+   62 D1:AD60 00 -  -  -  	.db 0
+   63 D1:AD61 -  -  -  -  	
+   64 D1:AD61 00 81 -  -  	.db $00,$81
+   65 D1:AD63 0A -  -  -  	.db 10
+   66 D1:AD64 81 -  -  -  	.db %10000001
+   67 D1:AD65 05 -  -  -  	.db 5
+   68 D1:AD66 00 -  -  -  	.db 0
+   69 D1:AD67 -  -  -  -  	
+   70 D1:AD67 00 80 -  -  	.db $00,$80
+   71 D1:AD69 14 -  -  -  	.db 20
+   72 D1:AD6A 41 -  -  -  	.db %01000001
+   73 D1:AD6B 05 -  -  -  	.db 5
+   74 D1:AD6C 00 -  -  -  	.db 0
+   75 D1:AD6D -  -  -  -  	
+   76 D1:AD6D 00 81 -  -  	.db $00,$81
+   77 D1:AD6F 1E -  -  -  	.db 30
+   78 D1:AD70 C1 -  -  -  	.db %11000001
+   79 D1:AD71 05 -  -  -  	.db 5
+   80 D1:AD72 00 -  -  -  	.db 0
+   81 D1:AD73 -  -  -  -  	
+   82 D1:AD73 -  -  -  -  	
+   83 D1:AD73 00 98 -  -  	.db $00,$98
+   84 D1:AD75 05 -  -  -  	.db 5
+   85 D1:AD76 01 -  -  -  	.db %00000001
+   86 D1:AD77 05 -  -  -  	.db 5
+   87 D1:AD78 00 -  -  -  	.db 0
+   88 D1:AD79 -  -  -  -  	
+   89 D1:AD79 00 98 -  -  		.db $00,$98
+   90 D1:AD7B 05 -  -  -  	.db 5
+   91 D1:AD7C 01 -  -  -  	.db %00000001
+   92 D1:AD7D 05 -  -  -  	.db 5
+   93 D1:AD7E 00 -  -  -  	.db 0
+   94 D1:AD7F 00 98 -  -  		.db $00,$98
+   95 D1:AD81 05 -  -  -  	.db 5
+   96 D1:AD82 01 -  -  -  	.db %00000001
+   97 D1:AD83 05 -  -  -  	.db 5
+   98 D1:AD84 00 -  -  -  	.db 0
+   99 D1:AD85 00 98 -  -  		.db $00,$98
+  100 D1:AD87 05 -  -  -  	.db 5
+  101 D1:AD88 01 -  -  -  	.db %00000001
+  102 D1:AD89 05 -  -  -  	.db 5
+  103 D1:AD8A 00 -  -  -  	.db 0
+  104 D1:AD8B 00 98 -  -  		.db $00,$98
+  105 D1:AD8D 05 -  -  -  	.db 5
+  106 D1:AD8E 01 -  -  -  	.db %00000001
+  107 D1:AD8F 05 -  -  -  	.db 5
+  108 D1:AD90 00 -  -  -  	.db 0
+  109 D1:AD91 00 98 -  -  		.db $00,$98
+  110 D1:AD93 05 -  -  -  	.db 5
+  111 D1:AD94 01 -  -  -  	.db %00000001
+  112 D1:AD95 05 -  -  -  	.db 5
+  113 D1:AD96 00 -  -  -  	.db 0
+  114 D1:AD97 00 98 -  -  		.db $00,$98
+  115 D1:AD99 05 -  -  -  	.db 5
+  116 D1:AD9A 01 -  -  -  	.db %00000001
+  117 D1:AD9B 05 -  -  -  	.db 5
+  118 D1:AD9C 00 -  -  -  	.db 0
+  119 D1:AD9D 00 98 -  -  		.db $00,$98
+  120 D1:AD9F 05 -  -  -  	.db 5
+  121 D1:ADA0 01 -  -  -  	.db %00000001
+  122 D1:ADA1 05 -  -  -  	.db 5
+  123 D1:ADA2 00 -  -  -  	.db 0
+  124 D1:ADA3 00 98 -  -  		.db $00,$98
+  125 D1:ADA5 05 -  -  -  	.db 5
+  126 D1:ADA6 01 -  -  -  	.db %00000001
+  127 D1:ADA7 05 -  -  -  	.db 5
+  128 D1:ADA8 00 -  -  -  	.db 0
+  129 D1:ADA9 00 98 -  -  		.db $00,$98
+  130 D1:ADAB 05 -  -  -  	.db 5
+  131 D1:ADAC 01 -  -  -  	.db %00000001
+  132 D1:ADAD 05 -  -  -  	.db 5
+  133 D1:ADAE 00 -  -  -  	.db 0
+  134 D1:ADAF 00 98 -  -  		.db $00,$98
+  135 D1:ADB1 05 -  -  -  	.db 5
+  136 D1:ADB2 01 -  -  -  	.db %00000001
+  137 D1:ADB3 05 -  -  -  	.db 5
+  138 D1:ADB4 00 -  -  -  	.db 0
+  139 D1:ADB5 00 98 -  -  		.db $00,$98
+  140 D1:ADB7 05 -  -  -  	.db 5
+  141 D1:ADB8 01 -  -  -  	.db %00000001
+  142 D1:ADB9 05 -  -  -  	.db 5
+  143 D1:ADBA 00 -  -  -  	.db 0
+  144 D1:ADBB 00 98 -  -  		.db $00,$98
+  145 D1:ADBD 05 -  -  -  	.db 5
+  146 D1:ADBE 01 -  -  -  	.db %00000001
+  147 D1:ADBF 05 -  -  -  	.db 5
+  148 D1:ADC0 00 -  -  -  	.db 0
+  149 D1:ADC1 00 98 -  -  		.db $00,$98
+  150 D1:ADC3 05 -  -  -  	.db 5
+  151 D1:ADC4 01 -  -  -  	.db %00000001
+  152 D1:ADC5 05 -  -  -  	.db 5
+  153 D1:ADC6 00 -  -  -  	.db 0
+  154 D1:ADC7 00 98 -  -  		.db $00,$98
+  155 D1:ADC9 05 -  -  -  	.db 5
+  156 D1:ADCA 01 -  -  -  	.db %00000001
+  157 D1:ADCB 05 -  -  -  	.db 5
+  158 D1:ADCC 00 -  -  -  	.db 0
+  159 D1:ADCD 00 98 -  -  		.db $00,$98
+  160 D1:ADCF 05 -  -  -  	.db 5
+  161 D1:ADD0 01 -  -  -  	.db %00000001
+  162 D1:ADD1 05 -  -  -  	.db 5
+  163 D1:ADD2 00 -  -  -  	.db 0
+  164 D1:ADD3 00 98 -  -  		.db $00,$98
+  165 D1:ADD5 05 -  -  -  	.db 5
+  166 D1:ADD6 01 -  -  -  	.db %00000001
+  167 D1:ADD7 05 -  -  -  	.db 5
+  168 D1:ADD8 00 -  -  -  	.db 0
+  169 D1:ADD9 -  -  -  -  	
+  170 D1:ADD9 00 98 -  -  			.db $00,$98
+  171 D1:ADDB 05 -  -  -  	.db 5
+  172 D1:ADDC 01 -  -  -  	.db %00000001
+  173 D1:ADDD 05 -  -  -  	.db 5
+  174 D1:ADDE 00 -  -  -  	.db 0
+  175 D1:ADDF 00 98 -  -  		.db $00,$98
+  176 D1:ADE1 05 -  -  -  	.db 5
+  177 D1:ADE2 01 -  -  -  	.db %00000001
+  178 D1:ADE3 05 -  -  -  	.db 5
+  179 D1:ADE4 00 -  -  -  	.db 0
+  180 D1:ADE5 00 98 -  -  		.db $00,$98
+  181 D1:ADE7 05 -  -  -  	.db 5
+  182 D1:ADE8 01 -  -  -  	.db %00000001
+  183 D1:ADE9 05 -  -  -  	.db 5
+  184 D1:ADEA 00 -  -  -  	.db 0
+  185 D1:ADEB 00 98 -  -  		.db $00,$98
+  186 D1:ADED 05 -  -  -  	.db 5
+  187 D1:ADEE 01 -  -  -  	.db %00000001
+  188 D1:ADEF 05 -  -  -  	.db 5
+  189 D1:ADF0 00 -  -  -  	.db 0
+  190 D1:ADF1 00 98 -  -  		.db $00,$98
+  191 D1:ADF3 05 -  -  -  	.db 5
+  192 D1:ADF4 01 -  -  -  	.db %00000001
+  193 D1:ADF5 05 -  -  -  	.db 5
+  194 D1:ADF6 00 -  -  -  	.db 0
+  195 D1:ADF7 00 98 -  -  			.db $00,$98
+  196 D1:ADF9 05 -  -  -  	.db 5
+  197 D1:ADFA 01 -  -  -  	.db %00000001
+  198 D1:ADFB 05 -  -  -  	.db 5
+  199 D1:ADFC 00 -  -  -  	.db 0
+  200 D1:ADFD 00 98 -  -  		.db $00,$98
+  201 D1:ADFF 05 -  -  -  	.db 5
+  202 D1:AE00 01 -  -  -  	.db %00000001
+  203 D1:AE01 05 -  -  -  	.db 5
+  204 D1:AE02 00 -  -  -  	.db 0
+  205 D1:AE03 00 98 -  -  		.db $00,$98
+  206 D1:AE05 05 -  -  -  	.db 5
+  207 D1:AE06 01 -  -  -  	.db %00000001
+  208 D1:AE07 05 -  -  -  	.db 5
+  209 D1:AE08 00 -  -  -  	.db 0
+  210 D1:AE09 00 98 -  -  		.db $00,$98
+  211 D1:AE0B 05 -  -  -  	.db 5
+  212 D1:AE0C 01 -  -  -  	.db %00000001
+  213 D1:AE0D 05 -  -  -  	.db 5
+  214 D1:AE0E 00 -  -  -  	.db 0
+  215 D1:AE0F 00 98 -  -  		.db $00,$98
+  216 D1:AE11 05 -  -  -  	.db 5
+  217 D1:AE12 01 -  -  -  	.db %00000001
+  218 D1:AE13 05 -  -  -  	.db 5
+  219 D1:AE14 00 -  -  -  	.db 0
+  220 D1:AE15 00 98 -  -  			.db $00,$98
+  221 D1:AE17 05 -  -  -  	.db 5
+  222 D1:AE18 01 -  -  -  	.db %00000001
+  223 D1:AE19 05 -  -  -  	.db 5
+  224 D1:AE1A 00 -  -  -  	.db 0
+  225 D1:AE1B 00 98 -  -  		.db $00,$98
+  226 D1:AE1D 05 -  -  -  	.db 5
+  227 D1:AE1E 01 -  -  -  	.db %00000001
+  228 D1:AE1F 05 -  -  -  	.db 5
+  229 D1:AE20 00 -  -  -  	.db 0
+  230 D1:AE21 00 98 -  -  		.db $00,$98
+  231 D1:AE23 05 -  -  -  	.db 5
+  232 D1:AE24 01 -  -  -  	.db %00000001
+  233 D1:AE25 05 -  -  -  	.db 5
+  234 D1:AE26 00 -  -  -  	.db 0
+  235 D1:AE27 00 98 -  -  		.db $00,$98
+  236 D1:AE29 05 -  -  -  	.db 5
+  237 D1:AE2A 01 -  -  -  	.db %00000001
+  238 D1:AE2B 05 -  -  -  	.db 5
+  239 D1:AE2C 00 -  -  -  	.db 0
+  240 D1:AE2D 00 40 -  -  	.db $00,$40
+  241 D1:AE2F 05 -  -  -  	.db 5
+  242 D1:AE30 01 -  -  -  	.db %00000001
+  243 D1:AE31 05 -  -  -  	.db 5
+  244 D1:AE32 00 -  -  -  	.db 0
+  245 D1:AE33 00 40 -  -  	.db $00,$40
+  246 D1:AE35 05 -  -  -  	.db 5
+  247 D1:AE36 01 -  -  -  	.db %00000001
+  248 D1:AE37 05 -  -  -  	.db 5
+  249 D1:AE38 00 -  -  -  	.db 0
+  250 D1:AE39 00 40 -  -  	.db $00,$40
+  251 D1:AE3B 05 -  -  -  	.db 5
+  252 D1:AE3C 01 -  -  -  	.db %00000001
+  253 D1:AE3D 05 -  -  -  	.db 5
+  254 D1:AE3E 00 -  -  -  	.db 0
+  255 D1:AE3F 00 40 -  -  	.db $00,$40
+  256 D1:AE41 05 -  -  -  	.db 5
+  257 D1:AE42 01 -  -  -  	.db %00000001
+  258 D1:AE43 05 -  -  -  	.db 5
+  259 D1:AE44 00 -  -  -  	.db 0
+  260 D1:AE45 00 40 -  -  	.db $00,$40
+  261 D1:AE47 05 -  -  -  	.db 5
+  262 D1:AE48 01 -  -  -  	.db %00000001
+  263 D1:AE49 05 -  -  -  	.db 5
+  264 D1:AE4A 00 -  -  -  	.db 0
+  265 D1:AE4B -  -  -  -  	
+  266 D1:AE4B 00 40 -  -  		.db $00,$40
+  267 D1:AE4D 05 -  -  -  	.db 5
+  268 D1:AE4E 01 -  -  -  	.db %00000001
+  269 D1:AE4F 05 -  -  -  	.db 5
+  270 D1:AE50 00 -  -  -  	.db 0
+  271 D1:AE51 00 40 -  -  	.db $00,$40
+  272 D1:AE53 05 -  -  -  	.db 5
+  273 D1:AE54 01 -  -  -  	.db %00000001
+  274 D1:AE55 05 -  -  -  	.db 5
+  275 D1:AE56 00 -  -  -  	.db 0
+  276 D1:AE57 00 40 -  -  	.db $00,$40
+  277 D1:AE59 05 -  -  -  	.db 5
+  278 D1:AE5A 01 -  -  -  	.db %00000001
+  279 D1:AE5B 05 -  -  -  	.db 5
+  280 D1:AE5C 00 -  -  -  	.db 0
+  281 D1:AE5D 00 40 -  -  	.db $00,$40
+  282 D1:AE5F 05 -  -  -  	.db 5
+  283 D1:AE60 01 -  -  -  	.db %00000001
+  284 D1:AE61 05 -  -  -  	.db 5
+  285 D1:AE62 00 -  -  -  	.db 0
+  286 D1:AE63 00 40 -  -  	.db $00,$40
+  287 D1:AE65 05 -  -  -  	.db 5
+  288 D1:AE66 01 -  -  -  	.db %00000001
+  289 D1:AE67 05 -  -  -  	.db 5
+  290 D1:AE68 00 -  -  -  	.db 0
+  291 D1:AE69 00 40 -  -  		.db $00,$40
+  292 D1:AE6B 05 -  -  -  	.db 5
+  293 D1:AE6C 01 -  -  -  	.db %00000001
+  294 D1:AE6D 05 -  -  -  	.db 5
+  295 D1:AE6E 00 -  -  -  	.db 0
+  296 D1:AE6F 00 40 -  -  	.db $00,$40
+  297 D1:AE71 05 -  -  -  	.db 5
+  298 D1:AE72 01 -  -  -  	.db %00000001
+  299 D1:AE73 05 -  -  -  	.db 5
+  300 D1:AE74 00 -  -  -  	.db 0
+  301 D1:AE75 00 40 -  -  	.db $00,$40
+  302 D1:AE77 05 -  -  -  	.db 5
+  303 D1:AE78 01 -  -  -  	.db %00000001
+  304 D1:AE79 05 -  -  -  	.db 5
+  305 D1:AE7A 00 -  -  -  	.db 0
+  306 D1:AE7B 00 40 -  -  	.db $00,$40
+  307 D1:AE7D 05 -  -  -  	.db 5
+  308 D1:AE7E 01 -  -  -  	.db %00000001
+  309 D1:AE7F 05 -  -  -  	.db 5
+  310 D1:AE80 00 -  -  -  	.db 0
+  311 D1:AE81 00 40 -  -  	.db $00,$40
+  312 D1:AE83 05 -  -  -  	.db 5
+  313 D1:AE84 01 -  -  -  	.db %00000001
+  314 D1:AE85 05 -  -  -  	.db 5
+  315 D1:AE86 00 -  -  -  	.db 0
+  316 D1:AE87 00 40 -  -  		.db $00,$40
+  317 D1:AE89 05 -  -  -  	.db 5
+  318 D1:AE8A 01 -  -  -  	.db %00000001
+  319 D1:AE8B 05 -  -  -  	.db 5
+  320 D1:AE8C 00 -  -  -  	.db 0
+  321 D1:AE8D 00 40 -  -  	.db $00,$40
+  322 D1:AE8F 05 -  -  -  	.db 5
+  323 D1:AE90 01 -  -  -  	.db %00000001
+  324 D1:AE91 05 -  -  -  	.db 5
+  325 D1:AE92 00 -  -  -  	.db 0
+  326 D1:AE93 00 40 -  -  	.db $00,$40
+  327 D1:AE95 05 -  -  -  	.db 5
+  328 D1:AE96 01 -  -  -  	.db %00000001
+  329 D1:AE97 05 -  -  -  	.db 5
+  330 D1:AE98 00 -  -  -  	.db 0
+  331 D1:AE99 00 40 -  -  	.db $00,$40
+  332 D1:AE9B 05 -  -  -  	.db 5
+  333 D1:AE9C 01 -  -  -  	.db %00000001
+  334 D1:AE9D 05 -  -  -  	.db 5
+  335 D1:AE9E 00 -  -  -  	.db 0
+  336 D1:AE9F 00 40 -  -  	.db $00,$40
+  337 D1:AEA1 05 -  -  -  	.db 5
+  338 D1:AEA2 01 -  -  -  	.db %00000001
+  339 D1:AEA3 05 -  -  -  	.db 5
+  340 D1:AEA4 00 -  -  -  	.db 0
+  341 D1:AEA5 00 40 -  -  		.db $00,$40
+  342 D1:AEA7 05 -  -  -  	.db 5
+  343 D1:AEA8 01 -  -  -  	.db %00000001
+  344 D1:AEA9 05 -  -  -  	.db 5
+  345 D1:AEAA 00 -  -  -  	.db 0
+  346 D1:AEAB 00 40 -  -  	.db $00,$40
+  347 D1:AEAD 05 -  -  -  	.db 5
+  348 D1:AEAE 01 -  -  -  	.db %00000001
+  349 D1:AEAF 05 -  -  -  	.db 5
+  350 D1:AEB0 00 -  -  -  	.db 0
+  351 D1:AEB1 00 40 -  -  	.db $00,$40
+  352 D1:AEB3 05 -  -  -  	.db 5
+  353 D1:AEB4 01 -  -  -  	.db %00000001
+  354 D1:AEB5 05 -  -  -  	.db 5
+  355 D1:AEB6 00 -  -  -  	.db 0
+  356 D1:AEB7 00 40 -  -  	.db $00,$40
+  357 D1:AEB9 05 -  -  -  	.db 5
+  358 D1:AEBA 01 -  -  -  	.db %00000001
+  359 D1:AEBB 05 -  -  -  	.db 5
+  360 D1:AEBC 00 -  -  -  	.db 0
+  361 D1:AEBD 00 40 -  -  	.db $00,$40
+  362 D1:AEBF 05 -  -  -  	.db 5
+  363 D1:AEC0 01 -  -  -  	.db %00000001
+  364 D1:AEC1 05 -  -  -  	.db 5
+  365 D1:AEC2 00 -  -  -  	.db 0
+  366 D1:AEC3 -  -  -  -  	
+  367 D1:AEC3 -  -  -  -  	
+  368 D1:AEC3 -  -  -  -  	
+  369 D1:AEC3 -  -  -  -  	
+  370 D1:AEC3 -  -  -  -  	
+  371 D1:AEC3 -  -  -  -  	
+  372 D1:AEC3 00 84 -  -  	.db $00,$84
+  373 D1:AEC5 0A -  -  -  	.db 10
+  374 D1:AEC6 80 -  -  -  	.db %10000000
+  375 D1:AEC7 05 -  -  -  	.db 5
+  376 D1:AEC8 00 -  -  -  	.db 0
+  377 D1:AEC9 -  -  -  -  
+  378 D1:AEC9 -  -  -  -  
+  379 D1:AEC9 -  -  -  -  	;.dl $000081
+  380 D1:AEC9 -  -  -  -  	;.db 10,%00001111
+  381 D1:AEC9 -  -  -  -  	;.db 5,0
+  382 D1:AEC9 -  -  -  -  		
+  383 D1:AEC9 00 00 00 00 
               00 -  -  -  	.db 0,0,0,0,0
 Listing for file "ascent.asm"
-  173 D1:AEB0 -  -  -  -  #include "spriteDecompress.txt"
+  173 D1:AECE -  -  -  -  #include "spriteDecompress.txt"
 Listing for file "C:\Users\jax9h\OneDrive\Desktop\ti84\ascent\spriteDecompress.txt"
-    1 D1:AEB0 -  -  -  -  
-    2 D1:AEB0 -  -  -  -  
-    3 D1:AEB0 -  -  -  -  ;hl = sprite data start, de = main data decompress location de' = loops/line data location
-    4 D1:AEB0 -  -  -  -  slow_sprite_decompress:
-    5 D1:AEB0 -  -  -  -  
-    6 D1:AEB0 3E D2 -  -  	ld a,%11010010;jp nc 
-    7 D1:AEB2 32 27 AF D1 	ld (sdcomp_end_reached_flag),a;reset end reached flag
-    8 D1:AEB6 3E 00 -  -  	ld a,0
-    9 D1:AEB8 32 15 AF D1 	ld (sdcomp_loop_counter) ,a;reset loop counter
-   10 D1:AEBC -  -  -  -  	
-   11 D1:AEBC 7E -  -  -  	ld a,(hl);width,in px
-   12 D1:AEBD E5 -  -  -  	push hl 
-   13 D1:AEBE 21 40 01 00 	ld hl,320
-   14 D1:AEC2 01 00 00 00 	ld bc,0
-   15 D1:AEC6 4F -  -  -  	ld c,a 
-   16 D1:AEC7 37 -  -  -  	scf 
-   17 D1:AEC8 3F -  -  -  	ccf 
-   18 D1:AEC9 ED 42 -  -  	sbc hl,bc;320 - width
-   19 D1:AECB 22 2A B0 D1 	ld (sdcomp_zeroes_between_lines),hl
-   20 D1:AECF E1 -  -  -  	pop hl 
-   21 D1:AED0 47 -  -  -  	ld b,a;width
-   22 D1:AED1 08 -  -  -  	ex af,af' ;'
-   23 D1:AED2 78 -  -  -  	ld a,b
-   24 D1:AED3 32 4C B0 D1 	ld (sdcomp_sprite_width),a
-   25 D1:AED7 08 -  -  -  	ex af,af' ;'
-   26 D1:AED8 -  -  -  -  
-   27 D1:AED8 23 -  -  -  	inc hl
-   28 D1:AED9 7E -  -  -  	ld a,(hl);height
-   29 D1:AEDA 32 18 B0 D1 	ld (sdcomp_lines_remaining),a;load remaining lines
-   30 D1:AEDE 12 -  -  -  	ld (de),a;height
-   31 D1:AEDF 13 -  -  -  	inc de
-   32 D1:AEE0 D5 -  -  -  	push de;loop/line data start 
-   33 D1:AEE1 D9 -  -  -  	exx;to shadow
-   34 D1:AEE2 D1 -  -  -  	pop de ;de' is loop/line data
-   35 D1:AEE3 D9 -  -  -  	exx
-   36 D1:AEE4 -  -  -  -  
-   37 D1:AEE4 23 -  -  -  	inc hl;alpha data start
-   38 D1:AEE5 E5 -  -  -  	push hl
-   39 D1:AEE6 E5 -  -  -  	push hl
-   40 D1:AEE7 67 -  -  -  	ld h,a;height
-   41 D1:AEE8 68 -  -  -  	ld l,b;width
-   42 D1:AEE9 ED 6C -  -  	mlt hl;number of pixels
-   43 D1:AEEB CB 3C -  -  	srl h
-   44 D1:AEED CB 1D -  -  	rr l
-   45 D1:AEEF CB 3C -  -  	srl h
-   46 D1:AEF1 CB 1D -  -  	rr l 
-   47 D1:AEF3 CB 3C -  -  	srl h 
-   48 D1:AEF5 CB 1D -  -  	rr l ;divide by 8
-   49 D1:AEF7 C1 -  -  -  	pop bc
-   50 D1:AEF8 09 -  -  -  	add hl,bc;hl holds start of color data
-   51 D1:AEF9 -  -  -  -  	;HL POINTING TO COLOR DATA
-   52 D1:AEF9 -  -  -  -  
-   53 D1:AEF9 EB -  -  -  	ex de,hl
-   54 D1:AEFA 01 00 00 00 	ld bc,0
-   55 D1:AEFE 4F -  -  -  	ld c,a;height 
-   56 D1:AEFF 09 -  -  -  	add hl,bc	
-   57 D1:AF00 EB -  -  -  	ex de,hl;de points to data write location
-   58 D1:AF01 -  -  -  -  	
-   59 D1:AF01 -  -  -  -  	
-   60 D1:AF01 D9 -  -  -  	exx;to shadow 
-   61 D1:AF02 E1 -  -  -  	pop hl;alpha data	
-   62 D1:AF03 -  -  -  -  	;HL IS POINTING TO ALPHA DATA
-   63 D1:AF03 0E 80 -  -  	ld c,%10000000;alpha mask
-   64 D1:AF05 D9 -  -  -  	exx
-   65 D1:AF06 0E F0 -  -  	ld c,%11110000;color mask
-   66 D1:AF08 -  -  -  -  sdcompress_loop_gen_loop:
-   67 D1:AF08 D9 -  -  -  	exx;to shadow
-   68 D1:AF09 E5 -  -  -  	push hl
-   69 D1:AF0A 21 00 00 00 	ld hl,0 
-   70 D1:AF0E 22 1E AF D1 	ld (sdcomp_starting_zeroes_found),hl
-   71 D1:AF12 E1 -  -  -  	pop hl
-   72 D1:AF13 -  -  -  -  sdcomp_inc_loop_counter:
-   73 D1:AF13 F5 -  -  -  	push af
-   74 D1:AF14 -  -  -  -  sdcomp_loop_counter .equ $ + 1
-   75 D1:AF14 3E 00 -  -  	ld a,0
-   76 D1:AF16 3C -  -  -  	inc a 
-   77 D1:AF17 32 15 AF D1 	ld (sdcomp_loop_counter) ,a
-   78 D1:AF1B F1 -  -  -  	pop af
-   79 D1:AF1C -  -  -  -  	
-   80 D1:AF1C E5 -  -  -  	push hl
-   81 D1:AF1D -  -  -  -  sdcomp_starting_zeroes_found .equ $ + 1;for ldir with no end pixel,must be -1
-   82 D1:AF1D 21 00 00 00 	ld hl,0
-   83 D1:AF21 22 31 AF D1 	ld (sdcomp_gap_zeroes_found),hl
-   84 D1:AF25 E1 -  -  -  	pop hl
-   85 D1:AF26 -  -  -  -  sdcomp_gap_finder_loop:
-   86 D1:AF26 37 -  -  -  	scf
-   87 D1:AF27 -  -  -  -  sdcomp_end_reached_flag .equ $
-   88 D1:AF27 D2 7A B0 D1 	jp nc,sdcomp_end
-   89 D1:AF2B CD FA AF D1 	call sdcomp_get_next_alpha
-   90 D1:AF2F -  -  -  -  	
-   91 D1:AF2F E5 -  -  -  	push hl
-   92 D1:AF30 -  -  -  -  sdcomp_gap_zeroes_found .equ $ + 1
-   93 D1:AF30 21 00 00 00 	ld hl,0
-   94 D1:AF34 23 -  -  -  	inc hl 
-   95 D1:AF35 22 31 AF D1 	ld (sdcomp_gap_zeroes_found),hl
-   96 D1:AF39 E1 -  -  -  	pop hl
-   97 D1:AF3A -  -  -  -  	
-   98 D1:AF3A B7 -  -  -  	or a
-   99 D1:AF3B CA 26 AF D1 	jp z,sdcomp_gap_finder_loop
-  100 D1:AF3F -  -  -  -  	
-  101 D1:AF3F -  -  -  -  	
-  102 D1:AF3F E5 -  -  -  	push hl 
-  103 D1:AF40 2A 31 AF D1 	ld hl,(sdcomp_gap_zeroes_found)
-  104 D1:AF44 -  -  -  -  	;holds number of zeroes(alpha) + 1  CORRECT 1st loop
-  105 D1:AF44 -  -  -  -  
-  106 D1:AF44 CB 45 -  -  	bit 0,l
-  107 D1:AF46 C2 71 AF D1 	jp nz,sdcomp_even_gap_length
-  108 D1:AF4A -  -  -  -  ;odd gap length, has leading pixel
-  109 D1:AF4A CB 3C -  -  	srl h 
-  110 D1:AF4C CB 1D -  -  	rr l ;l holds gap length
-  111 D1:AF4E 7D -  -  -  	ld a,l
-  112 D1:AF4F E1 -  -  -  	pop hl
-  113 D1:AF50 D9 -  -  -  	exx;out of shadow
-  114 D1:AF51 12 -  -  -  	ld (de),a;write gap length
-  115 D1:AF52 13 -  -  -  	inc de
-  116 D1:AF53 3E 0F -  -  	ld a,%00001111;save first pixel
-  117 D1:AF55 12 -  -  -  	ld (de),a
-  118 D1:AF56 13 -  -  -  	inc de
-  119 D1:AF57 CD 51 B0 D1 	call sdcomp_get_next_color_leading_nibble
-  120 D1:AF5B 12 -  -  -  	ld (de),a;write leading pixel
-  121 D1:AF5C 13 -  -  -  	inc de
-  122 D1:AF5D D9 -  -  -  	exx;toshadow
-  123 D1:AF5E -  -  -  -  		
-  124 D1:AF5E 06 00 -  -  	ld b,0;for gap finder loop
-  125 D1:AF60 7E -  -  -  	ld a,(hl);alpha
-  126 D1:AF61 A1 -  -  -  	and c ;points to start of next pixel pair
-  127 D1:AF62 B7 -  -  -  	or a
-  128 D1:AF63 D9 -  -  -  	exx
-  129 D1:AF64 CA 08 AF D1 	jp z,sdcompress_loop_gen_loop;after leading pix is either 00 or 01, start of new loop
-  130 D1:AF68 D9 -  -  -  	exx
-  131 D1:AF69 -  -  -  -  	;after leading pix is 11 or 10
-  132 D1:AF69 -  -  -  -  	;move alpha pointer to second bit of 11 or 10
-  133 D1:AF69 CD FA AF D1 	call sdcomp_get_next_alpha
-  134 D1:AF6D C3 83 AF D1 	jp sdcomp_ldir_or_end_pix
-  135 D1:AF71 -  -  -  -  	
-  136 D1:AF71 -  -  -  -  	
-  137 D1:AF71 -  -  -  -  sdcomp_even_gap_length:;ends in (11) or (10),no start pixel
-  138 D1:AF71 -  -  -  -  	
-  139 D1:AF71 CB 3C -  -  	srl h 
-  140 D1:AF73 CB 1D -  -  	rr l 
-  141 D1:AF75 7D -  -  -  	ld a,l;ldir length
-  142 D1:AF76 E1 -  -  -  	pop hl
-  143 D1:AF77 D9 -  -  -  	exx;out of shadow
-  144 D1:AF78 12 -  -  -  	ld (de),a;write gap length
-  145 D1:AF79 13 -  -  -  	inc de
-  146 D1:AF7A 3E FF -  -  	ld a,%11111111;no starting pixel
-  147 D1:AF7C 12 -  -  -  	ld (de),a
-  148 D1:AF7D 13 -  -  -  	inc de
-  149 D1:AF7E 3E 00 -  -  	ld a,%00000000
-  150 D1:AF80 12 -  -  -  	ld (de),a
-  151 D1:AF81 13 -  -  -  	inc de
-  152 D1:AF82 D9 -  -  -  	exx;into shadow
-  153 D1:AF83 -  -  -  -  sdcomp_ldir_or_end_pix:
-  154 D1:AF83 7E -  -  -  	ld a,(hl)
-  155 D1:AF84 A1 -  -  -  	and c
-  156 D1:AF85 B7 -  -  -  	or a
-  157 D1:AF86 C2 92 AF D1 	jp nz,sdcomp_ldir_gen;ends in 11, has ldir length
-  158 D1:AF8A -  -  -  -  	;ends in 10, only drawing end pixel
-  159 D1:AF8A CD FA AF D1 	call sdcomp_get_next_alpha;inc alpha pointer to new loop
-  160 D1:AF8E C3 B5 AF D1 	jp sdcomp_write_end_pixel
-  161 D1:AF92 -  -  -  -  
-  162 D1:AF92 -  -  -  -  ;in shadow, alpha points to second bit of first pixel pair,de points to ldir length byte, hl/c to color data
-  163 D1:AF92 -  -  -  -  sdcomp_ldir_gen:;know ldir length is at least 1
-  164 D1:AF92 06 00 -  -  	ld b,0;ldir length
-  165 D1:AF94 CD FA AF D1 	call sdcomp_get_next_alpha;inc alpha pointer to start of next 
-  166 D1:AF98 -  -  -  -  sdcomp_ldir_gen_loop:
-  167 D1:AF98 04 -  -  -  	inc b
-  168 D1:AF99 CD FA AF D1 	call sdcomp_get_next_alpha
-  169 D1:AF9D B7 -  -  -  	or a
-  170 D1:AF9E C2 98 AF D1 	jp nz,sdcomp_ldir_gen_loop;loops until alpha(0) found
-  171 D1:AFA2 05 -  -  -  	dec b 
-  172 D1:AFA3 -  -  -  -  	;b holds number of (1)s found (opaque) after first known ldir
-  173 D1:AFA3 -  -  -  -  	
-  174 D1:AFA3 -  -  -  -  	
-  175 D1:AFA3 CB 40 -  -  	bit 0,b
-  176 D1:AFA5 CA C4 AF D1 	jp z,sdcomp_no_ending_pix;even number of 1s ,no ending pixel ;alpha pointer is one after the 0
-  177 D1:AFA9 -  -  -  -  	;odd number of 1s, has ending pixel
-  178 D1:AFA9 CB 38 -  -  	srl b
-  179 D1:AFAB 04 -  -  -  	inc b;ldir length
-  180 D1:AFAC 78 -  -  -  	ld a,b
-  181 D1:AFAD D9 -  -  -  	exx;out of shadow
-  182 D1:AFAE 12 -  -  -  	ld (de),a 
-  183 D1:AFAF 13 -  -  -  	inc de
-  184 D1:AFB0 CD E6 AF D1 	call sdcomp_write_ldir_data_loop
-  185 D1:AFB4 -  -  -  -  	;write ending pixel
-  186 D1:AFB4 D9 -  -  -  	exx;into shadow
-  187 D1:AFB5 -  -  -  -  sdcomp_write_end_pixel:;in shadow
-  188 D1:AFB5 -  -  -  -  
-  189 D1:AFB5 D9 -  -  -  	exx;out of shadow
-  190 D1:AFB6 3E F0 -  -  	ld a,%11110000;keep second pixel
-  191 D1:AFB8 12 -  -  -  	ld (de),a
-  192 D1:AFB9 13 -  -  -  	inc de 
-  193 D1:AFBA CD 65 B0 D1 	call sdcomp_get_next_color_ending_nibble
-  194 D1:AFBE 12 -  -  -  	ld (de),a
-  195 D1:AFBF 13 -  -  -  	inc de 
-  196 D1:AFC0 C3 08 AF D1 	jp sdcompress_loop_gen_loop;back to start of next loop
-  197 D1:AFC4 -  -  -  -  	
-  198 D1:AFC4 -  -  -  -  	
-  199 D1:AFC4 -  -  -  -  sdcomp_no_ending_pix:
-  200 D1:AFC4 CB 38 -  -  	srl b
-  201 D1:AFC6 04 -  -  -  	inc b;ldir length  ,add one known ldir
-  202 D1:AFC7 78 -  -  -  	ld a,b
-  203 D1:AFC8 D9 -  -  -  	exx;out of shadow
-  204 D1:AFC9 12 -  -  -  	ld (de),a 
-  205 D1:AFCA 13 -  -  -  	inc de
-  206 D1:AFCB CD E6 AF D1 	call sdcomp_write_ldir_data_loop
-  207 D1:AFCF -  -  -  -  	;no ending pixel, loop is done
-  208 D1:AFCF 3E FF -  -  	ld a,%11111111
-  209 D1:AFD1 12 -  -  -  	ld (de),a
-  210 D1:AFD2 13 -  -  -  	inc de 
-  211 D1:AFD3 3E 00 -  -  	ld a,%00000000
-  212 D1:AFD5 12 -  -  -  	ld (de),a 
-  213 D1:AFD6 13 -  -  -  	inc de
-  214 D1:AFD7 D9 -  -  -  	exx;to shadow 
-  215 D1:AFD8 -  -  -  -  	;at end of ldir, data write location is incremented, gap length must decrease by 1 bc no end pixel
-  216 D1:AFD8 -  -  -  -  	
-  217 D1:AFD8 E5 -  -  -  	push hl 
-  218 D1:AFD9 21 FF FF FF 	ld hl,-1 
-  219 D1:AFDD 22 1E AF D1 	ld (sdcomp_starting_zeroes_found),hl
-  220 D1:AFE1 E1 -  -  -  	pop hl
-  221 D1:AFE2 C3 13 AF D1 	jp sdcomp_inc_loop_counter;back to start of next loop,with -1 gap length
-  222 D1:AFE6 -  -  -  -  	
-  223 D1:AFE6 -  -  -  -  ;hl/c is color data, de is ldir write pos, b' is ldir length, not in shadow 
-  224 D1:AFE6 -  -  -  -  sdcomp_write_ldir_data_loop:
-  225 D1:AFE6 CD 65 B0 D1 	call sdcomp_get_next_color_ending_nibble	
-  226 D1:AFEA 47 -  -  -  	ld b,a;first pixel
-  227 D1:AFEB CD 51 B0 D1 	call sdcomp_get_next_color_leading_nibble
-  228 D1:AFEF B0 -  -  -  	or b
-  229 D1:AFF0 -  -  -  -  	
-  230 D1:AFF0 -  -  -  -  	
-  231 D1:AFF0 12 -  -  -  	ld (de),a;write color data
-  232 D1:AFF1 13 -  -  -  	inc de
-  233 D1:AFF2 D9 -  -  -  	exx;to shadow
-  234 D1:AFF3 05 -  -  -  	dec b;ldir length counter
-  235 D1:AFF4 D9 -  -  -  	exx
-  236 D1:AFF5 C2 E6 AF D1 	jp nz,sdcomp_write_ldir_data_loop
-  237 D1:AFF9 C9 -  -  -  	ret
-  238 D1:AFFA -  -  -  -  	
-  239 D1:AFFA -  -  -  -  	
-  240 D1:AFFA -  -  -  -  	
-  241 D1:AFFA -  -  -  -  ;in shadow,returns a 0 or not 0
-  242 D1:AFFA -  -  -  -  sdcomp_get_next_alpha:
-  243 D1:AFFA -  -  -  -  
-  244 D1:AFFA 08 -  -  -  	ex af,af' ;'
-  245 D1:AFFB B7 -  -  -  	or a 
-  246 D1:AFFC CA 35 B0 D1 	jp z,sdcomp_line_end
-  247 D1:B000 08 -  -  -  	ex af,af' ;'
-  248 D1:B001 -  -  -  -  
-  249 D1:B001 7E -  -  -  	ld a,(hl)
-  250 D1:B002 A1 -  -  -  	and c 
-  251 D1:B003 CB 09 -  -  	rrc c 
-  252 D1:B005 D2 0A B0 D1 	jp nc,sdcomp_skip_alpha_inc
-  253 D1:B009 23 -  -  -  	inc hl
-  254 D1:B00A -  -  -  -  sdcomp_skip_alpha_inc:
-  255 D1:B00A -  -  -  -  
-  256 D1:B00A 08 -  -  -  	ex af,af' ;';to shadow
-  257 D1:B00B 3D -  -  -  	dec a;dec width counter
-  258 D1:B00C C2 33 B0 D1 	jp nz,sdcomp_setup_line_gap_skip
-  259 D1:B010 -  -  -  -  	
-  260 D1:B010 -  -  -  -  	;END OF LINE REACHED
-  261 D1:B010 -  -  -  -  	
-  262 D1:B010 F5 -  -  -  	push af;
-  263 D1:B011 3A 15 AF D1 	ld a,(sdcomp_loop_counter)
-  264 D1:B015 12 -  -  -  	ld (de),a;write loops per line data
-  265 D1:B016 13 -  -  -  	inc de
-  266 D1:B017 -  -  -  -  sdcomp_lines_remaining .equ $ + 1
-  267 D1:B017 3E 00 -  -  	ld a,0
-  268 D1:B019 3D -  -  -  	dec a 
-  269 D1:B01A 32 18 B0 D1 	ld (sdcomp_lines_remaining),a
-  270 D1:B01E C2 28 B0 D1 	jp nz,sdcomp_set_end_flag_skip
-  271 D1:B022 -  -  -  -  	;end of last line reached 
-  272 D1:B022 3E DA -  -  	ld a,%11011010;jp c
-  273 D1:B024 32 27 AF D1 	ld (sdcomp_end_reached_flag) , a
-  274 D1:B028 -  -  -  -  sdcomp_set_end_flag_skip:
-  275 D1:B028 E5 -  -  -  	push hl
-  276 D1:B029 -  -  -  -  sdcomp_zeroes_between_lines .equ $ + 1 
-  277 D1:B029 21 00 00 00 	ld hl,0;320-width
-  278 D1:B02D 22 38 B0 D1 	ld (sdcomp_remaining_zeroes_between_lines),hl
-  279 D1:B031 E1 -  -  -  	pop hl
-  280 D1:B032 F1 -  -  -  	pop af 
-  281 D1:B033 -  -  -  -  	
-  282 D1:B033 -  -  -  -  	
-  283 D1:B033 -  -  -  -  sdcomp_setup_line_gap_skip:
-  284 D1:B033 08 -  -  -  	ex af,af' ;';out of shadow
-  285 D1:B034 C9 -  -  -  	ret
-  286 D1:B035 -  -  -  -  sdcomp_line_end:;previous alpha read was last of line 
-  287 D1:B035 08 -  -  -  	ex af,af' ;';out of shadow keep a' at 0 until next line start reached 
-  288 D1:B036 E5 -  -  -  	push hl
-  289 D1:B037 -  -  -  -  sdcomp_remaining_zeroes_between_lines .equ $ + 1 
-  290 D1:B037 21 00 00 00 	ld hl,0;320 - width 
-  291 D1:B03B 2B -  -  -  	dec hl
-  292 D1:B03C 22 38 B0 D1 	ld (sdcomp_remaining_zeroes_between_lines),hl
-  293 D1:B040 7D -  -  -  	ld a,l
-  294 D1:B041 B4 -  -  -  	or h
-  295 D1:B042 E1 -  -  -  	pop hl
-  296 D1:B043 CA 4A B0 D1 	jp z,sdcomp_line_gap_end
-  297 D1:B047 3E 00 -  -  	ld a,0
-  298 D1:B049 C9 -  -  -  	ret
-  299 D1:B04A -  -  -  -  	
-  300 D1:B04A -  -  -  -  sdcomp_line_gap_end:
-  301 D1:B04A 08 -  -  -  	ex af,af' ;'
-  302 D1:B04B -  -  -  -  sdcomp_sprite_width .equ $ + 1
-  303 D1:B04B 3E 00 -  -  	ld a,0
-  304 D1:B04D 08 -  -  -  	ex af,af' ;'
-  305 D1:B04E 3E 00 -  -  	ld a,0
-  306 D1:B050 C9 -  -  -  	ret
-  307 D1:B051 -  -  -  -  	
-  308 D1:B051 -  -  -  -  
-  309 D1:B051 -  -  -  -  
-  310 D1:B051 -  -  -  -  
-  311 D1:B051 -  -  -  -  ;not in shadow, returns a = color0000
-  312 D1:B051 -  -  -  -  sdcomp_get_next_color_leading_nibble:
-  313 D1:B051 7E -  -  -  	ld a,(hl);load color
-  314 D1:B052 A1 -  -  -  	and c;and with mask
-  315 D1:B053 CB 09 -  -  	rrc c ;rotate mask
-  316 D1:B055 CB 09 -  -  	rrc c 
-  317 D1:B057 CB 09 -  -  	rrc c 
-  318 D1:B059 CB 09 -  -  	rrc c 
-  319 D1:B05B D2 64 B0 D1 	jp nc,sdcomp_color_inc_skip2
-  320 D1:B05F 23 -  -  -  	inc hl;a does need to be rotated
-  321 D1:B060 0F -  -  -  	rrca
-  322 D1:B061 0F -  -  -  	rrca
-  323 D1:B062 0F -  -  -  	rrca
-  324 D1:B063 0F -  -  -  	rrca
-  325 D1:B064 -  -  -  -  sdcomp_color_inc_skip2:
-  326 D1:B064 C9 -  -  -  	ret
-  327 D1:B065 -  -  -  -  
-  328 D1:B065 -  -  -  -  
-  329 D1:B065 -  -  -  -  ;not in shadow, returns a = 0000color
-  330 D1:B065 -  -  -  -  sdcomp_get_next_color_ending_nibble:
-  331 D1:B065 7E -  -  -  	ld a,(hl);load color
-  332 D1:B066 A1 -  -  -  	and c;and with mask
-  333 D1:B067 CB 09 -  -  	rrc c ;rotate mask
-  334 D1:B069 CB 09 -  -  	rrc c 
-  335 D1:B06B CB 09 -  -  	rrc c 
-  336 D1:B06D CB 09 -  -  	rrc c 
-  337 D1:B06F D2 75 B0 D1 	jp nc,sdcomp_color_inc_skip
-  338 D1:B073 23 -  -  -  	inc hl;
-  339 D1:B074 C9 -  -  -  	ret
-  340 D1:B075 -  -  -  -  sdcomp_color_inc_skip:
-  341 D1:B075 0F -  -  -  	rrca
-  342 D1:B076 0F -  -  -  	rrca
-  343 D1:B077 0F -  -  -  	rrca
-  344 D1:B078 0F -  -  -  	rrca
-  345 D1:B079 C9 -  -  -  	ret
-  346 D1:B07A -  -  -  -  
-  347 D1:B07A -  -  -  -  
-  348 D1:B07A -  -  -  -  
-  349 D1:B07A -  -  -  -  sdcomp_end:
-  350 D1:B07A C9 -  -  -  	ret 
-  351 D1:B07B -  -  -  -  
-  352 D1:B07B -  -  -  -  
-  353 D1:B07B -  -  -  -  
-  354 D1:B07B -  -  -  -  	
-  355 D1:B07B -  -  -  -  	
-  356 D1:B07B -  -  -  -  	
-  357 D1:B07B -  -  -  -  	
+    1 D1:AECE -  -  -  -  
+    2 D1:AECE -  -  -  -  
+    3 D1:AECE -  -  -  -  ;hl = sprite data start, de = main data decompress location de' = loops/line data location
+    4 D1:AECE -  -  -  -  slow_sprite_decompress:
+    5 D1:AECE -  -  -  -  
+    6 D1:AECE 3E D2 -  -  	ld a,%11010010;jp nc 
+    7 D1:AED0 32 3A AF D1 	ld (sdcomp_end_reached_flag),a;reset end reached flag
+    8 D1:AED4 3E 00 -  -  	ld a,0
+    9 D1:AED6 32 29 AF D1 	ld (sdcomp_loop_counter) ,a;reset loop counter
+   10 D1:AEDA -  -  -  -  	
+   11 D1:AEDA 7E -  -  -  	ld a,(hl);width,in px
+   12 D1:AEDB E5 -  -  -  	push hl 
+   13 D1:AEDC 21 40 01 00 	ld hl,320
+   14 D1:AEE0 01 00 00 00 	ld bc,0
+   15 D1:AEE4 4F -  -  -  	ld c,a 
+   16 D1:AEE5 37 -  -  -  	scf 
+   17 D1:AEE6 3F -  -  -  	ccf 
+   18 D1:AEE7 ED 42 -  -  	sbc hl,bc;320 - width
+   19 D1:AEE9 22 5A B0 D1 	ld (sdcomp_zeroes_between_lines),hl
+   20 D1:AEED E1 -  -  -  	pop hl 
+   21 D1:AEEE 47 -  -  -  	ld b,a;width
+   22 D1:AEEF 08 -  -  -  	ex af,af' ;'
+   23 D1:AEF0 78 -  -  -  	ld a,b
+   24 D1:AEF1 32 7C B0 D1 	ld (sdcomp_sprite_width),a
+   25 D1:AEF5 08 -  -  -  	ex af,af' ;'
+   26 D1:AEF6 -  -  -  -  
+   27 D1:AEF6 23 -  -  -  	inc hl
+   28 D1:AEF7 7E -  -  -  	ld a,(hl);height
+   29 D1:AEF8 32 48 B0 D1 	ld (sdcomp_lines_remaining),a;load remaining lines
+   30 D1:AEFC 12 -  -  -  	ld (de),a;height
+   31 D1:AEFD 13 -  -  -  	inc de
+   32 D1:AEFE D5 -  -  -  	push de;loop/line data start 
+   33 D1:AEFF D9 -  -  -  	exx;to shadow
+   34 D1:AF00 D1 -  -  -  	pop de ;de' is loop/line data
+   35 D1:AF01 D9 -  -  -  	exx
+   36 D1:AF02 -  -  -  -  
+   37 D1:AF02 23 -  -  -  	inc hl;alpha data start
+   38 D1:AF03 E5 -  -  -  	push hl
+   39 D1:AF04 E5 -  -  -  	push hl
+   40 D1:AF05 67 -  -  -  	ld h,a;height
+   41 D1:AF06 68 -  -  -  	ld l,b;width
+   42 D1:AF07 ED 6C -  -  	mlt hl;number of pixels
+   43 D1:AF09 2B -  -  -  	dec hl
+   44 D1:AF0A CB 3C -  -  	srl h
+   45 D1:AF0C CB 1D -  -  	rr l
+   46 D1:AF0E CB 3C -  -  	srl h
+   47 D1:AF10 CB 1D -  -  	rr l 
+   48 D1:AF12 CB 3C -  -  	srl h 
+   49 D1:AF14 CB 1D -  -  	rr l ;divide by 8
+   50 D1:AF16 23 -  -  -  	inc hl 
+   51 D1:AF17 C1 -  -  -  	pop bc
+   52 D1:AF18 09 -  -  -  	add hl,bc;hl holds start of color data
+   53 D1:AF19 -  -  -  -  	;HL POINTING TO COLOR DATA
+   54 D1:AF19 -  -  -  -  
+   55 D1:AF19 EB -  -  -  	ex de,hl
+   56 D1:AF1A 01 00 00 00 	ld bc,0
+   57 D1:AF1E 4F -  -  -  	ld c,a;height 
+   58 D1:AF1F 09 -  -  -  	add hl,bc	
+   59 D1:AF20 EB -  -  -  	ex de,hl;de points to data write location
+   60 D1:AF21 -  -  -  -  	
+   61 D1:AF21 -  -  -  -  	
+   62 D1:AF21 -  -  -  -  	
+   63 D1:AF21 -  -  -  -  	
+   64 D1:AF21 -  -  -  -  	
+   65 D1:AF21 D9 -  -  -  	exx;to shadow 
+   66 D1:AF22 E1 -  -  -  	pop hl;alpha data	
+   67 D1:AF23 -  -  -  -  	;HL IS POINTING TO ALPHA DATA
+   68 D1:AF23 0E 80 -  -  	ld c,%10000000;alpha mask
+   69 D1:AF25 D9 -  -  -  	exx
+   70 D1:AF26 0E F0 -  -  	ld c,%11110000;color mask
+   71 D1:AF28 -  -  -  -  
+   72 D1:AF28 -  -  -  -  ;START OF LOOP
+   73 D1:AF28 -  -  -  -  ;add amount to get from ending pixels to first nonzero pair
+   74 D1:AF28 -  -  -  -  sdcomp_find_gap_length:
+   75 D1:AF28 -  -  -  -  sdcomp_loop_counter .equ $ + 1
+   76 D1:AF28 3E 00 -  -  	ld a,0;inc number of loops
+   77 D1:AF2A 3C -  -  -  	inc a 
+   78 D1:AF2B 32 29 AF D1 	ld (sdcomp_loop_counter),a
+   79 D1:AF2F D9 -  -  -  	exx ;toshadow
+   80 D1:AF30 06 00 -  -  	ld b,0;pairs found, always < 255 
+   81 D1:AF32 -  -  -  -  sdcomp_add_1_gap_length .equ $
+   82 D1:AF32 00 -  -  -  	nop
+   83 D1:AF33 3E 00 -  -  	ld a,0;nop
+   84 D1:AF35 32 32 AF D1 	ld (sdcomp_add_1_gap_length),a
+   85 D1:AF39 -  -  -  -  sdcomp_find_gap_length_loop:
+   86 D1:AF39 -  -  -  -  	
+   87 D1:AF39 37 -  -  -  	scf 
+   88 D1:AF3A -  -  -  -  sdcomp_end_reached_flag .equ $;check if end of sprite reached
+   89 D1:AF3A D2 AA B0 D1 	jp nc,sdcomp_end
+   90 D1:AF3E -  -  -  -  
+   91 D1:AF3E CD 01 B0 D1 	call sdcomp_get_next_alpha_pair
+   92 D1:AF42 -  -  -  -  	;a holds alpha data 
+   93 D1:AF42 04 -  -  -  	inc b
+   94 D1:AF43 B7 -  -  -  	or a 
+   95 D1:AF44 CA 39 AF D1 	jp z,sdcomp_find_gap_length_loop
+   96 D1:AF48 -  -  -  -  	;END OF LOOP, B HOLDS NUMBER OF 00 PAIRS  +1
+   97 D1:AF48 -  -  -  -  		
+   98 D1:AF48 -  -  -  -  	
+   99 D1:AF48 -  -  -  -  
+  100 D1:AF48 -  -  -  -  	
+  101 D1:AF48 -  -  -  -  	
+  102 D1:AF48 -  -  -  -  	
+  103 D1:AF48 F5 -  -  -  	push af;saves leading pixel alpha data 
+  104 D1:AF49 78 -  -  -  	ld a,b 
+  105 D1:AF4A D9 -  -  -  	exx;out of shadow 
+  106 D1:AF4B 12 -  -  -  	ld (de),a;GAP LENGTH 
+  107 D1:AF4C 13 -  -  -  	inc de 
+  108 D1:AF4D D9 -  -  -  	exx;into shadow 
+  109 D1:AF4E -  -  -  -  	
+  110 D1:AF4E -  -  -  -  	
+  111 D1:AF4E -  -  -  -  ;LEADING PIXELS
+  112 D1:AF4E F1 -  -  -  	pop af;alpha data after gap, 11 01 10
+  113 D1:AF4F D9 -  -  -  	exx;out of shadow
+  114 D1:AF50 D5 -  -  -  	push de 
+  115 D1:AF51 -  -  -  -  	
+  116 D1:AF51 47 -  -  -  	ld b,a;save for later
+  117 D1:AF52 CB 67 -  -  	bit 4,a ;check if first pixel has color 
+  118 D1:AF54 3E 00 -  -  	ld a,0
+  119 D1:AF56 16 FF -  -  	ld d,%11111111;assuming no colors 
+  120 D1:AF58 CA 62 AF D1 	jp z,sdcomp_leading_pixel_first_skip
+  121 D1:AF5C -  -  -  -  	;has first color
+  122 D1:AF5C 16 F0 -  -  	ld d,%11110000;save second pixel of bg 
+  123 D1:AF5E CD 95 B0 D1 	call sdcomp_get_next_color_ending_nibble
+  124 D1:AF62 -  -  -  -  sdcomp_leading_pixel_first_skip:
+  125 D1:AF62 -  -  -  -  	;a is either $00 or $0color1
+  126 D1:AF62 -  -  -  -  	
+  127 D1:AF62 1E FF -  -  	ld e,%11111111;assuming no colors
+  128 D1:AF64 -  -  -  -  	
+  129 D1:AF64 CB 40 -  -  	bit 0,b;check second pixel alpha
+  130 D1:AF66 47 -  -  -  	ld b,a;save for later 
+  131 D1:AF67 3E 00 -  -  	ld a,0
+  132 D1:AF69 CA 73 AF D1 	jp z,sdcomp_leading_pixel_second_skip;
+  133 D1:AF6D -  -  -  -  	;has second color 
+  134 D1:AF6D CD 81 B0 D1 	call sdcomp_get_next_color_leading_nibble
+  135 D1:AF71 -  -  -  -  	;a = color2 0 
+  136 D1:AF71 1E 0F -  -  	ld e,%00001111;save first pixel of bg
+  137 D1:AF73 -  -  -  -  	
+  138 D1:AF73 -  -  -  -  sdcomp_leading_pixel_second_skip:
+  139 D1:AF73 -  -  -  -  	;a is either 00 or c2 0 
+  140 D1:AF73 -  -  -  -  	;b is either 00 or 0 c1 
+  141 D1:AF73 B0 -  -  -  	or b 
+  142 D1:AF74 47 -  -  -  	ld b,a;final color data
+  143 D1:AF75 7A -  -  -  	ld a,d 
+  144 D1:AF76 A3 -  -  -  	and e ;final mask data 
+  145 D1:AF77 -  -  -  -  	
+  146 D1:AF77 D1 -  -  -  	pop de;return to pointer 
+  147 D1:AF78 -  -  -  -  	
+  148 D1:AF78 12 -  -  -  	ld (de),a;write mask data 
+  149 D1:AF79 13 -  -  -  	inc de 
+  150 D1:AF7A 78 -  -  -  	ld a,b;color data 
+  151 D1:AF7B 12 -  -  -  	ld (de),a;write color data 
+  152 D1:AF7C 13 -  -  -  	inc de 
+  153 D1:AF7D D9 -  -  -  	exx;into shadow 
+  154 D1:AF7E -  -  -  -  	
+  155 D1:AF7E -  -  -  -  	
+  156 D1:AF7E -  -  -  -  ;CHECK FOR LDIR 
+  157 D1:AF7E 06 00 -  -  	ld b,0;pairs found 
+  158 D1:AF80 -  -  -  -  sdcomp_ldir_loop:
+  159 D1:AF80 CD 01 B0 D1 	call sdcomp_get_next_alpha_pair
+  160 D1:AF84 04 -  -  -  	inc b
+  161 D1:AF85 EE FF -  -  	xor %11111111;flip bits
+  162 D1:AF87 CA 80 AF D1 	jp z,sdcomp_ldir_loop;alpha data was 11
+  163 D1:AF8B -  -  -  -  	;b holds pairs found+1
+  164 D1:AF8B EE FF -  -  	xor %11111111;flip back
+  165 D1:AF8D -  -  -  -  	;a holds first non 11 pair 
+  166 D1:AF8D 05 -  -  -  	dec b ;b holds pairs found
+  167 D1:AF8E CA B3 AF D1 	jp z,sdcomp_no_ldir;no pairs found,no ldir length
+  168 D1:AF92 B7 -  -  -  	or a
+  169 D1:AF93 C2 A4 AF D1 	jp nz,sdcomp_ldir_write;ends not in 00, has single ending pixel
+  170 D1:AF97 -  -  -  -  	;ends in 00,ending pixels will be 11 
+  171 D1:AF97 -  -  -  -  	;must add 1 to next gap length, have already read first 00
+  172 D1:AF97 3E 04 -  -  	ld a,%00000100;inc b 
+  173 D1:AF99 32 32 AF D1 	ld (sdcomp_add_1_gap_length),a 
+  174 D1:AF9D 3E FF -  -  	ld a,$ff;ending pixels 11
+  175 D1:AF9F -  -  -  -  	
+  176 D1:AF9F 05 -  -  -  	dec b;reduce length by 1, final pair is end pixels
+  177 D1:AFA0 CA B3 AF D1 	jp z,sdcomp_no_ldir;no ldir length,ending pixels is 11 
+  178 D1:AFA4 -  -  -  -  	;b holds ldir length 
+  179 D1:AFA4 -  -  -  -  	
+  180 D1:AFA4 -  -  -  -  ;b holds ldir length, a holds ending pixels
+  181 D1:AFA4 -  -  -  -  sdcomp_ldir_write:
+  182 D1:AFA4 F5 -  -  -  	push af;save ending pixels
+  183 D1:AFA5 78 -  -  -  	ld a,b
+  184 D1:AFA6 D9 -  -  -  	exx 
+  185 D1:AFA7 12 -  -  -  	ld (de),a;write ldir length
+  186 D1:AFA8 13 -  -  -  	inc de 
+  187 D1:AFA9 CD ED AF D1 	call sdcomp_write_ldir_data_loop
+  188 D1:AFAD D9 -  -  -  	exx ;toshadow
+  189 D1:AFAE F1 -  -  -  	pop af;return ending pixels
+  190 D1:AFAF C3 BB AF D1 	jp sdcomp_write_end_pixels
+  191 D1:AFB3 -  -  -  -  sdcomp_no_ldir:;no ldir length, a holds ending pixels,00,10,01,11
+  192 D1:AFB3 F5 -  -  -  	push af;save end pixels
+  193 D1:AFB4 -  -  -  -  	
+  194 D1:AFB4 D9 -  -  -  	exx;out of shadow
+  195 D1:AFB5 3E 00 -  -  	ld a,0
+  196 D1:AFB7 12 -  -  -  	ld (de),a 
+  197 D1:AFB8 13 -  -  -  	inc de 
+  198 D1:AFB9 D9 -  -  -  	exx 
+  199 D1:AFBA F1 -  -  -  	pop af;return ending pixels
+  200 D1:AFBB -  -  -  -  
+  201 D1:AFBB -  -  -  -  
+  202 D1:AFBB -  -  -  -  ;WRITE ENDING PIXELS 
+  203 D1:AFBB -  -  -  -  
+  204 D1:AFBB -  -  -  -  sdcomp_write_end_pixels:;a holds end pixels
+  205 D1:AFBB -  -  -  -  	
+  206 D1:AFBB D9 -  -  -  	exx;out of shadow
+  207 D1:AFBC D5 -  -  -  	push de 
+  208 D1:AFBD -  -  -  -  	
+  209 D1:AFBD 47 -  -  -  	ld b,a;save for later
+  210 D1:AFBE CB 67 -  -  	bit 4,a ;check if first pixel has color 
+  211 D1:AFC0 3E 00 -  -  	ld a,0
+  212 D1:AFC2 16 FF -  -  	ld d,%11111111;assuming no colors 
+  213 D1:AFC4 CA CE AF D1 	jp z,sdcomp_ending_pixel_first_skip
+  214 D1:AFC8 -  -  -  -  	;has first color
+  215 D1:AFC8 16 F0 -  -  	ld d,%11110000;save second pixel of bg 
+  216 D1:AFCA CD 95 B0 D1 	call sdcomp_get_next_color_ending_nibble
+  217 D1:AFCE -  -  -  -  sdcomp_ending_pixel_first_skip:
+  218 D1:AFCE -  -  -  -  	;a is either $00 or $0color1
+  219 D1:AFCE -  -  -  -  	
+  220 D1:AFCE 1E FF -  -  	ld e,%11111111;assuming no colors
+  221 D1:AFD0 -  -  -  -  	
+  222 D1:AFD0 CB 40 -  -  	bit 0,b;check second pixel alpha
+  223 D1:AFD2 47 -  -  -  	ld b,a;save for later 
+  224 D1:AFD3 3E 00 -  -  	ld a,0
+  225 D1:AFD5 CA DF AF D1 	jp z,sdcomp_ending_pixel_second_skip;
+  226 D1:AFD9 -  -  -  -  	;has second color 
+  227 D1:AFD9 CD 81 B0 D1 	call sdcomp_get_next_color_leading_nibble
+  228 D1:AFDD -  -  -  -  	;a = color2 0 
+  229 D1:AFDD 1E 0F -  -  	ld e,%00001111;save first pixel of bg
+  230 D1:AFDF -  -  -  -  	
+  231 D1:AFDF -  -  -  -  sdcomp_ending_pixel_second_skip:
+  232 D1:AFDF -  -  -  -  	;a is either 00 or c2 0 
+  233 D1:AFDF -  -  -  -  	;b is either 00 or 0 c1 
+  234 D1:AFDF B0 -  -  -  	or b 
+  235 D1:AFE0 47 -  -  -  	ld b,a;final color data
+  236 D1:AFE1 7A -  -  -  	ld a,d 
+  237 D1:AFE2 A3 -  -  -  	and e ;final mask data 
+  238 D1:AFE3 -  -  -  -  	
+  239 D1:AFE3 D1 -  -  -  	pop de;return to pointer 
+  240 D1:AFE4 -  -  -  -  	
+  241 D1:AFE4 12 -  -  -  	ld (de),a;write mask data 
+  242 D1:AFE5 13 -  -  -  	inc de 
+  243 D1:AFE6 78 -  -  -  	ld a,b;color data 
+  244 D1:AFE7 12 -  -  -  	ld (de),a;write color data 
+  245 D1:AFE8 13 -  -  -  	inc de 
+  246 D1:AFE9 -  -  -  -  	
+  247 D1:AFE9 -  -  -  -  	
+  248 D1:AFE9 C3 28 AF D1 	jp sdcomp_find_gap_length;BACK TO START
+  249 D1:AFED -  -  -  -  	
+  250 D1:AFED -  -  -  -  	
+  251 D1:AFED -  -  -  -  
+  252 D1:AFED -  -  -  -  
+  253 D1:AFED -  -  -  -  
+  254 D1:AFED -  -  -  -  ;hl/c is color data, de is ldir write pos, b' is ldir length, not in shadow 
+  255 D1:AFED -  -  -  -  sdcomp_write_ldir_data_loop:
+  256 D1:AFED CD 95 B0 D1 	call sdcomp_get_next_color_ending_nibble	
+  257 D1:AFF1 47 -  -  -  	ld b,a;first pixel
+  258 D1:AFF2 CD 81 B0 D1 	call sdcomp_get_next_color_leading_nibble
+  259 D1:AFF6 B0 -  -  -  	or b
+  260 D1:AFF7 -  -  -  -  	
+  261 D1:AFF7 -  -  -  -  	
+  262 D1:AFF7 12 -  -  -  	ld (de),a;write color data
+  263 D1:AFF8 13 -  -  -  	inc de
+  264 D1:AFF9 D9 -  -  -  	exx;to shadow
+  265 D1:AFFA 05 -  -  -  	dec b;ldir length counter
+  266 D1:AFFB D9 -  -  -  	exx
+  267 D1:AFFC C2 ED AF D1 	jp nz,sdcomp_write_ldir_data_loop
+  268 D1:B000 C9 -  -  -  	ret
+  269 D1:B001 -  -  -  -  	
+  270 D1:B001 -  -  -  -  	
+  271 D1:B001 -  -  -  -  	
+  272 D1:B001 -  -  -  -  ;in shadow,returns a $FF,$0F,$F0,$00
+  273 D1:B001 -  -  -  -  sdcomp_get_next_alpha_pair:
+  274 D1:B001 CD 2A B0 D1 	call sdcomp_get_next_alpha_bit
+  275 D1:B005 B7 -  -  -  	or a 
+  276 D1:B006 CA 10 B0 D1 	jp z,sdcomp_get_next_alpha_pair0
+  277 D1:B00A 3E F0 -  -  	ld a,$F0;FIRST BIT WAS 1
+  278 D1:B00C C3 12 B0 D1 	jp sdcomp_get_next_alpha_pair1
+  279 D1:B010 -  -  -  -  sdcomp_get_next_alpha_pair0:
+  280 D1:B010 3E 00 -  -  	ld a,0
+  281 D1:B012 -  -  -  -  sdcomp_get_next_alpha_pair1:
+  282 D1:B012 32 28 B0 D1 	ld (sdcomp_get_next_alpha_pair_or),a 
+  283 D1:B016 -  -  -  -  	
+  284 D1:B016 CD 2A B0 D1 	call sdcomp_get_next_alpha_bit
+  285 D1:B01A B7 -  -  -  	or a 
+  286 D1:B01B CA 25 B0 D1 	jp z,sdcomp_get_next_alpha_pair2
+  287 D1:B01F 3E 0F -  -  	ld a,$0F;SECOND BIT WAS 1
+  288 D1:B021 C3 27 B0 D1 	jp sdcomp_get_next_alpha_pair3
+  289 D1:B025 -  -  -  -  sdcomp_get_next_alpha_pair2:
+  290 D1:B025 3E 00 -  -  	ld a,0;SECOND BIT WAS 0
+  291 D1:B027 -  -  -  -  sdcomp_get_next_alpha_pair3:	
+  292 D1:B027 -  -  -  -  sdcomp_get_next_alpha_pair_or .equ $ + 1
+  293 D1:B027 F6 00 -  -  	or 0;AND WITH FIRST BIT 
+  294 D1:B029 -  -  -  -  	
+  295 D1:B029 C9 -  -  -  	ret 
+  296 D1:B02A -  -  -  -  
+  297 D1:B02A -  -  -  -  
+  298 D1:B02A -  -  -  -  sdcomp_get_next_alpha_bit:
+  299 D1:B02A -  -  -  -  	;CHECKS IF OUTSIDE OF SPRITE,VIRTUAL 0s
+  300 D1:B02A 08 -  -  -  	ex af,af' ;'
+  301 D1:B02B B7 -  -  -  	or a
+  302 D1:B02C CA 65 B0 D1 	jp z,sdcomp_line_end
+  303 D1:B030 08 -  -  -  	ex af,af' ;'
+  304 D1:B031 -  -  -  -  
+  305 D1:B031 -  -  -  -  	;LOAD NEXT BIT
+  306 D1:B031 7E -  -  -  	ld a,(hl)
+  307 D1:B032 A1 -  -  -  	and c 
+  308 D1:B033 CB 09 -  -  	rrc c 
+  309 D1:B035 D2 3A B0 D1 	jp nc,sdcomp_skip_alpha_inc
+  310 D1:B039 23 -  -  -  	inc hl
+  311 D1:B03A -  -  -  -  sdcomp_skip_alpha_inc:
+  312 D1:B03A -  -  -  -  	
+  313 D1:B03A -  -  -  -  	;DEC WIDTH COUNTER
+  314 D1:B03A 08 -  -  -  	ex af,af' ;';to shadow
+  315 D1:B03B 3D -  -  -  	dec a;dec width counter
+  316 D1:B03C C2 63 B0 D1 	jp nz,sdcomp_setup_line_gap_skip
+  317 D1:B040 -  -  -  -  	
+  318 D1:B040 -  -  -  -  	;END OF LINE REACHED
+  319 D1:B040 -  -  -  -  	
+  320 D1:B040 -  -  -  -  	;AT LINE END,WRITE LOOPS/LINE DATA
+  321 D1:B040 F5 -  -  -  	push af;
+  322 D1:B041 3A 29 AF D1 	ld a,(sdcomp_loop_counter)
+  323 D1:B045 12 -  -  -  	ld (de),a;write loops per line data
+  324 D1:B046 13 -  -  -  	inc de
+  325 D1:B047 -  -  -  -  	;DEC NUMBER LINES REMAINING
+  326 D1:B047 -  -  -  -  sdcomp_lines_remaining .equ $ + 1
+  327 D1:B047 3E 00 -  -  	ld a,0
+  328 D1:B049 3D -  -  -  	dec a 
+  329 D1:B04A 32 48 B0 D1 	ld (sdcomp_lines_remaining),a
+  330 D1:B04E C2 58 B0 D1 	jp nz,sdcomp_set_end_flag_skip
+  331 D1:B052 -  -  -  -  	;end of last line reached 
+  332 D1:B052 3E DA -  -  	ld a,%11011010;jp c
+  333 D1:B054 32 3A AF D1 	ld (sdcomp_end_reached_flag) , a
+  334 D1:B058 -  -  -  -  sdcomp_set_end_flag_skip:
+  335 D1:B058 -  -  -  -  	;SET UP NUMBER OF VIRTUAL ZEROES
+  336 D1:B058 E5 -  -  -  	push hl
+  337 D1:B059 -  -  -  -  sdcomp_zeroes_between_lines .equ $ + 1 
+  338 D1:B059 21 00 00 00 	ld hl,0;320-width
+  339 D1:B05D 22 68 B0 D1 	ld (sdcomp_remaining_zeroes_between_lines),hl
+  340 D1:B061 E1 -  -  -  	pop hl
+  341 D1:B062 F1 -  -  -  	pop af 
+  342 D1:B063 -  -  -  -  	
+  343 D1:B063 -  -  -  -  	
+  344 D1:B063 -  -  -  -  sdcomp_setup_line_gap_skip:
+  345 D1:B063 08 -  -  -  	ex af,af' ;';out of shadow
+  346 D1:B064 C9 -  -  -  	ret;A HOLDS 0 OR NOT 0
+  347 D1:B065 -  -  -  -  	
+  348 D1:B065 -  -  -  -  	
+  349 D1:B065 -  -  -  -  	;IF OUTSIDE OF SPRITE,RETURN VIRTUAL 0
+  350 D1:B065 -  -  -  -  sdcomp_line_end:
+  351 D1:B065 08 -  -  -  	ex af,af' ;';out of shadow keep a' at 0 until next line start reached 
+  352 D1:B066 E5 -  -  -  	push hl
+  353 D1:B067 -  -  -  -  	;DEC REMAINING ZEROES
+  354 D1:B067 -  -  -  -  sdcomp_remaining_zeroes_between_lines .equ $ + 1 
+  355 D1:B067 21 00 00 00 	ld hl,0;320 - width 
+  356 D1:B06B 2B -  -  -  	dec hl
+  357 D1:B06C 22 68 B0 D1 	ld (sdcomp_remaining_zeroes_between_lines),hl
+  358 D1:B070 7D -  -  -  	ld a,l
+  359 D1:B071 B4 -  -  -  	or h
+  360 D1:B072 E1 -  -  -  	pop hl
+  361 D1:B073 CA 7A B0 D1 	jp z,sdcomp_line_gap_end;IF END OF VIRTUAL ZEROES
+  362 D1:B077 3E 00 -  -  	ld a,0
+  363 D1:B079 C9 -  -  -  	ret;return 0
+  364 D1:B07A -  -  -  -  	
+  365 D1:B07A -  -  -  -  sdcomp_line_gap_end:
+  366 D1:B07A 08 -  -  -  	ex af,af' ;';to shadow
+  367 D1:B07B -  -  -  -  sdcomp_sprite_width .equ $ + 1
+  368 D1:B07B 3E 00 -  -  	ld a,0;ld shadow a with width
+  369 D1:B07D 08 -  -  -  	ex af,af' ;';out of shadow
+  370 D1:B07E 3E 00 -  -  	ld a,0;ret 0
+  371 D1:B080 C9 -  -  -  	ret
+  372 D1:B081 -  -  -  -  	
+  373 D1:B081 -  -  -  -  
+  374 D1:B081 -  -  -  -  
+  375 D1:B081 -  -  -  -  
+  376 D1:B081 -  -  -  -  ;not in shadow, returns a = color0000
+  377 D1:B081 -  -  -  -  sdcomp_get_next_color_leading_nibble:
+  378 D1:B081 7E -  -  -  	ld a,(hl);load color
+  379 D1:B082 A1 -  -  -  	and c;and with mask
+  380 D1:B083 CB 09 -  -  	rrc c ;rotate mask
+  381 D1:B085 CB 09 -  -  	rrc c 
+  382 D1:B087 CB 09 -  -  	rrc c 
+  383 D1:B089 CB 09 -  -  	rrc c 
+  384 D1:B08B D2 94 B0 D1 	jp nc,sdcomp_color_inc_skip2
+  385 D1:B08F 23 -  -  -  	inc hl;a does need to be rotated
+  386 D1:B090 0F -  -  -  	rrca
+  387 D1:B091 0F -  -  -  	rrca
+  388 D1:B092 0F -  -  -  	rrca
+  389 D1:B093 0F -  -  -  	rrca
+  390 D1:B094 -  -  -  -  sdcomp_color_inc_skip2:
+  391 D1:B094 C9 -  -  -  	ret
+  392 D1:B095 -  -  -  -  
+  393 D1:B095 -  -  -  -  
+  394 D1:B095 -  -  -  -  ;not in shadow, returns a = 0000color
+  395 D1:B095 -  -  -  -  sdcomp_get_next_color_ending_nibble:
+  396 D1:B095 7E -  -  -  	ld a,(hl);load color
+  397 D1:B096 A1 -  -  -  	and c;and with mask
+  398 D1:B097 CB 09 -  -  	rrc c ;rotate mask
+  399 D1:B099 CB 09 -  -  	rrc c 
+  400 D1:B09B CB 09 -  -  	rrc c 
+  401 D1:B09D CB 09 -  -  	rrc c 
+  402 D1:B09F D2 A5 B0 D1 	jp nc,sdcomp_color_inc_skip
+  403 D1:B0A3 23 -  -  -  	inc hl;
+  404 D1:B0A4 C9 -  -  -  	ret
+  405 D1:B0A5 -  -  -  -  sdcomp_color_inc_skip:
+  406 D1:B0A5 0F -  -  -  	rrca
+  407 D1:B0A6 0F -  -  -  	rrca
+  408 D1:B0A7 0F -  -  -  	rrca
+  409 D1:B0A8 0F -  -  -  	rrca
+  410 D1:B0A9 C9 -  -  -  	ret
+  411 D1:B0AA -  -  -  -  
+  412 D1:B0AA -  -  -  -  
+  413 D1:B0AA -  -  -  -  
+  414 D1:B0AA -  -  -  -  sdcomp_end:
+  415 D1:B0AA C9 -  -  -  	ret 
+  416 D1:B0AB -  -  -  -  
+  417 D1:B0AB -  -  -  -  
+  418 D1:B0AB -  -  -  -  
+  419 D1:B0AB -  -  -  -  
+  420 D1:B0AB -  -  -  -  
+  421 D1:B0AB -  -  -  -  
+  422 D1:B0AB -  -  -  -  
+  423 D1:B0AB -  -  -  -  
+  424 D1:B0AB -  -  -  -  
+  425 D1:B0AB -  -  -  -  
+  426 D1:B0AB -  -  -  -  
+  427 D1:B0AB -  -  -  -  
+  428 D1:B0AB -  -  -  -  
+  429 D1:B0AB -  -  -  -  
+  430 D1:B0AB -  -  -  -  
+  431 D1:B0AB -  -  -  -  
+  432 D1:B0AB -  -  -  -  
+  433 D1:B0AB -  -  -  -  
+  434 D1:B0AB -  -  -  -  
+  435 D1:B0AB -  -  -  -  
+  436 D1:B0AB -  -  -  -  
+  437 D1:B0AB -  -  -  -  
+  438 D1:B0AB -  -  -  -  
+  439 D1:B0AB -  -  -  -  
+  440 D1:B0AB -  -  -  -  
+  441 D1:B0AB -  -  -  -  
+  442 D1:B0AB -  -  -  -  
+  443 D1:B0AB -  -  -  -  
+  444 D1:B0AB -  -  -  -  
+  445 D1:B0AB -  -  -  -  
+  446 D1:B0AB -  -  -  -  
+  447 D1:B0AB -  -  -  -  
+  448 D1:B0AB -  -  -  -  
+  449 D1:B0AB -  -  -  -  
+  450 D1:B0AB -  -  -  -  
+  451 D1:B0AB -  -  -  -  
+  452 D1:B0AB -  -  -  -  
+  453 D1:B0AB -  -  -  -  
+  454 D1:B0AB -  -  -  -  
+  455 D1:B0AB -  -  -  -  
+  456 D1:B0AB -  -  -  -  
+  457 D1:B0AB -  -  -  -  
+  458 D1:B0AB -  -  -  -  
+  459 D1:B0AB -  -  -  -  
+  460 D1:B0AB -  -  -  -  ;FIND GAP LENGTH
+  461 D1:B0AB -  -  -  -  ;read bitsteam in pairs
+  462 D1:B0AB -  -  -  -  ;gap length = number of full pairs found 
+  463 D1:B0AB -  -  -  -  
+  464 D1:B0AB -  -  -  -  ;STARTING PIXEL(S);have read either 11,01,10 in bitstream
+  465 D1:B0AB -  -  -  -  ;write either both, start,or end pixel 
+  466 D1:B0AB -  -  -  -  
+  467 D1:B0AB -  -  -  -  ;LDIR
+  468 D1:B0AB -  -  -  -  ;read number of pairs of 11 in bitstream 
+  469 D1:B0AB -  -  -  -  ;if 0 move to ending pixels
+  470 D1:B0AB -  -  -  -  ;if ends in 00, last full 11 pair will be ending pixels 
+  471 D1:B0AB -  -  -  -  ;write ldir length 
+  472 D1:B0AB -  -  -  -  ;if 0 move to next step
+  473 D1:B0AB -  -  -  -  ;else write ldir data 
+  474 D1:B0AB -  -  -  -  
+  475 D1:B0AB -  -  -  -  
+  476 D1:B0AB -  -  -  -  ;ENDING PIXEL(S)
+  477 D1:B0AB -  -  -  -  ;00 if there is nothing after leading pixels 
+  478 D1:B0AB -  -  -  -  ;11 10 01 otherwise
+  479 D1:B0AB -  -  -  -  
+  480 D1:B0AB -  -  -  -  ;BACK TO GAP LENGTH
+  481 D1:B0AB -  -  -  -  
+  482 D1:B0AB -  -  -  -  
+  483 D1:B0AB -  -  -  -  
+  484 D1:B0AB -  -  -  -  
+  485 D1:B0AB -  -  -  -  
+  486 D1:B0AB -  -  -  -  
+  487 D1:B0AB -  -  -  -  
+  488 D1:B0AB -  -  -  -  
+  489 D1:B0AB -  -  -  -  
+  490 D1:B0AB -  -  -  -  
+  491 D1:B0AB -  -  -  -  
+  492 D1:B0AB -  -  -  -  
+  493 D1:B0AB -  -  -  -  
+  494 D1:B0AB -  -  -  -  
+  495 D1:B0AB -  -  -  -  
+  496 D1:B0AB -  -  -  -  
+  497 D1:B0AB -  -  -  -  
+  498 D1:B0AB -  -  -  -  
+  499 D1:B0AB -  -  -  -  
+  500 D1:B0AB -  -  -  -  
+  501 D1:B0AB -  -  -  -  
+  502 D1:B0AB -  -  -  -  	
+  503 D1:B0AB -  -  -  -  	
+  504 D1:B0AB -  -  -  -  	
+  505 D1:B0AB -  -  -  -  	
 Listing for file "ascent.asm"
