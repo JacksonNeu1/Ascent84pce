@@ -55,19 +55,37 @@ slow_sprite_decompress:
 	ex de,hl
 	ld bc,0
 	ld c,a;height 
-	add hl,bc	
+	add hl,bc
 	ex de,hl;de points to data write location
-	
-	
-	
 	
 	
 	exx;to shadow 
 	pop hl;alpha data	
+
 	;HL IS POINTING TO ALPHA DATA
 	ld c,%10000000;alpha mask
-	exx
+	exx;out 
 	ld c,%11110000;color mask
+	
+	
+	scf 
+sdcomp_flip_1 .equ $
+	jp c,sdcomp_find_gap_length;continue if no flip
+
+	exx;to shadow 
+	dec hl;dec alpha pointer
+	ld (sdcomp_alpha_data_line_end_byte),hl 
+	ld a,%00000001
+	ld (sdcomp_alpha_data_line_end_mask),a 
+	exx ;out 
+	dec hl;dec color pointer
+	ld (sdcomp_color_data_line_end_byte),hl 
+	ld a,%00001111
+	ld (sdcomp_color_data_line_end_mask),a 
+	
+	
+	call sdcomp_traverse_line_data
+	
 
 ;START OF LOOP
 ;add amount to get from ending pixels to first nonzero pair
@@ -95,9 +113,6 @@ sdcomp_end_reached_flag .equ $;check if end of sprite reached
 	jp z,sdcomp_find_gap_length_loop
 	;END OF LOOP, B HOLDS NUMBER OF 00 PAIRS  +1
 		
-	
-
-	
 	
 	
 	push af;saves leading pixel alpha data 
@@ -295,7 +310,18 @@ sdcomp_get_next_alpha_pair_or .equ $ + 1
 	ret 
 
 
+
 sdcomp_get_next_alpha_bit:
+	
+	scf
+sdcomp_bit_offset .equ $ ;jp nc for offset
+	jp c,sdcomp_bit_offset_skip
+	ld a,%11011010;jp c 
+	ld (sdcomp_bit_offset),a
+	ld a,0
+	ret ;return 0 first bit
+sdcomp_bit_offset_skip:;skip bit offset
+	nop;ret 
 	;CHECKS IF OUTSIDE OF SPRITE,VIRTUAL 0s
 	ex af,af' ;'
 	or a
@@ -303,6 +329,11 @@ sdcomp_get_next_alpha_bit:
 	ex af,af' ;'
 
 	;LOAD NEXT BIT
+	
+	scf 
+sdcomp_flip_6 .equ $ ;jp c
+	jp nc,sdcomp_get_next_alpha_bit_flip_1
+	
 	ld a,(hl)
 	and c 
 	rrc c 
@@ -340,6 +371,15 @@ sdcomp_zeroes_between_lines .equ $ + 1
 	pop hl
 	pop af 
 	
+
+	exx;out of shadow 
+	push af
+	scf
+sdcomp_flip_7 .equ $;call c 
+	call nc,sdcomp_traverse_line_data
+	exx;into
+	pop af
+	
 	
 sdcomp_setup_line_gap_skip:
 	ex af,af' ;';out of shadow
@@ -369,12 +409,29 @@ sdcomp_sprite_width .equ $ + 1
 	ex af,af' ;';out of shadow
 	ld a,0;ret 0
 	ret
-	
+
+
+;read alpha and decrease
+sdcomp_get_next_alpha_bit_flip_1:
+	ld a,(hl)
+	and c
+	rlc c 
+	jp nc,sdcomp_skip_alpha_inc
+	dec hl
+	jp sdcomp_skip_alpha_inc;return to main routine
+
+
 
 
 
 ;not in shadow, returns a = color0000
 sdcomp_get_next_color_leading_nibble:
+	
+	scf
+sdcomp_flip_2 .equ $	;jp c
+	jp nc,sdcomp_next_color_leading_flip
+	
+
 	ld a,(hl);load color
 	and c;and with mask
 	rrc c ;rotate mask
@@ -393,6 +450,11 @@ sdcomp_color_inc_skip2:
 
 ;not in shadow, returns a = 0000color
 sdcomp_get_next_color_ending_nibble:
+
+	scf
+sdcomp_flip_3 .equ $	;jp c
+	jp nc,sdcomp_next_color_ending_flip
+
 	ld a,(hl);load color
 	and c;and with mask
 	rrc c ;rotate mask
@@ -417,35 +479,117 @@ sdcomp_end:
 
 
 
+sdcomp_next_color_leading_flip:
+	ld a,(hl);load color
+	and c;and with mask
+	rrc c ;rotate mask
+	rrc c 
+	rrc c 
+	rrc c 
+	jp c,sdcomp_color_inc_skip2_f
+	dec hl;a does need to be rotated
+	ret
+sdcomp_color_inc_skip2_f:
+	rrca
+	rrca
+	rrca
+	rrca
+	ret
+
+sdcomp_next_color_ending_flip:
+	ld a,(hl);load color
+	and c;and with mask
+	rrc c ;rotate mask
+	rrc c 
+	rrc c 
+	rrc c 
+	jp c,sdcomp_color_inc_skipf
+	dec hl;
+	rrca
+	rrca
+	rrca
+	rrca
+sdcomp_color_inc_skipf:
+	ret
 
 
 
 
+;not in shadow ,destroys a
+sdcomp_traverse_line_data:
+sdcomp_color_data_line_end_byte .equ $ + 1
+	ld hl,0
+sdcomp_color_data_line_end_mask .equ $ + 1
+	ld c,0
+	exx;toshadow 
+sdcomp_alpha_data_line_end_byte .equ $ + 1
+	ld hl,0
+sdcomp_alpha_data_line_end_mask .equ $ + 1
+	ld c,0
+	push de
+	ld a,(sdcomp_sprite_width)
+	ld e,a
+sdcomp_traverse_line_data_loop:
+	rrc c 
+	jp nc,sdcomp_traverse_line_data_alpha_inc_skip
+	inc hl
+sdcomp_traverse_line_data_alpha_inc_skip:
+	ld a,(hl)
+	and c 
+	jp z,sdcomp_traverse_line_data_color_skip
+	exx;out of shadow 
+	rrc c ;rotate mask
+	rrc c 
+	rrc c 
+	rrc c 
+	jp nc,sdcomp_traverse_line_data_color_inc_skip
+	inc hl
+sdcomp_traverse_line_data_color_inc_skip:
+	exx ;toshadow
+sdcomp_traverse_line_data_color_skip:
+	dec e
+	jp nz,sdcomp_traverse_line_data_loop
+	pop de  
+	ld (sdcomp_alpha_data_line_end_byte),hl
+	ld a,c
+	ld (sdcomp_alpha_data_line_end_mask),a
+	exx 
+	ld (sdcomp_color_data_line_end_byte),hl
+	ld a,c 
+	ld (sdcomp_color_data_line_end_mask),a
+	ret
 
 
 
+sdcomp_set_flip:
+	ld a,%11010010;jp nc 
+	ld (sdcomp_flip_1),a 
+	ld a,%11011010;jp c 
+	ld (sdcomp_flip_2),a 
+	ld (sdcomp_flip_3),a 
+	ld (sdcomp_flip_6),a 
+	ld a,%11011100;call c 
+	ld (sdcomp_flip_7),a
+	ret 
+	
+	
+sdcomp_reset_flip:
+	ld a,%11011010;jp c 
+	ld (sdcomp_flip_1),a 
+	ld a,%11010010;jp nc 
+	ld (sdcomp_flip_2),a 
+	ld (sdcomp_flip_3),a 
+	ld (sdcomp_flip_6),a 
+	ld a,%11010100;call nc 
+	ld (sdcomp_flip_7),a
+	ret 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+sdcomp_set_offset:
+	ld a,%11010010;jp nc 
+	ld (sdcomp_bit_offset),a
+	ret
 
 
 

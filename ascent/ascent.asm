@@ -69,14 +69,27 @@
 	;jp time_test_start
 	
 	
-	
-	ld hl,testSpriteCompressed3
+	call sdcomp_set_flip
+	call sdcomp_set_offset
+	ld hl,testSpriteCompressed
 	ld de,vRam
 	call slow_sprite_decompress
 	
 	
+	call sdcomp_reset_flip
+
+	ld hl,testSpriteCompressed
+	ld de,vRam+160
+	call slow_sprite_decompress
+	
+	
+	
 	ld de,vRam +(160*40)
 	ld hl,vRam
+	call draw_slow_fg_sprite_full
+	
+	ld de,vRam +(160*40)+4
+	ld hl,vRam+160
 	call draw_slow_fg_sprite_full
 	
 	ei
