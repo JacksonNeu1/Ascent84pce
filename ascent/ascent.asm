@@ -68,16 +68,16 @@
 	;call fast_fg_sprite_set_flip
 	;jp time_test_start
 	
-	
-	call sdcomp_set_flip
+	call sdcomp_reset_fast_sprite
+	call sdcomp_reset_flip
 	call sdcomp_set_offset
-	ld hl,testSpriteCompressed
+	ld hl,testSpriteCompressed4
 	ld de,vRam
 	call slow_sprite_decompress
 	
 	
-	call sdcomp_reset_flip
-
+	call sdcomp_set_flip
+	call sdcomp_set_offset
 	ld hl,testSpriteCompressed
 	ld de,vRam+160
 	call slow_sprite_decompress
@@ -86,25 +86,32 @@
 	
 	ld de,vRam +(160*40)
 	ld hl,vRam
-	call draw_slow_fg_sprite_full
+	ld a,2
+	call draw_slow_sprite_bottom_cut
 	
-	ld de,vRam +(160*40)+4
+	
+	ld de,vRam +(160*30)
+	ld hl,vRam
+	call draw_slow_sprite_full
+	
+	
+	ld de,vRam +(160*40)+5
 	ld hl,vRam+160
-	call draw_slow_fg_sprite_full
+	ld a,3
+	call draw_slow_sprite_top_cut
 	
-	ei
-	call _GetKey
-	di
-	
-	
-	
+	ld de,vRam +(160*30)+5
+	ld hl,vRam+160
+	call draw_slow_sprite_full
 	
 	
 	
-	ld hl,vRam + (160*5)
-	ld (draw_bg_vram_addr),hl
-	ld hl,$000080
-	call draw_bg_line
+	
+	
+;	ld hl,vRam + (160*5)
+;	ld (draw_bg_vram_addr),hl
+;	ld hl,$000080
+;	call draw_bg_line
 	
 	
 	
@@ -119,25 +126,60 @@
 	;call draw_fast_fg_sprite
 	
 	
-	ld de,vram +(160*20)
-	ld hl,test_fast_sprite
-	ld a,1
+;	ld de,vram +(160*20) - 1
+;	ld hl,test_fast_sprite
+;	ld a,1
+;	call draw_fast_sprite_top_cut
+	
+	
+	call sdcomp_reset_flip
+	call sdcomp_set_fast_sprite
+	ld hl,testSpriteCompressedFast
+	ld de,vRam + (160*3)
+	call slow_sprite_decompress
+		
+	ld de,vRam +(160*70) - 1
+	ld hl,vRam + (160*3)
+	ld a,3
+	call draw_fast_sprite_bottom_cut
+	
+	
+	
+	call sdcomp_set_flip
+;	call sdcomp_set_fast_sprite
+	ld hl,testSpriteCompressedFast
+	ld de,vRam + (160*4)
+	call slow_sprite_decompress
+	
+		
+	ld de,vRam +(160*70) + 5
+	ld hl,vRam + (160*4)
+	ld a,2
 	call draw_fast_sprite_top_cut
 	
 	
-	ld de,vram +(160*40)
-	ld hl,testSlowSprite
-	call draw_slow_fg_sprite_full
-	
-	ld de,vram +(160*30)
-	ld hl,testSlowSprite
+	ld de,vRam +(160*79) + 5
+	ld hl,vRam + (160*4)
 	ld a,2
-	call draw_slow_sprite_bottom_cut
+	call draw_fast_sprite_full
 	
-	ld de,vram +(160*30) + 6
-	ld hl,testSlowSprite
-	ld a,2
-	call draw_slow_sprite_top_cut
+	;call prgmpause
+	
+	
+	
+;	ld de,vram +(160*40)
+;	ld hl,testSlowSprite
+;	call draw_slow_fg_sprite_full
+	
+;	ld de,vram +(160*30)
+;	ld hl,testSlowSprite
+;	ld a,2
+;	call draw_slow_sprite_bottom_cut
+	
+;	ld de,vram +(160*30) + 6
+;	ld hl,testSlowSprite
+;	ld a,2
+;	call draw_slow_sprite_top_cut
 	
 	ei
 	call _GetKey
@@ -168,7 +210,11 @@ printHL:;=================REMOVE
 
 prgmpause:
 	ei
+	push de 
+	push hl 
 	call _GetKey
+	pop hl 
+	pop de 
 	di
 	ret
 

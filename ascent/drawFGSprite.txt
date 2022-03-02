@@ -1,6 +1,6 @@
 
 
-;de = vram , hl = data, a = number lines to draw
+;de = vram-1 , hl = data, a = number lines to draw
 draw_fast_sprite_bottom_cut:
 
 	ld bc,0
@@ -18,7 +18,7 @@ draw_fast_sprite_bottom_cut:
 	ex de,hl;hl is vram, de is data
 	jp dfgs_loop
 	
-;de = vram , hl = data, a = top lines to skip	
+;de = vram-1 , hl = data, a = top lines to skip	
 draw_fast_sprite_top_cut:
 	
 	ld bc,0
@@ -66,18 +66,17 @@ draw_fast_sprite_top_loop:
 	jp dfgs_loop
 
 
-;de = vram , hl = data
+;de = vram-1 , hl = data
 draw_fast_sprite_full:
 	ld bc,0
-	ld c,(hl)
+	ld c,(hl);height
 	add hl,bc
-	ld a,(hl)
+	ld a,(hl);total loops
 	inc hl
-	ld c,(hl)
+	ld c,(hl);first gap length
 	ex de,hl
 ;a = num loops, c = alphaLength,hl = vram
 dfgs_loop:;gap, colors
-	
 	add hl,bc;add alpha length
 	ex de,hl;swap, hl is data, de is vram
 	inc hl
@@ -96,7 +95,7 @@ dfgs_loop:;gap, colors
 
 
 ;hl = data, de = vram
-draw_slow_fg_sprite_full:
+draw_slow_sprite_full:
 	ld bc,0
 	ld c,(hl);height
 	add hl,bc
