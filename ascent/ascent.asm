@@ -67,7 +67,7 @@
 	
 	;call fast_fg_sprite_set_flip
 	;jp time_test_start
-	
+	call sdcomp_reset_bg_sprite
 	call sdcomp_reset_fast_sprite
 	call sdcomp_reset_flip
 	call sdcomp_set_offset
@@ -163,23 +163,91 @@
 	ld a,2
 	call draw_fast_sprite_full
 	
-	;call prgmpause
+	
+	ld hl,testBGSprite
+	ld de,vRam + (160*90)
+	ld a,0 
+	call draw_bg_sprite_line
+	
+	ld hl,testBGSprite
+	ld de,vRam + (160*91)
+	ld a,1
+	call draw_bg_sprite_line
+	
+	ld hl,testBGSprite
+	ld de,vRam + (160*92)
+	ld a,2 
+	call draw_bg_sprite_line
+	
+	ld hl,testBGSprite
+	ld de,vRam + (160*93)
+	ld a,3 
+	call draw_bg_sprite_line
+	
+	ld hl,testBGSprite
+	ld de,vRam + (160*94)
+	ld a,4 
+	call draw_bg_sprite_line
+	
+	ld hl,testBGSprite
+	ld de,vRam + (160*97)
+	ld a,7 
+	call draw_bg_sprite_line
 	
 	
 	
-;	ld de,vram +(160*40)
-;	ld hl,testSlowSprite
-;	call draw_slow_fg_sprite_full
 	
-;	ld de,vram +(160*30)
-;	ld hl,testSlowSprite
-;	ld a,2
-;	call draw_slow_sprite_bottom_cut
+	call sdcomp_reset_fast_sprite
+	call sdcomp_set_bg_sprite
+	call sdcomp_reset_flip
+	;call sdcomp_set_offset
+	ld hl,testSpriteCompressed
+	ld de,vRam+(160*6)
+	call slow_sprite_decompress
+	call sdcomp_reset_bg_sprite
 	
-;	ld de,vram +(160*30) + 6
-;	ld hl,testSlowSprite
-;	ld a,2
-;	call draw_slow_sprite_top_cut
+	
+	
+	ld hl,vRam+(160*6)
+	ld de,vRam + (160*90) + 10
+	ld a,0 
+	call draw_bg_sprite_line
+	
+	ld hl,vRam+(160*6)
+	ld de,vRam + (160*91) + 10
+	ld a,1 
+	call draw_bg_sprite_line
+	
+	ld hl,vRam+(160*6)
+	ld de,vRam + (160*92) + 10
+	ld a,2 
+	call draw_bg_sprite_line
+	ld hl,vRam+(160*6)
+	ld de,vRam + (160*93) + 10
+	ld a,3 
+	call draw_bg_sprite_line
+	ld hl,vRam+(160*6)
+	ld de,vRam + (160*94) + 10
+	ld a,4
+	call draw_bg_sprite_line
+	ld hl,vRam+(160*6)
+	ld de,vRam + (160*95) + 10
+	ld a,5 
+	call draw_bg_sprite_line
+	ld hl,vRam+(160*6)
+	ld de,vRam + (160*96) + 10
+	ld a,6 
+	call draw_bg_sprite_line
+	ld hl,vRam+(160*6)
+	ld de,vRam + (160*97) + 10
+	ld a,7 
+	call draw_bg_sprite_line
+
+	
+	
+	
+	
+	
 	
 	ei
 	call _GetKey

@@ -41,12 +41,33 @@ slow_sprite_decompress:
 	ld (sdcomp_sprite_width),a
 	ex af,af' ;'
 
+	
+	scf 
+sdcomp_bg_sprite_1 .equ $
+	jp c,sdcomp_bg_sprite_1_skip
+	;a holds width 
+	bit 0,a ;round up a 
+	jp z,sdcomp_bg_sprite_1_round_skip
+	inc a 
+sdcomp_bg_sprite_1_round_skip:
+	ld (de),a ;load width 
+	inc de
+sdcomp_bg_sprite_1_skip:
+
+
+
+
 
 	inc hl;to height
 	ld a,(hl);height
 	ld (sdcomp_lines_remaining),a;load remaining lines
+	
+	scf 
+sdcomp_bg_sprite_2 .equ $
+	jp nc,sdcomp_bg_sprite_2_skip
 	ld (de),a;height
 	inc de
+sdcomp_bg_sprite_2_skip:
 	push de;loop/line data start 
 	exx;to shadow
 	pop de ;de' is loop/line data
@@ -145,10 +166,13 @@ sdcomp_flip_1 .equ $
 	
 	call sdcomp_traverse_line_data	
 
-;START OF LOOP
+;START OF LOOP===================================================================================================
 ;add amount to get from ending pixels to first nonzero pair
 sdcomp_find_gap_length:
-
+	scf 
+sdcomp_bg_sprite_3 .equ $
+	jp nc,sdcomp_bg_sprite_routine
+	
 	exx ;toshadow
 	ld b,0;pairs found, always < 255 
 sdcomp_add_1_gap_length .equ $
@@ -471,9 +495,15 @@ sdcomp_remaining_zeroes_between_lines .equ $ + 1
 	
 sdcomp_line_gap_end:
 	
+	scf 
+sdcomp_bg_sprite_4 .equ $ 
+	jp nc,sdcomp_bg_sprite_4_skip
+	
 	ld a,(sdcomp_loop_counter)
 	ld (de),a;write loops per line data
 	inc de
+sdcomp_bg_sprite_4_skip:
+	
 	exx;out
 
 	scf
@@ -960,6 +990,98 @@ sdcomp_reset_fast_sprite:
 	ld (sdcomp_fast_sprite_2),a
 	ld (sdcomp_fast_sprite_3),a
 	ret
+	
+	
+sdcomp_set_bg_sprite:
+	ld a,%11010010;jp nc
+	ld (sdcomp_bg_sprite_1),a 
+	ld a,%11011010;jp c 
+	ld (sdcomp_bg_sprite_2),a
+	ld (sdcomp_bg_sprite_3),a
+	ld (sdcomp_bg_sprite_4),a
+	ret
+
+	
+sdcomp_reset_bg_sprite:
+	ld a,%11011010;jp c 
+	ld (sdcomp_bg_sprite_1),a 
+	ld a,%11010010;jp nc
+	ld (sdcomp_bg_sprite_2),a
+	ld (sdcomp_bg_sprite_3),a
+	ld (sdcomp_bg_sprite_4),a
+	ret
+
+;not in shadow 
+sdcomp_bg_sprite_routine:
+	exx ;in 
+	push de 
+	exx ;out 
+	pop de ;transfer loops/line write location to be main write location
+
+;not in shadow 
+sdcomp_bg_sprite_loop:
+	exx;toshadow 
+	
+	ex af,af' ;'
+	or a ;check if a' is zero, indicating virtual zeroes
+	push af 
+	ex af,af' ;'
+	pop af 
+	jp nz,sdcomp_bg_sprite_loop_skip
+	call sdcomp_get_next_alpha_pair;read next alpha pair 
+	exx;out 
+
+	jp sdcomp_bg_sprite_loop;keep looping until out of virtual 0s 
+sdcomp_bg_sprite_loop_skip:;not in virt 0s 
+	call sdcomp_get_next_alpha_pair;read next alpha pair 
+	exx;out 
+	
+	;write mask and color data 
+	push de 
+	
+	ld b,a;save for later
+	bit 4,a ;check if first pixel has color 
+	ld a,0
+	ld d,%11111111;assuming no colors 
+	jp z,sdcomp_bg_pixel_first_skip
+	;has first color
+	ld d,%11110000;save second pixel of bg 
+	call sdcomp_get_next_color_ending_nibble
+sdcomp_bg_pixel_first_skip:
+	;a is either $00 or $0color1
+	
+	ld e,%11111111;assuming no colors
+	
+	bit 0,b;check second pixel alpha
+	ld b,a;save for later 
+	ld a,0
+	jp z,sdcomp_bg_pixel_second_skip;
+	;has second color 
+	call sdcomp_get_next_color_leading_nibble
+	;a = color2 0 
+	ld e,%00001111;save first pixel of bg
+	
+sdcomp_bg_pixel_second_skip:
+	;a is either 00 or c2 0 
+	;b is either 00 or 0 c1 
+	or b 
+	ld b,a;final color data
+	ld a,d 
+	and e ;final mask data 
+	
+	pop de;return to pointer 
+	ld (de),a;write mask data 
+	inc de 
+	ld a,b;color data 
+	ld (de),a;write color data 
+	inc de 
+	
+	;check if end reached 
+	ld a,(sdcomp_end_reached_flag)
+	cp %11011010;jp c
+	jp nz,sdcomp_bg_sprite_loop 
+	ret 
+
 ;FIND GAP LENGTH
 ;read bitsteam in pairs
 ;gap length = number of full pairs found 

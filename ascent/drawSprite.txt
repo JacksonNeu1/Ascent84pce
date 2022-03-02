@@ -1,228 +1,33 @@
 
 
-; hl = line number
-draw_bg_line:
-	ld bc,0
-	ld ix, bg_data
-draw_bg_line_loop:
-	ld b,(ix)
-	ld c,(ix+1);bc holds y position of sprite
-	scf
-	push hl
-	sbc hl,bc;sub y position+1 from line number, hl holds difference
-	jp nc, draw_bg_line_skip;if not negative, skip
-	
-	;hl holds difference between line num and sprite y
-	ld a,h
-	xor %11111111
-	jp nz,draw_bg_line_skip;if hl is less than -256, too far below sprite
-	ld a,l
-	or a
-	jp z,draw_bg_line_skip;if hl = -256 skip
-	
-	ld a,(ix+4);a is sprite height
-	add a,l
-	jp nc,draw_bg_line_skip
-	ld a,l
-	neg ;a is row in sprite starting from 1
-	
-	ld h,(ix+6);h is sprite index
-	ld l,3
-	mlt hl
-	ld bc, bg_sprite_indices
-	add hl,bc;hl is pointer to sprite data
-	ld hl,(hl);hl is sprite data
-	
-	ld b,(hl); b is width
-	inc hl
-	ld c,a; c is row of sprite
-	;load colors
-	ld a,(hl)
-	ld (current_color_0),a
-	inc hl
-	ld a,(hl)
-	ld (current_color_1),a
-	inc hl
-	ld a,(hl)
-	ld (current_color_2),a
-	inc hl
-	ld a,(hl)
-	ld (current_color_3),a
-	
-	inc hl; hl is line length
-	
-	ld de,0
-get_sprite_data_row_loop:
-	dec c
-	jp z, get_sprite_data_row_loop_exit
-	ld e,(hl)
-	add hl,de
-	jp get_sprite_data_row_loop
-get_sprite_data_row_loop_exit:
-	;hl points to sprite data row
-	push hl
-	exx
-	pop de;transparency data ptr -1
-	exx
-	ld a,b;load sprite width
-	dec a
-	srl a
-	srl a
-	srl a
-	inc a
-	ld e,a;number of bytes of alpha data
-	add hl,de;hl points to color data-1
-	push hl
-	
-draw_bg_vram_addr .equ $+1
-	ld hl,$000000;load h w vram add
-	ld e,(ix+2);x position/2 -1
-	add hl,de; hl is vram byte
-	ld a,%00001111
-	bit 7,(ix+3)
-	jp z,draw_bg_line_evenpixel
-	xor %11111111
-draw_bg_line_evenpixel:
-	ld (dbgs_color_nibble),a;load color nibble
-	pop de ; de is color data
-	bit 6 , (ix+3)
-	jp nz ,draw_bg_line_flip
-	call dbgs_reset_flip
-	jp draw_bg_line_skip
-draw_bg_line_flip:
-	call dbgs_set_flip
-draw_bg_line_skip:
-	pop hl;return original line number
-	
-	bit 0 ,(ix+3)
-	ret z
-	ld bc,6
-	add ix,bc
-	jp draw_bg_line_loop
-	
-
-current_color_0:
-.db %00110011
-current_color_1:
-.db %01000100
-current_color_2:
-.db %00100010
-current_color_3:
-.db %01010101
 
 
 
-
-
-
-
-dbgs_set_flip:
-	ld a, %11001010
-	ld (dbgs_flip_1),a
-	ld (dbgs_flip_3),a
-	
-	ld a, %00101011
-	ld (dbgs_flip_2),a
-	ld (dbgs_flip_4),a
-	
-	jp draw_bg_sprite_line
-	
-dbgs_reset_flip:
-	ld a, %11000010
-	ld (dbgs_flip_1),a
-	ld (dbgs_flip_3),a
-	
-	ld a, %00100011
-	ld (dbgs_flip_2),a
-	ld (dbgs_flip_4),a
-;hl = vram position-1  de = colordata-1, de' = alpha-1 b= width
+;hl = data, de = vram, a = linenum (0 indexed from top)
 draw_bg_sprite_line:
-	push hl
-	ld c,%00000011
-	exx
-	pop hl
-	ld c,%00000001
-	exx
-draw_bg_sprite_line_loop:
-	exx;toShadow
-	rrc c
-	jp nc, dbgs_alpha_inc_skip
+	push hl;save 
+	ld l,(hl);sprite width in px
+	ld h,a ;lines to skip
+	ld a,l;width 
+	mlt hl;widt*lines skipped 
+	pop bc 
+	add hl,bc;skip to target line data 
+	inc hl 
+	;hl is pointing to start of line data 
+	sra a;divide width by 2 
+	ld b,a;b holds number of loops 
+dbgsl_loop:
+	ld a,(de); load vram data 
+	and (hl);and with mask 
+	inc hl ;to color data 
+	or (hl);or w color data 
+	ld (de),a;write to vram  
 	inc de
-dbgs_alpha_inc_skip:
-	ld a,(de)
-	and c
-	jp z, dbgs_alphaskip
-	exx
-	rrc c
-	rrc c
-	jp nc, dbgs_color_inc_skip
-	inc de
-dbgs_color_inc_skip:
-	ld a,(de)
-	and c
-	jp z, dbgs_color0;color is 00
-	ld l,a
-	and %10101010
-	jp z, dbgs_color1;first bit is 0, second must be 1
-	ld a,l ;original a
-	and %01010101 ;we know first bit is 1
-	jp z, dbgs_color2;second bit is 0
-	jp dbgs_color3;second bit is 1
-dbgs_color0:
-	;jp exit_prgm
-	exx;shadow
-	ld a,(current_color_0)
-	jp dbgs_color_write
-dbgs_color1:
-	;jp exit_prgm
-	exx;shadow
-	ld a,(current_color_1)
-	jp dbgs_color_write
-dbgs_color2:
-	;jp exit_prgm
-	exx;shadow
-	ld a,(current_color_2)
-	jp dbgs_color_write
-dbgs_color3:
-	;jp exit_prgm
-	exx;toShadow
-	ld a,(current_color_3)
-dbgs_color_write:
-dbgs_color_nibble .equ $+1
-	and %00001111;writing to second nibble of hl, first pixel
-	ld b,a;b has color nibble
-	ld a,(dbgs_color_nibble)
-	xor %11111111
-	ld (dbgs_color_nibble),a
+	inc hl;to mask data
+	djnz dbgsl_loop
+	ret 
 	
-	bit 0,a
-dbgs_flip_1 .equ $
-	jp nz, dbgs_skip_inc_hl;if writing to first pixel inc hl
-dbgs_flip_2 .equ $
-	inc hl
-dbgs_skip_inc_hl:
-	and (hl);a has other nibble
-	or b 
-	ld (hl),a;write to vram 
-	exx;normal
-	
-	djnz draw_bg_sprite_line_loop
-	ret
-dbgs_alphaskip:
-	
-	ld a,(dbgs_color_nibble)
-	xor %11111111
-	ld (dbgs_color_nibble),a
-	bit 0,a
-dbgs_flip_3 .equ $
-	jp nz, dbgs_skip_inc_hl_2
-dbgs_flip_4 .equ $
-	inc hl
-dbgs_skip_inc_hl_2:
-	exx;normal
-	dec b
-	jp nz, draw_bg_sprite_line_loop
-	ret
+
 
 
 

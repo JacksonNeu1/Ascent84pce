@@ -3,34 +3,27 @@
 
 
 ;BG SPRITES
-testSprite:
-	;.db width
-	;.db col 1 , 2 ,3 ,4
-	;spr data 2bpp
-	;line length in bytes, transparency, color data
-	;line length, data
-	;line length, data
+; width(px) rounded up
+;.db vram data mask, color data....
+
+testBGSprite:
+	.db 10
+	.db $00,$35,$FF,$00,$F0,$03,$0F,$50,$F0,$05
+	.db $FF,$00,$FF,$00,$FF,$00,$00,$23,$F0,$03
+	.db $00,$22,$00,$22,$00,$33,$0F,$30,$F0,$02
+	.db $00,$35,$FF,$00,$F0,$03,$0F,$05,$F0,$05
+	.db $FF,$00,$FF,$00,$FF,$00,$00,$23,$F0,$03
+	.db $00,$22,$00,$22,$00,$33,$0F,$30,$F0,$02
+	.db $00,$35,$FF,$00,$F0,$03,$0F,$05,$F0,$05
+	.db $FF,$00,$FF,$00,$FF,$00,$00,$23,$F0,$03	
+;53xx3xx55
+;xxxxxx323
+;222233x32
+;53xx3xx55
+;xxxxxx323	
+;222233x32
 
 
-	.db 8;h=5
-	.db %00110011, %01000100,%00100010, %01010101 ;rgbw
-	.db 4, %11111111, %00000101, %10001100;rrggbrwr
-	.db 4, %11101111, %00000111, %10110100;RRGXWBWG 
-	.db 4, %01010011, %00001111, %01000000 
-	.db 2, %00000000 
-	.db 3, %11000010, %11110111 ;WWXXXXGX
-	
-testSprite2:;h=4
-	.db 4
-	.db %00010001, %01000100,%00100010, %01010101
-	.db 3,%11110000, %00000101
-	.db 3,%10010000,%10101111
-	.db 2,%00000000
-	.db 3,%11100000,%11100100
-	
-	
-	
-	
 	
 ;FG _ SPRITES
 

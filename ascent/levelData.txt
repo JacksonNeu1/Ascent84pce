@@ -1,6 +1,6 @@
 bg_sprite_indices:
-	.dl testSprite
-	.dl testSprite2
+	;.dl testSprite
+	;.dl testSprite2
 	;.dl sprite data
 
 
