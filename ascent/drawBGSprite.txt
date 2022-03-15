@@ -1,0 +1,146 @@
+
+
+
+;hl = upper data frame, a = line number in target frame
+draw_bg_line:
+	ld (dbgl_line_num),a
+	ld (dbgl_line_num_2),a
+	ld de,(hl)
+	ld (dbgl_sprite_pointers),de
+	inc hl
+	inc hl
+	inc hl ;to frame data start 
+	ld de,0
+	ld bc,0
+	;upper frame, checking for sprites that carry into lower frame 
+dbgl_upper_loop:
+	ld a,(hl);y
+	inc hl;to height
+	sub (hl);subtract height
+	;a is y value of bottom row of sprite
+	jp nc,dbgl_upper_skip;if no carry into next frame
+	;sprite extends into target frame
+dbgl_line_num .equ $ + 1
+	sub 0 ;compare to line number in target frame
+	jp c,dbgl_upper_cont;if linenum is >  bottom row
+	jp z,dbgl_upper_cont;if = bottom row
+dbgl_upper_skip:
+	inc hl;to x
+	inc hl;to index 
+	ld a,(hl);index
+	inc hl;to y
+	or a 
+	jp nz,dbgl_upper_loop
+	jp dbgl_lower_start
+dbgl_upper_cont:
+	;a = bottom row - linenum
+	add a,(hl);add height-1 
+	;a holds 0 indexed line num within sprite
+	call dbgl_setup_and_draw
+	ld a,(hl);index
+	inc hl
+	or a 
+	jp nz,dbgl_upper_loop
+	
+dbgl_lower_start:
+;LOWER FRAME START 
+	;hl pointing to sprite data table 
+	ld de,(hl)
+	ld (dbgl_sprite_pointers),de	
+	ld de,0
+	inc hl
+	inc hl
+	inc hl;to y 
+dbgl_lower_loop:
+	ld a,(hl)
+	inc hl;to height-1
+dbgl_line_num_2 .equ $ + 1
+	sub 0;subtract line num 
+	jp c,dbgl_lower_skip;target line num is above sprite 
+	;target is below or = sprite y value 
+	;a holds 0 indexed sprite row 
+	cp (hl);compare to height
+	jp c,dbgl_lower_cont ;if height >= a 
+	jp z,dbgl_lower_cont
+dbgl_lower_skip:
+	inc hl;to x  
+	inc hl; to index
+	ld a,(hl);index
+	inc hl;to y
+	or a 
+	jp nz,dbgl_lower_loop
+	ret
+dbgl_lower_cont:
+
+	call dbgl_setup_and_draw
+	ld a,(hl);index 
+	inc hl;to y 
+	or a
+	jp nz,dbgl_lower_loop
+	ret;end of target frame
+
+;a holds 0 indexed line num, (hl) = height ,bc,de = 0
+dbgl_setup_and_draw:
+	inc hl;to x pos
+	ld e,(hl)
+	inc hl 
+	ld c,(hl);sprite index 
+	push hl
+dbgl_vram_line_start .equ $ + 1	
+	ld hl,0
+	add hl,de;add x pos 
+	ex de,hl;put vram pos into de 
+dbgl_sprite_pointers .equ $ + 1
+	ld hl,0
+	add hl,bc
+	add hl,bc 
+	add hl,bc ;hl points to sprite data pointer 
+	ld hl,(hl);hl holds sprite data
+
+	call draw_bg_sprite_line;draw sprite line 
+	ld de,0;clear de 
+	ld bc,0
+	pop hl;back to data
+	ret
+	
+
+
+
+
+
+;hl = data, de = vram, a = linenum (0 indexed from top)
+draw_bg_sprite_line:
+	push hl;save 
+	ld l,(hl);sprite width in px
+	ld h,a ;lines to skip
+	ld a,l;width 
+	mlt hl;widt*lines skipped 
+	pop bc 
+	add hl,bc;skip to target line data 
+	inc hl 
+	;hl is pointing to start of line data 
+	sra a;divide width by 2 
+	ld b,a;b holds number of loops 
+dbgsl_loop:
+	ld a,(de); load vram data 
+	and (hl);and with mask 
+	inc hl ;to color data 
+	or (hl);or w color data 
+	ld (de),a;write to vram  
+	inc de
+	inc hl;to mask data
+	djnz dbgsl_loop
+	ret 
+	
+
+
+
+
+
+
+
+
+
+
+
+

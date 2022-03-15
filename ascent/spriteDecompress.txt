@@ -1,8 +1,7 @@
 
 
 ;hl = sprite data start, de = main data decompress location de' = loops/line data location
-slow_sprite_decompress:
-
+sprite_decompress:
 	ld a,%11010010;jp nc 
 	ld (sdcomp_end_reached_flag),a;reset end reached flag
 	ld a,0

@@ -73,14 +73,14 @@
 	call sdcomp_set_offset
 	ld hl,testSpriteCompressed4
 	ld de,vRam
-	call slow_sprite_decompress
+	call sprite_decompress
 	
 	
 	call sdcomp_set_flip
 	call sdcomp_set_offset
 	ld hl,testSpriteCompressed
 	ld de,vRam+160
-	call slow_sprite_decompress
+	call sprite_decompress
 	
 	
 	
@@ -136,7 +136,7 @@
 	call sdcomp_set_fast_sprite
 	ld hl,testSpriteCompressedFast
 	ld de,vRam + (160*3)
-	call slow_sprite_decompress
+	call sprite_decompress
 		
 	ld de,vRam +(160*70) - 1
 	ld hl,vRam + (160*3)
@@ -149,7 +149,7 @@
 ;	call sdcomp_set_fast_sprite
 	ld hl,testSpriteCompressedFast
 	ld de,vRam + (160*4)
-	call slow_sprite_decompress
+	call sprite_decompress
 	
 		
 	ld de,vRam +(160*70) + 5
@@ -196,6 +196,8 @@
 	
 	
 	
+	ld hl,vRam + (320*240)
+	ld (mpLcdBase),hl
 	
 	call sdcomp_reset_fast_sprite
 	call sdcomp_set_bg_sprite
@@ -203,12 +205,69 @@
 	;call sdcomp_set_offset
 	ld hl,testSpriteCompressed
 	ld de,vRam+(160*6)
-	call slow_sprite_decompress
+	call sprite_decompress
+	
+	
+testBG1 .equ vRam+(160*240)
+testBG2 .equ testBG1 + 160
+testBG3 .equ testBG2 + 160
+testBG4 .equ testBG3 + 160
+	
+	ld hl,testBGSpriteComp
+	ld de,testBG1
+	call sprite_decompress
+	
+	ld hl,testBGSpriteComp2
+	ld de,testBG2
+	call sprite_decompress
+	
+	ld hl,testBGSpriteComp3
+	ld de,testBG3
+	call sprite_decompress
+	
 	call sdcomp_reset_bg_sprite
 	
 	
+	ld a,0
+	ld hl,$d49600
+	ld de,vRam + (320*240)
+	call draw_bg_sprite_line
 	
-	ld hl,vRam+(160*6)
+	
+	ld a,255
+	ld hl,vRam + (320*240)
+	ld (dbgl_vram_line_start),hl
+	ld hl,bg_data_frame_1
+	call draw_bg_line 
+	
+
+	
+	
+	ld a,255
+	ld hl,vRam + (320*240)
+bg_draw_test_loop:
+	ld (dbgl_vram_line_start),hl 
+	ld bc,160
+	add hl,bc 
+	push hl
+	push af
+	ld hl,bg_data_frame_1
+	call draw_bg_line 
+	pop af
+	pop hl
+	dec a
+	jp nz,bg_draw_test_loop
+
+	call prgmpause
+	
+	ld hl,vRam
+	ld (mpLcdBase),hl
+	
+	
+	
+	
+	
+#comment 	ld hl,vRam+(160*6)
 	ld de,vRam + (160*90) + 10
 	ld a,0 
 	call draw_bg_sprite_line
@@ -242,18 +301,16 @@
 	ld de,vRam + (160*97) + 10
 	ld a,7 
 	call draw_bg_sprite_line
-
+ #endcomment
 	
 	
 	
 	
 	
-	
-	ei
-	call _GetKey
-	di
 
 exit_prgm:
+	ld hl,vRam
+	ld (mpLcdBase),hl
 	call _ClrScrnFull
 	ld	a,lcdBpp16
 	ld	(mpLcdCtrl),a
@@ -265,6 +322,8 @@ exit_prgm:
 
 printHL:;=================REMOVE
 	push hl
+	ld hl,vRam
+	ld (mpLcdBase),hl
 	call _os_ClearVRAMLines	; set all of vram to index 255 (white)
 	ld	a,lcdBpp16
 	ld (mpLcdCtrl),a
@@ -277,13 +336,13 @@ printHL:;=================REMOVE
 
 
 prgmpause:
-	ei
 	push de 
 	push hl 
+	ei
 	call _GetKey
+	di
 	pop hl 
 	pop de 
-	di
 	ret
 
 test_addr:
@@ -293,7 +352,7 @@ draw_buffer:
 	.dl 0
 
 #include "timeTesting.txt"
-#include "drawSprite.txt"
+#include "drawBGSprite.txt"
 #include "drawFGSprite.txt"
 #include "spriteData.txt"
 #include "levelData.txt"
