@@ -1,8 +1,8 @@
 
 
-;de = vram-1 , hl = data, a = number lines to draw
+;de = vram , hl = data, a = number lines to draw
 draw_fast_sprite_bottom_cut:
-
+	dec de
 	ld bc,0
 	ld c,a
 	push hl
@@ -18,9 +18,9 @@ draw_fast_sprite_bottom_cut:
 	ex de,hl;hl is vram, de is data
 	jp dfgs_loop
 	
-;de = vram-1 , hl = data, a = top lines to skip	
+;de = vram , hl = data, a = top lines to skip	
 draw_fast_sprite_top_cut:
-	
+	dec de
 	ld bc,0
 	ld c,a
 	push de
@@ -66,8 +66,9 @@ draw_fast_sprite_top_loop:
 	jp dfgs_loop
 
 
-;de = vram-1 , hl = data
+;de = vram , hl = data
 draw_fast_sprite_full:
+	dec de
 	ld bc,0
 	ld c,(hl);height
 	add hl,bc

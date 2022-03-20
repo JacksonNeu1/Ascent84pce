@@ -138,7 +138,7 @@
 	ld de,vRam + (160*3)
 	call sprite_decompress
 		
-	ld de,vRam +(160*70) - 1
+	ld de,vRam +(160*70)
 	ld hl,vRam + (160*3)
 	ld a,3
 	call draw_fast_sprite_bottom_cut
@@ -357,3 +357,7 @@ draw_buffer:
 #include "spriteData.txt"
 #include "levelData.txt"
 #include "spriteDecompress.txt"
+#include "drawFG.txt"
+#include "FGLevelData.txt"
+
+

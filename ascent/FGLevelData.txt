@@ -1,0 +1,24 @@
+
+FG_sprite_table_1:
+	.db 
+	
+
+
+
+
+FG_Frame_1:
+	;.dl sprite table ptr
+	;.db y in frame, height-1, x, index 
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
