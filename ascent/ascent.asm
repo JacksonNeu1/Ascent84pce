@@ -65,6 +65,12 @@
 	ld (mpLcdCtrl),a	
 	
 	
+fg_sprite_1 .equ vRam + 1
+fg_sprite_2 .equ vRam + 160 + 1
+fg_sprite_3 .equ vRam + 320;fast
+fg_sprite_4 .equ vRam + 480;fast
+
+
 	;call fast_fg_sprite_set_flip
 	;jp time_test_start
 	call sdcomp_reset_bg_sprite
@@ -72,18 +78,60 @@
 	call sdcomp_reset_flip
 	call sdcomp_set_offset
 	ld hl,testSpriteCompressed4
-	ld de,vRam
+	ld de,fg_sprite_1
 	call sprite_decompress
 	
 	
 	call sdcomp_set_flip
 	call sdcomp_set_offset
 	ld hl,testSpriteCompressed
-	ld de,vRam+160
+	ld de,fg_sprite_2
+	call sprite_decompress
+	
+	call sdcomp_reset_flip
+	call sdcomp_set_fast_sprite
+	ld hl,testSpriteCompressedFast
+	ld de,fg_sprite_3
 	call sprite_decompress
 	
 	
+	call sdcomp_set_flip
+;	call sdcomp_set_fast_sprite
+	ld hl,testSpriteCompressedFast
+	ld de,fg_sprite_4
+	call sprite_decompress
 	
+	ld hl,vRam + (320*240)
+	ld (mpLcdBase),hl
+	ld (dfgs_vram_top_1),hl
+	ld (dfgs_vram_top_2),hl
+	ld bc,160*239;bottom line of vram
+	add hl,bc 
+	ld (dfgs_vram_bottom_1),hl 
+	ld (dfgs_vram_bottom_2),hl 
+	ld (dfgs_vram_bottom_3),hl 
+	ld (dfgs_vram_bottom_4),hl 
+	
+	ld a,255
+	
+test_fg_loop:
+	push af
+	ld (dfgs_cam_height_1),a
+	ld (dfgs_cam_height_2),a
+	ld (dfgs_cam_height_3),a
+	ld hl,FG_Frame_2
+	call draw_fg_sprites
+	
+	
+	ld a,255
+	ld bc,160*240
+	ld hl,vRam + (320*240)
+	call _MemSet
+	pop af 
+	dec a 
+	jp nz,test_fg_loop
+	
+#comment 	
 	ld de,vRam +(160*40)
 	ld hl,vRam
 	ld a,2
@@ -104,7 +152,7 @@
 	ld hl,vRam+160
 	call draw_slow_sprite_full
 	
-	
+	 #endcomment
 	
 	
 	
@@ -132,34 +180,16 @@
 ;	call draw_fast_sprite_top_cut
 	
 	
-	call sdcomp_reset_flip
-	call sdcomp_set_fast_sprite
-	ld hl,testSpriteCompressedFast
-	ld de,vRam + (160*3)
-	call sprite_decompress
-		
-	ld de,vRam +(160*70)
-	ld hl,vRam + (160*3)
-	ld a,3
-	call draw_fast_sprite_bottom_cut
-	
-	
-	
-	call sdcomp_set_flip
-;	call sdcomp_set_fast_sprite
-	ld hl,testSpriteCompressedFast
-	ld de,vRam + (160*4)
-	call sprite_decompress
-	
+
 		
 	ld de,vRam +(160*70) + 5
-	ld hl,vRam + (160*4)
+	ld hl,fg_sprite_4
 	ld a,2
 	call draw_fast_sprite_top_cut
 	
 	
 	ld de,vRam +(160*79) + 5
-	ld hl,vRam + (160*4)
+	ld hl,fg_sprite_4
 	ld a,2
 	call draw_fast_sprite_full
 	
