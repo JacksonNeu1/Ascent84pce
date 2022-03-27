@@ -71,6 +71,50 @@ fg_sprite_3 .equ vRam + 320;fast
 fg_sprite_4 .equ vRam + 480;fast
 
 
+
+
+	call sdcomp_set_bg_sprite
+	call sdcomp_reset_fast_sprite
+	call sdcomp_reset_flip
+	;call sdcomp_set_offset
+	ld hl,testBGSpriteComp4
+	ld de, testBG4 + 160
+	call sprite_decompress
+	
+	
+	ld hl,vRam + (320*240)
+	ld (mpLcdBase),hl
+	
+	
+	ld hl,testBG4 + 160
+	ld de,vRam + (320*240)
+	ld a,0 
+	call draw_bg_sprite_line
+	
+	ld hl,testBG4 + 160
+	ld de,vRam + (320*240) + 160
+	ld a,1 
+	call draw_bg_sprite_line
+	
+	ld hl,testBG4 + 160
+	ld de,vRam + (320*240) + (160 * 2)
+	ld a,2 
+	call draw_bg_sprite_line
+	ld hl,testBG4 + 160
+	ld de,vRam + (320*240) + (160 * 3)
+	ld a,3 
+	call draw_bg_sprite_line
+	ld hl,testBG4 + 160
+	ld de,vRam + (320*240) + (160 * 4)
+	ld a,4
+	call draw_bg_sprite_line
+	ld hl,testBG4 + 160
+	ld de,vRam + (320*240) + (160 * 5)
+	ld a,5 
+	
+	
+	call prgmpause
+
 	;call fast_fg_sprite_set_flip
 	;jp time_test_start
 	call sdcomp_reset_bg_sprite
@@ -131,6 +175,22 @@ test_fg_loop:
 	dec a 
 	jp nz,test_fg_loop
 	
+	
+	
+fg_sprite_unity .equ vram + 480 + 160
+	call sdcomp_reset_bg_sprite
+	call sdcomp_reset_fast_sprite
+	call sdcomp_reset_flip
+	ld hl,test_unity_compressed_1
+	ld de,fg_sprite_unity
+	call sprite_decompress
+	
+	ld de,vRam +(320*280) + 8
+	ld hl,fg_sprite_unity
+	call draw_slow_sprite_full
+	
+	call prgmpause
+	
 #comment 	
 	ld de,vRam +(160*40)
 	ld hl,vRam
@@ -179,55 +239,6 @@ test_fg_loop:
 ;	ld a,1
 ;	call draw_fast_sprite_top_cut
 	
-	
-
-		
-	ld de,vRam +(160*70) + 5
-	ld hl,fg_sprite_4
-	ld a,2
-	call draw_fast_sprite_top_cut
-	
-	
-	ld de,vRam +(160*79) + 5
-	ld hl,fg_sprite_4
-	ld a,2
-	call draw_fast_sprite_full
-	
-	
-	ld hl,testBGSprite
-	ld de,vRam + (160*90)
-	ld a,0 
-	call draw_bg_sprite_line
-	
-	ld hl,testBGSprite
-	ld de,vRam + (160*91)
-	ld a,1
-	call draw_bg_sprite_line
-	
-	ld hl,testBGSprite
-	ld de,vRam + (160*92)
-	ld a,2 
-	call draw_bg_sprite_line
-	
-	ld hl,testBGSprite
-	ld de,vRam + (160*93)
-	ld a,3 
-	call draw_bg_sprite_line
-	
-	ld hl,testBGSprite
-	ld de,vRam + (160*94)
-	ld a,4 
-	call draw_bg_sprite_line
-	
-	ld hl,testBGSprite
-	ld de,vRam + (160*97)
-	ld a,7 
-	call draw_bg_sprite_line
-	
-	
-	
-	ld hl,vRam + (320*240)
-	ld (mpLcdBase),hl
 	
 	call sdcomp_reset_fast_sprite
 	call sdcomp_set_bg_sprite

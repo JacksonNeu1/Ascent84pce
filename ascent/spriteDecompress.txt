@@ -45,12 +45,16 @@ sprite_decompress:
 sdcomp_bg_sprite_1 .equ $
 	jp c,sdcomp_bg_sprite_1_skip
 	;a holds width 
+sdcomp_offset_BG .equ $	
+	nop ; inc a  
 	bit 0,a ;round up a 
 	jp z,sdcomp_bg_sprite_1_round_skip
 	inc a 
 sdcomp_bg_sprite_1_round_skip:
 	ld (de),a ;load width 
 	inc de
+	ld a,0;nop 
+	ld (sdcomp_offset_BG),a 
 sdcomp_bg_sprite_1_skip:
 
 
@@ -781,6 +785,10 @@ sdcomp_reset_flip:
 sdcomp_set_offset:
 	ld a,%11010010;jp nc 
 	ld (sdcomp_bit_offset),a
+	ld a, %00111100;inc a 
+	ld (sdcomp_offset_BG),a
+	ld a,%11011010;jp c
+	ld (sdcomp_offset_BG_2),a	
 	ret
 
 
@@ -1013,26 +1021,44 @@ sdcomp_reset_bg_sprite:
 ;not in shadow 
 sdcomp_bg_sprite_routine:
 	exx ;in 
-	push de 
+	push de
 	exx ;out 
 	pop de ;transfer loops/line write location to be main write location
-
+	exx;in 
+	jp sdcomp_bg_sprite_loop_skip;start of data, not virtual
 ;not in shadow 
 sdcomp_bg_sprite_loop:
 	exx;toshadow 
 	
+	
 	ex af,af' ;'
-	or a ;check if a' is zero, indicating virtual zeroes
-	push af 
+	ld b,a;b holds a'
 	ex af,af' ;'
-	pop af 
-	jp nz,sdcomp_bg_sprite_loop_skip
+	ld a,b
+	or a;check if a' is 0
+	jp nz,sdcomp_bg_sprite_loop_skip;if zero check if virtual or not, if not use as real data
+	
+	;start of virtual zeroes
+sdcomp_bg_sprite_traverse_virtual_zeroes:
 	call sdcomp_get_next_alpha_pair;read next alpha pair 
-	exx;out 
+	ld b,a
+	ex af,af' ;'
+	push af
+	ex af,af' ;'
+	pop af
+	or a;check if a' is 0
+	jp z,sdcomp_bg_sprite_traverse_virtual_zeroes
+	ld a,b;a holds prev alpha pair
+	;end of vitual zeroes  
 
-	jp sdcomp_bg_sprite_loop;keep looping until out of virtual 0s 
+	scf 
+sdcomp_offset_BG_2 .equ $
+	jp nc,sdcomp_bg_zeroes_end_skip;if offset, use previously read data 
+	;if no offset, use next alpha pair
+	
 sdcomp_bg_sprite_loop_skip:;not in virt 0s 
 	call sdcomp_get_next_alpha_pair;read next alpha pair 
+sdcomp_bg_zeroes_end_skip:
 	exx;out 
 	
 	;write mask and color data 
@@ -1078,7 +1104,10 @@ sdcomp_bg_pixel_second_skip:
 	;check if end reached 
 	ld a,(sdcomp_end_reached_flag)
 	cp %11011010;jp c
+	ld a,0
 	jp nz,sdcomp_bg_sprite_loop 
+	ld a,%11010010;jp nc
+	ld (sdcomp_offset_BG_2),a
 	ret 
 
 ;FIND GAP LENGTH
