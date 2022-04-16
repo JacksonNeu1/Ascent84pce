@@ -1,0 +1,297 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+public class convertedSprite {
+
+    public enum decompressModes { 
+        slow,
+        slowFlip,
+        slowOff,
+        slowOffFlip,
+        fast,
+        fastFlip,
+        BG,
+        BGOff,
+        BGFlip,
+        BGOffFlip
+    }
+    public string spriteName;
+    public string compressedData;
+    public int width;
+    public int height;
+    public bool fast;
+    public int compressedSize;
+    public int[] decompressedSize;
+    public bool[] useageModes;
+}
+
+
+
+public static class spriteConverter
+{
+  
+    public static convertedSprite createConvertedSprite(Texture2D sprite)
+    {
+
+        convertedSprite convSprite = new convertedSprite();
+
+        convSprite.spriteName = sprite.name;
+
+        convSprite.decompressedSize = new int[10];
+        convSprite.useageModes = new bool[10];
+
+        int width = sprite.width;
+        int height = sprite.height;
+
+        convSprite.width = width;
+        convSprite.height = height;
+
+
+        Color[] cols = sprite.GetPixels();//bottom to top
+
+
+        List<int> alphaData = new List<int>();
+        bool hasAlpha = false;
+        List<int> uniqueColors = new List<int>();
+        List<int> colorData = new List<int>();
+
+
+        for (int y = height-1; y >=0; y--)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                int i = y * width + x;
+                alphaData.Add((int)cols[i].a);
+                if (cols[i].a == 0)
+                {
+                    hasAlpha = true;
+                }
+                else
+                {
+                    int palleteIndex = paletteManager.main.getIndex(cols[i]);
+                    //Debug.Log(palleteIndex);
+                    colorData.Add(palleteIndex);
+                    if (!uniqueColors.Contains(palleteIndex))
+                    {
+                        // Debug.Log("unique");
+                        uniqueColors.Add(palleteIndex);
+                    }
+                }
+            }
+            
+        }
+
+        //check if fast sprite 
+        convSprite.fast = width%2 == 0;//can be fast if even width
+        for(int i = 0; i < alphaData.Count-1; i+=2)
+        {
+            if(alphaData[i] != alphaData[i + 1])
+            {
+                convSprite.fast = false;
+            }
+        }
+
+
+        int compressedSize = 1;//pallete data size
+        int bpc = 0;
+        if(uniqueColors.Count > 1)
+        {
+            bpc = 1;
+            compressedSize = 1;
+        }
+        if (uniqueColors.Count > 2)
+        {
+            bpc = 2;
+            compressedSize = 2;
+        }
+        if (uniqueColors.Count > 4)
+        {
+            bpc = 3;
+            compressedSize = 4;
+        }
+        if (uniqueColors.Count > 8)
+        {
+            bpc = 4;
+            compressedSize = 0;
+        }
+
+
+        compressedSize += 3 + //flags and w,h
+            (hasAlpha ? (alphaData.Count / 8) : 0) + // alpha
+            ((colorData.Count * bpc) / 8);//color
+
+        convSprite.compressedSize = compressedSize;
+
+        //Debug.Log(compressedSize);
+        //create flags byte
+        string compressedString = ".db %";
+        compressedString += bpc == 4 ? "1" : "0";
+        compressedString += bpc == 3 ? "1" : "0";
+        compressedString += bpc == 2 ? "1" : "0";
+        compressedString += bpc == 1 ? "1" : "0";
+        compressedString += bpc == 0 ? "1" : "0";
+        compressedString += !hasAlpha ? "1" : "0";
+        compressedString += "00\n";
+
+        //create width/height bytes
+        compressedString += ".db " + width + ", " + height;
+
+
+        if (hasAlpha)
+        {
+            //create alpha data string
+            compressedString += bitstream2db(alphaData, 1);
+        }
+        if (bpc != 4)
+        {
+           //create pallete data string
+            compressedString += bitstream2db(uniqueColors, 4);
+        }
+        //create color data string
+        compressedString += bitstream2db(colorData, bpc);
+        convSprite.compressedData = compressedString;
+        //Debug.Log(compressedString);
+
+        convSprite.decompressedSize[(int)convertedSprite.decompressModes.slow] = getDecompressedSizeSlow(alphaData, width, height);
+        convSprite.decompressedSize[(int)convertedSprite.decompressModes.fast] = getDecompressedSizeFast(alphaData, width, height);
+        convSprite.decompressedSize[(int)convertedSprite.decompressModes.BG] = getDecompressedSizeBg(width, height);
+
+        //create flipped alpha data
+        List<int> alphaFlipped = new List<int>();
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = width-1;x >=0; x--)
+            {
+                alphaFlipped.Add(alphaData[x + y * width]);
+            }
+        }
+
+        convSprite.decompressedSize[(int)convertedSprite.decompressModes.slowFlip] = getDecompressedSizeSlow(alphaFlipped, width, height);
+        convSprite.decompressedSize[(int)convertedSprite.decompressModes.fastFlip] = getDecompressedSizeFast(alphaFlipped, width, height);
+        convSprite.decompressedSize[(int)convertedSprite.decompressModes.BGFlip] = convSprite.decompressedSize[(int)convertedSprite.decompressModes.BG];
+
+        //create offset data
+        for (int x = 0; x < height; x++)
+        {
+            alphaData.Insert(x * (width+1), 0);
+            alphaFlipped.Insert(x * (width + 1), 0);
+        }
+        convSprite.decompressedSize[(int)convertedSprite.decompressModes.slowOff] = getDecompressedSizeSlow(alphaData, width+1, height);
+
+        convSprite.decompressedSize[(int)convertedSprite.decompressModes.BGOff] = getDecompressedSizeBg(width+1, height);
+        convSprite.decompressedSize[(int)convertedSprite.decompressModes.BGOffFlip] = convSprite.decompressedSize[(int)convertedSprite.decompressModes.BGOff];
+
+        convSprite.decompressedSize[(int)convertedSprite.decompressModes.slowOffFlip] = getDecompressedSizeSlow(alphaFlipped, width+1, height);
+
+        return convSprite;
+    }
+
+    //converts list of ints to bitstream
+    private static string bitstream2db(List<int> vals,int bitsPerNum)
+    {
+        string s= "";
+        int c = 0;
+
+        foreach(int i in vals)
+        {
+            for(int bitIndex = bitsPerNum-1; bitIndex > -1; bitIndex--)
+            {
+                bool bitValue = ((i >> bitIndex) & 1) == 1;
+                if (c % 64 == 0)
+                {
+                    s += "\n.db %";
+                } else if (c % 8 == 0)
+                {
+                    s += ", %";
+                }
+                s += bitValue ? "1" : "0";
+                c++;
+            }
+        }
+        while(c % 8 != 0)
+        {
+            s += "0";
+            c++;
+        }
+        return s + "\n";
+    }
+
+    private static int getDecompressedSizeSlow(List<int> alphaData,int width,int height)
+    {
+        int size = 1 + height;
+        for (int row = 0; row < height; row++)
+        {
+
+            int i = 0;//index in row
+            do
+            {
+                while ((i < width ? alphaData[(row * width) + i] : 0) == 0 && (i + 1 < width ? alphaData[(row * width) + i + 1] : 0) == 0 && i < width)
+                {
+                    i += 2;
+                }
+                if(i >= width)
+                {
+                    break;
+                }
+                //leading alpha pair found
+                size += 4;//gap length, leading pix mask, leading pix data,ldir length
+                i += 2;//move to next pair
+                bool hasLdir = false;
+                while ((i < width ? alphaData[(row * width) + i] : 0) == 1 && (i + 1 < width ? alphaData[(row * width) + i + 1] : 0) == 1)
+                {
+                    i += 2;
+                    size++;
+                    hasLdir = true;
+                }
+                if ((i < width ? alphaData[(row * width) + i] : 0) == 0 && (i + 1 < width ? alphaData[(row * width) + i + 1] : 0) == 0 && hasLdir)
+                {
+                    size--;//subtract 1, final 11 pair is ending pixels
+                }
+
+                size += 2; //ending mask and pixels 
+                i += 2;
+            }while (i < width);
+        }
+
+        return size;
+    }
+
+    private static int getDecompressedSizeFast(List<int> alphaData, int width, int height)
+    {
+        int size = 1 + height;
+        for (int row = 0; row < height; row++)
+        {
+
+            int i = 0;//index in row
+            do
+            {
+                //skip through leading 0s
+                while ((i < width ? alphaData[(row * width) + i] : 0) == 0 && (i + 1 < width ? alphaData[(row * width) + i + 1] : 0) == 0 && i < width)
+                {
+                    i += 2;
+                }
+                if (i >= width)
+                {
+                    break;
+                }
+                //leading alpha pair found
+                size += 2;//gap length,ldir length
+                while ((i < width ? alphaData[(row * width) + i] : 0) == 1 && (i + 1 < width ? alphaData[(row * width) + i + 1] : 0) == 1)
+                {
+                    i += 2;
+                    size++;
+                }
+                i += 2;
+            } while (i < width);
+        }
+
+        return size;
+    }
+
+    private static int getDecompressedSizeBg(int width, int height)
+    {
+        return 1 + ((width % 2 == 0 ? width : width+1) * height);
+    }
+}
