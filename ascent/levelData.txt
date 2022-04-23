@@ -13,11 +13,11 @@ bg_data_frame:
 	
 
 bg_sprite_pointers_1:
-	.dl testBG1
-	.dl testBG1;h = 7
-	.dl testBG2;h = 5
-	.dl testBG3;h = 0
-	.dl testBG4
+	;.dl testBG1
+	;.dl testBG1;h = 7
+	;.dl testBG2;h = 5
+	;.dl testBG3;h = 0
+	;.dl testBG4
 
 bg_data_frame_0:
 	.dl bg_sprite_pointers_1 

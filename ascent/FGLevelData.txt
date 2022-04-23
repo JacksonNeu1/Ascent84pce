@@ -1,10 +1,10 @@
 
 FG_sprite_table_1:
-	.dl fg_sprite_1;9*4
-	.dl fg_sprite_1
-	.dl fg_sprite_2;8*8
-	.dl fg_sprite_3;8*8 fast
-	.dl fg_sprite_4;8*8 fast 
+	;.dl fg_sprite_1;9*4
+	;.dl fg_sprite_1
+	;.dl fg_sprite_2;8*8
+	;.dl fg_sprite_3;8*8 fast
+	;.dl fg_sprite_4;8*8 fast 
 	
 
 

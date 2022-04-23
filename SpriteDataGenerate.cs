@@ -73,17 +73,17 @@ public static class SpriteDataGenerate
 
                     string equateName = levelDataGenerate.getDecompressedName(mode, sprite.spriteName);
 
-                    equates += equateName + " .equ " + location.ToString("x") + "\n";
+                    equates += equateName + " .equ $" + location.ToString("x") + "\n";
 
                     if ((mode == convertedSprite.decompressModes.slowOff) ||
                         (mode == convertedSprite.decompressModes.slowOffFlip) ||
                         (mode == convertedSprite.decompressModes.BGOff) ||
                         (mode == convertedSprite.decompressModes.BGOffFlip))
                     {
-                        decompressCalls[i] += "call sdcomp_set_flip \n";
+                        decompressCalls[i] += "\tcall sdcomp_set_offset \n";
                     }
 
-                    decompressCalls[i] += "ld hl, " + sprite.spriteName + "\nld de, " + equateName + "\ncall sprite_decompress\n";
+                    decompressCalls[i] += "\tld hl, " + sprite.spriteName + "\n\tld de, " + equateName + "\n\tcall sprite_decompress\n";
 
                 }
 
@@ -94,7 +94,7 @@ public static class SpriteDataGenerate
         }
 
         //Combine decompress calls
-        string decompressCallsAll = "";
+        string decompressCallsAll = "decompress_calls:\n\n";
         for(int i = 0; i < 10; i++)
         {
             convertedSprite.decompressModes mode = (convertedSprite.decompressModes)i;
@@ -102,43 +102,43 @@ public static class SpriteDataGenerate
             switch (mode)
             {
                 case convertedSprite.decompressModes.slow:
-                    decompressCallsAll += "call sdcomp_reset_bg_sprite \ncall sdcomp_reset_flip\ncall sdcomp_reset_fast_sprite\n";
+                    decompressCallsAll += "\tcall sdcomp_reset_bg_sprite \n\tcall sdcomp_reset_flip\n\tcall sdcomp_reset_fast_sprite\n";
                     decompressCallsAll += decompressCalls[i];
                     break;
                 case convertedSprite.decompressModes.slowFlip:
-                    decompressCallsAll += "call sdcomp_reset_bg_sprite \ncall sdcomp_set_flip\ncall sdcomp_reset_fast_sprite\n";
+                    decompressCallsAll += "\tcall sdcomp_reset_bg_sprite \n\tcall sdcomp_set_flip\n\tcall sdcomp_reset_fast_sprite\n";
                     decompressCallsAll += decompressCalls[i];
                     break;
                 case convertedSprite.decompressModes.slowOff:
-                    decompressCallsAll += "call sdcomp_reset_bg_sprite \ncall sdcomp_reset_flip\ncall sdcomp_reset_fast_sprite\n";
+                    decompressCallsAll += "\tcall sdcomp_reset_bg_sprite \n\tcall sdcomp_reset_flip\n\tcall sdcomp_reset_fast_sprite\n";
                     decompressCallsAll += decompressCalls[i];
                     break;
                 case convertedSprite.decompressModes.slowOffFlip:
-                    decompressCallsAll += "call sdcomp_reset_bg_sprite \ncall sdcomp_set_flip\ncall sdcomp_reset_fast_sprite\n";
+                    decompressCallsAll += "\tcall sdcomp_reset_bg_sprite \n\tcall sdcomp_set_flip\n\tcall sdcomp_reset_fast_sprite\n";
                     decompressCallsAll += decompressCalls[i];
                     break;
                 case convertedSprite.decompressModes.fast:
-                    decompressCallsAll += "call sdcomp_reset_bg_sprite \ncall sdcomp_reset_flip\ncall sdcomp_set_fast_sprite\n";
+                    decompressCallsAll += "\tcall sdcomp_reset_bg_sprite \n\tcall sdcomp_reset_flip\n\tcall sdcomp_set_fast_sprite\n";
                     decompressCallsAll += decompressCalls[i];
                     break;
                 case convertedSprite.decompressModes.fastFlip:
-                    decompressCallsAll += "call sdcomp_reset_bg_sprite \ncall sdcomp_set_flip\ncall sdcomp_set_fast_sprite\n";
+                    decompressCallsAll += "\tcall sdcomp_reset_bg_sprite \n\tcall sdcomp_set_flip\n\tcall sdcomp_set_fast_sprite\n";
                     decompressCallsAll += decompressCalls[i];
                     break;
                 case convertedSprite.decompressModes.BG:
-                    decompressCallsAll += "call sdcomp_set_bg_sprite \ncall sdcomp_reset_flip\ncall sdcomp_reset_fast_sprite\n";
+                    decompressCallsAll += "\tcall sdcomp_set_bg_sprite \n\tcall sdcomp_reset_flip\n\tcall sdcomp_reset_fast_sprite\n";
                     decompressCallsAll += decompressCalls[i];
                     break;
                 case convertedSprite.decompressModes.BGFlip:
-                    decompressCallsAll += "call sdcomp_set_bg_sprite \ncall sdcomp_set_flip\ncall sdcomp_reset_fast_sprite\n";
+                    decompressCallsAll += "\tcall sdcomp_set_bg_sprite \n\tcall sdcomp_set_flip\n\tcall sdcomp_reset_fast_sprite\n";
                     decompressCallsAll += decompressCalls[i];
                     break;
                 case convertedSprite.decompressModes.BGOff:
-                    decompressCallsAll += "call sdcomp_set_bg_sprite \ncall sdcomp_reset_flip\ncall sdcomp_reset_fast_sprite\n";
+                    decompressCallsAll += "\tcall sdcomp_set_bg_sprite \n\tcall sdcomp_reset_flip\n\tcall sdcomp_reset_fast_sprite\n";
                     decompressCallsAll += decompressCalls[i];
                     break;
                 case convertedSprite.decompressModes.BGOffFlip:
-                    decompressCallsAll += "call sdcomp_set_bg_sprite \ncall sdcomp_set_flip\ncall sdcomp_reset_fast_sprite\n";
+                    decompressCallsAll += "\tcall sdcomp_set_bg_sprite \n\tcall sdcomp_set_flip\n\tcall sdcomp_reset_fast_sprite\n";
                     decompressCallsAll += decompressCalls[i];
                     break;
 
@@ -147,14 +147,14 @@ public static class SpriteDataGenerate
 
 
         }
+        decompressCallsAll += "\tret\n";
 
+        //Debug.Log(decompressCallsAll);
+       // Debug.Log(compressedData);
+       // Debug.Log(equates);
 
-        Debug.Log(decompressCallsAll);
-        Debug.Log(compressedData);
-        Debug.Log(equates);
-
-        FileWrite.WriteString(decompressCallsAll, "DecompressCalls");
-        FileWrite.WriteString(compressedData, "SpriteData");
+        FileWrite.WriteString(decompressCallsAll, "Decompress_Calls");
+        FileWrite.WriteString(compressedData, "Sprite_Data");
         FileWrite.WriteString(equates, "Equates");
     }
 

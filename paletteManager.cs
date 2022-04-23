@@ -18,14 +18,14 @@ public class paletteManager : MonoBehaviour
     }
     private void Start()
     {
-        string paletteData = paletteSetup(palette1);
-        Debug.Log(paletteSetup(palette1));
-        FileWrite.WriteString(paletteData, "PaletteSetup");
+        string paletteData = paletteSetup(palette1,1);
+        FileWrite.WriteString(paletteData, "Palette_Setup");
 
     }
-    private string paletteSetup(Color[] palette)
+    private string paletteSetup(Color[] palette,int paletteNum)
     {
-        string s = "ld hl,mpLcdPalette\n";
+        string s = "setup_palette_" + paletteNum + ":\n";
+        s += "\tld hl,mpLcdPalette\n";
         foreach (Color color in palette)
         {
             int green = (int)(color.g * 63);
@@ -37,13 +37,14 @@ public class paletteManager : MonoBehaviour
 
             string byte1s = System.Convert.ToString(byte1,2).PadLeft(8,'0');
             string byte2s = System.Convert.ToString(byte2, 2).PadLeft(8,'0');
-            s += "ld a,%" + byte1s + "\n";
-            s += "ld (hl),a \n";
-            s += "inc hl\n";
-            s += "ld a,%" + byte2s + "\n";
-            s += "ld (hl),a \n";
-            s += "inc hl\n";
+            s += "\tld a,%" + byte1s + "\n";
+            s += "\tld (hl),a \n";
+            s += "\tinc hl\n";
+            s += "\tld a,%" + byte2s + "\n";
+            s += "\tld (hl),a \n";
+            s += "\tinc hl\n";
         }
+        s += "\tret \n";
         return s;
     }
     public int getIndex(Color color)
@@ -57,6 +58,7 @@ public class paletteManager : MonoBehaviour
                 return i;
             }
         }
+        Debug.LogError("Color not in palette " + color.r + "r " + color.g + "g " + color.b + "b ");
         return -1;
     }
 

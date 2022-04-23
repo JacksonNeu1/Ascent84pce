@@ -1,8 +1,180 @@
 
+draw_bg:
+	call move_bg
+	ld hl,$d52c00;BG_buffer_end
+	ld bc,(BG_draw_buffer)
+	scf 
+	ccf 
+	sbc hl,bc
+	push hl 
+	pop bc
+	ld hl,(BG_draw_buffer)
+	ld de,(draw_buffer)
+	ldir
+	ld hl,(BG_draw_buffer)
+	ld bc,BG_buffer
+	scf 
+	ccf 
+	sbc hl,bc
+	ret z ;if bg buffer line is at top of buffer, no second ldir
+	push hl 
+	pop bc
+	ld hl,BG_buffer 
+	ldir 
+	ret 
+	
+move_bg:
+	ld hl,(cam_pos)
+	srl h
+	rr l
+	srl h
+	rr l ;div by 4
+	;hl holds bg cam pos 
+	ld bc,239
+	add hl,bc;add 0 pos  
+	ld bc,(bg_cam_pos)
+	sbc hl,bc 
+	ret z 
+	jp c,move_bg_down
+	call inc_bg
+	jp move_bg
+move_bg_down:
+	call dec_bg
+	jp move_bg
+
+
+dec_bg:;move cam down
+	;write on draw buffer line 
+	ld hl,(BG_draw_buffer)
+	ld (dbgl_vram_line_start),hl 
+	
+	ld hl,(bg_cam_pos)
+	dec hl 
+	ld (bg_cam_pos),hl 
+	ld bc,239
+	sbc hl,bc;bottom row of bc
+	ld c,h;cam pos msb 
+	ld a,l 
+	ld hl,BG_Data_frame_table
+	inc c 
+	add hl,bc 
+	add hl,bc 
+	add hl,bc 
+	ld hl,(hl)
+	call draw_bg_line
+	;move buffer pos
+	ld hl,(BG_draw_buffer)
+	ld bc,$d52b60;BG_buffer_end
+	scf 
+	ccf 
+	sbc hl,bc
+	ld hl,(BG_draw_buffer)
+	jp nz,dec_bg_bottom_skip
+	ld hl,$d49560;1 row above top of bg buffer 
+dec_bg_bottom_skip:
+	ld bc,160 
+	add hl,bc
+	ld (BG_draw_buffer),hl 
+	ret
+
+
+inc_bg:;move cam up 
+	ld hl,(BG_draw_buffer)
+	ld bc,$d49600;BG_buffer_start
+	scf 
+	ccf 
+	sbc hl,bc
+	ld hl,(BG_draw_buffer)
+	jp nz,inc_bg_top_skip
+	ld hl,$d52c00;1 below bottom of bg buffer 
+inc_bg_top_skip:
+	ld bc,160 
+	scf
+	ccf 
+	sbc hl,bc ;move up line 
+	ld (BG_draw_buffer),hl 
+	ld (dbgl_vram_line_start),hl 
+	ld hl,(bg_cam_pos)
+	inc hl 
+	ld (bg_cam_pos),hl 
+	ld bc,0
+	ld c,h;cam pos msb 
+	ld a,l 
+	ld hl,BG_Data_frame_table
+	inc c 
+	add hl,bc 
+	add hl,bc 
+	add hl,bc 
+	ld hl,(hl)
+	call draw_bg_line
+	ret
+	
+
+
+
+
+setup_bg:
+	ld hl,(cam_pos)
+	srl h
+	rr l
+	srl h
+	rr l ;div by 4
+	;hl holds bg cam pos 
+	ld bc,239
+	add hl,bc;add 0 pos  
+	ld (bg_cam_pos),hl
+	inc hl;to be dec in loop
+	push hl 
+	ld hl,BG_buffer 
+	ld (BG_draw_buffer),hl
+	push hl 
+	exx
+	ld b,240
+	
+setup_bg_loop:
+	exx
+	pop hl;vram draw pos 
+	ld (dbgl_vram_line_start),hl 
+	ld bc,160
+	add hl,bc 
+	ex de,hl ;put vram pos in de 
+	pop hl;cam pos
+	dec hl 
+	push hl;push cam pos 
+	push de ;push vram pos 
+	ld bc,0
+	ld c,h;cam pos msb 
+	ld a,l 
+	ld hl,BG_Data_frame_table
+	inc c 
+	add hl,bc 
+	add hl,bc 
+	add hl,bc 
+	ld hl,(hl)
+	call draw_bg_line
+	exx 
+	djnz setup_bg_loop
+	pop hl 
+	pop hl 
+	ret 
+
+
+
+
 
 
 ;hl = upper data frame, a = line number in target frame
+;set dbgl_vram_line_start 
 draw_bg_line:
+	push hl 
+	push af 
+	ld a,$ff
+	ld bc,160
+	ld hl,(dbgl_vram_line_start)
+	call _MemSet 
+	pop af 
+	pop hl
+
 	ld (dbgl_line_num),a
 	ld (dbgl_line_num_2),a
 	ld de,(hl)
@@ -10,6 +182,11 @@ draw_bg_line:
 	inc hl
 	inc hl
 	inc hl ;to frame data start 
+	ex af,af' ;'
+	ld a,(hl);number of elements
+	ex af,af' ;'
+	inc hl 
+	
 	ld de,0
 	ld bc,0
 	;upper frame, checking for sprites that carry into lower frame 
@@ -27,20 +204,24 @@ dbgl_line_num .equ $ + 1
 dbgl_upper_skip:
 	inc hl;to x
 	inc hl;to index 
-	ld a,(hl);index
 	inc hl;to y
-	or a 
-	jp nz,dbgl_upper_loop
-	jp dbgl_lower_start
+	ex af,af';'
+	dec a 
+	jp z,dbgl_lower_start 
+	ex af,af';'
+	jp dbgl_upper_loop
+	
 dbgl_upper_cont:
 	;a = bottom row - linenum
 	add a,(hl);add height-1 
 	;a holds 0 indexed line num within sprite
 	call dbgl_setup_and_draw
-	ld a,(hl);index
-	inc hl
-	or a 
-	jp nz,dbgl_upper_loop
+	inc hl;to y
+	ex af,af';'
+	dec a 
+	jp z,dbgl_lower_start 
+	ex af,af';'
+	jp dbgl_upper_loop
 	
 dbgl_lower_start:
 ;LOWER FRAME START 
@@ -50,7 +231,13 @@ dbgl_lower_start:
 	ld de,0
 	inc hl
 	inc hl
-	inc hl;to y 
+	inc hl;to num elements
+	
+	ex af,af' ;'
+	ld a,(hl);number of elements
+	ex af,af' ;'
+	inc hl ;to y
+	
 dbgl_lower_loop:
 	ld a,(hl)
 	inc hl;to height-1
@@ -65,19 +252,21 @@ dbgl_line_num_2 .equ $ + 1
 dbgl_lower_skip:
 	inc hl;to x  
 	inc hl; to index
-	ld a,(hl);index
 	inc hl;to y
-	or a 
-	jp nz,dbgl_lower_loop
-	ret
+	ex af,af';'
+	dec a 
+	ret z 
+	ex af,af';'
+	jp dbgl_lower_loop
 dbgl_lower_cont:
 
 	call dbgl_setup_and_draw
-	ld a,(hl);index 
-	inc hl;to y 
-	or a
-	jp nz,dbgl_lower_loop
-	ret;end of target frame
+	inc hl;to y
+	ex af,af';'
+	dec a 
+	ret z 
+	ex af,af';'
+	jp dbgl_lower_loop
 
 ;a holds 0 indexed line num, (hl) = height ,bc,de = 0
 dbgl_setup_and_draw:

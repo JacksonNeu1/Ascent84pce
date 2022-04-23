@@ -23,10 +23,8 @@ time_testing_loop:
 time_testing_loop_2:
 	push bc
 	;instruction here
-	ld de,vram +(160*30)
-	ld hl,testSlowSprite
-	ld a,1
-	call draw_slow_sprite_top_cut
+	
+	
 	;Instruction end
 	pop bc
 	dec bc

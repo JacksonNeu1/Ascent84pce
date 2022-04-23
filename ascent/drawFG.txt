@@ -1,6 +1,75 @@
 
 
-;hl = upper frame data 
+draw_mg:
+	ld hl,(draw_buffer)
+	ld (dfgs_vram_top_1),hl
+	ld (dfgs_vram_top_2),hl
+	ld bc,160*239
+	add hl,bc
+	ld (dfgs_vram_bottom_1),hl 
+	ld (dfgs_vram_bottom_2),hl 
+	ld (dfgs_vram_bottom_3),hl 
+	ld (dfgs_vram_bottom_4),hl 
+	
+	ld hl,(cam_pos)
+	srl h
+	rr l;div by 2
+	ld bc,239
+	add hl,bc 
+	ld a,l ;lsb cam pos 
+	ld (dfgs_cam_height_1),a
+	ld (dfgs_cam_height_2),a
+	ld (dfgs_cam_height_3),a
+	
+	ld bc,0
+	ld c,h;msb ccam pos 
+	inc c 
+	ld hl,MG_Data_frame_table
+	add hl,bc
+	add hl,bc 
+	add hl,bc 	
+	ld hl,(hl);upper frame 
+	
+	call draw_fg_sprites
+	ret
+
+
+draw_fg:
+	ld hl,(draw_buffer)
+	ld (dfgs_vram_top_1),hl
+	ld (dfgs_vram_top_2),hl
+	ld bc,160*239
+	add hl,bc
+	ld (dfgs_vram_bottom_1),hl 
+	ld (dfgs_vram_bottom_2),hl 
+	ld (dfgs_vram_bottom_3),hl 
+	ld (dfgs_vram_bottom_4),hl 
+	
+	ld hl,(cam_pos)
+	ld bc,239
+	add hl,bc 
+	ld a,l ;lsb cam pos 
+	ld (dfgs_cam_height_1),a
+	ld (dfgs_cam_height_2),a
+	ld (dfgs_cam_height_3),a
+	
+	ld bc,0
+	ld c,h;msb ccam pos 
+	inc c 
+	ld hl,FG_Data_frame_table
+	add hl,bc
+	add hl,bc 
+	add hl,bc 	
+	ld hl,(hl);upper frame 
+	
+	call draw_fg_sprites
+	ret
+
+
+
+
+;hl = upper frame data
+ 
 ;load cam height 123,vram top 12 vram bottom 1234
 draw_fg_sprites:
 	;UPPER FRAME, bottom of upper frame is not on screen, bottom of mid frame is on screen bottom of lower is not on screen
@@ -11,6 +80,13 @@ draw_fg_sprites:
 	inc hl 
 	inc hl
 	inc hl;past data table 
+	;hl is number of elements
+	ex af,af' ;'
+	ld a,(hl);number of elements
+	ex af,af' ;'
+	inc hl 
+	
+	
 dfgs_upper_loop:
 	ld a,(hl);sprite y value 
 	inc hl 
@@ -24,11 +100,12 @@ dfgs_cam_height_1 .equ $ + 1
 dfgs_upper_skip:
 	inc hl 
 	inc hl
-	ld a,(hl);index 
 	inc hl;to y 
-	or a
-	jp nz,dfgs_upper_loop
-	jp dfgs_mid_start
+	ex af,af';'
+	dec a 
+	jp z,dfgs_mid_start 
+	ex af,af';'
+	jp dfgs_upper_loop
 	
 dfgs_upper_cont:
 	
@@ -52,10 +129,12 @@ dfgs_upper_skip_2:
 	
 	ld de,0 
 	ld bc,0
-	ld a,(hl);index 
 	inc hl;to y 
-	or a	
-	jp nz,dfgs_upper_loop
+	ex af,af';'
+	dec a 
+	jp z,dfgs_mid_start 
+	ex af,af';'
+	jp dfgs_upper_loop
 	
 dfgs_mid_start:;MIDDLE FRAME, can be top cut, no cut, or bottom cut ===============================================
 	
@@ -65,6 +144,10 @@ dfgs_mid_start:;MIDDLE FRAME, can be top cut, no cut, or bottom cut ============
 	inc hl 
 	inc hl
 	inc hl;past data table 
+	ex af,af' ;'
+	ld a,(hl);number of elements
+	ex af,af' ;'
+	inc hl 
 dfgs_mid_loop:
 	ld a,(hl);y val 
 	inc hl ;to height
@@ -79,11 +162,12 @@ dfgs_cam_height_2 .equ $ + 1
 dfgs_mid_skip:;sprite is entirely above or below cam pos 
 	inc hl 
 	inc hl
-	ld a,(hl);index 
 	inc hl;to y 
-	or a
-	jp nz,dfgs_mid_loop
-	jp dfgs_lower_start
+	ex af,af';'
+	dec a 
+	jp z,dfgs_lower_start 
+	ex af,af';'
+	jp dfgs_mid_loop
 	
 dfgs_mid_above_cont:
 	;a = lines to skip 
@@ -104,11 +188,12 @@ dfgs_mid_top_slow:
 	exx;out shadwo
 	ld de,0 
 	ld bc,0
-	ld a,(hl);index 
 	inc hl;to y 
-	or a
-	jp nz,dfgs_mid_loop
-	jp dfgs_lower_start
+	ex af,af';'
+	dec a 
+	jp z,dfgs_lower_start 
+	ex af,af';'
+	jp dfgs_mid_loop
 
 dfgs_mid_sprite_below:;sprite start is = or below top of screen 
 	;can be full or bottom cut
@@ -136,11 +221,12 @@ dfgs_mid_full_slow:
 	exx
 	ld de,0 
 	ld bc,0
-	ld a,(hl)
-	inc hl 
-	or a 
-	jp nz,dfgs_mid_loop
-	jp dfgs_lower_start
+	inc hl;to y 
+	ex af,af';'
+	dec a 
+	jp z,dfgs_lower_start 
+	ex af,af';'
+	jp dfgs_mid_loop
 	
 	
 dfgs_mid_bottom_cut:
@@ -160,10 +246,12 @@ dfgs_mid_bottom_slow:
 	exx
 	ld de,0 
 	ld bc,0
-	ld a,(hl)
-	inc hl 
-	or a 
-	jp nz,dfgs_mid_loop
+	inc hl;to y 
+	ex af,af';'
+	dec a 
+	jp z,dfgs_lower_start 
+	ex af,af';'
+	jp dfgs_mid_loop
 	
 	
 	
@@ -176,7 +264,12 @@ dfgs_lower_start:
 	inc hl 
 	inc hl
 	inc hl;past data table 
-
+	
+	ex af,af' ;'
+	ld a,(hl);number of elements
+	ex af,af' ;'
+	inc hl
+	
 	ld a,239
 dfgs_cam_height_3 .equ $ + 1 
 	sub 0;cam pos 
@@ -194,11 +287,12 @@ dfgs_lower_frame_height .equ $ + 1
 dfgs_lower_skip:;sprite offscreen
 	inc hl
 	inc hl
-	ld a,(hl)
-	inc hl 
-	or a 
-	jp nz,dfgs_lower_loop
-	ret
+	inc hl;to y 
+	ex af,af';'
+	dec a 
+	ret z
+	ex af,af';'
+	jp dfgs_lower_loop
 	
 dfgs_lower_cont:
 	;a holds sprite dist from bottom of screen, from 0
@@ -221,11 +315,12 @@ dfgs_lower_full_slow:
 	exx
 	ld de,0 
 	ld bc,0
-	ld a,(hl)
-	inc hl 
-	or a 
-	jp nz,dfgs_lower_loop
-	ret
+	inc hl;to y 
+	ex af,af';'
+	dec a 
+	ret z
+	ex af,af';'
+	jp dfgs_lower_loop
 	
 	
 dfgs_lower_bottom_cut:
@@ -245,12 +340,12 @@ dfgs_lower_bottom_slow:
 	exx
 	ld de,0 
 	ld bc,0
-	ld a,(hl)
-	inc hl 
-	or a 
-	jp nz,dfgs_lower_loop
-	
-	ret
+	inc hl;to y 
+	ex af,af';'
+	dec a 
+	ret z
+	ex af,af';'
+	jp dfgs_lower_loop
 	
 	
 	

@@ -48,10 +48,29 @@ public static class spriteConverter
         convSprite.width = width;
         convSprite.height = height;
 
-
-        Color[] cols = sprite.GetPixels();//bottom to top
-
-
+        //Remove blank lines
+        Color[] uncropped = sprite.GetPixels();
+        List<Color> cols = new List<Color>();
+        for (int y = 0; y < height; y++)
+        {
+            bool isBlank = true;
+            for (int x = 0; x < width;x++)
+            {
+                if(uncropped[y * width + x].a != 0)
+                {
+                    isBlank = false;
+                }
+            }
+            if (!isBlank)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    cols.Add(uncropped[y * width + x]);
+                }
+            }
+        }
+        height = cols.Count / width;
+       
         List<int> alphaData = new List<int>();
         bool hasAlpha = false;
         List<int> uniqueColors = new List<int>();
@@ -95,21 +114,32 @@ public static class spriteConverter
 
 
         int compressedSize = 1;//pallete data size
-        int bpc = 0;
+        int bpc = 0;//1color
         if(uniqueColors.Count > 1)
-        {
+        {//2color
             bpc = 1;
             compressedSize = 1;
         }
         if (uniqueColors.Count > 2)
-        {
+        {//4color
             bpc = 2;
             compressedSize = 2;
+
+            for(int i = uniqueColors.Count; i < 4; i++)
+            {
+                uniqueColors.Add(0);
+            }
+
         }
         if (uniqueColors.Count > 4)
-        {
+        {//8color
             bpc = 3;
             compressedSize = 4;
+            for (int i = uniqueColors.Count; i < 8; i++)
+            {
+                uniqueColors.Add(0);
+            }
+
         }
         if (uniqueColors.Count > 8)
         {
@@ -126,7 +156,7 @@ public static class spriteConverter
 
         //Debug.Log(compressedSize);
         //create flags byte
-        string compressedString = ".db %";
+        string compressedString = "\t.db %";
         compressedString += bpc == 4 ? "1" : "0";
         compressedString += bpc == 3 ? "1" : "0";
         compressedString += bpc == 2 ? "1" : "0";
@@ -136,7 +166,7 @@ public static class spriteConverter
         compressedString += "00\n";
 
         //create width/height bytes
-        compressedString += ".db " + width + ", " + height;
+        compressedString += "\t.db " + width + ", " + height;
 
 
         if (hasAlpha)
@@ -146,8 +176,15 @@ public static class spriteConverter
         }
         if (bpc != 4)
         {
-           //create pallete data string
+           //create palette data string
             compressedString += bitstream2db(uniqueColors, 4);
+
+            //convert color data from palette index to local index
+            for(int i = 0; i < colorData.Count; i++)
+            {
+                colorData[i] = uniqueColors.IndexOf(colorData[i]);
+            }
+
         }
         //create color data string
         compressedString += bitstream2db(colorData, bpc);
@@ -201,7 +238,7 @@ public static class spriteConverter
                 bool bitValue = ((i >> bitIndex) & 1) == 1;
                 if (c % 64 == 0)
                 {
-                    s += "\n.db %";
+                    s += "\n\t.db %";
                 } else if (c % 8 == 0)
                 {
                     s += ", %";

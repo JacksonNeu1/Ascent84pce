@@ -55,16 +55,20 @@ public class levelDataGenerate : MonoBehaviour
         spriteTables[0].name = "Sprite_Table_0";
 
         List<GameObject>[] FGobjectFrames = getObjectFrames(FGParent);
+        List<GameObject>[] MGobjectFrames = getObjectFrames(MGParent);
+        List<GameObject>[] BGobjectFrames = getObjectFrames(BGParent);
 
-        //List<GameObject>[] MGobjectFrames = getObjectFrames(MGParent);
-       // List<GameObject>[] BGobjectFrames = getObjectFrames(BGParent);
-
-        List<DataFrame> FGFrames = generateDataFrames(FGobjectFrames);
+        List<DataFrame> FGFrames = generateDataFrames(FGobjectFrames,false);
+        List<DataFrame> MGFrames = generateDataFrames(MGobjectFrames, false);
+        List<DataFrame> BGFrames = generateDataFrames(BGobjectFrames,true);
 
         FGLevelData = dataFramesToString(FGFrames, "FG_Data");
+        MGLevelData = dataFramesToString(MGFrames, "MG_Data");
+        BGLevelData = dataFramesToString(BGFrames, "BG_Data");
 
         FileWrite.WriteString(FGLevelData, "FG_Data");
-
+        FileWrite.WriteString(MGLevelData, "MG_Data");
+        FileWrite.WriteString(BGLevelData, "BG_Data");
 
         spriteTableData = "";
         foreach(SpriteTable table in spriteTables)
@@ -81,7 +85,7 @@ public class levelDataGenerate : MonoBehaviour
 
         foreach(string spr in sTable.sprites)
         {
-            s += ".dl " + spr + "\n";
+            s += "\t.dl " + spr + "\n";
         }
         s += "\n";
         return s;
@@ -90,28 +94,29 @@ public class levelDataGenerate : MonoBehaviour
     private string dataFramesToString(List<DataFrame> dFrames, string baseName)
     {
         string s = "";
-        int frameNum = 0;
-        foreach (DataFrame frame in dFrames)
+        string lookuptbl = baseName + "_frame_table:\n";
+        for(int i = dFrames.Count-1; i>=0; i--)
         {
-            s += baseName + "_" + frameNum + ":\n";
-            frameNum++;
-            s += ".dl " + frame.spriteTable.name + "\n";
-            s += ".db " + frame.elements.Count + "\n";
+            DataFrame frame = dFrames[i];
+            s += baseName + "_" + i + ":\n";
+            lookuptbl += "\t.dl "+ baseName + "_" + (dFrames.Count - 1 - i) + "\n";
+            s += "\t.dl " + frame.spriteTable.name + "\n";
+            s += "\t.db " + frame.elements.Count + "\n";
             foreach (DataFrameElement element in frame.elements)
             {
-                s += ".db ";
+                s += "\t.db ";
                 s += element.y + ", ";
                 s += element.height + ", ";
                 s += element.x + ", ";
                 s += element.index + "\n";
             }
-
+            s += "\n";
         }
-        s += "\n";
-        return s;
+        s += "\n\n";
+        return lookuptbl + "\n\n\n" + s;
     }
 
-    private List<DataFrame> generateDataFrames(List<GameObject>[] objectFrames)
+    private List<DataFrame> generateDataFrames(List<GameObject>[] objectFrames,bool BG)
     {
         List<DataFrame> output = new List<DataFrame>();
         //loop through each object frame
@@ -144,7 +149,7 @@ public class levelDataGenerate : MonoBehaviour
                 int yPos = Mathf.RoundToInt(o.transform.localPosition.y * PPU - 1) - 256 * i;//ypos in frame
                 int xPos = Mathf.RoundToInt((SR.bounds.min.x - o.transform.parent.position.x) * PPU);//xpos relative to parent
 
-                convertedSprite.decompressModes decompressMode = getDecompressMode(convS, xPos, flipped, false);
+                convertedSprite.decompressModes decompressMode = getDecompressMode(convS, xPos, flipped, BG);
                 convS.useageModes[(int)decompressMode] = true;
 
                 frameElement.y = yPos;

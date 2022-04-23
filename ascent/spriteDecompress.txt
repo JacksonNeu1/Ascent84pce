@@ -58,7 +58,8 @@ sdcomp_bg_sprite_1_round_skip:
 sdcomp_bg_sprite_1_skip:
 
 
-
+	ld a,0;nop 
+	ld (sdcomp_offset_BG),a 
 
 
 	inc hl;to height
@@ -175,6 +176,9 @@ sdcomp_find_gap_length:
 	scf 
 sdcomp_bg_sprite_3 .equ $
 	jp nc,sdcomp_bg_sprite_routine
+	
+	ld a,%11010010;jp nc
+	ld (sdcomp_offset_BG_2),a;clear bg offset if not bg
 	
 	exx ;toshadow
 	ld b,0;pairs found, always < 255 
