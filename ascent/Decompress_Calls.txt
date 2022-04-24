@@ -80,6 +80,9 @@ decompress_calls:
 	ld hl, Banana1Large
 	ld de, Banana1Large_BG
 	call sprite_decompress
+	ld hl, OrangeDot
+	ld de, OrangeDot_BG
+	call sprite_decompress
 	ld hl, Banana5
 	ld de, Banana5_BG
 	call sprite_decompress
@@ -95,6 +98,10 @@ decompress_calls:
 	call sdcomp_set_offset 
 	ld hl, Banana1Large
 	ld de, Banana1Large_BG_O
+	call sprite_decompress
+	call sdcomp_set_offset 
+	ld hl, OrangeDot
+	ld de, OrangeDot_BG_O
 	call sprite_decompress
 	call sdcomp_set_offset 
 	ld hl, Banana5

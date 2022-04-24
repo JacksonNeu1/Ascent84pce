@@ -5,10 +5,10 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class LayerParentGuidelines : MonoBehaviour
 {
-    public int maxFrames = 100;
-    private float width = 320f;
-    private float height = 240f;
-    private float PPU = 10f;
+    public int maxFrames;
+    public float width = 320f;
+    public float height = 256f;
+    public float PPU = 10f;
 
 
     private void OnDrawGizmos()

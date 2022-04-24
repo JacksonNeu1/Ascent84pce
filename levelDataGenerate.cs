@@ -58,9 +58,9 @@ public class levelDataGenerate : MonoBehaviour
         List<GameObject>[] MGobjectFrames = getObjectFrames(MGParent);
         List<GameObject>[] BGobjectFrames = getObjectFrames(BGParent);
 
-        List<DataFrame> FGFrames = generateDataFrames(FGobjectFrames,false);
-        List<DataFrame> MGFrames = generateDataFrames(MGobjectFrames, false);
-        List<DataFrame> BGFrames = generateDataFrames(BGobjectFrames,true);
+        List<DataFrame> FGFrames = generateDataFrames(FGobjectFrames,FGParent,false);
+        List<DataFrame> MGFrames = generateDataFrames(MGobjectFrames,MGParent, false);
+        List<DataFrame> BGFrames = generateDataFrames(BGobjectFrames,BGParent,true);
 
         FGLevelData = dataFramesToString(FGFrames, "FG_Data");
         MGLevelData = dataFramesToString(MGFrames, "MG_Data");
@@ -116,7 +116,7 @@ public class levelDataGenerate : MonoBehaviour
         return lookuptbl + "\n\n\n" + s;
     }
 
-    private List<DataFrame> generateDataFrames(List<GameObject>[] objectFrames,bool BG)
+    private List<DataFrame> generateDataFrames(List<GameObject>[] objectFrames,GameObject parentObj,bool BG)
     {
         List<DataFrame> output = new List<DataFrame>();
         //loop through each object frame
@@ -146,8 +146,8 @@ public class levelDataGenerate : MonoBehaviour
                 DataFrameElement frameElement = new DataFrameElement();
                 bool flipped = SR.flipX;
 
-                int yPos = Mathf.RoundToInt(o.transform.localPosition.y * PPU - 1) - 256 * i;//ypos in frame
-                int xPos = Mathf.RoundToInt((SR.bounds.min.x - o.transform.parent.position.x) * PPU);//xpos relative to parent
+                int yPos = Mathf.RoundToInt((o.transform.position.y - parentObj.transform.position.y) * PPU - 1) - 256 * i;//ypos in frame
+                int xPos = Mathf.RoundToInt((SR.bounds.min.x - parentObj.transform.position.x) * PPU);//xpos relative to parent
 
                 convertedSprite.decompressModes decompressMode = getDecompressMode(convS, xPos, flipped, BG);
                 convS.useageModes[(int)decompressMode] = true;
@@ -253,11 +253,12 @@ public class levelDataGenerate : MonoBehaviour
 
         // find max height
         float maxHeight = 0;
-        foreach (Transform o in parent.transform)
+        foreach (SpriteRenderer sr in parent.GetComponentsInChildren<SpriteRenderer>())
         {
-            if (o.position.y > maxHeight)
+            Transform o = sr.transform; 
+            if (o.position.y - parent.transform.position.y > maxHeight)
             {
-                maxHeight = o.localPosition.y;
+                maxHeight = o.position.y - parent.transform.position.y;
             }
         }
         //Debug.Log(maxHeight);
@@ -274,9 +275,10 @@ public class levelDataGenerate : MonoBehaviour
 
         // group objects into frames
 
-        foreach (Transform o in parent.transform)
+        foreach (SpriteRenderer sr in parent.GetComponentsInChildren<SpriteRenderer>())
         {
-            int frameIndex = Mathf.RoundToInt(o.localPosition.y * PPU - 1) / 256;
+            Transform o = sr.transform;
+            int frameIndex = Mathf.RoundToInt((o.position.y - parent.transform.position.y) * PPU - 1) / 256;
             objectFrames[frameIndex].Add(o.gameObject);
             //Debug.Log("frame index: " + frameIndex + "  " + o.gameObject.name);
         }

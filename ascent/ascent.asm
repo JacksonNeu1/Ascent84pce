@@ -45,7 +45,7 @@
 	call setup_bg
 
 	;call draw_bg
-		
+	
 	
 main_loop:
 	;clear timer
@@ -62,6 +62,29 @@ main_loop:
 	
 	call draw_fg
 	
+	ld hl,0
+	
+	ld a,($F20000)
+	ld l,a
+	ld a,($F20001);128hz 
+	ld h,a
+	push hl
+	ld bc,(longestFrame)
+	sbc hl,bc 
+	jp c,longest_frame_skip
+	
+	pop hl 
+	push hl 
+	ld (longestFrame),hl 
+	ld hl,(cam_pos)
+	ld (longestFramePos),hl
+longest_frame_skip:
+	pop hl 
+	
+		
+	ld hl,(frameCount)
+	inc hl
+	ld (frameCount),hl
 	
 	;swap draw buffers
 	ld hl,(mpLcdBase)
@@ -74,33 +97,78 @@ clock_check_loop:
 	ld a,($F20001);128hz clock
 	cp 3;check if reached 3 
 	jp c,clock_check_loop
-
+	
 	;wait until finished drawing second frame
 
 clear_int:      
     ld hl, mpLcdIcr
     set 2, (hl)            ; clear interrupt
     ld hl, mpLcdRis
-wait_int:      
+wait_int:
     bit 2, (hl)
     jr z, wait_int  
 
+
+	ld hl,0
+	
+	ld a,($F20002)
+	ld h,a
+	ld a,($F20001)
+	ld l,a
+	ld bc,(totalTime)
+	add hl,bc 
+	ld (totalTime),hl 
 	
 	
 	ld hl,(cam_pos)
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	inc hl
 	inc hl
 	inc hl
 	ld (cam_pos),hl
 	ld bc,239
 	add hl,bc 
 	ld a,h ;msb 
-	cp 8
-	jp z,exit_prgm
+	cp 35
+	jp nz,main_loop
+		
+	;print debug times 
+	ld hl,vRam
+	ld (mpLcdBase),hl
+	call _os_ClearVRAMLines	; set all of vram to index 255 (white)
+	ld	a,lcdBpp16
+	ld (mpLcdCtrl),a
 	
+	ld a,0
+	ld (curRow),a
+	ld (curCol),a
+	ld hl,(longestFrame)
+	call _DispHL
+	ld a,1
+	ld (curRow),a
+	ld a,0
+	ld (curCol),a
+	ld hl,(longestFramePos)
+	call _DispHL
+	ld a,2
+	ld (curRow),a
+	ld a,0
+	ld (curCol),a
+	ld hl,(totalTime)
+	call _DispHL
+	ld a,3
+	ld (curRow),a
+	ld a,0
+	ld (curCol),a
+	ld hl,(frameCount)
+	call _DispHL
 	
-	;call prgmpause
-	
-	jp main_loop 
+	call prgmpause
+	call prgmpause
 	
 	
 exit_prgm:
@@ -140,7 +208,7 @@ prgmpause:
 	pop de 
 	ret
 
-cam_pos:
+cam_pos:;bottom of cam
 	.dl 0
 bg_cam_pos:
 	.dl 0
@@ -151,6 +219,20 @@ draw_buffer:
 BG_draw_buffer:;uppermost line of bg in vram
 	.dl 0
 BG_buffer .equ vram + (160*240)
+
+
+longestFrame:
+	.dl 0
+longestFramePos:
+	.dl 0
+totalTime:
+	.dl 0
+frameCount:
+	.dl 0
+hasLagged:
+	.dl 0
+
+
 
 
 

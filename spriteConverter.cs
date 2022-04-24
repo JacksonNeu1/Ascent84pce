@@ -48,29 +48,8 @@ public static class spriteConverter
         convSprite.width = width;
         convSprite.height = height;
 
-        //Remove blank lines
-        Color[] uncropped = sprite.GetPixels();
-        List<Color> cols = new List<Color>();
-        for (int y = 0; y < height; y++)
-        {
-            bool isBlank = true;
-            for (int x = 0; x < width;x++)
-            {
-                if(uncropped[y * width + x].a != 0)
-                {
-                    isBlank = false;
-                }
-            }
-            if (!isBlank)
-            {
-                for (int x = 0; x < width; x++)
-                {
-                    cols.Add(uncropped[y * width + x]);
-                }
-            }
-        }
-        height = cols.Count / width;
-       
+        Color[] cols = sprite.GetPixels();
+         
         List<int> alphaData = new List<int>();
         bool hasAlpha = false;
         List<int> uniqueColors = new List<int>();
