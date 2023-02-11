@@ -118,7 +118,7 @@ dfgs_vram_top_1 .equ $ + 1
 	
 	call dfgs_setup_draw;toshadow	
 	
-	bit 0,l 
+	bit 0,l ;location of sprite data in vram indicates fast or slow sprite
 	jp z,dfgs_upper_fast
 	call draw_slow_sprite_top_cut
 	jp dfgs_upper_skip_2

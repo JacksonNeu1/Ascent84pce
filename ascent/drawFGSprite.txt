@@ -34,13 +34,13 @@ draw_fast_sprite_top_cut:
 	add hl,de
 	ld b,(hl);total number of loops
 	inc hl;hl is pixel data
-	pop de
+	pop de;back to vram
 	push bc;save total and skipped loops
 	ld a,c;loops to skip
 	ld bc,0
 	
 
-draw_fast_sprite_top_loop:
+draw_fast_sprite_top_loop:; need to follow through gap and drawn lengths to find start of drawing
 	ld c,(hl);load with first gap length	
 	ex de,hl;hl is vram
 	add hl,bc

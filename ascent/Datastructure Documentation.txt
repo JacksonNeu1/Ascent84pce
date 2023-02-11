@@ -1,0 +1,88 @@
+;
+
+Compressed Sprite Data
+
+.db flags ( 4bpc,3bpc,2bpc,1bpc,0bpc,noalpha)
+.db width(px),height
+.db alpha data (not  uesed for noalpha)
+.db local color pallete index data (length = number of bytes required to hold colors, not used if >8 colors)
+.db color data (not used for 0bpc)
+
+
+
+
+FAST_SPRITE	
+;double pixel transparency, starts on even pixel
+;.db height
+;.db num loops for num lines
+;.db to next ldir start, color length, data
+
+
+
+;SLOW_SPRITE
+;per pixel transparency, even or odd start
+
+;.height
+;.num loops per num lines
+
+;.db alpha length(gap between single pixels, 0 for a gap of -1, 1 for no gap)
+,leading pixel mask(%00001111) or (%11111111) 
+leading pixel color data (%data0000) or (%00000000),
+; ldir length, 
+ldir pixel data,
+trailing pixel mask,
+trailing pixel color data.....
+
+testSlowSprite:
+	.db 5
+	.db 2,4,7,11,12
+	.db 0,%11111111,%00000000,2,$35,$35,%11111111,%00000000,0,%11111111,%00000000,2,$24,$24,%11111111,%00000000
+	.db 155, %11111111,%00000000,2,$31,$31,%11110000,$01,1,%11111111,%00000000,1,$11,%11111111,%00000000
+	.db 154,%00001111,$50,1,$53,%11111111,%00000000,0,%11111111,%00000000,1,$35,%11110000,$05,1,%00001111,$50,0,%11111111,%00000000
+	.db 154,%00001111,$30,0,%11110000,$03,0,%11111111,%00000000,0,%11110000,$03,1,%00001111,$30,0,%1111111,00000000,0,%00001111,$30,0,%11111111,%00000000
+	.db 155,%00001111,$50,4,$55,$55,$55,$55,%11110000,$05
+	
+	;WRWRXXGBGBXX
+	
+	;XXYRYRYXXXYY
+	
+	;XW RW XX WR WX XW
+	
+	;XR RX RX XR XR XX
+	
+	;XW WW WW WW WW WX
+	
+
+
+
+BG SPRITES, can be on odd pixel start 
+; width(px) rounded up
+;.db vram data mask, color data....
+
+testBGSprite:
+	.db 10
+	.db $00,$35,$FF,$00,$F0,$03,$0F,$50,$F0,$05
+	.db $FF,$00,$FF,$00,$FF,$00,$00,$23,$F0,$03
+	.db $00,$22,$00,$22,$00,$33,$0F,$30,$F0,$02
+	.db $00,$35,$FF,$00,$F0,$03,$0F,$05,$F0,$05
+	.db $FF,$00,$FF,$00,$FF,$00,$00,$23,$F0,$03
+	.db $00,$22,$00,$22,$00,$33,$0F,$30,$F0,$02
+	.db $00,$35,$FF,$00,$F0,$03,$0F,$05,$F0,$05
+	.db $FF,$00,$FF,$00,$FF,$00,$00,$23,$F0,$03	
+;53xx3xx55
+;xxxxxx323
+;222233x32
+;53xx3xx55
+;xxxxxx323	
+;222233x32
+
+
+
+Dataframes: Structure for storing locations of sprites grouped into 256 px tall segments of map data 
+Sprites position based on top left pixel of sprite. Sprites may extend into the frame below if they are tall enough
+.dl Sprite Table
+.db number of objects in frame
+.db object location data (ypos,sprite height-1, xpos, sprite index in table)
+
+
+

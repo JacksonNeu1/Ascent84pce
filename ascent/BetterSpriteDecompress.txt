@@ -1,0 +1,915 @@
+
+
+
+
+
+;Functions for getting next color and alpha value
+
+
+;REGISTER USEAGE
+;HL = sprite color data byte
+;C = bit selector for color data 
+;HL' = alpha data byte
+;C' = bit selector for alpha data
+;DE = output sprite data location
+;DE' = loops/line write location 
+;A' = alpha bits remaining to read in row
+
+;SETUP ----------------
+;SET UP BPC MODE AND ALPHA/NOALPHA
+;write height or width(BG) data to decompressed sprite 
+;GET PER SPRITE PALETTE DATA
+;set registers to point to correct locations for decompression
+;------------
+
+;GO TO EITHER FAST, SLOW, or BG SPRITE ALGORITHMS
+
+
+;FAST / SLOW ROUTINE ---------------------------
+;Parse through alpha data, count number of 00 pairs (gap length)
+;IF FAST, GOTO LDIR ROUTINE
+;leading pixel(s), either 11, 01, 10 in alpha data. 
+;write pixel mask and color data
+
+;LDIR ROUTINE
+;Count number of 11 pairs in alpha data (LDIR length)
+;if slow and alpha data ends with 00, the last 11 pair becomes trailing pixels
+;Write LDIR length to sprite data 
+;Write LDIR pixel data (if nonzero)
+;IF FAST, GOTO END
+
+;trailing pixels
+;11,10,01 in alpha data 
+
+;END AND RESTART
+;Increment loops/line counter
+;check if end of line and write loops/line
+
+;store registers and check if interrupt is required
+;if interruption required, return to main loop to draw next frame
+;otherwise return to start of loop
+
+;
+
+
+
+
+
+
+;rotates c and incs hl if needed to point to next bit. can be flipped to dec bit 
+sdcomp_next_in_bitstream:
+sdcomp_flip_bitstream .equ $ + 1
+	rrc c;rlc flip
+	ret nc
+sdcomp_flip_bitstream_2 .equ $
+	inc hl;dec hl flip
+	ret
+
+;ALPHA HELPER FUNCS ================================================================================================	
+
+;IN SHADOW
+;HL POINTS TO PIXEL ALPHA DATA
+;C IS BITMASK
+;RETURNS 0 OR nonzero IN A 
+;If final alpha bit in line is read, writes loop/line data, ...
+; sets some flags, decrements remaining lines, traverses sprite data if flip, returns the read data 
+; next call returns first bit in next row  
+sdcomp_get_next_alpha:
+
+;MUST BE RESET EVERY ROW
+	scf
+sdcomp_bit_offset .equ $ ;jp nc for offset
+	jp c,sdcomp_bit_offset_skip
+	ld a,%11011010;jp c 
+	ld (sdcomp_bit_offset),a
+	ld a,0
+	ret ;return 0 first bit
+sdcomp_bit_offset_skip:;skip bit offset
+	
+	ld a,(hl)
+	;call write_a_to_ram
+	
+	and c 
+	call sdcomp_next_in_bitstream;incs bitstream
+	;a holds data to return
+	;call write_a_to_ram
+	scf 
+sdcomp_no_alpha_1 .equ $;Load a with 1 if no alpha
+	jp c,sdcomp_no_alpha_1_skip
+	ld a,1
+sdcomp_no_alpha_1_skip:
+	
+	
+	ex af,af' ;';into shadow
+	dec a 
+	;call write_a_to_ram
+	jp nz, sdcomp_end_of_line_skip
+	
+	;HAve read last bit in line  
+	
+	;ld a,$AC;Test
+	;call write_a_to_ram;Test
+	;Decrement lines remaining in sprite
+sdcomp_lines_remaining .equ $ + 1
+	ld a,0
+	dec a 
+	ld (sdcomp_lines_remaining),a
+	;call write_a_to_ram
+	jp nz,sdcomp_set_end_flag_skip
+	;end of last line reached 
+	ld a,%11011010;jp c
+	ld (sdcomp_end_reached_flag) , a ;set end reached flag to indicate sprite is done decompressing TODO 
+sdcomp_set_end_flag_skip:
+	ld a,(sdcomp_loops_per_line_counter)
+	ld (de),a ;write loops/line data 
+	inc de
+
+	scf 
+sdcomp_flip_1 .equ $ ;if flipped sprite
+	call nc,sdcomp_traverse_line_data ;call line data traverse
+
+	ld a, %11010010 ;jp nc 
+	ld (sdcomp_end_of_line_1),a
+	ld a,%11011010;jp c
+	ld (sdcomp_end_of_line_2),a
+	
+	;TODO set flags in required places to break loops
+	
+	scf ;Set offset bit for next line
+sdcomp_offset_1 .equ $
+	jp nc,sdcomp_offset_1_skip
+	ld a, %11010010 ;jp nc 
+	ld (sdcomp_bit_offset),a
+sdcomp_offset_1_skip:
+	
+sdcomp_sprite_width_2 .equ $+1
+	ld a,0 ;Return sprite width to a'
+	
+	
+sdcomp_end_of_line_skip:
+	ex af,af' ;' ;out
+	
+	ret 
+	
+
+
+;in shadow,returns a $FF,$0F,$F0,$00
+sdcomp_get_next_alpha_pair:
+	call sdcomp_get_next_alpha
+	or a 
+	jp z,sdcomp_get_next_alpha_pair0
+	ld a,$F0;FIRST BIT WAS 1
+	jp sdcomp_get_next_alpha_pair1
+sdcomp_get_next_alpha_pair0:
+	ld a,0
+sdcomp_get_next_alpha_pair1:
+	ld (sdcomp_get_next_alpha_pair_or),a 
+	
+	call sdcomp_get_next_alpha
+	or a 
+	jp z,sdcomp_get_next_alpha_pair2
+	ld a,$0F;SECOND BIT WAS 1
+	jp sdcomp_get_next_alpha_pair3
+sdcomp_get_next_alpha_pair2:
+	ld a,0;SECOND BIT WAS 0
+sdcomp_get_next_alpha_pair3:	
+sdcomp_get_next_alpha_pair_or .equ $ + 1
+	or 0;OR WITH FIRST BIT 
+	
+	ret 
+	
+;COLOR HELPER FUNCS =================================================================================================
+
+;not in shadow, returns a = color0000
+sdcomp_get_next_color_leading_nibble:
+	call sdcomp_get_next_color
+	rrca 
+	rrca 
+	rrca 
+	rrca
+	ret 
+
+
+
+;bit orders
+;	noflip   flip 
+;4bpp 3210 	 0123
+;3bpp 210	 012
+;2bpp 10	 01
+;1bpp 0		 0
+
+;not in shadow, returns a = 0000color
+sdcomp_get_next_color:
+	push de ;save data write location
+	ld e,0;E will store the final color data
+	
+	scf
+sdcomp_0bpc .equ $ ;if sprite is 0bpc, skip reading bitstream, set to jp c 
+	jp nc,sdcomp_get_color_from_index
+	
+	
+	
+	ld a,(hl) ;read next bit 
+	;call write_a_to_ram ;TEST
+	and c
+	;call write_a_to_ram ;TEST
+	call sdcomp_next_in_bitstream  ;inc bitstream 
+	or a
+	jp z,sdcomp_get_color_data_set_skip_1
+sdcomp_color_bit_0 .equ $ + 1 
+	set 1,e  ;set bit of e reg to color, 0 for flip, else depends on bpc 
+sdcomp_get_color_data_set_skip_1:
+	
+	scf
+sdcomp_1bpc .equ $
+	jp nc,sdcomp_get_color_from_index ;if 1bpc jump to end 
+	
+	
+	ld a,(hl)
+	and c 
+	;call write_a_to_ram ;TEST
+	call sdcomp_next_in_bitstream
+	or a
+	jp z,sdcomp_get_color_data_set_skip_2
+sdcomp_color_bit_1 .equ $ + 1 	
+	set 0,e ;store next bit of color data in e  
+sdcomp_get_color_data_set_skip_2:
+	
+	scf
+sdcomp_2bpc .equ $
+	jp nc,sdcomp_get_color_from_index
+	
+	ld a,(hl)
+	and c 
+	call sdcomp_next_in_bitstream
+	or a
+	jp z,sdcomp_get_color_data_set_skip_3
+sdcomp_color_bit_2 .equ $ + 1 
+	set 2,e 
+sdcomp_get_color_data_set_skip_3:
+	
+	scf
+sdcomp_3bpc .equ $
+	jp nc,sdcomp_get_color_from_index	
+
+;4bpp, interpret as color data, not indexed	
+	ld a,(hl)
+	and c 
+	call sdcomp_next_in_bitstream
+	or a
+	jp z,sdcomp_get_color_data_set_skip_4
+sdcomp_color_bit_3 .equ $ + 1 
+	set 3,e 
+sdcomp_get_color_data_set_skip_4:
+;4bpp, interpret as color data, not indexed
+	ld a,e 
+	pop de 
+	ret 
+
+sdcomp_get_color_from_index: ; e holds index of color data, 1-8
+	
+	;ld a,$DD
+	;call write_a_to_ram
+	;ld a,e 
+	;call write_a_to_ram
+	
+	
+	bit 2,e 
+	jp z, sdcomp_get_color_from_index_2l
+	
+	;Bit 2 = 1 
+	bit 1,e 
+	jp z,sdcomp_get_color_from_index_2h1l
+
+	;bit 2 = 1 1 = 1
+sdcomp_indexed_color_data_4 .equ $ + 1	
+	ld a,0
+	bit 0,e 
+	jp z,sdcomp_get_color_from_index_msn
+	jp sdcomp_get_color_from_index_lsn
+
+sdcomp_get_color_from_index_2h1l:
+	;2 = 1 1 = 0 
+sdcomp_indexed_color_data_3 .equ $ + 1	
+	ld a,0
+	bit 0,e 
+	jp z,sdcomp_get_color_from_index_msn
+	jp sdcomp_get_color_from_index_lsn
+	
+sdcomp_get_color_from_index_2l:
+	;bit 2 was 0 
+	bit 1,e 
+	jp z,sdcomp_get_color_from_index_2l1l
+	
+	;bit 2 = 0 1 = 1
+sdcomp_indexed_color_data_2 .equ $ + 1	
+	ld a,0
+	bit 0,e 
+	jp z,sdcomp_get_color_from_index_msn
+	jp sdcomp_get_color_from_index_lsn
+	
+sdcomp_get_color_from_index_2l1l:
+	;bit 2 =0  1 = 0
+sdcomp_indexed_color_data_1 .equ $ + 1	
+	ld a,0
+	
+	bit 0,e 
+	jp z,sdcomp_get_color_from_index_msn
+	jp sdcomp_get_color_from_index_lsn
+sdcomp_get_color_from_index_lsn:
+	and %00001111;and with least significant nibble 
+	pop de 
+	ret 
+	
+sdcomp_get_color_from_index_msn:
+	and %11110000;and with most significant nibble 
+	rrca 
+	rrca 
+	rrca 
+	rrca 
+	pop de 
+	ret 
+
+
+
+;function for traversing sprite data for reversed sprites
+;not in shadow ,destroys a
+sdcomp_traverse_line_data:
+sdcomp_color_data_line_end_byte .equ $ + 1
+	ld hl,0 ;load end of previous color data line 
+sdcomp_color_data_line_end_mask .equ $ + 1
+	ld c,0 ;load end of previous color data line
+	exx;toshadow 
+	
+	;load end of previous alpha data line 
+sdcomp_alpha_data_line_end_byte .equ $ + 1
+	ld hl,0
+sdcomp_alpha_data_line_end_mask .equ $ + 1
+	ld c,0
+	push de
+sdcomp_sprite_width .equ $ + 1
+	ld a, 0
+	ld e,a ;e holds sprite width 
+	
+	;Read forward through alpha data and inc color pointer if alpha is 1 
+sdcomp_traverse_line_data_loop:
+	rrc c 
+	jp nc,sdcomp_traverse_line_data_alpha_inc_skip ;if not reached end of byte, skip
+	inc hl ;have reached end of alpha byte, inc hl 
+sdcomp_traverse_line_data_alpha_inc_skip:
+	ld a,(hl)
+	and c ;read alpha data 
+sdcomp_no_alpha_3 .equ $ ;jp c for no alpha sprites to always inc color 
+	jp z,sdcomp_traverse_line_data_color_skip;if no alpha skip incrementing color. 
+	exx;out of shadow 
+sdcomp_traverse_1bpp .equ $ + 1
+	rrc c ;rotate mask
+sdcomp_traverse_2bpp .equ $ + 1
+	rrc c ;replace with rrc a for 1bpc (not nop because rrc c is 2 byte operation)
+sdcomp_traverse_3bpp .equ $ + 1
+	rrc c;rrc a for 2bpc
+sdcomp_traverse_4bpp .equ $ + 1
+	rrc c
+	
+	;check if end of byte was reached during rotations
+	ld a,c
+sdcomp_traverse_bit_check .equ $ + 1
+	and %11110000 ; 4bpc = 11110000 3bpc = 11100000, 2bpc 11000000 1bpc 10000000 TODO 
+	jp z,sdcomp_traverse_line_data_color_inc_skip
+	inc hl ;inc hl if end of byte was reached 
+sdcomp_traverse_line_data_color_inc_skip:
+	exx ;toshadow
+sdcomp_traverse_line_data_color_skip:
+	dec e ;e holds sprite width 
+	jp nz,sdcomp_traverse_line_data_loop ;loop until end of line reached 
+	pop de  ;back to write location 
+	;set new end of line pointers 
+	ld (sdcomp_alpha_data_line_end_byte),hl
+	ld a,c
+	ld (sdcomp_alpha_data_line_end_mask),a
+	exx ;out
+	ld (sdcomp_color_data_line_end_byte),hl
+	ld a,c 
+	ld (sdcomp_color_data_line_end_mask),a
+	ret
+
+
+
+
+
+;hl/c is color data, de is ldir write pos, b' is ldir length, not in shadow 
+sdcomp_write_ldir_data_loop:
+	call sdcomp_get_next_color
+	ld b,a;first pixel
+	call sdcomp_get_next_color_leading_nibble
+	or b
+	
+	
+	ld (de),a;write color data
+	inc de
+	exx;to shadow
+	dec b;ldir length counter
+	exx
+	jp nz,sdcomp_write_ldir_data_loop
+	ret
+	
+
+;Not in shadow, a holds alpha data pair, writes color and mask data to output 
+sdcomp_write_leading_or_end_pixels:
+	push de ;output location	
+	ld b,a;save for later
+	bit 4,a ;check if first pixel has color 
+	ld a,0
+	ld d,%11111111;pixel data mask assuming no colors 
+	jp z,sdcomp_leading_pixel_first_skip
+	;has first color
+	ld d,%11110000;save second pixel of bg 
+	call sdcomp_get_next_color
+sdcomp_leading_pixel_first_skip:
+	;a is either $00 or $0color1
+	
+	ld e,%11111111;assuming no colors
+	
+	bit 0,b;check second pixel alpha
+	ld b,a;save for later 
+	ld a,0
+	jp z,sdcomp_leading_pixel_second_skip;
+	;has second color 
+	call sdcomp_get_next_color_leading_nibble
+	;a = color2 0 
+	ld e,%00001111;save first pixel of bg
+	
+sdcomp_leading_pixel_second_skip:
+	;a is either 00 or c2 0 
+	;b is either 00 or 0 c1 
+	or b 
+	ld b,a;final color data
+	ld a,d 
+	and e ;final mask data 
+	
+	pop de;return to pointer 
+	
+	ld (de),a;write mask data 
+	inc de 
+	ld a,b;color data 
+	ld (de),a;write color data 
+	
+	
+	
+	call write_a_to_ram
+	
+	inc de 
+	ret 
+
+
+
+;ENTRY POINT 
+
+
+;hl = sprite data start, de = main data decompress location
+sprite_decompress:
+
+
+	;SETUP ===========================================================================================================
+
+	;SET UP BPC MODE AND ALPHA/NOALPHA
+
+	;HL pointing to flags registers
+	;TODO set up bpc and alpha modes, Sprite type and offset. Write conditional jumps where needed
+	;set bpc mode 
+	bit 7,(hl)
+	call nz,sdcomp_set_4bpc
+	bit 6,(hl)
+	call nz,sdcomp_set_3bpc 
+	bit 5,(hl)
+	call nz,sdcomp_set_2bpc 
+	bit 4,(hl)
+	call nz,sdcomp_set_1bpc 
+	bit 3,(hl)
+	call nz,sdcomp_set_0bpc 
+	bit 2,(hl)
+	call nz,sdcomp_set_noalpha
+	
+	
+	;write height or width(BG) data to decompressed sprite 
+	
+	inc hl ;hl points to width in px 
+	
+	
+	ld a,(hl) 
+	ld (sdcomp_sprite_width),a ;TODO set width in required locations
+	ld (sdcomp_sprite_width_2),a
+	ld b,a;width
+	ex af,af' ;'
+	ld a,b;Number of alpha bits remaining in row
+	ex af,af' ;' 
+
+	
+	
+	
+	;Calculate number of bytes to skip between rows for gap length  
+	srl b;divide by 2
+	
+	
+	ld a,160
+	sub b ;a holds 160 - width/2
+	ld (sdcomp_gap_btwn_rows),a 
+	ld a,(hl);load width again
+	
+	ld b,a 
+	
+	scf
+sdcomp_bg_1 .equ $
+	jp c,sdcomp_bg_1_skip ;if not BG then skip
+	
+	;TODO calculate correct width data , add offset and rounded to even number
+	
+	;write width data to de
+	ld (de), a 
+	inc de 
+sdcomp_bg_1_skip:
+
+	inc hl ;hl points to height 
+	ld a,(hl);height
+	ld (sdcomp_lines_remaining),a ;write height to lines remaining counter
+	
+	
+	scf
+sdcomp_bg_2 .equ $
+	jp nc,sdcomp_bg_2_skip ; skip if BG
+	
+	
+	ld (de), a ;write height to first byte of sprite data 
+	inc de 
+	
+sdcomp_bg_2_skip:
+	
+	inc hl ;HL points to start of alpha data 
+
+	push hl ;Save alpha data 
+	
+	
+	;Need to find start of color data
+	;at this point a = height, b = width 
+	
+	scf
+	
+sdcomp_noalpha_1 .equ $
+	jp nc,sdcomp_noalpha_1_skip ; if no alpha skip this part
+	
+	;need to find number of pixels, div by 8 and skip that many bytes
+	
+	push hl
+	ld h,a;height
+	ld l,b;width
+	mlt hl;number of pixels
+	;rounds up to nearest multiple of 8
+	dec hl
+	srl h
+	rr l
+	srl h
+	rr l 
+	srl h 
+	rr l 
+	inc hl 
+	pop bc ;initial hl location
+	;add number of bytes to skip 
+	add hl,bc ;HL points to start of color data 
+	
+	
+	
+sdcomp_noalpha_1_skip:
+
+	
+	;HL POINTING TO COLOR PALETTE DATA
+
+	
+	ld b,a ;save for after
+	;GET LOCAL PALETTE DATA
+	
+	scf 
+sdcomp_1bpc_1 .equ $ 
+	jp nc,sdcomp_1bpc_1_skip ;skip if not 1bpc or 2bpc or 3bpc
+	
+	ld a,(hl);color data 
+	ld (sdcomp_indexed_color_data_1),a 
+	inc hl 
+	
+sdcomp_1bpc_1_skip:	
+
+
+	scf 
+sdcomp_2bpc_1 .equ $ 
+	jp nc,sdcomp_2bpc_1_skip ;skip if not 2bpc or 3bpc
+	
+	ld a,(hl);color data 
+	ld (sdcomp_indexed_color_data_2),a 
+	inc hl 
+	
+sdcomp_2bpc_1_skip:	
+
+
+	scf 
+sdcomp_3bpc_1 .equ $ 
+	jp c,sdcomp_3bpc_1_skip ;skip if not 3bpc
+	
+	ld a,(hl);color data 
+	ld (sdcomp_indexed_color_data_3),a 
+	inc hl 
+	ld a,(hl);color data 
+	ld (sdcomp_indexed_color_data_4),a 
+	inc hl 
+	
+sdcomp_3bpc_1_skip:	
+
+	
+	push de ;loops/line data location
+	ex de,hl
+	ld a,b
+	ld bc,0
+	ld c,a;height 
+	add hl,bc
+	ex de,hl;de points to data write location
+	
+	
+	exx;in to shadow
+	pop de 
+	pop hl ;alpha data stored from earlier
+	ld c,%10000000;alpha mask
+	exx;out 
+	ld c,%10000000;color mask
+	
+	;HL now points to pixel color data 
+	;HL' points to pixel alpha data 
+	;C holds color mask
+	;C' holds alpha mask
+	;DE' holds loops/line output data location
+	;DE holds main data output location
+	;A holds height
+	;A' holds bits remaining in row
+
+	;TODO jump to BG routine here
+	;END SETUP ======================================================================================================
+	
+	
+sdcomp_find_gap_length:
+	
+	exx ;to shadow
+	ld b,0;00 pairs found
+sdcomp_add_1_gap_length .equ $
+	nop 
+	ld a,0;nop
+	ld (sdcomp_add_1_gap_length),a
+	
+sdcomp_find_gap_length_loop:
+
+	scf ;check for adding length between lines
+sdcomp_end_of_line_1 .equ $
+	jp c, sdcomp_end_of_line_1_skip
+	
+	;End of alpha data for this line has been reached while searching for gap length,
+	;need to add 128-width/2 to b to account for screen wrap to next line
+	
+sdcomp_gap_btwn_rows .equ $ + 1
+	ld a,0
+	add a,b
+	ld b,a
+	ld a, %11011010 ;jp c 
+	ld (sdcomp_end_of_line_1),a;Reset end of line flag 
+	
+	ld a,$AD;TEST
+	call write_a_to_ram;TEST
+	
+
+sdcomp_end_of_line_1_skip:
+	call sdcomp_get_next_alpha_pair
+	call write_a_to_ram
+	inc b 
+	
+	push af ;TEST
+	ld a,$AB;TEST
+	call write_a_to_ram
+	pop af ;TEST
+	
+	or a
+	jp z,sdcomp_find_gap_length_loop
+	
+;END OF GAP LENGTH LOOP =====================	
+	
+	push af; save leading pixel alpha data 
+	;B holds number of 00 pairs + 1
+	
+	ld a,$AA ;test
+	call write_a_to_ram
+	ld a,b ;test
+	call write_a_to_ram
+	
+	
+	
+	;INC LOOP/LINE count
+sdcomp_loops_per_line_counter .equ $ + 1
+	ld a,0;inc number of loops
+	inc a 
+	ld (sdcomp_loops_per_line_counter),a
+	
+	;Write gap length data to output
+	ld a,b 
+	exx;out of shadow 
+	ld (de),a;GAP LENGTH 
+	inc de 
+	exx;into shadow 	
+	
+	
+;LEADING PIXELS ===================================================================================================
+	pop af ;a holds leading pixel pair alpha data (FF,0F,F0)
+	
+	exx;out of shadow
+	call sdcomp_write_leading_or_end_pixels
+	exx;into shadow 
+	
+	call prgmpause
+	
+;LDIR ==============================================================================================================	
+	;Count number of 11 pairs for LDIR section
+	;If end of line reached end loop 
+	
+sdcomp_ldir_start:
+	ld b,0; number of 11 pairs found
+sdcomp_ldir_loop:
+	call sdcomp_get_next_alpha_pair ;get alpha data
+	inc b 
+	
+	scf 
+sdcomp_end_of_line_2 .equ $ ;set when end of line reached 
+	jp nc, sdcomp_ldir_loop_end
+	
+	xor %11111111;flip all bits 
+	jp z, sdcomp_ldir_loop; if a is 0 means a was $FF 
+sdcomp_ldir_loop_end:
+
+	xor %11111111 ; flip back 
+	dec b 
+	;b holds 11 pairs found 
+	
+	jp z,sdcomp_no_ldir;no pairs found,no ldir length
+	or a
+	jp nz,sdcomp_ldir_write;ends not in 00, has single ending pixel
+	
+	;ends in 00,ending pixels will be 11 
+	;must add 1 to next gap length, have already read first 00 TODO 
+	ld a,%00000100;inc b 
+	ld (sdcomp_add_1_gap_length),a 
+	ld a,$ff;ending pixels 11
+	
+	dec b;reduce length by 1, final pair is end pixels
+	jp z,sdcomp_no_ldir;no ldir length,ending pixels is 11 
+	;b holds ldir length 
+	
+	
+;b holds ldir length, a holds ending pixels
+sdcomp_ldir_write:
+	push af;save ending pixels
+	ld a,b
+	exx ;out 
+	ld (de),a;write ldir length
+	inc de 
+	call sdcomp_write_ldir_data_loop
+	exx ;toshadow
+	pop af;return ending pixels
+	
+	
+	jp sdcomp_write_end_pixels
+sdcomp_no_ldir:;no ldir length, a holds ending pixels,00,10,01,11
+	push af;save end pixels
+	
+	exx;out of shadow
+	ld a,0
+	ld (de),a 
+	inc de 
+	exx 
+	pop af;return ending pixels
+
+;WRITE ENDING PIXELS ======================================================================================
+
+sdcomp_write_end_pixels:
+	call sdcomp_write_leading_or_end_pixels
+	
+	scf 
+sdcomp_end_reached_flag .equ $;check if end of sprite reached
+	jp nc,sdcomp_end
+
+	
+	jp sdcomp_find_gap_length 
+	
+sdcomp_end:
+	ret 
+
+
+;bit orders
+;	noflip   flip 
+;4bpp 3210 	 0123
+;3bpp 210	 012
+;2bpp 10	 01
+;1bpp 0		 0
+
+
+sdcomp_set_0bpc:
+	ld a,%11011010;jp c
+	ld (sdcomp_0bpc),a
+	
+	ld (sdcomp_2bpc_1),a ;for setting local pallete data
+	ld (sdcomp_3bpc_1),a 
+	
+	ld a, %11010010 ;jp nc 
+	ld (sdcomp_1bpc_1),a ;for setting local pallete data
+	
+	ret 
+	
+sdcomp_set_1bpc:
+	ld a,%11011010;jp c
+	ld (sdcomp_1bpc),a
+	
+	ld (sdcomp_2bpc_1),a ;for setting local pallete data
+	ld (sdcomp_3bpc_1),a 
+	
+	ld a, %11010010 ;jp nc 
+	ld (sdcomp_1bpc_1),a ;for setting local pallete data
+	
+	
+	ld a,%11000011 ;set 0,e
+	ld(sdcomp_color_bit_0),a ;for setting correct bit in e when reading color 
+	
+	ret 
+
+sdcomp_set_2bpc:
+	ld a,%11011010;jp c
+	ld (sdcomp_2bpc),a
+	ld (sdcomp_3bpc_1),a ;for setting local pallete data
+	
+	ld a, %11010010 ;jp nc 
+	ld (sdcomp_1bpc_1),a;for setting local pallete data
+	ld (sdcomp_2bpc_1),a 
+	
+	ld a,%11001011 ;set 1,e
+	ld(sdcomp_color_bit_0),a ;for setting correct bit in e when reading color 
+	ld a,%11000011 ;set 0,e
+	ld(sdcomp_color_bit_1),a ;for setting correct bit in e when reading color 
+	
+	ret 
+
+sdcomp_set_3bpc:
+	ld a,%11011010;jp c
+	ld (sdcomp_3bpc),a
+	
+	ld a, %11010010 ;jp nc 
+	ld (sdcomp_1bpc_1),a ;for setting local pallete data
+	ld (sdcomp_2bpc_1),a 
+	ld (sdcomp_3bpc_1),a 
+	
+	ld a,%11010011 ;set 2,e
+	ld(sdcomp_color_bit_0),a ;for setting correct bit in e when reading color 
+	ld a,%11001011 ;set 1,e
+	ld(sdcomp_color_bit_1),a ;for setting correct bit in e when reading color 
+	ld a,%11000011 ;set 0,e
+	ld(sdcomp_color_bit_2),a ;for setting correct bit in e when reading color 
+	
+	
+	ret 
+
+sdcomp_set_4bpc:
+	ld a,%11011010;jp c
+
+	ld (sdcomp_1bpc_1),a ;for setting local pallete data
+	ld (sdcomp_2bpc_1),a 
+	ld (sdcomp_3bpc_1),a 
+	
+	
+	ld a,%11011011 ;set 3,e
+	ld(sdcomp_color_bit_0),a ;for setting correct bit in e when reading color 
+	ld a,%11010011 ;set 2,e
+	ld(sdcomp_color_bit_1),a ;for setting correct bit in e when reading color 
+	ld a,%11001011 ;set 1,e
+	ld(sdcomp_color_bit_2),a ;for setting correct bit in e when reading color 
+	ld a,%11000011 ;set 0,e
+	ld(sdcomp_color_bit_3),a ;for setting correct bit in e when reading color 
+	
+	
+	ret 
+sdcomp_set_noalpha:
+	ret
+
+
+sdcomp_set_offset:
+
+
+sdcomp_set_flip:
+
+
+
+
+
+
+
+
+
+

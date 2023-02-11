@@ -22,9 +22,14 @@
 	ld	a,lcdBpp4
 	ld (mpLcdCtrl),a	
 
+	ld hl, Test_Sprite_1
+	ld de,vRam 
+	
+	call sprite_decompress
+	
 	
 
-	call decompress_calls
+;	call decompress_calls
 	
 	;gen purp timers
 		; 76543210	
@@ -64,6 +69,7 @@ main_loop:
 	
 	ld hl,0
 	
+	; for debug longest frame draw time
 	ld a,($F20000)
 	ld l,a
 	ld a,($F20001);128hz 
@@ -94,6 +100,10 @@ longest_frame_skip:
 	
 	;check if lcd has drawn first frame
 clock_check_loop:
+
+
+	;Sprite decompression will occur here
+
 	ld a,($F20001);128hz clock
 	cp 3;check if reached 3 
 	jp c,clock_check_loop
@@ -119,7 +129,7 @@ wait_int:
 	add hl,bc 
 	ld (totalTime),hl 
 	
-	
+	;Move cam
 	ld hl,(cam_pos)
 	inc hl
 	inc hl
@@ -198,7 +208,19 @@ printHL:;=================REMOVE
 	jp exit_prgm
 
 
-prgmpause:
+write_a_to_ram:
+	push af 
+	push hl 
+write_a_to_ram_addr .equ $ + 1 
+	ld hl, $d40040
+	ld (hl),a 
+	inc hl 
+	ld (write_a_to_ram_addr),hl 
+	pop hl 
+	pop af 
+	ret 
+
+prgmpause: ;for testing, interrupts code until key pressed. will destroy af register
 	push de 
 	push hl 
 	ei
@@ -239,19 +261,20 @@ hasLagged:
 #include "timeTesting.txt"
 #include "drawBGSprite.txt"
 #include "drawFGSprite.txt"
-#include "spriteDecompress.txt"
+#include "BetterSpriteDecompress.txt"
 #include "drawFG.txt"
 
 #include "levelData.txt"
 #include "FGLevelData.txt"
 
+#include "TestingSpriteData.txt"
 #include "Sprite_Data.txt"
 #include "FG_Data.txt"
 #include "MG_Data.txt"
 #include "BG_Data.txt"
 #include "Palette_Setup.txt"
 #include "Equates.txt"
-#include "Decompress_Calls.txt"
+;#include "Decompress_Calls.txt"
 #include "Sprite_Tables.txt"
 
 
