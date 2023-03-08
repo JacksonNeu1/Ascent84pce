@@ -1,5 +1,32 @@
 ;
 
+
+
+
+
+
+
+
+
+
+
+
+A0 XX = return of get next alpha 
+A1 = start of get alpha pair
+A2 = start of get next alpha
+A9 = get next alpha bit offset
+AC = get next alpha read last bit in line 
+A4 = Virtual zero read as first bit in pair
+ad = END OF LINE during gap length search 
+
+
+DE= ldir loop 
+
+E0 = before write end pixels
+EA = before end of loop
+E9 End flag set 
+
+
 Compressed Sprite Data
 
 .db flags ( 4bpc,3bpc,2bpc,1bpc,0bpc,noalpha)

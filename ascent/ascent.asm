@@ -22,12 +22,18 @@
 	ld	a,lcdBpp4
 	ld (mpLcdCtrl),a	
 
-	ld hl, Test_Sprite_1
+	call sdcomp_set_offset
+	ld hl, Test_Sprite_9
 	ld de,vRam 
 	
 	call sprite_decompress
 	
+	ld hl,vRam
+	ld de, vram+(160* 8)	
 	
+	call draw_slow_sprite_full
+	
+	call prgmpause
 
 ;	call decompress_calls
 	
@@ -212,7 +218,7 @@ write_a_to_ram:
 	push af 
 	push hl 
 write_a_to_ram_addr .equ $ + 1 
-	ld hl, $d40040
+	ld hl, $d41000
 	ld (hl),a 
 	inc hl 
 	ld (write_a_to_ram_addr),hl 

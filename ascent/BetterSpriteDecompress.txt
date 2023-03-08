@@ -3,7 +3,7 @@
 
 
 
-;Functions for getting next color and alpha value
+
 
 
 ;REGISTER USEAGE
@@ -75,19 +75,47 @@ sdcomp_flip_bitstream_2 .equ $
 ; sets some flags, decrements remaining lines, traverses sprite data if flip, returns the read data 
 ; next call returns first bit in next row  
 sdcomp_get_next_alpha:
+	ld a,$A2;test 
+	call write_a_to_ram
+	
+	scf 
+sdcomp_end_of_line_alp .equ $
+	jp c, sdcomp_end_of_line_alp_skip
 
+	ld a,$A3
+	call write_a_to_ram 
+	
+	ld a, %11010010 ;jp nc 
+	ld (sdcomp_end_vitrual_zero_read),a 
+	
+	ld a,0
+	ret ;returns virtual 0, outside of data range 
+
+sdcomp_end_of_line_alp_skip:
+	
+	
+	
 ;MUST BE RESET EVERY ROW
 	scf
 sdcomp_bit_offset .equ $ ;jp nc for offset
 	jp c,sdcomp_bit_offset_skip
 	ld a,%11011010;jp c 
 	ld (sdcomp_bit_offset),a
+	ld a,$A9
+	call write_a_to_ram
 	ld a,0
 	ret ;return 0 first bit
 sdcomp_bit_offset_skip:;skip bit offset
-	
-	ld a,(hl)
+		
+	;ld a,$EF
 	;call write_a_to_ram
+	ld a,(hl)
+	;push af 
+	;call write_a_to_ram
+	;ld a,c
+	;call write_a_to_ram
+	;pop af 
+	
 	
 	and c 
 	call sdcomp_next_in_bitstream;incs bitstream
@@ -107,8 +135,8 @@ sdcomp_no_alpha_1_skip:
 	
 	;HAve read last bit in line  
 	
-	;ld a,$AC;Test
-	;call write_a_to_ram;Test
+	ld a,$AC;Test
+	call write_a_to_ram;Test
 	;Decrement lines remaining in sprite
 sdcomp_lines_remaining .equ $ + 1
 	ld a,0
@@ -119,6 +147,8 @@ sdcomp_lines_remaining .equ $ + 1
 	;end of last line reached 
 	ld a,%11011010;jp c
 	ld (sdcomp_end_reached_flag) , a ;set end reached flag to indicate sprite is done decompressing TODO 
+	ld a,$E9
+	call write_a_to_ram;TEST 
 sdcomp_set_end_flag_skip:
 	ld a,(sdcomp_loops_per_line_counter)
 	ld (de),a ;write loops/line data 
@@ -129,15 +159,12 @@ sdcomp_flip_1 .equ $ ;if flipped sprite
 	call nc,sdcomp_traverse_line_data ;call line data traverse
 
 	ld a, %11010010 ;jp nc 
-	ld (sdcomp_end_of_line_1),a
-	ld a,%11011010;jp c
-	ld (sdcomp_end_of_line_2),a
-	
-	;TODO set flags in required places to break loops
+	ld (sdcomp_end_of_line_gaplength),a
+	ld (sdcomp_end_of_line_alp),a
 	
 	scf ;Set offset bit for next line
 sdcomp_offset_1 .equ $
-	jp nc,sdcomp_offset_1_skip
+	jp c,sdcomp_offset_1_skip
 	ld a, %11010010 ;jp nc 
 	ld (sdcomp_bit_offset),a
 sdcomp_offset_1_skip:
@@ -145,9 +172,16 @@ sdcomp_offset_1_skip:
 sdcomp_sprite_width_2 .equ $+1
 	ld a,0 ;Return sprite width to a'
 	
+	call write_a_to_ram
 	
 sdcomp_end_of_line_skip:
 	ex af,af' ;' ;out
+	
+	push af ;testing
+	ld a,$A0
+	call write_a_to_ram
+	pop af 
+	call write_a_to_ram
 	
 	ret 
 	
@@ -155,14 +189,37 @@ sdcomp_end_of_line_skip:
 
 ;in shadow,returns a $FF,$0F,$F0,$00
 sdcomp_get_next_alpha_pair:
+	ld a,$A1
+	call write_a_to_ram
+	
+	ld a,%11011010;jp c 
+	ld(sdcomp_end_vitrual_zero_read),a ;reset vitrual zero read flag
+	
 	call sdcomp_get_next_alpha
 	or a 
 	jp z,sdcomp_get_next_alpha_pair0
 	ld a,$F0;FIRST BIT WAS 1
+	call write_a_to_ram
 	jp sdcomp_get_next_alpha_pair1
 sdcomp_get_next_alpha_pair0:
 	ld a,0
+	
+	scf 
+sdcomp_end_vitrual_zero_read .equ $
+	jp c,sdcomp_get_next_alpha_pair1
+	push af 
+	;This gets triggered when we have read a vitrual 0 (outside of line) as the first bit in an alpha pair 
+	
+	ld a,%00111101 ;dec a 
+	ld (sdcomp_dec_gap_btwn_rows),a 
+	;We should subtract 1 from the next interline gap length whenever a virtual 00 is read.
+	ld a,$A4
+	call write_a_to_ram
+	pop af 
+	
 sdcomp_get_next_alpha_pair1:
+
+	
 	ld (sdcomp_get_next_alpha_pair_or),a 
 	
 	call sdcomp_get_next_alpha
@@ -456,7 +513,7 @@ sdcomp_leading_pixel_second_skip:
 	
 	
 	
-	call write_a_to_ram
+	;call write_a_to_ram
 	
 	inc de 
 	ret 
@@ -504,16 +561,26 @@ sprite_decompress:
 	ld a,b;Number of alpha bits remaining in row
 	ex af,af' ;' 
 
-	
-	
-	
+
+sdcomp_offset_2 .equ $ 
+	nop ;replace with inc b for offset 
+
 	;Calculate number of bytes to skip between rows for gap length  
+	inc b ;round up on odd sprites
 	srl b;divide by 2
 	
 	
 	ld a,160
-	sub b ;a holds 160 - width/2
+	sub b ;a holds 160 - (width in pairs)
 	ld (sdcomp_gap_btwn_rows),a 
+	
+	call write_a_to_ram
+	ld a,$BE
+	call write_a_to_ram
+	ld a,b 
+	call write_a_to_ram
+	
+	
 	ld a,(hl);load width again
 	
 	ld b,a 
@@ -554,8 +621,8 @@ sdcomp_bg_2_skip:
 	
 	scf
 	
-sdcomp_noalpha_1 .equ $
-	jp nc,sdcomp_noalpha_1_skip ; if no alpha skip this part
+sdcomp_no_alpha_2 .equ $
+	jp nc,sdcomp_no_alpha_2_skip ; if no alpha skip this part
 	
 	;need to find number of pixels, div by 8 and skip that many bytes
 	
@@ -578,7 +645,7 @@ sdcomp_noalpha_1 .equ $
 	
 	
 	
-sdcomp_noalpha_1_skip:
+sdcomp_no_alpha_2_skip:
 
 	
 	;HL POINTING TO COLOR PALETTE DATA
@@ -654,41 +721,55 @@ sdcomp_3bpc_1_skip:
 	
 sdcomp_find_gap_length:
 	
-	exx ;to shadow
-	ld b,0;00 pairs found
-sdcomp_add_1_gap_length .equ $
-	nop 
-	ld a,0;nop
-	ld (sdcomp_add_1_gap_length),a
+;If virtual 0 was read as the start of an alpha pair, remove 1 from next gap length 
+;this will occur if:
+;Starting pixels are at the end of line, eg :00000001. ldir length = 0 as virtual 0s are read. interline length should be reduced by 1 
+;
+;during ldir search, line data ends in 11, followed by virtual 00. In this case the 11 is the ending pixels if slow sprite, so gap length should not be reduced
+; This is done from the addition of 1 gap length whenever the 11->00 case occurs, canceling the interline reduction due to reading vitrual 00. 
 	
+	;INC LOOP/LINE count
+sdcomp_loops_per_line_counter .equ $ + 1
+	ld a,0;inc number of loops
+	inc a 
+	ld (sdcomp_loops_per_line_counter),a
+	
+	exx ;to shadow
+	
+sdcomp_add_1_gap_length .equ $ + 1
+	ld b,0;00 pairs found 
+	ld a,0 ;reset
+	ld (sdcomp_add_1_gap_length),a 
+
 sdcomp_find_gap_length_loop:
 
-	scf ;check for adding length between lines
-sdcomp_end_of_line_1 .equ $
-	jp c, sdcomp_end_of_line_1_skip
+	scf 
+sdcomp_end_of_line_gaplength .equ $ 
+	jp c, sdcomp_end_of_line_gaplength_skip
 	
-	;End of alpha data for this line has been reached while searching for gap length,
-	;need to add 128-width/2 to b to account for screen wrap to next line
-	
+	;We have reached the end of the alpha data, add between line gap length 
 sdcomp_gap_btwn_rows .equ $ + 1
 	ld a,0
-	add a,b
-	ld b,a
-	ld a, %11011010 ;jp c 
-	ld (sdcomp_end_of_line_1),a;Reset end of line flag 
+	add a,b 
+sdcomp_dec_gap_btwn_rows .equ $ 	
+	nop ;replace with dec a to decrease gap length 
+	ld b,a 
+	ld a,%00000000 ;nop 
+	ld (sdcomp_dec_gap_btwn_rows),a ;reset dec gap
+	ld a,%11011010;jp c
+	ld (sdcomp_end_of_line_alp),a ;Reset virtual zero flag, reading alpha data will now be the next line 
+	ld (sdcomp_end_of_line_gaplength),a ;Reset flag for adding interline gaplength 
 	
-	ld a,$AD;TEST
-	call write_a_to_ram;TEST
-	
-
-sdcomp_end_of_line_1_skip:
+sdcomp_end_of_line_gaplength_skip:
 	call sdcomp_get_next_alpha_pair
-	call write_a_to_ram
+	;call write_a_to_ram
 	inc b 
-	
+
 	push af ;TEST
 	ld a,$AB;TEST
 	call write_a_to_ram
+	
+	;call write_a_to_ram
 	pop af ;TEST
 	
 	or a
@@ -704,13 +785,7 @@ sdcomp_end_of_line_1_skip:
 	ld a,b ;test
 	call write_a_to_ram
 	
-	
-	
-	;INC LOOP/LINE count
-sdcomp_loops_per_line_counter .equ $ + 1
-	ld a,0;inc number of loops
-	inc a 
-	ld (sdcomp_loops_per_line_counter),a
+
 	
 	;Write gap length data to output
 	ld a,b 
@@ -727,37 +802,65 @@ sdcomp_loops_per_line_counter .equ $ + 1
 	call sdcomp_write_leading_or_end_pixels
 	exx;into shadow 
 	
-	call prgmpause
+
 	
 ;LDIR ==============================================================================================================	
 	;Count number of 11 pairs for LDIR section
-	;If end of line reached end loop 
+	;If end of line reached we know last pixels must be the ending pair
+	;
+	
+	;If ending is 11 -> 00 
+	;11 pair will need to become ending pixels if slow sprite
+	;Will need to reduce b by 1 
+	
+	;If ending is 11 ->01/10
+	;last pair wil become ending pixels, dont reduce b 
 	
 sdcomp_ldir_start:
-	ld b,0; number of 11 pairs found
+
+;	ld a, %11010010 ;jp nc 
+;	ld (sdcomp_end_of_line_2) , a ;reset end of line flag 
+
+	ld b,0; will hold number of 11 pairs found
 sdcomp_ldir_loop:
 	call sdcomp_get_next_alpha_pair ;get alpha data
 	inc b 
 	
-	scf 
-sdcomp_end_of_line_2 .equ $ ;set when end of line reached 
-	jp nc, sdcomp_ldir_loop_end
+	push af 
+	ld a,$DE 
+	call write_a_to_ram
+	pop af
+	call write_a_to_ram
+	
+;	scf 
+;sdcomp_end_of_line_2 .equ $ ;set when end of line reached 
+;	jp nc, sdcomp_ldir_loop_end;If read last in line
 	
 	xor %11111111;flip all bits 
 	jp z, sdcomp_ldir_loop; if a is 0 means a was $FF 
+	xor %11111111 ; flip back 
 sdcomp_ldir_loop_end:
 
-	xor %11111111 ; flip back 
-	dec b 
-	;b holds 11 pairs found 
 	
+	;at this point b holds # 11 pairs +1 
+	
+	
+
+	
+	
+	dec b ;b holds # 11 pairs 
 	jp z,sdcomp_no_ldir;no pairs found,no ldir length
 	or a
 	jp nz,sdcomp_ldir_write;ends not in 00, has single ending pixel
 	
-	;ends in 00,ending pixels will be 11 
-	;must add 1 to next gap length, have already read first 00 TODO 
-	ld a,%00000100;inc b 
+	;ends in 11 -> 00,ending pixels will be 11 if slow sprite. If fast, jump to ldir write here 
+	
+	ld a,$DF
+	call write_a_to_ram
+	
+	;must add 1 to next gap length, have already read first 00
+	;for the case with virtual 00, this cancels the decrease in gap length 
+	ld a,1;start w 1 gap len
 	ld (sdcomp_add_1_gap_length),a 
 	ld a,$ff;ending pixels 11
 	
@@ -765,34 +868,68 @@ sdcomp_ldir_loop_end:
 	jp z,sdcomp_no_ldir;no ldir length,ending pixels is 11 
 	;b holds ldir length 
 	
-	
+
 ;b holds ldir length, a holds ending pixels
 sdcomp_ldir_write:
+
+	;b holds 11 pairs found 
+	push af;TEST
+	ld a,$DA 
+	call write_a_to_ram
+	ld a,b 
+	call write_a_to_ram
+	pop af ;TEST
+
 	push af;save ending pixels
 	ld a,b
 	exx ;out 
 	ld (de),a;write ldir length
 	inc de 
 	call sdcomp_write_ldir_data_loop
-	exx ;toshadow
+
 	pop af;return ending pixels
-	
 	
 	jp sdcomp_write_end_pixels
 sdcomp_no_ldir:;no ldir length, a holds ending pixels,00,10,01,11
+
+	push af ;TEST
+
+	ld a,$DB
+	call write_a_to_ram
+	pop af ;TEST
+	call write_a_to_ram
+
 	push af;save end pixels
 	
 	exx;out of shadow
 	ld a,0
-	ld (de),a 
+	ld (de),a ;write 0 as ldir length
 	inc de 
-	exx 
 	pop af;return ending pixels
 
 ;WRITE ENDING PIXELS ======================================================================================
 
 sdcomp_write_end_pixels:
+;not in shadow
+	
+	;test
+	push af 
+	ld a,$E0
+	call write_a_to_ram
+	pop af 
+	
+
 	call sdcomp_write_leading_or_end_pixels
+	
+	
+;sdcomp_test_lines_stop .equ $ + 1 
+	;ld a,2
+	;dec a 
+	;jp z,sdcomp_end
+	;ld (sdcomp_test_lines_stop),a 
+	
+	ld a,$EA
+	call write_a_to_ram
 	
 	scf 
 sdcomp_end_reached_flag .equ $;check if end of sprite reached
@@ -802,6 +939,10 @@ sdcomp_end_reached_flag .equ $;check if end of sprite reached
 	jp sdcomp_find_gap_length 
 	
 sdcomp_end:
+	
+	ld a,$69
+	call write_a_to_ram
+	
 	ret 
 
 
@@ -896,12 +1037,22 @@ sdcomp_set_4bpc:
 	
 	ret 
 sdcomp_set_noalpha:
+	ld a, %11010010 ;jp nc 
+	ld (sdcomp_no_alpha_1),a 
+	ld a,%11011010;jp c
+	ld (sdcomp_no_alpha_2),a 
+	
 	ret
 
 
 sdcomp_set_offset:
-
-
+	ld a, %11010010 ;jp nc 
+	ld (sdcomp_offset_1),a 
+	ld (sdcomp_bit_offset),a 
+	ld a,%00000100 ;inc b 
+	ld (sdcomp_offset_2),a 
+	
+	ret 
 sdcomp_set_flip:
 
 
