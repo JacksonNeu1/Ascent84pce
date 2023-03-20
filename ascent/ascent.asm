@@ -22,8 +22,10 @@
 	ld	a,lcdBpp4
 	ld (mpLcdCtrl),a	
 
-	call sdcomp_set_offset
-	ld hl, Test_Sprite_9
+	;call sdcomp_set_offset
+	call sdcomp_set_flip
+	call sdcomp_set_fast
+	ld hl, Test_sprite_fast
 	ld de,vRam 
 	
 	call sprite_decompress
@@ -31,7 +33,7 @@
 	ld hl,vRam
 	ld de, vram+(160* 8)	
 	
-	call draw_slow_sprite_full
+	call draw_fast_sprite_full
 	
 	call prgmpause
 
