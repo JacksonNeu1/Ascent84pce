@@ -1,26 +1,19 @@
 
-
-;de = vram , hl = data, a = number lines to draw
-draw_fast_sprite_bottom_cut:
+;hl = data, a = lines to draw. returns a = num loops to draw, hl = 1 before first gap length
+setup_sprite_bottom_cut:
 	dec de
-	ld bc,0
-	ld c,a
-	push hl
-	ld a,(hl);height
-	add hl,bc;hl points to num loops required
-	ld c,a;height
-	ld a,(hl);a holds num loops
-	pop hl
-	inc hl
-	add hl,bc;beginning of pixel data
+	ld bc,0 ;clear bc
+	ld c,a;c = lines to draw
+	push hl ;save data 
+	add hl,bc
+	ld a,(hl);num loops to draw
+	pop hl ;return to start of data
+	ld c,(hl) ;height
+	add hl,bc ;hl now points to 1 before first gap length
+	ret 
 
-	ld c,(hl);load alpha length
-	ex de,hl;hl is vram, de is data
-	jp dfgs_loop
-	
-;de = vram , hl = data, a = top lines to skip	
-draw_fast_sprite_top_cut:
-	dec de
+setup_sprite_top_cut:
+	dec de ;move to correct vram pos 
 	ld bc,0
 	ld c,a
 	push de
@@ -28,18 +21,68 @@ draw_fast_sprite_top_cut:
 	push hl
 	ld e,(hl);height
 	add hl,bc;hl points to num skip loops 
-
 	ld c,(hl);c holds num skip loops
 	pop hl;start of data
 	add hl,de
 	ld b,(hl);total number of loops
 	inc hl;hl is pixel data
 	pop de;back to vram
-	push bc;save total and skipped loops
 	ld a,c;loops to skip
+	ret 
+
+;hl = data, a = line number to draw. returns a = c = number of loops to skip, b = loops to skip + loops to draw. HL = gap length  
+setup_sprite_single_line: ;sets up for single line drawing mode 
+	dec de
+	ld bc,0
+	ld c,a ;line to draw
+	push de ;save vram 
+	ld de,0
+	push hl
+	ld e,(hl);height
+	add hl,bc;hl points to num skip loops 
+	ld c,(hl);c holds num skip loops
+	inc hl 
+	ld b,(hl);b holds num loops after drawn line 
+	pop hl;start of data
+	add hl,de
+	inc hl;hl is pixel data points to gap length 
+	pop de;back to vram
+	ld a,c;loops to skip
+	ret 
+
+
+
+draw_fast_sprite_bottom_cut_from_line:
+	inc a 
+;de = vram , hl = data, a = number lines to draw
+draw_fast_sprite_bottom_cut:
+	call setup_sprite_bottom_cut
+	inc hl ;hl points to gap length 
+	ld c,(hl);load alpha length
+	ex de,hl;hl is vram, de is data
+	jp dfgs_loop
+
+
+;de = vram , hl = data, a = line to draw (starting from 0)
+draw_fast_sprite_single_line:
+	or a 
+	jp z,draw_fast_sprite_bottom_cut_from_line ; if a is 0, same as drawing bottom cut
+	;we know a is not 0 here 
+	call setup_sprite_single_line
+	
+	push bc;save total and skipped loops
 	ld bc,0
 	
+	jp draw_fast_sprite_top_loop 
 
+
+
+;de = vram , hl = data, a = top lines to skip	
+draw_fast_sprite_top_cut:
+	call setup_sprite_top_cut
+	push bc ;save total and skipped loops 
+	ld bc,0 
+	
 draw_fast_sprite_top_loop:; need to follow through gap and drawn lengths to find start of drawing
 	ld c,(hl);load with first gap length	
 	ex de,hl;hl is vram
@@ -56,13 +99,13 @@ draw_fast_sprite_top_loop:; need to follow through gap and drawn lengths to find
 	jp nz,draw_fast_sprite_top_loop
 	
 	
-	pop bc
+	pop bc ;b is total loops, c is skipped loops 
 	ld a,b
 	sub a,c;subtract skipped from total, a holds remaining number of loops
 		
 	ld bc,0
-	ld c,(hl)
-	ex de,hl
+	ld c,(hl);load c with gap length
+	ex de,hl ;setup for loop 
 	jp dfgs_loop
 
 
@@ -101,12 +144,12 @@ draw_slow_sprite_full:
 	ld c,(hl);height
 	add hl,bc
 	ld a,(hl);num loops
-	exx
-	ld c,a
-	exx
-	dec de
-	;hl = (gap length) -1 de = vram-1 c' = loops
+	dec de ;correct vram pos 
+	exx;into shadow 
+	ld b,a ;number of loops
+	;hl = (gap length) -1 de = vram-1 b' = loops
 dsfgs_line_loop:
+	exx;out of shadow
 	inc hl;gap length
 	ld c,(hl);gap length
 	ex de,hl;hl is vram
@@ -135,41 +178,39 @@ dsfgs_ldir_skip:
 	or (hl)
 	ld (de),a
 	
-	exx 
-	dec c
-	exx
-	jp nz,dsfgs_line_loop
+	exx ;into shadow
+	djnz dsfgs_line_loop
+	exx ;out 
 	ret
 
 
-;de = vram , hl = data, a = top lines to skip	
-draw_slow_sprite_top_cut:
 
-	push hl
+;de = vram , hl = data, a = line to draw (from 0)
+draw_slow_sprite_single_line:
+
+	or a 
+	jp z,draw_slow_sprite_bottom_cut_from_line ; if a is 0, same as drawing bottom cut
+	;we know a is not 0 here
+	call setup_sprite_single_line
+	push bc;save total and skipped loops
 	ld bc,0
-	ld c,a
-	add hl,bc
-	ld a,(hl);loops to skip
-	ld (dsstc_loops_skipped),a
-	exx
-	ld b,a;loops to skip
-	exx
-	pop hl
-	ld c,(hl)
-	add hl,bc;total loops
-	ld a,(hl);total loops
-	inc hl;gap length
+	
+	jp slow_sprite_data_traverse 
+	
 
-;hl = data start, b' = num loops,bc = 0
-	exx
+;de = vram , hl = data, a = top lines to skip (from 1)
+draw_slow_sprite_top_cut:
+	call setup_sprite_top_cut
+	push bc;save total and skipped loops
+	ld bc,0
+;hl = data start, a = num loops to skip, bc = 0
 slow_sprite_data_traverse:
-	exx
 	ld c,(hl);gap length
 	ex de,hl;hl is vram
 	add hl,bc
 	ex de,hl
 	
-	inc hl
+	inc hl ;inc past leading pixels
 	inc hl
 	inc hl;ldir length
 	ld c,(hl)
@@ -177,40 +218,37 @@ slow_sprite_data_traverse:
 	ex de,hl
 	add hl,bc
 	ex de,hl
-	inc de;single pix
-	inc hl
+	inc de;inc for leading pix 
+	inc hl;inc past ending pixels
 	inc hl
 	inc hl;gap length
-	exx
-	djnz slow_sprite_data_traverse
-	exx
-
-dsstc_loops_skipped .equ $ + 1
-	sub a,0;loops skipped
-	exx
-	ld c,a
-	exx
 	
-	dec de
-	dec hl	
+	dec a 
+	jp nz,slow_sprite_data_traverse
+
+
+	pop bc ;b is total loops, c is skipped loops 
+	ld a,b
+	sub a,c;subtract skipped from total, a holds remaining number of loops
+	ld bc,0;clear bc 
+	dec hl	;hl points to 1 before gaplength
+	exx ;toshadow
+	ld b,a 
 	jp dsfgs_line_loop
 	
+	
+	
+draw_slow_sprite_bottom_cut_from_line:
+	inc a 
 ;de = vram , hl = data, a = number lines to draw
 draw_slow_sprite_bottom_cut:
-	ld bc,0
-	push hl
-	ld c,a;height
-	add hl,bc
-	ld a,(hl);num loops
-	exx
-	ld c,a
-	exx
-	pop hl
-	ld c,(hl)
-	add hl,bc
 
-	dec de
+	call setup_sprite_bottom_cut
+	;a = loops to draw, hl = 1 before gap length 
+	exx ;toshadow
+	ld b,a
 	jp dsfgs_line_loop
+
 
 
 

@@ -1,5 +1,5 @@
 
-draw_bg:
+draw_bg:; function for drawing background buffer to the draw buffer, clearing the frame for fg sprites to be drawn over 
 	call move_bg
 	ld hl,$d52c00;BG_buffer_end
 	ld bc,(BG_draw_buffer)
@@ -23,44 +23,47 @@ draw_bg:
 	ldir 
 	ret 
 	
+	
+;function for "moving' the backgrond buffer. checks if camera has moved since the buffer was last updated.
+;if so will draw new lines of the bg buffer to move it up or down until it is in the correct position
 move_bg:
-	ld hl,(cam_pos)
+	ld hl,(cam_pos);load cam pos 
 	srl h
 	rr l
 	srl h
-	rr l ;div by 4
+	rr l ;div by 4 to get location of BG layer
 	;hl holds bg cam pos 
-	ld bc,239
-	add hl,bc;add 0 pos  
-	ld bc,(bg_cam_pos)
-	sbc hl,bc 
-	ret z 
-	jp c,move_bg_down
-	call inc_bg
-	jp move_bg
+	ld bc,239 ;get y value of topmost line of BG 
+	add hl,bc ;hl holds updated bg camera pos 
+	ld bc,(bg_cam_pos);previous BG cam location 
+	sbc hl,bc ;compare to the updated location
+	ret z ;if 0, the bg buffer does not need to be moved 
+	jp c,move_bg_down ;if previous cam pos id above current pos, screen has moved down, go to move bg down 1 line
+	call inc_bg ;otherwise, screen has moved up, need to move bg up 1 line
+	jp move_bg ;repeat until bg is in correct pos
 move_bg_down:
 	call dec_bg
-	jp move_bg
+	jp move_bg ;repeat until bg is in correct pos
 
 
-dec_bg:;move cam down
+dec_bg:;move bg cam down 1px 
 	;write on draw buffer line 
-	ld hl,(BG_draw_buffer)
+	ld hl,(BG_draw_buffer) ;topmost line of bg buffer will be overwritten with new bottom line 
 	ld (dbgl_vram_line_start),hl 
 	
 	ld hl,(bg_cam_pos)
-	dec hl 
+	dec hl ;dec bg cam pos by 1 
 	ld (bg_cam_pos),hl 
-	ld bc,239
-	sbc hl,bc;bottom row of bc
-	ld c,h;cam pos msb 
-	ld a,l 
+	ld bc,239 ;subtract 239 from cam pos to get y value of bottom of bg
+	sbc hl,bc;bottom row of bg 
+	ld c,h;bottom y value msb 
+	ld a,l ;bottom y value lsb 
 	ld hl,BG_Data_frame_table
 	inc c 
 	add hl,bc 
 	add hl,bc 
-	add hl,bc 
-	ld hl,(hl)
+	add hl,bc ;add 3*frame number to get to correct frame pointer
+	ld hl,(hl) ;hl now points to bg frame data 
 	call draw_bg_line
 	;move buffer pos
 	ld hl,(BG_draw_buffer)

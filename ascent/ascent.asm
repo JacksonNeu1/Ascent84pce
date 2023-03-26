@@ -31,9 +31,9 @@
 	call sprite_decompress
 	
 	ld hl,vRam
-	ld de, vram+(160* 8)	
-	
-	call draw_fast_sprite_full
+	ld de, vram+(160* 2)	
+	ld a,1
+	call draw_fast_sprite_single_line
 	
 	call prgmpause
 
@@ -244,9 +244,10 @@ bg_cam_pos:
 	.dl 0
 
 
-draw_buffer:
+draw_buffer:;where new frame is drawn before lcd pointer is swapped 
 	.dl 0
-BG_draw_buffer:;uppermost line of bg in vram
+	
+BG_draw_buffer: ;Address of the uppermost line of the background buffer. This is where new lines of bg are drawn to 
 	.dl 0
 BG_buffer .equ vram + (160*240)
 
