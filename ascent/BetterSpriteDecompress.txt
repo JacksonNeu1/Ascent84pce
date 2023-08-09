@@ -301,7 +301,7 @@ sdcomp_color_bit_1 .equ $ + 1
 sdcomp_get_color_data_set_skip_2:
 	
 	scf
-sdcomp_2bpc .equ $
+sdcomp_2bpc .equ $ ;if 2bpc jump to end
 	jp nc,sdcomp_get_color_from_index
 	
 	ld a,(hl)
@@ -587,7 +587,10 @@ sprite_decompress:
 	bit 2,(hl)
 	call nz,sdcomp_set_noalpha
 	
-	
+	ld a,0
+	ld (sdcomp_loops_per_line_counter),a ;reset loops counter
+	ld a,%11011010;jp c 
+	ld(sdcomp_end_vitrual_zero_read),a ;reset vitrual zero read flag
 	;write height or width(BG) data to decompressed sprite 
 	
 	inc hl ;hl points to width in px 
@@ -625,31 +628,15 @@ sdcomp_offset_2 .equ $
 	
 	ld b,a 
 	
-	scf
-sdcomp_bg_1 .equ $
-	jp c,sdcomp_bg_1_skip ;if not BG then skip
-	
-	;TODO calculate correct width data , add offset and rounded to even number
-	
-	;write width data to de
-	ld (de), a 
-	inc de 
-sdcomp_bg_1_skip:
 
 	inc hl ;hl points to height 
 	ld a,(hl);height
 	ld (sdcomp_lines_remaining),a ;write height to lines remaining counter
 	
 	
-	scf
-sdcomp_bg_2 .equ $
-	jp nc,sdcomp_bg_2_skip ; skip if BG
-	
-	
+
 	ld (de), a ;write height to first byte of sprite data 
 	inc de 
-	
-sdcomp_bg_2_skip:
 	
 	inc hl ;HL points to start of alpha data 
 
@@ -823,7 +810,7 @@ sdcomp_flip_traverse .equ $
 	
 	
 	scf 
-sdcomp_end_reached_flag .equ $;check if end of sprite reached TODO move to after gap length check to avoid writing useless pixels at end of sprite 
+sdcomp_end_reached_flag .equ $;check if end of sprite reached
 	jp nc,sdcomp_end
 
 	
@@ -907,9 +894,9 @@ sdcomp_ldir_loop:
 ;sdcomp_end_of_line_2 .equ $ ;set when end of line reached 
 ;	jp nc, sdcomp_ldir_loop_end;If read last in line
 	
-	xor %11111111;flip all bits 
+	xor %11111111 ;flip all bits  (CPL does not set flags :(  )
 	jp z, sdcomp_ldir_loop; if a is 0 means a was $FF 
-	xor %11111111 ; flip back 
+	cpl ; flip back 
 sdcomp_ldir_loop_end:
 
 	
@@ -963,7 +950,7 @@ sdcomp_ldir_write:
 	
 	scf
 sdcomp_fast_3 .equ $ 
-	jp nc,sdcomp_inc_loops_per_line
+	jp nc,sdcomp_inc_loops_per_line ;skip ending pixels
 	
 	jp sdcomp_write_end_pixels
 sdcomp_no_ldir:;no ldir length, a holds ending pixels,00,10,01,11
@@ -1028,16 +1015,82 @@ sdcomp_loops_per_line_counter .equ $ + 1
 	ld a,$EA
 	call write_a_to_ram
 	
+	;TODO Check for interrupt
+sdcomp_testing_interrupt_count .equ $ + 1;TESTING
+	ld a,10
+	dec a 
+	ld(sdcomp_testing_interrupt_count),a 
+	jp z,sdcomp_interrupt 
+	
+	
 	
 	jp sdcomp_find_gap_length
+
+
+	;TODO can prob not save a register
+sdcomp_interrupt:
+
+	ld a,10    ;TEST
+	ld(sdcomp_testing_interrupt_count),a ;TEST 
+
+	;not in shadow 
+	ld (sdcomp_cont_hl),hl 
+	ex de,hl
+	ld (sdcomp_cont_de),hl 
+	push bc
+	pop hl
+	ld (sdcomp_cont_bc),hl
+	ld (sdcomp_cont_a),a 
+	exx 
+	ex af,af' ;'
+	ld (sdcomp_cont_hlP),hl 
+	ex de,hl
+	ld (sdcomp_cont_deP),hl 
+	push bc 
+	pop hl
+	ld (sdcomp_cont_bcP),hl
+	ld (sdcomp_cont_aP),a 
+	
+	ld a,1 ;Return 1 if interrupted
+	ret 
+	
+sdcomp_continue:
+	;not in shadow 
+sdcomp_cont_hl .equ $ + 1
+	ld hl,0
+sdcomp_cont_de .equ $ + 1
+	ld de,0
+sdcomp_cont_bc .equ $ + 1
+	ld bc,0
+sdcomp_cont_a .equ $ + 1
+	ld a,0
+	exx 
+	ex af,af' ;'
+sdcomp_cont_hlP .equ $ + 1
+	ld hl,0
+sdcomp_cont_deP .equ $ + 1
+	ld de,0
+sdcomp_cont_bcP .equ $ + 1
+	ld bc,0
+sdcomp_cont_aP .equ $ + 1
+	ld a,0	
+	
+	exx ;out of shadow 
+	ex af,af' ;'
+
+	jp sdcomp_find_gap_length
+
+	
 
 sdcomp_end:
 	
 	ld a,$69
 	call write_a_to_ram
 	
-	ld a,%11011010;jp c
+	ld a, %11010010 ;jp nc 
 	ld (sdcomp_end_reached_flag),a 
+	
+	ld a,0 ;return 0 if finished decompressing 
 	ret 
 
 
@@ -1063,6 +1116,8 @@ sdcomp_set_0bpc:
 	ret 
 	
 sdcomp_set_1bpc:
+	ld a,%11010010;jp nc
+	ld (sdcomp_0bpc),a
 	ld a,%11011010;jp c
 	ld (sdcomp_1bpc),a
 	
@@ -1082,8 +1137,13 @@ sdcomp_set_1bpc:
 	ret 
 
 sdcomp_set_2bpc:
+	ld a,%11010010;jp nc
+	ld (sdcomp_0bpc),a
+	ld (sdcomp_1bpc),a
+	
 	ld a,%11011010;jp c
 	ld (sdcomp_2bpc),a
+	
 	ld (sdcomp_3bpc_1),a ;for setting local pallete data
 	
 	ld a, %11010010 ;jp nc 
@@ -1113,6 +1173,12 @@ sdcomp_2bpc_flip:
 
 
 sdcomp_set_3bpc:
+	
+	ld a,%11010010;jp nc
+	ld (sdcomp_0bpc),a
+	ld (sdcomp_1bpc),a
+	ld (sdcomp_2bpc),a
+	
 	ld a,%11011010;jp c
 	ld (sdcomp_3bpc),a
 	
@@ -1195,6 +1261,16 @@ sdcomp_set_noalpha:
 	ld (sdcomp_no_alpha_2),a 
 	ld (sdcomp_no_alpha_3),a 
 	ret
+	
+sdcomp_reset_noalpha:
+
+	ld a,%11011010;jp c
+	ld (sdcomp_no_alpha_1),a 
+	ld a, %11010010 ;jp nc
+	ld (sdcomp_no_alpha_2),a 
+	ld a, %11001010 ;jp z
+	ld (sdcomp_no_alpha_3),a 
+	ret
 
 
 sdcomp_set_offset:
@@ -1204,6 +1280,14 @@ sdcomp_set_offset:
 	ld a,%00000100 ;inc b 
 	ld (sdcomp_offset_2),a 
 	
+	ret 
+
+sdcomp_reset_offset:
+	ld a,%11011010;jp c
+	ld (sdcomp_offset_1),a 
+	ld (sdcomp_bit_offset),a 
+	ld a,%00000000 ;nop
+	ld (sdcomp_offset_2),a 
 	ret 
 	
 sdcomp_set_flip:
@@ -1222,7 +1306,22 @@ sdcomp_set_flip:
 	ld (sdcomp_flip_setup),a 
 	
 	ret 
+
+sdcomp_reset_flip:
+	ld a, %00001001 ;rrc c 
+	ld (sdcomp_flip_bitstream),a
+	ld a, %00100011 ;inc hl 
+	ld (sdcomp_flip_bitstream_2),a 
+	ld a, %11010100 ;call nc 
+	ld (sdcomp_flip_traverse),a 
 	
+	ld a, %11010010 ;jp nc 
+	ld (sdcomp_flip_2bpc),a
+	ld (sdcomp_flip_3bpc),a
+	ld (sdcomp_flip_4bpc),a
+	ld a,%11011010;jp c
+	ld (sdcomp_flip_setup),a 
+	ret 
 
 
 sdcomp_set_fast:
@@ -1233,6 +1332,13 @@ sdcomp_set_fast:
 	
 	ret 
 
+sdcomp_reset_fast:
+	ld a, %11010010 ;jp nc 
+	ld(sdcomp_fast_1),a 
+	ld(sdcomp_fast_2),a 
+	ld(sdcomp_fast_3),a 
+	
+	ret 
 
 
 

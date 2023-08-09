@@ -22,20 +22,19 @@
 	ld	a,lcdBpp4
 	ld (mpLcdCtrl),a	
 
-	;call sdcomp_set_offset
-	call sdcomp_set_flip
-	call sdcomp_set_fast
-	ld hl, Test_sprite_fast
-	ld de,vRam 
+	call setup_decompress_queue
 	
-	call sprite_decompress
 	
-	ld hl,vRam
-	ld de, vram+(160* 2)	
-	ld a,1
-	call draw_fast_sprite_single_line
+	
+	
+	
+	;call draw_fg
+	
 	
 	call prgmpause
+	
+
+	
 
 ;	call decompress_calls
 	
@@ -220,8 +219,8 @@ write_a_to_ram:
 	push af 
 	push hl 
 write_a_to_ram_addr .equ $ + 1 
-	ld hl, $d41000
-	ld (hl),a 
+	ld hl, $d43000
+	;ld (hl),a 
 	inc hl 
 	ld (write_a_to_ram_addr),hl 
 	pop hl 
@@ -238,18 +237,26 @@ prgmpause: ;for testing, interrupts code until key pressed. will destroy af regi
 	pop de 
 	ret
 
-cam_pos:;bottom of cam
-	.dl 0
-bg_cam_pos:
+cam_pos:;y position of lowest visible line in fg layer
+	.dl 79
+bg_cam_pos: ;y position of lowest visible line in bg layer (= cam pos / 4)
 	.dl 0
 
 
 draw_buffer:;where new frame is drawn before lcd pointer is swapped 
-	.dl 0
+	.dl $d52c00
 	
 BG_draw_buffer: ;Address of the uppermost line of the background buffer. This is where new lines of bg are drawn to 
 	.dl 0
-BG_buffer .equ vram + (160*240)
+BG_buffer .equ vram + (160*240) ;Start of BG buffer 
+
+
+;d40000 = Decompressed sprite data
+;d49600 = BG buffer
+;d52c00 = Frame draw buffer 1 
+;d5c200 = frame draw buffer 2
+
+;pixelShadow .equ $D031F6 
 
 
 longestFrame:
@@ -272,18 +279,21 @@ hasLagged:
 #include "drawFGSprite.txt"
 #include "BetterSpriteDecompress.txt"
 #include "drawFG.txt"
-
+#include "SpriteDecompressManager.txt"
 #include "levelData.txt"
 #include "FGLevelData.txt"
 
 #include "TestingSpriteData.txt"
+#include "TestGeneratedSpriteData.txt"
 #include "Sprite_Data.txt"
-#include "FG_Data.txt"
-#include "MG_Data.txt"
-#include "BG_Data.txt"
+;#include "FG_Data.txt"
+;#include "MG_Data.txt"
+;#include "BG_Data.txt"
 #include "Palette_Setup.txt"
 #include "Equates.txt"
 ;#include "Decompress_Calls.txt"
 #include "Sprite_Tables.txt"
+#include "TestingBGData.txt"
+#include "TestingFGData.txt"
 
 

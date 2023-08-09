@@ -1,10 +1,11 @@
 
+FGMaxSpriteHeight .equ 120
 
 draw_mg:
-	ld hl,(draw_buffer)
+		ld hl,(draw_buffer)
 	ld (dfgs_vram_top_1),hl
 	ld (dfgs_vram_top_2),hl
-	ld bc,160*239
+	ld bc,160*240
 	add hl,bc
 	ld (dfgs_vram_bottom_1),hl 
 	ld (dfgs_vram_bottom_2),hl 
@@ -12,19 +13,23 @@ draw_mg:
 	ld (dfgs_vram_bottom_4),hl 
 	
 	ld hl,(cam_pos)
-	srl h
-	rr l;div by 2
+	srl h ;div by 2
+	rr l 
+	
 	ld bc,239
-	add hl,bc 
-	ld a,l ;lsb cam pos 
+	add hl,bc ;y-value of uppermost visible line of fg layer
+	ld a,l ;lsb cam pos, = line number in middle frame
 	ld (dfgs_cam_height_1),a
-	ld (dfgs_cam_height_2),a
+	ld (dfgs_cam_height_2),a ;y value in dataframe of uppermost line of viewport
 	ld (dfgs_cam_height_3),a
+		
+	neg 
+	ld (dfgs_viewport_to_upper_frame),a
 	
 	ld bc,0
 	ld c,h;msb ccam pos 
 	inc c 
-	ld hl,MG_Data_frame_table
+	;ld hl,FG_Data_frame_table
 	add hl,bc
 	add hl,bc 
 	add hl,bc 	
@@ -34,11 +39,12 @@ draw_mg:
 	ret
 
 
+
 draw_fg:
 	ld hl,(draw_buffer)
 	ld (dfgs_vram_top_1),hl
 	ld (dfgs_vram_top_2),hl
-	ld bc,160*239
+	ld bc,160*240
 	add hl,bc
 	ld (dfgs_vram_bottom_1),hl 
 	ld (dfgs_vram_bottom_2),hl 
@@ -47,11 +53,14 @@ draw_fg:
 	
 	ld hl,(cam_pos)
 	ld bc,239
-	add hl,bc 
-	ld a,l ;lsb cam pos 
+	add hl,bc ;y-value of uppermost visible line of fg layer
+	ld a,l ;lsb cam pos, = line number in middle frame
 	ld (dfgs_cam_height_1),a
-	ld (dfgs_cam_height_2),a
+	ld (dfgs_cam_height_2),a ;y value in dataframe of uppermost line of viewport
 	ld (dfgs_cam_height_3),a
+		
+	neg 
+	ld (dfgs_viewport_to_upper_frame),a ; 1 = vp bound is on frame separator
 	
 	ld bc,0
 	ld c,h;msb ccam pos 
@@ -74,49 +83,59 @@ draw_fg:
 draw_fg_sprites:
 	;UPPER FRAME, bottom of upper frame is not on screen, bottom of mid frame is on screen bottom of lower is not on screen
 	ld de,(hl)
-	ld (dfgs_sprite_pointers_1),de
+	ld (dfgs_sprite_pointers_1),de ;write sprite table ptr to required locations 
 	
 	ld de,0
 	inc hl 
 	inc hl
 	inc hl;past data table 
 	;hl is number of elements
-	ex af,af' ;'
-	ld a,(hl);number of elements
-	ex af,af' ;'
-	inc hl 
 	
-	
-dfgs_upper_loop:
-	ld a,(hl);sprite y value 
-	inc hl 
-	sub (hl);subtract height
-	jp nc,dfgs_upper_skip;if no carry,skip
+	;TODO if cam height is far below upper frame, can skip upper frame 
 	
 dfgs_cam_height_1 .equ $ + 1
-	sub 0 ;subtract camera height lsb 
-	jp c,dfgs_upper_cont
-	jp z,dfgs_upper_cont 
-dfgs_upper_skip:
-	inc hl 
-	inc hl
-	inc hl;to y 
+	ld a,0 
+	cp FGMaxSpriteHeight
+	jp nc, dfgs_do_upper_loop
+	;cam too low for upper frame sprites to be drawn
+	ld bc,0
+	ld c,(hl) ;bc holds number of elements
+	add hl,bc 
+	add hl,bc 
+	add hl,bc 
+	add hl,bc;hl points to end of current frame data 
+	inc hl;start of next frame
+	jp dfgs_mid_start ;skip upper loop
+	
+	
+dfgs_do_upper_loop:	
+	ex af,af' ;'
+	ld a,(hl);number of elements
+	inc a
+	ex af,af' ;'
+	inc hl;hl points to first sprite in upper frame  
+
+dfgs_upper_loop:;Want to check for sprites in upper frame that extend to lower frame 
+
 	ex af,af';'
 	dec a 
 	jp z,dfgs_mid_start 
 	ex af,af';'
-	jp dfgs_upper_loop
+
+	ld a,(hl);sprite y value 
+	inc hl ;to height
 	
-dfgs_upper_cont:
-	
-	add a,(hl);add height
-	;a now holds 0 indexed row, number of lines to skip drawing
-	exx
+dfgs_viewport_to_upper_frame .equ $ + 1
+	add a,0 ;a now holds number of lines to skip in current sprite (1 indexed)
+	jp c, dfgs_upper_skip ;if sprite has large y pos, can carry over
+	cp (hl) ;compare to sprite height 
+	jp nc, dfgs_upper_skip
+	;a now holds number of lines to skip drawing
+
 dfgs_vram_top_1 .equ $ + 1 
 	ld de,0;load top of vram 
-	exx;out shadow
-	
-	call dfgs_setup_draw;toshadow	
+	push hl ;save height ptr
+	call dfgs_setup_draw;hl = sprite ptr, de = vram addr
 	
 	bit 0,l ;location of sprite data in vram indicates fast or slow sprite
 	jp z,dfgs_upper_fast
@@ -125,140 +144,120 @@ dfgs_vram_top_1 .equ $ + 1
 dfgs_upper_fast:
 	call draw_fast_sprite_top_cut
 dfgs_upper_skip_2:
-	exx ;out of shadow, hl holds index
+	pop hl ;hl holds (height)
 	
-	ld de,0 
-	ld bc,0
+
+dfgs_upper_skip:
+	inc hl ;to x
+	inc hl ;to index 
 	inc hl;to y 
-	ex af,af';'
-	dec a 
-	jp z,dfgs_mid_start 
-	ex af,af';'
 	jp dfgs_upper_loop
+	
 	
 dfgs_mid_start:;MIDDLE FRAME, can be top cut, no cut, or bottom cut ===============================================
 	
-	ld de,(hl)
+	ld de,(hl) ;load sprite table ptr 
 	ld (dfgs_sprite_pointers_1),de
 	ld de,0
 	inc hl 
 	inc hl
-	inc hl;past data table 
+	inc hl;past sprite table ptr
 	ex af,af' ;'
 	ld a,(hl);number of elements
+	inc a 
 	ex af,af' ;'
-	inc hl 
+	inc hl ;to first y val 
 dfgs_mid_loop:
-	ld a,(hl);y val 
-	inc hl ;to height
-dfgs_cam_height_2 .equ $ + 1
-	sub 0;subtract cam pos
-	jp c,dfgs_mid_sprite_below ;sprite is below camera pos, either full or bottom cut 
-	jp z,dfgs_mid_sprite_below 
-	;sprite start is above camera pos, top cut 
-	cp (hl);a holds numb lines below sprite y , compare to height
-	jp c,dfgs_mid_above_cont
-	jp z,dfgs_mid_above_cont
-dfgs_mid_skip:;sprite is entirely above or below cam pos 
-	inc hl 
-	inc hl
-	inc hl;to y 
+	
 	ex af,af';'
 	dec a 
-	jp z,dfgs_lower_start 
+	jp z,dfgs_lower_start ;check for end of data
 	ex af,af';'
-	jp dfgs_mid_loop
-	
-dfgs_mid_above_cont:
-	;a = lines to skip 
-	exx
-dfgs_vram_top_2 .equ $ + 1 
-	ld de,0
-	exx
-	
-	call dfgs_setup_draw;toshadow
-	
-	bit 0,l 
-	jp z,dfgs_mid_top_fast
-	call draw_slow_sprite_top_cut
-	jp dfgs_mid_top_slow
-dfgs_mid_top_fast:
-	call draw_fast_sprite_top_cut
-dfgs_mid_top_slow:
-	exx;out shadwo
-	ld de,0 
-	ld bc,0
-	inc hl;to y 
-	ex af,af';'
-	dec a 
-	jp z,dfgs_lower_start 
-	ex af,af';'
-	jp dfgs_mid_loop
 
-dfgs_mid_sprite_below:;sprite start is = or below top of screen 
-	;can be full or bottom cut
-	;a holds distance of sprite below top of screen
-	;0 = top of screen 255 = 1 below ,254 = 2 below ... 17 = bottom of screen
-	dec a 
-	sub 16;a holds dist from bottom
-	jp c,dfgs_mid_skip
-	cp (hl);compare to height
-	jp c,dfgs_mid_bottom_cut
+	ld a,(hl);y val of sprite in dataframe
+	inc hl ;to height
+dfgs_cam_height_2 .equ $ + 1 ;y value in dataframe of uppermost line of viewport
+	sub 0;subtract cam pos
+	jp z, dfgs_mid_sprite_topline ;check case where sprite is on top line of viewport
+	jp nc, dfgs_mid_sprite_above ; carried, sprite is above viewport boundary, a holds num lines to skip
+dfgs_mid_sprite_topline:
+	;Sprite is below viewport bound, either full or bottom cut 
+	neg ;a holds number of lines sprite is below top of viewport 
+
+	;need to check if sprite is partially or entirely below veiwport
 	
-	;full sprite
-	exx
-dfgs_vram_bottom_2 .equ $ + 1
-	ld de,0
-	exx
-	call dfgs_setup_draw;toshadow
-	bit 0,l
+	sub 240
+	jp nc, dfgs_mid_skip ;sprite is entirely below viewport 
+	;otherwise, a holds -lines to draw 
+	neg ;a holds lines to draw 
+	cp (hl) ;compare to sprite height 
+	jp c, dfgs_mid_bottom_cut ;height > lines to draw, bottom is cut off 
+	;otherwise, draw full sprite 
+	
+dfgs_vram_bottom_1 .equ $ + 1  ;FULL SPRITE, a = lines above bottom of viewport
+	ld de,0;load bottom of vram 
+	push hl ;save height ptr
+	call dfgs_setup_draw;hl = sprite ptr, de = vram addr
+	
+	bit 0,l ;location of sprite data in vram indicates fast or slow sprite
 	jp z,dfgs_mid_full_fast
 	call draw_slow_sprite_full
-	jp dfgs_mid_full_slow
+	jp dfgs_mid_skip_1
 dfgs_mid_full_fast:
 	call draw_fast_sprite_full
-dfgs_mid_full_slow:
-	exx
-	ld de,0 
-	ld bc,0
+dfgs_mid_skip_1:
+	pop hl ;hl holds (height)
+	
+dfgs_mid_skip:;sprite is entirely above or below cam pos 
+	inc hl ;x
+	inc hl ;index 
 	inc hl;to y 
-	ex af,af';'
-	dec a 
-	jp z,dfgs_lower_start 
-	ex af,af';'
+	
 	jp dfgs_mid_loop
 	
-	
+
 dfgs_mid_bottom_cut:
-	exx
-dfgs_vram_bottom_1 .equ $ + 1
-	ld de,0
-	exx
-	call dfgs_setup_draw
-	inc a;for bottom cuts
-	bit 0,l 
-	jp z,dfgs_mid_bottom_fast
+dfgs_vram_bottom_2 .equ $ + 1  ;FULL SPRITE, a = lines above bottom of viewport
+	ld de,0;load bottom of vram 
+	push hl ;save height ptr
+	call dfgs_setup_draw;hl = sprite ptr, de = vram addr
+	
+	bit 0,l ;location of sprite data in vram indicates fast or slow sprite
+	jp z,dfgs_mid_bcut_fast
 	call draw_slow_sprite_bottom_cut
-	jp dfgs_mid_bottom_slow
-dfgs_mid_bottom_fast:
+	jp dfgs_mid_skip_2
+dfgs_mid_bcut_fast:
 	call draw_fast_sprite_bottom_cut
-dfgs_mid_bottom_slow:
-	exx
-	ld de,0 
-	ld bc,0
-	inc hl;to y 
-	ex af,af';'
-	dec a 
-	jp z,dfgs_lower_start 
-	ex af,af';'
-	jp dfgs_mid_loop
+dfgs_mid_skip_2:
+	pop hl ;hl holds (height)
+	jp dfgs_mid_skip
+
+dfgs_mid_sprite_above:
+	;a holds lines to skip 
+	cp (hl) ;compare to height
+	jp nc, dfgs_mid_skip ;skip sprite, entirely above viewport
+
+dfgs_vram_top_2 .equ $ + 1
+	ld de,0;top of vram 
+	push hl ;save height ptr
+	call dfgs_setup_draw;hl = sprite ptr, de = vram addr
+	
+	bit 0,l ;location of sprite data in vram indicates fast or slow sprite
+	jp z,dfgs_mid_tcut_fast
+	call draw_slow_sprite_top_cut
+	jp dfgs_mid_skip_3
+dfgs_mid_tcut_fast:
+	call draw_fast_sprite_top_cut
+dfgs_mid_skip_3:
+	pop hl ;hl holds (height)
+	jp dfgs_mid_skip
 	
 	
 	
 ;BOTTOM FRAME, FULL OR BOTTOM CUT===========================================================================	
 dfgs_lower_start:
 	
-	ld de,(hl)
+	ld de,(hl) ;load sprite table ptr
 	ld (dfgs_sprite_pointers_1),de
 	ld de,0
 	inc hl 
@@ -267,86 +266,73 @@ dfgs_lower_start:
 	
 	ex af,af' ;'
 	ld a,(hl);number of elements
+	inc a 
 	ex af,af' ;'
 	inc hl
 	
-	ld a,239
+
 dfgs_cam_height_3 .equ $ + 1 
-	sub 0;cam pos 
-	ret c;if bottom frame is offscreen 
-	ret z 
-	;a holds distance of top line of lower frame from bottom of screen starting from 1
-	ld (dfgs_lower_frame_height),a
+	ld a, 0
+	sub 239
+	ret nc;if bottom frame is offscreen 
+
+	;a holds y value of viewport bottom line in lower frame 
+	ld (dfgs_viewport_bottom_y),a
 
 dfgs_lower_loop:
-	ld a,(hl);y
-	inc hl
-dfgs_lower_frame_height .equ $ + 1
-	add a,0;add frame height 
-	jp c,dfgs_lower_cont;sprite onscreen
-dfgs_lower_skip:;sprite offscreen
-	inc hl
-	inc hl
-	inc hl;to y 
+
 	ex af,af';'
 	dec a 
 	ret z
 	ex af,af';'
-	jp dfgs_lower_loop
 	
-dfgs_lower_cont:
-	;a holds sprite dist from bottom of screen, from 0
-	cp (hl);compare to height
-	jp c,dfgs_lower_bottom_cut
+	ld a,(hl);y
+	inc hl ;inc to height
+dfgs_viewport_bottom_y .equ $ + 1
+	sub a,0;subtract y val of viewport bottom
+	jp c,dfgs_lower_skip;sprite below screen
 	
-	;full sprite 
-	exx
-dfgs_vram_bottom_3 .equ $ + 1
-	ld de,0
-	exx
-	call dfgs_setup_draw
-	bit 0,l
+	;a holds number of lines to draw 
+	cp (hl) ;compare to sprite height 
+	jp c, dfgs_lower_bottom_cut ;bottom is below viewport 
+	
+	;draw full sprite 
+dfgs_vram_bottom_3 .equ $ + 1  ;FULL SPRITE, a = lines above bottom of viewport
+	ld de,0;load bottom of vram 
+	push hl ;save height ptr
+	call dfgs_setup_draw;hl = sprite ptr, de = vram addr
+	
+	bit 0,l ;location of sprite data in vram indicates fast or slow sprite
 	jp z,dfgs_lower_full_fast
 	call draw_slow_sprite_full
-	jp dfgs_lower_full_slow
+	jp dfgs_lower_skip_1
 dfgs_lower_full_fast:
 	call draw_fast_sprite_full
-dfgs_lower_full_slow:
-	exx
-	ld de,0 
-	ld bc,0
+dfgs_lower_skip_1:
+	pop hl ;hl holds (height)
+
+dfgs_lower_skip:;sprite offscreen
+	inc hl ;x 
+	inc hl ;index 
 	inc hl;to y 
-	ex af,af';'
-	dec a 
-	ret z
-	ex af,af';'
+
 	jp dfgs_lower_loop
 	
+dfgs_lower_bottom_cut: 
+dfgs_vram_bottom_4 .equ $ + 1  ;FULL SPRITE, a = lines above bottom of viewport
+	ld de,0;load bottom of vram 
+	push hl ;save height ptr
+	call dfgs_setup_draw;hl = sprite ptr, de = vram addr
 	
-dfgs_lower_bottom_cut:
-	exx
-dfgs_vram_bottom_4 .equ $ + 1
-	ld de,0
-	exx
-	call dfgs_setup_draw
-	inc a;for bottom cuts
-	bit 0,l 
-	jp z,dfgs_lower_bottom_fast
+	bit 0,l ;location of sprite data in vram indicates fast or slow sprite
+	jp z,dfgs_lower_bcut_fast ;even= fast
 	call draw_slow_sprite_bottom_cut
-	jp dfgs_lower_bottom_slow
-dfgs_lower_bottom_fast:
+	jp dfgs_lower_skip_2
+dfgs_lower_bcut_fast:
 	call draw_fast_sprite_bottom_cut
-dfgs_lower_bottom_slow:
-	exx
-	ld de,0 
-	ld bc,0
-	inc hl;to y 
-	ex af,af';'
-	dec a 
-	ret z
-	ex af,af';'
-	jp dfgs_lower_loop
-	
+dfgs_lower_skip_2:
+	pop hl ;hl holds (height)
+	jp dfgs_lower_skip
 	
 	
 	
@@ -358,22 +344,21 @@ dfgs_lower_bottom_slow:
 ;a holds distance from bottom of screen, starting from 0, or for top cut dist above screen = num lines to skip 
 ;(hl) = height 	
 ;de = initial vram, top for top cut, otherwise bottom
-;returns hl = sprite data, de = vram position
+
+;Subtracts a lines from de (initial vram pos),
+;returns hl = sprite data, de = new vram position
 dfgs_setup_draw:
-	inc hl
+	inc hl ;x pos 
 	ld bc,0
 	ld c,(hl); x pos
 	inc hl;to index
-	push hl
-	push bc
-	exx;toshadow
-	pop bc
+	push hl;save sprite index 
 	ld h,160
-	ld l,a
+	ld l,a ;number of lines to subtract 
 	mlt hl;subtract from vram
 	scf 
 	ccf
-	ex de,hl;hl holds vram
+	ex de,hl;hl holds initial vram pos, de is lines to subtract  
 	sbc hl,de ;subtract to get sprite draw start line 
 	add hl,bc;add x pos ;hl now holds sprite draw start pos 
 	ex de,hl;put in de

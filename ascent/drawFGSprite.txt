@@ -15,7 +15,7 @@ setup_sprite_bottom_cut:
 setup_sprite_top_cut:
 	dec de ;move to correct vram pos 
 	ld bc,0
-	ld c,a
+	ld c,a ;lines to skip (1 indexed)
 	push de
 	ld de,0
 	push hl
@@ -77,7 +77,7 @@ draw_fast_sprite_single_line:
 
 
 
-;de = vram , hl = data, a = top lines to skip	
+;de = vram , hl = data, a = top lines to skip (1 indexed)
 draw_fast_sprite_top_cut:
 	call setup_sprite_top_cut
 	push bc ;save total and skipped loops 

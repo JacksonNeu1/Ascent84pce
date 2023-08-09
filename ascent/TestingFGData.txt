@@ -1,0 +1,55 @@
+
+
+	
+	
+FG_Data_frame_table:
+	.dl FG_Data_0
+	.dl FG_Data_1
+	.dl FG_Data_2
+	.dl FG_Data_3
+	
+FG_Data_3:
+	.dl Testing_sprite_table
+	.db 0
+	
+
+FG_Data_2:
+	.dl Testing_sprite_table
+	.db 5
+	.db 5,6,10,0 ;no overflow
+	.db 1,6,20,1
+	.db 0,6,30,0
+	.db 2,6,40,0
+	.db 9,8,60,12 ;no overflow
+	
+
+FG_Data_1:
+	.dl Testing_sprite_table
+	.db 10
+	.db 5,6,15,0
+	.db 1,6,25,1
+	.db 0,6,35,0
+	.db 20,6,45,0
+	.db 9,8,95,12
+	.db 255,6,55,0 ;L
+	.db 254,8,65,12 ;L
+	.db 90,7,65,8
+	.db 91,7,45,9
+	.db 92,7,85,10
+	
+
+FG_Data_0:
+	.dl Testing_sprite_table
+	.db 11
+	.db 5,6,10,0
+	.db 1,6,20,1
+	.db 255,6,30,0
+	.db 239,6,10,0
+	.db 240,6,20,1
+	.db 241,6,30,0
+	.db 255,6,40,0
+	.db 254,8,60,12
+	.db 0,6,30,0
+	.db 1,6,40,1
+	.db 2,8,60,12
+	

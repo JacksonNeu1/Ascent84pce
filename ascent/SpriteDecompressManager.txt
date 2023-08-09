@@ -1,0 +1,234 @@
+
+
+decompress_queue_start .equ vram
+
+decompress_queue_end .equ vram + (7*40) ;Max queue length of 40
+
+decompress_tail_ptr:
+	.dl decompress_queue_start + 6  ;points to sprite being currently decompressed (parameters byte)
+
+decompress_head_ptr: ;points to where next element will be added to queue
+	.dl decompress_queue_start
+
+;Decompress queue format
+; .dl Sprite data ptr, decompress location, parameters (7 = fast, 6 = offset, 5 = flip, 4 =started decompressing 3 = finished decompressing )
+
+setup_decompress_queue:
+	ld a,$FF
+	ld bc, 7*40
+	ld hl, decompress_queue_start
+	call _MemSet
+	ret 
+
+;bc = sprite data ptr, de = decompress location, a = params
+
+add_to_decompress_queue:
+	ld hl, (decompress_head_ptr)
+	ld (hl), bc 
+	inc hl
+	inc hl 
+	inc hl 
+
+	ld (hl),de
+	
+	inc hl 
+	inc hl 
+	inc hl 
+	
+	ld (hl), a 
+	inc hl ;start of next element 
+	
+	push hl 
+	ld de, decompress_queue_end
+	scf
+	ccf
+	sbc hl,de ;check if we have reached end of queue to wrap around
+	pop hl
+	jp z, a2dq_back_to_start
+	
+	ld (decompress_head_ptr),hl
+	ret
+	
+a2dq_back_to_start:
+	ld hl,decompress_queue_start
+	ld (decompress_head_ptr),hl
+	ret
+	
+	
+
+
+
+	;if has ended, return. at end of queue
+	;if not started, begin decompression and set start flag
+	;if has started, but not ended, continue decompression 
+	;if started and ended, move to next element 
+continue_decompressions:
+	ld hl, (decompress_tail_ptr)
+	ld a,(hl) ;decompress params 
+	bit 3,a 
+	ret nz ;sprite is done decompressing, at end of queue 
+	bit 4,a
+	jp z, cd_begin_decompression
+	
+	;has started,not ended 
+	call sdcomp_continue 
+	or a 
+	ret nz ;sprite not yet done decompressing 
+
+cd_done_decompressing:
+	;sprite finished decompressing
+	ld hl, (decompress_tail_ptr)	
+	set 3,(hl) ;set finished flag
+	ld de,7 
+	add hl,de ;points to next element in queue
+	
+	push hl 
+	ld de, decompress_queue_end
+	scf
+	ccf
+	sbc hl,de 
+	pop hl
+	jp nc, cd_back_to_start
+	ld (decompress_tail_ptr),hl
+	jp continue_decompressions ;Move on to next sprite 
+	
+cd_back_to_start:
+	ld hl,decompress_queue_start
+	ld (decompress_tail_ptr),hl
+	jp continue_decompressions ;Move on to next sprite 
+
+cd_begin_decompression:
+	;setup and begin decompressing
+	set 4,(hl) ;set start flag
+	push af 
+	bit 7,a 
+	call nz, sdcomp_set_fast
+	pop af 
+	
+	push af 
+	bit 7,a 
+	call z, sdcomp_reset_fast
+	pop af 
+	
+	push af 
+	bit 6,a 
+	call nz, sdcomp_set_offset
+	pop af 
+	
+	push af 
+	bit 6,a 
+	call nz, sdcomp_reset_offset
+	pop af 
+	
+	push af 
+	bit 5,a 
+	call nz, sdcomp_set_flip
+	pop af 
+	
+	push af 
+	bit 5,a 
+	call nz, sdcomp_reset_flip
+	pop af 
+	
+	ld hl, (decompress_tail_ptr) ;may be unnessecary
+	
+	dec hl 
+	dec hl 
+	dec hl 
+	ld de,(hl) ;load decompress location
+
+	dec hl 
+	dec hl 
+	dec hl 
+	ld hl,(hl) ;load sprite data ptr
+
+	call sprite_decompress
+	or a 
+	ret nz ;sprite not yet done decompressing 
+	jp cd_done_decompressing
+
+
+check_for_decompress_calls:
+	ld a, (cam_pos + 1) ;Current frame cam is in
+	ld b, (last_decompressed_cam_pos)
+	ld (last_decompressed_cam_pos),a 
+	;need to check if cam has moved up or down since last time
+	sub a,b 
+	
+	
+	ret z ;if same, no new things to add to queue 
+	jp nc, cfdc_cam_move_up ;camera has moved up since last time 
+	
+	;cam has moved down since last time 
+	ld hl, (decompress_calls_table_down)
+	jp cfdc_add_calls_to_queue
+	
+	
+cfdc_cam_move_up:
+	ld hl, (decompress_calls_table_up)
+
+	;a = cam frame, hl = decompress call table (up or down)
+cfdc_add_calls_to_queue:
+	ld bc,0
+	ld c,a
+	add hl,bc 
+	add hl,bc 
+	add hl,bc 
+	ld hl,(hl) ;hl now points to correct decompress frame 
+	
+	ex af,af' ;'
+	ld a,(hl) ;b holds num elements 
+	inc a 
+	ex af,af' ;'
+	
+	inc hl ;points to first sprite data 
+cfdc_add_to_queue_loop:
+	ex af,af' ;'
+	dec a ;account for cases where frame has 0 elements 
+	ret z
+	ex af,af' ;'
+	ld bc ,(hl) ;load sprite data 
+	inc hl 
+	inc hl
+	inc hl 
+	ld de,(hl) ;load decomp location 
+	inc hl 
+	inc hl
+	inc hl 
+	ld a,(hl) ;ld params
+	inc hl 
+	call add_to_decompress_queue
+	jp cfdc_add_to_queue_loop
+	
+	
+
+
+last_decompressed_cam_pos:
+	.db 0 ;camera frame last time checking for decomp was called 
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

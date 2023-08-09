@@ -81,6 +81,7 @@ testSlowSprite:
 	
 
 
+CAPPINGTON!
 
 BG SPRITES, can be on odd pixel start 
 ; width(px) rounded up
@@ -106,10 +107,11 @@ testBGSprite:
 
 
 Dataframes: Structure for storing locations of sprites grouped into 256 px tall segments of map data 
-Sprites position based on top left pixel of sprite. Sprites may extend into the frame below if they are tall enough
+Sprites position based on top left pixel of sprite. Sprites may extend into the frame below if they are tall 
+Bacground data frame (use actual height not h-1)
 .dl Sprite Table
 .db number of objects in frame
-.db object location data (ypos,sprite height-1, xpos, sprite index in table)
+.db object location data (ypos,sprite heigh1, xpos, sprite index in table)
 
 
 

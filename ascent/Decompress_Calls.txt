@@ -1,145 +1,38 @@
-decompress_calls:
 
-	call sdcomp_reset_bg_sprite 
-	call sdcomp_reset_flip
-	call sdcomp_reset_fast_sprite
-	ld hl, Banana1
-	ld de, Banana1_Slow
-	call sprite_decompress
-	ld hl, Shittlogo
-	ld de, Shittlogo_Slow
-	call sprite_decompress
-	ld hl, OrangeDot
-	ld de, OrangeDot_Slow
-	call sprite_decompress
-	ld hl, SquiggleL
-	ld de, SquiggleL_Slow
-	call sprite_decompress
-	call sdcomp_reset_bg_sprite 
-	call sdcomp_set_flip
-	call sdcomp_reset_fast_sprite
-	ld hl, Banana1
-	ld de, Banana1_Slow_F
-	call sprite_decompress
-	ld hl, SquiggleL
-	ld de, SquiggleL_Slow_F
-	call sprite_decompress
-	call sdcomp_reset_bg_sprite 
-	call sdcomp_reset_flip
-	call sdcomp_reset_fast_sprite
-	call sdcomp_set_offset 
-	ld hl, Banana1
-	ld de, Banana1_Slow_O
-	call sprite_decompress
-	call sdcomp_set_offset 
-	ld hl, Banana1Large
-	ld de, Banana1Large_Slow_O
-	call sprite_decompress
-	call sdcomp_set_offset 
-	ld hl, Shittlogo
-	ld de, Shittlogo_Slow_O
-	call sprite_decompress
-	call sdcomp_set_offset 
-	ld hl, OrangeDot
-	ld de, OrangeDot_Slow_O
-	call sprite_decompress
-	call sdcomp_set_offset 
-	ld hl, SquiggleL
-	ld de, SquiggleL_Slow_O
-	call sprite_decompress
-	call sdcomp_reset_bg_sprite 
-	call sdcomp_set_flip
-	call sdcomp_reset_fast_sprite
-	call sdcomp_set_offset 
-	ld hl, Banana1
-	ld de, Banana1_Slow_O_F
-	call sprite_decompress
-	call sdcomp_set_offset 
-	ld hl, Banana1Large
-	ld de, Banana1Large_Slow_O_F
-	call sprite_decompress
-	call sdcomp_set_offset 
-	ld hl, SquiggleL
-	ld de, SquiggleL_Slow_O_F
-	call sprite_decompress
-	call sdcomp_reset_bg_sprite 
-	call sdcomp_reset_flip
-	call sdcomp_set_fast_sprite
-	ld hl, Banana1Large
-	ld de, Banana1Large_Fast
-	call sprite_decompress
-	call sdcomp_reset_bg_sprite 
-	call sdcomp_set_flip
-	call sdcomp_set_fast_sprite
-	ld hl, Banana1Large
-	ld de, Banana1Large_Fast_F
-	call sprite_decompress
-	call sdcomp_set_bg_sprite 
-	call sdcomp_reset_flip
-	call sdcomp_reset_fast_sprite
-	ld hl, Banana1Large
-	ld de, Banana1Large_BG
-	call sprite_decompress
-	ld hl, OrangeDot
-	ld de, OrangeDot_BG
-	call sprite_decompress
-	ld hl, Banana5
-	ld de, Banana5_BG
-	call sprite_decompress
-	ld hl, GreenCurl1
-	ld de, GreenCurl1_BG
-	call sprite_decompress
-	ld hl, Bluecurl
-	ld de, Bluecurl_BG
-	call sprite_decompress
-	call sdcomp_set_bg_sprite 
-	call sdcomp_reset_flip
-	call sdcomp_reset_fast_sprite
-	call sdcomp_set_offset 
-	ld hl, Banana1Large
-	ld de, Banana1Large_BG_O
-	call sprite_decompress
-	call sdcomp_set_offset 
-	ld hl, OrangeDot
-	ld de, OrangeDot_BG_O
-	call sprite_decompress
-	call sdcomp_set_offset 
-	ld hl, Banana5
-	ld de, Banana5_BG_O
-	call sprite_decompress
-	call sdcomp_set_offset 
-	ld hl, GreenCurl1
-	ld de, GreenCurl1_BG_O
-	call sprite_decompress
-	call sdcomp_set_offset 
-	ld hl, Bluecurl
-	ld de, Bluecurl_BG_O
-	call sprite_decompress
-	call sdcomp_set_bg_sprite 
-	call sdcomp_set_flip
-	call sdcomp_reset_fast_sprite
-	ld hl, Banana1Large
-	ld de, Banana1Large_BG_F
-	call sprite_decompress
-	ld hl, Banana5
-	ld de, Banana5_BG_F
-	call sprite_decompress
-	ld hl, GreenCurl1
-	ld de, GreenCurl1_BG_F
-	call sprite_decompress
-	call sdcomp_set_bg_sprite 
-	call sdcomp_set_flip
-	call sdcomp_reset_fast_sprite
-	call sdcomp_set_offset 
-	ld hl, Banana1Large
-	ld de, Banana1Large_BG_O_F
-	call sprite_decompress
-	call sdcomp_set_offset 
-	ld hl, Banana5
-	ld de, Banana5_BG_O_F
-	call sprite_decompress
-	call sdcomp_set_offset 
-	ld hl, GreenCurl1
-	ld de, GreenCurl1_BG_O_F
-	call sprite_decompress
-	ret
+
+
+
+decompress_calls_table_up:
+	.dl decompress_frame_0_up
+	.dl decompress_frame_1_up
+	.dl decompress_frame_2_up
+	.dl decompress_frame_3_up
+
+
+
+
+decompress_frame_0_up:
+
+decompress_frame_1_up:
+;num elements
+; sprite data, decompress location, params ( 7 = set if fast, 6 = set if offset, 5 = set if flip, 4 =started decompressing 3 = finished decompressing ) 
+
+
+
+
+
+decompress_calls_table_down:
+	.dl decompress_frame_0_down
+	.dl decompress_frame_1_down
+	.dl decompress_frame_2_down
+	.dl decompress_frame_3_down
+
+
+
+decompress_frame_0_down:
+
+
+decompress_frame_1_down:
+
+
+decompress_frame_2_down:
