@@ -27,6 +27,18 @@ EA = before end of loop
 E9 End flag set 
 
 
+
+Dataframes: Structure for storing locations of sprites grouped into 256 px tall segments of map data 
+Sprites position based on top left pixel of sprite. Sprites may extend into the frame below if they are tall 
+Bacground data frame (use actual height not h-1) 8/11/23
+.dl Sprite Table
+.db number of objects in frame
+.db object location data (ypos,sprite heigh1, xpos, sprite index in table)
+
+
+
+
+
 Compressed Sprite Data
 
 .db flags ( 4bpc,3bpc,2bpc,1bpc,0bpc,noalpha)
@@ -106,12 +118,6 @@ testBGSprite:
 
 
 
-Dataframes: Structure for storing locations of sprites grouped into 256 px tall segments of map data 
-Sprites position based on top left pixel of sprite. Sprites may extend into the frame below if they are tall 
-Bacground data frame (use actual height not h-1)
-.dl Sprite Table
-.db number of objects in frame
-.db object location data (ypos,sprite heigh1, xpos, sprite index in table)
 
 
 

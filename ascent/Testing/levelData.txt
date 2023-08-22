@@ -1,0 +1,50 @@
+bg_sprite_pointers:;255 sprites max
+	;.dl lastSprite
+	;.dl lastSpritecopy
+	;.dl sprite2
+	;.dl sprite3
+
+
+
+
+bg_data_frame:
+	;.db sprite data table pointer
+	;.db y (lsb) ,height-1,x,index(0 indicates end of data)
+	
+
+bg_sprite_pointers_1:
+	;.dl testBG1
+	;.dl testBG1;h = 7
+	;.dl testBG2;h = 5
+	;.dl testBG3;h = 0
+	;.dl testBG4
+
+bg_data_frame_0:
+	.dl bg_sprite_pointers_1 
+	.db 200,7,5,0
+	;upper 
+bg_data_frame_1:
+	.dl bg_sprite_pointers_1
+	.db 200,7,5,1
+	.db 100,7,5,1
+	.db 8,7,5,1
+	.db 7,7,10,1
+	.db 6,7,15,1;X
+	.db 5,7,20,1;X
+	.db 5,5,25,2
+	.db 4,5,30,2;X
+	.db 3,5,35,2;X
+	.db 0,5,40,2;X
+	.db 0,0,45,3
+	.db 10,0,50,3
+	.db 50,7,5,0;end 
+	
+bg_data_frame_2:
+	.dl bg_sprite_pointers_1
+	.db 255,7,60,1
+	.db 254,7,65,1
+	.db 100,5,70,2
+	.db 100,0,75,3
+	.db 50,7,80,0
+	
+	

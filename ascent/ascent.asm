@@ -26,16 +26,25 @@
 	
 	
 	
-	
-	
 	;call draw_fg
 	
+	ld a,0
+	call cfdc_cam_move_up ;need to skip here for frame 0
 	
 	call prgmpause
-	
 
+	call continue_decompressions
 	
+	call continue_decompressions
+	
+	call continue_decompressions
 
+	call continue_decompressions
+	
+	call prgmpause
+	call continue_decompressions
+	
+	
 ;	call decompress_calls
 	
 	;gen purp timers
@@ -54,10 +63,8 @@
 	ld hl,0
 	ld (cam_pos),hl
 
-	call setup_bg
+	;call setup_bg
 
-	;call draw_bg
-	
 	
 main_loop:
 	;clear timer
@@ -68,9 +75,15 @@ main_loop:
 	ld ($F20003),a
 	
 	;Instructions here 
-	call draw_bg
+	;call draw_bg
 	
-	call draw_mg
+	;TEST CLEAR BUFFER
+	ld hl,BG_buffer
+	ld de,(draw_buffer)
+	ld bc, 160*240
+	ldir
+	
+	;call draw_mg
 	
 	call draw_fg
 	
@@ -106,15 +119,12 @@ longest_frame_skip:
 	ld (draw_buffer),hl
 	
 	;check if lcd has drawn first frame
-clock_check_loop:
 
-
+	call check_for_decompress_calls
 	;Sprite decompression will occur here
-
-	ld a,($F20001);128hz clock
-	cp 3;check if reached 3 
-	jp c,clock_check_loop
+	call continue_decompressions
 	
+
 	;wait until finished drawing second frame
 
 clear_int:      
@@ -139,14 +149,10 @@ wait_int:
 	;Move cam
 	ld hl,(cam_pos)
 	inc hl
-	inc hl
-	inc hl
-	inc hl
-	inc hl
-	inc hl
-	inc hl
-	inc hl
+
 	ld (cam_pos),hl
+	
+	;Check for end of demo
 	ld bc,239
 	add hl,bc 
 	ld a,h ;msb 
@@ -220,7 +226,7 @@ write_a_to_ram:
 	push hl 
 write_a_to_ram_addr .equ $ + 1 
 	ld hl, $d43000
-	;ld (hl),a 
+	ld (hl),a 
 	inc hl 
 	ld (write_a_to_ram_addr),hl 
 	pop hl 
@@ -228,6 +234,7 @@ write_a_to_ram_addr .equ $ + 1
 	ret 
 
 prgmpause: ;for testing, interrupts code until key pressed. will destroy af register
+	push af
 	push de 
 	push hl 
 	ei
@@ -235,6 +242,7 @@ prgmpause: ;for testing, interrupts code until key pressed. will destroy af regi
 	di
 	pop hl 
 	pop de 
+	pop af
 	ret
 
 cam_pos:;y position of lowest visible line in fg layer
@@ -280,20 +288,31 @@ hasLagged:
 #include "BetterSpriteDecompress.txt"
 #include "drawFG.txt"
 #include "SpriteDecompressManager.txt"
-#include "levelData.txt"
-#include "FGLevelData.txt"
+;#include "levelData.txt"
+;#include "FGLevelData.txt"
 
-#include "TestingSpriteData.txt"
-#include "TestGeneratedSpriteData.txt"
-#include "Sprite_Data.txt"
+#include "generated/BG_Data.txt"
+#include "generated/MG_Data.txt"
+#include "generated/FG_Data.txt"
+#include "generated/DecompressCalls.txt"
+#include "generated/Palette_Setup.txt"
+#include "generated/Sprite_Tables.txt"
+#include "generated/Sprite_Data.txt"
+#include "generated/SpriteEquates.txt"
+
+
+;
+;#include "TestingSpriteData.txt"
+;#include "TestGeneratedSpriteData.txt"
+;#include "Sprite_Data.txt"
 ;#include "FG_Data.txt"
 ;#include "MG_Data.txt"
 ;#include "BG_Data.txt"
-#include "Palette_Setup.txt"
-#include "Equates.txt"
+;#include "Palette_Setup.txt"
+;#include "Equates.txt"
 ;#include "Decompress_Calls.txt"
-#include "Sprite_Tables.txt"
-#include "TestingBGData.txt"
-#include "TestingFGData.txt"
+;#include "Sprite_Tables.txt"
+;#include "TestingBGData.txt"
+;#include "TestingFGData.txt"
 
 

@@ -69,8 +69,9 @@ draw_fg:
 	add hl,bc
 	add hl,bc 
 	add hl,bc 	
+
 	ld hl,(hl);upper frame 
-	
+
 	call draw_fg_sprites
 	ret
 
@@ -91,8 +92,8 @@ draw_fg_sprites:
 	inc hl;past data table 
 	;hl is number of elements
 	
-	;TODO if cam height is far below upper frame, can skip upper frame 
 	
+	;if cam is far below upper frame, can skip upper frame 
 dfgs_cam_height_1 .equ $ + 1
 	ld a,0 
 	cp FGMaxSpriteHeight
@@ -110,7 +111,13 @@ dfgs_cam_height_1 .equ $ + 1
 	
 dfgs_do_upper_loop:	
 	ex af,af' ;'
+	
 	ld a,(hl);number of elements
+	;TESTING
+	;call write_a_to_ram
+	;call prgmpause
+	;TESTING
+	
 	inc a
 	ex af,af' ;'
 	inc hl;hl points to first sprite in upper frame  
@@ -118,12 +125,18 @@ dfgs_do_upper_loop:
 dfgs_upper_loop:;Want to check for sprites in upper frame that extend to lower frame 
 
 	ex af,af';'
-	dec a 
+	dec a ;dec number of elements
+	;call write_a_to_ram
+	
 	jp z,dfgs_mid_start 
 	ex af,af';'
 
 	ld a,(hl);sprite y value 
 	inc hl ;to height
+	
+	;call write_a_to_ram
+	;call prgmpause
+	
 	
 dfgs_viewport_to_upper_frame .equ $ + 1
 	add a,0 ;a now holds number of lines to skip in current sprite (1 indexed)
@@ -151,6 +164,11 @@ dfgs_upper_skip:
 	inc hl ;to x
 	inc hl ;to index 
 	inc hl;to y 
+	
+	;ld a,$AA
+	;call write_a_to_ram
+	;call prgmpause
+	
 	jp dfgs_upper_loop
 	
 	
@@ -164,6 +182,10 @@ dfgs_mid_start:;MIDDLE FRAME, can be top cut, no cut, or bottom cut ============
 	inc hl;past sprite table ptr
 	ex af,af' ;'
 	ld a,(hl);number of elements
+	
+	
+
+	
 	inc a 
 	ex af,af' ;'
 	inc hl ;to first y val 
@@ -171,16 +193,24 @@ dfgs_mid_loop:
 	
 	ex af,af';'
 	dec a 
+	;call write_a_to_ram
 	jp z,dfgs_lower_start ;check for end of data
 	ex af,af';'
 
+	;ld a, $AB
+	;call write_a_to_ram
+
+
 	ld a,(hl);y val of sprite in dataframe
+	;call write_a_to_ram
 	inc hl ;to height
 dfgs_cam_height_2 .equ $ + 1 ;y value in dataframe of uppermost line of viewport
 	sub 0;subtract cam pos
 	jp z, dfgs_mid_sprite_topline ;check case where sprite is on top line of viewport
 	jp nc, dfgs_mid_sprite_above ; carried, sprite is above viewport boundary, a holds num lines to skip
 dfgs_mid_sprite_topline:
+
+
 	;Sprite is below viewport bound, either full or bottom cut 
 	neg ;a holds number of lines sprite is below top of viewport 
 

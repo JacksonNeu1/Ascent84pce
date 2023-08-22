@@ -75,19 +75,19 @@ sdcomp_flip_bitstream_2 .equ $
 ; sets some flags, decrements remaining lines, traverses sprite data if flip, returns the read data 
 ; next call returns first bit in next row  
 sdcomp_get_next_alpha:
-	ld a,$A2;test 
-	call write_a_to_ram
+	;ld a,$A2;test 
+	;call write_a_to_ram
 	ld a,c 
-	call write_a_to_ram 
+	;call write_a_to_ram 
 	ld a,(hl)
-	call write_a_to_ram
+	;call write_a_to_ram
 	
 	scf 
 sdcomp_end_of_line_alp .equ $
 	jp c, sdcomp_end_of_line_alp_skip
 
-	ld a,$A3
-	call write_a_to_ram 
+	;ld a,$A3
+	;call write_a_to_ram 
 	
 	ld a, %11010010 ;jp nc 
 	ld (sdcomp_end_vitrual_zero_read),a 
@@ -105,8 +105,8 @@ sdcomp_bit_offset .equ $ ;jp nc for offset
 	jp c,sdcomp_bit_offset_skip
 	ld a,%11011010;jp c 
 	ld (sdcomp_bit_offset),a
-	ld a,$A9
-	call write_a_to_ram
+	;ld a,$A9
+	;call write_a_to_ram
 	ld a,0
 	ret ;return 0 first bit
 sdcomp_bit_offset_skip:;skip bit offset
@@ -124,7 +124,7 @@ sdcomp_bit_offset_skip:;skip bit offset
 	and c 
 	call sdcomp_next_in_bitstream;incs bitstream
 	;a holds data to return
-	call write_a_to_ram
+	;call write_a_to_ram
 	scf 
 sdcomp_no_alpha_1 .equ $;Load a with 1 if no alpha
 	jp c,sdcomp_no_alpha_1_skip
@@ -139,8 +139,8 @@ sdcomp_no_alpha_1_skip:
 	
 	;HAve read last bit in line  
 	
-	ld a,$AC;Test
-	call write_a_to_ram;Test
+	;ld a,$AC;Test
+	;call write_a_to_ram;Test
 	;Decrement lines remaining in sprite
 sdcomp_lines_remaining .equ $ + 1
 	ld a,0
@@ -151,8 +151,8 @@ sdcomp_lines_remaining .equ $ + 1
 	;end of last line reached 
 	ld a,%11011010;jp c
 	ld (sdcomp_end_reached_flag) , a ;set end reached flag to indicate sprite is done decompressing TODO 
-	ld a,$E9
-	call write_a_to_ram;TEST 
+	;ld a,$E9
+	;call write_a_to_ram;TEST 
 sdcomp_set_end_flag_skip:
 	
 
@@ -171,16 +171,16 @@ sdcomp_offset_1_skip:
 sdcomp_sprite_width_2 .equ $+1
 	ld a,0 ;Return sprite width to a'
 	
-	call write_a_to_ram
+	;call write_a_to_ram
 	
 sdcomp_end_of_line_skip:
 	ex af,af' ;' ;out
 	
-	push af ;testing
-	ld a,$A0
-	call write_a_to_ram
-	pop af 
-	call write_a_to_ram
+	;push af ;testing
+	;ld a,$A0
+	;call write_a_to_ram
+	;pop af 
+	;call write_a_to_ram
 	
 	ret 
 	
@@ -188,13 +188,13 @@ sdcomp_end_of_line_skip:
 
 ;in shadow,returns a $FF,$0F,$F0,$00
 sdcomp_get_next_alpha_pair:
-	ld a,$A1
-	call write_a_to_ram
+	;ld a,$A1
+	;call write_a_to_ram
 	
-	ld a,c 
-	call write_a_to_ram 
-	ld a,(hl)
-	call write_a_to_ram
+	;ld a,c ;test
+	;call write_a_to_ram 
+	;ld a,(hl) ;test
+	;call write_a_to_ram
 	
 	ld a,%11011010;jp c 
 	ld(sdcomp_end_vitrual_zero_read),a ;reset vitrual zero read flag
@@ -203,7 +203,7 @@ sdcomp_get_next_alpha_pair:
 	or a 
 	jp z,sdcomp_get_next_alpha_pair0
 	ld a,$F0;FIRST BIT WAS 1
-	call write_a_to_ram
+	;call write_a_to_ram
 	jp sdcomp_get_next_alpha_pair1
 sdcomp_get_next_alpha_pair0:
 	ld a,0
@@ -217,8 +217,8 @@ sdcomp_end_vitrual_zero_read .equ $
 	ld a,%00111101 ;dec a 
 	ld (sdcomp_dec_gap_btwn_rows),a 
 	;We should subtract 1 from the next interline gap length whenever a virtual 00 is read.
-	ld a,$A4
-	call write_a_to_ram
+	;ld a,$A4
+	;call write_a_to_ram
 	pop af 
 	
 sdcomp_get_next_alpha_pair1:
@@ -385,11 +385,11 @@ sdcomp_get_color_from_index_lsn:
 	and %00001111;and with least significant nibble 
 	pop de 
 	
-	push af 
-	ld a,$C0
-	call write_a_to_ram
-	pop af 
-	call write_a_to_ram
+	;push af 
+	;ld a,$C0
+	;call write_a_to_ram
+	;pop af 
+	;call write_a_to_ram
 	
 	ret 
 	
@@ -401,11 +401,11 @@ sdcomp_get_color_from_index_msn:
 	rrca 
 	pop de 
 	
-	push af 
-	ld a,$C0
-	call write_a_to_ram
-	pop af 
-	call write_a_to_ram
+	;push af 
+	;ld a,$C0
+	;call write_a_to_ram
+	;pop af 
+	;call write_a_to_ram
 	
 	ret 
 
@@ -467,12 +467,12 @@ sdcomp_traverse_line_data_color_skip:
 	pop de  ;back to write location 
 	;set new end of line pointers 
 	
-	ld a,$BB 
-	call write_a_to_ram 
-	ld a,(hl) 
-	call write_a_to_ram 
-	ld a,c 
-	call write_a_to_ram 
+	;ld a,$BB 
+	;call write_a_to_ram 
+	;ld a,(hl) 
+	;call write_a_to_ram 
+	;ld a,c 
+	;call write_a_to_ram 
 	
 	
 	ld (sdcomp_alpha_data_line_end_byte),hl
@@ -483,10 +483,11 @@ sdcomp_traverse_line_data_color_skip:
 	ld a,c 
 	ld (sdcomp_color_data_line_end_mask),a
 	
-	ld a,(hl) 
-	call write_a_to_ram 
-	ld a,c 
-	call write_a_to_ram 
+	;ld a,(hl) 
+	;call write_a_to_ram 
+	;ld a,c 
+	;call write_a_to_ram 
+	
 	exx;to shadow 
 	ret
 
@@ -617,11 +618,11 @@ sdcomp_offset_2 .equ $
 	sub b ;a holds 160 - (width in pairs)
 	ld (sdcomp_gap_btwn_rows),a 
 	
-	call write_a_to_ram
-	ld a,$BE
-	call write_a_to_ram
-	ld a,b 
-	call write_a_to_ram
+	;call write_a_to_ram
+	;ld a,$BE
+	;call write_a_to_ram
+	;ld a,b 
+	;call write_a_to_ram
 	
 	
 	ld a,(hl);load width again
@@ -819,12 +820,12 @@ sdcomp_end_of_line_gaplength_skip:
 	;call write_a_to_ram
 	inc b 
 
-	push af ;TEST
-	ld a,$AB;TEST
-	call write_a_to_ram
+	;push af ;TEST
+	;ld a,$AB;TEST
+	;call write_a_to_ram
 	
 	;call write_a_to_ram
-	pop af ;TEST
+	;pop af ;TEST
 	
 	or a
 	jp z,sdcomp_find_gap_length_loop
@@ -834,10 +835,10 @@ sdcomp_end_of_line_gaplength_skip:
 	push af; save leading pixel alpha data 
 	;B holds number of 00 pairs + 1
 	
-	ld a,$AA ;test
-	call write_a_to_ram
-	ld a,b ;test
-	call write_a_to_ram
+	;ld a,$AA ;test
+	;call write_a_to_ram
+	;ld a,b ;test
+	;call write_a_to_ram
 	
 	
 	
@@ -884,11 +885,11 @@ sdcomp_ldir_loop:
 	call sdcomp_get_next_alpha_pair ;get alpha data
 	inc b 
 	
-	push af 
-	ld a,$DE 
-	call write_a_to_ram
-	pop af
-	call write_a_to_ram
+	;push af 
+	;ld a,$DE 
+	;call write_a_to_ram
+	;pop af
+	;call write_a_to_ram
 	
 ;	scf 
 ;sdcomp_end_of_line_2 .equ $ ;set when end of line reached 
@@ -914,8 +915,8 @@ sdcomp_fast_2 .equ $
 	
 	;ends in 11 -> 00,ending pixels will be 11 if slow sprite. If fast, jump to ldir write here 
 	
-	ld a,$DF
-	call write_a_to_ram
+	;ld a,$DF
+	;call write_a_to_ram
 	
 	;must add 1 to next gap length, have already read first 00
 	;for the case with virtual 00, this cancels the decrease in gap length 
@@ -932,12 +933,13 @@ sdcomp_fast_2 .equ $
 sdcomp_ldir_write:
 
 	;b holds 11 pairs found 
-	push af;TEST
-	ld a,$DA 
-	call write_a_to_ram
-	ld a,b 
-	call write_a_to_ram
-	pop af ;TEST
+	
+	;push af;TEST
+	;ld a,$DA 
+	;call write_a_to_ram
+	;ld a,b 
+	;call write_a_to_ram
+	;pop af ;TEST
 
 	push af;save ending pixels
 	ld a,b
@@ -955,12 +957,12 @@ sdcomp_fast_3 .equ $
 	jp sdcomp_write_end_pixels
 sdcomp_no_ldir:;no ldir length, a holds ending pixels,00,10,01,11
 
-	push af ;TEST
 
-	ld a,$DB
-	call write_a_to_ram
-	pop af ;TEST
-	call write_a_to_ram
+	;push af ;TEST
+	;ld a,$DB
+	;call write_a_to_ram
+	;pop af ;TEST
+	;call write_a_to_ram
 
 	push af;save end pixels
 	
@@ -976,10 +978,10 @@ sdcomp_write_end_pixels:
 ;not in shadow
 	
 	;test
-	push af 
-	ld a,$E0
-	call write_a_to_ram
-	pop af 
+	;push af 
+	;ld a,$E0
+	;call write_a_to_ram
+	;pop af 
 	
 
 	call sdcomp_write_leading_or_end_pixels
@@ -998,40 +1000,27 @@ sdcomp_loops_per_line_counter .equ $ + 1
 	inc a 
 	ld (sdcomp_loops_per_line_counter),a
 
-	; scf 
-; sdcomp_write_loops_per_line_flag .equ $
-	; jp c, sdcomp_write_loops_per_line_skip
-	; exx 
-	; ld a,(sdcomp_loops_per_line_counter)
-	; ld (de),a ;write loops/line data 
-	; inc de
-	; exx 
-	; ld a,%11011010;jp c
-	; ld (sdcomp_write_loops_per_line_flag),a
-
-; sdcomp_write_loops_per_line_skip:
 
 	
-	ld a,$EA
-	call write_a_to_ram
 	
-	;TODO Check for interrupt
-sdcomp_testing_interrupt_count .equ $ + 1;TESTING
-	ld a,10
-	dec a 
-	ld(sdcomp_testing_interrupt_count),a 
-	jp z,sdcomp_interrupt 
+	;Check the timer to see if we need to begin rendering next frame 
+	;1090 cycles @ 32768hz ~= 1 frame (1/30s)
+	;Should stop decompressions at 1000 cycles?
+	; = %00000011, 11101000
+sdcomp_clock_check_loop:
+	ld a,($F20001);128hz clock
+	cp %00000011 ;check if reached 3 
+	jp c,sdcomp_find_gap_length ;msb <= 2, can continue  
+	ld a,($F20000);32768hz clock
+	cp %11101000;check if reached value 
+	jp c,sdcomp_find_gap_length ;msb = 3 and lsb < value, can continue
 	
-	
-	
-	jp sdcomp_find_gap_length
+	;Past clock threshold, need to stop decompressions
 
 
-	;TODO can prob not save a register
+	;TODO can prob not need to save (a) register
 sdcomp_interrupt:
 
-	ld a,10    ;TEST
-	ld(sdcomp_testing_interrupt_count),a ;TEST 
 
 	;not in shadow 
 	ld (sdcomp_cont_hl),hl 
@@ -1084,8 +1073,8 @@ sdcomp_cont_aP .equ $ + 1
 
 sdcomp_end:
 	
-	ld a,$69
-	call write_a_to_ram
+	;ld a,$69
+	;call write_a_to_ram
 	
 	ld a, %11010010 ;jp nc 
 	ld (sdcomp_end_reached_flag),a 

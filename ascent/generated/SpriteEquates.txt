@@ -1,0 +1,15 @@
+Banana1_Slow_0 .equ 13894081
+Banana1Large_Fast_0 .equ 13894362
+Banana1_Slow_O_0 .equ 13895019
+Banana1Large_Slow_O_F_0 .equ 13895299
+Banana1Large_Fast_F_0 .equ 13896094
+Banana1_Slow_O_F_0 .equ 13896751
+Banana1_Slow_F_0 .equ 13897031
+Banana1Large_Slow_O_0 .equ 13897311
+Bluething_Slow_O_0 .equ 13894081
+Bluething_Slow_0 .equ 13895019
+Shittlogo_Slow_O_0 .equ 13895263
+Shittlogo_Slow_0 .equ 13896571
+Banana1Large_Slow_O_1 .equ 13897899
+Bluething_Slow_O_1 .equ 13894081
+Bluething_Slow_1 .equ 13895019

@@ -1,0 +1,38 @@
+Sprite_Table_0:
+	.dl Banana1_Slow_F
+	.dl Banana1Large_Slow_O
+	.dl Banana1Large_Fast
+	.dl Banana1Large_Slow_O_F
+	.dl Banana1_Slow
+	.dl Banana1_Slow_O_F
+	.dl Banana1Large_Fast_F
+	.dl Banana1_Slow_O
+	.dl Shittlogo_Slow_O
+	.dl Shittlogo_Slow
+	.dl OrangeDot_Slow_O
+	.dl OrangeDot_Slow
+	.dl SquiggleL_Slow_O
+	.dl SquiggleL_Slow_F
+	.dl SquiggleL_Slow
+	.dl SquiggleL_Slow_O_F
+
+Sprite_Table_1:
+	.dl Banana1Large_BG_O_F
+	.dl Banana1Large_BG_O
+	.dl Banana1Large_BG
+	.dl Banana5_BG_O
+	.dl Banana5_BG
+	.dl GreenCurl1_BG_O_F
+	.dl GreenCurl1_BG_O
+	.dl GreenCurl1_BG_F
+	.dl Bluecurl_BG_O
+	.dl Banana1Large_BG_F
+	.dl Banana5_BG_F
+	.dl Bluecurl_BG
+	.dl OrangeDot_BG_O
+	.dl GreenCurl1_BG
+	.dl OrangeDot_BG
+	.dl Banana5_BG_O_F
+
+Sprite_Table_2:
+

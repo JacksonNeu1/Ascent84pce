@@ -1,0 +1,11 @@
+MG_Data_frame_table:
+	.dl MG_Data_0
+
+
+
+MG_Data_0:
+	.dl Sprite_Table_0
+	.db 0
+
+
+
