@@ -38,6 +38,8 @@ move_bg:
 	rr l ;div by 4 to get location of BG layer
 	;hl holds bg cam pos, lowest visible line of bg layer 
 	ld bc,(bg_cam_pos);previous BG cam location 
+	scf
+	ccf
 	sbc hl,bc ;compare to the updated location
 	ret z ;if 0, the bg buffer does not need to be moved 
 	jp c,move_bg_down ;if previous cam pos id above current pos, screen has moved down, go to move bg down 1 line
@@ -49,6 +51,13 @@ move_bg_down:
 
 
 dec_bg:;move bg cam down 1px 
+
+	
+	;Testibng
+	;ld a,$AD
+	;call write_a_to_ram
+	
+
 	;write on draw buffer line 
 	ld hl,(BG_draw_buffer) ;topmost line of bg buffer will be overwritten with new bottom line 
 	ld (dbgl_vram_line_start),hl 
@@ -56,6 +65,8 @@ dec_bg:;move bg cam down 1px
 	ld hl,(bg_cam_pos)
 	dec hl ;dec bg cam pos by 1 
 	ld (bg_cam_pos),hl 
+	
+	ld bc,0 ;clear bc reg
 	ld c,h;bottom y value msb 
 	ld a,l ;bottom y value lsb 
 	ld hl,BG_Data_frame_table
@@ -65,6 +76,8 @@ dec_bg:;move bg cam down 1px
 	add hl,bc ;add 3*frame number to get to correct frame pointer
 	ld hl,(hl) ;hl now points to bg frame data 
 	call draw_bg_line
+	
+
 	;move buffer pos
 	ld hl,(BG_draw_buffer)
 	ld bc,$d52b60;BG_buffer_end, start of last line of vram buffer 
@@ -82,6 +95,13 @@ dec_bg_bottom_skip:
 
 
 inc_bg:;move cam up 
+
+	
+	;Testibng
+	;ld a,$AC
+	;call write_a_to_ram
+	
+
 	ld hl,(BG_draw_buffer)
 	ld bc,BG_buffer
 	scf 
@@ -181,7 +201,7 @@ setup_bg_loop_count .equ $ + 1
 draw_bg_line:
 	push hl ;upper frame sprite table pointer 
 	push af ;save line number 
-	ld a,$00 ;Set all of line to FF to clear it with color 16
+	ld a,$FF ;Set all of line to FF to clear it with color 16
 	ld bc,160
 	ld hl,(dbgl_vram_line_start) ;Drawing address of line 
 	call _MemSet ;Clear all of line 

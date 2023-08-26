@@ -31,7 +31,7 @@
 	ld a,0
 	call cfdc_cam_move_up ;need to skip here for frame 0
 	
-	call prgmpause
+	;call prgmpause
 
 	call continue_decompressions
 	
@@ -40,8 +40,17 @@
 	call continue_decompressions
 
 	call continue_decompressions
+	call continue_decompressions
+
+	call continue_decompressions
+	call continue_decompressions
+
+	call continue_decompressions
+	call continue_decompressions
+
+	call continue_decompressions
 	
-	call prgmpause
+	;call prgmpause
 	call continue_decompressions
 	
 	
@@ -63,10 +72,13 @@
 	ld hl,0
 	ld (cam_pos),hl
 
-	;call setup_bg
+	call setup_bg ;after initial decompressions and cam setup
 
 	
 main_loop:
+
+	
+
 	;clear timer
 	ld a,0
 	ld ($F20000),a;32768hz
@@ -75,17 +87,93 @@ main_loop:
 	ld ($F20003),a
 	
 	;Instructions here 
-	;call draw_bg
+	
+	
+	;call input_cam_up
+	call get_inputs
+	
+	call move_bg
+
+
+	; TESTING move bg time
+	ld hl,0
+	ld a,($F20000);32768hz
+	ld l,a
+	ld a,($F20001);128hz 
+	ld h,a
+	srl h ;div by 8
+	rr l 
+	srl h
+	rr l 
+	srl h
+	rr l 
+	ld a,l
+	inc a ;Cant have time be 1, BC must be >1 for _MemSet
+	inc a
+	inc a
+	ld (move_bg_time),a
+
+	
+	
+	call draw_bg
+
+	
+	
+	;TEsting
+	ld hl,0
+	ld a,($F20000);32768hz
+	ld l,a
+	ld a,($F20001);128hz 
+	ld h,a
+	srl h ;div by 8
+	rr l 
+	srl h
+	rr l 
+	srl h
+	rr l 
+	ld a,l
+	ld (draw_bg_time),a
 	
 	;TEST CLEAR BUFFER
-	ld hl,BG_buffer
-	ld de,(draw_buffer)
-	ld bc, 160*240
-	ldir
+	;ld hl,BG_buffer
+	;ld de,(draw_buffer)
+	;ld bc, 160*240
+	;ldir
 	
-	;call draw_mg
+	call draw_mg
+	
+	;TEsting
+	ld hl,0
+	ld a,($F20000);32768hz
+	ld l,a
+	ld a,($F20001);128hz 
+	ld h,a
+	srl h ;div by 8
+	rr l 
+	srl h
+	rr l 
+	srl h
+	rr l 
+	ld a,l
+	ld (draw_mg_time),a
 	
 	call draw_fg
+	
+	
+	;TEsting
+	ld hl,0
+	ld a,($F20000);32768hz
+	ld l,a
+	ld a,($F20001);128hz 
+	ld h,a
+	srl h ;div by 8
+	rr l 
+	srl h
+	rr l 
+	srl h
+	rr l 
+	ld a,l
+	ld (draw_fg_time),a
 	
 	ld hl,0
 	
@@ -112,11 +200,7 @@ longest_frame_skip:
 	inc hl
 	ld (frameCount),hl
 	
-	;swap draw buffers
-	ld hl,(mpLcdBase)
-	ld de,(draw_buffer)
-	ld (mpLcdBase),de
-	ld (draw_buffer),hl
+
 	
 	;check if lcd has drawn first frame
 
@@ -124,8 +208,128 @@ longest_frame_skip:
 	;Sprite decompression will occur here
 	call continue_decompressions
 	
+	;TEsting
+	ld hl,0
+	ld a,($F20000);32768hz
+	ld l,a
+	ld a,($F20001);128hz 
+	ld h,a
+	srl h ;div by 4
+	rr l 
+	srl h
+	rr l 
+	srl h
+	rr l 
+	ld a,l
+	ld (decompress_time),a
+
+
+	
+
+	;Draw time bar at top of screen 
+	ld hl, (draw_buffer)
+	ld bc,0 
+	ld a,(decompress_time)
+	ld c,a 
+	ld a, $55
+	call _MemSet
+	
+	ld hl, (draw_buffer)
+	ld bc,0 
+	ld a,(draw_fg_time)
+	ld c,a 
+	ld a, $44
+	call _MemSet
+	
+	ld hl, (draw_buffer)
+	ld bc,0 
+	ld a,(draw_mg_time)
+	ld c,a 
+	ld a, $33
+	call _MemSet
+
+	ld hl, (draw_buffer)
+	ld bc,0 
+	ld a,(draw_bg_time)
+	ld c,a 
+	ld a, $22
+	call _MemSet
+	
+	
+	
+	ld hl, (draw_buffer)
+	ld bc,0 
+	ld a,(move_bg_time)
+	ld c,a 
+	ld a, $11
+	call _MemSet
+
+	
+	ld hl, (draw_buffer)
+	ld bc, 136  ; =1000/4 /2 for 2pix/bit 
+	add hl,bc 
+	ld a,$55
+	ld (hl),a 
+	
+	
+	;Again for thick line
+	
+	ld hl, (draw_buffer)
+	ld bc,160
+	add hl,bc 
+	ld a,(decompress_time)
+	ld c,a 
+	ld a, $55
+	call _MemSet
+	
+	ld hl, (draw_buffer)
+	ld bc,160
+	add hl,bc 
+	ld a,(draw_fg_time)
+	ld c,a 
+	ld a, $44
+	call _MemSet
+	
+	ld hl, (draw_buffer)
+	ld bc,160
+	add hl,bc
+	ld a,(draw_mg_time)
+	ld c,a 
+	ld a, $33
+	call _MemSet
+
+	ld hl, (draw_buffer)
+	ld bc,160
+	add hl,bc
+	ld a,(draw_bg_time)
+	ld c,a 
+	ld a, $22
+	call _MemSet
+	
+	ld hl, (draw_buffer)
+	ld bc,160
+	add hl,bc
+	ld a,(move_bg_time)
+	ld c,a 
+	ld a, $11
+	call _MemSet
+
+	ld hl, (draw_buffer)
+	ld bc,296
+	add hl,bc 
+	ld a,$55
+	ld (hl),a 
+	
+	
+
 
 	;wait until finished drawing second frame
+
+	;swap draw buffers
+	ld hl,(mpLcdBase)
+	ld de,(draw_buffer)
+	ld (mpLcdBase),de
+	ld (draw_buffer),hl
 
 clear_int:      
     ld hl, mpLcdIcr
@@ -146,17 +350,12 @@ wait_int:
 	add hl,bc 
 	ld (totalTime),hl 
 	
-	;Move cam
-	ld hl,(cam_pos)
-	inc hl
-
-	ld (cam_pos),hl
 	
-	;Check for end of demo
-	ld bc,239
-	add hl,bc 
-	ld a,h ;msb 
-	cp 35
+	
+	
+
+	
+
 	jp nz,main_loop
 		
 	;print debug times 
@@ -225,7 +424,7 @@ write_a_to_ram:
 	push af 
 	push hl 
 write_a_to_ram_addr .equ $ + 1 
-	ld hl, $d43000
+	ld hl, $d46000
 	ld (hl),a 
 	inc hl 
 	ld (write_a_to_ram_addr),hl 
@@ -246,7 +445,7 @@ prgmpause: ;for testing, interrupts code until key pressed. will destroy af regi
 	ret
 
 cam_pos:;y position of lowest visible line in fg layer
-	.dl 79
+	.dl 0
 bg_cam_pos: ;y position of lowest visible line in bg layer (= cam pos / 4)
 	.dl 0
 
@@ -265,6 +464,17 @@ BG_buffer .equ vram + (160*240) ;Start of BG buffer
 ;d5c200 = frame draw buffer 2
 
 ;pixelShadow .equ $D031F6 
+
+move_bg_time:
+	.db 0
+draw_bg_time:
+	.db 0
+draw_mg_time:
+	.db 0
+draw_fg_time:
+	.db 0
+decompress_time:
+	.db 0
 
 
 longestFrame:
@@ -288,6 +498,7 @@ hasLagged:
 #include "BetterSpriteDecompress.txt"
 #include "drawFG.txt"
 #include "SpriteDecompressManager.txt"
+#include "getInputs.txt"
 ;#include "levelData.txt"
 ;#include "FGLevelData.txt"
 

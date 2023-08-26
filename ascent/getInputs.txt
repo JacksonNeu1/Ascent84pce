@@ -1,0 +1,64 @@
+
+
+
+get_inputs:
+	ld	hl,DI_Mode		; register for keypad mode
+	ld	(hl),2			; set single scan mode
+
+	xor	a,a
+scan_wait:
+	cp	a,(hl)			; wait for keypad idle mode
+	jr	nz,scan_wait
+	
+	; https://wikiti.brandonw.net/index.php?title=84PCE:Ports:A000
+	
+	ld	a,(kbdG7) ; $F5001E
+ 	bit	kbitUp,a
+	jp nz, input_cam_up
+	
+	
+	bit	kbitDown,a
+	jp nz, input_cam_down
+	ret
+	
+	
+input_cam_up:
+	;Move cam
+	ld hl,(cam_pos)
+	
+	push hl 
+	ld bc,2500
+	sbc hl,bc 
+	pop hl 
+	ret nc
+	
+	
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	ld (cam_pos),hl
+	ret
+
+
+input_cam_down:
+	;Move cam
+	ld hl,(cam_pos)
+	
+	push hl 
+	ld bc,5 
+	sbc hl,bc 
+	pop hl 
+	ret c 
+	
+	
+	dec hl
+	dec hl
+	dec hl
+	dec hl
+	ld (cam_pos),hl
+	ret
+	
+	
+	

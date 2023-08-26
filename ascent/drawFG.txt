@@ -2,7 +2,7 @@
 FGMaxSpriteHeight .equ 120
 
 draw_mg:
-		ld hl,(draw_buffer)
+	ld hl,(draw_buffer)
 	ld (dfgs_vram_top_1),hl
 	ld (dfgs_vram_top_2),hl
 	ld bc,160*240
@@ -29,7 +29,7 @@ draw_mg:
 	ld bc,0
 	ld c,h;msb ccam pos 
 	inc c 
-	;ld hl,FG_Data_frame_table
+	ld hl,MG_Data_frame_table
 	add hl,bc
 	add hl,bc 
 	add hl,bc 	

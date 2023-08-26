@@ -15,6 +15,34 @@ decompress_calls_table_up:
 	.dl decompress_frame_up_13
 	.dl decompress_frame_up_14
 	.dl decompress_frame_up_15
+	.dl decompress_frame_up_16
+	.dl decompress_frame_up_17
+	.dl decompress_frame_up_18
+	.dl decompress_frame_up_19
+	.dl decompress_frame_up_20
+	.dl decompress_frame_up_21
+	.dl decompress_frame_up_22
+	.dl decompress_frame_up_23
+	.dl decompress_frame_up_24
+	.dl decompress_frame_up_25
+	.dl decompress_frame_up_26
+	.dl decompress_frame_up_27
+	.dl decompress_frame_up_28
+	.dl decompress_frame_up_29
+	.dl decompress_frame_up_30
+	.dl decompress_frame_up_31
+	.dl decompress_frame_up_32
+	.dl decompress_frame_up_33
+	.dl decompress_frame_up_34
+	.dl decompress_frame_up_35
+	.dl decompress_frame_up_36
+	.dl decompress_frame_up_37
+	.dl decompress_frame_up_38
+	.dl decompress_frame_up_39
+	.dl decompress_frame_up_40
+	.dl decompress_frame_up_41
+	.dl decompress_frame_up_42
+	.dl decompress_frame_up_43
 
 
 decompress_calls_table_down:
@@ -34,25 +62,65 @@ decompress_calls_table_down:
 	.dl decompress_frame_down_13
 	.dl decompress_frame_down_14
 	.dl decompress_frame_down_15
+	.dl decompress_frame_down_16
+	.dl decompress_frame_down_17
+	.dl decompress_frame_down_18
+	.dl decompress_frame_down_19
+	.dl decompress_frame_down_20
+	.dl decompress_frame_down_21
+	.dl decompress_frame_down_22
+	.dl decompress_frame_down_23
+	.dl decompress_frame_down_24
+	.dl decompress_frame_down_25
+	.dl decompress_frame_down_26
+	.dl decompress_frame_down_27
+	.dl decompress_frame_down_28
+	.dl decompress_frame_down_29
+	.dl decompress_frame_down_30
+	.dl decompress_frame_down_31
+	.dl decompress_frame_down_32
+	.dl decompress_frame_down_33
+	.dl decompress_frame_down_34
+	.dl decompress_frame_down_35
+	.dl decompress_frame_down_36
+	.dl decompress_frame_down_37
+	.dl decompress_frame_down_38
+	.dl decompress_frame_down_39
+	.dl decompress_frame_down_40
+	.dl decompress_frame_down_41
+	.dl decompress_frame_down_42
+	.dl decompress_frame_down_43
 
 
 
 decompress_frame_up_0:
-	.db 7
+	.db 13
 	.dl Banana1, Banana1_Slow_0
 	.db %00000000
 	.dl Banana1Large, Banana1Large_Fast_0
 	.db %10000000
 	.dl Banana1, Banana1_Slow_O_0
 	.db %01000000
-	.dl Banana1Large, Banana1Large_Slow_O_F_0
-	.db %01100000
 	.dl Banana1Large, Banana1Large_Fast_F_0
 	.db %10100000
+	.dl Banana1Large, Banana1Large_Slow_O_F_0
+	.db %01100000
 	.dl Banana1, Banana1_Slow_O_F_0
 	.db %01100000
 	.dl Banana1, Banana1_Slow_F_0
 	.db %00100000
+	.dl SquiggleL, SquiggleL_Slow_0
+	.db %00000000
+	.dl Banana5, Banana5_Slow_0
+	.db %00000000
+	.dl Banana5, Banana5_Slow_O_0
+	.db %01000000
+	.dl Banana5, Banana5_Slow_O_F_0
+	.db %01100000
+	.dl Banana5, Banana5_Slow_F_0
+	.db %00100000
+	.dl OrangeDot, OrangeDot_Slow_O_0
+	.db %01000000
 
 decompress_frame_up_1:
 	.db 1
@@ -70,7 +138,9 @@ decompress_frame_up_3:
 	.db %00000000
 
 decompress_frame_up_4:
-	.db 0
+	.db 1
+	.dl OrangeDot, OrangeDot_Slow_0
+	.db %00000000
 
 decompress_frame_up_5:
 	.db 1
@@ -104,7 +174,11 @@ decompress_frame_up_11:
 	.db %00000000
 
 decompress_frame_up_12:
-	.db 0
+	.db 2
+	.dl SquiggleL, SquiggleL_Slow_O_F_0
+	.db %01100000
+	.dl SquiggleL, SquiggleL_Slow_F_0
+	.db %00100000
 
 decompress_frame_up_13:
 	.db 0
@@ -113,6 +187,94 @@ decompress_frame_up_14:
 	.db 0
 
 decompress_frame_up_15:
+	.db 0
+
+decompress_frame_up_16:
+	.db 2
+	.dl SquiggleL, SquiggleL_Slow_1
+	.db %00000000
+	.dl SquiggleL, SquiggleL_Slow_O_0
+	.db %01000000
+
+decompress_frame_up_17:
+	.db 0
+
+decompress_frame_up_18:
+	.db 0
+
+decompress_frame_up_19:
+	.db 0
+
+decompress_frame_up_20:
+	.db 0
+
+decompress_frame_up_21:
+	.db 0
+
+decompress_frame_up_22:
+	.db 0
+
+decompress_frame_up_23:
+	.db 0
+
+decompress_frame_up_24:
+	.db 0
+
+decompress_frame_up_25:
+	.db 0
+
+decompress_frame_up_26:
+	.db 0
+
+decompress_frame_up_27:
+	.db 0
+
+decompress_frame_up_28:
+	.db 0
+
+decompress_frame_up_29:
+	.db 0
+
+decompress_frame_up_30:
+	.db 0
+
+decompress_frame_up_31:
+	.db 0
+
+decompress_frame_up_32:
+	.db 0
+
+decompress_frame_up_33:
+	.db 0
+
+decompress_frame_up_34:
+	.db 0
+
+decompress_frame_up_35:
+	.db 0
+
+decompress_frame_up_36:
+	.db 0
+
+decompress_frame_up_37:
+	.db 0
+
+decompress_frame_up_38:
+	.db 0
+
+decompress_frame_up_39:
+	.db 0
+
+decompress_frame_up_40:
+	.db 0
+
+decompress_frame_up_41:
+	.db 0
+
+decompress_frame_up_42:
+	.db 0
+
+decompress_frame_up_43:
 	.db 0
 
 
@@ -124,46 +286,44 @@ decompress_frame_down_1:
 	.db 0
 
 decompress_frame_down_2:
-	.db 2
-	.dl Banana1, Banana1_Slow_0
-	.db %00000000
-	.dl Banana1, Banana1_Slow_O_0
-	.db %01000000
+	.db 0
 
 decompress_frame_down_3:
-	.db 2
-	.dl Banana1Large, Banana1Large_Slow_O_F_0
-	.db %01100000
+	.db 1
 	.dl Banana1Large, Banana1Large_Fast_F_0
 	.db %10100000
 
 decompress_frame_down_4:
-	.db 2
-	.dl Banana1, Banana1_Slow_O_F_0
+	.db 1
+	.dl Banana1Large, Banana1Large_Slow_O_F_0
 	.db %01100000
-	.dl Banana1, Banana1_Slow_F_0
-	.db %00100000
 
 decompress_frame_down_5:
-	.db 1
-	.dl Banana1Large, Banana1Large_Slow_O_0
-	.db %01000000
+	.db 0
 
 decompress_frame_down_6:
-	.db 0
+	.db 2
+	.dl Banana1Large, Banana1Large_Slow_O_0
+	.db %01000000
+	.dl SquiggleL, SquiggleL_Slow_0
+	.db %00000000
 
 decompress_frame_down_7:
 	.db 0
 
 decompress_frame_down_8:
 	.db 2
+	.dl Banana1, Banana1_Slow_0
+	.db %00000000
+	.dl Banana1, Banana1_Slow_O_0
+	.db %01000000
+
+decompress_frame_down_9:
+	.db 2
 	.dl Bluething, Bluething_Slow_O_0
 	.db %01000000
 	.dl Bluething, Bluething_Slow_0
 	.db %00000000
-
-decompress_frame_down_9:
-	.db 0
 
 decompress_frame_down_10:
 	.db 0
@@ -172,21 +332,129 @@ decompress_frame_down_11:
 	.db 0
 
 decompress_frame_down_12:
+	.db 0
+
+decompress_frame_down_13:
 	.db 1
 	.dl Shittlogo, Shittlogo_Slow_0
 	.db %00000000
 
-decompress_frame_down_13:
+decompress_frame_down_14:
 	.db 2
 	.dl Banana1Large, Banana1Large_Fast_0
 	.db %10000000
 	.dl Shittlogo, Shittlogo_Slow_O_0
 	.db %01000000
 
-decompress_frame_down_14:
+decompress_frame_down_15:
 	.db 1
 	.dl Banana1Large, Banana1Large_Slow_O_1
 	.db %01000000
 
-decompress_frame_down_15:
+decompress_frame_down_16:
+	.db 0
+
+decompress_frame_down_17:
+	.db 2
+	.dl Bluething, Bluething_Slow_O_1
+	.db %01000000
+	.dl Bluething, Bluething_Slow_1
+	.db %00000000
+
+decompress_frame_down_18:
+	.db 0
+
+decompress_frame_down_19:
+	.db 0
+
+decompress_frame_down_20:
+	.db 2
+	.dl SquiggleL, SquiggleL_Slow_O_F_0
+	.db %01100000
+	.dl SquiggleL, SquiggleL_Slow_F_0
+	.db %00100000
+
+decompress_frame_down_21:
+	.db 0
+
+decompress_frame_down_22:
+	.db 0
+
+decompress_frame_down_23:
+	.db 0
+
+decompress_frame_down_24:
+	.db 5
+	.dl Banana1, Banana1_Slow_O_F_0
+	.db %01100000
+	.dl SquiggleL, SquiggleL_Slow_1
+	.db %00000000
+	.dl SquiggleL, SquiggleL_Slow_O_0
+	.db %01000000
+	.dl Banana5, Banana5_Slow_O_F_0
+	.db %01100000
+	.dl Banana5, Banana5_Slow_F_0
+	.db %00100000
+
+decompress_frame_down_25:
+	.db 0
+
+decompress_frame_down_26:
+	.db 1
+	.dl Banana1, Banana1_Slow_F_0
+	.db %00100000
+
+decompress_frame_down_27:
+	.db 0
+
+decompress_frame_down_28:
+	.db 2
+	.dl OrangeDot, OrangeDot_Slow_O_0
+	.db %01000000
+	.dl OrangeDot, OrangeDot_Slow_0
+	.db %00000000
+
+decompress_frame_down_29:
+	.db 0
+
+decompress_frame_down_30:
+	.db 0
+
+decompress_frame_down_31:
+	.db 0
+
+decompress_frame_down_32:
+	.db 0
+
+decompress_frame_down_33:
+	.db 0
+
+decompress_frame_down_34:
+	.db 0
+
+decompress_frame_down_35:
+	.db 0
+
+decompress_frame_down_36:
+	.db 0
+
+decompress_frame_down_37:
+	.db 0
+
+decompress_frame_down_38:
+	.db 0
+
+decompress_frame_down_39:
+	.db 0
+
+decompress_frame_down_40:
+	.db 0
+
+decompress_frame_down_41:
+	.db 0
+
+decompress_frame_down_42:
+	.db 0
+
+decompress_frame_down_43:
 	.db 0

@@ -2,7 +2,7 @@
 
 decompress_queue_start .equ vram
 
-decompress_queue_end .equ vram + (7*64) ;Max queue length of 64
+decompress_queue_end .equ vram + (7*64) ;Max queue length of 64 TODO change back
 
 decompress_tail_ptr:
 	.dl decompress_queue_start + 6  ;points to sprite being currently decompressed (parameters byte)
@@ -15,7 +15,7 @@ decompress_head_ptr: ;points to where next element will be added to queue
 
 setup_decompress_queue: ;clears memory in queue
 	ld a,$FF
-	ld bc, 7*40
+	ld bc, 7*64
 	ld hl, decompress_queue_start
 	call _MemSet
 	ret 
@@ -55,8 +55,6 @@ a2dq_back_to_start:
 	;ld a,$AA ;testing
 	;call write_a_to_ram
 
-
-
 	ld hl,decompress_queue_start
 	ld (decompress_head_ptr),hl
 	ret
@@ -74,6 +72,16 @@ continue_decompressions:
 	ld a,(hl) ;decompress params 
 	bit 3,a 
 	ret nz ;sprite is done decompressing, at end of queue 
+	
+	;testing
+	;push af
+	;ld a,$55
+	;call write_a_to_ram
+	;pop af
+	
+	
+	
+	
 	bit 4,a
 	jp z, cd_begin_decompression
 	
@@ -101,13 +109,19 @@ cd_done_decompressing:
 	
 cd_back_to_start:
 	ld hl,decompress_queue_start
+	ld de,6 ;tail points to the parameters byte
+	add hl,de
 	ld (decompress_tail_ptr),hl
 	jp continue_decompressions ;Move on to next sprite 
 
 cd_begin_decompression:
 
+	;testing
+	;push af 
+	;ld a,$AA
+	;call write_a_to_ram
+	;pop af
 	
-
 	;setup and begin decompressing
 	set 4,(hl) ;set start flag
 	push af 

@@ -1,15 +1,26 @@
-Banana1_Slow_0 .equ 13894081
-Banana1Large_Fast_0 .equ 13894362
-Banana1_Slow_O_0 .equ 13895019
-Banana1Large_Slow_O_F_0 .equ 13895299
-Banana1Large_Fast_F_0 .equ 13896094
-Banana1_Slow_O_F_0 .equ 13896751
-Banana1_Slow_F_0 .equ 13897031
-Banana1Large_Slow_O_0 .equ 13897311
-Bluething_Slow_O_0 .equ 13894081
-Bluething_Slow_0 .equ 13895019
-Shittlogo_Slow_O_0 .equ 13895263
-Shittlogo_Slow_0 .equ 13896571
-Banana1Large_Slow_O_1 .equ 13897899
-Bluething_Slow_O_1 .equ 13894081
-Bluething_Slow_1 .equ 13895019
+Banana1_Slow_0 .equ 13894081 ; vRam + 1 - 281
+Banana1Large_Fast_0 .equ 13894362 ; vRam + 282 - 939
+Banana1_Slow_O_0 .equ 13895019 ; vRam + 939 - 1218
+Banana1Large_Fast_F_0 .equ 13895298 ; vRam + 1218 - 1875
+Banana1Large_Slow_O_F_0 .equ 13895955 ; vRam + 1875 - 2670
+Banana1_Slow_O_F_0 .equ 13896751 ; vRam + 2671 - 2950
+Banana1_Slow_F_0 .equ 13897031 ; vRam + 2951 - 3231
+SquiggleL_Slow_0 .equ 13897311 ; vRam + 3231 - 3646
+Banana5_Slow_0 .equ 13897727 ; vRam + 3647 - 4022
+Banana5_Slow_O_0 .equ 13898103 ; vRam + 4023 - 4405
+Banana5_Slow_O_F_0 .equ 13898485 ; vRam + 4405 - 4787
+Banana5_Slow_F_0 .equ 13898867 ; vRam + 4787 - 5162
+OrangeDot_Slow_O_0 .equ 13899243 ; vRam + 5163 - 5334
+Banana1Large_Slow_O_0 .equ 13899415 ; vRam + 5335 - 6130
+Bluething_Slow_O_0 .equ 13900211 ; vRam + 6131 - 6398
+Bluething_Slow_0 .equ 13900479 ; vRam + 6399 - 6643
+OrangeDot_Slow_0 .equ 13895299 ; vRam + 1219 - 1391
+Shittlogo_Slow_O_0 .equ 13900723 ; vRam + 6643 - 7951
+Shittlogo_Slow_0 .equ 13902031 ; vRam + 7951 - 9278
+Banana1Large_Slow_O_1 .equ 13895471 ; vRam + 1391 - 2186
+Bluething_Slow_O_1 .equ 13894081 ; vRam + 1 - 268
+Bluething_Slow_1 .equ 13895019 ; vRam + 939 - 1183
+SquiggleL_Slow_O_F_0 .equ 13896267 ; vRam + 2187 - 2607
+SquiggleL_Slow_F_0 .equ 13897311 ; vRam + 3231 - 3646
+SquiggleL_Slow_1 .equ 13894349 ; vRam + 269 - 684
+SquiggleL_Slow_O_0 .equ 13895471 ; vRam + 1391 - 1811

@@ -1,11 +1,131 @@
 MG_Data_frame_table:
 	.dl MG_Data_0
+	.dl MG_Data_1
+	.dl MG_Data_2
+	.dl MG_Data_3
+	.dl MG_Data_4
+	.dl MG_Data_5
+	.dl MG_Data_6
+	.dl MG_Data_7
+	.dl MG_Data_8
+	.dl MG_Data_9
+	.dl MG_Data_10
+	.dl MG_Data_11
 
 
+
+MG_Data_11:
+	.dl Sprite_Table_0
+	.db 1
+	.db 108, 24, 36, 6
+
+MG_Data_10:
+	.dl Sprite_Table_0
+	.db 4
+	.db 76, 24, 73, 5
+	.db 161, 24, 25, 18
+	.db 65, 24, 101, 19
+	.db 161, 24, 25, 18
+
+MG_Data_9:
+	.dl Sprite_Table_0
+	.db 1
+	.db 94, 24, 102, 5
+
+MG_Data_8:
+	.dl Sprite_Table_0
+	.db 3
+	.db 187, 24, 65, 6
+	.db 80, 24, 93, 16
+	.db 64, 24, 10, 17
+
+MG_Data_7:
+	.dl Sprite_Table_0
+	.db 1
+	.db 141, 24, 33, 5
+
+MG_Data_6:
+	.dl Sprite_Table_0
+	.db 2
+	.db 138, 24, 90, 6
+	.db 142, 24, 23, 6
+
+MG_Data_5:
+	.dl Sprite_Table_0
+	.db 2
+	.db 113, 24, 31, 5
+	.db 209, 24, 54, 5
+
+MG_Data_4:
+	.dl Sprite_Table_0
+	.db 3
+	.db 46, 24, 25, 6
+	.db 99, 24, 99, 6
+	.db 131, 24, 68, 6
+
+MG_Data_3:
+	.dl Sprite_Table_0
+	.db 5
+	.db 44, 24, 34, 5
+	.db 141, 24, 45, 6
+	.db 164, 24, 83, 5
+	.db 102, 24, 139, 5
+	.db 214, 24, 7, 5
+
+MG_Data_2:
+	.dl Sprite_Table_0
+	.db 14
+	.db 38, 24, 147, 2
+	.db 71, 24, 62, 0
+	.db 110, 24, 23, 2
+	.db 170, 24, 41, 0
+	.db 165, 24, 86, 0
+	.db 164, 24, 113, 2
+	.db 10, 24, 95, 0
+	.db 13, 24, 77, 2
+	.db 3, 24, 57, 0
+	.db 16, 24, 0, 0
+	.db 120, 24, 123, 2
+	.db 105, 24, 96, 0
+	.db 188, 24, 81, 6
+	.db 133, 24, 148, 6
+
+MG_Data_1:
+	.dl Sprite_Table_0
+	.db 18
+	.db 36, 24, 36, 0
+	.db 205, 24, 120, 6
+	.db 221, 24, 105, 0
+	.db 243, 24, 101, 2
+	.db 238, 24, 63, 0
+	.db 197, 24, 32, 2
+	.db 214, 24, 24, 0
+	.db 234, 24, 26, 2
+	.db 253, 24, 0, 2
+	.db 173, 24, 85, 2
+	.db 153, 24, 53, 0
+	.db 115, 24, 33, 2
+	.db 96, 24, 70, 0
+	.db 66, 24, 104, 0
+	.db 8, 24, 87, 0
+	.db 17, 24, 65, 0
+	.db 188, 24, 141, 5
+	.db 126, 24, 112, 15
 
 MG_Data_0:
 	.dl Sprite_Table_0
-	.db 0
+	.db 11
+	.db 84, 24, 13, 0
+	.db 84, 24, 13, 0
+	.db 158, 24, 61, 0
+	.db 185, 24, 83, 0
+	.db 223, 24, 125, 0
+	.db 139, 24, 128, 0
+	.db 117, 24, 105, 2
+	.db 111, 24, 93, 2
+	.db 105, 24, 82, 0
+	.db 103, 24, 72, 0
+	.db 230, 24, 39, 0
 
 
 

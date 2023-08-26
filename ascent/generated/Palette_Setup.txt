@@ -54,10 +54,10 @@ setup_palette_1:
 	ld a,%11111111
 	ld (hl),a 
 	inc hl
-	ld a,%00011111
+	ld a,%00100000
 	ld (hl),a 
 	inc hl
-	ld a,%10000001
+	ld a,%01101010
 	ld (hl),a 
 	inc hl
 	ld a,%00011111

@@ -2,8 +2,8 @@ Sprite_Table_0:
 	.dl Banana1_Slow_0
 	.dl Banana1Large_Fast_0
 	.dl Banana1_Slow_O_0
-	.dl Banana1Large_Slow_O_F_0
 	.dl Banana1Large_Fast_F_0
+	.dl Banana1Large_Slow_O_F_0
 	.dl Banana1_Slow_O_F_0
 	.dl Banana1_Slow_F_0
 	.dl Banana1Large_Slow_O_0
@@ -14,6 +14,17 @@ Sprite_Table_0:
 	.dl Banana1Large_Slow_O_1
 	.dl Bluething_Slow_1
 	.dl Bluething_Slow_O_1
+	.dl SquiggleL_Slow_0
+	.dl SquiggleL_Slow_O_F_0
+	.dl SquiggleL_Slow_F_0
+	.dl SquiggleL_Slow_O_0
+	.dl SquiggleL_Slow_1
+	.dl Banana5_Slow_0
+	.dl Banana5_Slow_O_0
+	.dl Banana5_Slow_O_F_0
+	.dl Banana5_Slow_F_0
+	.dl OrangeDot_Slow_O_0
+	.dl OrangeDot_Slow_0
 
 Sprite_Table_1:
 

@@ -1,11 +1,107 @@
 BG_Data_frame_table:
 	.dl BG_Data_0
+	.dl BG_Data_1
+	.dl BG_Data_2
+	.dl BG_Data_3
+	.dl BG_Data_4
+	.dl BG_Data_5
+	.dl BG_Data_6
+	.dl BG_Data_7
+	.dl BG_Data_8
+	.dl BG_Data_9
 
 
+
+BG_Data_9:
+	.dl Sprite_Table_0
+	.db 3
+	.db 156, 32, 59, 20
+	.db 98, 32, 97, 21
+	.db 156, 32, 59, 20
+
+BG_Data_8:
+	.dl Sprite_Table_0
+	.db 5
+	.db 137, 32, 15, 20
+	.db 166, 32, 33, 21
+	.db 186, 32, 57, 21
+	.db 203, 32, 80, 21
+	.db 226, 32, 99, 20
+
+BG_Data_7:
+	.dl Sprite_Table_0
+	.db 1
+	.db 84, 32, 92, 20
+
+BG_Data_6:
+	.dl Sprite_Table_0
+	.db 1
+	.db 111, 32, 20, 21
+
+BG_Data_5:
+	.dl Sprite_Table_0
+	.db 7
+	.db 169, 15, 111, 25
+	.db 135, 32, 126, 21
+	.db 236, 15, 45, 25
+	.db 176, 15, 28, 24
+	.db 132, 15, 56, 25
+	.db 183, 15, 82, 24
+	.db 122, 15, 90, 25
+
+BG_Data_4:
+	.dl Sprite_Table_0
+	.db 5
+	.db 120, 32, 16, 20
+	.db 19, 32, 91, 22
+	.db 37, 32, 57, 22
+	.db 10, 32, 22, 23
+	.db 237, 15, 8, 24
+
+BG_Data_3:
+	.dl Sprite_Table_0
+	.db 15
+	.db 70, 32, 116, 23
+	.db 70, 32, 103, 23
+	.db 70, 32, 91, 22
+	.db 70, 32, 79, 22
+	.db 71, 32, 61, 22
+	.db 70, 32, 47, 23
+	.db 52, 32, 30, 23
+	.db 22, 32, 17, 23
+	.db 9, 32, 38, 22
+	.db 9, 32, 63, 22
+	.db 11, 32, 85, 23
+	.db 12, 32, 106, 22
+	.db 12, 32, 128, 22
+	.db 235, 32, 15, 22
+	.db 236, 15, 147, 25
+
+BG_Data_2:
+	.dl Sprite_Table_0
+	.db 4
+	.db 71, 32, 7, 21
+	.db 159, 32, 91, 22
+	.db 12, 32, 63, 23
+	.db 223, 15, 143, 24
+
+BG_Data_1:
+	.dl Sprite_Table_0
+	.db 9
+	.db 86, 32, 137, 21
+	.db 137, 32, 25, 20
+	.db 86, 32, 137, 21
+	.db 86, 32, 137, 21
+	.db 210, 32, 145, 20
+	.db 176, 32, 144, 21
+	.db 155, 32, 51, 20
+	.db 99, 32, 0, 21
+	.db 159, 32, 0, 20
 
 BG_Data_0:
 	.dl Sprite_Table_0
-	.db 0
+	.db 1
+	.db 111, 32, 49, 20
 
 
 
