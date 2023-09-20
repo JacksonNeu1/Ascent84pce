@@ -22,8 +22,28 @@
 	ld	a,lcdBpp4
 	ld (mpLcdCtrl),a	
 
-	call setup_decompress_queue
+
+
+
+	;call sdcomp_set_fast
+	;call sdcomp_set_flip
+	;call sdcomp_reset_offset
+	;ld hl, Tree_5 
+	;ld de, Tree_5_Fast_F_0
+	;call sdcomp_set_2bpc
+	;call sprite_decompress
 	
+	;call sdcomp_set_fast
+	;call sdcomp_reset_flip
+	;call sdcomp_reset_offset
+	;ld hl, Moss_0 
+	;ld de, Moss_0_Fast_0
+	;call sprite_decompress
+	
+	;call prgmpause
+	;call prgmpause
+
+	call setup_decompress_queue
 	
 	
 	;call draw_fg
@@ -35,26 +55,10 @@
 
 	call continue_decompressions
 	
-	call continue_decompressions
-	
-	call continue_decompressions
-
-	call continue_decompressions
-	call continue_decompressions
-
-	call continue_decompressions
-	call continue_decompressions
-
-	call continue_decompressions
-	call continue_decompressions
-
-	call continue_decompressions
-	
-	;call prgmpause
-	call continue_decompressions
-	
 	
 ;	call decompress_calls
+	
+
 	
 	;gen purp timers
 		; 76543210	
@@ -69,7 +73,9 @@
 	ld hl,vRam + (160*240*3)
 	ld (mpLcdBase),hl
 	
-	ld hl,0
+
+	
+	ld hl,40
 	ld (cam_pos),hl
 
 	call setup_bg ;after initial decompressions and cam setup
@@ -323,13 +329,26 @@ longest_frame_skip:
 	
 
 
-	;wait until finished drawing second frame
+	
 
 	;swap draw buffers
 	ld hl,(mpLcdBase)
 	ld de,(draw_buffer)
 	ld (mpLcdBase),de
 	ld (draw_buffer),hl
+
+
+	;wait until finished drawing second frame
+	;Need to check clock here, there wont always be decompression to wait for
+main_clock_check_loop:
+	ld a,($F20001);128hz clock
+	cp %00000011 ;check if reached 3 
+	jp c,main_clock_check_loop ;msb <= 2, can continue  
+	ld a,($F20000);32768hz clock
+	cp %11101000;check if reached value 
+	jp c,main_clock_check_loop ;msb = 3 and lsb < value, can continue
+	
+
 
 clear_int:      
     ld hl, mpLcdIcr
@@ -488,7 +507,8 @@ frameCount:
 hasLagged:
 	.dl 0
 
-
+sd_test_a:
+	.dl 0 
 
 
 
@@ -512,7 +532,7 @@ hasLagged:
 #include "generated/SpriteEquates.txt"
 
 
-;
+#include "testing/SpriteGroups.txt"
 ;#include "TestingSpriteData.txt"
 ;#include "TestGeneratedSpriteData.txt"
 ;#include "Sprite_Data.txt"

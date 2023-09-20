@@ -27,16 +27,12 @@ input_cam_up:
 	ld hl,(cam_pos)
 	
 	push hl 
-	ld bc,2500
+	ld bc,2000
 	sbc hl,bc 
 	pop hl 
 	ret nc
 	
-	
-	inc hl
-	inc hl
-	inc hl
-	inc hl
+
 	inc hl
 	ld (cam_pos),hl
 	ret
@@ -47,15 +43,11 @@ input_cam_down:
 	ld hl,(cam_pos)
 	
 	push hl 
-	ld bc,5 
+	ld bc,1 
 	sbc hl,bc 
 	pop hl 
 	ret c 
 	
-	
-	dec hl
-	dec hl
-	dec hl
 	dec hl
 	ld (cam_pos),hl
 	ret

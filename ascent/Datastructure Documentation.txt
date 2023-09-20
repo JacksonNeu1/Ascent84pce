@@ -34,6 +34,7 @@ Bacground data frame (use actual height not h-1) 8/11/23
 .dl Sprite Table
 .db number of objects in frame
 .db object location data (ypos,sprite heigh1, xpos, sprite index in table)
+IF height bit 7 == 1 indicates a sprite group 
 
 
 

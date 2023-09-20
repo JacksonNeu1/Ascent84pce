@@ -444,7 +444,7 @@ sdcomp_traverse_line_data_alpha_inc_skip:
 sdcomp_no_alpha_3 .equ $ ;jp c for no alpha sprites to always inc color 
 	jp z,sdcomp_traverse_line_data_color_skip;if no alpha skip incrementing color. 
 	exx;out of shadow 
-sdcomp_traverse_1bpp .equ $ + 1
+
 	rrc c ;rotate mask
 sdcomp_traverse_2bpp .equ $ + 1
 	rrc a ;replace with rrc c for 2bpc (not nop because rrc c is 2 byte operation)
@@ -587,6 +587,9 @@ sprite_decompress:
 	call nz,sdcomp_set_0bpc 
 	bit 2,(hl)
 	call nz,sdcomp_set_noalpha
+	bit 2,(hl)
+	call z,sdcomp_reset_noalpha
+	
 	
 	ld a,0
 	ld (sdcomp_loops_per_line_counter),a ;reset loops counter
@@ -686,7 +689,7 @@ sdcomp_no_alpha_2_skip:
 sdcomp_1bpc_1 .equ $ 
 	jp nc,sdcomp_1bpc_1_skip ;skip if not 1bpc or 2bpc or 3bpc
 	
-	ld a,(hl);color data 
+	ld a,(hl);color data 	
 	ld (sdcomp_indexed_color_data_1),a 
 	inc hl 
 	
@@ -1001,7 +1004,7 @@ sdcomp_loops_per_line_counter .equ $ + 1
 	ld (sdcomp_loops_per_line_counter),a
 
 
-	
+	;jp sdcomp_find_gap_length ;TESTING REMOVE
 	
 	;Check the timer to see if we need to begin rendering next frame 
 	;1090 cycles @ 32768hz ~= 1 frame (1/30s)
@@ -1127,6 +1130,10 @@ sdcomp_set_1bpc:
 	ld a,%10000000
 	ld (sdcomp_traverse_bit_check),a 
 	
+	ld a, %00001111 ;rrc a 
+	ld (sdcomp_traverse_2bpp),a
+	ld (sdcomp_traverse_3bpp),a
+	ld (sdcomp_traverse_4bpp),a
 	ret 
 
 sdcomp_set_2bpc:
@@ -1151,6 +1158,7 @@ sdcomp_flip_2bpc .equ $
 	ld(sdcomp_color_bit_0),a ;for setting correct bit in e when reading color 
 	ld a,%11000011 ;set 0,e
 	ld(sdcomp_color_bit_1),a ;for setting correct bit in e when reading color 
+	
 	ret 
 	
 sdcomp_2bpc_flip:
@@ -1159,7 +1167,12 @@ sdcomp_2bpc_flip:
 	ld a,%11000011 ;set 0,e
 	ld(sdcomp_color_bit_0),a ;for setting correct bit in e when reading color 
 	ld a, %00001001 ;rrc c 
-	ld (sdcomp_traverse_2bpp),a 
+	ld (sdcomp_traverse_2bpp),a
+
+	ld a, %00001111 ;rrc a 
+	ld (sdcomp_traverse_3bpp),a
+	ld (sdcomp_traverse_4bpp),a
+	
 	ld a,%11000000
 	ld (sdcomp_traverse_bit_check),a 
 	ret 
@@ -1190,6 +1203,7 @@ sdcomp_flip_3bpc .equ $
 	ld(sdcomp_color_bit_1),a ;for setting correct bit in e when reading color 
 	ld a,%11000011 ;set 0,e
 	ld(sdcomp_color_bit_2),a ;for setting correct bit in e when reading color 
+	
 	ret 
 	
 sdcomp_3bpc_flip:
@@ -1203,12 +1217,22 @@ sdcomp_3bpc_flip:
 	ld a, %00001001 ;rrc c 
 	ld (sdcomp_traverse_2bpp),a 
 	ld (sdcomp_traverse_3bpp),a 
+	
+	ld a, %00001111 ;rrc a 
+	ld (sdcomp_traverse_4bpp),a
+	
 	ld a,%11100000
 	ld (sdcomp_traverse_bit_check),a 
 	
 	ret 
 
 sdcomp_set_4bpc:
+
+	ld a,%11010010;jp nc
+	ld (sdcomp_0bpc),a
+	ld (sdcomp_1bpc),a
+	ld (sdcomp_2bpc),a
+
 	ld a,%11011010;jp c
 
 	ld (sdcomp_1bpc_1),a ;for setting local pallete data
