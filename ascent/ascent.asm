@@ -75,11 +75,13 @@
 	
 
 	
-	ld hl,40
+	ld hl,86
 	ld (cam_pos),hl
 
-	call setup_bg ;after initial decompressions and cam setup
 
+	;call draw_mg
+
+	call setup_bg ;after initial decompressions and cam setup
 	
 main_loop:
 
@@ -98,7 +100,7 @@ main_loop:
 	;call input_cam_up
 	call get_inputs
 	
-	call move_bg
+	;call move_bg Draw BG calls MoveBg
 
 
 	; TESTING move bg time
@@ -163,7 +165,7 @@ main_loop:
 	ld a,l
 	ld (draw_mg_time),a
 	
-	call draw_fg
+	;call draw_fg
 	
 	
 	;TEsting

@@ -2,6 +2,12 @@
 FGMaxSpriteHeight .equ 120
 
 draw_mg:
+
+	ld a, %11010010 ;jp nc
+	ld (dfgs_bg_mode_1),a 
+	ld (dfgs_bg_mode_2),a 
+	ld (dfgs_bg_mode_3),a 
+
 	ld hl,(draw_buffer)
 	ld (dfgs_vram_top_1),hl
 	ld (dfgs_vram_top_2),hl
@@ -22,9 +28,12 @@ draw_mg:
 	ld (dfgs_cam_height_1),a
 	ld (dfgs_cam_height_2),a ;y value in dataframe of uppermost line of viewport
 	ld (dfgs_cam_height_3),a
-		
+	ld (dfgs_cam_height_4),a	
 	neg 
-	ld (dfgs_viewport_to_upper_frame),a
+	ld (dfgs_viewport_to_upper_frame),a ;1 = top line of VP is top line of middle frame
+	neg 
+	sub 239
+	ld (dfgs_viewport_bottom_y),a
 	
 	ld bc,0
 	ld c,h;msb ccam pos 
@@ -35,12 +44,19 @@ draw_mg:
 	add hl,bc 	
 	ld hl,(hl);upper frame 
 	
+	
 	call draw_fg_sprites
 	ret
 
 
 
 draw_fg:
+
+	ld a, %11010010 ;jp nc
+	ld (dfgs_bg_mode_1),a 
+	ld (dfgs_bg_mode_2),a 
+	ld (dfgs_bg_mode_3),a
+	
 	ld hl,(draw_buffer)
 	ld (dfgs_vram_top_1),hl
 	ld (dfgs_vram_top_2),hl
@@ -55,12 +71,15 @@ draw_fg:
 	ld bc,239
 	add hl,bc ;y-value of uppermost visible line of fg layer
 	ld a,l ;lsb cam pos, = line number in middle frame
-	ld (dfgs_cam_height_1),a
+	ld (dfgs_cam_height_1),a ;SET with line# for bg
 	ld (dfgs_cam_height_2),a ;y value in dataframe of uppermost line of viewport
-	ld (dfgs_cam_height_3),a
-		
+	ld (dfgs_cam_height_3),a ;Set to 255 for BG (Skips drawing lower frame)
+	ld (dfgs_cam_height_4),a
 	neg 
 	ld (dfgs_viewport_to_upper_frame),a ; 1 = vp bound is on frame separator
+	neg 
+	sub 239
+	ld (dfgs_viewport_bottom_y),a
 	
 	ld bc,0
 	ld c,h;msb ccam pos 
@@ -119,7 +138,7 @@ dfgs_do_upper_loop:
 	;call prgmpause
 	;TESTING
 	
-	inc a
+	inc a ;to be decd later
 	ex af,af' ;'
 	inc hl;hl points to first sprite in upper frame  
 
@@ -128,7 +147,6 @@ dfgs_upper_loop:;Want to check for sprites in upper frame that extend to lower f
 	ex af,af';'
 	dec a ;dec number of elements
 	;call write_a_to_ram
-	
 	jp z,dfgs_mid_start 
 	ex af,af';'
 
@@ -150,8 +168,14 @@ dfgs_upper_loop:;Want to check for sprites in upper frame that extend to lower f
 ;a holds y pos in upper frame, hl pts to sprite height 
 dfgs_draw_upper_sprite:
 
+	scf 
+dfgs_bg_mode_1 .equ $ 
+	jp nc, dbgl_draw_upper_sprite ;if bg mode go to bg draw routine
+
+
 dfgs_viewport_to_upper_frame .equ $ + 1
 	add a,0 ;a now holds number of lines to skip in current sprite (1 indexed)
+	;call write_a_to_ram
 	jp c, dfgs_upper_skip ;if sprite has large y pos, can carry over
 	cp (hl) ;compare to sprite height 
 	jp nc, dfgs_upper_skip ;skips drawing too many lines, sprite is not on screen
@@ -173,6 +197,7 @@ dfgs_upper_skip_2:
 	
 
 dfgs_upper_skip:
+
 	inc hl ;to x
 	inc hl ;to index 
 	inc hl;to y 
@@ -187,6 +212,8 @@ dfgs_upper_skip:
 ;MIDDLE FRAME ====================================================================================================
 	
 dfgs_mid_start:;MIDDLE FRAME, can be top cut, no cut, or bottom cut ===============================================
+	
+	;call prgmpause
 	
 	ld de,(hl) ;load sprite table ptr 
 	ld (dfgs_sprite_pointers_1),de
@@ -207,6 +234,7 @@ dfgs_mid_loop:
 	dec a 
 	;call write_a_to_ram
 	jp z,dfgs_lower_start ;check for end of data
+	
 	ex af,af';'
 
 	;ld a, $AB
@@ -219,8 +247,11 @@ dfgs_mid_loop:
 	bit 7, (hl) ;Check for sprite group
 	jp nz, dfgs_sg_mid ;goto group loop 
 	
+	
+	
 	;otherwise, draw single sprite 
 	call dfgs_draw_mid_sprite
+
 	
 	jp dfgs_mid_loop
 	
@@ -229,30 +260,32 @@ dfgs_mid_loop:
 	;a = ypos in mid frame, hl pts to height
 dfgs_draw_mid_sprite:	
 	
+	scf 
+dfgs_bg_mode_2 .equ $ 
+	jp nc, dbgl_draw_mid_sprite ;if bg mode go to bg draw routine
+
+	;call write_a_to_ram
+	
 dfgs_cam_height_2 .equ $ + 1 ;y value in dataframe of uppermost line of viewport
 	sub 0;subtract cam pos
+	;call write_a_to_ram
+
 	jp z, dfgs_mid_sprite_topline ;check case where sprite is on top line of viewport
 	jp nc, dfgs_mid_sprite_above ; carried, sprite is above viewport boundary, a holds num lines to skip
 dfgs_mid_sprite_topline:
 
 	;Sprite is below viewport bound, either full or bottom cut 
 	
-	;neg ;a holds number of lines sprite is below top of viewport 
-
-	;need to check if sprite is partially or entirely below veiwport
-	
-	;sub 240
-	;jp nc, dfgs_mid_skip ;sprite is entirely below viewport 
-	;otherwise, a holds -lines to draw 
-	;neg ;a holds lines above viewport bottom (1 indexed) 
-
-	;Different setup 
 	;a = sprite y - cam pos 
-	add a,239 
+	dec a ;for case where sprite pos = cam pos
+	add a,240 
+
 	jp nc, dfgs_mid_skip
-	
 	;a holds y pos above bottom of vp (0 indexed )
 	inc a 
+	
+	
+	
 	cp (hl) ;compare to sprite height 
 	jp c, dfgs_mid_bottom_cut ;height > lines to draw, bottom is cut off 
 	;otherwise, draw full sprite 
@@ -271,16 +304,19 @@ dfgs_mid_full_fast:
 dfgs_mid_skip_1:
 	pop hl ;hl holds (height)
 	
+	
 dfgs_mid_skip:;sprite is entirely above or below cam pos 
 	inc hl ;x
 	inc hl ;index 
 	inc hl;to y 
 	
+	
+	
 	ret
 	
 
 dfgs_mid_bottom_cut:
-dfgs_vram_bottom_2 .equ $ + 1  ;FULL SPRITE, a = lines above bottom of viewport
+dfgs_vram_bottom_2 .equ $ + 1  ;Bottom Cut SPRITE, a = lines above bottom of viewport
 	ld de,0;load bottom of vram 
 	push hl ;save height ptr
 	call dfgs_setup_draw;hl = sprite ptr, de = vram addr
@@ -296,6 +332,7 @@ dfgs_mid_skip_2:
 	jp dfgs_mid_skip
 
 dfgs_mid_sprite_above:
+	
 	;a holds lines to skip 
 	cp (hl) ;compare to height
 	jp nc, dfgs_mid_skip ;skip sprite, entirely above viewport
@@ -341,7 +378,7 @@ dfgs_cam_height_3 .equ $ + 1
 	ret nc;if bottom frame is offscreen 
 
 	;a holds y value of viewport bottom line in lower frame 
-	ld (dfgs_viewport_bottom_y),a
+	
 
 dfgs_lower_loop:
 
@@ -351,6 +388,7 @@ dfgs_lower_loop:
 	ex af,af';'
 	
 	ld a,(hl);y
+	;call write_a_to_ram
 	inc hl ;inc to height
 	
 	bit 7, (hl) ;Check for sprite group
@@ -363,9 +401,29 @@ dfgs_lower_loop:
 
 	
 dfgs_draw_lower_sprite: ;a = ypos, hl pts to height
+	
+	scf 
+dfgs_bg_mode_3 .equ $ 
+	jp nc, dbgl_draw_lower_sprite ;if bg mode go to bg draw routine
+
+
+	;call write_a_to_ram
+	ld b,a ;save
+dfgs_cam_height_4 .equ $ + 1 
+	ld a, 0 ;check if bottom frame is in VP at all
+	sub 239
+	jp nc,dfgs_lower_skip
+	ld a,b
 dfgs_viewport_bottom_y .equ $ + 1
-	sub a,0;subtract y val of viewport bottom
+	sub 0;subtract y val of viewport bottom
+
 	jp c,dfgs_lower_skip;sprite below screen
+	
+	;push af 
+	;ld a,$A0
+	;call write_a_to_ram
+	;pop af
+	
 	
 	inc a
 	;a holds number of lines to draw 
@@ -387,11 +445,14 @@ dfgs_lower_full_fast:
 dfgs_lower_skip_1:
 	pop hl ;hl holds (height)
 
+	
 dfgs_lower_skip:;sprite offscreen
 	inc hl ;x 
 	inc hl ;index 
 	inc hl;to y 
-
+	;call write_a_to_ram
+	;ld a,$AD
+	;call write_a_to_ram
 	ret
 	
 dfgs_lower_bottom_cut: 
@@ -417,14 +478,14 @@ dfgs_lower_skip_2:
 dfgs_sg_setup:
 	inc hl ;hl points to xPos of sprite group 
 	ld a,(hl)
-	ld (dfgs_sg_x_origin),a ;TODO set back to 0 after sprite group is done 
+	ld (dfgs_sg_x_origin),a 
 	
+	;call write_a_to_ram
+	ld bc,0
 	inc hl ; index 
 	ld c,(hl) ;sprite group index 
-	inc hl; to next sprite 
-	push hl ;save frame data location 
-			
-	ld hl, (Sprite_Groups_Table)
+		
+	ld hl, Sprite_Groups_Table
 	add hl,bc 
 	add hl,bc 
 	add hl,bc 
@@ -433,10 +494,11 @@ dfgs_sg_setup:
 	;hl pts to sprite table for this group 
 	ld de,(hl)
 	ld (dfgs_sprite_pointers_1), de ;NEed to undo after loop is done 
-	
-	inc hl 
-	inc hl 
+
+	inc hl
+	inc hl 	
 	inc hl ;to num sprites 
+
 	ld a,(hl) ;num sprites in group
 	inc hl;first sprite y 
 	ret
@@ -444,7 +506,9 @@ dfgs_sg_setup:
 	;Sprite group in upper frame. a holds y pos of sprite group. HL points to height (unused)
 dfgs_sg_upper:	
 	ld (dfgs_sg_upper_y_origin),a
+	push hl ;save frame data location (height ptr)
 	call dfgs_sg_setup ;returns with a = num sprites
+ 
 	ld (dfgs_sg_upper_count),a 
 	
 dfgs_sg_upper_loop:
@@ -454,6 +518,7 @@ dfgs_sg_upper_loop:
 dfgs_sg_upper_y_origin .equ $ + 1 
 	ld a, 0
 	sub a,(hl)
+	;call write_a_to_ram
 	inc hl ;to height
 	jp nc, dfgs_sg_upper_draw_upper
 	
@@ -472,7 +537,10 @@ dfgs_sg_upper_count .equ $ + 1
 	jp nz, dfgs_sg_upper_loop 
 	;otherwise, end of sprite group 
 	ld (dfgs_sg_x_origin),a  ;already 0 
-	pop hl ;start of next sprite in data frame
+	pop hl ;return to height ptr of data frame obj
+	inc hl
+	inc hl
+	inc hl ;to y pos of next sprite
 dfgs_sprite_pointers_2 .equ $ + 1
 	ld de, 0
 	ld (dfgs_sprite_pointers_1),de 
@@ -484,9 +552,12 @@ dfgs_sprite_pointers_2 .equ $ + 1
 ;SG MID =========================================================================================================
 	;Sprite group in middle frame. a holds y pos of sprite group. HL points to height (unused)
 dfgs_sg_mid:	
+	push hl
 	ld (dfgs_sg_mid_y_origin),a
 	call dfgs_sg_setup 
+	
 	ld (dfgs_sg_mid_count),a
+	
 dfgs_sg_mid_loop:
 	;take y pos of group origin, subtract y offset of sprite 
 	;if no carry, sprite is still in mid frame, a holds pos in mid frame 
@@ -499,9 +570,8 @@ dfgs_sg_mid_y_origin .equ $ + 1
 	
 	call dfgs_draw_lower_sprite
 	jp dfgs_sg_mid_continue
-	;otherwise, sprite is entirely in mid frame, a holds y pos in mid frame
-	
-	
+
+		
 dfgs_sg_mid_draw_mid:
 	call dfgs_draw_mid_sprite
 dfgs_sg_mid_continue:
@@ -512,7 +582,10 @@ dfgs_sg_mid_count .equ $ + 1
 	jp nz, dfgs_sg_mid_loop 
 	;otherwise, end of sprite group 
 	ld (dfgs_sg_x_origin),a  ;already 0 
-	pop hl ;start of next sprite in data frame
+	pop hl ;return to height ptr of data frame obj
+	inc hl
+	inc hl
+	inc hl ;to y pos of next sprite
 dfgs_sprite_pointers_3 .equ $ + 1
 	ld de, 0
 	ld (dfgs_sprite_pointers_1),de 
@@ -520,25 +593,33 @@ dfgs_sprite_pointers_3 .equ $ + 1
 	jp dfgs_mid_loop
 	
 	
-	
 ;SG Lower =========================================================================================================
 	;Sprite group in lower frame. a holds y pos of sprite group. HL points to height (unused)
 dfgs_sg_lower:	
 	ld (dfgs_sg_lower_y_origin),a
+	push hl
 	call dfgs_sg_setup 
 	ld (dfgs_sg_lower_count),a
+	;call write_a_to_ram
 dfgs_sg_lower_loop:
+
+	;call prgmpause
+
 	;take y pos of group origin, subtract y offset of sprite 
 	;if no carry, sprite is still in lower frame, a holds pos in lower frame 
 	;if carry sprite is offscreen
 dfgs_sg_lower_y_origin .equ $ + 1 
 	ld a, 0
 	sub a,(hl)
+	;call write_a_to_ram
 	inc hl ;to height
 	jp nc, dfgs_sg_lower_draw_lower
 	
+	inc hl 
+	inc hl
+	inc hl 
 	jp dfgs_sg_lower_continue
-	;otherwise, sprite is entirely in mid frame, a holds y pos in mid frame
+	;otherwise, sprite is entirely below lower frame, skip
 	
 	
 dfgs_sg_lower_draw_lower:
@@ -546,12 +627,16 @@ dfgs_sg_lower_draw_lower:
 dfgs_sg_lower_continue:
 dfgs_sg_lower_count .equ $ + 1
 	ld a, 0
+	;call write_a_to_ram
 	dec a 
 	ld (dfgs_sg_lower_count),a 
 	jp nz, dfgs_sg_lower_loop 
 	;otherwise, end of sprite group 
 	ld (dfgs_sg_x_origin),a  ;already 0 
-	pop hl ;start of next sprite in data frame
+	pop hl ;return to height ptr of data frame obj
+	inc hl
+	inc hl
+	inc hl ;to y pos of next sprite
 dfgs_sprite_pointers_4 .equ $ + 1
 	ld de, 0
 	ld (dfgs_sprite_pointers_1),de 
@@ -581,7 +666,7 @@ dfgs_setup_draw:
 	ex de,hl;hl holds initial vram pos, de is lines to subtract  
 	sbc hl,de ;subtract to get sprite draw start line 
 	add hl,bc;add x pos ;hl now holds sprite draw start pos 
-dfgs_sg_x_origin .equ $ + 1 ;TODO set
+dfgs_sg_x_origin .equ $ + 1 ;
 	ld c, 0
 	add hl,bc;add sprite group x pos offset (if applicable)
 	ex de,hl;put in de
@@ -598,7 +683,8 @@ dfgs_sprite_pointers_1 .equ $ + 1
 	ret
 
 	
-	
+dfgs_test:
+	jp dfgs_test
 	
 	
 	

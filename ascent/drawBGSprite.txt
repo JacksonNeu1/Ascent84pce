@@ -199,18 +199,32 @@ setup_bg_loop_count .equ $ + 1
 ;and the sprites in the target frame which contains the y position of the line being drawn
 ;set dbgl_vram_line_start before calling 
 draw_bg_line:
+	
+	
+	ld (dbgl_line_num),a ;write line num to required positions 
+	ld (dfgs_cam_height), a ;Used to check if upper frame should be considered
+	
+	
 	push hl ;upper frame sprite table pointer 
-	push af ;save line number 
 	ld a,$FF ;Set all of line to FF to clear it with color 16
 	ld bc,160
 	ld hl,(dbgl_vram_line_start) ;Drawing address of line 
 	call _MemSet ;Clear all of line 
-	pop af ;return line number 
 	pop hl ;return upper frame ptr 
 
-
-
-	ld (dbgl_line_num),a ;write line num to required positions 
+	
+	ld a,%11011010;jp c
+	ld (dfgs_bg_mode_1),a 
+	ld (dfgs_bg_mode_2),a 
+	ld (dfgs_bg_mode_3),a 
+	
+	ld a,255;
+	ld (dfgs_cam_height_3),a ;Will skip drawing of lower frame
+	
+	call draw_fg_sprites
+	
+	
+	
 	
 	neg
 	jp z, dbgl_skip_upper_loop ;need to check 0 case, negative 0 = 0
@@ -240,7 +254,7 @@ dbgl_do_upper_loop:
 	ld a,(hl);number of elements = num loops
 	inc a ;add 1 bc termination is checked at start of loop 
 	ex af,af' ;'
-	
+	inc hl ;to Y
 	ld de,0
 	ld bc,0
 	;upper frame, checking for sprites that carry into lower frame
@@ -249,9 +263,16 @@ dbgl_upper_loop:
 	dec a 
 	jp z,dbgl_lower_start
 	ex af,af' ;'
-	inc hl ;to Y
 	ld a,(hl); y value of sprite in upper frame 
 	inc hl;to height
+	bit 7,(hl) ;check for sprite group 
+	jp nz,dbgl_upper_sprite_group
+	
+	call dbgl_draw_upper_sprite
+	jp dbgl_upper_loop
+	;a = y value of sprite in upper frame, hl pts to height
+dbgl_draw_upper_sprite:	
+
 dbgl_lines_to_top_of_target_frame .equ $ + 1
 	add a,0 ;a holds line number in sprite to draw (0 indexed)
 	jp c,dbgl_upper_skip_sprite ; if line to draw >255, skip (happens if sprite has large y val)
@@ -259,19 +280,19 @@ dbgl_lines_to_top_of_target_frame .equ $ + 1
 	jp nc, dbgl_upper_skip_sprite; Skip drawing, sprite does not extend to target line 
 	;Sprite is to be drawn, a holds line number 
 	call dbgl_setup_and_draw ;draw sprite line 
-	;hl pts to sprite index
-	jp dbgl_upper_loop
+	;hl pts to next sprite y
+	ret
 	
 dbgl_upper_skip_sprite:
 	inc hl ;to x 
 	inc hl ;to index 
-	jp dbgl_upper_loop
+	inc hl ;to next y
+	ret
 	
 	
 dbgl_lower_start:
 ;LOWER FRAME START 
-	;After breaking upper loop, hl is pointing to the sprite index of the last element in the upper frame 
-	inc hl ;hl now points to sprite table of the lower frame 
+	;After breaking upper loop, hl is pointing to the start of next frame (spritetable) 
 	ld de,(hl)
 	ld (dbgl_sprite_pointers),de ;write sprite table ptr 
 	ld de,0;clear d upper 
@@ -284,38 +305,53 @@ dbgl_lower_start:
 	inc a 
 	ex af,af' ;'
 	
+	inc hl ;to y
 	
+	;(hl) = y
 dbgl_lower_loop:
 	ex af,af' ;'
 	dec a 
 	ret z
 	ex af,af' ;'
-	inc hl ;to y
 	ld a,(hl) ;y pos of sprite in lower frame 
 	inc hl;to height
+	bit 7,(hl) ;check for sprite group 
+	jp nz,dbgl_lower_sprite_group
+	
+	
+	
+	;a holds y in frame, (hl) = height
+dbgl_draw_lower_sprite:
+	
 dbgl_line_num .equ $ + 1
 	sub 0;subtract line num 
 	jp c, dbgl_lower_skip_sprite ;if carry, line number was above sprite y pos 
 	;if a is 0, we draw first line of sprite, if a is 1, draw second... a holds line num of sprite to draw (0 indexed) 
-	cp (hl) ;compare to sprite height -1
+	cp (hl) ;compare to sprite height
 	jp nc, dbgl_lower_skip_sprite; Skip drawing, sprite does not extend to target line 
 	
 	;Sprite is to be drawn, a holds line number 
 	call dbgl_setup_and_draw ;draw sprite line 
-	;hl pts to sprite index
-	jp dbgl_lower_loop
+	;hl pts to next y
+	ret
 	
 dbgl_lower_skip_sprite:
 	inc hl ;to x 
 	inc hl ;to index 
-	jp dbgl_lower_loop
+	inc hl ;to y
+	ret
+
+
+
 
 ;a holds 0 indexed line num of sprite, (hl) = height ,bc,de = 0
+;returns hl holds next y val
 dbgl_setup_and_draw:
 	inc hl;to x pos
 	ld e,(hl);e holds x pos 
 	inc hl 
 	ld c,(hl);sprite index 
+	inc hl ;next y
 	push hl ;save location in data 
 dbgl_vram_line_start .equ $ + 1	
 	ld hl,0

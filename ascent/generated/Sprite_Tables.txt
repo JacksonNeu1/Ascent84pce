@@ -4,17 +4,17 @@ Sprite_Table_0:
 	.dl Vines_1_Slow_0
 	.dl Vines_3_Slow_F_0
 	.dl Vines_2_Slow_F_0
-	.dl Vines_3_Slow_O_F_0
+	.dl Vines_3_Slow_O_F_0 ;5
 	.dl Vines_1_Slow_O_0
 	.dl Vines_2_Slow_0
 	.dl Vines_3_Slow_O_0
 	.dl Tree_0_Fast_0
-	.dl Tree_4_Fast_0
+	.dl Tree_4_Fast_0 ;10
 	.dl Tree_7_Fast_0
 	.dl Tree_9_Fast_F_0
 	.dl Tree_6_Fast_F_0
 	.dl Tree_5_Fast_F_0
-	.dl Tree_1_Fast_F_0
+	.dl Tree_1_Fast_F_0 ;15
 	.dl Tree_7_Fast_F_0
 	.dl Tree_3_Fast_0
 	.dl Tree_6_Fast_0

@@ -1,6 +1,6 @@
 Sprite_Groups_Table:
 	.dl sprite_group_test_1
-	
+	.dl sprite_group_test_2
 	
 	
 	
@@ -14,6 +14,34 @@ sprite_group_test_1:
 	;.db yOffset, height, xOffset, sprite index
 	;yOffset can range from 0 to 128 (px below origin) 
 	;Origin is in topleft of all sprites in group 
+	.dl Sprite_Table_0
+	.db 5 
+	.db 0,12,0,15
+	.db 4,12,24,11
+	.db 10,12,80,12
+	.db 26,12,4,13
+	.db 40,12,40,14
+	
+
+
+sprite_group_test_2:
+	;.dl sprite table (All sprites in a group must share a table)
+	;.db num sprites 
+	;.db yOffset, height, xOffset, sprite index
+	;yOffset can range from 0 to 128 (px below origin) 
+	;Origin is in topleft of all sprites in group 
+	.dl Sprite_Table_0
+	.db 9
+	.db 0,12,0,14
+	.db 51,12,60,14
+	.db 15,12,41,22
+	.db 26,12,4,23
+	.db 0,12,40,24
+	.db 05,12,60,20
+	.db 21,12,16,21
+	.db 1,12,10,22
+	.db 0,12,60,9
+	
 	
 	
 	
