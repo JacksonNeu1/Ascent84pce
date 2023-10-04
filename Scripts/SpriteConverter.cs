@@ -34,7 +34,7 @@ public enum DecompressModes
 public static class SpriteConverter
 {
   
-    public static ConvertedSprite CreateConvertedSprite(Texture2D sprite)
+    public static ConvertedSprite CreateConvertedSprite(Sprite sprite)
     {
 
         ConvertedSprite convSprite = new ConvertedSprite();
@@ -44,13 +44,17 @@ public static class SpriteConverter
         convSprite.decompressedSize = new int[10];
         convSprite.useageModes = new bool[10];
 
-        int width = sprite.width;
-        int height = sprite.height;
+        Color[] cols = sprite.texture.GetPixels((int)sprite.textureRect.x,
+                                         (int)sprite.textureRect.y,
+                                         (int)sprite.textureRect.width,
+                                         (int)sprite.textureRect.height);
+
+        int width = (int)sprite.textureRect.width;
+        int height = (int)sprite.textureRect.height;
 
         convSprite.width = width;
         convSprite.height = height;
 
-        Color[] cols = sprite.GetPixels();
          
         List<int> alphaData = new List<int>();
         bool hasAlpha = false;
@@ -238,7 +242,7 @@ public static class SpriteConverter
 
     private static int GetDecompressedSizeSlow(List<int> alphaData,int width,int height)
     {
-        int size = 1 + height;
+        int size = 1 + height; // loops per line data
         for (int row = 0; row < height; row++)
         {
 

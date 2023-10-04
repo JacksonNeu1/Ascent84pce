@@ -11,8 +11,8 @@ public class TestGenerateCompressedSprites : MonoBehaviour
         string compressedSpriteData = "";
         foreach(GameObject o in spritesToConvert)
         {
-            Texture2D tex = o.GetComponent<SpriteRenderer>().sprite.texture;
-            ConvertedSprite convS = SpriteConverter.CreateConvertedSprite(tex);
+
+            ConvertedSprite convS = SpriteConverter.CreateConvertedSprite(o.GetComponent<SpriteRenderer>().sprite);
             compressedSpriteData += convS.spriteName + ":\n" + convS.compressedData + "\n\n";
         }
 

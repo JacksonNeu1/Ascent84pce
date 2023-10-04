@@ -11,7 +11,7 @@ public class DecompressedSprite //Decompressed sprite with certain usage mode
     public string compressedName;
     public int DecompressedSize; //Size of data in bytes when decompressed;
     public bool isFast; //true if fast sprite 
-    public List<Vector2> LoadedSegments; //Lower and upper frames where this sprite should be loaded. Sorted by lower frame number 
+    public List<Vector2> LoadedSegments = new List<Vector2>(); //Lower and upper frames where this sprite should be loaded. Sorted by lower frame number 
     public DecompressedSprite(ConvertedSprite associatedSprite, DecompressModes _usageMode, int frameNum, bool bg, bool mg, bool fg)
     {
         associatedCompressedSprite = associatedSprite;
@@ -42,11 +42,6 @@ public class DecompressedSprite //Decompressed sprite with certain usage mode
 
         int lowerLoadFrame = Mathf.RoundToInt(AddedRegion.x);
         int upperLoadFrame = Mathf.RoundToInt(AddedRegion.y);
-
-        if(upperLoadFrame > MaxUnloadFrame)
-        {
-            MaxUnloadFrame = upperLoadFrame;
-        }
 
         int newLowerBound = -1;
         int newUpperBound = -1;
@@ -150,17 +145,22 @@ public class DecompressedSprite //Decompressed sprite with certain usage mode
         if (fg)
         {
             lowerLoadFrame = Mathf.Max(0, frameNum - 2 - FGLowerBufferDistance);
-            upperLoadFrame = frameNum + FGLowerBufferDistance;
+            upperLoadFrame = frameNum + 2;
         }
         else if (mg)
         {
             lowerLoadFrame = Mathf.Max(0, (frameNum - 2) * 2 + 1 - MGLowerBufferDistance);
-            upperLoadFrame = (frameNum + MGLowerBufferDistance) * 2;
+            upperLoadFrame = (frameNum + 2) * 2;
         }
         else if (bg)
         {
             lowerLoadFrame = Mathf.Max(0, (frameNum - 2) * 4 + 1 - BGLowerBufferDistance);
-            upperLoadFrame = (frameNum + BGLowerBufferDistance) * 4;
+            upperLoadFrame = (frameNum + 2) * 4;
+        }
+        else
+        { //Sprite is in AlwaysActive group
+            lowerLoadFrame = 0;
+            upperLoadFrame = MaxUnloadFrame;
         }
         return new Vector2(lowerLoadFrame, upperLoadFrame);
 
@@ -182,7 +182,7 @@ public class DecompressedSprite //Decompressed sprite with certain usage mode
     {
         for (int i = 0; i < LoadedSegments.Count; i++)
         {
-            if (LoadedSegments[i].x <= loadFrame && LoadedSegments[i].y >= loadFrame)
+            if (LoadedSegments[i].x <= loadFrame && LoadedSegments[i].y >= loadFrame-1)
             {
                 return i;
             }

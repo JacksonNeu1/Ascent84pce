@@ -52,7 +52,7 @@ public class PaletteManager : MonoBehaviour
         //Debug.Log(pallete1[0]);
         for(int i = 0; i < palette1.Length; i++)
         {
-            if (color == palette1[i])
+            if (Vector3.Distance(new Vector3(color.r, color.g, color.b), new Vector3(palette1[i].r, palette1[i].g, palette1[i].b)) < 0.05f)
             {
                 return i;
             }
