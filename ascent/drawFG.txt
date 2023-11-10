@@ -6,7 +6,6 @@ draw_mg:
 	ld a, %11010010 ;jp nc
 	ld (dfgs_bg_mode_1),a 
 	ld (dfgs_bg_mode_2),a 
-	ld (dfgs_bg_mode_3),a 
 
 	ld hl,(draw_buffer)
 	ld (dfgs_vram_top_1),hl
@@ -55,7 +54,7 @@ draw_fg:
 	ld a, %11010010 ;jp nc
 	ld (dfgs_bg_mode_1),a 
 	ld (dfgs_bg_mode_2),a 
-	ld (dfgs_bg_mode_3),a
+
 	
 	ld hl,(draw_buffer)
 	ld (dfgs_vram_top_1),hl
@@ -102,13 +101,12 @@ draw_fg:
 ;load cam height 123,vram top 12 vram bottom 1234
 draw_fg_sprites:
 	;UPPER FRAME, bottom of upper frame is not on screen, bottom of mid frame is on screen bottom of lower is not on screen
-	ld de,(hl)
+	call sprite_table_from_index
 	ld (dfgs_sprite_pointers_1),de ;write sprite table ptr to required locations 
 	ld (dfgs_sprite_pointers_2),de 
+	ld (dbgl_sprite_pointers),de
 	
 	ld de,0
-	inc hl 
-	inc hl
 	inc hl;past data table 
 	;hl is number of elements
 	
@@ -215,12 +213,11 @@ dfgs_mid_start:;MIDDLE FRAME, can be top cut, no cut, or bottom cut ============
 	
 	;call prgmpause
 	
-	ld de,(hl) ;load sprite table ptr 
+	call sprite_table_from_index
 	ld (dfgs_sprite_pointers_1),de
 	ld (dfgs_sprite_pointers_3),de 
+	ld (dbgl_sprite_pointers),de
 	ld de,0
-	inc hl 
-	inc hl
 	inc hl;past sprite table ptr
 	ex af,af' ;'
 	ld a,(hl);number of elements
@@ -232,7 +229,6 @@ dfgs_mid_loop:
 	
 	ex af,af';'
 	dec a 
-	;call write_a_to_ram
 	jp z,dfgs_lower_start ;check for end of data
 	
 	ex af,af';'
@@ -247,8 +243,6 @@ dfgs_mid_loop:
 	bit 7, (hl) ;Check for sprite group
 	jp nz, dfgs_sg_mid ;goto group loop 
 	
-	
-	
 	;otherwise, draw single sprite 
 	call dfgs_draw_mid_sprite
 
@@ -262,7 +256,7 @@ dfgs_draw_mid_sprite:
 	
 	scf 
 dfgs_bg_mode_2 .equ $ 
-	jp nc, dbgl_draw_mid_sprite ;if bg mode go to bg draw routine
+	jp nc, dbgl_draw_lower_sprite ;if bg mode go to bg draw routine
 
 	;call write_a_to_ram
 	
@@ -357,12 +351,10 @@ dfgs_mid_skip_3:
 ;BOTTOM FRAME, FULL OR BOTTOM CUT===========================================================================	
 dfgs_lower_start:
 	
-	ld de,(hl) ;load sprite table ptr
+	call sprite_table_from_index
 	ld (dfgs_sprite_pointers_1),de
 	ld (dfgs_sprite_pointers_4),de
 	ld de,0
-	inc hl 
-	inc hl
 	inc hl;past data table 
 	
 	ex af,af' ;'
@@ -402,10 +394,6 @@ dfgs_lower_loop:
 	
 dfgs_draw_lower_sprite: ;a = ypos, hl pts to height
 	
-	scf 
-dfgs_bg_mode_3 .equ $ 
-	jp nc, dbgl_draw_lower_sprite ;if bg mode go to bg draw routine
-
 
 	;call write_a_to_ram
 	ld b,a ;save
@@ -479,24 +467,26 @@ dfgs_sg_setup:
 	inc hl ;hl points to xPos of sprite group 
 	ld a,(hl)
 	ld (dfgs_sg_x_origin),a 
-	
+	ld (dbgl_sg_x_origin),a
 	;call write_a_to_ram
 	ld bc,0
 	inc hl ; index 
 	ld c,(hl) ;sprite group index 
-		
-	ld hl, Sprite_Groups_Table
-	add hl,bc 
-	add hl,bc 
-	add hl,bc 
-	;hl now points to correct sprite group ptr 
-	ld hl, (hl)
-	;hl pts to sprite table for this group 
-	ld de,(hl)
-	ld (dfgs_sprite_pointers_1), de ;NEed to undo after loop is done 
 
-	inc hl
-	inc hl 	
+	ld hl, Sprite_Groups
+	;ld c,0 ;TESTING
+
+	add hl,bc 
+	add hl,bc 
+	add hl,bc 
+	
+	;hl now points to correct sprite group ptr 
+	ld hl, (hl)	
+	;hl pts to sprite table for this group 
+
+	call sprite_table_from_index
+	ld (dfgs_sprite_pointers_1), de ;NEed to undo after loop is done 
+	ld (dbgl_sprite_pointers),de
 	inc hl ;to num sprites 
 
 	ld a,(hl) ;num sprites in group
@@ -537,6 +527,7 @@ dfgs_sg_upper_count .equ $ + 1
 	jp nz, dfgs_sg_upper_loop 
 	;otherwise, end of sprite group 
 	ld (dfgs_sg_x_origin),a  ;already 0 
+	ld (dbgl_sg_x_origin),a
 	pop hl ;return to height ptr of data frame obj
 	inc hl
 	inc hl
@@ -544,7 +535,7 @@ dfgs_sg_upper_count .equ $ + 1
 dfgs_sprite_pointers_2 .equ $ + 1
 	ld de, 0
 	ld (dfgs_sprite_pointers_1),de 
-
+	ld (dbgl_sprite_pointers),de
 	jp dfgs_upper_loop
 	
 
@@ -582,6 +573,7 @@ dfgs_sg_mid_count .equ $ + 1
 	jp nz, dfgs_sg_mid_loop 
 	;otherwise, end of sprite group 
 	ld (dfgs_sg_x_origin),a  ;already 0 
+	ld (dbgl_sg_x_origin),a 
 	pop hl ;return to height ptr of data frame obj
 	inc hl
 	inc hl
@@ -589,7 +581,7 @@ dfgs_sg_mid_count .equ $ + 1
 dfgs_sprite_pointers_3 .equ $ + 1
 	ld de, 0
 	ld (dfgs_sprite_pointers_1),de 
-
+	ld (dbgl_sprite_pointers),de
 	jp dfgs_mid_loop
 	
 	
@@ -633,6 +625,7 @@ dfgs_sg_lower_count .equ $ + 1
 	jp nz, dfgs_sg_lower_loop 
 	;otherwise, end of sprite group 
 	ld (dfgs_sg_x_origin),a  ;already 0 
+	ld (dbgl_sg_x_origin),a 
 	pop hl ;return to height ptr of data frame obj
 	inc hl
 	inc hl
@@ -640,7 +633,7 @@ dfgs_sg_lower_count .equ $ + 1
 dfgs_sprite_pointers_4 .equ $ + 1
 	ld de, 0
 	ld (dfgs_sprite_pointers_1),de 
-
+	ld (dbgl_sprite_pointers),de
 	jp dfgs_lower_loop
 	
 	
@@ -682,9 +675,27 @@ dfgs_sprite_pointers_1 .equ $ + 1
 
 	ret
 
+	;hl pts to sprite table index, returns de = sprite table ptr
 	
-dfgs_test:
-	jp dfgs_test
+sprite_table_from_index:
+	push hl ;save 
+	ld de,0
+	ld e,(hl) ;e holds table index
+	ld hl,Sprite_Table_Table
+	add hl,de 
+	add hl,de 
+	add hl,de ;inc to correct table
+	ld de,(hl)
+	
+
+	
+	;call prgmpause Seems to work
+	
+	pop hl 
+	ret 
+	
+
+
 	
 	
 	

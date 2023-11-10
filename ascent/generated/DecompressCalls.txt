@@ -27,6 +27,68 @@ decompress_calls_table_up:
 	.dl decompress_frame_up_25
 	.dl decompress_frame_up_26
 	.dl decompress_frame_up_27
+	.dl decompress_frame_up_28
+	.dl decompress_frame_up_29
+	.dl decompress_frame_up_30
+	.dl decompress_frame_up_31
+	.dl decompress_frame_up_32
+	.dl decompress_frame_up_33
+	.dl decompress_frame_up_34
+	.dl decompress_frame_up_35
+	.dl decompress_frame_up_36
+	.dl decompress_frame_up_37
+	.dl decompress_frame_up_38
+	.dl decompress_frame_up_39
+	.dl decompress_frame_up_40
+	.dl decompress_frame_up_41
+	.dl decompress_frame_up_42
+	.dl decompress_frame_up_43
+	.dl decompress_frame_up_44
+	.dl decompress_frame_up_45
+	.dl decompress_frame_up_46
+	.dl decompress_frame_up_47
+	.dl decompress_frame_up_48
+	.dl decompress_frame_up_49
+	.dl decompress_frame_up_50
+	.dl decompress_frame_up_51
+	.dl decompress_frame_up_52
+	.dl decompress_frame_up_53
+	.dl decompress_frame_up_54
+	.dl decompress_frame_up_55
+	.dl decompress_frame_up_56
+	.dl decompress_frame_up_57
+	.dl decompress_frame_up_58
+	.dl decompress_frame_up_59
+	.dl decompress_frame_up_60
+	.dl decompress_frame_up_61
+	.dl decompress_frame_up_62
+	.dl decompress_frame_up_63
+	.dl decompress_frame_up_64
+	.dl decompress_frame_up_65
+	.dl decompress_frame_up_66
+	.dl decompress_frame_up_67
+	.dl decompress_frame_up_68
+	.dl decompress_frame_up_69
+	.dl decompress_frame_up_70
+	.dl decompress_frame_up_71
+	.dl decompress_frame_up_72
+	.dl decompress_frame_up_73
+	.dl decompress_frame_up_74
+	.dl decompress_frame_up_75
+	.dl decompress_frame_up_76
+	.dl decompress_frame_up_77
+	.dl decompress_frame_up_78
+	.dl decompress_frame_up_79
+	.dl decompress_frame_up_80
+	.dl decompress_frame_up_81
+	.dl decompress_frame_up_82
+	.dl decompress_frame_up_83
+	.dl decompress_frame_up_84
+	.dl decompress_frame_up_85
+	.dl decompress_frame_up_86
+	.dl decompress_frame_up_87
+	.dl decompress_frame_up_88
+	.dl decompress_frame_up_89
 
 
 decompress_calls_table_down:
@@ -58,125 +120,389 @@ decompress_calls_table_down:
 	.dl decompress_frame_down_25
 	.dl decompress_frame_down_26
 	.dl decompress_frame_down_27
+	.dl decompress_frame_down_28
+	.dl decompress_frame_down_29
+	.dl decompress_frame_down_30
+	.dl decompress_frame_down_31
+	.dl decompress_frame_down_32
+	.dl decompress_frame_down_33
+	.dl decompress_frame_down_34
+	.dl decompress_frame_down_35
+	.dl decompress_frame_down_36
+	.dl decompress_frame_down_37
+	.dl decompress_frame_down_38
+	.dl decompress_frame_down_39
+	.dl decompress_frame_down_40
+	.dl decompress_frame_down_41
+	.dl decompress_frame_down_42
+	.dl decompress_frame_down_43
+	.dl decompress_frame_down_44
+	.dl decompress_frame_down_45
+	.dl decompress_frame_down_46
+	.dl decompress_frame_down_47
+	.dl decompress_frame_down_48
+	.dl decompress_frame_down_49
+	.dl decompress_frame_down_50
+	.dl decompress_frame_down_51
+	.dl decompress_frame_down_52
+	.dl decompress_frame_down_53
+	.dl decompress_frame_down_54
+	.dl decompress_frame_down_55
+	.dl decompress_frame_down_56
+	.dl decompress_frame_down_57
+	.dl decompress_frame_down_58
+	.dl decompress_frame_down_59
+	.dl decompress_frame_down_60
+	.dl decompress_frame_down_61
+	.dl decompress_frame_down_62
+	.dl decompress_frame_down_63
+	.dl decompress_frame_down_64
+	.dl decompress_frame_down_65
+	.dl decompress_frame_down_66
+	.dl decompress_frame_down_67
+	.dl decompress_frame_down_68
+	.dl decompress_frame_down_69
+	.dl decompress_frame_down_70
+	.dl decompress_frame_down_71
+	.dl decompress_frame_down_72
+	.dl decompress_frame_down_73
+	.dl decompress_frame_down_74
+	.dl decompress_frame_down_75
+	.dl decompress_frame_down_76
+	.dl decompress_frame_down_77
+	.dl decompress_frame_down_78
+	.dl decompress_frame_down_79
+	.dl decompress_frame_down_80
+	.dl decompress_frame_down_81
+	.dl decompress_frame_down_82
+	.dl decompress_frame_down_83
+	.dl decompress_frame_down_84
+	.dl decompress_frame_down_85
+	.dl decompress_frame_down_86
+	.dl decompress_frame_down_87
+	.dl decompress_frame_down_88
+	.dl decompress_frame_down_89
 
 
+
+decompress_frame_up_pre2:
+	.db 5
+	.dl Clouds_0, Clouds_0_Fast_F
+	.db %10100000
+	.dl Clouds_1, Clouds_1_Fast_F
+	.db %10100000
+	.dl Clouds_4, Clouds_4_Fast_F
+	.db %10100000
+	.dl Clouds_3, Clouds_3_Fast_F
+	.db %10100000
+	.dl Clouds_2, Clouds_2_Fast_F
+	.db %10100000
+
+decompress_frame_up_pre1:
+	.db 64
+	.dl Branches_8, Branches_8_Fast_F
+	.db %10100000
+	.dl Branches_15, Branches_15_Slow
+	.db %00000000
+	.dl Branches_3, Branches_3_Fast
+	.db %10000000
+	.dl Vines_2, Vines_2_Slow_F
+	.db %00100000
+	.dl Vines_1, Vines_1_Slow
+	.db %00000000
+	.dl Vines_9, Vines_9_Slow_O
+	.db %01000000
+	.dl Tree_0, Tree_0_Fast_F
+	.db %10100000
+	.dl Tree_3, Tree_3_Fast
+	.db %10000000
+	.dl Tree_8, Tree_8_Fast
+	.db %10000000
+	.dl Tree_9, Tree_9_Fast_F
+	.db %10100000
+	.dl Tree_8, Tree_8_Fast_F
+	.db %10100000
+	.dl Tree_4, Tree_4_Fast_F
+	.db %10100000
+	.dl Tree_0, Tree_0_Fast
+	.db %10000000
+	.dl Tree_6, Tree_6_Fast
+	.db %10000000
+	.dl Tree_10, Tree_10_Fast
+	.db %10000000
+	.dl Tree_7, Tree_7_Fast_F
+	.db %10100000
+	.dl Tree_1, Tree_1_Fast_F
+	.db %10100000
+	.dl Tree_1, Tree_1_Fast
+	.db %10000000
+	.dl Tree_5, Tree_5_Fast
+	.db %10000000
+	.dl Tree_11, Tree_11_Fast
+	.db %10000000
+	.dl Tree_5, Tree_5_Fast_F
+	.db %10100000
+	.dl Tree_2, Tree_2_Fast_F
+	.db %10100000
+	.dl Tree_11, Tree_11_Fast_F
+	.db %10100000
+	.dl Branches_1, Branches_1_Fast
+	.db %10000000
+	.dl Branches_2, Branches_2_Slow_O
+	.db %01000000
+	.dl Branches_3, Branches_3_Slow_O
+	.db %01000000
+	.dl Branches_5, Branches_5_Slow_O
+	.db %01000000
+	.dl Leaves_3, Leaves_3_Slow_O
+	.db %01000000
+	.dl Vines_7, Vines_7_Slow
+	.db %00000000
+	.dl Vines_5, Vines_5_Slow_O_F
+	.db %01100000
+	.dl Vines_3, Vines_3_Slow_O_F
+	.db %01100000
+	.dl Vines_4, Vines_4_Slow_O
+	.db %01000000
+	.dl Vines_10, Vines_10_Slow
+	.db %00000000
+	.dl Vines_7, Vines_7_Slow_F
+	.db %00100000
+	.dl Vines_2, Vines_2_Slow
+	.db %00000000
+	.dl Leaves_2, Leaves_2_Slow
+	.db %00000000
+	.dl Branches_1, Branches_1_Fast_F
+	.db %10100000
+	.dl Branches_2, Branches_2_Fast_F
+	.db %10100000
+	.dl Branches_5, Branches_5_Fast_F
+	.db %10100000
+	.dl Branches_14, Branches_14_Slow
+	.db %00000000
+	.dl Vines_10, Vines_10_Slow_O
+	.db %01000000
+	.dl Branches_0, Branches_0_Fast
+	.db %10000000
+	.dl GroundDirtDark, GroundDirtDark_Fast
+	.db %10000000
+	.dl GroundDirtDark, GroundDirtDark_Fast_F
+	.db %10100000
+	.dl GroundHumpDark, GroundHumpDark_Fast
+	.db %10000000
+	.dl GroundHumpDark, GroundHumpDark_Fast_F
+	.db %10100000
+	.dl GroundGrassSmall, GroundGrassSmall_Fast
+	.db %10000000
+	.dl GroundGrassSmall, GroundGrassSmall_Fast_F
+	.db %10100000
+	.dl Tree_16, Tree_16_Fast
+	.db %10000000
+	.dl Tree_17, Tree_17_Slow_O
+	.db %01000000
+	.dl Tree_17, Tree_17_Slow_O_F
+	.db %01100000
+	.dl Leaves_8, Leaves_8_Fast
+	.db %10000000
+	.dl Tree_16, Tree_16_Slow_O
+	.db %01000000
+	.dl Tree_17, Tree_17_Slow_F
+	.db %00100000
+	.dl Tree_18, Tree_18_Slow_O
+	.db %01000000
+	.dl Tree_17, Tree_17_Slow
+	.db %00000000
+	.dl Tree_18, Tree_18_Slow_F
+	.db %00100000
+	.dl Tree_16, Tree_16_Slow_O_F
+	.db %01100000
+	.dl Leaves_2, Leaves_2_Slow_F
+	.db %00100000
+	.dl Clouds_0, Clouds_0_Fast
+	.db %10000000
+	.dl Clouds_1, Clouds_1_Fast
+	.db %10000000
+	.dl Clouds_3, Clouds_3_Fast
+	.db %10000000
+	.dl Clouds_4, Clouds_4_Fast
+	.db %10000000
+	.dl Clouds_2, Clouds_2_Fast
+	.db %10000000
 
 decompress_frame_up_0:
-	.db 48
-	.dl Moss_1, Moss_1_Slow_O_0
+	.db 64
+	.dl GroundDirtFull, GroundDirtFull_Fast
+	.db %10000000
+	.dl GroundDirtFull, GroundDirtFull_Fast_F
+	.db %10100000
+	.dl GroundDirtMound, GroundDirtMound_Fast
+	.db %10000000
+	.dl GroundDirtMound, GroundDirtMound_Fast_F
+	.db %10100000
+	.dl GroundGrassL4, GroundGrassL4_Fast
+	.db %10000000
+	.dl GroundGrassL2, GroundGrassL2_Fast
+	.db %10000000
+	.dl GroundGrassL5, GroundGrassL5_Fast
+	.db %10000000
+	.dl GroundGrassL3, GroundGrassL3_Fast
+	.db %10000000
+	.dl GroundGrassL1, GroundGrassL1_Fast
+	.db %10000000
+	.dl GroundGrassL1, GroundGrassL1_Fast_F
+	.db %10100000
+	.dl GroundGrassL3, GroundGrassL3_Fast_F
+	.db %10100000
+	.dl Branches_10, Branches_10_Slow_O
 	.db %01000000
-	.dl Moss_1, Moss_1_Fast_0
+	.dl Branches_9, Branches_9_Fast
 	.db %10000000
-	.dl Tree_0, Tree_0_Fast_0
-	.db %10000000
-	.dl Tree_3, Tree_3_Fast_0
-	.db %10000000
-	.dl Tree_6, Tree_6_Fast_0
-	.db %10000000
-	.dl Tree_8, Tree_8_Fast_0
-	.db %10000000
-	.dl Tree_5, Tree_5_Fast_F_0
-	.db %10100000
-	.dl Tree_6, Tree_6_Fast_F_0
-	.db %10100000
-	.dl Tree_2, Tree_2_Fast_F_0
-	.db %10100000
-	.dl Tree_1, Tree_1_Fast_0
-	.db %10000000
-	.dl Tree_7, Tree_7_Fast_0
-	.db %10000000
-	.dl Tree_9, Tree_9_Fast_0
-	.db %10000000
-	.dl Tree_7, Tree_7_Fast_F_0
-	.db %10100000
-	.dl Tree_2, Tree_2_Fast_0
-	.db %10000000
-	.dl Tree_4, Tree_4_Fast_0
-	.db %10000000
-	.dl Tree_9, Tree_9_Fast_F_0
-	.db %10100000
-	.dl Tree_1, Tree_1_Fast_F_0
-	.db %10100000
-	.dl Tree_3, Tree_3_Fast_F_0
-	.db %10100000
-	.dl Tree_8, Tree_8_Fast_F_0
-	.db %10100000
-	.dl Tree_4, Tree_4_Fast_F_0
-	.db %10100000
-	.dl Tree_0, Tree_0_Fast_F_0
-	.db %10100000
-	.dl Moss_0, Moss_0_Fast_0
-	.db %10000000
-	.dl Moss_0, Moss_0_Fast_F_0
-	.db %10100000
-	.dl Moss_2, Moss_2_Fast_0
-	.db %10000000
-	.dl Moss_2, Moss_2_Fast_F_0
-	.db %10100000
-	.dl Vines_3, Vines_3_Slow_O_0
-	.db %01000000
-	.dl Vines_2, Vines_2_Slow_0
+	.dl Branches_16, Branches_16_Slow
 	.db %00000000
-	.dl Vines_1, Vines_1_Slow_O_0
+	.dl Branches_13, Branches_13_Slow_O
 	.db %01000000
-	.dl Vines_3, Vines_3_Slow_O_F_0
+	.dl Leaves_3, Leaves_3_Slow
+	.db %00000000
+	.dl Leaves_7, Leaves_7_Fast
+	.db %10000000
+	.dl Leaves_7, Leaves_7_Fast_F
+	.db %10100000
+	.dl Branches_6, Branches_6_Slow
+	.db %00000000
+	.dl Branches_10, Branches_10_Slow_O_F
 	.db %01100000
-	.dl Vines_2, Vines_2_Slow_F_0
-	.db %00100000
-	.dl Vines_3, Vines_3_Slow_F_0
-	.db %00100000
-	.dl Vines_1, Vines_1_Slow_0
-	.db %00000000
-	.dl Vines_8, Vines_8_Slow_0
-	.db %00000000
-	.dl Vines_2, Vines_2_Slow_O_0
+	.dl Branches_7, Branches_7_Slow_O
 	.db %01000000
-	.dl Vines_3, Vines_3_Slow_0
-	.db %00000000
-	.dl Vines_5, Vines_5_Slow_O_0
+	.dl Branches_16, Branches_16_Slow_O
 	.db %01000000
-	.dl Vines_7, Vines_7_Slow_0
-	.db %00000000
-	.dl Vines_8, Vines_8_Slow_F_0
-	.db %00100000
-	.dl Vines_5, Vines_5_Slow_O_F_0
+	.dl Branches_15, Branches_15_Slow_O
+	.db %01000000
+	.dl Branches_8, Branches_8_Slow_O_F
 	.db %01100000
-	.dl Vines_4, Vines_4_Slow_O_0
+	.dl Branches_12, Branches_12_Slow_O
 	.db %01000000
-	.dl Vines_9, Vines_9_Slow_O_0
+	.dl Branches_15, Branches_15_Slow_O_F
+	.db %01100000
+	.dl Leaves_2, Leaves_2_Slow_O
 	.db %01000000
-	.dl Vines_10, Vines_10_Slow_O_0
-	.db %01000000
-	.dl Branches_15, Branches_15_Fast_0
+	.dl Leaves_4, Leaves_4_Slow
+	.db %00000000
+	.dl Leaves_4, Leaves_4_Slow_F
+	.db %00100000
+	.dl Branches_7, Branches_7_Fast
 	.db %10000000
-	.dl Branches_3, Branches_3_Fast_F_0
+	.dl Branches_8, Branches_8_Fast
+	.db %10000000
+	.dl Branches_10, Branches_10_Fast_F
 	.db %10100000
-	.dl Branches_5, Branches_5_Fast_0
-	.db %10000000
-	.dl Branches_11, Branches_11_Fast_0
-	.db %10000000
-	.dl Branches_6, Branches_6_Fast_F_0
+	.dl Branches_11, Branches_11_Fast_F
 	.db %10100000
-	.dl Moss_2, Moss_2_Slow_O_0
+	.dl Branches_16, Branches_16_Slow_O_F
+	.db %01100000
+	.dl Branches_13, Branches_13_Fast_F
+	.db %10100000
+	.dl Branches_14, Branches_14_Slow_O
 	.db %01000000
+	.dl Branches_15, Branches_15_Slow_F
+	.db %00100000
+	.dl Leaves_6, Leaves_6_Slow
+	.db %00000000
+	.dl Branches_4, Branches_4_Fast_F
+	.db %10100000
+	.dl Branches_7, Branches_7_Fast_F
+	.db %10100000
+	.dl Branches_12, Branches_12_Fast_F
+	.db %10100000
+	.dl Leaves_4, Leaves_4_Slow_O
+	.db %01000000
+	.dl Branches_8, Branches_8_Slow_O
+	.db %01000000
+	.dl Branches_10, Branches_10_Fast
+	.db %10000000
+	.dl Leaves_6, Leaves_6_Slow_O
+	.db %01000000
+	.dl Leaves_3, Leaves_3_Slow_F
+	.db %00100000
+	.dl Vines_8, Vines_8_Slow
+	.db %00000000
+	.dl Vines_2, Vines_2_Slow_O
+	.db %01000000
+	.dl Vines_3, Vines_3_Slow
+	.db %00000000
+	.dl Vines_5, Vines_5_Slow
+	.db %00000000
+	.dl Vines_9, Vines_9_Slow
+	.db %00000000
+	.dl Vines_4, Vines_4_Slow_F
+	.db %00100000
+	.dl Vines_1, Vines_1_Slow_O
+	.db %01000000
+	.dl Vines_9, Vines_9_Slow_O_F
+	.db %01100000
+	.dl Vines_3, Vines_3_Slow_F
+	.db %00100000
+	.dl Vines_8, Vines_8_Slow_F
+	.db %00100000
+	.dl Branches_9, Branches_9_Slow_O
+	.db %01000000
+	.dl Vines_2, Vines_2_Slow_O_F
+	.db %01100000
+	.dl Tree_2, Tree_2_Fast
+	.db %10000000
+	.dl Tree_4, Tree_4_Fast
+	.db %10000000
+	.dl Tree_7, Tree_7_Fast
+	.db %10000000
+	.dl Tree_9, Tree_9_Fast
+	.db %10000000
+	.dl Tree_6, Tree_6_Fast_F
+	.db %10100000
+	.dl Tree_3, Tree_3_Fast_F
+	.db %10100000
 
 decompress_frame_up_1:
 	.db 0
 
 decompress_frame_up_2:
-	.db 0
+	.db 4
+	.dl Branches_1, Branches_1_Slow_O
+	.db %01000000
+	.dl Branches_4, Branches_4_Slow_O
+	.db %01000000
+	.dl Leaves_3, Leaves_3_Slow_O_F
+	.db %01100000
+	.dl Vines_7, Vines_7_Slow_O
+	.db %01000000
 
 decompress_frame_up_3:
 	.db 0
 
 decompress_frame_up_4:
-	.db 0
+	.db 5
+	.dl Vines_8, Vines_8_Slow_O
+	.db %01000000
+	.dl Vines_8, Vines_8_Slow_O_F
+	.db %01100000
+	.dl Vines_6, Vines_6_Slow
+	.db %00000000
+	.dl Branches_0, Branches_0_Fast_F
+	.db %10100000
+	.dl Branches_9, Branches_9_Fast_F
+	.db %10100000
 
 decompress_frame_up_5:
-	.db 0
+	.db 2
+	.dl Branches_5, Branches_5_Fast
+	.db %10000000
+	.dl Branches_4, Branches_4_Fast
+	.db %10000000
 
 decompress_frame_up_6:
-	.db 0
+	.db 2
+	.dl Branches_2, Branches_2_Fast
+	.db %10000000
+	.dl Vines_3, Vines_3_Slow_O
+	.db %01000000
 
 decompress_frame_up_7:
 	.db 0
@@ -241,6 +567,192 @@ decompress_frame_up_26:
 decompress_frame_up_27:
 	.db 0
 
+decompress_frame_up_28:
+	.db 0
+
+decompress_frame_up_29:
+	.db 0
+
+decompress_frame_up_30:
+	.db 0
+
+decompress_frame_up_31:
+	.db 0
+
+decompress_frame_up_32:
+	.db 0
+
+decompress_frame_up_33:
+	.db 0
+
+decompress_frame_up_34:
+	.db 0
+
+decompress_frame_up_35:
+	.db 0
+
+decompress_frame_up_36:
+	.db 0
+
+decompress_frame_up_37:
+	.db 0
+
+decompress_frame_up_38:
+	.db 0
+
+decompress_frame_up_39:
+	.db 0
+
+decompress_frame_up_40:
+	.db 0
+
+decompress_frame_up_41:
+	.db 0
+
+decompress_frame_up_42:
+	.db 0
+
+decompress_frame_up_43:
+	.db 0
+
+decompress_frame_up_44:
+	.db 0
+
+decompress_frame_up_45:
+	.db 0
+
+decompress_frame_up_46:
+	.db 0
+
+decompress_frame_up_47:
+	.db 0
+
+decompress_frame_up_48:
+	.db 0
+
+decompress_frame_up_49:
+	.db 0
+
+decompress_frame_up_50:
+	.db 0
+
+decompress_frame_up_51:
+	.db 0
+
+decompress_frame_up_52:
+	.db 0
+
+decompress_frame_up_53:
+	.db 0
+
+decompress_frame_up_54:
+	.db 0
+
+decompress_frame_up_55:
+	.db 0
+
+decompress_frame_up_56:
+	.db 0
+
+decompress_frame_up_57:
+	.db 0
+
+decompress_frame_up_58:
+	.db 0
+
+decompress_frame_up_59:
+	.db 0
+
+decompress_frame_up_60:
+	.db 0
+
+decompress_frame_up_61:
+	.db 0
+
+decompress_frame_up_62:
+	.db 0
+
+decompress_frame_up_63:
+	.db 0
+
+decompress_frame_up_64:
+	.db 0
+
+decompress_frame_up_65:
+	.db 0
+
+decompress_frame_up_66:
+	.db 0
+
+decompress_frame_up_67:
+	.db 0
+
+decompress_frame_up_68:
+	.db 0
+
+decompress_frame_up_69:
+	.db 0
+
+decompress_frame_up_70:
+	.db 0
+
+decompress_frame_up_71:
+	.db 0
+
+decompress_frame_up_72:
+	.db 0
+
+decompress_frame_up_73:
+	.db 0
+
+decompress_frame_up_74:
+	.db 0
+
+decompress_frame_up_75:
+	.db 0
+
+decompress_frame_up_76:
+	.db 0
+
+decompress_frame_up_77:
+	.db 0
+
+decompress_frame_up_78:
+	.db 0
+
+decompress_frame_up_79:
+	.db 0
+
+decompress_frame_up_80:
+	.db 0
+
+decompress_frame_up_81:
+	.db 0
+
+decompress_frame_up_82:
+	.db 0
+
+decompress_frame_up_83:
+	.db 0
+
+decompress_frame_up_84:
+	.db 0
+
+decompress_frame_up_85:
+	.db 0
+
+decompress_frame_up_86:
+	.db 0
+
+decompress_frame_up_87:
+	.db 0
+
+decompress_frame_up_88:
+	.db 0
+
+decompress_frame_up_89:
+	.db 0
+
 
 
 decompress_frame_down_0:
@@ -256,135 +768,315 @@ decompress_frame_down_3:
 	.db 0
 
 decompress_frame_down_4:
-	.db 44
-	.dl Tree_0, Tree_0_Fast_0
+	.db 9
+	.dl GroundGrassL4, GroundGrassL4_Fast
 	.db %10000000
-	.dl Tree_3, Tree_3_Fast_0
+	.dl GroundGrassL2, GroundGrassL2_Fast
 	.db %10000000
-	.dl Tree_6, Tree_6_Fast_0
+	.dl GroundGrassL5, GroundGrassL5_Fast
 	.db %10000000
-	.dl Tree_8, Tree_8_Fast_0
+	.dl GroundGrassL3, GroundGrassL3_Fast
 	.db %10000000
-	.dl Tree_5, Tree_5_Fast_F_0
-	.db %10100000
-	.dl Tree_6, Tree_6_Fast_F_0
-	.db %10100000
-	.dl Tree_2, Tree_2_Fast_F_0
-	.db %10100000
-	.dl Tree_1, Tree_1_Fast_0
+	.dl GroundGrassL1, GroundGrassL1_Fast
 	.db %10000000
-	.dl Tree_7, Tree_7_Fast_0
-	.db %10000000
-	.dl Tree_9, Tree_9_Fast_0
-	.db %10000000
-	.dl Tree_7, Tree_7_Fast_F_0
+	.dl GroundGrassL1, GroundGrassL1_Fast_F
 	.db %10100000
-	.dl Tree_2, Tree_2_Fast_0
-	.db %10000000
-	.dl Tree_4, Tree_4_Fast_0
-	.db %10000000
-	.dl Tree_9, Tree_9_Fast_F_0
+	.dl GroundGrassL3, GroundGrassL3_Fast_F
 	.db %10100000
-	.dl Tree_1, Tree_1_Fast_F_0
-	.db %10100000
-	.dl Tree_3, Tree_3_Fast_F_0
-	.db %10100000
-	.dl Tree_8, Tree_8_Fast_F_0
-	.db %10100000
-	.dl Tree_4, Tree_4_Fast_F_0
-	.db %10100000
-	.dl Tree_0, Tree_0_Fast_F_0
-	.db %10100000
-	.dl Moss_0, Moss_0_Fast_0
-	.db %10000000
-	.dl Moss_0, Moss_0_Fast_F_0
-	.db %10100000
-	.dl Moss_2, Moss_2_Fast_F_0
-	.db %10100000
-	.dl Vines_3, Vines_3_Slow_O_0
-	.db %01000000
-	.dl Vines_2, Vines_2_Slow_0
-	.db %00000000
-	.dl Vines_1, Vines_1_Slow_O_0
-	.db %01000000
-	.dl Vines_3, Vines_3_Slow_O_F_0
+	.dl Vines_9, Vines_9_Slow_O_F
 	.db %01100000
-	.dl Vines_2, Vines_2_Slow_F_0
-	.db %00100000
-	.dl Vines_3, Vines_3_Slow_F_0
-	.db %00100000
-	.dl Vines_1, Vines_1_Slow_0
-	.db %00000000
-	.dl Vines_8, Vines_8_Slow_0
-	.db %00000000
-	.dl Vines_2, Vines_2_Slow_O_0
-	.db %01000000
-	.dl Vines_3, Vines_3_Slow_0
-	.db %00000000
-	.dl Vines_5, Vines_5_Slow_O_0
-	.db %01000000
-	.dl Vines_7, Vines_7_Slow_0
-	.db %00000000
-	.dl Vines_8, Vines_8_Slow_F_0
-	.db %00100000
-	.dl Vines_5, Vines_5_Slow_O_F_0
+	.dl Vines_2, Vines_2_Slow_O_F
 	.db %01100000
-	.dl Vines_4, Vines_4_Slow_O_0
-	.db %01000000
-	.dl Vines_9, Vines_9_Slow_O_0
-	.db %01000000
-	.dl Vines_10, Vines_10_Slow_O_0
-	.db %01000000
-	.dl Branches_15, Branches_15_Fast_0
-	.db %10000000
-	.dl Branches_3, Branches_3_Fast_F_0
-	.db %10100000
-	.dl Branches_5, Branches_5_Fast_0
-	.db %10000000
-	.dl Branches_11, Branches_11_Fast_0
-	.db %10000000
-	.dl Branches_6, Branches_6_Fast_F_0
-	.db %10100000
 
 decompress_frame_down_5:
 	.db 0
 
 decompress_frame_down_6:
-	.db 0
+	.db 1
+	.dl Vines_10, Vines_10_Slow_O
+	.db %01000000
 
 decompress_frame_down_7:
 	.db 0
 
 decompress_frame_down_8:
-	.db 0
+	.db 6
+	.dl Vines_5, Vines_5_Slow
+	.db %00000000
+	.dl Branches_1, Branches_1_Fast_F
+	.db %10100000
+	.dl Branches_2, Branches_2_Fast_F
+	.db %10100000
+	.dl Branches_5, Branches_5_Fast_F
+	.db %10100000
+	.dl Branches_14, Branches_14_Slow
+	.db %00000000
+	.dl Branches_0, Branches_0_Fast
+	.db %10000000
 
 decompress_frame_down_9:
 	.db 0
 
 decompress_frame_down_10:
-	.db 0
+	.db 17
+	.dl Branches_7, Branches_7_Fast_F
+	.db %10100000
+	.dl Branches_12, Branches_12_Fast_F
+	.db %10100000
+	.dl Vines_8, Vines_8_Slow
+	.db %00000000
+	.dl Branches_5, Branches_5_Fast
+	.db %10000000
+	.dl Branches_4, Branches_4_Fast
+	.db %10000000
+	.dl Branches_8, Branches_8_Fast_F
+	.db %10100000
+	.dl Vines_7, Vines_7_Slow
+	.db %00000000
+	.dl Vines_5, Vines_5_Slow_O_F
+	.db %01100000
+	.dl Vines_3, Vines_3_Slow_O_F
+	.db %01100000
+	.dl Vines_4, Vines_4_Slow_O
+	.db %01000000
+	.dl Vines_10, Vines_10_Slow
+	.db %00000000
+	.dl Vines_7, Vines_7_Slow_F
+	.db %00100000
+	.dl Vines_2, Vines_2_Slow
+	.db %00000000
+	.dl Branches_1, Branches_1_Slow_O
+	.db %01000000
+	.dl Branches_4, Branches_4_Slow_O
+	.db %01000000
+	.dl Leaves_3, Leaves_3_Slow_O_F
+	.db %01100000
+	.dl Vines_7, Vines_7_Slow_O
+	.db %01000000
 
 decompress_frame_down_11:
-	.db 1
-	.dl Moss_1, Moss_1_Slow_O_0
+	.db 21
+	.dl Branches_6, Branches_6_Slow
+	.db %00000000
+	.dl Branches_10, Branches_10_Slow_O_F
+	.db %01100000
+	.dl Branches_15, Branches_15_Slow_O
+	.db %01000000
+	.dl Branches_8, Branches_8_Slow_O_F
+	.db %01100000
+	.dl Branches_15, Branches_15_Slow_O_F
+	.db %01100000
+	.dl Leaves_2, Leaves_2_Slow_O
+	.db %01000000
+	.dl Leaves_4, Leaves_4_Slow
+	.db %00000000
+	.dl Leaves_4, Leaves_4_Slow_F
+	.db %00100000
+	.dl Branches_4, Branches_4_Fast_F
+	.db %10100000
+	.dl Branches_10, Branches_10_Fast
+	.db %10000000
+	.dl Leaves_6, Leaves_6_Slow_O
+	.db %01000000
+	.dl Leaves_3, Leaves_3_Slow_F
+	.db %00100000
+	.dl Vines_2, Vines_2_Slow_O
+	.db %01000000
+	.dl Vines_8, Vines_8_Slow_O
+	.db %01000000
+	.dl Vines_8, Vines_8_Slow_O_F
+	.db %01100000
+	.dl Vines_6, Vines_6_Slow
+	.db %00000000
+	.dl Branches_3, Branches_3_Fast
+	.db %10000000
+	.dl Branches_2, Branches_2_Fast
+	.db %10000000
+	.dl Vines_3, Vines_3_Slow_O
+	.db %01000000
+	.dl Vines_8, Vines_8_Slow_F
+	.db %00100000
+	.dl Vines_9, Vines_9_Slow_O
 	.db %01000000
 
 decompress_frame_down_12:
-	.db 0
+	.db 37
+	.dl Branches_10, Branches_10_Slow_O
+	.db %01000000
+	.dl Branches_9, Branches_9_Fast
+	.db %10000000
+	.dl Branches_16, Branches_16_Slow
+	.db %00000000
+	.dl Branches_13, Branches_13_Slow_O
+	.db %01000000
+	.dl Leaves_3, Leaves_3_Slow
+	.db %00000000
+	.dl Leaves_7, Leaves_7_Fast
+	.db %10000000
+	.dl Leaves_7, Leaves_7_Fast_F
+	.db %10100000
+	.dl Branches_7, Branches_7_Slow_O
+	.db %01000000
+	.dl Branches_16, Branches_16_Slow_O
+	.db %01000000
+	.dl Branches_12, Branches_12_Slow_O
+	.db %01000000
+	.dl Branches_7, Branches_7_Fast
+	.db %10000000
+	.dl Branches_8, Branches_8_Fast
+	.db %10000000
+	.dl Branches_10, Branches_10_Fast_F
+	.db %10100000
+	.dl Branches_11, Branches_11_Fast_F
+	.db %10100000
+	.dl Branches_16, Branches_16_Slow_O_F
+	.db %01100000
+	.dl Branches_13, Branches_13_Fast_F
+	.db %10100000
+	.dl Branches_14, Branches_14_Slow_O
+	.db %01000000
+	.dl Branches_15, Branches_15_Slow_F
+	.db %00100000
+	.dl Leaves_6, Leaves_6_Slow
+	.db %00000000
+	.dl Leaves_4, Leaves_4_Slow_O
+	.db %01000000
+	.dl Branches_8, Branches_8_Slow_O
+	.db %01000000
+	.dl Vines_3, Vines_3_Slow
+	.db %00000000
+	.dl Vines_9, Vines_9_Slow
+	.db %00000000
+	.dl Vines_4, Vines_4_Slow_F
+	.db %00100000
+	.dl Vines_1, Vines_1_Slow_O
+	.db %01000000
+	.dl Vines_3, Vines_3_Slow_F
+	.db %00100000
+	.dl Branches_15, Branches_15_Slow
+	.db %00000000
+	.dl Vines_2, Vines_2_Slow_F
+	.db %00100000
+	.dl Vines_1, Vines_1_Slow
+	.db %00000000
+	.dl Branches_9, Branches_9_Slow_O
+	.db %01000000
+	.dl Branches_1, Branches_1_Fast
+	.db %10000000
+	.dl Branches_2, Branches_2_Slow_O
+	.db %01000000
+	.dl Branches_3, Branches_3_Slow_O
+	.db %01000000
+	.dl Branches_5, Branches_5_Slow_O
+	.db %01000000
+	.dl Leaves_3, Leaves_3_Slow_O
+	.db %01000000
+	.dl Branches_0, Branches_0_Fast_F
+	.db %10100000
+	.dl Branches_9, Branches_9_Fast_F
+	.db %10100000
 
 decompress_frame_down_13:
 	.db 0
 
 decompress_frame_down_14:
-	.db 0
+	.db 23
+	.dl Tree_2, Tree_2_Fast
+	.db %10000000
+	.dl Tree_4, Tree_4_Fast
+	.db %10000000
+	.dl Tree_7, Tree_7_Fast
+	.db %10000000
+	.dl Tree_9, Tree_9_Fast
+	.db %10000000
+	.dl Tree_6, Tree_6_Fast_F
+	.db %10100000
+	.dl Tree_3, Tree_3_Fast_F
+	.db %10100000
+	.dl Tree_0, Tree_0_Fast_F
+	.db %10100000
+	.dl Tree_3, Tree_3_Fast
+	.db %10000000
+	.dl Tree_8, Tree_8_Fast
+	.db %10000000
+	.dl Tree_9, Tree_9_Fast_F
+	.db %10100000
+	.dl Tree_8, Tree_8_Fast_F
+	.db %10100000
+	.dl Tree_4, Tree_4_Fast_F
+	.db %10100000
+	.dl Tree_0, Tree_0_Fast
+	.db %10000000
+	.dl Tree_6, Tree_6_Fast
+	.db %10000000
+	.dl Tree_10, Tree_10_Fast
+	.db %10000000
+	.dl Tree_7, Tree_7_Fast_F
+	.db %10100000
+	.dl Tree_1, Tree_1_Fast_F
+	.db %10100000
+	.dl Tree_1, Tree_1_Fast
+	.db %10000000
+	.dl Tree_5, Tree_5_Fast
+	.db %10000000
+	.dl Tree_11, Tree_11_Fast
+	.db %10000000
+	.dl Tree_5, Tree_5_Fast_F
+	.db %10100000
+	.dl Tree_2, Tree_2_Fast_F
+	.db %10100000
+	.dl Tree_11, Tree_11_Fast_F
+	.db %10100000
 
 decompress_frame_down_15:
-	.db 1
-	.dl Moss_1, Moss_1_Fast_0
-	.db %10000000
+	.db 0
 
 decompress_frame_down_16:
-	.db 0
+	.db 22
+	.dl GroundDirtFull, GroundDirtFull_Fast
+	.db %10000000
+	.dl GroundDirtFull, GroundDirtFull_Fast_F
+	.db %10100000
+	.dl GroundDirtMound, GroundDirtMound_Fast
+	.db %10000000
+	.dl GroundDirtMound, GroundDirtMound_Fast_F
+	.db %10100000
+	.dl Leaves_2, Leaves_2_Slow
+	.db %00000000
+	.dl GroundDirtDark, GroundDirtDark_Fast
+	.db %10000000
+	.dl GroundDirtDark, GroundDirtDark_Fast_F
+	.db %10100000
+	.dl GroundHumpDark, GroundHumpDark_Fast
+	.db %10000000
+	.dl GroundHumpDark, GroundHumpDark_Fast_F
+	.db %10100000
+	.dl GroundGrassSmall, GroundGrassSmall_Fast
+	.db %10000000
+	.dl GroundGrassSmall, GroundGrassSmall_Fast_F
+	.db %10100000
+	.dl Tree_16, Tree_16_Fast
+	.db %10000000
+	.dl Tree_17, Tree_17_Slow_O
+	.db %01000000
+	.dl Tree_17, Tree_17_Slow_O_F
+	.db %01100000
+	.dl Leaves_8, Leaves_8_Fast
+	.db %10000000
+	.dl Tree_16, Tree_16_Slow_O
+	.db %01000000
+	.dl Tree_17, Tree_17_Slow_F
+	.db %00100000
+	.dl Tree_18, Tree_18_Slow_O
+	.db %01000000
+	.dl Tree_17, Tree_17_Slow
+	.db %00000000
+	.dl Tree_18, Tree_18_Slow_F
+	.db %00100000
+	.dl Tree_16, Tree_16_Slow_O_F
+	.db %01100000
+	.dl Leaves_2, Leaves_2_Slow_F
+	.db %00100000
 
 decompress_frame_down_17:
 	.db 0
@@ -396,9 +1088,7 @@ decompress_frame_down_19:
 	.db 0
 
 decompress_frame_down_20:
-	.db 1
-	.dl Moss_2, Moss_2_Fast_0
-	.db %10000000
+	.db 0
 
 decompress_frame_down_21:
 	.db 0
@@ -410,7 +1100,27 @@ decompress_frame_down_23:
 	.db 0
 
 decompress_frame_down_24:
-	.db 0
+	.db 10
+	.dl Clouds_0, Clouds_0_Fast
+	.db %10000000
+	.dl Clouds_1, Clouds_1_Fast
+	.db %10000000
+	.dl Clouds_3, Clouds_3_Fast
+	.db %10000000
+	.dl Clouds_4, Clouds_4_Fast
+	.db %10000000
+	.dl Clouds_2, Clouds_2_Fast
+	.db %10000000
+	.dl Clouds_0, Clouds_0_Fast_F
+	.db %10100000
+	.dl Clouds_1, Clouds_1_Fast_F
+	.db %10100000
+	.dl Clouds_4, Clouds_4_Fast_F
+	.db %10100000
+	.dl Clouds_3, Clouds_3_Fast_F
+	.db %10100000
+	.dl Clouds_2, Clouds_2_Fast_F
+	.db %10100000
 
 decompress_frame_down_25:
 	.db 0
@@ -419,4 +1129,190 @@ decompress_frame_down_26:
 	.db 0
 
 decompress_frame_down_27:
+	.db 0
+
+decompress_frame_down_28:
+	.db 0
+
+decompress_frame_down_29:
+	.db 0
+
+decompress_frame_down_30:
+	.db 0
+
+decompress_frame_down_31:
+	.db 0
+
+decompress_frame_down_32:
+	.db 0
+
+decompress_frame_down_33:
+	.db 0
+
+decompress_frame_down_34:
+	.db 0
+
+decompress_frame_down_35:
+	.db 0
+
+decompress_frame_down_36:
+	.db 0
+
+decompress_frame_down_37:
+	.db 0
+
+decompress_frame_down_38:
+	.db 0
+
+decompress_frame_down_39:
+	.db 0
+
+decompress_frame_down_40:
+	.db 0
+
+decompress_frame_down_41:
+	.db 0
+
+decompress_frame_down_42:
+	.db 0
+
+decompress_frame_down_43:
+	.db 0
+
+decompress_frame_down_44:
+	.db 0
+
+decompress_frame_down_45:
+	.db 0
+
+decompress_frame_down_46:
+	.db 0
+
+decompress_frame_down_47:
+	.db 0
+
+decompress_frame_down_48:
+	.db 0
+
+decompress_frame_down_49:
+	.db 0
+
+decompress_frame_down_50:
+	.db 0
+
+decompress_frame_down_51:
+	.db 0
+
+decompress_frame_down_52:
+	.db 0
+
+decompress_frame_down_53:
+	.db 0
+
+decompress_frame_down_54:
+	.db 0
+
+decompress_frame_down_55:
+	.db 0
+
+decompress_frame_down_56:
+	.db 0
+
+decompress_frame_down_57:
+	.db 0
+
+decompress_frame_down_58:
+	.db 0
+
+decompress_frame_down_59:
+	.db 0
+
+decompress_frame_down_60:
+	.db 0
+
+decompress_frame_down_61:
+	.db 0
+
+decompress_frame_down_62:
+	.db 0
+
+decompress_frame_down_63:
+	.db 0
+
+decompress_frame_down_64:
+	.db 0
+
+decompress_frame_down_65:
+	.db 0
+
+decompress_frame_down_66:
+	.db 0
+
+decompress_frame_down_67:
+	.db 0
+
+decompress_frame_down_68:
+	.db 0
+
+decompress_frame_down_69:
+	.db 0
+
+decompress_frame_down_70:
+	.db 0
+
+decompress_frame_down_71:
+	.db 0
+
+decompress_frame_down_72:
+	.db 0
+
+decompress_frame_down_73:
+	.db 0
+
+decompress_frame_down_74:
+	.db 0
+
+decompress_frame_down_75:
+	.db 0
+
+decompress_frame_down_76:
+	.db 0
+
+decompress_frame_down_77:
+	.db 0
+
+decompress_frame_down_78:
+	.db 0
+
+decompress_frame_down_79:
+	.db 0
+
+decompress_frame_down_80:
+	.db 0
+
+decompress_frame_down_81:
+	.db 0
+
+decompress_frame_down_82:
+	.db 0
+
+decompress_frame_down_83:
+	.db 0
+
+decompress_frame_down_84:
+	.db 0
+
+decompress_frame_down_85:
+	.db 0
+
+decompress_frame_down_86:
+	.db 0
+
+decompress_frame_down_87:
+	.db 0
+
+decompress_frame_down_88:
+	.db 0
+
+decompress_frame_down_89:
 	.db 0

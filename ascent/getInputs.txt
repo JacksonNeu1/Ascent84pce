@@ -19,7 +19,14 @@ scan_wait:
 	
 	bit	kbitDown,a
 	jp nz, input_cam_down
-	ret
+
+
+	ld a,(kbdG6)
+	bit kbitClear,a
+	jp nz,exit_prgm
+	
+
+	jp get_inputs_return
 	
 	
 input_cam_up:
@@ -27,30 +34,50 @@ input_cam_up:
 	ld hl,(cam_pos)
 	
 	push hl 
-	ld bc,2000
+	ld bc,2500
 	sbc hl,bc 
 	pop hl 
-	ret nc
+	jp nc, get_inputs_return
 	
-
 	inc hl
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	
 	ld (cam_pos),hl
-	ret
+	jp get_inputs_return
 
 
 input_cam_down:
 	;Move cam
 	ld hl,(cam_pos)
 	
+	
 	push hl 
-	ld bc,1 
+	ld bc,10 
 	sbc hl,bc 
 	pop hl 
-	ret c 
+	jp c, get_inputs_return
 	
 	dec hl
+	dec hl
+	dec hl
+	dec hl
+	dec hl
+	dec hl
+	dec hl
+	dec hl
+	
+	
+	
+	
+	
 	ld (cam_pos),hl
-	ret
+	jp get_inputs_return
 	
 	
 	

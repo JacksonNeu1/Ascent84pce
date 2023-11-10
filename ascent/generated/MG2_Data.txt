@@ -1,0 +1,156 @@
+MG2_Data_frame_table:
+	.dl MG2_Data_0
+	.dl MG2_Data_1
+	.dl MG2_Data_2
+	.dl MG2_Data_3
+	.dl MG2_Data_4
+	.dl MG2_Data_5
+	.dl MG2_Data_6
+	.dl MG2_Data_7
+	.dl MG2_Data_8
+	.dl MG2_Data_9
+	.dl MG2_Data_10
+	.dl MG2_Data_11
+	.dl MG2_Data_12
+	.dl MG2_Data_13
+	.dl MG2_Data_14
+	.dl MG2_Data_15
+	.dl MG2_Data_16
+	.dl MG2_Data_17
+	.dl MG2_Data_18
+	.dl MG2_Data_19
+	.dl MG2_Data_20
+	.dl MG2_Data_21
+	.dl MG2_Data_22
+	.dl MG2_Data_23
+	.dl MG2_Data_24
+	.dl MG2_Data_25
+	.dl MG2_Data_26
+	.dl MG2_Data_27
+	.dl MG2_Data_28
+	.dl MG2_Data_29
+
+
+
+MG2_Data_29:
+	.db 0
+	.db 0
+
+MG2_Data_28:
+	.db 0
+	.db 0
+
+MG2_Data_27:
+	.db 0
+	.db 0
+
+MG2_Data_26:
+	.db 0
+	.db 0
+
+MG2_Data_25:
+	.db 0
+	.db 0
+
+MG2_Data_24:
+	.db 0
+	.db 0
+
+MG2_Data_23:
+	.db 0
+	.db 0
+
+MG2_Data_22:
+	.db 0
+	.db 0
+
+MG2_Data_21:
+	.db 0
+	.db 0
+
+MG2_Data_20:
+	.db 0
+	.db 0
+
+MG2_Data_19:
+	.db 0
+	.db 0
+
+MG2_Data_18:
+	.db 0
+	.db 0
+
+MG2_Data_17:
+	.db 0
+	.db 0
+
+MG2_Data_16:
+	.db 0
+	.db 0
+
+MG2_Data_15:
+	.db 0
+	.db 0
+
+MG2_Data_14:
+	.db 0
+	.db 0
+
+MG2_Data_13:
+	.db 0
+	.db 0
+
+MG2_Data_12:
+	.db 0
+	.db 0
+
+MG2_Data_11:
+	.db 0
+	.db 0
+
+MG2_Data_10:
+	.db 0
+	.db 0
+
+MG2_Data_9:
+	.db 0
+	.db 0
+
+MG2_Data_8:
+	.db 0
+	.db 0
+
+MG2_Data_7:
+	.db 0
+	.db 0
+
+MG2_Data_6:
+	.db 0
+	.db 0
+
+MG2_Data_5:
+	.db 0
+	.db 0
+
+MG2_Data_4:
+	.db 0
+	.db 0
+
+MG2_Data_3:
+	.db 0
+	.db 0
+
+MG2_Data_2:
+	.db 0
+	.db 0
+
+MG2_Data_1:
+	.db 0
+	.db 0
+
+MG2_Data_0:
+	.db 0
+	.db 0
+
+
+

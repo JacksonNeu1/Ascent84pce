@@ -13,80 +13,193 @@ FG_Data_frame_table:
 	.dl FG_Data_11
 	.dl FG_Data_12
 	.dl FG_Data_13
+	.dl FG_Data_14
+	.dl FG_Data_15
+	.dl FG_Data_16
+	.dl FG_Data_17
+	.dl FG_Data_18
+	.dl FG_Data_19
+	.dl FG_Data_20
+	.dl FG_Data_21
+	.dl FG_Data_22
+	.dl FG_Data_23
+	.dl FG_Data_24
+	.dl FG_Data_25
+	.dl FG_Data_26
+	.dl FG_Data_27
+	.dl FG_Data_28
+	.dl FG_Data_29
 
 
+
+FG_Data_29:
+	.db 0
+	.db 0
+
+FG_Data_28:
+	.db 0
+	.db 0
+
+FG_Data_27:
+	.db 0
+	.db 0
+
+FG_Data_26:
+	.db 0
+	.db 0
+
+FG_Data_25:
+	.db 0
+	.db 0
+
+FG_Data_24:
+	.db 0
+	.db 0
+
+FG_Data_23:
+	.db 0
+	.db 0
+
+FG_Data_22:
+	.db 0
+	.db 0
+
+FG_Data_21:
+	.db 0
+	.db 0
+
+FG_Data_20:
+	.db 0
+	.db 0
+
+FG_Data_19:
+	.db 0
+	.db 0
+
+FG_Data_18:
+	.db 0
+	.db 0
+
+FG_Data_17:
+	.db 0
+	.db 0
+
+FG_Data_16:
+	.db 0
+	.db 0
+
+FG_Data_15:
+	.db 0
+	.db 0
+
+FG_Data_14:
+	.db 0
+	.db 0
 
 FG_Data_13:
-	.dl Sprite_Table_0
-	.db 1
-	.db 77, 16, 15, 1
+	.db 0
+	.db 0
 
 FG_Data_12:
-	.dl Sprite_Table_0
-	.db 1
-	.db 41, 16, 17, 1
+	.db 0
+	.db 0
 
 FG_Data_11:
-	.dl Sprite_Table_0
-	.db 1
-	.db 65, 16, 17, 1
+	.db 0
+	.db 0
 
 FG_Data_10:
-	.dl Sprite_Table_0
+	.db 0
 	.db 1
-	.db 79, 16, 17, 1
+	.db 202, 255, 130, 2  ;SG_Branch3
 
 FG_Data_9:
-	.dl Sprite_Table_0
-	.db 1
-	.db 82, 16, 11, 0
+	.db 0
+	.db 12
+	.db 189, 255, 34, 9  ;SG_Vine2
+	.db 171, 24, 155, 64  ;Vines_8_Slow_F
+	.db 184, 11, 19, 65  ;Vines_9_Slow_O
+	.db 213, 255, 125, 4  ;SG_Branch4
+	.db 176, 14, 0, 66  ;Branches_3_Fast
+	.db 177, 14, 9, 67  ;Branches_2_Fast
+	.db 177, 14, 18, 51  ;Branches_4_Fast_F
+	.db 234, 255, 19, 3  ;SG_Branch7
+	.db 145, 255, 78, 7  ;SG_Vine6
+	.db 155, 16, 134, 68  ;Vines_3_Slow_O
+	.db 172, 19, 145, 43  ;Vines_2_Slow_O
+	.db 176, 255, 14, 10  ;SG_Vine7
 
 FG_Data_8:
-	.dl Sprite_Table_0
-	.db 1
-	.db 57, 16, 20, 0
+	.db 0
+	.db 4
+	.db 124, 14, 151, 62  ;Branches_5_Fast
+	.db 124, 14, 142, 63  ;Branches_4_Fast
+	.db 164, 255, 119, 11  ;SG_Branch2
+	.db 123, 255, 140, 10  ;SG_Vine7
 
 FG_Data_7:
-	.dl Sprite_Table_0
-	.db 1
-	.db 53, 16, 15, 0
+	.db 0
+	.db 3
+	.db 135, 255, 0, 5  ;SG_Branch5
+	.db 237, 255, 0, 8  ;SG_Branch6
+	.db 100, 255, 8, 10  ;SG_Vine7
 
 FG_Data_6:
-	.dl Sprite_Table_0
+	.db 0
 	.db 1
-	.db 81, 16, 13, 0
+	.db 100, 255, 0, 8  ;SG_Branch6
 
 FG_Data_5:
-	.dl Sprite_Table_0
-	.db 1
-	.db 59, 16, 15, 0
+	.db 0
+	.db 4
+	.db 52, 255, 16, 9  ;SG_Vine2
+	.db 215, 255, 130, 2  ;SG_Branch3
+	.db 93, 255, 0, 5  ;SG_Branch5
+	.db 8, 255, 59, 9  ;SG_Vine2
 
 FG_Data_4:
-	.dl Sprite_Table_0
-	.db 1
-	.db 105, 16, 17, 1
+	.db 0
+	.db 2
+	.db 181, 255, 130, 2  ;SG_Branch3
+	.db 219, 255, 103, 7  ;SG_Vine6
 
 FG_Data_3:
-	.dl Sprite_Table_0
+	.db 0
 	.db 1
-	.db 44, 16, 10, 1
+	.db 193, 255, 0, 8  ;SG_Branch6
 
 FG_Data_2:
-	.dl Sprite_Table_0
-	.db 1
-	.db 41, 16, 11, 1
+	.db 0
+	.db 9
+	.db 251, 255, 125, 4  ;SG_Branch4
+	.db 147, 255, 0, 5  ;SG_Branch5
+	.db 201, 255, 113, 6  ;SG_Vine3
+	.db 105, 255, 56, 7  ;SG_Vine6
+	.db 113, 11, 44, 49  ;Vines_9_Slow_O_F
+	.db 113, 9, 32, 47  ;Vines_1_Slow_O
+	.db 109, 16, 21, 44  ;Vines_3_Slow
+	.db 110, 16, 14, 50  ;Vines_3_Slow_F
+	.db 210, 11, 148, 48  ;Vines_9_Slow
 
 FG_Data_1:
-	.dl Sprite_Table_0
-	.db 2
-	.db 66, 16, 15, 1
-	.db 175, 16, 10, 1
+	.db 0
+	.db 3
+	.db 201, 255, 130, 2  ;SG_Branch3
+	.db 135, 255, 0, 3  ;SG_Branch7
+	.db 75, 14, 0, 11  ;Branches_9_Fast
 
 FG_Data_0:
-	.dl Sprite_Table_0
-	.db 2
-	.db 49, 16, 6, 0
-	.db 49, 16, 6, 0
+	.db 0
+	.db 9
+	.db 27, 255, 0, 0  ;SG_GroundChunk3
+	.db 27, 255, 32, 0  ;SG_GroundChunk3
+	.db 27, 255, 64, 0  ;SG_GroundChunk3
+	.db 27, 255, 96, 0  ;SG_GroundChunk3
+	.db 27, 255, 128, 0  ;SG_GroundChunk3
+	.db 39, 255, 42, 1  ;SG_GroundGrass
+	.db 42, 255, 3, 1  ;SG_GroundGrass
+	.db 42, 255, 78, 1  ;SG_GroundGrass
+	.db 39, 255, 117, 1  ;SG_GroundGrass
 
 
 

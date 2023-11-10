@@ -43,8 +43,23 @@
 	;call prgmpause
 	;call prgmpause
 
+	ld hl,0
+	ld (cam_pos),hl
+	ld (bg_cam_pos),hl
+	
+	
+	ld a,%00000010;disable, 32768hz
+	ld ($F20030),a	
+	
 	call setup_decompress_queue
 	
+	;Decompress sprites in preframes for setup
+	ld hl,decompress_frame_up_pre2 
+	call cfdc_direct_add_decompress_frame
+	call continue_decompressions ;Run decompression (Will finish as timer has not started)
+	ld hl,decompress_frame_up_pre1
+	call cfdc_direct_add_decompress_frame
+	call continue_decompressions ;Run decompression (Will finish as timer has not started)
 	
 	;call draw_fg
 	
@@ -55,7 +70,8 @@
 
 	call continue_decompressions
 	
-	
+	;call prgmpause
+	nop ;This needs to be here for some reason
 ;	call decompress_calls
 	
 
@@ -75,14 +91,23 @@
 	
 
 	
-	ld hl,86
-	ld (cam_pos),hl
+	
 
+	;ld hl,BG_buffer+(160*5)
+	;ld (dbgl_vram_line_start),hl
+
+	;ld hl,BG_Data_1
+	;ld a,10
+	;call draw_bg_line
+	
+	
+	;call prgmpause
 
 	;call draw_mg
 
 	call setup_bg ;after initial decompressions and cam setup
-	
+	;call prgmpause
+	;call prgmpause
 main_loop:
 
 	
@@ -98,29 +123,10 @@ main_loop:
 	
 	
 	;call input_cam_up
-	call get_inputs
-	
+	jp get_inputs
+get_inputs_return:
+
 	;call move_bg Draw BG calls MoveBg
-
-
-	; TESTING move bg time
-	ld hl,0
-	ld a,($F20000);32768hz
-	ld l,a
-	ld a,($F20001);128hz 
-	ld h,a
-	srl h ;div by 8
-	rr l 
-	srl h
-	rr l 
-	srl h
-	rr l 
-	ld a,l
-	inc a ;Cant have time be 1, BC must be >1 for _MemSet
-	inc a
-	inc a
-	ld (move_bg_time),a
-
 	
 	
 	call draw_bg
@@ -165,7 +171,12 @@ main_loop:
 	ld a,l
 	ld (draw_mg_time),a
 	
-	;call draw_fg
+	call draw_fg
+	;Leaves_4_Slow_1 has issue
+	;Need to fix indexing of decompress segments
+	
+	;Sprite groups must all use the same load index of a given sprite, as they pull from same data
+	
 	
 	
 	;TEsting
@@ -266,14 +277,6 @@ longest_frame_skip:
 	
 	
 	ld hl, (draw_buffer)
-	ld bc,0 
-	ld a,(move_bg_time)
-	ld c,a 
-	ld a, $11
-	call _MemSet
-
-	
-	ld hl, (draw_buffer)
 	ld bc, 136  ; =1000/4 /2 for 2pix/bit 
 	add hl,bc 
 	ld a,$55
@@ -314,14 +317,6 @@ longest_frame_skip:
 	ld a, $22
 	call _MemSet
 	
-	ld hl, (draw_buffer)
-	ld bc,160
-	add hl,bc
-	ld a,(move_bg_time)
-	ld c,a 
-	ld a, $11
-	call _MemSet
-
 	ld hl, (draw_buffer)
 	ld bc,296
 	add hl,bc 
@@ -452,14 +447,32 @@ write_a_to_ram_addr .equ $ + 1
 	pop hl 
 	pop af 
 	ret 
+	
+write_hl_to_ram:
+	push hl 
+	push de 
+	ex de,hl
+	ld hl,(write_a_to_ram_addr)
+	ld (hl),de 
+	inc hl
+	inc hl
+	inc hl
+	ld (write_a_to_ram_addr),hl
+	pop de 
+	pop hl
+	ret 
 
 prgmpause: ;for testing, interrupts code until key pressed. will destroy af register
 	push af
 	push de 
 	push hl 
+	ex af,af';'
+	push af 
 	ei
 	call _GetKey
 	di
+	pop af 
+	ex af,af';'
 	pop hl 
 	pop de 
 	pop af
@@ -467,7 +480,7 @@ prgmpause: ;for testing, interrupts code until key pressed. will destroy af regi
 
 cam_pos:;y position of lowest visible line in fg layer
 	.dl 0
-bg_cam_pos: ;y position of lowest visible line in bg layer (= cam pos / 4)
+bg_cam_pos: ;y position of lowest visible line in bg layer (= cam pos / 8)
 	.dl 0
 
 
@@ -532,9 +545,9 @@ sd_test_a:
 #include "generated/Sprite_Tables.txt"
 #include "generated/Sprite_Data.txt"
 #include "generated/SpriteEquates.txt"
+#include "generated/Sprite_Groups.txt"
 
-
-#include "testing/SpriteGroups.txt"
+;#include "testing/SpriteGroups.txt"
 ;#include "TestingSpriteData.txt"
 ;#include "TestGeneratedSpriteData.txt"
 ;#include "Sprite_Data.txt"

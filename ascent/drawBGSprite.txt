@@ -32,10 +32,13 @@ draw_bg:; function for drawing background buffer to the draw buffer, clearing th
 ;if so will draw new lines of the bg buffer to move it up or down until it is in the correct position
 move_bg:
 	ld hl,(cam_pos);load cam pos 
+	;call write_hl_to_ram
 	srl h
 	rr l
 	srl h
-	rr l ;div by 4 to get location of BG layer
+	rr l
+	srl h
+	rr l	;div by 8 to get location of BG layer
 	;hl holds bg cam pos, lowest visible line of bg layer 
 	ld bc,(bg_cam_pos);previous BG cam location 
 	scf
@@ -98,9 +101,9 @@ inc_bg:;move cam up
 
 	
 	;Testibng
-	;ld a,$AC
+	;ld a,$00
 	;call write_a_to_ram
-	
+	;call prgmpause
 
 	ld hl,(BG_draw_buffer)
 	ld bc,BG_buffer
@@ -120,6 +123,7 @@ inc_bg_top_skip:
 	ld hl,(bg_cam_pos)
 	inc hl 
 	ld (bg_cam_pos),hl ;incremnet cam pos 
+	;call write_hl_to_ram
 	ld bc,239
 	add hl,bc ;gets uppermost visible line y value in bg layer
 	ld c,h;cam pos msb 
@@ -202,8 +206,9 @@ draw_bg_line:
 	
 	
 	ld (dbgl_line_num),a ;write line num to required positions 
-	ld (dfgs_cam_height), a ;Used to check if upper frame should be considered
-	
+	ld (dfgs_cam_height_1), a ;Used to check if upper frame should be considered
+	neg 
+	ld (dbgl_lines_to_top_of_target_frame),a 
 	
 	push hl ;upper frame sprite table pointer 
 	ld a,$FF ;Set all of line to FF to clear it with color 16
@@ -216,65 +221,37 @@ draw_bg_line:
 	ld a,%11011010;jp c
 	ld (dfgs_bg_mode_1),a 
 	ld (dfgs_bg_mode_2),a 
-	ld (dfgs_bg_mode_3),a 
 	
 	ld a,255;
 	ld (dfgs_cam_height_3),a ;Will skip drawing of lower frame
+	ld (dfgs_cam_height_4),a
+	
+
 	
 	call draw_fg_sprites
 	
+	ret
 	
-	
-	
-	neg
-	jp z, dbgl_skip_upper_loop ;need to check 0 case, negative 0 = 0
-	ld (dbgl_lines_to_top_of_target_frame),a ;a holds lines from top of frame (1 indexed)
-	cp BGMaxSpriteHeight
-	jp c, dbgl_do_upper_loop
-dbgl_skip_upper_loop:
-	;Upper sprites are too far to be seen in this line, skip upper loop 
-	inc hl 
-	inc hl
-	inc hl ;hl points to number of elements 
-	ld bc,0
-	ld c,(hl) ;bc holds number of elements
-	add hl,bc 
-	add hl,bc 
-	add hl,bc 
-	add hl,bc;hl points to end of current frame data 
-	jp dbgl_lower_start ;skip upper loop
-	
-dbgl_do_upper_loop:
-	ld de,(hl) ;DE points to sprite table 
-	ld (dbgl_sprite_pointers),de ;write sprite table ptr
-	inc hl
-	inc hl
-	inc hl ;to frame data start 
-	ex af,af' ;'
-	ld a,(hl);number of elements = num loops
-	inc a ;add 1 bc termination is checked at start of loop 
-	ex af,af' ;'
-	inc hl ;to Y
-	ld de,0
-	ld bc,0
-	;upper frame, checking for sprites that carry into lower frame
-dbgl_upper_loop:
-	ex af,af' ;'
-	dec a 
-	jp z,dbgl_lower_start
-	ex af,af' ;'
-	ld a,(hl); y value of sprite in upper frame 
-	inc hl;to height
-	bit 7,(hl) ;check for sprite group 
-	jp nz,dbgl_upper_sprite_group
-	
-	call dbgl_draw_upper_sprite
-	jp dbgl_upper_loop
+
+
 	;a = y value of sprite in upper frame, hl pts to height
 dbgl_draw_upper_sprite:	
 
+	;push af 
+	;call write_a_to_ram
+	;ld a,(hl)
+	;call write_a_to_ram
+	;ld a,$BC
+	;call write_a_to_ram
+	;pop af
+	
+	;call write_hl_to_ram
+	
+	;call prgmpause
+
 dbgl_lines_to_top_of_target_frame .equ $ + 1
 	add a,0 ;a holds line number in sprite to draw (0 indexed)
+	;call write_a_to_ram
 	jp c,dbgl_upper_skip_sprite ; if line to draw >255, skip (happens if sprite has large y val)
 	cp (hl) ;compare to sprite height 
 	jp nc, dbgl_upper_skip_sprite; Skip drawing, sprite does not extend to target line 
@@ -289,39 +266,15 @@ dbgl_upper_skip_sprite:
 	inc hl ;to next y
 	ret
 	
-	
-dbgl_lower_start:
-;LOWER FRAME START 
-	;After breaking upper loop, hl is pointing to the start of next frame (spritetable) 
-	ld de,(hl)
-	ld (dbgl_sprite_pointers),de ;write sprite table ptr 
-	ld de,0;clear d upper 
-	inc hl
-	inc hl
-	inc hl;to num elements
-	
-	ex af,af' ;'
-	ld a,(hl);number of elements
-	inc a 
-	ex af,af' ;'
-	
-	inc hl ;to y
-	
-	;(hl) = y
-dbgl_lower_loop:
-	ex af,af' ;'
-	dec a 
-	ret z
-	ex af,af' ;'
-	ld a,(hl) ;y pos of sprite in lower frame 
-	inc hl;to height
-	bit 7,(hl) ;check for sprite group 
-	jp nz,dbgl_lower_sprite_group
-	
-	
-	
+
 	;a holds y in frame, (hl) = height
 dbgl_draw_lower_sprite:
+	
+	;call write_a_to_ram
+	;call prgmpause
+	;call write_hl_to_ram
+	
+	;call prgmpause
 	
 dbgl_line_num .equ $ + 1
 	sub 0;subtract line num 
@@ -336,6 +289,11 @@ dbgl_line_num .equ $ + 1
 	ret
 	
 dbgl_lower_skip_sprite:
+
+	;ld a,$AA 
+	;call write_a_to_ram
+	;call prgmpause
+	
 	inc hl ;to x 
 	inc hl ;to index 
 	inc hl ;to y
@@ -347,6 +305,19 @@ dbgl_lower_skip_sprite:
 ;a holds 0 indexed line num of sprite, (hl) = height ,bc,de = 0
 ;returns hl holds next y val
 dbgl_setup_and_draw:
+
+	;push af 
+	;ld a,$AB 
+	;call write_a_to_ram
+	;call write_hl_to_ram
+	;pop af 
+	;call write_a_to_ram
+	
+	;call prgmpause
+
+	ld bc,0
+	ld de,0
+	
 	inc hl;to x pos
 	ld e,(hl);e holds x pos 
 	inc hl 
@@ -355,7 +326,11 @@ dbgl_setup_and_draw:
 	push hl ;save location in data 
 dbgl_vram_line_start .equ $ + 1	
 	ld hl,0
-	add hl,de;add x pos 
+	add hl,de;add x pos
+dbgl_sg_x_origin .equ $ + 1
+	ld e,0 
+	add hl,de;add x pos
+	
 	ex de,hl;put vram pos into de 
 	
 	ld h,160
@@ -394,73 +369,6 @@ dbgl_slow_sprite:
 
 
 
-
-
-
-; dbgl_upper_loop:
-	; ld a,(hl);y
-	; inc hl;to height
-	; sub (hl);subtract height
-	;a is y value of bottom row of sprite
-	; jp nc,dbgl_upper_skip;if no carry into next frame (most sprites will do this so want this to be fast)
-	
-	;sprite extends into target frame
-; dbgl_line_num .equ $ + 1
-	; sub 0 ;compare to line number in target frame
-	; jp c,dbgl_upper_cont;if linenum is >  bottom row
-	; jp z,dbgl_upper_cont;if = bottom row
-; dbgl_upper_skip:
-	; inc hl;to x
-	; inc hl;to index 
-	; inc hl;to y
-	; ex af,af';'
-	; dec a ;dec number of loops 
-	; jp z,dbgl_lower_start 
-	; ex af,af';'
-	; jp dbgl_upper_loop
-	
-; dbgl_upper_cont:
-	;a = bottom row - linenum
-	; add a,(hl);add height-1 
-	;a holds 0 indexed line num within sprite
-	; call dbgl_setup_and_draw
-	; inc hl;to y
-	; ex af,af';'
-	; dec a 
-	; jp z,dbgl_lower_start 
-	; ex af,af';'
-	; jp dbgl_upper_loop
-
-
-
-
-
-
-
-;hl = data, de = vram, a = linenum (0 indexed from top)
-; draw_bg_sprite_line:
-	; push hl;save 
-	; ld l,(hl);sprite width in px
-	; ld h,a ;lines to skip
-	; ld a,l;width 
-	; mlt hl;widt*lines skipped 
-	; pop bc 
-	; add hl,bc;skip to target line data 
-	; inc hl 
-	;hl is pointing to start of line data 
-	; sra a;divide width by 2 
-	; ld b,a;b holds number of loops 
-; dbgsl_loop:
-	; ld a,(de); load vram data 
-	; and (hl);and with mask 
-	; inc hl ;to color data 
-	; or (hl);or w color data 
-	; ld (de),a;write to vram  
-	; inc de
-	; inc hl;to mask data
-	; djnz dbgsl_loop
-	; ret 
-	
 
 
 

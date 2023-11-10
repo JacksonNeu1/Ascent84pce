@@ -2,7 +2,7 @@
 
 decompress_queue_start .equ vram
 
-decompress_queue_end .equ vram + (7*64) ;Max queue length of 64 TODO change back
+decompress_queue_end .equ vram + (7*64) ;Max queue length of 64
 
 decompress_tail_ptr:
 	.dl decompress_queue_start + 6  ;points to sprite being currently decompressed (parameters byte)
@@ -17,7 +17,12 @@ setup_decompress_queue: ;clears memory in queue
 	ld a,$FF
 	ld bc, 7*64
 	ld hl, decompress_queue_start
+	ld (decompress_head_ptr),hl 
 	call _MemSet
+	ld hl, decompress_queue_start + 6
+	ld (decompress_tail_ptr),hl 
+	ld a,0 
+	ld (last_decompressed_cam_pos),a
 	ret 
 
 ;bc = sprite data ptr, de = decompress location, a = params
@@ -204,7 +209,8 @@ cfdc_add_calls_to_queue:
 	add hl,bc 
 	add hl,bc 
 	ld hl,(hl) ;hl now points to correct decompress frame 
-	
+cfdc_direct_add_decompress_frame:
+
 	ex af,af' ;'
 	ld a,(hl) ;a' holds num elements 
 	
