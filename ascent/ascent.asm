@@ -89,7 +89,14 @@
 	ld hl,vRam + (160*240*3)
 	ld (mpLcdBase),hl
 	
-
+	
+	ld hl,$000600
+	ld (player_x_pos),hl 
+	ld hl,$001E00
+	ld (player_y_pos),hl 
+	
+	call player_draw 
+	
 	
 	
 
@@ -155,6 +162,14 @@ get_inputs_return:
 	;ldir
 	
 	call draw_mg
+	
+	
+	ld hl,$010700
+	ld (player_x_pos),hl 
+	ld hl,$02dE00
+	ld (player_y_pos),hl 
+	
+	call player_draw 
 	
 	;TEsting
 	ld hl,0
@@ -534,6 +549,7 @@ sd_test_a:
 #include "drawFG.txt"
 #include "SpriteDecompressManager.txt"
 #include "getInputs.txt"
+#include "PlayerController.txt"
 ;#include "levelData.txt"
 ;#include "FGLevelData.txt"
 

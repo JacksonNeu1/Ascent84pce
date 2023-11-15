@@ -186,7 +186,7 @@ decompress_calls_table_down:
 
 
 decompress_frame_up_pre2:
-	.db 5
+	.db 7
 	.dl Clouds_0, Clouds_0_Fast_F
 	.db %10100000
 	.dl Clouds_1, Clouds_1_Fast_F
@@ -197,6 +197,10 @@ decompress_frame_up_pre2:
 	.db %10100000
 	.dl Clouds_2, Clouds_2_Fast_F
 	.db %10100000
+	.dl Frog_0, Frog_0_Slow
+	.db %00000000
+	.dl Frog_0, Frog_0_Slow_O
+	.db %01000000
 
 decompress_frame_up_pre1:
 	.db 64
@@ -1315,4 +1319,8 @@ decompress_frame_down_88:
 	.db 0
 
 decompress_frame_down_89:
-	.db 0
+	.db 2
+	.dl Frog_0, Frog_0_Slow
+	.db %00000000
+	.dl Frog_0, Frog_0_Slow_O
+	.db %01000000

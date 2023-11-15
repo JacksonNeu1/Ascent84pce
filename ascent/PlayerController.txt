@@ -1,0 +1,387 @@
+
+
+
+charge_jump_left:
+	;Decrease jump right strength if it > -127 
+	;Increase jump up strength 
+	;Do nothing if jump left timer is above max value 
+	ld a,(player_flags)
+	set 7, a 
+	ld (player_flags),a 
+	
+	ld a,(jump_left_charge_timer)
+	cp timer_max_val
+	jp nc, cjl_skip
+	inc a 
+	ld (jump_left_charge_timer),a
+	ld a,(jump_strength_right)
+	dec a 
+	jp p,cjl_skip ;Checks if we went from negative to positive
+	ld (jump_strength_right),a 
+cjl_skip:
+	ret 
+
+
+charge_jump_right:
+	;Increase jump right strength if it < 127 
+	;Increase jump up strength 
+	;Do nothing if jump  timer is above max value 
+	
+	ld a,(player_flags)
+	set 7, a 
+	ld (player_flags),a 
+	
+	ld a,(jump_right_charge_timer)
+	cp timer_max_val
+	jp nc, cjr_skip
+	inc a 
+	ld (jump_right_charge_timer),a
+	ld a,(jump_strength_right)
+	inc a
+	jp p,cjr_skip ;Checks if we went from negative to positive
+	ld (jump_strength_right),a 
+cjr_skip:
+	ret 
+
+
+player_update: ;Should be called after inputs
+
+	ld a,(player_flags)
+	bit 7,a 
+	jp z, pu_try_jump
+	
+	;Jump key is held, charge jump
+	;Jumps can be charged in air, for immediate jump
+	res 7,a ;Reset jump hold check 
+	ld (player_flags),a 
+
+	
+	
+pu_try_jump:
+	;no jump keys held this frame. If jump timer > 0 and on ground, then jump 
+	
+	bit 6,a ;ground check 
+	jp nz, pu_no_jump
+	ld a,(jump_left_charge_timer)
+	ld b,a 
+	ld a,(jump_right_charge_timer)
+	or b
+	jp z,pu_no_jump
+	
+	;Player is on ground and should execute a jump 
+	
+	ld hl,0 
+	ld a,(jump_strength_up)
+	ld l,a
+	
+	sla l ;mult by 2 
+	rl h 
+	sla l ;mult by 2 
+	rl h 
+	sla l ;mult by 2 
+	rl h 
+	sla l ;mult by 2 
+	rl h 
+
+	ld (player_y_vel),hl 
+	
+	ld a,(jump_strength_right)
+	bit 7, a 
+	jp nz, pu_left_jump 
+		
+	;right jump 
+	ld l,a 
+	jp pu_jump_cont
+pu_left_jump:
+	
+	ld hl, $ffffff
+	ld l,a 
+pu_jump_cont:
+	
+	sla l ;mult by 2 
+	rl h 
+	sla l ;mult by 2 
+	rl h 
+	sla l ;mult by 2 
+	rl h 
+	sla l ;mult by 2 
+	rl h 
+	
+	ld (player_x_vel),hl 
+	
+	;Clear ground flag 
+	ld a,(player_flags)
+	res 6, a 
+	ld (player_flags),a 
+	
+pu_no_jump:	
+	;reset jump timers 
+	ld a,0 
+	ld (jump_left_charge_timer),a 
+	ld (jump_right_charge_timer),a 
+	
+	
+
+pu_physics:
+
+	;Execute player physics update and check for collisions 
+	;Run multiple times, 4 steps per frame? 
+	;Move up first, then check collision, then move side and check again 
+	
+	ex af, af' ;' 
+	ld a,5 ;num physics loops 
+	ex af, af' ;' 
+	
+pu_physics_loop:
+	ex af, af' ;' 
+	dec a 
+	jp z, player_draw 
+	ex af, af' ;' 
+	
+	ld a,(player_flags)
+	bit 6,a 
+	jp nz,pu_physics_loop ;If on ground, no need to do physics 
+	
+	
+	ld hl, (player_y_vel) 
+	ex de,hl 
+	ld hl, (player_y_pos) 
+	
+	add hl,de ;add y vel to y pos 
+	
+	;TODO check for collisions here 
+	
+	;Temp 
+	ld de, 38
+	sbc hl,de 
+	jp nc, pu_update_y_pos 
+
+pu_ground_hit:
+	ld hl,38 ;TEMP 
+	ld a,(player_flags)
+	set 6,a 
+	ld (player_flags),a 
+
+pu_update_y_pos:
+	ld (player_y_pos),hl 
+	
+	;Apply gravity 
+	ld hl,(player_y_vel)
+	ld de,80
+	sbc hl,de 
+	ld (player_y_vel),hl 
+	
+
+
+player_draw:
+;Draw sprite and reset any flags 
+
+	;Todo Logic for choosing sprite index 
+	ld a,0 
+	ld (player_sprite_index),a 
+	ld a, 19
+	ld (pd_sprite_height_1),a 
+	ld (pd_sprite_height_2),a 
+	
+	
+	;ld x pos
+	ld a, (player_x_pos + 1) ;fullpixel byte
+
+	bit 0, a ;least fullpixel bit 
+	jp z, pd_even_px 
+	ld de, (player_sprite_table_offset)
+	jp pd_set_sprite_table
+pd_even_px:
+	ld de, (player_sprite_table)
+pd_set_sprite_table:
+	ld (pd_sprite_table), de 
+	
+	srl a ;div by 2
+	ld b,a 
+	ld a,(player_x_pos+2);MSB fullpixel 
+	rrca ;Move bit 0 to bit 7
+	or b 
+
+	
+	ld (pd_xpos_full),a 
+	
+	;call write_a_to_ram
+	
+	ld hl,0 
+	ld a,(player_y_pos + 2) ;MSB
+	ld h,a 
+	ld a, (player_y_pos + 1) ;middle bit (fullpixel LSB)
+	ld l,a 
+
+	ex de,hl 
+	ld hl,(cam_pos)
+	srl h ;div by 2
+	rr l 
+	ld bc,239
+	add hl,bc ;y-value of uppermost visible line of fg layer
+	
+	;Uppermost vp line - player y  = lines below top to draw player 
+	sbc hl,de 
+	;call write_hl_to_ram
+	jp c, pd_top_cut
+	
+	ld a,h 
+	
+	or a 
+	ret nz ;player is > 256 px below cam 
+	
+	ld a,l 
+
+	;a holds lines below vp top to draw player
+
+	ld b,a 
+	ld a,239
+	sub a,b ;lines above bottom of VP 
+	ret c 
+
+	
+	ld de, (draw_buffer)
+	ld hl, 240*160
+	add hl,de 
+	ex de,hl ;DE hlds VP bottom 
+	
+pd_sprite_height_1 .equ $ + 1
+	cp 0 
+	jp c, pd_bottom_cut 
+	
+
+	
+	;Otherwise, no top or bottm cut
+	;a holds lines above bottom VP 
+	call pd_setup_draw
+	
+
+	;call prgmpause
+	
+	call draw_slow_sprite_full
+	
+	
+	ret
+
+pd_bottom_cut:
+	;a holds lines to draw
+	;DE holds vram bottom 
+	call pd_setup_draw
+	call draw_slow_sprite_bottom_cut
+	
+	;push af 
+	;ld a,$33
+	;call write_a_to_ram 
+	;pop af 
+	
+	ret 
+	
+
+pd_top_cut:
+	;call write_hl_to_ram
+	;push af 
+	;ld a,$44
+	;call write_a_to_ram 
+	;pop af 
+
+	ld a,h ;Upper byte after subtraction, check for chase where player > 256 px above cam to prevent overflow errors
+	xor %11111111 ;flip all bits 
+	ret nz ;player is > 256 px above cam 
+	
+ 
+	
+	ld a,l ;lines below VP
+	neg 
+
+	;a holds lines above vp top = lines to cut 
+pd_sprite_height_2 .equ $ + 1 
+	cp 0 ; compare to height 
+	ret nc 
+
+	ld de,(draw_buffer)
+	call pd_setup_draw ;Setup draw pos 
+	
+	;bit 0,l ;location of sprite data in vram indicates fast or slow sprite
+	;jp z,pd_top_cut_fast
+	call draw_slow_sprite_top_cut ;for now assume all sprites are slow
+	
+	;jp pd_top_cut_slow
+;pd_top_cut_fast:
+	;call draw_fast_sprite_top_cut
+;pd_top_cut_slow:
+	
+	ret 
+	
+
+
+
+pd_setup_draw:
+	;A holds lines above bottom (or top) line of VP 
+	;DE holds VP top or bottom
+	ld h,160
+	ld l,a ;Num lines to subtract
+	mlt hl 
+	scf 
+	ccf 
+	ex de,hl ;De holds lines to subtract, hl holds vram pos 
+	sbc hl,de 
+	ld bc,0 
+pd_xpos_full .equ $ + 1 
+	ld c, 0 ;ld x pos 
+	add hl,bc 
+	ex de,hl 
+pd_sprite_table .equ $ + 1 
+	ld hl,0 ;Load sprite table (offset or even)
+
+player_sprite_index .equ $ + 1 
+	ld c,0 ;load sprite index 
+	add hl,bc 
+	add hl,bc 
+	add hl,bc 
+	;HL holds sprite data, de holds draw pos 
+	ret 
+
+
+
+
+
+
+player_sprite_table:
+	.dl Frog_0_Slow
+
+player_sprite_table_offset:
+	.dl Frog_0_Slow_O
+
+
+
+
+
+
+jump_strength_up:
+	.db 0 
+jump_strength_right:
+	.db 0 
+jump_left_charge_timer:
+	.db 0 
+jump_right_charge_timer:
+	.db 0 
+	
+timer_max_val .equ 30
+
+player_x_pos:
+	.dl 0 ; (MSB fullpixel, Fullpixels, subpixels)
+	
+player_y_pos:
+	.dl 0 ; (Frame #, Fullpixels, subpixels)
+
+player_x_vel:
+	.dl 0 ; (Unused, Fullpixels, subpixels)
+	
+player_y_vel:
+	.dl 0 ; (Unused, Fullpixels, subpixels)
+
+
+
+player_flags:
+	.db %00000000 ; (7 = Any jump button held, 6 = on ground, )
+	

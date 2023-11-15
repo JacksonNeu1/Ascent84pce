@@ -14,8 +14,9 @@ scan_wait:
 	
 	ld	a,(kbdG7) ; $F5001E
  	bit	kbitUp,a
+	push af 
 	jp nz, input_cam_up
-	
+	pop af 
 	
 	bit	kbitDown,a
 	jp nz, input_cam_down

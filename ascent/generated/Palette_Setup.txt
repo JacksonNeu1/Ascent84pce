@@ -48,16 +48,16 @@ setup_palette_1:
 	ld a,%01011011
 	ld (hl),a 
 	inc hl
-	ld a,%11111111
+	ld a,%10001110
 	ld (hl),a 
 	inc hl
-	ld a,%11111111
+	ld a,%01001111
 	ld (hl),a 
 	inc hl
 	ld a,%00100000
 	ld (hl),a 
 	inc hl
-	ld a,%01101010
+	ld a,%10000000
 	ld (hl),a 
 	inc hl
 	ld a,%00011111
