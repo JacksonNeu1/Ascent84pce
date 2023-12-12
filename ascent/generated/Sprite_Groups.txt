@@ -388,53 +388,53 @@ SG_BranchBase4:
 SG_DarkGroundChunk:
 	.db 0
 	.db 7
-	.db 17, 12, 0, 119  ;GroundDirtDark_Fast
-	.db 17, 12, 8, 119  ;GroundDirtDark_Fast
-	.db 16, 12, 16, 120  ;GroundDirtDark_Fast_F
-	.db 5, 13, 0, 121  ;GroundHumpDark_Fast
-	.db 5, 13, 8, 121  ;GroundHumpDark_Fast
-	.db 4, 13, 16, 122  ;GroundHumpDark_Fast_F
-	.db 0, 13, 12, 122  ;GroundHumpDark_Fast_F
+	.db 17, 12, 0, 120  ;GroundDirtDark_Fast
+	.db 17, 12, 8, 120  ;GroundDirtDark_Fast
+	.db 16, 12, 16, 121  ;GroundDirtDark_Fast_F
+	.db 5, 13, 0, 122  ;GroundHumpDark_Fast
+	.db 5, 13, 8, 122  ;GroundHumpDark_Fast
+	.db 4, 13, 16, 123  ;GroundHumpDark_Fast_F
+	.db 0, 13, 12, 123  ;GroundHumpDark_Fast_F
 
 SG_BGTree1:
 	.db 0
 	.db 8
-	.db 22, 16, 5, 123  ;Tree_16_Fast
-	.db 10, 14, 7, 124  ;Tree_17_Slow_O
-	.db 12, 14, 3, 125  ;Tree_17_Slow_O_F
-	.db 38, 16, 4, 126  ;Tree_16_Slow_O
-	.db 32, 14, 2, 127  ;Tree_17_Slow_F
-	.db 0, 14, 7, 128  ;Leaves_8_Fast
-	.db 2, 14, 0, 128  ;Leaves_8_Fast
+	.db 22, 16, 5, 124  ;Tree_16_Fast
+	.db 10, 14, 7, 125  ;Tree_17_Slow_O
+	.db 12, 14, 3, 126  ;Tree_17_Slow_O_F
+	.db 38, 16, 4, 127  ;Tree_16_Slow_O
+	.db 32, 14, 2, 128  ;Tree_17_Slow_F
+	.db 0, 14, 7, 129  ;Leaves_8_Fast
+	.db 2, 14, 0, 129  ;Leaves_8_Fast
 	.db 29, 9, 0, 105  ;Leaves_2_Slow
 
 SG_BGTree2:
 	.db 0
 	.db 8
-	.db 49, 14, 7, 129  ;Tree_18_Slow_O
-	.db 49, 14, 1, 130  ;Tree_17_Slow
-	.db 49, 14, 2, 131  ;Tree_18_Slow_F
-	.db 36, 16, 0, 132  ;Tree_16_Slow_O_F
-	.db 20, 16, 1, 126  ;Tree_16_Slow_O
-	.db 11, 14, 1, 129  ;Tree_18_Slow_O
-	.db 0, 14, 0, 128  ;Leaves_8_Fast
-	.db 43, 9, 6, 133  ;Leaves_2_Slow_F
+	.db 49, 14, 7, 130  ;Tree_18_Slow_O
+	.db 49, 14, 1, 131  ;Tree_17_Slow
+	.db 49, 14, 2, 132  ;Tree_18_Slow_F
+	.db 36, 16, 0, 133  ;Tree_16_Slow_O_F
+	.db 20, 16, 1, 127  ;Tree_16_Slow_O
+	.db 11, 14, 1, 130  ;Tree_18_Slow_O
+	.db 0, 14, 0, 129  ;Leaves_8_Fast
+	.db 43, 9, 6, 134  ;Leaves_2_Slow_F
 
 SG_Cloud1:
 	.db 0
 	.db 13
-	.db 20, 10, 6, 134  ;Clouds_0_Fast
-	.db 13, 14, 0, 135  ;Clouds_1_Fast
-	.db 0, 11, 7, 136  ;Clouds_3_Fast
-	.db 3, 10, 3, 137  ;Clouds_4_Fast
-	.db 8, 16, 6, 138  ;Clouds_2_Fast
-	.db 20, 10, 14, 134  ;Clouds_0_Fast
+	.db 20, 10, 6, 135  ;Clouds_0_Fast
+	.db 13, 14, 0, 136  ;Clouds_1_Fast
+	.db 0, 11, 7, 137  ;Clouds_3_Fast
+	.db 3, 10, 3, 138  ;Clouds_4_Fast
+	.db 8, 16, 6, 119  ;Clouds_2_Fast
+	.db 20, 10, 14, 135  ;Clouds_0_Fast
 	.db 19, 10, 20, 139  ;Clouds_0_Fast_F
 	.db 11, 14, 28, 140  ;Clouds_1_Fast_F
 	.db 3, 10, 27, 141  ;Clouds_4_Fast_F
 	.db 1, 11, 15, 142  ;Clouds_3_Fast_F
-	.db 1, 11, 21, 136  ;Clouds_3_Fast
-	.db 6, 16, 20, 138  ;Clouds_2_Fast
+	.db 1, 11, 21, 137  ;Clouds_3_Fast
+	.db 6, 16, 20, 119  ;Clouds_2_Fast
 	.db 6, 16, 12, 143  ;Clouds_2_Fast_F
 
 

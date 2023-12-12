@@ -26,6 +26,14 @@ scan_wait:
 	bit kbitClear,a
 	jp nz,exit_prgm
 	
+	ld a,(kbdG5)
+	bit kbit6,a 
+	call nz, charge_jump_right
+	
+	ld a,(kbdG3)
+	bit kbit4,a 
+	call nz, charge_jump_left
+	
 
 	jp get_inputs_return
 	

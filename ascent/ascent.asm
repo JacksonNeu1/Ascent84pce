@@ -90,14 +90,10 @@
 	ld (mpLcdBase),hl
 	
 	
-	ld hl,$000600
+	ld hl,$00E300
 	ld (player_x_pos),hl 
-	ld hl,$001E00
+	ld hl,$00EE00
 	ld (player_y_pos),hl 
-	
-	call player_draw 
-	
-	
 	
 
 	;ld hl,BG_buffer+(160*5)
@@ -132,9 +128,10 @@ main_loop:
 	;call input_cam_up
 	jp get_inputs
 get_inputs_return:
-
 	;call move_bg Draw BG calls MoveBg
+	call player_move_debug
 	
+	call check_collisions
 	
 	call draw_bg
 
@@ -163,12 +160,9 @@ get_inputs_return:
 	
 	call draw_mg
 	
+	call draw_mg2
 	
-	ld hl,$010700
-	ld (player_x_pos),hl 
-	ld hl,$02dE00
-	ld (player_y_pos),hl 
-	
+
 	call player_draw 
 	
 	;TEsting
@@ -552,9 +546,11 @@ sd_test_a:
 #include "PlayerController.txt"
 ;#include "levelData.txt"
 ;#include "FGLevelData.txt"
+;#include "testing/TestingCollisionData.txt"
 
 #include "generated/BG_Data.txt"
 #include "generated/MG_Data.txt"
+#include "generated/MG2_Data.txt"
 #include "generated/FG_Data.txt"
 #include "generated/DecompressCalls.txt"
 #include "generated/Palette_Setup.txt"
@@ -562,6 +558,7 @@ sd_test_a:
 #include "generated/Sprite_Data.txt"
 #include "generated/SpriteEquates.txt"
 #include "generated/Sprite_Groups.txt"
+#include "generated/Collision_Data.txt"
 
 ;#include "testing/SpriteGroups.txt"
 ;#include "TestingSpriteData.txt"

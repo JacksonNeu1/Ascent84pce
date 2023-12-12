@@ -1,0 +1,27 @@
+
+
+Collision_Data_frame_table:
+	.dl collision_data_0
+	.dl collision_data_1
+
+
+
+collision_data_1:
+	.db 0
+
+
+;Frames sorted by y min
+;.db num elements
+;.db ymin, height-1, (xmax-2) / 2, xmin/2 (Double Pixels), Flags (7 = semisolid, 6 = spikes, 3,2,1,0 = Breakaway platform index (starting from 1) 
+collision_data_0:
+	.db 6
+	.db 56,15, 37,30, %00000001
+	.db 84,15,99,92, %00000010
+	.db 155,15,56,50, %00000011
+	.db 244,15,7,0, %00000100
+	.db 244,15,147,140, %00000101
+	.db 204,15,142,135, %00000110
+
+collision_data_terminate:
+	.db 0
+	

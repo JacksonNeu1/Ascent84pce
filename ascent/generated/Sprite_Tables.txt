@@ -123,6 +123,7 @@ Sprite_Table_0:
 	.dl Vines_7_Slow_O
 	.dl Branches_0_Fast_F
 	.dl Branches_9_Fast_F
+	.dl Clouds_2_Fast
 	.dl GroundDirtDark_Fast
 	.dl GroundDirtDark_Fast_F
 	.dl GroundHumpDark_Fast
@@ -142,7 +143,6 @@ Sprite_Table_0:
 	.dl Clouds_1_Fast
 	.dl Clouds_3_Fast
 	.dl Clouds_4_Fast
-	.dl Clouds_2_Fast
 	.dl Clouds_0_Fast_F
 	.dl Clouds_1_Fast_F
 	.dl Clouds_4_Fast_F

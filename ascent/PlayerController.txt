@@ -9,15 +9,16 @@ charge_jump_left:
 	set 7, a 
 	ld (player_flags),a 
 	
-	ld a,(jump_left_charge_timer)
+	ld a,(jump_charge_timer)
 	cp timer_max_val
 	jp nc, cjl_skip
-	inc a 
-	ld (jump_left_charge_timer),a
 	ld a,(jump_strength_right)
 	dec a 
-	jp p,cjl_skip ;Checks if we went from negative to positive
-	ld (jump_strength_right),a 
+	ld (jump_strength_right),a
+	ld a,(jump_strength_up)
+	inc a 
+	ld (jump_strength_up),a
+
 cjl_skip:
 	ret 
 
@@ -30,52 +31,76 @@ charge_jump_right:
 	ld a,(player_flags)
 	set 7, a 
 	ld (player_flags),a 
-	
-	ld a,(jump_right_charge_timer)
+	ld a,(jump_charge_timer)
 	cp timer_max_val
 	jp nc, cjr_skip
-	inc a 
-	ld (jump_right_charge_timer),a
 	ld a,(jump_strength_right)
 	inc a
-	jp p,cjr_skip ;Checks if we went from negative to positive
-	ld (jump_strength_right),a 
+	ld (jump_strength_right),a
+	ld a,(jump_strength_up)
+	inc a 
+	ld (jump_strength_up),a	
 cjr_skip:
 	ret 
+
 
 
 player_update: ;Should be called after inputs
 
 	ld a,(player_flags)
-	bit 7,a 
+	bit 7,a ;jump key  flag 
 	jp z, pu_try_jump
 	
-	;Jump key is held, charge jump
-	;Jumps can be charged in air, for immediate jump
 	res 7,a ;Reset jump hold check 
 	ld (player_flags),a 
-
+	;Jump key is held, charge jump
+	ld a,(jump_charge_timer)
+	inc a 
+	ld (jump_charge_timer),a
+	;Jumps can be charged in air, for immediate jump
 	
+	jp pu_physics
 	
 pu_try_jump:
 	;no jump keys held this frame. If jump timer > 0 and on ground, then jump 
 	
 	bit 6,a ;ground check 
-	jp nz, pu_no_jump
-	ld a,(jump_left_charge_timer)
-	ld b,a 
-	ld a,(jump_right_charge_timer)
-	or b
-	jp z,pu_no_jump
+	jp z, pu_no_jump ;if not on ground, cant jump
+	ld a,(jump_charge_timer)
+	or a 
+	jp z,pu_no_jump ;jump timers are 0 = no jump
+	
+	cp 8;if timer < 8 set to min strength 
+	jp nc, pu_jump_notmin
+	
+	;This is the minimum jump player can do 
+	ld a,(jump_strength_right)
+	bit 7,a 
+	jp nz, pu_min_jump_left 
+	or a 
+	jp z, pu_min_jump_up 
+	ld a,8 
+	jp pu_min_jump_up
+pu_min_jump_left:
+	ld a, -8
+pu_min_jump_up:
+	ld (jump_strength_right),a 
+	
+	ld a,10 
+	ld (jump_strength_up),a 
+	
+	
+	ld a,$55
+	call write_a_to_ram
 	
 	;Player is on ground and should execute a jump 
+pu_jump_notmin:
 	
 	ld hl,0 
 	ld a,(jump_strength_up)
 	ld l,a
+	call write_a_to_ram
 	
-	sla l ;mult by 2 
-	rl h 
 	sla l ;mult by 2 
 	rl h 
 	sla l ;mult by 2 
@@ -84,22 +109,19 @@ pu_try_jump:
 	rl h 
 
 	ld (player_y_vel),hl 
+	call write_hl_to_ram
 	
 	ld a,(jump_strength_right)
+	call write_a_to_ram
 	bit 7, a 
 	jp nz, pu_left_jump 
-		
 	;right jump 
-	ld l,a 
+	ld hl,0
 	jp pu_jump_cont
-pu_left_jump:
-	
-	ld hl, $ffffff
-	ld l,a 
+pu_left_jump:	
+	ld hl, $ffffff ;makes x vel negative 
 pu_jump_cont:
-	
-	sla l ;mult by 2 
-	rl h 
+	ld l,a 
 	sla l ;mult by 2 
 	rl h 
 	sla l ;mult by 2 
@@ -108,7 +130,7 @@ pu_jump_cont:
 	rl h 
 	
 	ld (player_x_vel),hl 
-	
+	call write_hl_to_ram
 	;Clear ground flag 
 	ld a,(player_flags)
 	res 6, a 
@@ -117,60 +139,124 @@ pu_jump_cont:
 pu_no_jump:	
 	;reset jump timers 
 	ld a,0 
-	ld (jump_left_charge_timer),a 
-	ld (jump_right_charge_timer),a 
+	ld (jump_charge_timer),a 
+	ld (jump_strength_right),a 
+	ld (jump_strength_up),a
 	
 	
-
+	
+	
+	
+	
 pu_physics:
 
 	;Execute player physics update and check for collisions 
 	;Run multiple times, 4 steps per frame? 
 	;Move up first, then check collision, then move side and check again 
 	
-	ex af, af' ;' 
+
 	ld a,5 ;num physics loops 
-	ex af, af' ;' 
+	ld (pu_physics_count),a 
 	
 pu_physics_loop:
-	ex af, af' ;' 
+
+pu_physics_count .equ $ + 1
+	ld a,0
 	dec a 
-	jp z, player_draw 
-	ex af, af' ;' 
+	ret z
+	ld (pu_physics_count),a
 	
 	ld a,(player_flags)
+	
+	res 5,a ;reset in semisolid flag 
+	ld (player_flags),a 
 	bit 6,a 
 	jp nz,pu_physics_loop ;If on ground, no need to do physics 
 	
 	
-	ld hl, (player_y_vel) 
+
+;Y POS UPDATE
+
+	ld hl, (player_y_vel) 	
 	ex de,hl 
 	ld hl, (player_y_pos) 
-	
 	add hl,de ;add y vel to y pos 
+	ld (player_y_pos),hl 
 	
-	;TODO check for collisions here 
+	;TODO check for vertical collisions here 
+	ld a,%11011010;jp c
+	ld (collision_check_vertical),a
+	call check_collisions
 	
 	;Temp 
-	ld de, 38
+	push hl 
+	ld de, $002000
 	sbc hl,de 
-	jp nc, pu_update_y_pos 
+	pop hl 
+	jp nc, pu_update_x_pos 
 
 pu_ground_hit:
-	ld hl,38 ;TEMP 
+	ld hl,$002000 ;TEMP 
 	ld a,(player_flags)
 	set 6,a 
 	ld (player_flags),a 
 
-pu_update_y_pos:
-	ld (player_y_pos),hl 
+pu_update_x_pos:
+
+;X POS UPDATE
+	ld hl, (player_x_vel) 
+	ex de,hl 
+	ld hl, (player_x_pos) 
+	add hl,de ;add x vel to x pos 
+	ld (player_x_pos),hl 
+	
+	;TODO check horizontal collisoins 
+	ld a, %11010010 ;jp nc 
+	ld (collision_check_vertical),a
+	call check_collisions
+	
+	;Set previous position 
+	ld hl, (player_y_pos)
+	ld (player_y_pos_prev), hl 
+	ld hl, (player_x_pos)
+	ld (player_x_pos_prev), hl 
+	
+	ld a,(player_flags)
+	bit 5,a ;in semisolid flag 
+	jp z, pu_no_semisolid
+	set 4,a	
+	jp pu_prev_semisolid
+pu_no_semisolid:
+	res 4,a 
+pu_prev_semisolid:
+	ld (player_flags),a 
 	
 	;Apply gravity 
 	ld hl,(player_y_vel)
-	ld de,80
-	sbc hl,de 
-	ld (player_y_vel),hl 
+	bit 7,h  ;Check if vel is negative
+	jp z,pu_apply_gravity
 	
+	push hl 
+	;check foor terminal vel 
+	ld de, $000200 ;15px per frame
+	add hl,de ;terminal V is negative
+	pop hl 
+	jp nc, pu_terminal_vel
+pu_apply_gravity:
+	ld de,03 ;GRAVITY CONSTANT
+	scf 
+	ccf ;reset carry flag 
+	sbc hl,de 
+	ld (player_y_vel),hl
+
+	jp pu_physics_loop
+pu_terminal_vel:
+	ld hl, $fffd00 ;-15 px per frame
+	ld (player_y_vel),hl
+
+	jp pu_physics_loop
+
+
 
 
 player_draw:
@@ -219,7 +305,8 @@ pd_set_sprite_table:
 	rr l 
 	ld bc,239
 	add hl,bc ;y-value of uppermost visible line of fg layer
-	
+	scf 
+	ccf 
 	;Uppermost vp line - player y  = lines below top to draw player 
 	sbc hl,de 
 	;call write_hl_to_ram
@@ -231,13 +318,11 @@ pd_set_sprite_table:
 	ret nz ;player is > 256 px below cam 
 	
 	ld a,l 
-
 	;a holds lines below vp top to draw player
-
 	ld b,a 
-	ld a,239
+	ld a,240
 	sub a,b ;lines above bottom of VP 
-	ret c 
+	ret c ;player below VP 
 
 	
 	ld de, (draw_buffer)
@@ -248,9 +333,7 @@ pd_set_sprite_table:
 pd_sprite_height_1 .equ $ + 1
 	cp 0 
 	jp c, pd_bottom_cut 
-	
 
-	
 	;Otherwise, no top or bottm cut
 	;a holds lines above bottom VP 
 	call pd_setup_draw
@@ -344,6 +427,268 @@ player_sprite_index .equ $ + 1
 
 
 
+check_collisions:
+	ld a,(player_y_pos+2) ;Frame Number
+	ld bc,0 
+	ld hl, Collision_Data_frame_table
+	ld c,a 
+	add hl,bc ;add frame num 
+	add hl,bc ;add frame num 
+	add hl,bc ;add frame num 
+	ld hl,(hl)
+	
+	ld a,%11011010;jp c
+	ld(check_col_lower_jump),a 
+	
+	;hl points to collision data for this frame 
+	ex af,af' ;' 
+	ld a,(hl) ;ld number of elements 
+	inc a ;for 0 case
+	ex af,af' ;' 
+	inc hl ;to first element
+
+check_collisions_same_loop:
+	;hl pts to ymin of collider 
+	ex af,af' ;'
+	dec a 
+	jp z, check_collisions_lower
+	ex af,af';' 
+	;Collider bottom is in same frame as player 
+	ld a,(player_y_pos + 1)
+	sub a,(hl); sub y pos of collider 
+	;call write_a_to_ram
+	jp c, check_col_skip_4 
+	inc hl; to height 
+	;Player top is above bottom of collider 
+	;a holds # pixels above bottom of collider (0 indexed)	
+	ld c,player_collider_height
+	;call write_a_to_ram
+	sub a,c
+	jp c, check_col_y_collision
+	sub (hl); cokmpare to collider height -1 
+	jp c,check_col_y_collision
+	;Otherwise no collision 	
+	jp check_col_skip_3
+
+check_collisions_lower:
+	;hl pts to start of lower frame collisoin data 
+	ex af,af' ;' 
+	ld a,(hl) ;ld number of elements 
+	inc a ;for 0 case
+	;call write_a_to_ram
+	ex af,af' ;' 
+	inc hl ;to first element
+	ld a, %11010010 ;jp nc 
+	ld(check_col_lower_jump),a 
+
+check_collisions_lower_loop:
+;hl pts to ymin of collider 
+	ex af,af' ;'
+	dec a 
+	ret z 
+	ex af,af';' 
+	;collider y min is in frame below player
+	;we already know player is above collider bottom 
+	ld a,(player_y_pos + 1)
+	sub (hl)
+	jp nc,check_col_skip_4
+	;call write_a_to_ram
+	inc hl ;to height 
+	;a holds px from player top to collider bottom 
+	ld c,player_collider_height
+	;call write_a_to_ram
+	sub a,c
+	jp c, check_col_y_collision
+	
+	
+	;call write_a_to_ram
+	sub (hl); cokmpare to collider height -1 
+	jp c,check_col_y_collision
+	;Otherwise no collision 	
+	jp check_col_skip_3
+	
+check_col_y_collision:
+	;call write_a_to_ram
+
+	;Player is within Y range of collider 
+	;ld a,$AA 
+	;call write_a_to_ram;TESTIng
+	
+	inc hl ;to x max 
+	ld a,(player_x_pos+1);Fullpixels
+	srl a ;div by 2 
+	ld b,a 
+	ld a,(player_x_pos+2);MSB fullpixel 
+	rrca ;Move bit 0 to bit 7
+	or b 
+	;A holds x pos / 2 (paired pixels) 
+	
+	cp (hl) ;compare to x max 
+	;zero or carry = collison 
+	jp z, check_col_x_collision
+	jp c, check_col_x_collision
+	
+	jp check_col_skip_2
+	
+check_col_x_collision:
+
+	;ld a,$BB
+	;call write_a_to_ram
+	;Need to find x pos of right of player, then div by 2 
+	ld a,(player_x_pos+1);Fullpixels
+	add a, player_collider_width ;Will set carry flag if right side of player > 255 and left of player < 255 
+	rra ;div by 2 and move carry flag to bit 7. 
+	ld b,a 
+	ld a,(player_x_pos +2 ); MSB pixel 
+	rrca ;move bit 0 to bit 7
+	or b ;a holds right pos of player / 2 
+	inc hl ;to x min 
+	cp (hl) 
+ 
+	jp c, check_col_skip_1 
+
+
+
+
+
+
+	
+collision_found: ;A collision has been detected
+	
+	;TESTing 
+	inc hl ;to flags 
+	ld a,(hl)
+	call write_a_to_ram
+	
+	ret ;TESTING
+
+	scf 
+collision_check_vertical .equ $
+	jp c, collision_check_vert 
+	
+
+	;Player is moving horizontal 
+	ld a,(hl) ;flags 
+	bit 7,a ;semisolid 
+	jp nz,vert_col_up_semisolid ;skips semisolid 
+
+	bit 6,a 
+	jp nz, collision_spikes
+	
+	;TODO breakaway platforms 
+	
+	;player has moved horiz and hit a solid wall 
+	;Reverse x velocity 
+	push hl 
+	ld hl,(player_x_vel)
+	ex de,hl 
+	ld hl,0
+	sbc hl, de 
+	ld (player_x_vel),hl 
+	ld hl, (player_x_pos_prev) ;revert to previous y pos 
+	ld (player_x_pos),hl 
+	pop hl 
+	
+	jp check_col_skip_0
+
+collision_check_vert:
+	;Player is moving in vertical direction 
+
+	ld a,(player_y_vel + 2) ;MSB of y vel 
+	bit 7,a ;check if moving up or down 
+	jp nz, vert_col_down
+	
+	;player is moving up 
+	ld a,(hl) ;flags 
+	bit 7,a ;semisolid 
+	jp nz,vert_col_up_semisolid ;semisolid and moving up
+
+	bit 6,a 
+	jp nz, collision_spikes
+
+	;TODO breakaway platforms 
+	
+	;Plyaer has moved up and hit non spike object 
+	;Set velocity to 0 
+	push hl 
+	ld hl,0
+	ld (player_y_vel),hl 
+	ld hl, (player_y_pos_prev) ;revert to previous y pos 
+	ld (player_y_pos),hl 
+	pop hl 
+	
+	jp check_col_skip_0
+	
+vert_col_up_semisolid:
+	ld a,(player_flags)
+	set 5,a ;set semisolid flag 
+	ld (player_flags),a 
+	jp check_col_skip_0
+	
+	
+	
+vert_col_down:
+
+	;player is moving down 
+	ld a,(hl) ;flags 
+	bit 7,a ;semisolid 
+	jp z,vert_col_down_solid 
+	
+	;semisolid and moving down
+	ld a,(player_flags)
+	set 5,a ;set semisolid flag 
+	ld (player_flags),a 
+	bit 4,a ;check we were not in semisolid last update 
+	jp nz, check_col_skip_0 ;we were already within semisolid collider 
+	;otherwise, hit the collider 
+	
+
+vert_col_down_solid:
+	bit 6,a 
+	jp nz, collision_spikes
+
+	;TODO breakaway platforms 
+	
+	;Plyaer has moved down and hit non spike object 
+	;Set velocity to 0 
+	push hl 
+	ld hl,0
+	ld (player_y_vel),hl 
+	ld hl, (player_y_pos_prev) ;revert to previous y pos 
+	ld (player_y_pos),hl 
+	pop hl 
+	
+	ld a,(player_flags)
+	set 6,a  ;set ground flag 
+	ld (player_flags),a
+	
+	jp check_col_skip_0 ;continue 
+
+
+
+
+
+collision_spikes:
+	;player has collided with spikes 
+
+	jp check_col_skip_0
+
+check_col_skip_4:
+	inc hl ;to height
+check_col_skip_3:
+	inc hl ;to xmax
+check_col_skip_2:	
+	inc hl ;to xmin
+check_col_skip_1:	
+	inc hl ;to flags
+check_col_skip_0:
+	inc hl ;to next element
+	
+	scf 
+check_col_lower_jump .equ $
+	jp c, check_collisions_same_loop
+	jp check_collisions_lower_loop
+
 
 
 player_sprite_table:
@@ -361,12 +706,15 @@ jump_strength_up:
 	.db 0 
 jump_strength_right:
 	.db 0 
-jump_left_charge_timer:
+jump_charge_timer:
 	.db 0 
-jump_right_charge_timer:
-	.db 0 
+
 	
 timer_max_val .equ 30
+
+player_collider_height .equ 19
+player_collider_width .equ 24 ;width -1 
+
 
 player_x_pos:
 	.dl 0 ; (MSB fullpixel, Fullpixels, subpixels)
@@ -381,7 +729,89 @@ player_y_vel:
 	.dl 0 ; (Unused, Fullpixels, subpixels)
 
 
+player_x_pos_prev: ;x position before update, revert to this if collision 
+	.dl 0 ; (MSB fullpixel, Fullpixels, subpixels)
+	
+player_y_pos_prev: ;y position before update, revert to this if collision :
+	.dl 0 ; (Frame #, Fullpixels, subpixels)
+
+
 
 player_flags:
-	.db %00000000 ; (7 = Any jump button held, 6 = on ground, )
+	.db %00000000 ; (7 = Any jump button held, 6 = on ground,5 = within semisolid, 4 = in semisolid last update)
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+player_move_debug:
+;DEBUG MODE ============================================================================= 
+	ld	hl,DI_Mode		; register for keypad mode
+	ld	(hl),2			; set single scan mode
+	xor	a,a
+dbg_scan_wait:
+	cp	a,(hl)			; wait for keypad idle mode
+	jr	nz,dbg_scan_wait
+	
+	ld a,(kbdG5)
+	bit kbit6,a 
+	jp nz, player_move_debug_right
+	
+	ld a,(kbdG3)
+	bit kbit4,a 
+	jp nz, player_move_debug_left
+	
+	ld a,(kbdG4)
+	bit kbit2,a 
+	jp nz, player_move_debug_down 
+	
+	ld a,(kbdG4)
+	bit kbit8,a 
+	jp nz, player_move_debug_up
+	
+	ret 
+	
+	
+
+
+player_move_debug_left:
+	ld hl,(player_x_pos)
+	ld bc, 128
+	sbc hl,bc 
+	ld (player_x_pos),hl 
+	call check_collisions
+	ret 
+
+player_move_debug_right:
+	ld hl,(player_x_pos)
+	ld bc, 128
+	add hl,bc 
+	ld (player_x_pos),hl 
+	call check_collisions
+	ret 
+
+player_move_debug_up:
+	ld hl,(player_y_pos)
+	ld bc, 128
+	add hl,bc 
+	ld (player_y_pos),hl 
+	call check_collisions
+	ret 
+
+player_move_debug_down:
+	ld hl,(player_y_pos)
+	ld bc, 128
+	sbc hl,bc 
+	ld (player_y_pos),hl 
+	call check_collisions
+	ret

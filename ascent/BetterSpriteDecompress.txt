@@ -1044,8 +1044,8 @@ sdcomp_interrupt:
 	ld (sdcomp_cont_aP),a 
 	
 	
-	ld a, $AA
-	call write_a_to_ram
+	;ld a, $AA
+	;call write_a_to_ram
 	
 	ld a,1 ;Return 1 if interrupted
 	ret 

@@ -288,6 +288,8 @@ decompress_frame_up_pre1:
 	.db %01000000
 	.dl Branches_0, Branches_0_Fast
 	.db %10000000
+	.dl Clouds_2, Clouds_2_Fast
+	.db %10000000
 	.dl GroundDirtDark, GroundDirtDark_Fast
 	.db %10000000
 	.dl GroundDirtDark, GroundDirtDark_Fast_F
@@ -329,8 +331,6 @@ decompress_frame_up_pre1:
 	.dl Clouds_3, Clouds_3_Fast
 	.db %10000000
 	.dl Clouds_4, Clouds_4_Fast
-	.db %10000000
-	.dl Clouds_2, Clouds_2_Fast
 	.db %10000000
 
 decompress_frame_up_0:
@@ -1105,6 +1105,8 @@ decompress_frame_down_23:
 
 decompress_frame_down_24:
 	.db 10
+	.dl Clouds_2, Clouds_2_Fast
+	.db %10000000
 	.dl Clouds_0, Clouds_0_Fast
 	.db %10000000
 	.dl Clouds_1, Clouds_1_Fast
@@ -1112,8 +1114,6 @@ decompress_frame_down_24:
 	.dl Clouds_3, Clouds_3_Fast
 	.db %10000000
 	.dl Clouds_4, Clouds_4_Fast
-	.db %10000000
-	.dl Clouds_2, Clouds_2_Fast
 	.db %10000000
 	.dl Clouds_0, Clouds_0_Fast_F
 	.db %10100000

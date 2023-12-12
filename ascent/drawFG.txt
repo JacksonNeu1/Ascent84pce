@@ -1,8 +1,7 @@
 
 FGMaxSpriteHeight .equ 120
 
-draw_mg:
-
+draw_fg_setup:
 	ld a, %11010010 ;jp nc
 	ld (dfgs_bg_mode_1),a 
 	ld (dfgs_bg_mode_2),a 
@@ -16,11 +15,10 @@ draw_mg:
 	ld (dfgs_vram_bottom_2),hl 
 	ld (dfgs_vram_bottom_3),hl 
 	ld (dfgs_vram_bottom_4),hl 
-	
-	ld hl,(cam_pos)
-	srl h ;div by 2
-	rr l 
-	
+	ret 
+
+
+draw_fg_setup_2:
 	ld bc,239
 	add hl,bc ;y-value of uppermost visible line of fg layer
 	ld a,l ;lsb cam pos, = line number in middle frame
@@ -37,57 +35,60 @@ draw_mg:
 	ld bc,0
 	ld c,h;msb ccam pos 
 	inc c 
+	
+	ret 
+
+draw_mg:
+
+	call draw_fg_setup
+	
+	ld hl,(cam_pos)
+	srl h ;div by 2
+	rr l 
+	
+	call draw_fg_setup_2
+
 	ld hl,MG_Data_frame_table
 	add hl,bc
 	add hl,bc 
 	add hl,bc 	
 	ld hl,(hl);upper frame 
 	
-	
 	call draw_fg_sprites
 	ret
 
+draw_mg2:
 
+	call draw_fg_setup
+	
+	ld hl,(cam_pos)
+	srl h ;div by 2
+	rr l 
+	
+	call draw_fg_setup_2
+
+	ld hl,MG2_Data_frame_table
+	add hl,bc
+	add hl,bc 
+	add hl,bc 	
+	ld hl,(hl);upper frame 
+
+	call draw_fg_sprites
+	ret
+	
 
 draw_fg:
 
-	ld a, %11010010 ;jp nc
-	ld (dfgs_bg_mode_1),a 
-	ld (dfgs_bg_mode_2),a 
-
-	
-	ld hl,(draw_buffer)
-	ld (dfgs_vram_top_1),hl
-	ld (dfgs_vram_top_2),hl
-	ld bc,160*240
-	add hl,bc
-	ld (dfgs_vram_bottom_1),hl 
-	ld (dfgs_vram_bottom_2),hl 
-	ld (dfgs_vram_bottom_3),hl 
-	ld (dfgs_vram_bottom_4),hl 
+	call draw_fg_setup
 	
 	ld hl,(cam_pos)
-	ld bc,239
-	add hl,bc ;y-value of uppermost visible line of fg layer
-	ld a,l ;lsb cam pos, = line number in middle frame
-	ld (dfgs_cam_height_1),a ;SET with line# for bg
-	ld (dfgs_cam_height_2),a ;y value in dataframe of uppermost line of viewport
-	ld (dfgs_cam_height_3),a ;Set to 255 for BG (Skips drawing lower frame)
-	ld (dfgs_cam_height_4),a
-	neg 
-	ld (dfgs_viewport_to_upper_frame),a ; 1 = vp bound is on frame separator
-	neg 
-	sub 239
-	ld (dfgs_viewport_bottom_y),a
 	
-	ld bc,0
-	ld c,h;msb ccam pos 
-	inc c 
+	call draw_fg_setup_2
+	
 	ld hl,FG_Data_frame_table
 	add hl,bc
 	add hl,bc 
 	add hl,bc 	
-
 	ld hl,(hl);upper frame 
 
 	call draw_fg_sprites
@@ -639,7 +640,7 @@ dfgs_sprite_pointers_4 .equ $ + 1
 	
 	
 	
-;a holds distance from bottom of screen, starting from 0, or for top cut dist above screen = num lines to skip 
+;a holds distance from bottom of screen, starting from 1, or for top cut dist above screen = num lines to skip 
 ;(hl) = height 	
 ;de = initial vram, top for top cut, otherwise bottom
 

@@ -142,15 +142,31 @@ MG2_Data_3:
 
 MG2_Data_2:
 	.db 0
-	.db 0
+	.db 2
+	.db 8, 16, 41, 119  ;Clouds_2_Fast
+	.db 83, 16, 114, 119  ;Clouds_2_Fast
 
 MG2_Data_1:
 	.db 0
-	.db 0
+	.db 6
+	.db 4, 16, 6, 119  ;Clouds_2_Fast
+	.db 4, 16, 15, 119  ;Clouds_2_Fast
+	.db 4, 16, 25, 119  ;Clouds_2_Fast
+	.db 46, 16, 0, 119  ;Clouds_2_Fast
+	.db 115, 16, 87, 119  ;Clouds_2_Fast
+	.db 255, 16, 25, 119  ;Clouds_2_Fast
 
 MG2_Data_0:
 	.db 0
-	.db 0
+	.db 8
+	.db 89, 16, 35, 119  ;Clouds_2_Fast
+	.db 89, 16, 43, 119  ;Clouds_2_Fast
+	.db 89, 16, 51, 119  ;Clouds_2_Fast
+	.db 89, 16, 59, 119  ;Clouds_2_Fast
+	.db 135, 16, 97, 119  ;Clouds_2_Fast
+	.db 135, 16, 89, 119  ;Clouds_2_Fast
+	.db 135, 16, 78, 119  ;Clouds_2_Fast
+	.db 135, 16, 67, 119  ;Clouds_2_Fast
 
 
 
