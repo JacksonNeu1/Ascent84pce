@@ -129,9 +129,16 @@ main_loop:
 	jp get_inputs
 get_inputs_return:
 	;call move_bg Draw BG calls MoveBg
-	call player_move_debug
-	
+	;call player_move_debug
+	call player_update
 	call check_collisions
+	
+	call update_sine_vals
+	ld a,(sine_8_7_2)
+	call write_a_to_ram
+	
+	call update_animations
+	
 	
 	call draw_bg
 
@@ -162,7 +169,7 @@ get_inputs_return:
 	
 	call draw_mg2
 	
-
+	
 	call player_draw 
 	
 	;TEsting
@@ -223,7 +230,7 @@ get_inputs_return:
 longest_frame_skip:
 	pop hl 
 	
-		
+	;Add to frame counter
 	ld hl,(frameCount)
 	inc hl
 	ld (frameCount),hl
@@ -536,6 +543,9 @@ sd_test_a:
 
 
 
+
+
+
 #include "timeTesting.txt"
 #include "drawBGSprite.txt"
 #include "drawFGSprite.txt"
@@ -544,6 +554,8 @@ sd_test_a:
 #include "SpriteDecompressManager.txt"
 #include "getInputs.txt"
 #include "PlayerController.txt"
+#include "sineFunc.txt"
+#include "animations.txt"
 ;#include "levelData.txt"
 ;#include "FGLevelData.txt"
 ;#include "testing/TestingCollisionData.txt"

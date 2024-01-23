@@ -1,0 +1,626 @@
+
+update_sine_vals:
+	ld bc,0
+	
+	ld a, (frameCount+1);middle byte 
+	srl a ;put bit 0 to carry flag 
+	ld a, (frameCount)
+	rra ;a holds frame counter/2, ~16 second timer
+	ld hl,sine_modes_table
+	ex af,af' ;' ;in
+	ld a,20 
+	
+update_sine_loop:
+	ex af,af' ;' ;out
+	push af ;frame count 
+	ld de, (hl) ;de holds correct sine value table 
+	inc hl 
+	inc hl 
+	inc hl 
+	push hl 
+	call sine_apply_amplitudes
+	pop hl
+	pop af 
+	ld c,64 ;add quarter phase offset 
+	add a,c 
+	ex af,af' ;' ;in
+	dec a 
+	ret z 
+	ld c,a
+	and %00000011 ;check last 2 bits
+	ld a,c
+	jp nz,update_sine_loop
+	;otherwise, a is multiple of 4, multiply clock speed 
+	ex af, af' ;' ;out
+	sla a ;mult by 2 
+	ex af, af' ;' ;in
+	jp update_sine_loop
+	
+	
+	
+	
+	
+	
+sine_apply_amplitudes: ;a holds scaled frame count,de holds ptr to correct sine value table
+	ld hl, sine
+	ld c,a 
+	add hl,bc 
+	ld a,(hl); a holds sine value 
+	ex de,hl 
+	srl a ;div 2 
+	srl a 
+	srl a ;amplitude of 31 
+	ld (hl),a 
+	inc hl 
+	srl a ;amplitude of 15 
+	ld (hl),a 
+	inc hl
+	srl a ;amplitude of 7 
+	ld (hl),a 
+	inc hl
+	srl a ;amplitude of 3 
+	ld (hl),a 
+	inc hl
+	srl a ;amplitude of 1 
+	ld (hl),a
+	ret 
+
+
+
+sine_modes_table:
+	.dl sine_05_1 
+	.dl sine_05_2
+	.dl sine_05_3
+	.dl sine_05_4
+	
+	.dl sine_1_1
+	.dl sine_1_2
+	.dl sine_1_3
+	.dl sine_1_4
+	
+	.dl sine_2_1
+	.dl sine_2_2
+	.dl sine_2_3
+	.dl sine_2_4
+	
+	.dl sine_4_1
+	.dl sine_4_2
+	.dl sine_4_3
+	.dl sine_4_4
+
+	.dl sine_8_1
+	.dl sine_8_2
+	.dl sine_8_3
+	.dl sine_8_4
+
+
+
+
+sine_05_1: ;half frequency, no phase shift
+sine_05_31_1: ;freqMult, amplitude, phase 
+	.db 0  
+sine_05_15_1: ;freqMult, amplitude, phase 
+	.db 0 
+sine_05_7_1: ;freqMult, amplitude, phase 
+	.db 0 
+sine_05_3_1: ;freqMult, amplitude, phase 
+	.db 0 
+sine_05_1_1: ;freqMult, amplitude, phase 
+	.db 0 
+
+	
+	
+sine_05_2: ;half frequency, no phase shift 
+sine_05_31_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_05_15_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_05_7_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_05_3_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_05_1_2: ;freqMult, amplitude, phase 
+	.db 0 
+
+	
+sine_05_3: ;half frequency, no phase shift
+sine_05_31_3: ;freqMult, amplitude, phase 
+	.db 0  
+sine_05_15_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_05_7_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_05_3_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_05_1_3: ;freqMult, amplitude, phase 
+	.db 0 
+
+
+sine_05_4: ;half frequency, no phase shift 
+sine_05_31_4: ;freqMult, amplitude, phase 
+	.db 0
+sine_05_15_4: ;freqMult, amplitude, phase 
+	.db 0 
+sine_05_7_4: ;freqMult, amplitude, phase 
+	.db 0 
+sine_05_3_4: ;freqMult, amplitude, phase 
+	.db 0 
+sine_05_1_4: ;freqMult, amplitude, phase 
+	.db 0 
+
+
+	
+sine_1_1: ;no freq mult, no phase shift
+sine_1_31_1: ;freqMult, amplitude, phase 
+	.db 0  
+sine_1_15_1: ;freqMult, amplitude, phase 
+	.db 0 
+sine_1_7_1: ;freqMult, amplitude, phase 
+	.db 0 
+sine_1_3_1: ;freqMult, amplitude, phase 
+	.db 0 
+sine_1_1_1: ;freqMult, amplitude, phase 
+	.db 0 
+
+	
+sine_1_2: ;no freq mult, no phase shift 
+sine_1_31_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_1_15_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_1_7_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_1_3_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_1_1_2: ;freqMult, amplitude, phase 
+	.db 0 
+
+sine_1_3: ;no freq mult, no phase shift 
+sine_1_31_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_1_15_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_1_7_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_1_3_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_1_1_3: ;freqMult, amplitude, phase 
+	.db 0 
+
+	
+sine_1_4: ;no freq mult, no phase shift
+sine_1_31_4: ;freqMult, amplitude, phase 
+	.db 0  
+sine_1_15_4: ;freqMult, amplitude, phase 
+	.db 0 
+sine_1_7_4: ;freqMult, amplitude, phase 
+	.db 0 
+sine_1_3_4: ;freqMult, amplitude, phase 
+	.db 0 
+sine_1_1_4: ;freqMult, amplitude, phase 
+	.db 0 
+
+
+
+
+sine_2_1: ;double freq mult
+sine_2_31_1: ;freqMult, amplitude, phase 
+	.db 0 
+sine_2_15_1: ;freqMult, amplitude, phase 
+	.db 0 
+sine_2_7_1: ;freqMult, amplitude, phase 
+	.db 0 
+sine_2_3_1: ;freqMult, amplitude, phase 
+	.db 0 
+sine_2_1_1: ;freqMult, amplitude, phase 
+	.db 0 
+
+	
+sine_2_2: 
+sine_2_31_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_2_15_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_2_7_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_2_3_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_2_1_2: ;freqMult, amplitude, phase 
+	.db 0 
+
+	
+sine_2_3: 
+sine_2_31_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_2_15_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_2_7_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_2_3_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_2_1_3: ;freqMult, amplitude, phase 
+	.db 0 
+
+	
+sine_2_4: 
+sine_2_31_4: ;freqMult, amplitude, phase 
+	.db 0	
+sine_2_15_4: ;freqMult, amplitude, phase 
+	.db 0 
+sine_2_7_4: ;freqMult, amplitude, phase 
+	.db 0 
+sine_2_3_4: ;freqMult, amplitude, phase 
+	.db 0 
+sine_2_1_4: ;freqMult, amplitude, phase 
+	.db 0 
+
+
+
+
+sine_4_1: ;double freq mult
+sine_4_31_1: ;freqMult, amplitude, phase 
+	.db 0 
+sine_4_15_1: ;freqMult, amplitude, phase 
+	.db 0 
+sine_4_7_1: ;freqMult, amplitude, phase 
+	.db 0 
+sine_4_3_1: ;freqMult, amplitude, phase 
+	.db 0 
+sine_4_1_1: ;freqMult, amplitude, phase 
+	.db 0 
+
+	
+sine_4_2: 
+sine_4_31_2: ;freqMult, amplitude, phase 
+	.db 0
+sine_4_15_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_4_7_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_4_3_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_4_1_2: ;freqMult, amplitude, phase 
+	.db 0 
+
+	
+sine_4_3: 
+sine_4_31_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_4_15_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_4_7_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_4_3_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_4_1_3: ;freqMult, amplitude, phase 
+	.db 0 
+
+	
+sine_4_4: 
+sine_4_314: ;freqMult, amplitude, phase 
+	.db 0
+sine_4_15_4: ;freqMult, amplitude, phase 
+	.db 0 
+sine_4_7_4: ;freqMult, amplitude, phase 
+	.db 0 
+sine_4_3_4: ;freqMult, amplitude, phase 
+	.db 0 
+sine_4_1_4: ;freqMult, amplitude, phase 
+	.db 0 
+
+
+
+
+
+sine_8_1: ;double freq mult
+sine_8_31_1: ;freqMult, amplitude, phase 
+	.db 0 
+sine_8_15_1: ;freqMult, amplitude, phase 
+	.db 0 
+sine_8_7_1: ;freqMult, amplitude, phase 
+	.db 0 
+sine_8_3_1: ;freqMult, amplitude, phase 
+	.db 0 
+sine_8_1_1: ;freqMult, amplitude, phase 
+	.db 0 
+
+	
+sine_8_2: 
+sine_8_31_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_8_15_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_8_7_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_8_3_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_8_1_2: ;freqMult, amplitude, phase 
+	.db 0 
+
+	
+sine_8_3: 
+sine_8_313: ;freqMult, amplitude, phase 
+	.db 0 
+sine_8_15_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_8_7_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_8_3_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_8_1_3: ;freqMult, amplitude, phase 
+	.db 0 
+
+	
+sine_8_4: 
+sine_8_31_4: ;freqMult, amplitude, phase 
+	.db 0
+sine_8_15_4: ;freqMult, amplitude, phase 
+	.db 0 
+sine_8_7_4: ;freqMult, amplitude, phase 
+	.db 0 
+sine_8_3_4: ;freqMult, amplitude, phase 
+	.db 0 
+sine_8_1_4: ;freqMult, amplitude, phase 
+	.db 0 
+
+
+
+
+sine:
+	.db 128
+	.db 131
+	.db 134
+	.db 137
+	.db 140
+	.db 143
+	.db 146
+	.db 149
+	.db 152
+	.db 156
+	.db 159
+	.db 162
+	.db 165
+	.db 168
+	.db 171
+	.db 174
+	.db 176
+	.db 179
+	.db 182
+	.db 185
+	.db 188
+	.db 191
+	.db 193
+	.db 196
+	.db 199
+	.db 201
+	.db 204
+	.db 206
+	.db 209
+	.db 211
+	.db 213
+	.db 216
+	.db 218
+	.db 220
+	.db 222
+	.db 224
+	.db 226
+	.db 228
+	.db 230
+	.db 232
+	.db 234
+	.db 235
+	.db 237
+	.db 239
+	.db 240
+	.db 242
+	.db 243
+	.db 244
+	.db 246
+	.db 247
+	.db 248
+	.db 249
+	.db 250
+	.db 251
+	.db 251
+	.db 252
+	.db 253
+	.db 253
+	.db 254
+	.db 254
+	.db 254
+	.db 255
+	.db 255
+	.db 255
+	.db 255
+	.db 255
+	.db 255
+	.db 255
+	.db 254
+	.db 254
+	.db 253
+	.db 253
+	.db 252
+	.db 252
+	.db 251
+	.db 250
+	.db 249
+	.db 248
+	.db 247
+	.db 246
+	.db 245
+	.db 244
+	.db 242
+	.db 241
+	.db 239
+	.db 238
+	.db 236
+	.db 235
+	.db 233
+	.db 231
+	.db 229
+	.db 227
+	.db 225
+	.db 223
+	.db 221
+	.db 219
+	.db 217
+	.db 215
+	.db 212
+	.db 210
+	.db 207
+	.db 205
+	.db 202
+	.db 200
+	.db 197
+	.db 195
+	.db 192
+	.db 189
+	.db 186
+	.db 184
+	.db 181
+	.db 178
+	.db 175
+	.db 172
+	.db 169
+	.db 166
+	.db 163
+	.db 160
+	.db 157
+	.db 154
+	.db 151
+	.db 148
+	.db 145
+	.db 142
+	.db 138
+	.db 135
+	.db 132
+	.db 129
+	.db 126
+	.db 123
+	.db 120
+	.db 117
+	.db 113
+	.db 110
+	.db 107
+	.db 104
+	.db 101
+	.db 98
+	.db 95
+	.db 92
+	.db 89
+	.db 86
+	.db 83
+	.db 80
+	.db 77
+	.db 74
+	.db 71
+	.db 69
+	.db 66
+	.db 63
+	.db 60
+	.db 58
+	.db 55
+	.db 53
+	.db 50
+	.db 48
+	.db 45
+	.db 43
+	.db 40
+	.db 38
+	.db 36
+	.db 34
+	.db 32
+	.db 30
+	.db 28
+	.db 26
+	.db 24
+	.db 22
+	.db 20
+	.db 19
+	.db 17
+	.db 16
+	.db 14
+	.db 13
+	.db 11
+	.db 10
+	.db 9
+	.db 8
+	.db 7
+	.db 6
+	.db 5
+	.db 4
+	.db 3
+	.db 3
+	.db 2
+	.db 2
+	.db 1
+	.db 1
+	.db 0
+	.db 0
+	.db 0
+	.db 0
+	.db 0
+	.db 0
+	.db 0
+	.db 1
+	.db 1
+	.db 1
+	.db 2
+	.db 2
+	.db 3
+	.db 4
+	.db 4
+	.db 5
+	.db 6
+	.db 7
+	.db 8
+	.db 9
+	.db 11
+	.db 12
+	.db 13
+	.db 15
+	.db 16
+	.db 18
+	.db 20
+	.db 21
+	.db 23
+	.db 25
+	.db 27
+	.db 29
+	.db 31
+	.db 33
+	.db 35
+	.db 37
+	.db 39
+	.db 42
+	.db 44
+	.db 46
+	.db 49
+	.db 51
+	.db 54
+	.db 56
+	.db 59
+	.db 62
+	.db 64
+	.db 67
+	.db 70
+	.db 73
+	.db 76
+	.db 79
+	.db 81
+	.db 84
+	.db 87
+	.db 90
+	.db 93
+	.db 96
+	.db 99
+	.db 103
+	.db 106
+	.db 109
+	.db 112
+	.db 115
+	.db 118
+	.db 121
+	.db 124
+	.db 127
+	

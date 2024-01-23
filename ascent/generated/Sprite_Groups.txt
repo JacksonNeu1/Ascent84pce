@@ -27,6 +27,7 @@ Sprite_Groups:
 	.dl SG_BranchBase1
 	.dl SG_BranchBase2
 	.dl SG_BranchBase4
+	.dl SG_CloudPlatform
 	.dl SG_DarkGroundChunk
 	.dl SG_BGTree1
 	.dl SG_BGTree2
@@ -384,6 +385,14 @@ SG_BranchBase4:
 	.db 18, 14, 9, 118  ;Branches_9_Fast_F
 	.db 0, 14, 12, 69  ;Branches_9_Slow_O
 	.db 10, 9, 11, 105  ;Leaves_2_Slow
+
+SG_CloudPlatform:
+	.db 0
+	.db 4
+	.db 0, 16, 0, 119  ;Clouds_2_Fast
+	.db 0, 16, 8, 119  ;Clouds_2_Fast
+	.db 0, 16, 16, 119  ;Clouds_2_Fast
+	.db 0, 16, 24, 119  ;Clouds_2_Fast
 
 SG_DarkGroundChunk:
 	.db 0

@@ -1,0 +1,104 @@
+ 
+update_animations:
+	;Will update all animations every frame. Not significant performance impact
+	
+	;POSITION
+	;load hl with data pointer (dataframe or sprite group)
+	;ld bc with number of bytes to target property
+	;add hl bc 
+
+	;ld a with desired sine freq,phase,and amplitude 
+	;add a,xx ;Base value
+	;ld (hl),a
+
+	;7 bytes per animated value
+	ex af, af' ;'
+	ld a,1 ;Number of animations 
+	ld hl,position_animation_data
+update_animation_position_loop:
+	ex af, af' ;'
+	ld de,(hl);load address of property
+	inc hl
+	inc hl 
+	inc hl 
+	ld bc,(hl) ;address of anim curve 
+	inc hl 
+	inc hl 
+	inc hl
+	ld a,(bc) ;value of anim curve
+	ld c, (hl) ;base value
+	inc hl
+	add a,c
+	ld (de),a 
+	ex af, af' ;'
+	dec a 
+	jp nz,update_animation_position_loop
+	
+	
+	
+	ld de,0 ;clear upper byte 
+	ex af, af' ;'
+	ld a,1 ;Number of animations 
+	ld hl,sprite_animation_data
+update_animation_sprite_loop:
+	ex af, af' ;'
+	ld bc,(hl) ;animation curve address
+	inc hl 
+	inc hl
+	inc hl
+	ld a,(bc) ;anim curve value (btwn 0 and 7)
+	ld e,a 
+	add hl,de ;jump to correct place
+	neg ;a holds -curve value
+	add a,8; a holds amt to jump to get past sprite table
+	ld e,a 
+	ld a,(hl);correct sprite index 
+	add hl,de ;to address of target property
+	ld bc,(hl)
+	ld (bc),a 
+	inc hl 
+	ex af, af' ;'
+	dec a 
+	jp nz,update_animation_sprite_loop
+	
+	
+	;call write_a_to_ram
+	ret 
+	
+	
+	
+	
+	;SPRITE
+	;ld hl with base data ptr
+	;ld bc with number of bytes to target property
+	
+
+position_animation_data: ;7 bytes per animation
+	;.dl address of target property
+	;.dl address of desired animation curve value (could use lookup table to reduce memory)
+	;.db base value 
+	;...
+	.dl MG_Data_0 + 18 
+	.dl sine_8_31_2
+	.db 168
+	
+	
+
+sprite_animation_data: ;14 bytes per animation
+	;.dl address of desired animation curve value (could use lookup table to reduce memory)
+	;.db sprite frame 0 
+	;.db sprite frame 1
+	;.db sprite frame 2
+	;.db sprite frame 3
+	;.db sprite frame 4
+	;.db sprite frame 5
+	;.db sprite frame 6
+	;.db sprite frame 7
+	;.dl address of target property
+
+	
+	
+	
+ 
+ 
+ 
