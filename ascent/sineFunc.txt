@@ -8,7 +8,7 @@ update_sine_vals:
 	rra ;a holds frame counter/2, ~16 second timer
 	ld hl,sine_modes_table
 	ex af,af' ;' ;in
-	ld a,20 
+	ld a,20
 	
 update_sine_loop:
 	ex af,af' ;' ;out
@@ -19,6 +19,31 @@ update_sine_loop:
 	inc hl 
 	push hl 
 	call sine_apply_amplitudes
+	pop hl
+	pop af 
+	;a holds frame count 
+	ld de, (hl) ;de holds lin value table
+	inc hl 
+	inc hl 
+	inc hl 
+	push hl 
+	push af
+	;A holds frame count for linear curve
+	call lin_apply_amplitudes
+	pop af 
+	pop hl
+	push af
+	ld de, (hl) ;de holds linrep value table
+	inc hl 
+	inc hl 
+	inc hl 
+	bit 7,a 
+	jp z,update_sine_skip_rep
+	xor %11111111 ;if a >127, negate it to reverse the time 
+update_sine_skip_rep:
+	push hl
+	ex de,hl 	
+	call linrep_apply_amplitudes
 	pop hl
 	pop af 
 	ld c,64 ;add quarter phase offset 
@@ -46,8 +71,10 @@ sine_apply_amplitudes: ;a holds scaled frame count,de holds ptr to correct sine 
 	ld c,a 
 	add hl,bc 
 	ld a,(hl); a holds sine value 
+lin_apply_amplitudes:
 	ex de,hl 
 	srl a ;div 2 
+linrep_apply_amplitudes:
 	srl a 
 	srl a ;amplitude of 31 
 	ld (hl),a 
@@ -68,30 +95,70 @@ sine_apply_amplitudes: ;a holds scaled frame count,de holds ptr to correct sine 
 
 
 sine_modes_table:
-	.dl sine_05_1 
+	.dl sine_05_1
+	.dl lin_05_1
+	.dl linrep_05_1
 	.dl sine_05_2
+	.dl lin_05_2
+	.dl linrep_05_2
 	.dl sine_05_3
+	.dl lin_05_3
+	.dl linrep_05_3
 	.dl sine_05_4
+	.dl lin_05_4
+	.dl linrep_05_4
 	
 	.dl sine_1_1
+	.dl lin_1_1
+	.dl linrep_1_1
 	.dl sine_1_2
+	.dl lin_1_2
+	.dl linrep_1_2
 	.dl sine_1_3
+	.dl lin_1_3
+	.dl linrep_1_3
 	.dl sine_1_4
+	.dl lin_1_4
+	.dl linrep_1_4
 	
 	.dl sine_2_1
+	.dl lin_2_1
+	.dl linrep_2_1
 	.dl sine_2_2
+	.dl lin_2_2
+	.dl linrep_2_2
 	.dl sine_2_3
+	.dl lin_2_3
+	.dl linrep_2_3
 	.dl sine_2_4
+	.dl lin_2_4
+	.dl linrep_2_4
 	
 	.dl sine_4_1
+	.dl lin_4_1
+	.dl linrep_4_1
 	.dl sine_4_2
+	.dl lin_4_2
+	.dl linrep_4_2
 	.dl sine_4_3
+	.dl lin_4_3
+	.dl linrep_4_3
 	.dl sine_4_4
+	.dl lin_4_4
+	.dl linrep_4_4
 
 	.dl sine_8_1
+	.dl lin_8_1
+	.dl linrep_8_1
 	.dl sine_8_2
+	.dl lin_8_2
+	.dl linrep_8_2
 	.dl sine_8_3
+	.dl lin_8_3
+	.dl linrep_8_3
 	.dl sine_8_4
+	.dl lin_8_4
+	.dl linrep_8_4
 
 
 
@@ -364,6 +431,498 @@ sine_8_1_4: ;freqMult, amplitude, phase
 	.db 0 
 
 
+
+
+lin_05_1:
+lin_05_31_1:
+	.db 0 
+lin_05_15_1:
+	.db 0 
+lin_05_7_1:
+	.db 0 
+lin_05_3_1:
+	.db 0 
+lin_05_1_1:
+	.db 0 
+
+lin_05_2:
+lin_05_31_2:
+	.db 0 
+lin_05_15_2:
+	.db 0 
+lin_05_7_2:
+	.db 0 
+lin_05_3_2:
+	.db 0 
+lin_05_1_2:
+	.db 0 	
+	
+lin_05_3:
+lin_05_31_3:
+	.db 0 
+lin_05_15_3:
+	.db 0 
+lin_05_7_3:
+	.db 0 
+lin_05_3_3:
+	.db 0 
+lin_05_1_3:
+	.db 0 	
+	
+lin_05_4:
+lin_05_31_4:
+	.db 0 
+lin_05_15_4:
+	.db 0 
+lin_05_7_4:
+	.db 0 
+lin_05_3_4:
+	.db 0 
+lin_05_1_4:
+	.db 0 
+
+lin_1_1:
+lin_1_31_1:
+	.db 0 
+lin_1_15_1:
+	.db 0 
+lin_1_7_1:
+	.db 0 
+lin_1_3_1:
+	.db 0
+lin_1_1_1:
+	.db 0 	
+
+lin_1_2:
+lin_1_31_2:
+	.db 0 
+lin_1_15_2:
+	.db 0 
+lin_1_7_2:
+	.db 0 
+lin_1_3_2:
+	.db 0 
+lin_1_1_2:
+	.db 0 
+	
+lin_1_3:
+lin_1_31_3:
+	.db 0 
+lin_1_15_3:
+	.db 0 
+lin_1_7_3:
+	.db 0 
+lin_1_3_3:
+	.db 0 
+lin_1_1_3:
+	.db 0 
+	
+lin_1_4:
+lin_1_31_4:
+	.db 0 
+lin_1_15_4:
+	.db 0 
+lin_1_7_4:
+	.db 0 
+lin_1_3_4:
+	.db 0 
+lin_1_1_4:
+	.db 0 
+	
+lin_2_1:
+lin_2_31_1:
+	.db 0 
+lin_2_15_1:
+	.db 0 
+lin_2_7_1:
+	.db 0 
+lin_2_3_1:
+	.db 0 
+lin_2_1_1:
+	.db 0
+
+lin_2_2:
+lin_2_31_2:
+	.db 0 
+lin_2_15_2:
+	.db 0 
+lin_2_7_2:
+	.db 0 
+lin_2_3_2:
+	.db 0 
+lin_2_1_2:
+	.db 0 
+	
+lin_2_3:
+lin_2_31_3:
+	.db 0 
+lin_2_15_3:
+	.db 0 
+lin_2_7_3:
+	.db 0 
+lin_2_3_3:
+	.db 0 
+lin_2_1_3:
+	.db 0 
+	
+lin_2_4:
+lin_2_31_4:
+	.db 0 
+lin_2_15_4:
+	.db 0 
+lin_2_7_4:
+	.db 0 
+lin_2_3_4:
+	.db 0 
+lin_2_1_4:
+	.db 0 
+	
+lin_4_1:
+lin_4_31_1:
+	.db 0 
+lin_4_15_1:
+	.db 0 
+lin_4_7_1:
+	.db 0 
+lin_4_3_1:
+	.db 0 
+lin_4_1_1:
+	.db 0 
+
+
+lin_4_2:
+lin_4_31_2:
+	.db 0 
+lin_4_15_2:
+	.db 0 
+lin_4_7_2:
+	.db 0 
+lin_4_3_2:
+	.db 0 
+lin_4_1_2:
+	.db 0 
+	
+lin_4_3:
+lin_4_31_3:
+	.db 0 
+lin_4_15_3:
+	.db 0 
+lin_4_7_3:
+	.db 0 
+lin_4_3_3:
+	.db 0 
+lin_4_1_3:
+	.db 0 
+	
+lin_4_4:
+lin_4_31_4:
+	.db 0 
+lin_4_15_4:
+	.db 0 
+lin_4_7_4:
+	.db 0 
+lin_4_3_4:
+	.db 0 
+lin_4_1_4:
+	.db 0 
+	
+	
+lin_8_1:
+lin_8_31_1:
+	.db 0 
+lin_8_15_1:
+	.db 0 
+lin_8_7_1:
+	.db 0 
+lin_8_3_1:
+	.db 0 
+lin_8_1_1:
+	.db 0 
+
+lin_8_2:
+lin_8_31_2:
+	.db 0 
+lin_8_15_2:
+	.db 0 
+lin_8_7_2:
+	.db 0 
+lin_8_3_2:
+	.db 0 
+lin_8_1_2:
+	.db 0 
+	
+lin_8_3:
+lin_8_31_3:
+	.db 0 
+lin_8_15_3:
+	.db 0 
+lin_8_7_3:
+	.db 0 
+lin_8_3_3:
+	.db 0 
+lin_8_1_3:
+	.db 0 
+	
+lin_8_4:
+lin_8_31_4:
+	.db 0 
+lin_8_15_4:
+	.db 0 
+lin_8_7_4:
+	.db 0 
+lin_8_3_4:
+	.db 0 
+lin_8_1_4:
+	.db 0 
+
+
+
+
+
+linrep_05_1:
+linrep_05_31_1:
+	.db 0 
+linrep_05_15_1:
+	.db 0 
+linrep_05_7_1:
+	.db 0 
+linrep_05_3_1:
+	.db 0 
+linrep_05_1_1:
+	.db 0 
+
+linrep_05_2:
+linrep_05_31_2:
+	.db 0 
+linrep_05_15_2:
+	.db 0 
+linrep_05_7_2:
+	.db 0 
+linrep_05_3_2:
+	.db 0 
+linrep_05_1_2:
+	.db 0 	
+	
+linrep_05_3:
+linrep_05_31_3:
+	.db 0 
+linrep_05_15_3:
+	.db 0 
+linrep_05_7_3:
+	.db 0 
+linrep_05_3_3:
+	.db 0 
+linrep_05_1_3:
+	.db 0 	
+	
+linrep_05_4:
+linrep_05_31_4:
+	.db 0 
+linrep_05_15_4:
+	.db 0 
+linrep_05_7_4:
+	.db 0 
+linrep_05_3_4:
+	.db 0 
+linrep_05_1_4:
+	.db 0 
+
+linrep_1_1:
+linrep_1_31_1:
+	.db 0 
+linrep_1_15_1:
+	.db 0 
+linrep_1_7_1:
+	.db 0 
+linrep_1_3_1:
+	.db 0
+linrep_1_1_1:
+	.db 0 	
+
+linrep_1_2:
+linrep_1_31_2:
+	.db 0 
+linrep_1_15_2:
+	.db 0 
+linrep_1_7_2:
+	.db 0 
+linrep_1_3_2:
+	.db 0 
+linrep_1_1_2:
+	.db 0 
+	
+linrep_1_3:
+linrep_1_31_3:
+	.db 0 
+linrep_1_15_3:
+	.db 0 
+linrep_1_7_3:
+	.db 0 
+linrep_1_3_3:
+	.db 0 
+linrep_1_1_3:
+	.db 0 
+	
+linrep_1_4:
+linrep_1_31_4:
+	.db 0 
+linrep_1_15_4:
+	.db 0 
+linrep_1_7_4:
+	.db 0 
+linrep_1_3_4:
+	.db 0 
+linrep_1_1_4:
+	.db 0 
+	
+linrep_2_1:
+linrep_2_31_1:
+	.db 0 
+linrep_2_15_1:
+	.db 0 
+linrep_2_7_1:
+	.db 0 
+linrep_2_3_1:
+	.db 0 
+linrep_2_1_1:
+	.db 0
+
+linrep_2_2:
+linrep_2_31_2:
+	.db 0 
+linrep_2_15_2:
+	.db 0 
+linrep_2_7_2:
+	.db 0 
+linrep_2_3_2:
+	.db 0 
+linrep_2_1_2:
+	.db 0 
+	
+linrep_2_3:
+linrep_2_31_3:
+	.db 0 
+linrep_2_15_3:
+	.db 0 
+linrep_2_7_3:
+	.db 0 
+linrep_2_3_3:
+	.db 0 
+linrep_2_1_3:
+	.db 0 
+	
+linrep_2_4:
+linrep_2_31_4:
+	.db 0 
+linrep_2_15_4:
+	.db 0 
+linrep_2_7_4:
+	.db 0 
+linrep_2_3_4:
+	.db 0 
+linrep_2_1_4:
+	.db 0 
+	
+linrep_4_1:
+linrep_4_31_1:
+	.db 0 
+linrep_4_15_1:
+	.db 0 
+linrep_4_7_1:
+	.db 0 
+linrep_4_3_1:
+	.db 0 
+linrep_4_1_1:
+	.db 0 
+
+
+linrep_4_2:
+linrep_4_31_2:
+	.db 0 
+linrep_4_15_2:
+	.db 0 
+linrep_4_7_2:
+	.db 0 
+linrep_4_3_2:
+	.db 0 
+linrep_4_1_2:
+	.db 0 
+	
+linrep_4_3:
+linrep_4_31_3:
+	.db 0 
+linrep_4_15_3:
+	.db 0 
+linrep_4_7_3:
+	.db 0 
+linrep_4_3_3:
+	.db 0 
+linrep_4_1_3:
+	.db 0 
+	
+linrep_4_4:
+linrep_4_31_4:
+	.db 0 
+linrep_4_15_4:
+	.db 0 
+linrep_4_7_4:
+	.db 0 
+linrep_4_3_4:
+	.db 0 
+linrep_4_1_4:
+	.db 0 
+	
+	
+linrep_8_1:
+linrep_8_31_1:
+	.db 0 
+linrep_8_15_1:
+	.db 0 
+linrep_8_7_1:
+	.db 0 
+linrep_8_3_1:
+	.db 0 
+linrep_8_1_1:
+	.db 0 
+
+linrep_8_2:
+linrep_8_31_2:
+	.db 0 
+linrep_8_15_2:
+	.db 0 
+linrep_8_7_2:
+	.db 0 
+linrep_8_3_2:
+	.db 0 
+linrep_8_1_2:
+	.db 0 
+	
+linrep_8_3:
+linrep_8_31_3:
+	.db 0 
+linrep_8_15_3:
+	.db 0 
+linrep_8_7_3:
+	.db 0 
+linrep_8_3_3:
+	.db 0 
+linrep_8_1_3:
+	.db 0 
+	
+linrep_8_4:
+linrep_8_31_4:
+	.db 0 
+linrep_8_15_4:
+	.db 0 
+linrep_8_7_4:
+	.db 0 
+linrep_8_3_4:
+	.db 0 
+linrep_8_1_4:
+	.db 0 
+	
+	
+	
 
 
 sine:

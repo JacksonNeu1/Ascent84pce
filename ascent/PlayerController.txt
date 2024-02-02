@@ -557,7 +557,7 @@ collision_found: ;A collision has been detected
 	;TESTing 
 	inc hl ;to flags 
 	ld a,(hl)
-	call write_a_to_ram
+	;call write_a_to_ram
 	
 	scf 
 collision_check_vertical .equ $

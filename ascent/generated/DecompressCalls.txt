@@ -228,18 +228,18 @@ decompress_frame_up_pre1:
 	.db %10100000
 	.dl Tree_4, Tree_4_Fast_F
 	.db %10100000
+	.dl Tree_1, Tree_1_Fast
+	.db %10000000
 	.dl Tree_0, Tree_0_Fast
 	.db %10000000
+	.dl Tree_1, Tree_1_Fast_F
+	.db %10100000
 	.dl Tree_6, Tree_6_Fast
 	.db %10000000
 	.dl Tree_10, Tree_10_Fast
 	.db %10000000
 	.dl Tree_7, Tree_7_Fast_F
 	.db %10100000
-	.dl Tree_1, Tree_1_Fast_F
-	.db %10100000
-	.dl Tree_1, Tree_1_Fast
-	.db %10000000
 	.dl Tree_5, Tree_5_Fast
 	.db %10000000
 	.dl Tree_11, Tree_11_Fast
@@ -1009,18 +1009,18 @@ decompress_frame_down_14:
 	.db %10100000
 	.dl Tree_4, Tree_4_Fast_F
 	.db %10100000
+	.dl Tree_1, Tree_1_Fast
+	.db %10000000
 	.dl Tree_0, Tree_0_Fast
 	.db %10000000
+	.dl Tree_1, Tree_1_Fast_F
+	.db %10100000
 	.dl Tree_6, Tree_6_Fast
 	.db %10000000
 	.dl Tree_10, Tree_10_Fast
 	.db %10000000
 	.dl Tree_7, Tree_7_Fast_F
 	.db %10100000
-	.dl Tree_1, Tree_1_Fast_F
-	.db %10100000
-	.dl Tree_1, Tree_1_Fast
-	.db %10000000
 	.dl Tree_5, Tree_5_Fast
 	.db %10000000
 	.dl Tree_11, Tree_11_Fast

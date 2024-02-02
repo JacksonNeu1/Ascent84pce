@@ -134,8 +134,8 @@ get_inputs_return:
 	call check_collisions
 	
 	call update_sine_vals
-	ld a,(sine_8_7_2)
-	call write_a_to_ram
+	ld a,(lin_4_7_1)
+	;call write_a_to_ram
 	
 	call update_animations
 	
@@ -571,6 +571,7 @@ sd_test_a:
 #include "generated/SpriteEquates.txt"
 #include "generated/Sprite_Groups.txt"
 #include "generated/Collision_Data.txt"
+#include "generated/Animation_Data.txt"
 
 ;#include "testing/SpriteGroups.txt"
 ;#include "TestingSpriteData.txt"

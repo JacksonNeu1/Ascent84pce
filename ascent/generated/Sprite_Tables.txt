@@ -86,12 +86,12 @@ Sprite_Table_0:
 	.dl Tree_9_Fast_F
 	.dl Tree_8_Fast_F
 	.dl Tree_4_Fast_F
+	.dl Tree_1_Fast
 	.dl Tree_0_Fast
+	.dl Tree_1_Fast_F
 	.dl Tree_6_Fast
 	.dl Tree_10_Fast
 	.dl Tree_7_Fast_F
-	.dl Tree_1_Fast_F
-	.dl Tree_1_Fast
 	.dl Tree_5_Fast
 	.dl Tree_11_Fast
 	.dl Tree_5_Fast_F

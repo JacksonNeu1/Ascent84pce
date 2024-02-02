@@ -1,0 +1,20 @@
+position_animation_data:
+	.db 1
+	.dl MG_Data_0 + 18
+	.dl sine_2_31_3
+	.db 168
+
+
+
+sprite_animation_data:
+	.db 1
+	.dl lin_8_7_1
+	.db 82
+	.db 82
+	.db 83
+	.db 83
+	.db 84
+	.db 70
+	.db 82
+	.db 76
+	.dl SG_TreeRow1 + 05
