@@ -38,12 +38,12 @@ update_animation_position_loop:
 	
 	
 	ld de,0 ;clear upper byte 
-	ex af, af' ;'
+	ex af, af' ;' ;in
 	ld hl,sprite_animation_data
 	ld a,(hl)
 	inc hl
 update_animation_sprite_loop:
-	ex af, af' ;'
+	ex af, af' ;' ;out
 	ld bc,(hl) ;animation curve address
 	inc hl 
 	inc hl
@@ -59,7 +59,9 @@ update_animation_sprite_loop:
 	ld bc,(hl)
 	ld (bc),a 
 	inc hl 
-	ex af, af' ;'
+	inc hl 
+	inc hl
+	ex af, af' ;' ;in
 	dec a 
 	jp nz,update_animation_sprite_loop
 	

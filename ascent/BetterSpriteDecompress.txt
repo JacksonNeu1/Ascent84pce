@@ -1009,13 +1009,13 @@ sdcomp_loops_per_line_counter .equ $ + 1
 	;Check the timer to see if we need to begin rendering next frame 
 	;1090 cycles @ 32768hz ~= 1 frame (1/30s)
 	;Should stop decompressions at 1000 cycles?
-	; = %00000011, 11101000
+	; = %00000011, 11100000
 sdcomp_clock_check_loop:
 	ld a,($F20001);128hz clock
 	cp %00000011 ;check if reached 3 
 	jp c,sdcomp_find_gap_length ;msb <= 2, can continue  
 	ld a,($F20000);32768hz clock
-	cp %11101000;check if reached value 
+	cp %11100000;check if reached value 
 	jp c,sdcomp_find_gap_length ;msb = 3 and lsb < value, can continue
 	
 	;Past clock threshold, need to stop decompressions

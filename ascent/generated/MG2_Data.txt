@@ -138,33 +138,46 @@ MG2_Data_4:
 
 MG2_Data_3:
 	.db 0
-	.db 0
+	.db 1
+	.db 35, 19, 78, 98  ;Frog_0_Slow
 
 MG2_Data_2:
 	.db 0
-	.db 0
+	.db 7
+	.db 42, 255, 53, 23  ;SG_CloudPlatform
+	.db 74, 255, 91, 23  ;SG_CloudPlatform
+	.db 90, 255, 19, 23  ;SG_CloudPlatform
+	.db 122, 255, 61, 23  ;SG_CloudPlatform
+	.db 161, 255, 47, 23  ;SG_CloudPlatform
+	.db 199, 255, 20, 23  ;SG_CloudPlatform
+	.db 240, 255, 63, 23  ;SG_CloudPlatform
 
 MG2_Data_1:
 	.db 0
-	.db 7
-	.db 43, 255, 100, 28  ;SG_CloudPlatform
-	.db 117, 255, 64, 28  ;SG_CloudPlatform
-	.db 160, 255, 14, 28  ;SG_CloudPlatform
-	.db 19, 255, 17, 28  ;SG_CloudPlatform
-	.db 52, 16, 13, 119  ;Clouds_2_Fast
-	.db 36, 16, 13, 119  ;Clouds_2_Fast
-	.db 20, 16, 13, 119  ;Clouds_2_Fast
+	.db 10
+	.db 43, 255, 100, 23  ;SG_CloudPlatform
+	.db 117, 255, 64, 23  ;SG_CloudPlatform
+	.db 160, 255, 14, 23  ;SG_CloudPlatform
+	.db 19, 255, 17, 23  ;SG_CloudPlatform
+	.db 52, 16, 13, 97  ;Clouds_2_Fast
+	.db 36, 16, 13, 97  ;Clouds_2_Fast
+	.db 20, 16, 13, 97  ;Clouds_2_Fast
+	.db 74, 255, 34, 23  ;SG_CloudPlatform
+	.db 183, 255, 48, 23  ;SG_CloudPlatform
+	.db 237, 255, 59, 23  ;SG_CloudPlatform
 
 MG2_Data_0:
 	.db 0
-	.db 7
-	.db 99, 255, 5, 28  ;SG_CloudPlatform
-	.db 182, 255, 42, 28  ;SG_CloudPlatform
-	.db 127, 255, 107, 28  ;SG_CloudPlatform
-	.db 89, 255, 67, 28  ;SG_CloudPlatform
-	.db 209, 16, 141, 119  ;Clouds_2_Fast
-	.db 193, 16, 141, 119  ;Clouds_2_Fast
-	.db 177, 16, 141, 119  ;Clouds_2_Fast
+	.db 9
+	.db 99, 255, 5, 23  ;SG_CloudPlatform
+	.db 182, 255, 42, 23  ;SG_CloudPlatform
+	.db 127, 255, 107, 23  ;SG_CloudPlatform
+	.db 89, 255, 67, 23  ;SG_CloudPlatform
+	.db 209, 16, 141, 97  ;Clouds_2_Fast
+	.db 193, 16, 141, 97  ;Clouds_2_Fast
+	.db 177, 16, 141, 97  ;Clouds_2_Fast
+	.db 226, 255, 66, 23  ;SG_CloudPlatform
+	.db 160, 255, 76, 23  ;SG_CloudPlatform
 
 
 

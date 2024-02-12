@@ -14,8 +14,13 @@ charge_jump_left:
 	jp nc, cjl_skip
 	ld a,(jump_strength_right)
 	dec a 
+	dec a 
+	dec a 
+	dec a 
 	ld (jump_strength_right),a
 	ld a,(jump_strength_up)
+	inc a 
+	inc a 
 	inc a 
 	ld (jump_strength_up),a
 
@@ -36,9 +41,14 @@ charge_jump_right:
 	jp nc, cjr_skip
 	ld a,(jump_strength_right)
 	inc a
+	inc a
+	inc a
+	inc a
 	ld (jump_strength_right),a
 	ld a,(jump_strength_up)
 	inc a 
+	inc a
+	inc a
 	ld (jump_strength_up),a	
 cjr_skip:
 	ret 
@@ -70,28 +80,27 @@ pu_try_jump:
 	or a 
 	jp z,pu_no_jump ;jump timers are 0 = no jump
 	
-	cp 8;if timer < 8 set to min strength 
-	jp nc, pu_jump_notmin
+	cp 5;if timer < 5 no jump
+	jp c, pu_no_jump
 	
 	;This is the minimum jump player can do 
-	ld a,(jump_strength_right)
-	bit 7,a 
-	jp nz, pu_min_jump_left 
-	or a 
-	jp z, pu_min_jump_up 
-	ld a,8 
-	jp pu_min_jump_up
-pu_min_jump_left:
-	ld a, -8
-pu_min_jump_up:
-	ld (jump_strength_right),a 
+	;ld a,(jump_strength_right)
+	;bit 7,a 
+	;;jp nz, pu_min_jump_left 
+	;or a 
+	;jp z, pu_min_jump_up 
+	;ld a,20 
+	;jp pu_min_jump_up
+;pu_min_jump_left:
+	;ld a, -20
+;pu_min_jump_up:
+	;ld (jump_strength_right),a 
 	
-	ld a,10 
-	ld (jump_strength_up),a 
+	;ld a,15 
+	;ld (jump_strength_up),a 
 	
-	
-	ld a,$55
-	call write_a_to_ram
+	;ld a,$55
+	;call write_a_to_ram
 	
 	;Player is on ground and should execute a jump 
 pu_jump_notmin:
@@ -99,18 +108,13 @@ pu_jump_notmin:
 	ld hl,0 
 	ld a,(jump_strength_up)
 	ld l,a
-	call write_a_to_ram
-	
-	sla l ;mult by 2 
-	rl h 
-	sla l ;mult by 2 
-	rl h 
+	;call write_a_to_ram
 
 	ld (player_y_vel),hl 
-	call write_hl_to_ram
+	;call write_hl_to_ram
 	
 	ld a,(jump_strength_right)
-	call write_a_to_ram
+	;call write_a_to_ram
 	bit 7, a 
 	jp nz, pu_left_jump 
 	;right jump 
@@ -120,13 +124,9 @@ pu_left_jump:
 	ld hl, $ffffff ;makes x vel negative 
 pu_jump_cont:
 	ld l,a 
-	sla l ;mult by 2 
-	rl h 
-	sla l ;mult by 2 
-	rl h 
 	
 	ld (player_x_vel),hl 
-	call write_hl_to_ram
+	;call write_hl_to_ram
 	;Clear ground flag 
 	ld a,(player_flags)
 	res 6, a 
@@ -147,7 +147,7 @@ pu_no_jump:
 pu_physics:
 
 	;Execute player physics update and check for collisions 
-	;Run multiple times, 4 steps per frame? 
+	;Run multiple times, 16 steps per frame? 
 	;Move up first, then check collision, then move side and check again 
 
 	ld a,16 ;num physics loops 
@@ -205,6 +205,14 @@ pu_update_x_pos:
 	add hl,de ;add x vel to x pos 
 	ld (player_x_pos),hl 
 	
+	ld de,$000200
+	sbc hl,de 
+	call c, reverse_x_vel ;If xpos < 2px
+	ld hl, (player_x_pos) 
+	ld de,$012800; if xpos > 300px
+	sbc hl,de 
+	call nc,reverse_x_vel
+	
 	;TODO check horizontal collisoins 
 	ld a, %11010010 ;jp nc 
 	ld (collision_check_vertical),a
@@ -242,7 +250,7 @@ pu_physics_end:
 	pop hl 
 	jp nc, pu_terminal_vel
 pu_apply_gravity:
-	ld de,13 ;GRAVITY CONSTANT
+	ld de,11 ;GRAVITY CONSTANT
 	scf 
 	ccf ;reset carry flag 
 	sbc hl,de 
@@ -260,6 +268,11 @@ pu_terminal_vel:
 
 player_draw:
 ;Draw sprite and reset any flags 
+
+	;cam follow player 
+	
+	
+
 
 	;Todo Logic for choosing sprite index 
 	ld a,0 
@@ -564,6 +577,15 @@ collision_check_vertical .equ $
 	jp c, collision_check_vert 
 	
 
+	ld a,(player_flags)
+	bit 3,a 
+	jp z,colis_horiz_not_fall
+	;player is falling 
+	set 5,a ;set semisolid flag 
+	ld (player_flags),a 
+	jp check_col_skip_0
+	
+colis_horiz_not_fall:
 	;Player is moving horizontal 
 	ld a,(hl) ;flags 
 	bit 7,a ;semisolid 
@@ -577,22 +599,7 @@ collision_check_vertical .equ $
 	;player has moved horiz and hit a solid wall 
 	;Reverse x velocity 
 	push hl 
-	ld hl,(player_x_vel)
-	ex de,hl 
-	ld hl,0
-	sbc hl, de  
-	
-	ld a,h
-	and %10000000
-	srl h ;div by 2 
-	rr l 
-	or h
-	ld h,a 
-	
-	
-	ld (player_x_vel),hl 
-	ld hl, (player_x_pos_prev) ;revert to previous y pos 
-	ld (player_x_pos),hl 
+	call reverse_x_vel
 	pop hl 
 	
 	jp check_col_skip_0
@@ -604,6 +611,16 @@ collision_check_vert:
 	bit 7,a ;check if moving up or down 
 	jp nz, vert_col_down
 	
+	
+	ld a,(player_flags)
+	bit 3,a 
+	jp z,colis_vert_up_not_fall
+	set 5,a ;set semisolid flag. All colliders act semisolid while in fall
+	ld (player_flags),a 
+	jp check_col_skip_0
+	
+	
+colis_vert_up_not_fall:
 	;player is moving up 
 	ld a,(hl) ;flags 
 	bit 7,a ;semisolid 
@@ -635,6 +652,56 @@ vert_col_up_semisolid:
 	
 vert_col_down:
 
+
+	ld a,(player_flags)
+	bit 3,a 
+	jp z,colis_vert_down_not_fall
+	set 5,a ;set semisolid flag. All colliders act semisolid while in fall
+	ld (player_flags),a 
+	
+	push hl 
+	;check if we are below spike hit height 
+	ld hl,(spike_hit_height)
+	ex de,hl 
+	ld hl,(player_y_pos) 
+	sbc hl,de 
+	jp c,check_end_fall
+	;Player is above threshold 
+	pop hl 
+	jp check_col_skip_0 ;continue 
+	
+
+check_end_fall:
+	;Player has hit ground below fall threshold 
+	ld (player_flags),a 
+	bit 4,a ;check we were not in semisolid last update 
+	jp z, check_end_fall_2; player not currently in collider 
+	pop hl 
+	jp check_col_skip_0 ;continue 
+check_end_fall_2:
+	;player can land 
+	;check for unlucky bounce 
+	res 3,a 
+	ld (player_flags),a ;reset fall flag 
+	pop hl 
+	ld a, (fall_num_bounces)
+	ld b,a 
+	call random_val
+	ld c,%00000001
+unlucky_bounce_loop:
+	and a,c 
+	jp z,colis_vert_down_not_fall
+	rlc c 
+	jp c,colis_vert_down_not_fall
+	djnz unlucky_bounce_loop
+	
+;Player has hit unlucky bounce 
+	push hl 
+	call spike_hit_bounce
+	pop hl
+	jp check_col_skip_0 ;continue 
+	
+colis_vert_down_not_fall:
 	;player is moving down 
 	ld a,(hl) ;flags 
 	bit 7,a ;semisolid 
@@ -675,9 +742,50 @@ vert_col_down_solid:
 
 
 collision_spikes:
+	push hl
 	;player has collided with spikes 
-
+	call spike_hit_bounce
+	ld a,0
+	ld (fall_num_bounces),a 
+	pop hl 
 	jp check_col_skip_0
+
+
+spike_hit_bounce:
+	ld hl,$000080
+	ld (player_y_vel),hl 
+	call random_val
+	bit 0, a 
+	jp nz, spike_negative_bounce
+	ld hl,0
+	and %11000000 ;pull 2 bits of a for velocity
+	or  %00110000
+	ld l,a 
+	ld (player_x_vel),hl
+	jp spike_pos_bounce
+spike_negative_bounce:
+	ld hl,$ffffff
+	and %11000000 ;pull 2 bits of a for velocity
+	or  %00001111
+	ld l,a 
+	ld (player_x_vel),hl
+spike_pos_bounce:
+	ld a,(player_flags)
+	set 3,a  ;set fall flag 
+	ld (player_flags),a 
+	;Set spike hit height 
+	ld hl, (player_y_pos)
+	ld de, $00ff00 ;fall minimum of 256px 
+	sbc hl,de 
+	jp nc, spike_bounce_min_height_threshold
+	ld hl,0
+spike_bounce_min_height_threshold:
+	ld de, $002300  ;minimum spike height threshold 
+	add hl,de 
+	ld (spike_hit_height),hl 
+	
+	ret 
+
 
 check_col_skip_4:
 	inc hl ;to height
@@ -694,6 +802,36 @@ check_col_skip_0:
 check_col_lower_jump .equ $
 	jp c, check_collisions_same_loop
 	jp check_collisions_lower_loop
+
+
+
+reverse_x_vel:;bounce player off wall
+	ld hl,(player_x_vel)
+	ex de,hl 
+	ld hl,0
+	sbc hl, de  
+	
+	ld a,h
+	and %10000000
+	srl h ;div by 2 
+	rr l 
+	or h ;keeps bit 7 the same 
+	ld h,a 
+
+	ld (player_x_vel),hl 
+	ld hl, (player_x_pos_prev) ;revert to previous x pos 
+	ld (player_x_pos),hl 
+	ret 
+
+
+
+random_val:
+	ld a, (player_y_pos)
+	ld c,a 
+	ld a,($F20000) ;fast timer 
+	xor c
+	ret 
+
 
 
 
@@ -744,10 +882,12 @@ player_y_pos_prev: ;y position before update, revert to this if collision :
 
 
 player_flags:
-	.db %00000000 ; (7 = Any jump button held, 6 = on ground,5 = within semisolid, 4 = in semisolid last update)
+	.db %00000000 ; (7 = Any jump button held, 6 = on ground,5 = within semisolid, 4 = in semisolid last update, 3= isfalling)
 	
-	
-	
+spike_hit_height:
+	.dl 0 ;Height where player can land after hitting spike
+fall_num_bounces:
+	.db 0 ;Number of times player has had unlucky bounce
 	
 	
 	

@@ -4,75 +4,54 @@ Sprite_Table_Table:
 
 
 Sprite_Table_0:
-	.dl GroundDirtFull_Fast
-	.dl GroundDirtFull_Fast_F
-	.dl GroundDirtMound_Fast
-	.dl GroundDirtMound_Fast_F
-	.dl GroundGrassL4_Fast
-	.dl GroundGrassL2_Fast
-	.dl GroundGrassL5_Fast
-	.dl GroundGrassL3_Fast
-	.dl GroundGrassL1_Fast
-	.dl GroundGrassL1_Fast_F
-	.dl GroundGrassL3_Fast_F
+	.dl BigGrassBase_Slow_O
+	.dl BigGrassBase_Fast
+	.dl BigGrassBase_Fast_F
+	.dl BigGrassTop_Fast
+	.dl BigGrassTop_Fast_F
+	.dl BigGrassTop_Slow_O
+	.dl DualLeaf4_Slow
+	.dl DualLeaf4_Slow_F
+	.dl DualLeaf3_Fast
 	.dl Branches_9_Fast
-	.dl Branches_13_Slow_O
-	.dl Branches_10_Slow_O
+	.dl Branches_13_Fast
+	.dl Branches_10_Fast
 	.dl Branches_16_Slow
-	.dl Leaves_3_Slow
-	.dl Leaves_7_Fast
-	.dl Leaves_7_Fast_F
-	.dl Branches_8_Slow_O
-	.dl Leaves_3_Slow_F
-	.dl Branches_14_Slow_O
+	.dl Leaves1_Fast
+	.dl DualLeaf1_Fast
+	.dl DualLeaf2_Fast
+	.dl DualLeaf2_Slow_O
+	.dl DualLeaf1_Slow_O
+	.dl LeavesLight_Fast
+	.dl LeavesDark_Fast
+	.dl Branches_14_Slow
 	.dl Branches_15_Slow_O_F
-	.dl Branches_15_Slow_O
+	.dl Branches_8_Fast
+	.dl Branches_15_Slow
 	.dl Branches_11_Fast_F
 	.dl Branches_13_Fast_F
 	.dl Branches_10_Fast_F
-	.dl Branches_10_Fast
-	.dl Leaves_6_Slow_O
+	.dl Leaves2_Fast_F
+	.dl Leaves2_Fast
+	.dl LeavesDark_Fast_F
+	.dl Branches_12_Fast
 	.dl Branches_6_Slow
-	.dl Branches_10_Slow_O_F
-	.dl Branches_12_Slow_O
-	.dl Leaves_4_Slow
-	.dl Branches_8_Slow_O_F
-	.dl Branches_16_Slow_O
-	.dl Branches_7_Slow_O
-	.dl Leaves_4_Slow_F
-	.dl Leaves_2_Slow_O
 	.dl Branches_7_Fast
-	.dl Branches_8_Fast
-	.dl Branches_15_Slow_F
-	.dl Leaves_6_Slow
+	.dl Branches_8_Fast_F
 	.dl Branches_16_Slow_O_F
-	.dl Vines_8_Slow
-	.dl Vines_2_Slow_O
-	.dl Vines_3_Slow
-	.dl Vines_5_Slow
-	.dl Vines_4_Slow_F
-	.dl Vines_1_Slow_O
-	.dl Vines_9_Slow
-	.dl Vines_9_Slow_O_F
-	.dl Vines_3_Slow_F
 	.dl Branches_4_Fast_F
 	.dl Branches_7_Fast_F
 	.dl Branches_12_Fast_F
-	.dl Leaves_4_Slow_O
-	.dl Vines_2_Slow_F
-	.dl Vines_1_Slow
-	.dl Vines_8_Slow_O
-	.dl Vines_8_Slow_O_F
-	.dl Vines_6_Slow
-	.dl Branches_8_Fast_F
-	.dl Branches_15_Slow
+	.dl Leaves1_Fast_F
 	.dl Branches_5_Fast
 	.dl Branches_4_Fast
-	.dl Vines_8_Slow_F
-	.dl Vines_9_Slow_O
 	.dl Branches_3_Fast
 	.dl Branches_2_Fast
-	.dl Vines_3_Slow_O
+	.dl GroundDirtFull_Fast_F
+	.dl GroundDirtFull_Fast
+	.dl GroundDirtMound_Fast
+	.dl GroundDirtMound_Fast_F
+	.dl Branches_8_Slow_O_F
 	.dl Branches_9_Slow_O
 	.dl Tree_2_Fast
 	.dl Tree_4_Fast
@@ -86,59 +65,54 @@ Sprite_Table_0:
 	.dl Tree_9_Fast_F
 	.dl Tree_8_Fast_F
 	.dl Tree_4_Fast_F
-	.dl Tree_1_Fast
 	.dl Tree_0_Fast
-	.dl Tree_1_Fast_F
 	.dl Tree_6_Fast
 	.dl Tree_10_Fast
 	.dl Tree_7_Fast_F
+	.dl Tree_1_Fast_F
+	.dl Tree_1_Fast
 	.dl Tree_5_Fast
 	.dl Tree_11_Fast
 	.dl Tree_5_Fast_F
 	.dl Tree_2_Fast_F
 	.dl Tree_11_Fast_F
 	.dl Branches_1_Fast
-	.dl Branches_2_Slow_O
-	.dl Branches_3_Slow_O
-	.dl Branches_5_Slow_O
-	.dl Leaves_3_Slow_O
-	.dl Vines_7_Slow
-	.dl Vines_5_Slow_O_F
-	.dl Vines_3_Slow_O_F
-	.dl Vines_4_Slow_O
-	.dl Vines_10_Slow
-	.dl Vines_7_Slow_F
-	.dl Vines_2_Slow
-	.dl Leaves_2_Slow
-	.dl Vines_2_Slow_O_F
+	.dl Vine2_Slow
+	.dl VineVertical_Slow_O
+	.dl VineVertical_Slow
+	.dl Vine4_Slow_F
+	.dl Vine4_Slow_O_F
+	.dl Vine5_Slow_O_F
+	.dl Vine6_Slow_O
+	.dl Vine7_Slow
+	.dl Vine5_Slow
+	.dl Vine6_Slow
+	.dl Vine4_Slow
+	.dl Vine7_Slow_O
+	.dl Vine5_Slow_O
+	.dl Vine4_Slow_O
 	.dl Branches_1_Fast_F
 	.dl Branches_2_Fast_F
 	.dl Branches_5_Fast_F
-	.dl Branches_14_Slow
-	.dl Vines_10_Slow_O
-	.dl Branches_0_Fast
 	.dl Branches_1_Slow_O
+	.dl Branches_2_Slow_O
 	.dl Branches_4_Slow_O
-	.dl Leaves_3_Slow_O_F
-	.dl Vines_7_Slow_O
+	.dl Branches_7_Slow_O
 	.dl Branches_0_Fast_F
+	.dl Branches_8_Slow_O
 	.dl Branches_9_Fast_F
 	.dl Clouds_2_Fast
+	.dl Frog_0_Slow
 	.dl GroundDirtDark_Fast
 	.dl GroundDirtDark_Fast_F
 	.dl GroundHumpDark_Fast
 	.dl GroundHumpDark_Fast_F
 	.dl Tree_16_Fast
-	.dl Tree_17_Slow_O
-	.dl Tree_17_Slow_O_F
-	.dl Tree_16_Slow_O
-	.dl Tree_17_Slow_F
-	.dl Leaves_8_Fast
-	.dl Tree_18_Slow_O
 	.dl Tree_17_Slow
-	.dl Tree_18_Slow_F
-	.dl Tree_16_Slow_O_F
-	.dl Leaves_2_Slow_F
+	.dl Tree_17_Slow_O_F
+	.dl Tree_18_Slow
+	.dl Tree_18_Slow_O_F
+	.dl Tree_16_Fast_F
 	.dl Clouds_0_Fast
 	.dl Clouds_1_Fast
 	.dl Clouds_3_Fast
@@ -148,8 +122,6 @@ Sprite_Table_0:
 	.dl Clouds_4_Fast_F
 	.dl Clouds_3_Fast_F
 	.dl Clouds_2_Fast_F
-	.dl GroundGrassSmall_Fast
-	.dl GroundGrassSmall_Fast_F
 
 Sprite_Table_1:
 

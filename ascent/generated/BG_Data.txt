@@ -147,48 +147,36 @@ BG_Data_2:
 BG_Data_1:
 	.db 0
 	.db 3
-	.db 34, 255, 125, 32  ;SG_Cloud1
-	.db 112, 255, 118, 32  ;SG_Cloud1
-	.db 163, 255, 21, 32  ;SG_Cloud1
+	.db 34, 255, 125, 27  ;SG_Cloud1
+	.db 112, 255, 118, 27  ;SG_Cloud1
+	.db 163, 255, 21, 27  ;SG_Cloud1
 
 BG_Data_0:
 	.db 0
-	.db 35
-	.db 85, 255, 0, 29  ;SG_DarkGroundChunk
-	.db 79, 255, 136, 29  ;SG_DarkGroundChunk
-	.db 85, 255, 24, 29  ;SG_DarkGroundChunk
-	.db 80, 255, 112, 29  ;SG_DarkGroundChunk
-	.db 129, 255, 114, 31  ;SG_BGTree2
-	.db 129, 255, 137, 31  ;SG_BGTree2
-	.db 136, 255, 22, 31  ;SG_BGTree2
-	.db 141, 255, 11, 31  ;SG_BGTree2
-	.db 130, 255, 145, 30  ;SG_BGTree1
-	.db 128, 255, 128, 30  ;SG_BGTree1
-	.db 127, 255, 119, 30  ;SG_BGTree1
-	.db 129, 255, 31, 30  ;SG_BGTree1
-	.db 132, 255, 1, 30  ;SG_BGTree1
-	.db 132, 255, 127, 31  ;SG_BGTree2
-	.db 242, 255, 2, 32  ;SG_Cloud1
-	.db 67, 255, 0, 13  ;SG_GroundChunk1
-	.db 61, 255, 112, 13  ;SG_GroundChunk1
-	.db 60, 255, 136, 12  ;SG_GroundChunk2
-	.db 65, 255, 24, 12  ;SG_GroundChunk2
-	.db 45, 255, 24, 13  ;SG_GroundChunk1
-	.db 42, 255, 0, 12  ;SG_GroundChunk2
-	.db 38, 255, 136, 13  ;SG_GroundChunk1
-	.db 38, 255, 112, 12  ;SG_GroundChunk2
-	.db 52, 15, 116, 144  ;GroundGrassSmall_Fast
-	.db 56, 15, 150, 144  ;GroundGrassSmall_Fast
-	.db 66, 15, 12, 144  ;GroundGrassSmall_Fast
-	.db 58, 15, 32, 145  ;GroundGrassSmall_Fast_F
-	.db 53, 15, 17, 145  ;GroundGrassSmall_Fast_F
-	.db 73, 15, 10, 145  ;GroundGrassSmall_Fast_F
-	.db 70, 15, 26, 145  ;GroundGrassSmall_Fast_F
-	.db 69, 15, 39, 145  ;GroundGrassSmall_Fast_F
-	.db 64, 15, 141, 144  ;GroundGrassSmall_Fast
-	.db 49, 15, 132, 144  ;GroundGrassSmall_Fast
-	.db 65, 15, 130, 144  ;GroundGrassSmall_Fast
-	.db 47, 15, 142, 145  ;GroundGrassSmall_Fast_F
+	.db 23
+	.db 85, 255, 0, 24  ;SG_DarkGroundChunk
+	.db 79, 255, 136, 24  ;SG_DarkGroundChunk
+	.db 85, 255, 24, 24  ;SG_DarkGroundChunk
+	.db 80, 255, 112, 24  ;SG_DarkGroundChunk
+	.db 129, 255, 111, 26  ;SG_BGTree2
+	.db 129, 255, 142, 26  ;SG_BGTree2
+	.db 136, 255, 22, 26  ;SG_BGTree2
+	.db 141, 255, 11, 26  ;SG_BGTree2
+	.db 124, 255, 134, 25  ;SG_BGTree1
+	.db 128, 255, 128, 25  ;SG_BGTree1
+	.db 127, 255, 119, 25  ;SG_BGTree1
+	.db 129, 255, 31, 25  ;SG_BGTree1
+	.db 38, 255, 112, 7  ;SG_GroundChunk2
+	.db 132, 255, 127, 26  ;SG_BGTree2
+	.db 38, 255, 136, 8  ;SG_GroundChunk1
+	.db 42, 255, 0, 7  ;SG_GroundChunk2
+	.db 45, 255, 24, 8  ;SG_GroundChunk1
+	.db 65, 255, 24, 7  ;SG_GroundChunk2
+	.db 60, 255, 136, 7  ;SG_GroundChunk2
+	.db 61, 255, 112, 8  ;SG_GroundChunk1
+	.db 67, 255, 0, 8  ;SG_GroundChunk1
+	.db 132, 255, 0, 25  ;SG_BGTree1
+	.db 242, 255, 2, 27  ;SG_Cloud1
 
 
 

@@ -1,20 +1,160 @@
 position_animation_data:
+	.db 41
+	.dl SG_GroundGrass + 20
+	.dl sine_2_1_3
+	.db 2
+	.dl SG_GroundGrass + 34
+	.dl sine_2_1_2
+	.db 4
+	.dl SG_GroundGrass + 44
+	.dl sine_4_1_3
+	.db 25
+	.dl SG_GroundGrass + 54
+	.dl sine_8_1_2
+	.db 10
+	.dl SG_Branch3 + 18
+	.dl sine_2_1_1
+	.db 5
+	.dl SG_Branch7 + 60
+	.dl sine_2_1_4
+	.db 17
+	.dl SG_Branch7 + 66
+	.dl sine_4_1_2
+	.db 16
+	.dl SG_Branch7 + 70
+	.dl sine_1_1_3
+	.db 16
+	.dl SG_Branch7 + 74
+	.dl sine_4_1_1
+	.db 8
+	.dl SG_Branch4 + 2
+	.dl sine_2_3_3
+	.db 63
+	.dl SG_Branch4 + 8
+	.dl sine_4_1_1
+	.db 15
+	.dl SG_Branch4 + 20
+	.dl sine_4_1_1
+	.db 6
+	.dl SG_Branch5 + 14
+	.dl sine_2_1_1
+	.db 9
+	.dl SG_Branch5 + 56
+	.dl sine_2_1_3
+	.db 4
+	.dl SG_Branch6 + 6
+	.dl sine_2_1_3
+	.db 0
+	.dl SG_Branch6 + 30
+	.dl sine_4_1_1
+	.db 11
+	.dl SG_Branch6 + 46
+	.dl sine_4_1_2
+	.db 12
+	.dl SG_Branch6 + 52
+	.dl sine_2_1_1
+	.db 28
+	.dl SG_Branch2 + 2
+	.dl sine_4_1_1
+	.db 0
+	.dl SG_Branch2 + 6
+	.dl sine_2_1_2
 	.db 1
-	.dl MG_Data_0 + 18
-	.dl sine_2_31_3
-	.db 168
+	.dl SG_Branch2 + 72
+	.dl sine_2_1_3
+	.db 12
+	.dl SG_Branch1 + 26
+	.dl sine_4_1_3
+	.db 0
+	.dl SG_Branch1 + 50
+	.dl sine_4_1_2
+	.db 19
+	.dl SG_Branch1 + 60
+	.dl sine_1_1_1
+	.db 9
+	.dl SG_Vines6 + 6
+	.dl sine_2_3_2
+	.db 15
+	.dl SG_Vines6 + 10
+	.dl sine_2_3_2
+	.db 31
+	.dl SG_Vines6 + 14
+	.dl sine_2_3_2
+	.db 38
+	.dl SG_Vines6 + 18
+	.dl sine_2_3_2
+	.db 40
+	.dl SG_Vines7 + 2
+	.dl sine_2_3_2
+	.db 33
+	.dl SG_Vines7 + 6
+	.dl sine_2_3_2
+	.db 31
+	.dl SG_Vines7 + 10
+	.dl sine_2_3_2
+	.db 24
+	.dl SG_Vines7 + 14
+	.dl sine_2_1_2
+	.db 15
+	.dl SG_Vines5 + 2
+	.dl sine_8_1_1
+	.db 0
+	.dl SG_Vines5 + 6
+	.dl sine_8_1_2
+	.db 17
+	.dl SG_Vines5 + 10
+	.dl sine_8_1_3
+	.db 33
+	.dl SG_Vines5 + 14
+	.dl sine_8_1_4
+	.db 40
+	.dl SG_Vines5 + 18
+	.dl sine_8_1_1
+	.db 42
+	.dl SG_Vines5 + 22
+	.dl sine_8_1_2
+	.db 34
+	.dl SG_Vines5 + 26
+	.dl sine_8_1_3
+	.db 33
+	.dl SG_Vines5 + 30
+	.dl sine_8_1_4
+	.db 26
+	.dl SG_Vines5 + 34
+	.dl sine_8_1_1
+	.db 12
 
 
 
 sprite_animation_data:
-	.db 1
-	.dl lin_8_7_1
-	.db 82
-	.db 82
-	.db 83
-	.db 83
-	.db 84
-	.db 70
-	.db 82
-	.db 76
-	.dl SG_TreeRow1 + 05
+	.db 3
+	.dl lin_4_7_4
+	.db 14
+	.db 15
+	.db 16
+	.db 17
+	.db 14
+	.db 15
+	.db 14
+	.db 17
+	.dl SG_Branch3 + 25
+	.dl lin_4_7_2
+	.db 75
+	.db 74
+	.db 74
+	.db 75
+	.db 75
+	.db 75
+	.db 74
+	.db 75
+	.dl SG_Vines2 + 13
+	.dl lin_4_7_2
+	.db 15
+	.db 15
+	.db 14
+	.db 17
+	.db 16
+	.db 14
+	.db 15
+	.db 17
+	.dl SG_Vines2 + 17

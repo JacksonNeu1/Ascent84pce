@@ -90,9 +90,9 @@
 	ld (mpLcdBase),hl
 	
 	
-	ld hl,$00E300
+	ld hl,$004300
 	ld (player_x_pos),hl 
-	ld hl,$00EE00
+	ld hl,$02EE00
 	ld (player_y_pos),hl 
 	
 
@@ -249,7 +249,7 @@ longest_frame_skip:
 	ld l,a
 	ld a,($F20001);128hz 
 	ld h,a
-	srl h ;div by 4
+	srl h ;div by 8
 	rr l 
 	srl h
 	rr l 
@@ -290,10 +290,11 @@ longest_frame_skip:
 	ld a, $22
 	call _MemSet
 	
-	
-	
+
 	ld hl, (draw_buffer)
-	ld bc, 136  ; =1000/4 /2 for 2pix/bit 
+	;max time = 00000011 11100010
+	;after 3x shift, a = 011111000 = 120
+	ld bc, 120  ; =1000/4 /2 for 2pix/bit 
 	add hl,bc 
 	ld a,$55
 	ld (hl),a 
@@ -334,7 +335,7 @@ longest_frame_skip:
 	call _MemSet
 	
 	ld hl, (draw_buffer)
-	ld bc,296
+	ld bc,280
 	add hl,bc 
 	ld a,$55
 	ld (hl),a 
@@ -353,12 +354,13 @@ longest_frame_skip:
 
 	;wait until finished drawing second frame
 	;Need to check clock here, there wont always be decompression to wait for
+	;Max time = 00000011 11000000
 main_clock_check_loop:
 	ld a,($F20001);128hz clock
-	cp %00000011 ;check if reached 3 
+	cp %00000011 ;check if reached 4 
 	jp c,main_clock_check_loop ;msb <= 2, can continue  
 	ld a,($F20000);32768hz clock
-	cp %11101000;check if reached value 
+	cp %11100000;check if reached value 
 	jp c,main_clock_check_loop ;msb = 3 and lsb < value, can continue
 	
 
