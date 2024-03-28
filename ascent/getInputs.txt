@@ -12,19 +12,26 @@ scan_wait:
 	
 	; https://wikiti.brandonw.net/index.php?title=84PCE:Ports:A000
 	
+	ld a,0
+	ld (player_flags+1),a ;clear cam moove flags
+	
 	ld	a,(kbdG7) ; $F5001E
  	bit	kbitUp,a
 	push af 
-	jp nz, input_cam_up
+	call nz, input_cam_up
 	pop af 
 	
 	bit	kbitDown,a
-	jp nz, input_cam_down
+	call nz, input_cam_down
 
 
 	ld a,(kbdG6)
 	bit kbitClear,a
 	jp nz,exit_prgm
+	
+	ld a,(kbdG4)
+	bit kbit5,a 
+	call nz, try_tongue
 	
 	ld a,(kbdG5)
 	bit kbit6,a 
@@ -39,54 +46,18 @@ scan_wait:
 	
 	
 input_cam_up:
-	;Move cam
-	ld hl,(cam_pos)
-	
-	push hl 
-	ld bc,2500
-	sbc hl,bc 
-	pop hl 
-	jp nc, get_inputs_return
-	
-	inc hl
-	inc hl
-	inc hl
-	inc hl
-	inc hl
-	inc hl
-	inc hl
-	inc hl
-	
-	ld (cam_pos),hl
-	jp get_inputs_return
-
+	;set flag for cam move up 
+	ld a,(player_flags + 1)
+	set 7,a 
+	ld (player_flags + 1),a 
+	ret
 
 input_cam_down:
-	;Move cam
-	ld hl,(cam_pos)
-	
-	
-	push hl 
-	ld bc,10 
-	sbc hl,bc 
-	pop hl 
-	jp c, get_inputs_return
-	
-	dec hl
-	dec hl
-	dec hl
-	dec hl
-	dec hl
-	dec hl
-	dec hl
-	dec hl
-	
-	
-	
-	
-	
-	ld (cam_pos),hl
-	jp get_inputs_return
+	;set flag for cam move up 
+	ld a,(player_flags + 1)
+	set 6,a 
+	ld (player_flags + 1),a 
+	ret
 	
 	
 	

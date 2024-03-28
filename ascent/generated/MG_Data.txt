@@ -249,7 +249,6 @@ MG_Data_0:
 	.db 59, 255, 114, 8  ;SG_GroundChunk1
 	.db 59, 255, 22, 7  ;SG_GroundChunk2
 	.db 60, 255, 0, 8  ;SG_GroundChunk1
-	.db 207, 255, 31, 17  ;SG_Vines6
 	.db 255, 255, 34, 13  ;SG_TreeRow2
 	.db 239, 255, 35, 10  ;SG_TreeRow3
 	.db 223, 255, 34, 12  ;SG_TreeRow1
@@ -262,22 +261,23 @@ MG_Data_0:
 	.db 111, 255, 35, 11  ;SG_TreeRow5
 	.db 95, 255, 34, 13  ;SG_TreeRow2
 	.db 79, 255, 34, 12  ;SG_TreeRow1
-	.db 63, 255, 34, 11  ;SG_TreeRow5
 	.db 47, 255, 34, 10  ;SG_TreeRow3
 	.db 53, 255, 18, 9  ;SG_Root1
 	.db 51, 255, 134, 9  ;SG_Root1
 	.db 59, 255, 121, 9  ;SG_Root1
-	.db 31, 255, 136, 7  ;SG_GroundChunk2
-	.db 34, 255, 120, 7  ;SG_GroundChunk2
-	.db 37, 255, 96, 8  ;SG_GroundChunk1
-	.db 36, 255, 72, 7  ;SG_GroundChunk2
-	.db 34, 255, 0, 7  ;SG_GroundChunk2
-	.db 37, 255, 48, 8  ;SG_GroundChunk1
-	.db 233, 255, 0, 15  ;SG_Branch1
-	.db 35, 255, 24, 8  ;SG_GroundChunk1
+	.db 63, 255, 34, 11  ;SG_TreeRow5
 	.db 209, 255, 73, 18  ;SG_Vines7
-	.db 207, 255, 23, 16  ;SG_Vines2
+	.db 207, 255, 31, 17  ;SG_Vines6
+	.db 35, 255, 24, 8  ;SG_GroundChunk1
+	.db 37, 255, 48, 8  ;SG_GroundChunk1
+	.db 36, 255, 72, 7  ;SG_GroundChunk2
+	.db 37, 255, 96, 8  ;SG_GroundChunk1
+	.db 34, 255, 120, 7  ;SG_GroundChunk2
+	.db 31, 255, 136, 7  ;SG_GroundChunk2
+	.db 34, 255, 0, 7  ;SG_GroundChunk2
+	.db 233, 255, 0, 15  ;SG_Branch1
 	.db 219, 16, 116, 81  ;Vine5_Slow
+	.db 207, 255, 23, 16  ;SG_Vines2
 
 
 

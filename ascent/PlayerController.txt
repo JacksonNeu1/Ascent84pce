@@ -2,67 +2,176 @@
 
 
 charge_jump_left:
-	;Decrease jump right strength if it > -127 
+	;Decrease jump right strength
 	;Increase jump up strength 
 	;Do nothing if jump left timer is above max value 
 	ld a,(player_flags)
 	set 7, a 
 	ld (player_flags),a 
-	
 	ld a,(jump_charge_timer)
 	cp timer_max_val
-	jp nc, cjl_skip
-	ld a,(jump_strength_right)
-	dec a 
-	dec a 
-	dec a 
-	dec a 
-	ld (jump_strength_right),a
+	ret nc
+	ld a,(jump_strength_left)
+	ld b,4
+	add a,b 
+	ld (jump_strength_left),a
+jump_add_up_strength:
 	ld a,(jump_strength_up)
 	inc a 
 	inc a 
 	inc a 
 	ld (jump_strength_up),a
-
-cjl_skip:
-	ret 
+	ret
 
 
 charge_jump_right:
-	;Increase jump right strength if it < 127 
+	;Increase jump right strength 
 	;Increase jump up strength 
 	;Do nothing if jump  timer is above max value 
-	
 	ld a,(player_flags)
 	set 7, a 
 	ld (player_flags),a 
 	ld a,(jump_charge_timer)
 	cp timer_max_val
-	jp nc, cjr_skip
+	ret nc
 	ld a,(jump_strength_right)
-	inc a
-	inc a
-	inc a
-	inc a
+	ld b,4
+	add a,b 
 	ld (jump_strength_right),a
-	ld a,(jump_strength_up)
-	inc a 
-	inc a
-	inc a
-	ld (jump_strength_up),a	
-cjr_skip:
+	jp jump_add_up_strength
+
+
+try_tongue: ;called from getinput
+
+	;check if player in air 
+	ld a,(player_flags)
+	bit 6,a ;on ground flag 
+	ret nz 
+	bit 2,a 
+	ret nz ;already in tongue state
+	bit 3,a 
+	ret nz ;falling
+	;ld a,$A0
+	;call write_a_to_ram
+
+	ld de,0 
+	ld bc,0
+	ld hl,0
+	ld a, (player_y_pos + 2) ;player y frame 
+	ld h,a 
+	ld a, (player_y_pos + 1);player y pixel 
+	ld l,a
+	dec hl ;Offset y pos to mouth origin
+	dec hl 
+	dec hl 
+	dec hl 
+	dec hl 
+	dec hl 
+	dec hl ;hl holds y poos of mouth
+	
+	ld de, Tongue_Rings
+	ex af,af' ;'
+	ld a,(de) ; a' is counter 
+	;call write_a_to_ram
+	inc de ;to first element 
+try_tongue_loop:
+	ex af,af' ;' 
+	;hl holds player y ,de holds data
+	ld a ,(de)
+	ld b,a ;frame num 
+	inc de
+	ld a,(de)
+	inc de
+	ld c,a ;pixel
+	;call write_a_to_ram
+	push hl ;hl holds player y 
+	;call write_hl_to_ram
+	push bc ;bc holds ring y 
+	scf 
+	ccf 
+	sbc hl,bc ;compare to ring y 
+	jp nc, tongue_loop_continue ;ring below player 
+	;call write_hl_to_ram
+	;otherwise ring above player, hl holds -dist 
+	ld bc,10 ; min dist threshold 
+	add hl,bc 
+	jp c, tongue_loop_continue ; ring less than min dist above player 
+	ld bc,tongue_max_length ;ring max dist threshold - min dist threshold
+	add hl,bc 
+	jp nc,tongue_loop_continue ;ring above max distance threshold
+	;jp nc,test_1	
+	
+	;Ring has valid y pos 
+	pop hl ;ring y 
+	ld (tongue_ring_y_pos),hl
+	pop bc ;player y  
+	push bc
+	scf 
+	ccf 
+	sbc hl,bc ;hl holds distance ring is above player  
+	;ld a,$AA
+	;call write_a_to_ram
+	ld a,(de) ;ring x pos 
+	;call write_a_to_ram
+	ld c,a 
+	ld (tongue_ring_x_pos),a 
+	call player_x_half ;a holds player x in pairs  (destroys b)
+	;call write_a_to_ram
+	ld b,3;x offset from collider to center of player collider
+	add a,b 
+	sub a,c ;player x - ring x 
+	;call write_a_to_ram
+	jp nc, tongue_ring_to_left
+	neg 
+tongue_ring_to_left:
+	;player sprite will be flipped 
+	;a holds abs(xdistance) to ring in pair pixels 
+	; l holds y dist in single px
+	cp 30
+	jp nc,tongue_loop_continue_2 ;x dist > 20
+	dec l ;safety factor
+	sub a,l
+	;call write_a_to_ram
+	jp nc, tongue_loop_continue_2 ;x dist > y dist 
+	;jp nc, test_2
+	;Valid ring found 
+	
+	;call prgmpause;
+	
+	pop hl ;player y 
+	ld a,(player_flags)
+	set 2,a 
+	ld (player_flags),a 
+	ld a,0 
+	ld (tongue_extend_timer),a
+	;call write_a_to_ram
+	;ld a,$AA
+	;call write_a_to_ram
 	ret 
+
+
+tongue_loop_continue:
+	pop bc ;ring y 
+	inc de ;to next
+tongue_loop_continue_2:
+	pop hl ;player y
+	ex af,af' ;' 
+	dec a 
+	jp nz,try_tongue_loop
+	
+	ret 
+
 
 
 
 player_update: ;Should be called after inputs
 
 	ld a,(player_flags)
+	bit 2,a ;tongue flag 
+	jp nz, pu_tongue_update	
 	bit 7,a ;jump key  flag 
 	jp z, pu_try_jump
 	
-	res 7,a ;Reset jump hold check 
-	ld (player_flags),a 
 	;Jump key is held, charge jump
 	ld a,(jump_charge_timer)
 	inc a 
@@ -70,7 +179,115 @@ player_update: ;Should be called after inputs
 	;Jumps can be charged in air, for immediate jump
 	
 	jp pu_physics
+
+pu_tongue_update:
 	
+	;ld a,$AB
+	;call write_a_to_ram
+	
+	;compute y dist to ring, and angle to check cancel 
+	call y_length_to_tongue_ring
+	ld a,l
+	cp tongue_max_length
+	jp nc, pu_tongue_release 
+	;call write_hl_to_ram
+	;hl holds line y length 
+	;ld a,l 
+	;call write_a_to_ram
+	ld a,(tongue_extend_timer)
+	;call write_a_to_ram
+	;compare timer to y dist / 8 
+	srl l 
+	srl l 
+	srl l 
+	cp l 
+	jp c, pu_tongue_extend
+	
+	cp 127 ;if > 127 go to contract
+	jp nc, pu_tongue_contract
+	;ld a,$AC
+	;call write_a_to_ram
+	;otherwise tongue is full length, set timer to 128 to start contract phase 
+	ld a,128 
+	ld (tongue_extend_timer),a 
+	ld hl,0 
+	ld (player_y_vel),hl 
+	ld (player_x_vel),hl
+
+pu_tongue_contract:
+
+	ld a,$AD 
+	call write_a_to_ram
+	;Add distance to ring to player velocity until reach ring
+	call y_length_to_tongue_ring ;l holds y dist in px 
+	ld a,l 
+	;call write_a_to_ram
+	cp 3 
+	jp c, pu_tongue_release
+	bit 7,h 
+	jp nz,pu_tongue_release
+	;div by ~6
+	srl l
+	srl l
+	srl l
+	ld a,l 
+	srl l 
+	add a,l 
+  	ld l,a 
+	;call write_a_to_ram
+	;call prgmpause
+	;call write_hl_to_ram
+	ld de,20
+	add hl,de 
+	ex de,hl 
+	ld hl,(player_y_vel)
+	add hl,de 
+	ld (player_y_vel),hl 
+	;call write_hl_to_ram
+	;call prgmpause
+	
+	call x_length_to_tongue_ring
+	;a holds x dist in pairs
+	bit 7,a ;check sign 
+	jp nz, pu_tongue_contract_left
+	ld de,0 
+	ld e,3 
+	add a,e 
+	ld e,a
+	srl e ;div by 2
+	jp pu_tongue_contract_right
+pu_tongue_contract_left:
+	ld de, $ffffff
+	ld e,-3 
+	add a,e
+	ld e,a 
+	sra e ;div 2
+pu_tongue_contract_right:
+	
+	ld hl,(player_x_vel)
+	add hl,de 
+	ld (player_x_vel),hl 
+	
+	jp pu_physics
+	
+	;tongue extends 8px per frame until max length 
+	;then set timer to 128 for contract phase 
+pu_tongue_extend:
+	;Extend tongue and do normal air physics
+	inc a 
+	inc a 
+	;call write_a_to_ram
+	ld (tongue_extend_timer),a 
+	jp pu_physics
+
+
+pu_tongue_release:
+	ld a,(player_flags)
+	res 2,a 
+	ld (player_flags),a 
+	jp pu_physics
+
+
 pu_try_jump:
 	;no jump keys held this frame. If jump timer > 0 and on ground, then jump 
 	
@@ -80,7 +297,7 @@ pu_try_jump:
 	or a 
 	jp z,pu_no_jump ;jump timers are 0 = no jump
 	
-	cp 5;if timer < 5 no jump
+	cp 8;if timer < 8 no jump
 	jp c, pu_no_jump
 	
 	;This is the minimum jump player can do 
@@ -113,10 +330,11 @@ pu_jump_notmin:
 	ld (player_y_vel),hl 
 	;call write_hl_to_ram
 	
+	ld a,(jump_strength_left)
+	ld b,a 
 	ld a,(jump_strength_right)
-	;call write_a_to_ram
-	bit 7, a 
-	jp nz, pu_left_jump 
+	sub a,b ;subtract left jump from right
+	jp c, pu_left_jump 
 	;right jump 
 	ld hl,0
 	jp pu_jump_cont
@@ -124,7 +342,7 @@ pu_left_jump:
 	ld hl, $ffffff ;makes x vel negative 
 pu_jump_cont:
 	ld l,a 
-	
+	;call write_a_to_ram
 	ld (player_x_vel),hl 
 	;call write_hl_to_ram
 	;Clear ground flag 
@@ -137,12 +355,8 @@ pu_no_jump:
 	ld a,0 
 	ld (jump_charge_timer),a 
 	ld (jump_strength_right),a 
-	ld (jump_strength_up),a
-	
-	
-	
-	
-	
+	ld (jump_strength_left),a 
+	ld (jump_strength_up),a	
 	
 pu_physics:
 
@@ -182,19 +396,6 @@ pu_physics_count .equ $ + 1
 	ld a,%11011010;jp c
 	ld (collision_check_vertical),a
 	call check_collisions
-	
-	;Temp ground check
-	ld hl, (player_y_pos) 
-	ld de, $002000
-	sbc hl,de 
-	jp nc, pu_update_x_pos 
-
-pu_ground_hit:
-	ld hl,$002000 ;TEMP 
-	ld (player_y_pos),hl 
-	ld a,(player_flags)
-	set 6,a 
-	ld (player_flags),a 
 
 pu_update_x_pos:
 
@@ -205,11 +406,11 @@ pu_update_x_pos:
 	add hl,de ;add x vel to x pos 
 	ld (player_x_pos),hl 
 	
-	ld de,$000200
+	ld de,$000900
 	sbc hl,de 
 	call c, reverse_x_vel ;If xpos < 2px
 	ld hl, (player_x_pos) 
-	ld de,$012800; if xpos > 300px
+	ld de,$012300; if xpos > 300px
 	sbc hl,de 
 	call nc,reverse_x_vel
 	
@@ -241,11 +442,11 @@ pu_physics_end:
 	;Apply gravity 
 	ld hl,(player_y_vel)
 	bit 7,h  ;Check if vel is negative
-	jp z,pu_apply_gravity
+	jp z,pu_apply_gravity ;if moving up apply gravity
 	
 	push hl 
 	;check foor terminal vel 
-	ld de, $000f00 ;15px per frame
+	ld de, $000080 ;8px per frame
 	add hl,de ;terminal V is negative
 	pop hl 
 	jp nc, pu_terminal_vel
@@ -258,184 +459,10 @@ pu_apply_gravity:
 
 	ret 
 pu_terminal_vel:
-	ld hl, $fff100 ;-15 px per frame
+	ld hl, $ffff80 ;-8 px per frame
 	ld (player_y_vel),hl
-
-	ret 
-
-
-
-
-player_draw:
-;Draw sprite and reset any flags 
-
-	;cam follow player 
-	
-	
-
-
-	;Todo Logic for choosing sprite index 
-	ld a,0 
-	ld (player_sprite_index),a 
-	ld a, 19
-	ld (pd_sprite_height_1),a 
-	ld (pd_sprite_height_2),a 
-	
-	
-	;ld x pos
-	ld a, (player_x_pos + 1) ;fullpixel byte
-
-	bit 0, a ;least fullpixel bit 
-	jp z, pd_even_px 
-	ld de, (player_sprite_table_offset)
-	jp pd_set_sprite_table
-pd_even_px:
-	ld de, (player_sprite_table)
-pd_set_sprite_table:
-	ld (pd_sprite_table), de 
-	
-	srl a ;div by 2
-	ld b,a 
-	ld a,(player_x_pos+2);MSB fullpixel 
-	rrca ;Move bit 0 to bit 7
-	or b 
-
-	
-	ld (pd_xpos_full),a 
-	
-	;call write_a_to_ram
-	
-	ld hl,0 
-	ld a,(player_y_pos + 2) ;MSB
-	ld h,a 
-	ld a, (player_y_pos + 1) ;middle bit (fullpixel LSB)
-	ld l,a 
-
-	ex de,hl 
-	ld hl,(cam_pos)
-	srl h ;div by 2
-	rr l 
-	ld bc,239
-	add hl,bc ;y-value of uppermost visible line of fg layer
-	scf 
-	ccf 
-	;Uppermost vp line - player y  = lines below top to draw player 
-	sbc hl,de 
 	;call write_hl_to_ram
-	jp c, pd_top_cut
-	
-	ld a,h 
-	
-	or a 
-	ret nz ;player is > 256 px below cam 
-	
-	ld a,l 
-	;a holds lines below vp top to draw player
-	ld b,a 
-	ld a,240
-	sub a,b ;lines above bottom of VP 
-	ret c ;player below VP 
-
-	
-	ld de, (draw_buffer)
-	ld hl, 240*160
-	add hl,de 
-	ex de,hl ;DE hlds VP bottom 
-	
-pd_sprite_height_1 .equ $ + 1
-	cp 0 
-	jp c, pd_bottom_cut 
-
-	;Otherwise, no top or bottm cut
-	;a holds lines above bottom VP 
-	call pd_setup_draw
-	
-
-	;call prgmpause
-	
-	call draw_slow_sprite_full
-	
-	
-	ret
-
-pd_bottom_cut:
-	;a holds lines to draw
-	;DE holds vram bottom 
-	call pd_setup_draw
-	call draw_slow_sprite_bottom_cut
-	
-	;push af 
-	;ld a,$33
-	;call write_a_to_ram 
-	;pop af 
-	
 	ret 
-	
-
-pd_top_cut:
-	;call write_hl_to_ram
-	;push af 
-	;ld a,$44
-	;call write_a_to_ram 
-	;pop af 
-
-	ld a,h ;Upper byte after subtraction, check for chase where player > 256 px above cam to prevent overflow errors
-	xor %11111111 ;flip all bits 
-	ret nz ;player is > 256 px above cam 
-	
- 
-	
-	ld a,l ;lines below VP
-	neg 
-
-	;a holds lines above vp top = lines to cut 
-pd_sprite_height_2 .equ $ + 1 
-	cp 0 ; compare to height 
-	ret nc 
-
-	ld de,(draw_buffer)
-	call pd_setup_draw ;Setup draw pos 
-	
-	;bit 0,l ;location of sprite data in vram indicates fast or slow sprite
-	;jp z,pd_top_cut_fast
-	call draw_slow_sprite_top_cut ;for now assume all sprites are slow
-	
-	;jp pd_top_cut_slow
-;pd_top_cut_fast:
-	;call draw_fast_sprite_top_cut
-;pd_top_cut_slow:
-	
-	ret 
-	
-
-
-
-pd_setup_draw:
-	;A holds lines above bottom (or top) line of VP 
-	;DE holds VP top or bottom
-	ld h,160
-	ld l,a ;Num lines to subtract
-	mlt hl 
-	scf 
-	ccf 
-	ex de,hl ;De holds lines to subtract, hl holds vram pos 
-	sbc hl,de 
-	ld bc,0 
-pd_xpos_full .equ $ + 1 
-	ld c, 0 ;ld x pos 
-	add hl,bc 
-	ex de,hl 
-pd_sprite_table .equ $ + 1 
-	ld hl,0 ;Load sprite table (offset or even)
-
-player_sprite_index .equ $ + 1 
-	ld c,0 ;load sprite index 
-	add hl,bc 
-	add hl,bc 
-	add hl,bc 
-	;HL holds sprite data, de holds draw pos 
-	ret 
-
 
 
 
@@ -527,12 +554,7 @@ check_col_y_collision:
 	;call write_a_to_ram;TESTIng
 	
 	inc hl ;to x max 
-	ld a,(player_x_pos+1);Fullpixels
-	srl a ;div by 2 
-	ld b,a 
-	ld a,(player_x_pos+2);MSB fullpixel 
-	rrca ;Move bit 0 to bit 7
-	or b 
+	call player_x_half
 	;A holds x pos / 2 (paired pixels) 
 	
 	cp (hl) ;compare to x max 
@@ -686,6 +708,7 @@ check_end_fall_2:
 	pop hl 
 	ld a, (fall_num_bounces)
 	ld b,a 
+	;call write_a_to_ram
 	call random_val
 	ld c,%00000001
 unlucky_bounce_loop:
@@ -714,7 +737,7 @@ colis_vert_down_not_fall:
 	bit 4,a ;check we were not in semisolid last update 
 	jp nz, check_col_skip_0 ;we were already within semisolid collider 
 	;otherwise, hit the collider 
-	
+	ld a,(hl)
 
 vert_col_down_solid:
 	bit 6,a 
@@ -729,12 +752,13 @@ vert_col_down_solid:
 	ld (player_y_vel),hl 
 	ld hl, (player_y_pos_prev) ;revert to previous y pos 
 	ld (player_y_pos),hl 
+	ld (player_last_ground_pos),hl
 	pop hl 
 	
 	ld a,(player_flags)
 	set 6,a  ;set ground flag 
+	res 2,a ;reset tongue flag (cancel tongue if landed)
 	ld (player_flags),a
-	
 	jp check_col_skip_0 ;continue 
 
 
@@ -745,7 +769,7 @@ collision_spikes:
 	push hl
 	;player has collided with spikes 
 	call spike_hit_bounce
-	ld a,0
+	ld a,1
 	ld (fall_num_bounces),a 
 	pop hl 
 	jp check_col_skip_0
@@ -772,6 +796,7 @@ spike_negative_bounce:
 spike_pos_bounce:
 	ld a,(player_flags)
 	set 3,a  ;set fall flag 
+	res 2,a ;reset tongue flag
 	ld (player_flags),a 
 	;Set spike hit height 
 	ld hl, (player_y_pos)
@@ -780,10 +805,10 @@ spike_pos_bounce:
 	jp nc, spike_bounce_min_height_threshold
 	ld hl,0
 spike_bounce_min_height_threshold:
-	ld de, $002300  ;minimum spike height threshold 
+	ld de, $004300  ;minimum spike height threshold 
 	add hl,de 
 	ld (spike_hit_height),hl 
-	
+	call write_hl_to_ram
 	ret 
 
 
@@ -832,32 +857,30 @@ random_val:
 	xor c
 	ret 
 
-
-
-
-player_sprite_table:
-	.dl Frog_0_Slow
-
-player_sprite_table_offset:
-	.dl Frog_0_Slow_O
-
-
-
-
+player_x_half:
+	ld a,(player_x_pos+1);Fullpixels
+	srl a ;div by 2 
+	ld b,a 
+	ld a,(player_x_pos+2);MSB fullpixel 
+	rrca ;Move bit 0 to bit 7
+	or b 
+	ret 
 
 
 jump_strength_up:
 	.db 0 
 jump_strength_right:
 	.db 0 
+jump_strength_left:
+	.db 0
 jump_charge_timer:
 	.db 0 
 
 	
-timer_max_val .equ 30
+timer_max_val .equ 32
 
-player_collider_height .equ 19
-player_collider_width .equ 24 ;width -1 
+player_collider_height .equ 18
+player_collider_width .equ 20 ;width -1 
 
 
 player_x_pos:
@@ -879,17 +902,25 @@ player_x_pos_prev: ;x position before update, revert to this if collision
 player_y_pos_prev: ;y position before update, revert to this if collision :
 	.dl 0 ; (Frame #, Fullpixels, subpixels)
 
+player_last_ground_pos:
+	.dl 0
 
+tongue_ring_y_pos:
+	.dl 0
+tongue_ring_x_pos:
+	.db 0	
+tongue_max_length .equ 90
 
 player_flags:
-	.db %00000000 ; (7 = Any jump button held, 6 = on ground,5 = within semisolid, 4 = in semisolid last update, 3= isfalling)
-	
+	.db %00000000 ; (7 = Any jump button held, 6 = on ground,5 = within semisolid, 4 = in semisolid last update, 3= isfalling, 2 = tongueActive, 1 = lastDirection(1=right))
+	.db %00000000 ; 7= cam move up, 6 = cam move down
 spike_hit_height:
 	.dl 0 ;Height where player can land after hitting spike
 fall_num_bounces:
 	.db 0 ;Number of times player has had unlucky bounce
-	
-	
+tongue_extend_timer:
+	.db 0 ;Timer for extend tongue anim
+
 	
 	
 	

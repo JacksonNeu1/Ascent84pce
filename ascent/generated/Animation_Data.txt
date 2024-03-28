@@ -127,7 +127,7 @@ position_animation_data:
 
 
 sprite_animation_data:
-	.db 3
+	.db 5
 	.dl lin_4_7_4
 	.db 14
 	.db 15
@@ -158,3 +158,23 @@ sprite_animation_data:
 	.db 15
 	.db 17
 	.dl SG_Vines2 + 17
+	.dl linrep_8_7_1
+	.db 102
+	.db 103
+	.db 102
+	.db 103
+	.db 102
+	.db 103
+	.db 102
+	.db 103
+	.dl SG_TongueRing + 5
+	.dl linrep_8_7_1
+	.db 104
+	.db 105
+	.db 104
+	.db 105
+	.db 104
+	.db 105
+	.db 104
+	.db 105
+	.dl SG_TongueRing + 9

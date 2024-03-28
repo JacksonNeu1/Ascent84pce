@@ -186,10 +186,44 @@ decompress_calls_table_down:
 
 
 decompress_frame_up_pre2:
-	.db 0
+	.db 17
+	.dl FrogCharge, FrogCharge_Slow_O
+	.db %01000000
+	.dl FrogCharge, FrogCharge_Slow_F
+	.db %00100000
+	.dl FrogCharge, FrogCharge_Slow_O_F
+	.db %01100000
+	.dl FrogJump, FrogJump_Slow
+	.db %00000000
+	.dl FrogJump, FrogJump_Slow_O
+	.db %01000000
+	.dl FrogJump, FrogJump_Slow_F
+	.db %00100000
+	.dl FrogJump, FrogJump_Slow_O_F
+	.db %01100000
+	.dl FrogJumpMouth, FrogJumpMouth_Slow
+	.db %00000000
+	.dl FrogJumpMouth, FrogJumpMouth_Slow_O
+	.db %01000000
+	.dl FrogJumpMouth, FrogJumpMouth_Slow_F
+	.db %00100000
+	.dl FrogJumpMouth, FrogJumpMouth_Slow_O_F
+	.db %01100000
+	.dl FrogFall, FrogFall_Slow
+	.db %00000000
+	.dl FrogFall, FrogFall_Slow_O
+	.db %01000000
+	.dl FrogFall, FrogFall_Slow_F
+	.db %00100000
+	.dl FrogFall, FrogFall_Slow_O_F
+	.db %01100000
+	.dl FrogTongue, FrogTongue_Slow
+	.db %00000000
+	.dl FrogTongue, FrogTongue_Slow_O
+	.db %01000000
 
 decompress_frame_up_pre1:
-	.db 47
+	.db 64
 	.dl Branches_5, Branches_5_Fast
 	.db %10000000
 	.dl Branches_3, Branches_3_Fast
@@ -240,10 +274,26 @@ decompress_frame_up_pre1:
 	.db %10100000
 	.dl Branches_5, Branches_5_Fast_F
 	.db %10100000
-	.dl Clouds_2, Clouds_2_Fast
+	.dl Platforms_0, Platforms_0_Fast
 	.db %10000000
-	.dl Frog_0, Frog_0_Slow
+	.dl Platforms_1, Platforms_1_Fast
+	.db %10000000
+	.dl Platforms_0, Platforms_0_Fast_F
+	.db %10100000
+	.dl Platforms_2, Platforms_2_Slow_O_F
+	.db %01100000
+	.dl Platforms_2, Platforms_2_Slow_O
+	.db %01000000
+	.dl Spikes_0, Spikes_0_Fast
+	.db %10000000
+	.dl TongueRing1, TongueRing1_Slow
 	.db %00000000
+	.dl TongueRing2, TongueRing2_Slow
+	.db %00000000
+	.dl TongueRing1, TongueRing1_Slow_F
+	.db %00100000
+	.dl TongueRing2, TongueRing2_Slow_F
+	.db %00100000
 	.dl GroundDirtDark, GroundDirtDark_Fast
 	.db %10000000
 	.dl GroundDirtDark, GroundDirtDark_Fast_F
@@ -272,6 +322,8 @@ decompress_frame_up_pre1:
 	.db %10000000
 	.dl Clouds_4, Clouds_4_Fast
 	.db %10000000
+	.dl Clouds_2, Clouds_2_Fast
+	.db %10000000
 	.dl Clouds_0, Clouds_0_Fast_F
 	.db %10100000
 	.dl Clouds_1, Clouds_1_Fast_F
@@ -282,8 +334,24 @@ decompress_frame_up_pre1:
 	.db %10100000
 	.dl Clouds_2, Clouds_2_Fast_F
 	.db %10100000
-	.dl Frog_0, Frog_0_Slow_O
+	.dl FrogDefault, FrogDefault_Slow
+	.db %00000000
+	.dl FrogDefault, FrogDefault_Slow_O
 	.db %01000000
+	.dl FrogDefault, FrogDefault_Slow_F
+	.db %00100000
+	.dl FrogDefault, FrogDefault_Slow_O_F
+	.db %01100000
+	.dl FrogChargeLit, FrogChargeLit_Slow
+	.db %00000000
+	.dl FrogChargeLit, FrogChargeLit_Slow_O
+	.db %01000000
+	.dl FrogChargeLit, FrogChargeLit_Slow_F
+	.db %00100000
+	.dl FrogChargeLit, FrogChargeLit_Slow_O_F
+	.db %01100000
+	.dl FrogCharge, FrogCharge_Slow
+	.db %00000000
 
 decompress_frame_up_0:
 	.db 64
@@ -740,7 +808,7 @@ decompress_frame_down_5:
 	.db 0
 
 decompress_frame_down_6:
-	.db 12
+	.db 14
 	.dl Vine2, Vine2_Slow
 	.db %00000000
 	.dl VineVertical, VineVertical_Slow_O
@@ -765,6 +833,10 @@ decompress_frame_down_6:
 	.db %01000000
 	.dl Vine4, Vine4_Slow_O
 	.db %01000000
+	.dl Platforms_2, Platforms_2_Slow_O
+	.db %01000000
+	.dl Spikes_0, Spikes_0_Fast
+	.db %10000000
 
 decompress_frame_down_7:
 	.db 0
@@ -782,7 +854,7 @@ decompress_frame_down_9:
 	.db 0
 
 decompress_frame_down_10:
-	.db 8
+	.db 12
 	.dl Branches_7, Branches_7_Fast_F
 	.db %10100000
 	.dl Branches_12, Branches_12_Fast_F
@@ -799,6 +871,14 @@ decompress_frame_down_10:
 	.db %01000000
 	.dl Branches_7, Branches_7_Slow_O
 	.db %01000000
+	.dl TongueRing1, TongueRing1_Slow
+	.db %00000000
+	.dl TongueRing2, TongueRing2_Slow
+	.db %00000000
+	.dl TongueRing1, TongueRing1_Slow_F
+	.db %00100000
+	.dl TongueRing2, TongueRing2_Slow_F
+	.db %00100000
 
 decompress_frame_down_11:
 	.db 6
@@ -816,7 +896,7 @@ decompress_frame_down_11:
 	.db %10100000
 
 decompress_frame_down_12:
-	.db 28
+	.db 32
 	.dl DualLeaf4, DualLeaf4_Slow
 	.db %00000000
 	.dl Branches_10, Branches_10_Fast
@@ -873,6 +953,14 @@ decompress_frame_down_12:
 	.db %01000000
 	.dl Branches_9, Branches_9_Fast_F
 	.db %10100000
+	.dl Platforms_0, Platforms_0_Fast
+	.db %10000000
+	.dl Platforms_1, Platforms_1_Fast
+	.db %10000000
+	.dl Platforms_0, Platforms_0_Fast_F
+	.db %10100000
+	.dl Platforms_2, Platforms_2_Slow_O_F
+	.db %01100000
 
 decompress_frame_down_13:
 	.db 0
@@ -989,8 +1077,6 @@ decompress_frame_down_23:
 
 decompress_frame_down_24:
 	.db 10
-	.dl Clouds_2, Clouds_2_Fast
-	.db %10000000
 	.dl Clouds_0, Clouds_0_Fast
 	.db %10000000
 	.dl Clouds_1, Clouds_1_Fast
@@ -998,6 +1084,8 @@ decompress_frame_down_24:
 	.dl Clouds_3, Clouds_3_Fast
 	.db %10000000
 	.dl Clouds_4, Clouds_4_Fast
+	.db %10000000
+	.dl Clouds_2, Clouds_2_Fast
 	.db %10000000
 	.dl Clouds_0, Clouds_0_Fast_F
 	.db %10100000
@@ -1203,8 +1291,56 @@ decompress_frame_down_88:
 	.db 0
 
 decompress_frame_down_89:
-	.db 2
-	.dl Frog_0, Frog_0_Slow
+	.db 26
+	.dl FrogDefault, FrogDefault_Slow
 	.db %00000000
-	.dl Frog_0, Frog_0_Slow_O
+	.dl FrogDefault, FrogDefault_Slow_O
+	.db %01000000
+	.dl FrogDefault, FrogDefault_Slow_F
+	.db %00100000
+	.dl FrogDefault, FrogDefault_Slow_O_F
+	.db %01100000
+	.dl FrogChargeLit, FrogChargeLit_Slow
+	.db %00000000
+	.dl FrogChargeLit, FrogChargeLit_Slow_O
+	.db %01000000
+	.dl FrogChargeLit, FrogChargeLit_Slow_F
+	.db %00100000
+	.dl FrogChargeLit, FrogChargeLit_Slow_O_F
+	.db %01100000
+	.dl FrogCharge, FrogCharge_Slow
+	.db %00000000
+	.dl FrogCharge, FrogCharge_Slow_O
+	.db %01000000
+	.dl FrogCharge, FrogCharge_Slow_F
+	.db %00100000
+	.dl FrogCharge, FrogCharge_Slow_O_F
+	.db %01100000
+	.dl FrogJump, FrogJump_Slow
+	.db %00000000
+	.dl FrogJump, FrogJump_Slow_O
+	.db %01000000
+	.dl FrogJump, FrogJump_Slow_F
+	.db %00100000
+	.dl FrogJump, FrogJump_Slow_O_F
+	.db %01100000
+	.dl FrogJumpMouth, FrogJumpMouth_Slow
+	.db %00000000
+	.dl FrogJumpMouth, FrogJumpMouth_Slow_O
+	.db %01000000
+	.dl FrogJumpMouth, FrogJumpMouth_Slow_F
+	.db %00100000
+	.dl FrogJumpMouth, FrogJumpMouth_Slow_O_F
+	.db %01100000
+	.dl FrogFall, FrogFall_Slow
+	.db %00000000
+	.dl FrogFall, FrogFall_Slow_O
+	.db %01000000
+	.dl FrogFall, FrogFall_Slow_F
+	.db %00100000
+	.dl FrogFall, FrogFall_Slow_O_F
+	.db %01100000
+	.dl FrogTongue, FrogTongue_Slow
+	.db %00000000
+	.dl FrogTongue, FrogTongue_Slow_O
 	.db %01000000

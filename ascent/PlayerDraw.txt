@@ -1,0 +1,849 @@
+
+
+desired_cam_pos: ;Target position, can smoothly move cam to here 
+	.dl 0
+
+player_move_cam:
+	;cam follow player 
+	;if player on ground, scroll up to keep player near bottom of screen, 90px
+	;if player below last grounded pos, desired cam pos = 150px
+	;if player is near top of screen, scroll up 
+	
+	;if player using tounge scroll up
+	
+	
+	ld a,(player_flags)
+	bit 6,a ;ground flag 
+	jp nz, pmc_grounded
+	bit 3,a ;is falling 
+	jp nz, pmc_falling
+	;otherwise, check if player below last grounded pos 
+	ld hl,(player_last_ground_pos)
+	ex de,hl 
+	ld hl,(player_y_pos)
+	sbc hl,de 
+	jp c, pmc_below_last_ground
+	
+	
+	;Check if player is near top or bottom of screen
+	ld hl, (cam_pos)
+	push hl
+	call player_to_cam_coords ;hl holds cam pos to put player at bottom of frame
+	pop de 	
+	sbc hl,de ;max cam pos - current cam pos 
+	;hl holds how far up to move cam to have player at bottom = how far player is above bottom of screen
+	push hl 
+	jp c, pmc_player_near_bottom ;player is below screen, need to move cam down
+	ld de,10
+	sbc hl,de ;check if within 10px of screen bottom 
+	jp c,pmc_player_near_bottom 
+	
+	pop hl 
+	ld de,240
+	sbc hl,de 
+	jp nc, pmc_player_near_top
+	
+	;no cam move needed 
+	ret 
+	
+	
+pmc_grounded:
+
+	ld a,(player_flags+1);camera control flags 
+	bit 7,a 
+	jp nz,pmc_camscroll_up
+	bit 6,a 
+	jp nz,pmc_camscroll_down
+	;If player on ground, desired cam pos = 90px below player 
+	call player_to_cam_coords ;hl holds cam pos to put player at bottom of frame
+	ld de,90
+	sbc hl,de
+	jp nc, set_desired_pos_0_skip
+	ld hl,0
+set_desired_pos_0_skip:
+	ld (desired_cam_pos),hl 
+	call pmc_move_towards_desired_pos
+	ret 
+
+
+pmc_falling:
+	call player_to_cam_coords ;hl holds cam pos to put player at bottom of frame
+	ld de,220
+	sbc hl,de
+	jp nc, set_desired_pos_0_skip
+	ld hl,0
+	ld (desired_cam_pos),hl 
+	call pmc_move_towards_desired_pos
+	ret 
+
+pmc_camscroll_up:
+	call player_to_cam_coords ;hl holds cam pos to put player at bottom of frame
+	ld de,320
+	add hl,de 
+	ld (desired_cam_pos),hl 
+	call pmc_move_towards_desired_pos
+	ret
+
+pmc_camscroll_down:
+	call player_to_cam_coords ;hl holds cam pos to put player at bottom of frame
+	ld de,260
+	sbc hl,de 
+	jp nc, set_desired_pos_0_skip
+	ld hl,0
+	ld (desired_cam_pos),hl 
+	call pmc_move_towards_desired_pos
+	ret
+
+pmc_below_last_ground:
+	;if below last ground pos, deired pos = 150px 
+	call player_to_cam_coords ;hl holds cam pos to put player at bottom of frame
+	ld de,150
+	sbc hl,de 
+	jp nc, set_desired_pos_0_skip
+	ld hl,0
+	ld (desired_cam_pos),hl 
+	call pmc_move_towards_desired_pos
+	ret
+
+
+pmc_player_near_bottom: ;need to set cam to 10px from bottom
+	pop hl
+	call player_to_cam_coords
+	ld de,12
+	sbc hl,de 
+	jp nc,set_cam_0_skip
+	ld hl,0
+	ld (cam_pos),hl 
+	ret 
+	
+pmc_player_near_top: ;need to set cam to 10px from top
+	call player_to_cam_coords
+	ld de,240
+	sbc hl,de 
+	ld (cam_pos),hl 
+	
+	ret 
+
+
+pmc_move_towards_desired_pos: 
+	;moves cam closer to desired cam pos. Speed proportinal to difference btwn current and desired 
+	ld hl,(desired_cam_pos)
+	;call write_hl_to_ram
+	ex de,hl 
+	ld hl,(cam_pos)
+	sbc hl,de 
+	jp c, pmc_move_towards_up
+	;else move cam down 
+	ld a,l 
+	ld de,0 
+	call pmc_set_speed
+	ld a,h 
+	or a 
+	call nz,pmc_max_speed ;set max speed
+	ld hl,(cam_pos)
+	sbc hl,de ;add speed to cam pos 
+	
+	jp nc,set_cam_0_skip
+	ld hl,0
+set_cam_0_skip:
+	ld (cam_pos),hl 
+	ret 
+	
+pmc_move_towards_up:
+	;hl holds difference btwn current and desired, is negative
+	;check bits of l to determine speed 
+	ld a,l 
+	neg 
+	ld de,0
+	call pmc_set_speed ;de holds px to add 
+	ld a,h 
+	xor %11111111 ;Check if h has zeros = >255 px difference 
+	call nz,pmc_max_speed ;set max speed
+	ld hl,(cam_pos)
+	add hl,de ;add speed to cam pos 
+	ld (cam_pos),hl 
+	;call write_hl_to_ram
+	ret 
+	
+
+
+
+pmc_set_speed: ;a holds magnitude of difference btwn current and desired pos 
+	ld e, 0
+	cp 3
+	ret c ;difference < 3px
+	ld e, 1
+	cp 10
+	ret c ;difference < 8px
+	ld e, 2
+	cp 20
+	ret c ;difference < 16px
+	ld e, 3
+	cp 30
+	ret z ;difference < 24px
+	ld e, 4
+	cp 40
+	ret c 
+	ld e, 5
+	cp 55
+	ret c 
+	ld e, 8
+	cp 90
+	ret c 
+	ld e, 12
+	cp 140
+	ret c
+	ld e, 20
+	cp 250
+	ret c
+pmc_max_speed:	
+	ld e, 24 ;Max cam speed px/frame
+	ret
+
+player_draw:
+;Draw sprite and reset any flags 
+
+	ld bc,0 ;clear 
+	;bc is sprite index counter 
+	;default, charge, chargelit, jump, jumpmouth, fall
+	;Add 4 for sprite, add 2 for flip, add 1 for offset
+	
+	ld a,(player_flags)
+	bit 3,a ;check fall flag 
+	jp nz,pd_set_fall
+	;TODO tounge flag
+	bit 2,a 
+	jp nz,pd_set_tongue
+	bit 7,a ;Check jump held flag 
+	jp nz,pd_set_charge
+	
+	bit 6,a ;on ground flag
+	jp z, pd_set_jump
+
+	;On ground 
+	;c=0
+	;Set sprite heights and offsets
+	ld a,19
+	ld (pd_sprite_height_1),a 
+	ld (pd_sprite_height_2),a 
+	ld a,2
+	ld (pd_x_offset_noflip),a 
+	ld (pd_x_offset_flip),a 
+	ld a,1 
+	ld (pd_y_offset),a
+	ld a,(player_flags)
+	bit 1,a 
+	jp nz,pd_noflip
+	jp pd_flip
+
+pd_set_fall:
+	ld c,20
+	ld a,26
+	ld (pd_sprite_height_1),a 
+	ld (pd_sprite_height_2),a 
+	ld a,1
+	ld (pd_x_offset_noflip),a 
+	ld a,0
+	ld (pd_x_offset_flip),a 
+	ld a,7 
+	ld (pd_y_offset),a 
+	jp pd_check_flip
+
+pd_set_tongue:
+	ld a,29
+	ld (pd_sprite_height_1),a 
+	ld (pd_sprite_height_2),a 
+	ld a,1 
+	ld (pd_y_offset),a 
+	
+	;Need to check if player center is to the left or right of ring, will determine flip 
+	call player_x_half ;a holds x pos in px pairs
+	ld b,3 ;center offset for jump sprite (in pairs) from collider 
+	add a,b 
+	;compare to ring pos to determine sprite flip
+	ld b,a 
+	ld a,(tongue_ring_x_pos)
+	cp b 
+	jp nc, pd_tongue_noflip
+	;ring to left of player, yes flip 
+	ld b,0
+	ld c,18
+	ld de,2 ;flip offset
+	jp pd_check_offset
+pd_tongue_noflip:
+	;ring is to the right of player, no sprite flip
+	ld b,0
+	ld c,16
+	ld de,7
+	jp pd_check_offset
+
+pd_set_charge:
+	ld a,18
+	ld (pd_sprite_height_1),a 
+	ld (pd_sprite_height_2),a 
+	ld a,2
+	ld (pd_x_offset_noflip),a 
+	ld (pd_x_offset_flip),a 
+	ld a,0
+	ld (pd_y_offset),a 
+
+	ld a,(jump_charge_timer)
+	cp timer_max_val
+	jp c,pd_set_charge_norm
+
+	ld a,(frameCount)
+	bit 2,a 
+	jp nz,pd_set_charge_lit 
+pd_set_charge_norm:
+	ld c,4
+	ld a,(jump_strength_left)
+	ld b,a 
+	ld a,(jump_strength_right)
+	sub a,b ;Check which direction jump is being charged 
+	jp nc,pd_noflip
+	jp pd_flip
+	
+pd_set_charge_lit:
+	ld c,8
+	ld a,(jump_strength_left)
+	ld b,a 
+	ld a,(jump_strength_right)
+	sub a,b ;Check which direction jump is being charged 
+	jp nc,pd_noflip
+	jp pd_flip
+	
+	
+pd_set_jump:
+	ld c,12
+	ld a,29
+	ld (pd_sprite_height_1),a 
+	ld (pd_sprite_height_2),a 
+	ld a,7
+	ld (pd_x_offset_noflip),a 
+	ld a,2
+	ld (pd_x_offset_flip),a 
+	ld a,1 
+	ld (pd_y_offset),a 
+	
+
+pd_check_flip:
+	ld a,(player_x_vel + 2);MSB velocity
+	bit 7,a 
+	jp z,pd_noflip
+pd_flip:
+	inc c 
+	inc c
+	ld a,(player_flags)
+	res 1,a 
+	ld (player_flags),a 
+pd_x_offset_flip .equ $+1
+	ld de,0 
+	jp pd_check_offset
+pd_noflip:
+pd_x_offset_noflip .equ $+1
+	ld de,0 
+	ld a,(player_flags)
+	set 1,a 
+	ld (player_flags),a 
+pd_check_offset:
+	;ld x pos
+	ld hl,(player_x_pos+1);fullpx
+	sbc hl,de ;subtract x offset
+	ld e,l
+	srl h ;div 2
+	rr l 
+	ld a,l
+	ld (pd_xpos_full),a 
+
+	bit 0, e ;least fullpixel bit 
+	jp z, pd_even_px 
+	inc c ;add 1 for offset 
+pd_even_px:
+	ld a,c
+	ld (player_sprite_index),a 
+
+	;call write_a_to_ram
+
+	;get y pos
+	ld hl,0 
+	ld a,(player_y_pos + 2) ;MSB
+	ld h,a 
+	ld a, (player_y_pos + 1) ;middle bit (fullpixel LSB)
+	ld l,a 
+	;hl holds y pos fullpixels
+	
+pd_y_offset .equ $+1
+	ld de,0 
+	add hl,de ;add y offset
+
+	ex de,hl 
+	ld hl,(cam_pos)
+	srl h ;div by 2
+	rr l 
+	ld bc,239
+	add hl,bc ;y-value of uppermost visible line of fg layer
+	scf 
+	ccf 
+	;Uppermost vp line - player y  = lines below top to draw player 
+	sbc hl,de 
+	;call write_hl_to_ram
+	jp c, pd_top_cut
+	
+	ld a,h 
+	
+	or a 
+	ret nz ;player is > 256 px below cam 
+	
+	ld a,l 
+	;a holds lines below vp top to draw player
+	ld b,a 
+	ld a,240
+	sub a,b ;lines above bottom of VP 
+	ret c ;player below VP 
+
+	
+	ld de, (draw_buffer)
+	ld hl, 240*160
+	add hl,de 
+	ex de,hl ;DE hlds VP bottom 
+	
+pd_sprite_height_1 .equ $ + 1
+	cp 0 
+	jp c, pd_bottom_cut 
+
+	;Otherwise, no top or bottm cut
+	;a holds lines above bottom VP 
+	call pd_setup_draw
+	call draw_slow_sprite_full
+	ld a,(player_flags)
+	bit 2,a 
+	call nz, draw_tongue
+	ret
+
+pd_bottom_cut:
+	;a holds lines to draw
+	;DE holds vram bottom 
+	call pd_setup_draw
+	call draw_slow_sprite_bottom_cut
+	ld a,(player_flags)
+	bit 2,a 
+	call nz, draw_tongue
+	ret 
+	
+
+pd_top_cut:
+	;call write_hl_to_ram
+	;push af 
+	;ld a,$44
+	;call write_a_to_ram 
+	;pop af 
+
+	ld a,h ;Upper byte after subtraction, check for chase where player > 256 px above cam to prevent overflow errors
+	xor %11111111 ;flip all bits 
+	ret nz ;player is > 256 px above cam 
+
+	ld a,l ;lines below VP
+	neg 
+
+	;a holds lines above vp top = lines to cut 
+pd_sprite_height_2 .equ $ + 1 
+	cp 0 ; compare to height 
+	ret nc 
+
+	ld de,(draw_buffer)
+	call pd_setup_draw ;Setup draw pos 
+	
+	;bit 0,l ;location of sprite data in vram indicates fast or slow sprite
+	;jp z,pd_top_cut_fast
+	call draw_slow_sprite_top_cut ;for now assume all sprites are slow
+	
+	ld a,(player_flags)
+	bit 2,a 
+	call nz, draw_tongue
+	ret 
+	
+
+
+
+pd_setup_draw:
+	;A holds lines above bottom (or top) line of VP 
+	;DE holds VP top or bottom
+	ld h,160
+	ld l,a ;Num lines to subtract
+	mlt hl 
+	scf 
+	ccf 
+	ex de,hl ;De holds lines to subtract, hl holds vram pos 
+	sbc hl,de 
+	ld bc,0 
+pd_xpos_full .equ $ + 1 
+	ld c, 0 ;ld x pos 
+	add hl,bc 
+	ex de,hl 
+	ld hl,player_sprite_table ;Load sprite table
+
+player_sprite_index .equ $ + 1 
+	ld c,0 ;load sprite index 
+	add hl,bc 
+	add hl,bc 
+	add hl,bc 
+	ld hl,(hl)
+	;HL holds sprite data, de holds draw pos 
+	ret 
+
+
+
+player_to_cam_coords:
+	ld hl,0
+	ld a,(player_y_pos + 2) ;frame number
+	ld h,a 
+	ld a,(player_y_pos + 1) ;pixel number
+	ld l,a 
+	
+	sla l ;mult by 2 to convert to FG space
+	rl h 
+	ld de,36 ;add offset to put player at bottom of screen
+	sbc hl,de 
+	jp nc, set_cam_0_pos_skip
+	ld hl,0
+set_cam_0_pos_skip:
+	ret
+	
+	
+	
+
+y_length_to_tongue_ring: ;returns hl = y dist
+	ld hl,0 
+	ld a,(player_y_pos +2)
+	ld h,a 
+	ld a,(player_y_pos +1)
+	ld l,a 
+	dec hl ;mouth y offset
+	dec hl
+	dec hl 
+	dec hl
+	dec hl
+	dec hl
+	dec hl
+	;call write_hl_to_ram
+	;hl holds player y fullpixels 
+	ex de,hl 
+	ld hl,(tongue_ring_y_pos)
+	;call write_hl_to_ram
+	sbc hl,de 
+	ret 
+
+x_length_to_tongue_ring: ;returns a = dist 
+	call player_x_half
+	ld b,3 ;offset to center of collider 
+	add a,b 
+	ld b,a
+	ld a,(tongue_ring_x_pos)
+	sub a,b 
+	ret 
+
+
+draw_tongue:
+	;c holds max y dist to draw 
+	;ld a,$DD
+	;call write_a_to_ram
+	
+	ld a, (tongue_extend_timer)
+	;call write_a_to_ram
+	bit 7,a 
+	jp nz,dt_full_extend ; a > 128 = full exted
+	sla a ;otherwise mult by 8 to find limit 
+	sla a 
+	sla a 
+dt_full_extend:
+	ld c,a 
+	;call write_a_to_ram
+	call y_length_to_tongue_ring ;hl holds y dist to ring
+	ret c ;distance should not be negative 
+	
+	;hl holds line y length 
+	ld a,l ;a holds line length
+	ld (dl_cutoff_length),a
+	;call write_a_to_ram
+	cp 5 
+	ret c ;min line length
+	cp c 
+	jp c, dt_full_len
+	
+	;otherwise limit line length
+	ld a,c 
+	ld (dl_cutoff_length),a
+	;ld a,$A1 
+	;call write_a_to_ram
+	;call write_a_to_ram
+	ld a,l ;line length
+dt_full_len:
+	ld (dl_y_dist_1),a
+	ld (dl_y_dist_2),a 
+	;call write_a_to_ram
+
+
+	;Find line start y in screen space 
+	;de still holds player y in fullpixels
+	
+	ld hl,(cam_pos)
+	srl h ;div by 2
+	rr l 
+	ld bc,239 + 0 ;top of screen - mouth y offset 
+	add hl,bc ;y-value of uppermost visible line of mg layer
+	scf 
+	ccf 
+	;Uppermost vp line - player y  = lines below top to draw player 
+	sbc hl,de
+	ld a,l 
+	ld h,160 
+	mlt hl 
+	ex de,hl 
+	ld hl, (draw_buffer)
+	add hl,de 
+	ex de,hl ;de holds correct y pos in vram 
+	
+	ld hl,0 
+	ld a,(player_x_pos + 2);msb 
+	ld h,a 
+	ld a,(player_x_pos + 1)
+	ld l,a ;hl holds x pos in fullpixels
+	
+	;Need to find x and y pos of player mouth (world coords)
+	;Need to check if player center is to the left or right of ring, will determine flip 
+	call player_x_half ;a holds x pos in px pairs
+	ld b,3 ;center offset for jump sprite (in pairs) from collider 
+	add a,b 
+	;compare to ring pos to determine sprite flip
+	ld b,a 
+	ld a,(tongue_ring_x_pos)
+	cp b 
+	jp nc, dt_noflip
+	;ring to left of player 
+	
+	ld bc,1 
+	jp dt_flip
+dt_noflip:
+	;ring is to the right of player, no sprite flip
+	ld bc,17 ;17px offset from collider x 
+dt_flip:
+	add hl,bc ;hl holds x pos of line start (mouth pos) fullpixels 
+	
+	push hl
+	ld bc,0
+	ld c,a ;a holds ring x pos (in pair pixels)
+	sla c ;mult by 2  
+	rl b 
+	sbc hl,bc ;hl holds x delta in px (player - ring)
+	jp nc,dt_neg_delta_x
+	;ring to the right
+	call dl_set_positive
+	ld a,l ;a holds x delta
+	neg 
+	jp dt_pos_delta_x
+dt_neg_delta_x:
+	;ring to the left 
+	call dl_set_negative ;set neg slope
+	ld a,l ;a holds x delta
+dt_pos_delta_x:
+	
+	ld (dl_x_dist),a 
+	
+	pop hl ;x pos of line start 
+	ld b,l ;offset counter
+	
+	srl h ;div by 2
+	rr l
+	add hl,de ;add to vram y pos 
+	;hl = line bottom pos in vram 
+	
+	
+	;set (dl_y_dist_1), (dl_y_dist_2), (dl_x_dist)
+	;a is byte counter, incs by xdist, if >ydist subtract ydist 
+dl_cutoff_length .equ $+1
+	ld c,0 
+	;ld a,c
+	;call write_a_to_ram
+	ld de,0 ;amount to inc per line 
+	ld a,0 
+draw_line_loop:
+	ex af,af';' ;a' used for writing to hl
+	
+	bit 0,b 
+	jp z,dl_no_offset
+	
+	ld a, %11011010 ;%JP c
+	ld (dl_end_sprite_offset) ,a 
+	
+	ld a,(hl)
+	and %00001111 ;save left pixel 
+	or $A0 ;right pixel = 12 
+	ld (hl),a 
+	inc hl 
+	ld a,$AA
+	ld (hl),a 
+	inc hl 
+	ld a,(hl)
+	and %11110000 ;save right pixel 
+	or $0A ;right pixel = 12 
+	ld (hl),a 
+	ld de,162 ;1 line up to left 
+	jp dl_check_slope
+	
+dl_no_offset:
+	
+	ld a, %11010010 ;%JP nc
+	ld (dl_end_sprite_offset) ,a 
+
+	ld a,$CB ;left side colors 
+	ld (hl),a 
+	inc hl 
+	ld a,$BC ;Right side colors 
+	ld (hl),a 
+	inc hl 
+	ld de,162 ;to move 1 line up to left side 
+	
+dl_check_slope:
+	scf 
+	ccf 
+	sbc hl,de ;add default length
+	ex af,af' ;' ; back to slope byte counter 
+
+	dec c ;check here to avoid hl being changed in inc x to stop weird behavior in end sprite
+	jp z, dl_loop_end
+
+dl_x_dist .equ $+1 
+	ld e,0 
+	add a,e  ;add x dist 
+	inc a
+dl_compare_y:
+dl_y_dist_1 .equ $ + 1 
+	cp 0 ;compare to y dist
+	jp nc, dl_inc_x
+	
+	jp draw_line_loop
+	
+dl_loop_end:
+
+	;Draw tongue end sprite
+	;hl should be pointing to end of line vram already 
+	ld de, 160*3 + 1
+	scf 
+	ccf 
+	sbc hl,de  
+;dl_negative_x_2 .equ $
+	;dec hl ;fixes weird offset issue
+	ex de,hl 
+	scf
+dl_end_sprite_offset .equ $
+	jp c, dt_end_sprite_offset
+	ld hl, FrogTongue_Slow
+	call draw_slow_sprite_full
+	ret 
+	
+dt_end_sprite_offset:
+	;dec de
+	ld hl, FrogTongue_Slow_O
+	call draw_slow_sprite_full 
+	;call write_a_to_ram
+	ret 
+	
+	
+dl_inc_x:
+
+dl_y_dist_2 .equ $ + 1 
+	ld e,0 ;ld with y dist
+	sub a,e ;subtract y dist 
+	
+	inc b 
+	bit 0,b 
+	jp nz,dl_inc_to_offset
+dl_negative_x .equ $ ;replace with nop for negative 
+	inc hl ;add 1 to hl 	
+	jp dl_compare_y
+	
+
+dl_inc_to_offset:
+
+dl_negative_x_1 .equ $ ;replace with dec for negative 
+	nop
+	jp dl_compare_y
+	
+
+dl_set_positive: ;line has pos slope
+	ld a,%00000000 ;nop 
+	ld (dl_negative_x_1),a
+	
+	;ld a, %00100011 ;inc  hl 
+	;ld (dl_negative_x_2),a	
+	ld a, %00100011 ;inc  hl 
+	ld (dl_negative_x),a 
+	ret 
+	 
+
+dl_set_negative: ;line has neg slope 
+	ld a,%00000000 ;nop 
+	ld (dl_negative_x),a 
+	;ld a, %00101011 ;dec hl
+	;ld (dl_negative_x_2),a
+	ld a, %00101011 ;dec hl 
+	ld (dl_negative_x_1),a 
+	
+	ret 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+player_sprite_table: ;Add 4 for sprite, add 2 for flip, add 1 for offset
+	.dl FrogDefault_Slow
+	.dl FrogDefault_Slow_O
+	.dl FrogDefault_Slow_F
+	.dl FrogDefault_Slow_O_F
+	.dl FrogCharge_Slow
+	.dl FrogCharge_Slow_O
+	.dl FrogCharge_Slow_F
+	.dl FrogCharge_Slow_O_F
+	.dl FrogChargeLit_Slow
+	.dl FrogChargeLit_Slow_O
+	.dl FrogChargeLit_Slow_F
+	.dl FrogChargeLit_Slow_O_F
+	.dl FrogJump_Slow
+	.dl FrogJump_Slow_O
+	.dl FrogJump_Slow_F
+	.dl FrogJump_Slow_O_F
+	.dl FrogJumpMouth_Slow
+	.dl FrogJumpMouth_Slow_O
+	.dl FrogJumpMouth_Slow_F
+	.dl FrogJumpMouth_Slow_O_F
+	.dl FrogFall_Slow
+	.dl FrogFall_Slow_O
+	.dl FrogFall_Slow_F
+	.dl FrogFall_Slow_O_F
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

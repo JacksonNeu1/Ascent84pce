@@ -134,50 +134,46 @@ MG2_Data_5:
 
 MG2_Data_4:
 	.db 0
-	.db 0
+	.db 1
+	.db 27, 255, 54, 23  ;SG_Platform3
 
 MG2_Data_3:
 	.db 0
-	.db 1
-	.db 35, 19, 78, 98  ;Frog_0_Slow
+	.db 4
+	.db 33, 255, 95, 27  ;SG_TongueRing
+	.db 126, 255, 76, 27  ;SG_TongueRing
+	.db 173, 255, 118, 27  ;SG_TongueRing
+	.db 188, 255, 31, 27  ;SG_TongueRing
 
 MG2_Data_2:
 	.db 0
-	.db 7
-	.db 42, 255, 53, 23  ;SG_CloudPlatform
-	.db 74, 255, 91, 23  ;SG_CloudPlatform
-	.db 90, 255, 19, 23  ;SG_CloudPlatform
-	.db 122, 255, 61, 23  ;SG_CloudPlatform
-	.db 161, 255, 47, 23  ;SG_CloudPlatform
-	.db 199, 255, 20, 23  ;SG_CloudPlatform
-	.db 240, 255, 63, 23  ;SG_CloudPlatform
+	.db 6
+	.db 37, 255, 108, 27  ;SG_TongueRing
+	.db 84, 255, 64, 27  ;SG_TongueRing
+	.db 129, 255, 98, 27  ;SG_TongueRing
+	.db 171, 255, 24, 27  ;SG_TongueRing
+	.db 213, 255, 124, 27  ;SG_TongueRing
+	.db 223, 255, 59, 27  ;SG_TongueRing
 
 MG2_Data_1:
 	.db 0
-	.db 10
-	.db 43, 255, 100, 23  ;SG_CloudPlatform
-	.db 117, 255, 64, 23  ;SG_CloudPlatform
-	.db 160, 255, 14, 23  ;SG_CloudPlatform
-	.db 19, 255, 17, 23  ;SG_CloudPlatform
-	.db 52, 16, 13, 97  ;Clouds_2_Fast
-	.db 36, 16, 13, 97  ;Clouds_2_Fast
-	.db 20, 16, 13, 97  ;Clouds_2_Fast
-	.db 74, 255, 34, 23  ;SG_CloudPlatform
-	.db 183, 255, 48, 23  ;SG_CloudPlatform
-	.db 237, 255, 59, 23  ;SG_CloudPlatform
+	.db 7
+	.db 20, 255, 81, 25  ;SG_Platform1
+	.db 53, 255, 15, 25  ;SG_Platform1
+	.db 121, 255, 40, 23  ;SG_Platform3
+	.db 189, 255, 110, 26  ;SG_Platform2
+	.db 109, 255, 120, 27  ;SG_TongueRing
+	.db 255, 255, 36, 27  ;SG_TongueRing
+	.db 130, 9, 59, 106  ;Spikes_0_Fast
 
 MG2_Data_0:
 	.db 0
-	.db 9
-	.db 99, 255, 5, 23  ;SG_CloudPlatform
-	.db 182, 255, 42, 23  ;SG_CloudPlatform
-	.db 127, 255, 107, 23  ;SG_CloudPlatform
-	.db 89, 255, 67, 23  ;SG_CloudPlatform
-	.db 209, 16, 141, 97  ;Clouds_2_Fast
-	.db 193, 16, 141, 97  ;Clouds_2_Fast
-	.db 177, 16, 141, 97  ;Clouds_2_Fast
-	.db 226, 255, 66, 23  ;SG_CloudPlatform
-	.db 160, 255, 76, 23  ;SG_CloudPlatform
+	.db 5
+	.db 99, 255, 105, 23  ;SG_Platform3
+	.db 99, 255, 5, 24  ;SG_Platform4
+	.db 159, 255, 65, 25  ;SG_Platform1
+	.db 206, 255, 116, 26  ;SG_Platform2
+	.db 204, 255, 33, 27  ;SG_TongueRing
 
 
 

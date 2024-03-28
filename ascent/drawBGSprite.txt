@@ -146,7 +146,9 @@ setup_bg: ;Draws entire BG buffer when loading game
 	srl h
 	rr l
 	srl h
-	rr l ;div by 4
+	rr l
+	srl h
+	rr l ;div by 8
 	;hl holds bg cam pos 
 	ld (bg_cam_pos),hl
 	

@@ -43,9 +43,20 @@
 	;call prgmpause
 	;call prgmpause
 
+
+	ld hl,$00A300
+	ld (player_x_pos),hl 
+	ld hl,$022E00
+	ld (player_y_pos),hl 
+	
+	call player_to_cam_coords
+	ld de,80
+	sbc hl,de 
+	jp nc, set_cam_0_pos_skip_start
 	ld hl,0
+set_cam_0_pos_skip_start:
 	ld (cam_pos),hl
-	ld (bg_cam_pos),hl
+	;ld (bg_cam_pos),hl
 	
 	
 	ld a,%00000010;disable, 32768hz
@@ -90,11 +101,6 @@
 	ld (mpLcdBase),hl
 	
 	
-	ld hl,$004300
-	ld (player_x_pos),hl 
-	ld hl,$02EE00
-	ld (player_y_pos),hl 
-	
 
 	;ld hl,BG_buffer+(160*5)
 	;ld (dbgl_vram_line_start),hl
@@ -126,7 +132,7 @@ main_loop:
 	
 	
 	;call input_cam_up
-	jp get_inputs
+	jp get_inputs ;use jp so can jump to prgmexit to not have pushed PC pointer
 get_inputs_return:
 	;call move_bg Draw BG calls MoveBg
 	;call player_move_debug
@@ -134,11 +140,13 @@ get_inputs_return:
 	call check_collisions
 	
 	call update_sine_vals
-	ld a,(lin_4_7_1)
+	;ld a,(lin_4_7_1)
 	;call write_a_to_ram
 	
 	call update_animations
 	
+	
+	call player_move_cam
 	
 	call draw_bg
 
@@ -171,6 +179,20 @@ get_inputs_return:
 	
 	
 	call player_draw 
+	ld a,(player_flags)
+	res 7,a ;Reset jump hold flag
+	ld (player_flags),a 
+	
+	
+	;ld hl,121
+	;ld (tongue_ring_y_pos),hl 
+	;ld a, 50
+	;ld (tongue_ring_x_pos),a 
+	
+	;ld c,20 
+	;call draw_tongue
+	
+	
 	
 	;TEsting
 	ld hl,0
@@ -188,6 +210,26 @@ get_inputs_return:
 	ld (draw_mg_time),a
 	
 	call draw_fg
+	
+	
+	;call dl_set_negative
+	;Line draw test 
+	;ld hl, (draw_buffer)
+	;ld de, 160*96  + 25
+	;add hl,de 
+	;ld a, 35; x dist 
+	;ld (dl_x_dist),a 
+	;ld a, 22; y dist 
+	;ld c,a 
+	;ld (dl_y_dist_1),a 
+	;ld (dl_y_dist_2),a 
+	;ld de,0
+	;ld a,0 
+	;ld b,0
+	;call draw_line_loop
+	
+	
+	
 	;Leaves_4_Slow_1 has issue
 	;Need to fix indexing of decompress segments
 	
@@ -293,7 +335,7 @@ longest_frame_skip:
 
 	ld hl, (draw_buffer)
 	;max time = 00000011 11100010
-	;after 3x shift, a = 011111000 = 120
+	;after 3x shift, a = 01111100 = 120
 	ld bc, 120  ; =1000/4 /2 for 2pix/bit 
 	add hl,bc 
 	ld a,$55
@@ -458,7 +500,7 @@ write_a_to_ram:
 	push af 
 	push hl 
 write_a_to_ram_addr .equ $ + 1 
-	ld hl, $d46000
+	ld hl, $d48000
 	ld (hl),a 
 	inc hl 
 	ld (write_a_to_ram_addr),hl 
@@ -556,6 +598,7 @@ sd_test_a:
 #include "SpriteDecompressManager.txt"
 #include "getInputs.txt"
 #include "PlayerController.txt"
+#include "PlayerDraw.txt"
 #include "sineFunc.txt"
 #include "animations.txt"
 ;#include "levelData.txt"
@@ -574,6 +617,7 @@ sd_test_a:
 #include "generated/Sprite_Groups.txt"
 #include "generated/Collision_Data.txt"
 #include "generated/Animation_Data.txt"
+#include "generated/Tongue_Rings.txt"
 
 ;#include "testing/SpriteGroups.txt"
 ;#include "TestingSpriteData.txt"
