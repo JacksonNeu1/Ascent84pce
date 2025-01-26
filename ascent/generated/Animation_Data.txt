@@ -1,5 +1,8 @@
 position_animation_data:
-	.db 41
+	.db 42
+	.dl FG_Data_1 + 10
+	.dl sine_1_15_1
+	.db 57
 	.dl SG_GroundGrass + 20
 	.dl sine_2_1_3
 	.db 2
@@ -138,15 +141,35 @@ sprite_animation_data:
 	.db 14
 	.db 17
 	.dl SG_Branch3 + 25
+	.dl linrep_4_7_1
+	.db 29
+	.db 30
+	.db 31
+	.db 30
+	.db 29
+	.db 30
+	.db 31
+	.db 30
+	.dl SG_Lantern1 + 5
+	.dl linrep_4_7_1
+	.db 32
+	.db 33
+	.db 34
+	.db 33
+	.db 32
+	.db 33
+	.db 34
+	.db 33
+	.dl SG_Lantern1 + 9
 	.dl lin_4_7_2
-	.db 75
-	.db 74
-	.db 74
-	.db 75
-	.db 75
-	.db 75
-	.db 74
-	.db 75
+	.db 83
+	.db 82
+	.db 82
+	.db 83
+	.db 83
+	.db 83
+	.db 82
+	.db 83
 	.dl SG_Vines2 + 13
 	.dl lin_4_7_2
 	.db 15
@@ -158,23 +181,66 @@ sprite_animation_data:
 	.db 15
 	.db 17
 	.dl SG_Vines2 + 17
-	.dl linrep_8_7_1
-	.db 102
-	.db 103
-	.db 102
-	.db 103
-	.db 102
-	.db 103
-	.db 102
-	.db 103
-	.dl SG_TongueRing + 5
-	.dl linrep_8_7_1
-	.db 104
-	.db 105
-	.db 104
-	.db 105
-	.db 104
-	.db 105
-	.db 104
-	.db 105
-	.dl SG_TongueRing + 9
+
+
+
+breakaway_platform_data_0
+	.db 0
+
+
+breakaway_platform_data_1
+	.db 0
+
+
+breakaway_platform_data_2
+	.db 0
+
+
+breakaway_platform_data_3
+	.db 0
+
+
+breakaway_platform_data_4
+	.db 0
+
+
+breakaway_platform_data_5
+	.db 0
+
+
+breakaway_platform_data_6
+	.db 0
+
+
+breakaway_platform_data_7
+	.db 0
+
+
+breakaway_platform_data_8
+	.db 0
+
+
+breakaway_platform_data_9
+	.db 0
+
+
+breakaway_platform_data_10
+	.db 0
+
+
+breakaway_platform_data_11
+	.db 0
+
+
+breakaway_platform_data_12
+	.db 0
+
+
+breakaway_platform_data_13
+	.db 0
+
+
+breakaway_platform_data_14
+	.db 0
+
+

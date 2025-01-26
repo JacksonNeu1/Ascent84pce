@@ -33,6 +33,14 @@ Sprite_Table_0:
 	.dl Branches_10_Fast_F
 	.dl Leaves2_Fast_F
 	.dl Leaves2_Fast
+	.dl Lantern_0_Fast
+	.dl Lantern_1_Fast
+	.dl Lantern_2_Fast
+	.dl Lantern_0_Fast_F
+	.dl Lantern_1_Fast_F
+	.dl Lantern_2_Fast_F
+	.dl Lantern_3_Slow
+	.dl Lantern_3_Slow_O_F
 	.dl LeavesDark_Fast_F
 	.dl Branches_12_Fast
 	.dl Branches_6_Slow
@@ -106,10 +114,6 @@ Sprite_Table_0:
 	.dl Platforms_0_Fast_F
 	.dl Platforms_2_Slow_O_F
 	.dl Platforms_2_Slow_O
-	.dl TongueRing1_Slow
-	.dl TongueRing2_Slow
-	.dl TongueRing1_Slow_F
-	.dl TongueRing2_Slow_F
 	.dl Spikes_0_Fast
 	.dl GroundDirtDark_Fast
 	.dl GroundDirtDark_Fast_F

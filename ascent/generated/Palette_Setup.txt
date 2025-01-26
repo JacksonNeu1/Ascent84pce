@@ -1,99 +1,99 @@
 setup_palette_1:
 	ld hl,mpLcdPalette
-	ld a,%11000010
+	ld a,%11000111
 	ld (hl),a 
 	inc hl
 	ld a,%00100000
 	ld (hl),a 
 	inc hl
-	ld a,%00100100
+	ld a,%00101001
 	ld (hl),a 
 	inc hl
 	ld a,%00111001
 	ld (hl),a 
 	inc hl
-	ld a,%10000101
+	ld a,%10001010
 	ld (hl),a 
 	inc hl
 	ld a,%01001101
 	ld (hl),a 
 	inc hl
-	ld a,%11100110
+	ld a,%11101011
 	ld (hl),a 
 	inc hl
 	ld a,%11100001
 	ld (hl),a 
 	inc hl
-	ld a,%00101010
+	ld a,%00101111
 	ld (hl),a 
 	inc hl
 	ld a,%00101110
 	ld (hl),a 
 	inc hl
-	ld a,%01100101
+	ld a,%01101010
 	ld (hl),a 
 	inc hl
 	ld a,%10010101
 	ld (hl),a 
 	inc hl
-	ld a,%11111110
+	ld a,%11111111
 	ld (hl),a 
 	inc hl
 	ld a,%01110011
 	ld (hl),a 
 	inc hl
-	ld a,%10111100
+	ld a,%10111111
 	ld (hl),a 
 	inc hl
 	ld a,%01011011
 	ld (hl),a 
 	inc hl
-	ld a,%10001110
+	ld a,%10010011
 	ld (hl),a 
 	inc hl
 	ld a,%01001111
 	ld (hl),a 
 	inc hl
-	ld a,%00100000
+	ld a,%00100101
 	ld (hl),a 
 	inc hl
 	ld a,%10000000
 	ld (hl),a 
 	inc hl
-	ld a,%00001000
+	ld a,%00001101
 	ld (hl),a 
 	inc hl
 	ld a,%01011101
 	ld (hl),a 
 	inc hl
-	ld a,%11011101
+	ld a,%11011111
 	ld (hl),a 
 	inc hl
 	ld a,%01110101
 	ld (hl),a 
 	inc hl
-	ld a,%01011001
+	ld a,%01011110
 	ld (hl),a 
 	inc hl
 	ld a,%01100101
 	ld (hl),a 
 	inc hl
-	ld a,%00011111
+	ld a,%00010001
 	ld (hl),a 
 	inc hl
-	ld a,%10000001
+	ld a,%01101111
 	ld (hl),a 
 	inc hl
-	ld a,%11000110
+	ld a,%10101010
 	ld (hl),a 
 	inc hl
-	ld a,%10011000
+	ld a,%01010000
 	ld (hl),a 
 	inc hl
-	ld a,%10010101
+	ld a,%10010111
 	ld (hl),a 
 	inc hl
-	ld a,%10011001
+	ld a,%00011001
 	ld (hl),a 
 	inc hl
 	ret 

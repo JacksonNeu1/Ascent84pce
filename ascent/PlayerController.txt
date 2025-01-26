@@ -216,8 +216,8 @@ pu_tongue_update:
 
 pu_tongue_contract:
 
-	ld a,$AD 
-	call write_a_to_ram
+	;ld a,$AD 
+	;call write_a_to_ram
 	;Add distance to ring to player velocity until reach ring
 	call y_length_to_tongue_ring ;l holds y dist in px 
 	ld a,l 
@@ -363,6 +363,10 @@ pu_physics:
 	;Execute player physics update and check for collisions 
 	;Run multiple times, 16 steps per frame? 
 	;Move up first, then check collision, then move side and check again 
+	ld a,(player_flags)
+	bit 6,a 
+	call nz,pu_check_on_ground ;check if player still on ground 
+
 
 	ld a,16 ;num physics loops 
 	ld (pu_physics_count),a 
@@ -422,8 +426,13 @@ pu_update_x_pos:
 	;Set previous position 
 	ld hl, (player_y_pos)
 	ld (player_y_pos_prev), hl 
+	;call write_hl_to_ram
 	ld hl, (player_x_pos)
 	ld (player_x_pos_prev), hl 
+	
+	;ld a,$CC
+	;call write_a_to_ram
+	
 	
 	ld a,(player_flags)
 	bit 5,a ;in semisolid flag 
@@ -437,7 +446,23 @@ pu_prev_semisolid:
 	
 	jp pu_physics_loop
 	;Apply gravity and terminal v check after loop 
-	
+
+pu_check_on_ground:
+	;checks if player is still on ground or platform has dissapeared 
+	ld a,(player_flags)
+	res 6,a 
+	ld (player_flags),a 
+	ld hl, (player_y_pos)
+	ld de,-256
+	add hl,de ;dec by 1 full pixel
+	ld (player_y_pos),hl 
+	;check for vertical collisions here 
+	ld a,%11011010;jp c
+	ld (collision_check_vertical),a
+	call check_collisions	
+	ret 
+
+
 pu_physics_end:
 	;Apply gravity 
 	ld hl,(player_y_vel)
@@ -476,8 +501,14 @@ check_collisions:
 	add hl,bc ;add frame num 
 	ld hl,(hl)
 	
+	;call write_a_to_ram
+	
+	;ld a,$20 
+	;call write_a_to_ram
+	
 	ld a,%11011010;jp c
 	ld(check_col_lower_jump),a 
+	ld (colis_semisolid_down_lower_frame),a 
 	
 	;hl points to collision data for this frame 
 	ex af,af' ;' 
@@ -515,11 +546,15 @@ check_collisions_lower:
 	ld a,(hl) ;ld number of elements 
 	inc a ;for 0 case
 	;call write_a_to_ram
-	ex af,af' ;' 
+	ex af,af' ;'
+
+	;ld a,$21 
+	;call write_a_to_ram
+	
 	inc hl ;to first element
 	ld a, %11010010 ;jp nc 
-	ld(check_col_lower_jump),a 
-
+	ld (check_col_lower_jump),a 
+	ld (colis_semisolid_down_lower_frame),a 
 check_collisions_lower_loop:
 ;hl pts to ymin of collider 
 	ex af,af' ;'
@@ -529,7 +564,7 @@ check_collisions_lower_loop:
 	;collider y min is in frame below player
 	;we already know player is above collider bottom 
 	ld a,(player_y_pos + 1)
-	sub (hl)
+	sub a,(hl)
 	jp nc,check_col_skip_4
 	;call write_a_to_ram
 	inc hl ;to height 
@@ -538,8 +573,7 @@ check_collisions_lower_loop:
 	;call write_a_to_ram
 	sub a,c
 	jp c, check_col_y_collision
-	
-	
+
 	;call write_a_to_ram
 	sub (hl); cokmpare to collider height -1 
 	jp c,check_col_y_collision
@@ -582,16 +616,15 @@ check_col_x_collision:
 	jp c, check_col_skip_1 
 
 
-
-
-
-
-	
 collision_found: ;A collision has been detected
 	
 	;TESTing 
+	;ld a,$AB 
+	;call write_a_to_ram
+	
 	inc hl ;to flags 
-	ld a,(hl)
+	
+	;ld a,(hl)
 	;call write_a_to_ram
 	
 	scf 
@@ -673,15 +706,19 @@ vert_col_up_semisolid:
 	
 	
 vert_col_down:
-
-
 	ld a,(player_flags)
 	bit 3,a 
 	jp z,colis_vert_down_not_fall
 	set 5,a ;set semisolid flag. All colliders act semisolid while in fall
 	ld (player_flags),a 
+	push hl ;save collider flags 
 	
-	push hl 
+	
+	push af 
+	ld a,$B0
+	call write_a_to_ram
+	pop af
+	
 	;check if we are below spike hit height 
 	ld hl,(spike_hit_height)
 	ex de,hl 
@@ -689,29 +726,37 @@ vert_col_down:
 	sbc hl,de 
 	jp c,check_end_fall
 	;Player is above threshold 
-	pop hl 
+	pop hl ;return collider flags 
 	jp check_col_skip_0 ;continue 
 	
 
 check_end_fall:
+	push af 
+	ld a,$B1
+	call write_a_to_ram
+	pop af
+	call write_a_to_ram
+	
+	pop hl ;return collider flags 
 	;Player has hit ground below fall threshold 
-	ld (player_flags),a 
 	bit 4,a ;check we were not in semisolid last update 
-	jp z, check_end_fall_2; player not currently in collider 
-	pop hl 
-	jp check_col_skip_0 ;continue 
-check_end_fall_2:
+	jp nz, check_col_skip_0; player not currently in collider 
+ 
+	ld a,$B2
+	call write_a_to_ram
 	;player can land 
 	;check for unlucky bounce 
 	res 3,a 
 	ld (player_flags),a ;reset fall flag 
-	pop hl 
+	;pop hl 
 	ld a, (fall_num_bounces)
 	ld b,a 
-	;call write_a_to_ram
+	call write_a_to_ram
 	call random_val
+	ld e,a 
 	ld c,%00000001
 unlucky_bounce_loop:
+	ld a,e ;restore random val
 	and a,c 
 	jp z,colis_vert_down_not_fall
 	rlc c 
@@ -724,6 +769,7 @@ unlucky_bounce_loop:
 	pop hl
 	jp check_col_skip_0 ;continue 
 	
+	
 colis_vert_down_not_fall:
 	;player is moving down 
 	ld a,(hl) ;flags 
@@ -731,11 +777,52 @@ colis_vert_down_not_fall:
 	jp z,vert_col_down_solid 
 	
 	;semisolid and moving down
-	ld a,(player_flags)
-	set 5,a ;set semisolid flag 
-	ld (player_flags),a 
-	bit 4,a ;check we were not in semisolid last update 
-	jp nz, check_col_skip_0 ;we were already within semisolid collider 
+	;ld a,(player_flags)
+	;set 5,a ;set semisolid flag 
+	;ld (player_flags),a 
+	
+	;ld a,$AC 
+	;call write_a_to_ram
+	;call write_hl_to_ram
+	
+	;check if previos y pos was in frame above, if so treat collider as in lower frame 
+	ld a,(player_y_pos+2);current pos frame 
+	ld b,a 
+	ld a,(player_y_pos_prev + 2);last pos frame#
+	cp b 
+	jp z,colis_semi_same_frame
+	ld a,%11010010 ;jp nc 
+	ld (colis_semisolid_down_lower_frame),a 
+colis_semi_same_frame:
+	
+	ld a,(player_y_pos_prev + 1) ;last y pos in frame 
+	
+	dec hl; to xmin 
+	dec hl 
+	dec hl ;height 
+	dec hl ;ymin 
+	sub a,(hl) ;player y - collider bottom 
+colis_semisolid_down_lower_frame .equ $
+	jp nc,check_col_skip_4 ;nc for lower frame, c for same frame 
+	push af
+	;ld a,$A0 
+	;call write_a_to_ram
+	pop af
+	;call write_a_to_ram
+	inc hl ;height
+	ld c, player_collider_height
+	sub a,c ;player bottom to collider bottom 
+	jp c,check_col_skip_3
+	;ld a,$A1 
+	;call write_a_to_ram
+	;call write_a_to_ram
+	sub a,(hl) ;compare to height 
+	jp c,check_col_skip_3 ;we were already within semisolid collider 
+	inc hl
+	inc hl 
+	inc hl;flags 
+	;ld a,$A2
+	;call write_a_to_ram
 	;otherwise, hit the collider 
 	ld a,(hl)
 
@@ -743,16 +830,41 @@ vert_col_down_solid:
 	bit 6,a 
 	jp nz, collision_spikes
 
+	push hl ;save flags
 	;TODO breakaway platforms 
+	and a,%00001111 ;breakaway index 1-16
+	jp z, not_breakaway
 	
+	;Player has hit breakaway platform, check timer 
+	ld hl,breakaway_timers
+	ld bc,0 
+	ld c,a ;index 
+	add hl,bc 
+	;hl pts to correct timer
+	ld a,(hl)
+	or a 
+	jp nz, start_breakaway_skip
+	;if timer is zero, set to 1 
+	ld a,1 
+	ld (hl),a 
+	jp not_breakaway ;platform is solid 
+start_breakaway_skip:
+	pop hl 
+	and %11100000 ;check if >32 
+	jp nz, check_col_skip_0
+	;otherwise platform still solid 
+	push hl 
+not_breakaway:
+
 	;Plyaer has moved down and hit non spike object 
 	;Set velocity to 0 
-	push hl 
 	ld hl,0
+	ld (player_x_vel),hl 
 	ld (player_y_vel),hl 
 	ld hl, (player_y_pos_prev) ;revert to previous y pos 
 	ld (player_y_pos),hl 
 	ld (player_last_ground_pos),hl
+	;call write_hl_to_ram
 	pop hl 
 	
 	ld a,(player_flags)
@@ -808,7 +920,7 @@ spike_bounce_min_height_threshold:
 	ld de, $004300  ;minimum spike height threshold 
 	add hl,de 
 	ld (spike_hit_height),hl 
-	call write_hl_to_ram
+	;call write_hl_to_ram
 	ret 
 
 
@@ -921,12 +1033,135 @@ fall_num_bounces:
 tongue_extend_timer:
 	.db 0 ;Timer for extend tongue anim
 
+
+breakaway_timer_update:
+	ld hl, breakaway_timers + 1
+	exx 
+	ld hl, breakaway_sprite_data_table
+	exx 
+	ld b, 15 
+breakaway_timer_update_loop:
+	ld a,(hl)
+	;call write_a_to_ram
+	;call prgmpause
+	or a 
+	jp z, breakaway_timer_update_loop_skip
+	inc a 
+	ld (hl),a 
+breakaway_timer_update_loop_skip:
+
+	;a holds timer val 
+	cp 10 
+	jp c, breakaway_platform_set_sprite_0
+	cp 20 
+	jp c, breakaway_platform_set_sprite_1
+	cp 32
+	jp c, breakaway_platform_set_sprite_2
+	inc a 
+	ld (hl),a 
+	jp breakaway_platform_set_sprite_3
+
+breakaway_platform_set_sprite_0:
+	ld a,3 
+	ld (breakaway_set_sprite_number),a 
+	ld a,4
+	ld (breakaway_set_sprite_number_2),a 
+	jp breakaway_platform_set_sprites
+
+breakaway_platform_set_sprite_1:
+	ld a,4 
+	ld (breakaway_set_sprite_number),a 
+	ld a,3
+	ld (breakaway_set_sprite_number_2),a 
+	jp breakaway_platform_set_sprites
+
+breakaway_platform_set_sprite_2:
+	ld a,5 
+	ld (breakaway_set_sprite_number),a 
+	ld a,2
+	ld (breakaway_set_sprite_number_2),a 
+	jp breakaway_platform_set_sprites
+
+breakaway_platform_set_sprite_3:
+	ld a,6 
+	ld (breakaway_set_sprite_number),a 
+	ld a,1
+	ld (breakaway_set_sprite_number_2),a 
+	jp breakaway_platform_set_sprites	
 	
+breakaway_platform_set_sprites:	
+	exx ;in shadow
+	push hl 
+	ld hl,(hl) ;hl pts to number of platforms with this index 
+	ld b,(hl) ;num platforms
+	dec hl 
+	dec hl 
+	inc b 
+breakaway_platform_set_sprites_loop:
+	ld de,0
+	dec b 
+	jp z,breakaway_platform_return_timer_loop
+breakaway_set_sprite_number .equ $ + 1
+	ld e,0
+	add hl,de 
+	ld a,(hl) ; sprite index 
+	;call write_a_to_ram
+breakaway_set_sprite_number_2 .equ $ + 1
+	ld e,0
+	add hl,de ;data location 
+	ld de,(hl)
+	ld (de),a ;set sprite value in level data 
+	;call prgmpause
+	jp breakaway_platform_set_sprites_loop
 	
+
+breakaway_platform_return_timer_loop:
+	pop hl 
+	inc hl 
+	inc hl 
+	inc hl
+	exx ;out
+	inc hl 
+	dec b 
+	jp nz,breakaway_timer_update_loop
 	
+	ret 
+
 	
-	
-	
+breakaway_timers: ;If not zero, count up by 1 every frame, solid when timer btwn 0-32
+	.db 0 ;Unused
+	.db 0
+	.db 1
+	.db 0
+	.db 0
+	.db 0
+	.db 0
+	.db 0
+	.db 0
+	.db 0
+	.db 0
+	.db 0
+	.db 0
+	.db 0
+	.db 0
+	.db 0
+
+breakaway_sprite_data_table:
+	.dl breakaway_platform_data_0
+	.dl breakaway_platform_data_1
+	.dl breakaway_platform_data_2
+	.dl breakaway_platform_data_3
+	.dl breakaway_platform_data_4
+	.dl breakaway_platform_data_5
+	.dl breakaway_platform_data_6
+	.dl breakaway_platform_data_7
+	.dl breakaway_platform_data_8
+	.dl breakaway_platform_data_9
+	.dl breakaway_platform_data_10
+	.dl breakaway_platform_data_11
+	.dl breakaway_platform_data_12
+	.dl breakaway_platform_data_13
+	.dl breakaway_platform_data_14
 	
 	
 	

@@ -44,10 +44,11 @@
 	;call prgmpause
 
 
-	ld hl,$00A300
+	ld hl,$002300
 	ld (player_x_pos),hl 
-	ld hl,$022E00
+	ld hl,$010E00
 	ld (player_y_pos),hl 
+	ld (player_y_pos_prev),hl
 	
 	call player_to_cam_coords
 	ld de,80
@@ -145,6 +146,7 @@ get_inputs_return:
 	
 	call update_animations
 	
+	call breakaway_timer_update
 	
 	call player_move_cam
 	

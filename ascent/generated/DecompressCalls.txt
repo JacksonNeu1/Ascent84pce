@@ -186,7 +186,15 @@ decompress_calls_table_down:
 
 
 decompress_frame_up_pre2:
-	.db 17
+	.db 21
+	.dl FrogChargeLit, FrogChargeLit_Slow_O
+	.db %01000000
+	.dl FrogChargeLit, FrogChargeLit_Slow_F
+	.db %00100000
+	.dl FrogChargeLit, FrogChargeLit_Slow_O_F
+	.db %01100000
+	.dl FrogCharge, FrogCharge_Slow
+	.db %00000000
 	.dl FrogCharge, FrogCharge_Slow_O
 	.db %01000000
 	.dl FrogCharge, FrogCharge_Slow_F
@@ -229,6 +237,22 @@ decompress_frame_up_pre1:
 	.dl Branches_3, Branches_3_Fast
 	.db %10000000
 	.dl Branches_2, Branches_2_Fast
+	.db %10000000
+	.dl Tree_4, Tree_4_Fast_F
+	.db %10100000
+	.dl Tree_0, Tree_0_Fast
+	.db %10000000
+	.dl Tree_6, Tree_6_Fast
+	.db %10000000
+	.dl Tree_10, Tree_10_Fast
+	.db %10000000
+	.dl Tree_7, Tree_7_Fast_F
+	.db %10100000
+	.dl Tree_1, Tree_1_Fast_F
+	.db %10100000
+	.dl Tree_1, Tree_1_Fast
+	.db %10000000
+	.dl Tree_5, Tree_5_Fast
 	.db %10000000
 	.dl Tree_11, Tree_11_Fast
 	.db %10000000
@@ -286,14 +310,6 @@ decompress_frame_up_pre1:
 	.db %01000000
 	.dl Spikes_0, Spikes_0_Fast
 	.db %10000000
-	.dl TongueRing1, TongueRing1_Slow
-	.db %00000000
-	.dl TongueRing2, TongueRing2_Slow
-	.db %00000000
-	.dl TongueRing1, TongueRing1_Slow_F
-	.db %00100000
-	.dl TongueRing2, TongueRing2_Slow_F
-	.db %00100000
 	.dl GroundDirtDark, GroundDirtDark_Fast
 	.db %10000000
 	.dl GroundDirtDark, GroundDirtDark_Fast_F
@@ -343,14 +359,6 @@ decompress_frame_up_pre1:
 	.dl FrogDefault, FrogDefault_Slow_O_F
 	.db %01100000
 	.dl FrogChargeLit, FrogChargeLit_Slow
-	.db %00000000
-	.dl FrogChargeLit, FrogChargeLit_Slow_O
-	.db %01000000
-	.dl FrogChargeLit, FrogChargeLit_Slow_F
-	.db %00100000
-	.dl FrogChargeLit, FrogChargeLit_Slow_O_F
-	.db %01100000
-	.dl FrogCharge, FrogCharge_Slow
 	.db %00000000
 
 decompress_frame_up_0:
@@ -433,6 +441,22 @@ decompress_frame_up_0:
 	.db %10100000
 	.dl Leaves1, Leaves1_Fast_F
 	.db %10100000
+	.dl Lantern_0, Lantern_0_Fast
+	.db %10000000
+	.dl Lantern_1, Lantern_1_Fast
+	.db %10000000
+	.dl Lantern_2, Lantern_2_Fast
+	.db %10000000
+	.dl Lantern_0, Lantern_0_Fast_F
+	.db %10100000
+	.dl Lantern_1, Lantern_1_Fast_F
+	.db %10100000
+	.dl Lantern_2, Lantern_2_Fast_F
+	.db %10100000
+	.dl Lantern_3, Lantern_3_Slow
+	.db %00000000
+	.dl Lantern_3, Lantern_3_Slow_O_F
+	.db %01100000
 	.dl GroundDirtFull, GroundDirtFull_Fast_F
 	.db %10100000
 	.dl GroundDirtFull, GroundDirtFull_Fast
@@ -467,22 +491,6 @@ decompress_frame_up_0:
 	.db %10100000
 	.dl Tree_8, Tree_8_Fast_F
 	.db %10100000
-	.dl Tree_4, Tree_4_Fast_F
-	.db %10100000
-	.dl Tree_0, Tree_0_Fast
-	.db %10000000
-	.dl Tree_6, Tree_6_Fast
-	.db %10000000
-	.dl Tree_10, Tree_10_Fast
-	.db %10000000
-	.dl Tree_7, Tree_7_Fast_F
-	.db %10100000
-	.dl Tree_1, Tree_1_Fast_F
-	.db %10100000
-	.dl Tree_1, Tree_1_Fast
-	.db %10000000
-	.dl Tree_5, Tree_5_Fast
-	.db %10000000
 
 decompress_frame_up_1:
 	.db 0
@@ -793,7 +801,23 @@ decompress_frame_down_2:
 	.db %00100000
 
 decompress_frame_down_3:
-	.db 0
+	.db 8
+	.dl Lantern_0, Lantern_0_Fast
+	.db %10000000
+	.dl Lantern_1, Lantern_1_Fast
+	.db %10000000
+	.dl Lantern_2, Lantern_2_Fast
+	.db %10000000
+	.dl Lantern_0, Lantern_0_Fast_F
+	.db %10100000
+	.dl Lantern_1, Lantern_1_Fast_F
+	.db %10100000
+	.dl Lantern_2, Lantern_2_Fast_F
+	.db %10100000
+	.dl Lantern_3, Lantern_3_Slow
+	.db %00000000
+	.dl Lantern_3, Lantern_3_Slow_O_F
+	.db %01100000
 
 decompress_frame_down_4:
 	.db 3
@@ -808,7 +832,7 @@ decompress_frame_down_5:
 	.db 0
 
 decompress_frame_down_6:
-	.db 14
+	.db 12
 	.dl Vine2, Vine2_Slow
 	.db %00000000
 	.dl VineVertical, VineVertical_Slow_O
@@ -833,28 +857,36 @@ decompress_frame_down_6:
 	.db %01000000
 	.dl Vine4, Vine4_Slow_O
 	.db %01000000
-	.dl Platforms_2, Platforms_2_Slow_O
-	.db %01000000
-	.dl Spikes_0, Spikes_0_Fast
-	.db %10000000
 
 decompress_frame_down_7:
 	.db 0
 
 decompress_frame_down_8:
-	.db 3
+	.db 9
 	.dl Branches_1, Branches_1_Fast_F
 	.db %10100000
 	.dl Branches_2, Branches_2_Fast_F
 	.db %10100000
 	.dl Branches_5, Branches_5_Fast_F
 	.db %10100000
+	.dl Platforms_0, Platforms_0_Fast
+	.db %10000000
+	.dl Platforms_1, Platforms_1_Fast
+	.db %10000000
+	.dl Platforms_0, Platforms_0_Fast_F
+	.db %10100000
+	.dl Platforms_2, Platforms_2_Slow_O_F
+	.db %01100000
+	.dl Platforms_2, Platforms_2_Slow_O
+	.db %01000000
+	.dl Spikes_0, Spikes_0_Fast
+	.db %10000000
 
 decompress_frame_down_9:
 	.db 0
 
 decompress_frame_down_10:
-	.db 12
+	.db 8
 	.dl Branches_7, Branches_7_Fast_F
 	.db %10100000
 	.dl Branches_12, Branches_12_Fast_F
@@ -871,14 +903,6 @@ decompress_frame_down_10:
 	.db %01000000
 	.dl Branches_7, Branches_7_Slow_O
 	.db %01000000
-	.dl TongueRing1, TongueRing1_Slow
-	.db %00000000
-	.dl TongueRing2, TongueRing2_Slow
-	.db %00000000
-	.dl TongueRing1, TongueRing1_Slow_F
-	.db %00100000
-	.dl TongueRing2, TongueRing2_Slow_F
-	.db %00100000
 
 decompress_frame_down_11:
 	.db 6
@@ -896,7 +920,7 @@ decompress_frame_down_11:
 	.db %10100000
 
 decompress_frame_down_12:
-	.db 32
+	.db 28
 	.dl DualLeaf4, DualLeaf4_Slow
 	.db %00000000
 	.dl Branches_10, Branches_10_Fast
@@ -953,14 +977,6 @@ decompress_frame_down_12:
 	.db %01000000
 	.dl Branches_9, Branches_9_Fast_F
 	.db %10100000
-	.dl Platforms_0, Platforms_0_Fast
-	.db %10000000
-	.dl Platforms_1, Platforms_1_Fast
-	.db %10000000
-	.dl Platforms_0, Platforms_0_Fast_F
-	.db %10100000
-	.dl Platforms_2, Platforms_2_Slow_O_F
-	.db %01100000
 
 decompress_frame_down_13:
 	.db 0

@@ -101,6 +101,8 @@ update_animation_sprite_loop:
 	;.db sprite frame 6
 	;.db sprite frame 7
 	;.dl address of target property
+	
+	
 	;.dl sine_2_7_1
 	;.db 70
 	;.db 71
