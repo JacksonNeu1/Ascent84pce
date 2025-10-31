@@ -1,2 +1,3 @@
 Tongue_Rings:
-	.db 0
+	.db 1
+	.db 0, 193, 38

@@ -23,8 +23,6 @@
 	ld (mpLcdCtrl),a	
 
 
-
-
 	;call sdcomp_set_fast
 	;call sdcomp_set_flip
 	;call sdcomp_reset_offset
@@ -40,13 +38,14 @@
 	;ld de, Moss_0_Fast_0
 	;call sprite_decompress
 	
-	;call prgmpause
+	
+	
 	;call prgmpause
 
 
-	ld hl,$002300
+	ld hl,$008300
 	ld (player_x_pos),hl 
-	ld hl,$010E00
+	ld hl,$006E00
 	ld (player_y_pos),hl 
 	ld (player_y_pos_prev),hl
 	
@@ -66,6 +65,9 @@ set_cam_0_pos_skip_start:
 	call setup_decompress_queue
 	
 	;Decompress sprites in preframes for setup
+	ld hl,decompress_frame_up_pre3 
+	call cfdc_direct_add_decompress_frame
+	call continue_decompressions ;Run decompression (Will finish as timer has not started)
 	ld hl,decompress_frame_up_pre2 
 	call cfdc_direct_add_decompress_frame
 	call continue_decompressions ;Run decompression (Will finish as timer has not started)
@@ -194,7 +196,13 @@ get_inputs_return:
 	;ld c,20 
 	;call draw_tongue
 	
-	
+	ld hl, (draw_buffer)
+	ld de, 160*96  + 25
+	add hl,de
+	ex de, hl
+	ld hl,Font_19_Fast
+	call draw_fast_sprite_full
+
 	
 	;TEsting
 	ld hl,0
@@ -214,6 +222,12 @@ get_inputs_return:
 	call draw_fg
 	
 	
+	ld a,(character_count)
+	ld (render_text_char_counter),a 
+	call render_text_test
+	
+	
+	
 	;call dl_set_negative
 	;Line draw test 
 	;ld hl, (draw_buffer)
@@ -231,6 +245,13 @@ get_inputs_return:
 	;call draw_line_loop
 	
 	
+	
+	;ld hl, (draw_buffer)
+	;ld de, 160*96  + 25
+	;add hl,de
+	;ex de, hl
+	;ld hl,Unlucky_0_Fast
+	;call draw_fast_sprite_full
 	
 	;Leaves_4_Slow_1 has issue
 	;Need to fix indexing of decompress segments
@@ -481,7 +502,8 @@ exit_prgm:
 	
 	ei				; reset screen back to normal
 	ret			; return to os
-
+	;graphDraw		equ 0		;0=graph is valid, 1=redraw graph(dirty)
+	;May need to mark as dirty due to writing to plotSSCren buffer to prevent crash
 
 printHL:;=================REMOVE
 	push hl
@@ -502,7 +524,7 @@ write_a_to_ram:
 	push af 
 	push hl 
 write_a_to_ram_addr .equ $ + 1 
-	ld hl, $d48000
+	ld hl, $D09466 ;PlotSSCreen
 	ld (hl),a 
 	inc hl 
 	ld (write_a_to_ram_addr),hl 
@@ -603,6 +625,7 @@ sd_test_a:
 #include "PlayerDraw.txt"
 #include "sineFunc.txt"
 #include "animations.txt"
+#include "TextTyper.txt"
 ;#include "levelData.txt"
 ;#include "FGLevelData.txt"
 ;#include "testing/TestingCollisionData.txt"
@@ -634,5 +657,5 @@ sd_test_a:
 ;#include "Sprite_Tables.txt"
 ;#include "TestingBGData.txt"
 ;#include "TestingFGData.txt"
-
+#include "testing/TestingTextData.txt"
 

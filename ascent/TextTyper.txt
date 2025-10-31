@@ -1,0 +1,280 @@
+;start a new text segment when player is landed with a specific Y coordinate
+
+;Will set a pointer to char data
+
+;Every frame when text is active, render chars by indexing into a sprite table based on char data
+;Then draw character and increment X pos by value given per character (also in sprite table?)
+
+;Repeat for characters up to current char count
+;Every 2 frames when text is active char count increases (to some maximum)
+
+
+;Can render just using screen coords, as we know players Y value will be unchanged
+;(There is the issue of camera movement, but can just render text only when cam is not moving?)
+
+check_for_text:
+	;Checks list of text segments against player Y coord, and starts a text type if so 
+	ld a,(character_count)
+	ret nz ;if text has already started, return 
+	ld a,(player_flags)
+	bit 6,a
+	ret z ; return if player not on ground
+	
+	
+	ld hl,text_table
+	ld de,7
+	ld b,(hl)
+	inc hl
+check_text_ypos_loop:
+	ld a,(player_y_pos)
+	cp (hl) ;comare upper byte of y pos to entry in text table data 
+	inc hl ;to second byte of Y (doesn't change z flg)
+	jp nz,check_text_ypos_loop_1 ;if no match, go to next entry in table 
+	ld a,(player_y_pos + 1)
+	cp (hl) ;compare lower byte of y (pixels)
+	jp z, set_text_segment ;if match, set this as current text segment
+check_text_ypos_loop_1:
+	add hl,de ;to start of next y pos
+	djnz check_text_ypos_loop
+	ret
+set_text_segment:
+	inc hl ;hl points to vram offset of text draw pos 
+	ld de,(hl)
+	ld (text_pos),de
+	ld a,1 
+	ld (character_count),a 
+	inc hl 
+	inc hl 
+	inc hl 
+	ld de,(hl)
+	ld (current_segment_chars),de
+	ret
+
+
+render_text:
+	;called every frame 
+	ld a,(character_count)
+	ret z ;if no text active, return 
+	ld (render_text_char_counter),a  ;store char count for loop
+	ld a,(player_flags)
+	bit 6,a 
+	jp z,clear_active_text ; if player not on ground, clear text 
+	ld a,(camera_last_speed)
+	jp nz,clear_active_text ; if camera is moving, clear text 
+	
+	;Able to render text 
+	;b holds current char count 
+render_text_test:	
+	
+
+	;exx ;to shadow 
+	ld hl,(text_pos)
+	ld de,(draw_buffer)
+	add hl,de 
+	push hl 
+	;pop bc ;bc holds draw starting position in vram
+	;exx;out
+	
+	ld hl,(current_segment_chars) ;hl holds pointer to char[] data 
+	ld a,(hl) ;a holds char indx 
+
+	cp 29 ;check if large or small font 
+	jp nc, render_text_small_setup
+	
+	;if a <29 using large (fast) sprites 
+	ld a, %11010010 ;jp nc
+	ld (render_text_sizemode),a 
+	ld de, 160*14
+	ld (render_text_line_spacing),de 
+	ld de, 10
+	ld (render_text_space_dist),de 
+	ld de,0 
+	ld (render_text_line_spacing_sum), de
+	
+	;ld a,$B1 
+	;call write_a_to_ram
+
+	
+	jp render_text_loop 
+	
+render_text_small_setup:
+	ld a,%11011010;jp c
+	ld (render_text_sizemode),a 
+	ld de, 160*8
+	ld (render_text_line_spacing),de 
+	ld de, 7
+	ld (render_text_space_dist),de 
+	ld de,0 
+	ld (render_text_line_spacing_sum), de
+
+	
+render_text_loop:
+	ld a,(hl) ;a holds index of character 
+	;call write_a_to_ram
+	;call prgmpause
+	
+	exx ;into shadow 
+	ld hl,char_table
+	ld de,0
+	ld e,a 
+	add hl,de ;index into char table by a
+	add hl,de
+	add hl,de
+	
+	ld de,(hl) ;de holds sprite ptr
+	pop hl ;hl holds draw pos 
+	push hl 
+	ex de,hl ;de holds vram pos, hl holds data 
+	cp 55 ;check if newline char (55)
+	jp z, render_text_newline
+    cp 56 ;check if space char (56)
+	jp z, render_text_space
+	
+	scf
+render_text_sizemode .equ $
+	jp nc,render_text_slow_char
+	;chars >= 29 use slow sprite format 
+	
+	
+	;ld a,$B2
+	;call write_a_to_ram
+	
+	call draw_fast_sprite_full 
+	ld de,8
+	jp render_text_postdraw
+
+
+
+render_text_slow_char:
+
+	
+	;call write_hl_to_ram
+	;ex de,hl 
+	;call write_hl_to_ram 
+	;call prgmpause
+
+	call draw_slow_sprite_full 	;slow sprite draw routine edits b shadow register 
+	ld de,4
+render_text_postdraw:
+	pop hl ;draw pos 
+	add hl,de ;add offset to next char 
+	push hl 
+render_text_postspace:
+	
+
+
+	exx ; out 
+	;hl now holds pointer in char[] 
+	inc hl 
+	
+	
+render_text_char_counter .equ $ + 1 
+	ld a,0 
+	dec a 
+	ld (render_text_char_counter),a 
+	jp nz, render_text_loop 
+	
+	pop hl ;prevent stack overflow 
+	ret 
+	
+
+render_text_newline:
+	pop hl ;draw pos 
+render_text_line_spacing_sum .equ $+1
+	ld hl,0 ;track sum for multiple (>2) lines 
+render_text_line_spacing .equ $ + 1
+	ld de, 0 
+	add hl,de ;increase line spacing (for multiple lines)
+	ld (render_text_line_spacing_sum),hl 
+	ld de, (text_pos) ;origin of text pos 
+	add hl,de ;add line spacing 
+	ld de,(draw_buffer)
+	add hl,de
+	push hl ;push current draw pos 
+	
+	;call write_hl_to_ram
+
+	jp render_text_postspace
+
+	
+render_text_space:
+	pop hl ;draw pos 
+render_text_space_dist .equ $ + 1
+	ld de, 0
+	add hl,de ;increase line spacing (for multiple lines)
+	push hl ;push current draw pos 
+	jp render_text_postspace
+	
+	
+clear_active_text:
+	ld a,0
+	ld (character_count),a 
+	ret 
+
+
+character_count:
+.db 30 
+current_segment_chars:
+.dl test_text_2 ;pointer to char[] of current segment 
+text_pos:
+.dl 160*20 + 4 ;offset from start of draw buffer to start of text
+
+char_table:
+.dl Font_0_Fast
+.dl Font_1_Fast
+.dl Font_2_Fast
+.dl Font_3_Fast
+.dl Font_4_Fast
+.dl Font_5_Fast
+.dl Font_6_Fast
+.dl Font_7_Fast
+.dl Font_8_Fast
+.dl Font_9_Fast
+.dl Font_10_Fast
+.dl Font_11_Fast
+.dl Font_12_Fast
+.dl Font_13_Fast
+.dl Font_14_Fast
+.dl Font_15_Fast
+.dl Font_16_Fast
+.dl Font_17_Fast
+.dl Font_18_Fast
+.dl Font_19_Fast
+.dl Font_20_Fast
+.dl Font_21_Fast
+.dl Font_22_Fast
+.dl Font_23_Fast
+.dl Font_24_Fast
+.dl Font_25_Fast
+.dl Font_26_Fast
+.dl Font_27_Fast
+.dl Font_28_Fast
+.dl Font_29_Slow
+.dl Font_30_Slow
+.dl Font_31_Slow
+.dl Font_32_Slow
+.dl Font_33_Slow
+.dl Font_34_Slow
+.dl Font_35_Slow
+.dl Font_36_Slow
+.dl Font_37_Slow
+.dl Font_38_Slow
+.dl Font_39_Slow
+.dl Font_40_Slow
+.dl Font_41_Slow
+.dl Font_42_Slow
+.dl Font_43_Slow
+.dl Font_44_Slow
+.dl Font_45_Slow
+.dl Font_46_Slow
+.dl Font_47_Slow
+.dl Font_48_Slow
+.dl Font_49_Slow
+.dl Font_50_Slow
+.dl Font_51_Slow
+.dl Font_52_Slow
+.dl Font_53_Slow
+.dl Font_54_Slow
+	;.dl pointer to sprite
+	
+	

@@ -138,35 +138,43 @@ MG2_Data_4:
 
 MG2_Data_3:
 	.db 0
-	.db 0
+	.db 5
+	.db 53, 255, 82, 31  ;SG_Platform1
+	.db 137, 255, 102, 33  ;SG_Platform2
+	.db 177, 255, 68, 31  ;SG_Platform1
+	.db 224, 255, 23, 31  ;SG_Platform1
+	.db 186, 9, 85, 138  ;Spikes_0_Fast
 
 MG2_Data_2:
 	.db 0
-	.db 6
-	.db 21, 255, 86, 24  ;SG_Platform3
-	.db 94, 255, 36, 25  ;SG_Platform4
-	.db 172, 255, 18, 26  ;SG_Platform1
-	.db 30, 9, 105, 110  ;Spikes_0_Fast
-	.db 30, 9, 117, 110  ;Spikes_0_Fast
-	.db 103, 9, 55, 110  ;Spikes_0_Fast
+	.db 8
+	.db 21, 255, 79, 29  ;SG_Platform3
+	.db 94, 255, 36, 30  ;SG_Platform4
+	.db 172, 255, 18, 31  ;SG_Platform1
+	.db 242, 255, 17, 31  ;SG_Platform1
+	.db 242, 255, 115, 33  ;SG_Platform2
+	.db 30, 9, 105, 138  ;Spikes_0_Fast
+	.db 30, 9, 117, 138  ;Spikes_0_Fast
+	.db 103, 9, 55, 138  ;Spikes_0_Fast
 
 MG2_Data_1:
 	.db 0
 	.db 6
-	.db 101, 255, 48, 24  ;SG_Platform3
-	.db 30, 255, 5, 25  ;SG_Platform4
-	.db 101, 255, 103, 27  ;SG_Platform2
-	.db 170, 255, 89, 27  ;SG_Platform2
-	.db 215, 255, 38, 26  ;SG_Platform1
-	.db 110, 9, 70, 110  ;Spikes_0_Fast
+	.db 98, 255, 48, 29  ;SG_Platform3
+	.db 24, 255, 6, 30  ;SG_Platform4
+	.db 98, 255, 103, 33  ;SG_Platform2
+	.db 176, 255, 103, 33  ;SG_Platform2
+	.db 205, 255, 39, 31  ;SG_Platform1
+	.db 107, 9, 70, 138  ;Spikes_0_Fast
 
 MG2_Data_0:
 	.db 0
-	.db 4
-	.db 93, 255, 105, 24  ;SG_Platform3
-	.db 93, 255, 5, 25  ;SG_Platform4
-	.db 145, 255, 65, 26  ;SG_Platform1
-	.db 235, 255, 84, 26  ;SG_Platform1
+	.db 5
+	.db 93, 255, 99, 29  ;SG_Platform3
+	.db 93, 255, 12, 30  ;SG_Platform4
+	.db 145, 255, 65, 31  ;SG_Platform1
+	.db 232, 255, 84, 31  ;SG_Platform1
+	.db 200, 255, 35, 32  ;SG_TongueRing
 
 
 

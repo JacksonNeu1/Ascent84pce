@@ -1,18 +1,87 @@
 position_animation_data:
-	.db 42
-	.dl FG_Data_1 + 10
+	.db 65
+	.dl FG_Data_2 + 2
+	.dl sine_05_31_1
+	.db 58
+	.dl FG_Data_2 + 6
+	.dl sine_05_31_3
+	.db 56
+	.dl FG_Data_2 + 50
+	.dl sine_4_1_1
+	.db 77
+	.dl FG_Data_2 + 54
+	.dl sine_4_1_1
+	.db 73
+	.dl FG_Data_2 + 58
+	.dl sine_4_1_1
+	.db 69
+	.dl FG_Data_2 + 62
+	.dl sine_4_1_4
+	.db 65
+	.dl FG_Data_2 + 66
+	.dl sine_4_1_3
+	.db 64
+	.dl FG_Data_2 + 70
+	.dl sine_4_1_2
+	.db 63
+	.dl FG_Data_2 + 74
+	.dl sine_4_1_1
+	.db 62
+	.dl FG_Data_2 + 78
+	.dl sine_4_1_4
+	.db 62
+	.dl FG_Data_2 + 82
+	.dl sine_4_1_3
+	.db 63
+	.dl FG_Data_2 + 86
+	.dl sine_4_1_2
+	.db 71
+	.dl FG_Data_2 + 90
+	.dl sine_4_1_1
+	.db 75
+	.dl FG_Data_2 + 94
+	.dl sine_4_1_2
+	.db 67
+	.dl FG_Data_2 + 98
+	.dl sine_4_1_1
+	.db 79
+	.dl FG_Data_2 + 110
+	.dl sine_1_15_2
+	.db 62
+	.dl FG_Data_1 + 2
 	.dl sine_1_15_1
 	.db 57
-	.dl SG_GroundGrass + 20
+	.dl FG_Data_1 + 6
+	.dl sine_1_15_2
+	.db 65
+	.dl MG_Data_4 + 66
+	.dl sine_2_3_4
+	.db 98
+	.dl MG_Data_4 + 78
+	.dl sine_2_3_4
+	.db 101
+	.dl MG_Data_3 + 74
+	.dl sine_8_1_1
+	.db 138
+	.dl MG_Data_2 + 10
+	.dl sine_2_3_4
+	.db 40
+	.dl MG_Data_2 + 30
+	.dl sine_2_3_4
+	.db 40
+	.dl MG_Data_0 + 66
+	.dl sine_05_15_3
+	.db 204
+	.dl MG_Data_0 + 90
+	.dl sine_05_15_1
+	.db 157
+	.dl SG_GroundGrass + 16
 	.dl sine_2_1_3
 	.db 2
-	.dl SG_GroundGrass + 34
-	.dl sine_2_1_2
-	.db 4
-	.dl SG_GroundGrass + 44
+	.dl SG_GroundGrass + 36
 	.dl sine_4_1_3
 	.db 25
-	.dl SG_GroundGrass + 54
+	.dl SG_GroundGrass + 46
 	.dl sine_8_1_2
 	.db 10
 	.dl SG_Branch3 + 18
@@ -57,36 +126,6 @@ position_animation_data:
 	.dl SG_Branch6 + 52
 	.dl sine_2_1_1
 	.db 28
-	.dl SG_Branch2 + 2
-	.dl sine_4_1_1
-	.db 0
-	.dl SG_Branch2 + 6
-	.dl sine_2_1_2
-	.db 1
-	.dl SG_Branch2 + 72
-	.dl sine_2_1_3
-	.db 12
-	.dl SG_Branch1 + 26
-	.dl sine_4_1_3
-	.db 0
-	.dl SG_Branch1 + 50
-	.dl sine_4_1_2
-	.db 19
-	.dl SG_Branch1 + 60
-	.dl sine_1_1_1
-	.db 9
-	.dl SG_Vines6 + 6
-	.dl sine_2_3_2
-	.db 15
-	.dl SG_Vines6 + 10
-	.dl sine_2_3_2
-	.db 31
-	.dl SG_Vines6 + 14
-	.dl sine_2_3_2
-	.db 38
-	.dl SG_Vines6 + 18
-	.dl sine_2_3_2
-	.db 40
 	.dl SG_Vines7 + 2
 	.dl sine_2_3_2
 	.db 33
@@ -126,11 +165,71 @@ position_animation_data:
 	.dl SG_Vines5 + 34
 	.dl sine_8_1_1
 	.db 12
+	.dl SG_Branch2 + 2
+	.dl sine_4_1_1
+	.db 0
+	.dl SG_Branch2 + 6
+	.dl sine_2_1_2
+	.db 1
+	.dl SG_Branch2 + 72
+	.dl sine_2_1_3
+	.db 12
+	.dl SG_Branch1 + 26
+	.dl sine_4_1_3
+	.db 0
+	.dl SG_Branch1 + 50
+	.dl sine_4_1_2
+	.db 19
+	.dl SG_Branch1 + 60
+	.dl sine_1_1_1
+	.db 9
+	.dl SG_Vines6 + 6
+	.dl sine_2_3_2
+	.db 15
+	.dl SG_Vines6 + 10
+	.dl sine_2_3_2
+	.db 31
+	.dl SG_Vines6 + 14
+	.dl sine_2_3_2
+	.db 38
+	.dl SG_Vines6 + 18
+	.dl sine_2_3_2
+	.db 40
 
 
 
 sprite_animation_data:
-	.db 5
+	.db 16
+	.dl sine_2_7_1
+	.db 47
+	.db 48
+	.db 47
+	.db 47
+	.db 48
+	.db 47
+	.db 48
+	.db 48
+	.dl FG_Data_2 + 13
+	.dl sine_2_7_1
+	.db 50
+	.db 49
+	.db 49
+	.db 49
+	.db 50
+	.db 49
+	.db 50
+	.db 50
+	.dl FG_Data_2 + 21
+	.dl sine_4_7_1
+	.db 48
+	.db 47
+	.db 47
+	.db 47
+	.db 48
+	.db 48
+	.db 47
+	.db 47
+	.dl FG_Data_2 + 25
 	.dl lin_4_7_4
 	.db 14
 	.db 15
@@ -161,15 +260,55 @@ sprite_animation_data:
 	.db 34
 	.db 33
 	.dl SG_Lantern1 + 9
+	.dl linrep_4_7_1
+	.db 29
+	.db 30
+	.db 31
+	.db 30
+	.db 29
+	.db 30
+	.db 31
+	.db 30
+	.dl SG_Lantern2 + 5
+	.dl linrep_4_7_1
+	.db 32
+	.db 33
+	.db 34
+	.db 33
+	.db 32
+	.db 33
+	.db 34
+	.db 33
+	.dl SG_Lantern2 + 9
+	.dl linrep_4_7_1
+	.db 29
+	.db 30
+	.db 31
+	.db 30
+	.db 29
+	.db 30
+	.db 31
+	.db 30
+	.dl SG_Lantern4 + 5
+	.dl linrep_4_7_1
+	.db 32
+	.db 33
+	.db 34
+	.db 33
+	.db 32
+	.db 33
+	.db 34
+	.db 33
+	.dl SG_Lantern4 + 9
 	.dl lin_4_7_2
-	.db 83
-	.db 82
-	.db 82
-	.db 83
-	.db 83
-	.db 83
-	.db 82
-	.db 83
+	.db 79
+	.db 78
+	.db 78
+	.db 79
+	.db 79
+	.db 79
+	.db 78
+	.db 79
 	.dl SG_Vines2 + 13
 	.dl lin_4_7_2
 	.db 15
@@ -181,6 +320,46 @@ sprite_animation_data:
 	.db 15
 	.db 17
 	.dl SG_Vines2 + 17
+	.dl lin_4_7_2
+	.db 79
+	.db 78
+	.db 78
+	.db 79
+	.db 79
+	.db 79
+	.db 78
+	.db 79
+	.dl SG_Vines8 + 13
+	.dl lin_4_7_3
+	.db 15
+	.db 15
+	.db 17
+	.db 14
+	.db 16
+	.db 17
+	.db 15
+	.db 17
+	.dl SG_Vines8 + 17
+	.dl linrep_8_7_1
+	.db 134
+	.db 135
+	.db 134
+	.db 135
+	.db 134
+	.db 135
+	.db 134
+	.db 135
+	.dl SG_TongueRing + 5
+	.dl linrep_8_7_1
+	.db 136
+	.db 137
+	.db 136
+	.db 137
+	.db 136
+	.db 137
+	.db 136
+	.db 137
+	.dl SG_TongueRing + 9
 
 
 

@@ -116,67 +116,97 @@ FG_Data_10:
 FG_Data_9:
 	.db 0
 	.db 5
-	.db 213, 255, 114, 4  ;SG_Branch4
-	.db 176, 14, 0, 49  ;Branches_3_Fast
-	.db 177, 14, 9, 50  ;Branches_2_Fast
-	.db 177, 14, 18, 43  ;Branches_4_Fast_F
+	.db 176, 14, 0, 82  ;Branches_3_Fast
+	.db 177, 14, 9, 83  ;Branches_2_Fast
+	.db 177, 14, 18, 63  ;Branches_4_Fast_F
+	.db 213, 255, 114, 5  ;SG_Branch4
 	.db 234, 255, 19, 2  ;SG_Branch7
 
 FG_Data_8:
 	.db 0
 	.db 3
-	.db 124, 14, 151, 47  ;Branches_5_Fast
-	.db 124, 14, 142, 48  ;Branches_4_Fast
-	.db 186, 255, 110, 7  ;SG_Branch2
+	.db 124, 14, 151, 80  ;Branches_5_Fast
+	.db 124, 14, 142, 81  ;Branches_4_Fast
+	.db 186, 255, 110, 12  ;SG_Branch2
 
 FG_Data_7:
 	.db 0
 	.db 2
-	.db 135, 255, 0, 5  ;SG_Branch5
-	.db 237, 255, 0, 6  ;SG_Branch6
+	.db 135, 255, 0, 6  ;SG_Branch5
+	.db 237, 255, 0, 8  ;SG_Branch6
 
 FG_Data_6:
 	.db 0
 	.db 1
-	.db 100, 255, 0, 6  ;SG_Branch6
+	.db 100, 255, 0, 8  ;SG_Branch6
 
 FG_Data_5:
 	.db 0
 	.db 2
 	.db 215, 255, 128, 1  ;SG_Branch3
-	.db 93, 255, 0, 5  ;SG_Branch5
+	.db 93, 255, 0, 6  ;SG_Branch5
 
 FG_Data_4:
 	.db 0
-	.db 1
-	.db 181, 255, 128, 1  ;SG_Branch3
+	.db 5
+	.db 143, 255, 110, 9  ;SG_Vines7
+	.db 111, 255, 32, 10  ;SG_Vines5
+	.db 141, 255, 0, 8  ;SG_Branch6
+	.db 202, 255, 114, 5  ;SG_Branch4
+	.db 110, 255, 24, 11  ;SG_Vines2
 
 FG_Data_3:
 	.db 0
 	.db 1
-	.db 193, 255, 0, 6  ;SG_Branch6
+	.db 176, 255, 128, 1  ;SG_Branch3
 
 FG_Data_2:
 	.db 0
-	.db 2
-	.db 251, 255, 114, 4  ;SG_Branch4
-	.db 147, 255, 0, 5  ;SG_Branch5
+	.db 28
+	.db 58, 255, 30, 7  ;SG_Lantern4
+	.db 56, 255, 144, 7  ;SG_Lantern4
+	.db 61, 10, 16, 48  ;AscentBanner_8_Slow
+	.db 88, 10, 16, 49  ;AscentBanner_7_Fast
+	.db 78, 10, 152, 50  ;AscentBanner_7_Slow_O
+	.db 68, 10, 152, 47  ;AscentBanner_8_Slow_O
+	.db 88, 10, 152, 49  ;AscentBanner_7_Fast
+	.db 147, 255, 0, 6  ;SG_Branch5
+	.db 156, 255, 114, 5  ;SG_Branch4
+	.db 85, 12, 143, 51  ;AscentBanner_9_Fast_F
+	.db 81, 12, 139, 51  ;AscentBanner_9_Fast_F
+	.db 96, 19, 147, 52  ;AscentBanner_6_Slow_F
+	.db 77, 12, 135, 51  ;AscentBanner_9_Fast_F
+	.db 73, 12, 131, 51  ;AscentBanner_9_Fast_F
+	.db 69, 11, 123, 53  ;AscentBanner_10_Fast_F
+	.db 65, 8, 111, 54  ;AscentBanner_5_Fast
+	.db 64, 8, 99, 55  ;AscentBanner_4_Fast
+	.db 63, 8, 91, 56  ;AscentBanner_0_Fast
+	.db 62, 8, 73, 57  ;AscentBanner_3_Fast
+	.db 62, 8, 61, 58  ;AscentBanner_2_Fast
+	.db 63, 8, 49, 59  ;AscentBanner_1_Fast
+	.db 71, 12, 37, 60  ;AscentBanner_9_Fast
+	.db 75, 12, 33, 60  ;AscentBanner_9_Fast
+	.db 67, 11, 41, 61  ;AscentBanner_10_Fast
+	.db 79, 12, 29, 60  ;AscentBanner_9_Fast
+	.db 83, 12, 25, 60  ;AscentBanner_9_Fast
+	.db 95, 19, 17, 62  ;AscentBanner_6_Slow_O
+	.db 62, 255, 4, 4  ;SG_Lantern2
 
 FG_Data_1:
 	.db 0
-	.db 4
+	.db 5
+	.db 57, 255, 20, 3  ;SG_Lantern1
+	.db 65, 255, 35, 4  ;SG_Lantern2
+	.db 75, 14, 0, 9  ;Branches_9_Fast
 	.db 201, 255, 128, 1  ;SG_Branch3
 	.db 135, 255, 0, 2  ;SG_Branch7
-	.db 57, 255, 20, 3  ;SG_Lantern1
-	.db 75, 14, 0, 9  ;Branches_9_Fast
 
 FG_Data_0:
 	.db 0
-	.db 5
-	.db 25, 26, 148, 1  ;BigGrassBase_Fast
-	.db 30, 23, 147, 4  ;BigGrassTop_Fast_F
+	.db 4
+	.db 25, 26, 148, 2  ;BigGrassBase_Fast
 	.db 51, 255, 0, 0  ;SG_GroundGrass
-	.db 51, 255, 56, 0  ;SG_GroundGrass
+	.db 51, 255, 34, 0  ;SG_GroundGrass
 	.db 51, 255, 95, 0  ;SG_GroundGrass
 
 

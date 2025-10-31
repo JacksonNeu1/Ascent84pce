@@ -126,158 +126,201 @@ MG_Data_7:
 
 MG_Data_6:
 	.db 0
-	.db 0
+	.db 22
+	.db 79, 255, 82, 10  ;SG_Vines5
+	.db 79, 255, 23, 20  ;SG_TreeRow4
+	.db 63, 255, 22, 17  ;SG_TreeRow5
+	.db 111, 255, 25, 16  ;SG_TreeRow3
+	.db 143, 255, 27, 17  ;SG_TreeRow5
+	.db 159, 255, 28, 20  ;SG_TreeRow4
+	.db 31, 255, 20, 18  ;SG_TreeRow1
+	.db 95, 255, 24, 19  ;SG_TreeRow2
+	.db 175, 255, 27, 17  ;SG_TreeRow5
+	.db 223, 255, 26, 20  ;SG_TreeRow4
+	.db 255, 255, 25, 16  ;SG_TreeRow3
+	.db 47, 255, 21, 18  ;SG_TreeRow1
+	.db 127, 255, 26, 18  ;SG_TreeRow1
+	.db 191, 255, 27, 18  ;SG_TreeRow1
+	.db 239, 255, 25, 18  ;SG_TreeRow1
+	.db 207, 255, 27, 19  ;SG_TreeRow2
+	.db 15, 255, 19, 16  ;SG_TreeRow3
+	.db 120, 255, 81, 23  ;SG_BranchBase3
+	.db 168, 255, 99, 2  ;SG_Branch7
+	.db 140, 255, 4, 1  ;SG_Branch3
+	.db 160, 255, 35, 28  ;SG_BranchBase1
+	.db 219, 255, 6, 12  ;SG_Branch2
 
 MG_Data_5:
 	.db 0
-	.db 16
-	.db 15, 255, 28, 13  ;SG_TreeRow1
-	.db 255, 255, 19, 13  ;SG_TreeRow1
-	.db 159, 255, 22, 13  ;SG_TreeRow1
-	.db 31, 255, 27, 12  ;SG_TreeRow5
-	.db 191, 255, 20, 14  ;SG_TreeRow2
-	.db 239, 255, 20, 12  ;SG_TreeRow5
-	.db 127, 255, 24, 14  ;SG_TreeRow2
-	.db 223, 255, 19, 15  ;SG_TreeRow4
-	.db 207, 255, 19, 15  ;SG_TreeRow4
-	.db 175, 255, 21, 11  ;SG_TreeRow3
-	.db 111, 255, 25, 14  ;SG_TreeRow2
-	.db 63, 255, 25, 14  ;SG_TreeRow2
-	.db 95, 255, 24, 11  ;SG_TreeRow3
-	.db 47, 255, 26, 15  ;SG_TreeRow4
-	.db 143, 255, 23, 12  ;SG_TreeRow5
-	.db 79, 255, 25, 12  ;SG_TreeRow5
+	.db 20
+	.db 167, 255, 0, 22  ;SG_Vines6
+	.db 79, 255, 25, 17  ;SG_TreeRow5
+	.db 143, 255, 23, 17  ;SG_TreeRow5
+	.db 47, 255, 26, 20  ;SG_TreeRow4
+	.db 95, 255, 24, 16  ;SG_TreeRow3
+	.db 63, 255, 25, 19  ;SG_TreeRow2
+	.db 111, 255, 25, 19  ;SG_TreeRow2
+	.db 207, 255, 19, 20  ;SG_TreeRow4
+	.db 175, 255, 21, 16  ;SG_TreeRow3
+	.db 127, 255, 24, 19  ;SG_TreeRow2
+	.db 239, 255, 20, 17  ;SG_TreeRow5
+	.db 191, 255, 20, 19  ;SG_TreeRow2
+	.db 31, 255, 27, 17  ;SG_TreeRow5
+	.db 159, 255, 22, 18  ;SG_TreeRow1
+	.db 255, 255, 19, 18  ;SG_TreeRow1
+	.db 223, 255, 19, 20  ;SG_TreeRow4
+	.db 15, 255, 28, 18  ;SG_TreeRow1
+	.db 215, 255, 95, 6  ;SG_Branch5
+	.db 165, 255, 74, 27  ;SG_BranchBase4
+	.db 182, 255, 91, 8  ;SG_Branch6
 
 MG_Data_4:
 	.db 0
-	.db 20
-	.db 15, 255, 41, 13  ;SG_TreeRow1
-	.db 79, 255, 38, 12  ;SG_TreeRow5
-	.db 143, 255, 34, 12  ;SG_TreeRow5
-	.db 63, 255, 39, 15  ;SG_TreeRow4
-	.db 47, 255, 39, 15  ;SG_TreeRow4
-	.db 111, 255, 36, 14  ;SG_TreeRow2
-	.db 159, 255, 33, 15  ;SG_TreeRow4
-	.db 207, 255, 30, 12  ;SG_TreeRow5
-	.db 191, 255, 31, 15  ;SG_TreeRow4
-	.db 255, 255, 29, 11  ;SG_TreeRow3
-	.db 31, 255, 40, 11  ;SG_TreeRow3
-	.db 95, 255, 37, 13  ;SG_TreeRow1
-	.db 127, 255, 35, 13  ;SG_TreeRow1
-	.db 175, 255, 32, 13  ;SG_TreeRow1
-	.db 239, 255, 30, 13  ;SG_TreeRow1
-	.db 223, 255, 31, 14  ;SG_TreeRow2
-	.db 207, 255, 101, 5  ;SG_Branch5
-	.db 46, 255, 0, 16  ;SG_Branch1
-	.db 195, 255, 84, 23  ;SG_BranchBase4
-	.db 228, 255, 105, 5  ;SG_Branch5
+	.db 25
+	.db 15, 255, 41, 18  ;SG_TreeRow1
+	.db 79, 255, 38, 17  ;SG_TreeRow5
+	.db 143, 255, 34, 17  ;SG_TreeRow5
+	.db 63, 255, 39, 20  ;SG_TreeRow4
+	.db 111, 255, 36, 19  ;SG_TreeRow2
+	.db 159, 255, 33, 20  ;SG_TreeRow4
+	.db 191, 255, 31, 20  ;SG_TreeRow4
+	.db 207, 255, 30, 17  ;SG_TreeRow5
+	.db 47, 255, 39, 20  ;SG_TreeRow4
+	.db 255, 255, 29, 16  ;SG_TreeRow3
+	.db 31, 255, 40, 16  ;SG_TreeRow3
+	.db 95, 255, 37, 18  ;SG_TreeRow1
+	.db 127, 255, 35, 18  ;SG_TreeRow1
+	.db 175, 255, 32, 18  ;SG_TreeRow1
+	.db 239, 255, 30, 18  ;SG_TreeRow1
+	.db 223, 255, 31, 19  ;SG_TreeRow2
+	.db 98, 16, 37, 74  ;Vine5_Slow_O
+	.db 176, 255, 104, 25  ;SG_Vines8
+	.db 145, 255, 57, 9  ;SG_Vines7
+	.db 101, 10, 46, 75  ;Vine6_Slow_O
+	.db 46, 255, 0, 21  ;SG_Branch1
+	.db 195, 255, 84, 27  ;SG_BranchBase4
+	.db 224, 255, 101, 6  ;SG_Branch5
+	.db 247, 255, 105, 6  ;SG_Branch5
+	.db 176, 255, 98, 24  ;SG_Vines4
 
 MG_Data_3:
 	.db 0
-	.db 19
-	.db 15, 255, 40, 12  ;SG_TreeRow5
-	.db 95, 255, 38, 15  ;SG_TreeRow4
-	.db 111, 255, 37, 12  ;SG_TreeRow5
-	.db 47, 255, 40, 14  ;SG_TreeRow2
-	.db 79, 255, 39, 11  ;SG_TreeRow3
-	.db 127, 255, 38, 11  ;SG_TreeRow3
-	.db 143, 255, 39, 14  ;SG_TreeRow2
-	.db 191, 255, 41, 14  ;SG_TreeRow2
-	.db 159, 255, 39, 11  ;SG_TreeRow3
-	.db 239, 255, 42, 15  ;SG_TreeRow4
-	.db 255, 255, 42, 11  ;SG_TreeRow3
-	.db 31, 255, 40, 11  ;SG_TreeRow3
-	.db 63, 255, 40, 13  ;SG_TreeRow1
-	.db 175, 255, 40, 13  ;SG_TreeRow1
-	.db 207, 255, 41, 13  ;SG_TreeRow1
-	.db 223, 255, 42, 12  ;SG_TreeRow5
+	.db 21
+	.db 15, 255, 40, 17  ;SG_TreeRow5
+	.db 95, 255, 38, 20  ;SG_TreeRow4
+	.db 111, 255, 37, 17  ;SG_TreeRow5
+	.db 47, 255, 40, 19  ;SG_TreeRow2
+	.db 79, 255, 39, 16  ;SG_TreeRow3
+	.db 127, 255, 38, 16  ;SG_TreeRow3
+	.db 159, 255, 39, 16  ;SG_TreeRow3
+	.db 191, 255, 41, 19  ;SG_TreeRow2
+	.db 143, 255, 39, 19  ;SG_TreeRow2
+	.db 239, 255, 42, 20  ;SG_TreeRow4
+	.db 255, 255, 42, 16  ;SG_TreeRow3
+	.db 31, 255, 40, 16  ;SG_TreeRow3
+	.db 63, 255, 40, 18  ;SG_TreeRow1
+	.db 175, 255, 40, 18  ;SG_TreeRow1
+	.db 207, 255, 41, 18  ;SG_TreeRow1
+	.db 223, 255, 42, 17  ;SG_TreeRow5
+	.db 121, 255, 51, 10  ;SG_Vines5
+	.db 93, 255, 108, 8  ;SG_Branch6
+	.db 138, 18, 43, 70  ;Vine4_Slow_F
+	.db 149, 255, 30, 26  ;SG_BranchBase2
 	.db 135, 255, 2, 1  ;SG_Branch3
-	.db 93, 255, 108, 6  ;SG_Branch6
-	.db 149, 255, 30, 22  ;SG_BranchBase2
 
 MG_Data_2:
 	.db 0
-	.db 18
-	.db 15, 255, 34, 11  ;SG_TreeRow3
-	.db 79, 255, 38, 15  ;SG_TreeRow4
-	.db 63, 255, 37, 12  ;SG_TreeRow5
-	.db 111, 255, 40, 11  ;SG_TreeRow3
-	.db 143, 255, 42, 12  ;SG_TreeRow5
-	.db 159, 255, 43, 15  ;SG_TreeRow4
-	.db 175, 255, 42, 12  ;SG_TreeRow5
-	.db 31, 255, 35, 13  ;SG_TreeRow1
-	.db 95, 255, 39, 14  ;SG_TreeRow2
-	.db 207, 255, 42, 14  ;SG_TreeRow2
-	.db 223, 255, 41, 15  ;SG_TreeRow4
-	.db 255, 255, 40, 11  ;SG_TreeRow3
-	.db 47, 255, 36, 13  ;SG_TreeRow1
-	.db 127, 255, 41, 13  ;SG_TreeRow1
-	.db 191, 255, 42, 13  ;SG_TreeRow1
-	.db 239, 255, 40, 13  ;SG_TreeRow1
-	.db 120, 255, 96, 21  ;SG_BranchBase3
+	.db 24
+	.db 220, 255, 0, 22  ;SG_Vines6
+	.db 15, 255, 34, 16  ;SG_TreeRow3
+	.db 40, 10, 144, 75  ;Vine6_Slow_O
+	.db 79, 255, 38, 20  ;SG_TreeRow4
+	.db 63, 255, 37, 17  ;SG_TreeRow5
+	.db 111, 255, 40, 16  ;SG_TreeRow3
+	.db 143, 255, 42, 17  ;SG_TreeRow5
+	.db 40, 10, 149, 75  ;Vine6_Slow_O
+	.db 175, 255, 42, 17  ;SG_TreeRow5
+	.db 159, 255, 43, 20  ;SG_TreeRow4
+	.db 95, 255, 39, 19  ;SG_TreeRow2
+	.db 207, 255, 42, 19  ;SG_TreeRow2
+	.db 223, 255, 41, 20  ;SG_TreeRow4
+	.db 255, 255, 40, 16  ;SG_TreeRow3
+	.db 47, 255, 36, 18  ;SG_TreeRow1
+	.db 127, 255, 41, 18  ;SG_TreeRow1
+	.db 191, 255, 42, 18  ;SG_TreeRow1
+	.db 239, 255, 40, 18  ;SG_TreeRow1
+	.db 31, 255, 35, 18  ;SG_TreeRow1
+	.db 80, 255, 102, 22  ;SG_Vines6
+	.db 111, 255, 106, 25  ;SG_Vines8
+	.db 120, 255, 96, 23  ;SG_BranchBase3
 	.db 168, 255, 114, 2  ;SG_Branch7
+	.db 110, 255, 100, 24  ;SG_Vines4
 
 MG_Data_1:
 	.db 0
-	.db 21
-	.db 15, 255, 33, 12  ;SG_TreeRow5
-	.db 95, 255, 31, 12  ;SG_TreeRow5
-	.db 175, 255, 31, 12  ;SG_TreeRow5
-	.db 47, 255, 32, 15  ;SG_TreeRow4
-	.db 63, 255, 31, 14  ;SG_TreeRow2
-	.db 111, 255, 31, 14  ;SG_TreeRow2
-	.db 159, 255, 31, 15  ;SG_TreeRow4
-	.db 223, 255, 33, 15  ;SG_TreeRow4
-	.db 127, 255, 31, 11  ;SG_TreeRow3
-	.db 255, 255, 34, 15  ;SG_TreeRow4
-	.db 31, 255, 32, 11  ;SG_TreeRow3
-	.db 79, 255, 31, 13  ;SG_TreeRow1
-	.db 143, 255, 31, 13  ;SG_TreeRow1
-	.db 191, 255, 32, 13  ;SG_TreeRow1
-	.db 207, 255, 32, 13  ;SG_TreeRow1
-	.db 239, 255, 33, 11  ;SG_TreeRow3
-	.db 163, 255, 82, 20  ;SG_Vines5
+	.db 20
+	.db 15, 255, 33, 17  ;SG_TreeRow5
+	.db 95, 255, 31, 17  ;SG_TreeRow5
+	.db 175, 255, 31, 17  ;SG_TreeRow5
+	.db 47, 255, 32, 20  ;SG_TreeRow4
+	.db 63, 255, 31, 19  ;SG_TreeRow2
+	.db 111, 255, 31, 19  ;SG_TreeRow2
+	.db 127, 255, 31, 16  ;SG_TreeRow3
+	.db 223, 255, 33, 20  ;SG_TreeRow4
+	.db 159, 255, 31, 20  ;SG_TreeRow4
+	.db 255, 255, 34, 20  ;SG_TreeRow4
+	.db 31, 255, 32, 16  ;SG_TreeRow3
+	.db 79, 255, 31, 18  ;SG_TreeRow1
+	.db 143, 255, 31, 18  ;SG_TreeRow1
+	.db 191, 255, 32, 18  ;SG_TreeRow1
+	.db 207, 255, 32, 18  ;SG_TreeRow1
+	.db 239, 255, 33, 16  ;SG_TreeRow3
+	.db 163, 255, 82, 10  ;SG_Vines5
 	.db 217, 255, 96, 2  ;SG_Branch7
-	.db 170, 255, 73, 21  ;SG_BranchBase3
-	.db 239, 255, 6, 7  ;SG_Branch2
-	.db 163, 255, 74, 17  ;SG_Vines2
+	.db 170, 255, 73, 23  ;SG_BranchBase3
+	.db 163, 255, 74, 11  ;SG_Vines2
 
 MG_Data_0:
 	.db 0
-	.db 33
-	.db 57, 255, 136, 8  ;SG_GroundChunk2
-	.db 59, 255, 114, 9  ;SG_GroundChunk1
-	.db 59, 255, 22, 8  ;SG_GroundChunk2
-	.db 60, 255, 0, 9  ;SG_GroundChunk1
-	.db 255, 255, 34, 14  ;SG_TreeRow2
-	.db 239, 255, 35, 11  ;SG_TreeRow3
-	.db 223, 255, 34, 13  ;SG_TreeRow1
-	.db 207, 255, 35, 12  ;SG_TreeRow5
-	.db 191, 255, 34, 13  ;SG_TreeRow1
-	.db 175, 255, 34, 15  ;SG_TreeRow4
-	.db 159, 255, 34, 14  ;SG_TreeRow2
-	.db 143, 255, 35, 13  ;SG_TreeRow1
-	.db 127, 255, 35, 11  ;SG_TreeRow3
-	.db 111, 255, 35, 12  ;SG_TreeRow5
-	.db 95, 255, 34, 14  ;SG_TreeRow2
-	.db 79, 255, 34, 13  ;SG_TreeRow1
-	.db 47, 255, 34, 11  ;SG_TreeRow3
-	.db 53, 255, 18, 10  ;SG_Root1
-	.db 51, 255, 134, 10  ;SG_Root1
-	.db 59, 255, 121, 10  ;SG_Root1
-	.db 63, 255, 34, 12  ;SG_TreeRow5
-	.db 209, 255, 73, 19  ;SG_Vines7
-	.db 207, 255, 31, 18  ;SG_Vines6
-	.db 35, 255, 24, 9  ;SG_GroundChunk1
-	.db 37, 255, 48, 9  ;SG_GroundChunk1
-	.db 36, 255, 72, 8  ;SG_GroundChunk2
-	.db 37, 255, 96, 9  ;SG_GroundChunk1
-	.db 34, 255, 120, 8  ;SG_GroundChunk2
-	.db 31, 255, 136, 8  ;SG_GroundChunk2
-	.db 34, 255, 0, 8  ;SG_GroundChunk2
-	.db 233, 255, 0, 16  ;SG_Branch1
-	.db 219, 16, 116, 89  ;Vine5_Slow
-	.db 207, 255, 23, 17  ;SG_Vines2
+	.db 38
+	.db 57, 255, 136, 13  ;SG_GroundChunk2
+	.db 59, 255, 114, 14  ;SG_GroundChunk1
+	.db 59, 255, 22, 13  ;SG_GroundChunk2
+	.db 60, 255, 0, 14  ;SG_GroundChunk1
+	.db 95, 255, 34, 19  ;SG_TreeRow2
+	.db 111, 255, 35, 17  ;SG_TreeRow5
+	.db 127, 255, 35, 16  ;SG_TreeRow3
+	.db 143, 255, 35, 18  ;SG_TreeRow1
+	.db 159, 255, 34, 19  ;SG_TreeRow2
+	.db 191, 255, 34, 18  ;SG_TreeRow1
+	.db 79, 255, 34, 18  ;SG_TreeRow1
+	.db 207, 255, 35, 17  ;SG_TreeRow5
+	.db 223, 255, 34, 18  ;SG_TreeRow1
+	.db 239, 255, 35, 16  ;SG_TreeRow3
+	.db 255, 255, 34, 19  ;SG_TreeRow2
+	.db 175, 255, 34, 20  ;SG_TreeRow4
+	.db 204, 255, 135, 7  ;SG_Lantern4
+	.db 63, 255, 34, 17  ;SG_TreeRow5
+	.db 15, 16, 131, 85  ;GroundDirtFull_Fast
+	.db 47, 255, 34, 16  ;SG_TreeRow3
+	.db 59, 255, 121, 15  ;SG_Root1
+	.db 51, 255, 134, 15  ;SG_Root1
+	.db 157, 255, 13, 7  ;SG_Lantern4
+	.db 15, 16, 70, 85  ;GroundDirtFull_Fast
+	.db 15, 16, 90, 85  ;GroundDirtFull_Fast
+	.db 53, 255, 18, 15  ;SG_Root1
+	.db 31, 255, 136, 13  ;SG_GroundChunk2
+	.db 34, 255, 120, 13  ;SG_GroundChunk2
+	.db 37, 255, 96, 14  ;SG_GroundChunk1
+	.db 34, 255, 0, 13  ;SG_GroundChunk2
+	.db 37, 255, 48, 14  ;SG_GroundChunk1
+	.db 35, 255, 24, 14  ;SG_GroundChunk1
+	.db 207, 255, 31, 22  ;SG_Vines6
+	.db 209, 255, 73, 9  ;SG_Vines7
+	.db 36, 255, 72, 13  ;SG_GroundChunk2
+	.db 233, 255, 0, 21  ;SG_Branch1
+	.db 219, 16, 116, 67  ;Vine5_Slow
+	.db 207, 255, 23, 11  ;SG_Vines2
 
 
 

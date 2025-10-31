@@ -1,12 +1,13 @@
 Sprite_Table_Table:
 	.dl Sprite_Table_0
 	.dl Sprite_Table_1
+	.dl Sprite_Table_2
 
 
 Sprite_Table_0:
 	.dl BigGrassBase_Slow_O
-	.dl BigGrassBase_Fast
 	.dl BigGrassBase_Fast_F
+	.dl BigGrassBase_Fast
 	.dl BigGrassTop_Fast
 	.dl BigGrassTop_Fast_F
 	.dl BigGrassTop_Slow_O
@@ -41,16 +42,49 @@ Sprite_Table_0:
 	.dl Lantern_2_Fast_F
 	.dl Lantern_3_Slow
 	.dl Lantern_3_Slow_O_F
+	.dl Lantern_5_Slow
+	.dl Lantern_5_Slow_O_F
 	.dl LeavesDark_Fast_F
 	.dl Branches_12_Fast
 	.dl Branches_6_Slow
 	.dl Branches_7_Fast
 	.dl Branches_8_Fast_F
 	.dl Branches_16_Slow_O_F
+	.dl Lantern_6_Slow
+	.dl Lantern_6_Slow_O_F
+	.dl AscentBanner_8_Slow
+	.dl AscentBanner_8_Slow_O
+	.dl AscentBanner_7_Fast
+	.dl AscentBanner_7_Slow_O
+	.dl AscentBanner_9_Fast_F
+	.dl AscentBanner_6_Slow_F
+	.dl AscentBanner_10_Fast_F
+	.dl AscentBanner_5_Fast
+	.dl AscentBanner_4_Fast
+	.dl AscentBanner_0_Fast
+	.dl AscentBanner_3_Fast
+	.dl AscentBanner_2_Fast
+	.dl AscentBanner_1_Fast
+	.dl AscentBanner_9_Fast
+	.dl AscentBanner_10_Fast
+	.dl AscentBanner_6_Slow_O
 	.dl Branches_4_Fast_F
 	.dl Branches_7_Fast_F
 	.dl Branches_12_Fast_F
 	.dl Leaves1_Fast_F
+	.dl Vine5_Slow
+	.dl Vine6_Slow
+	.dl Vine4_Slow
+	.dl Vine4_Slow_F
+	.dl Vine4_Slow_O_F
+	.dl Vine5_Slow_O_F
+	.dl Vine7_Slow_O
+	.dl Vine5_Slow_O
+	.dl Vine6_Slow_O
+	.dl Vine4_Slow_O
+	.dl Vine2_Slow
+	.dl VineVertical_Slow_O
+	.dl VineVertical_Slow
 	.dl Branches_5_Fast
 	.dl Branches_4_Fast
 	.dl Branches_3_Fast
@@ -85,23 +119,13 @@ Sprite_Table_0:
 	.dl Tree_2_Fast_F
 	.dl Tree_11_Fast_F
 	.dl Branches_1_Fast
-	.dl Vine2_Slow
-	.dl VineVertical_Slow_O
-	.dl VineVertical_Slow
-	.dl Vine4_Slow_F
-	.dl Vine4_Slow_O_F
-	.dl Vine5_Slow_O_F
-	.dl Vine6_Slow_O
 	.dl Vine7_Slow
-	.dl Vine5_Slow
-	.dl Vine6_Slow
-	.dl Vine4_Slow
-	.dl Vine7_Slow_O
-	.dl Vine5_Slow_O
-	.dl Vine4_Slow_O
 	.dl Branches_1_Fast_F
 	.dl Branches_2_Fast_F
 	.dl Branches_5_Fast_F
+	.dl Vine2_Slow_O
+	.dl Vine2_Slow_F
+	.dl VineVertical_Slow_F
 	.dl Branches_1_Slow_O
 	.dl Branches_2_Slow_O
 	.dl Branches_4_Slow_O
@@ -109,11 +133,16 @@ Sprite_Table_0:
 	.dl Branches_0_Fast_F
 	.dl Branches_8_Slow_O
 	.dl Branches_9_Fast_F
+	.dl Branches_0_Fast
 	.dl Platforms_0_Fast
 	.dl Platforms_1_Fast
 	.dl Platforms_0_Fast_F
 	.dl Platforms_2_Slow_O_F
 	.dl Platforms_2_Slow_O
+	.dl TongueRing1_Slow
+	.dl TongueRing2_Slow
+	.dl TongueRing1_Slow_F
+	.dl TongueRing2_Slow_F
 	.dl Spikes_0_Fast
 	.dl GroundDirtDark_Fast
 	.dl GroundDirtDark_Fast_F
@@ -137,4 +166,6 @@ Sprite_Table_0:
 	.dl Clouds_2_Fast_F
 
 Sprite_Table_1:
+
+Sprite_Table_2:
 

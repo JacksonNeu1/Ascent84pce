@@ -10,7 +10,7 @@
 
 
 
-
+Debug flags in RAM:
 A0 XX = return of get next alpha 
 A1 = start of get alpha pair
 A2 = start of get next alpha
@@ -92,6 +92,15 @@ testSlowSprite:
 	
 	;XW WW WW WW WW WX
 	
+
+Collision Data:
+Grouped into dataframes 256px tall similar to sprites
+.db ymin (lowest y val of collider), height, xmax, xmin, flags (7 = semisolid, 6 = damagesource, 5,4=unused,  3-0 = breakaway platform index)
+breakaway platform index inicates which timer to use for this collider, up to 15 different timers for tracking states of breakaway platforms. 0000 = not breakaway
+	
+
+
+
 
 
 CAPPINGTON!

@@ -709,15 +709,17 @@ vert_col_down:
 	ld a,(player_flags)
 	bit 3,a 
 	jp z,colis_vert_down_not_fall
+	
+	;PLayer is falling
 	set 5,a ;set semisolid flag. All colliders act semisolid while in fall
 	ld (player_flags),a 
 	push hl ;save collider flags 
 	
 	
-	push af 
-	ld a,$B0
-	call write_a_to_ram
-	pop af
+	;push af 
+	;ld a,$B0
+	;call write_a_to_ram
+	;pop af
 	
 	;check if we are below spike hit height 
 	ld hl,(spike_hit_height)
@@ -731,42 +733,52 @@ vert_col_down:
 	
 
 check_end_fall:
-	push af 
-	ld a,$B1
-	call write_a_to_ram
-	pop af
-	call write_a_to_ram
+	;push af 
+	;ld a,$B1
+	;call write_a_to_ram
+	;pop af
+	;call write_a_to_ram
 	
 	pop hl ;return collider flags 
 	;Player has hit ground below fall threshold 
-	bit 4,a ;check we were not in semisolid last update 
-	jp nz, check_col_skip_0; player not currently in collider 
- 
-	ld a,$B2
-	call write_a_to_ram
+	bit 4,a ;check we were not in semisolid last update (cant stop fall if player is clipping into a collider)
+	jp nz, check_col_skip_0; player currently in collider 
+	
+	;ld a,$B2
+	;call write_a_to_ram
 	;player can land 
 	;check for unlucky bounce 
 	res 3,a 
 	ld (player_flags),a ;reset fall flag 
+	
+	ld a,$B1
+	call write_a_to_ram
+	
 	;pop hl 
 	ld a, (fall_num_bounces)
 	ld b,a 
-	call write_a_to_ram
+	;call write_a_to_ram
 	call random_val
 	ld e,a 
-	ld c,%00000001
-unlucky_bounce_loop:
+	call write_a_to_ram
+	ld c,%00000001 ;can set to 11 for hard mode
+unlucky_bounce_loop: ;number of bounces determines num loops = more chances to land successfully
 	ld a,e ;restore random val
 	and a,c 
-	jp z,colis_vert_down_not_fall
+	jp z,colis_vert_down_not_fall ;player lands
 	rlc c 
-	jp c,colis_vert_down_not_fall
+	jp c,colis_vert_down_not_fall ;break loop after 8 shifts (incase rand val is all 0)
 	djnz unlucky_bounce_loop
 	
 ;Player has hit unlucky bounce 
 	push hl 
 	call spike_hit_bounce
 	pop hl
+	
+	;show unlucky indicator
+	ld a,80
+	ld (pd_unlucky_display_timer),a 
+	
 	jp check_col_skip_0 ;continue 
 	
 	
@@ -917,7 +929,7 @@ spike_pos_bounce:
 	jp nc, spike_bounce_min_height_threshold
 	ld hl,0
 spike_bounce_min_height_threshold:
-	ld de, $004300  ;minimum spike height threshold 
+	ld de, $004300  ;minimum spike height threshold (bottom of map)
 	add hl,de 
 	ld (spike_hit_height),hl 
 	;call write_hl_to_ram
@@ -1045,7 +1057,7 @@ breakaway_timer_update_loop:
 	;call write_a_to_ram
 	;call prgmpause
 	or a 
-	jp z, breakaway_timer_update_loop_skip
+	jp z, breakaway_timer_update_loop_skip ;not being stood on
 	inc a 
 	ld (hl),a 
 breakaway_timer_update_loop_skip:

@@ -112,7 +112,7 @@ pmc_player_near_bottom: ;need to set cam to 10px from bottom
 	ld de,12
 	sbc hl,de 
 	jp nc,set_cam_0_skip
-	ld hl,0
+	ld hl,0 ;prevents bottoming out
 	ld (cam_pos),hl 
 	ret 
 	
@@ -138,13 +138,13 @@ pmc_move_towards_desired_pos:
 	ld de,0 
 	call pmc_set_speed
 	ld a,h 
-	or a 
+	or a ;if h is nonzero >256px difference
 	call nz,pmc_max_speed ;set max speed
 	ld hl,(cam_pos)
 	sbc hl,de ;add speed to cam pos 
 	
 	jp nc,set_cam_0_skip
-	ld hl,0
+	ld hl,0 ;prevents negative cam pos
 set_cam_0_skip:
 	ld (cam_pos),hl 
 	ret 
@@ -169,6 +169,7 @@ pmc_move_towards_up:
 
 
 pmc_set_speed: ;a holds magnitude of difference btwn current and desired pos 
+	ld (camera_last_speed),a 
 	ld e, 0
 	cp 3
 	ret c ;difference < 3px
@@ -200,6 +201,10 @@ pmc_max_speed:
 	ld e, 24 ;Max cam speed px/frame
 	ret
 
+camera_last_speed:
+	.db 0
+
+
 player_draw:
 ;Draw sprite and reset any flags 
 
@@ -211,7 +216,7 @@ player_draw:
 	ld a,(player_flags)
 	bit 3,a ;check fall flag 
 	jp nz,pd_set_fall
-	;TODO tounge flag
+	;tounge flag
 	bit 2,a 
 	jp nz,pd_set_tongue
 	bit 7,a ;Check jump held flag 
@@ -322,7 +327,7 @@ pd_set_jump:
 	ld (pd_x_offset_noflip),a 
 	ld a,2
 	ld (pd_x_offset_flip),a 
-	ld a,1 
+	ld a,1
 	ld (pd_y_offset),a 
 	
 
@@ -345,7 +350,7 @@ pd_x_offset_noflip .equ $+1
 	ld a,(player_flags)
 	set 1,a 
 	ld (player_flags),a 
-pd_check_offset:
+pd_check_offset: ;jump here to draw unlucky
 	;ld x pos
 	ld hl,(player_x_pos+1);fullpx
 	sbc hl,de ;subtract x offset
@@ -353,7 +358,7 @@ pd_check_offset:
 	srl h ;div 2
 	rr l 
 	ld a,l
-	ld (pd_xpos_full),a 
+	ld (pd_xpos_full),a ;xpos in pixel pairs
 
 	bit 0, e ;least fullpixel bit 
 	jp z, pd_even_px 
@@ -363,7 +368,7 @@ pd_even_px:
 	ld (player_sprite_index),a 
 
 	;call write_a_to_ram
-
+ 
 	;get y pos
 	ld hl,0 
 	ld a,(player_y_pos + 2) ;MSB
@@ -376,12 +381,14 @@ pd_y_offset .equ $+1
 	ld de,0 
 	add hl,de ;add y offset
 
-	ex de,hl 
+
+	;Draw player sprite 
+	ex de,hl ;de holds player y 
 	ld hl,(cam_pos)
-	srl h ;div by 2
+	srl h ;div by 2 (mg layer)
 	rr l 
-	ld bc,239
-	add hl,bc ;y-value of uppermost visible line of fg layer
+	ld bc,239 ;screen height
+	add hl,bc ;y-value of uppermost visible line of mg layer
 	scf 
 	ccf 
 	;Uppermost vp line - player y  = lines below top to draw player 
@@ -392,7 +399,7 @@ pd_y_offset .equ $+1
 	ld a,h 
 	
 	or a 
-	ret nz ;player is > 256 px below cam 
+	ret nz ;player is > 256 px below cam top
 	
 	ld a,l 
 	;a holds lines below vp top to draw player
@@ -401,7 +408,6 @@ pd_y_offset .equ $+1
 	sub a,b ;lines above bottom of VP 
 	ret c ;player below VP 
 
-	
 	ld de, (draw_buffer)
 	ld hl, 240*160
 	add hl,de 
@@ -414,22 +420,31 @@ pd_sprite_height_1 .equ $ + 1
 	;Otherwise, no top or bottm cut
 	;a holds lines above bottom VP 
 	call pd_setup_draw
+	bit 0,l ;location of sprite data in vram indicates fast or slow sprite
+	jp z,pd_fullsprite_fast
 	call draw_slow_sprite_full
-	ld a,(player_flags)
-	bit 2,a 
-	call nz, draw_tongue
-	ret
+	jp pd_check_unlucky_and_tongue
+pd_fullsprite_fast:
+	;ld a,$BB
+	;call write_a_to_ram
+	;call prgmpause
+	call draw_fast_sprite_full
+	;ld a,$BC
+	;call write_a_to_ram
+	jp pd_check_unlucky_and_tongue
 
 pd_bottom_cut:
 	;a holds lines to draw
 	;DE holds vram bottom 
 	call pd_setup_draw
-	call draw_slow_sprite_bottom_cut
-	ld a,(player_flags)
-	bit 2,a 
-	call nz, draw_tongue
-	ret 
 	
+	bit 0,l ;location of sprite data in vram indicates fast or slow sprite
+	jp z,pd_bottom_cut_fast
+	call draw_slow_sprite_bottom_cut
+	jp pd_check_unlucky_and_tongue
+pd_bottom_cut_fast:
+	call draw_fast_sprite_bottom_cut
+	jp pd_check_unlucky_and_tongue
 
 pd_top_cut:
 	;call write_hl_to_ram
@@ -440,7 +455,7 @@ pd_top_cut:
 
 	ld a,h ;Upper byte after subtraction, check for chase where player > 256 px above cam to prevent overflow errors
 	xor %11111111 ;flip all bits 
-	ret nz ;player is > 256 px above cam 
+	ret nz ;player is > 256 px above cam.
 
 	ld a,l ;lines below VP
 	neg 
@@ -453,16 +468,90 @@ pd_sprite_height_2 .equ $ + 1
 	ld de,(draw_buffer)
 	call pd_setup_draw ;Setup draw pos 
 	
-	;bit 0,l ;location of sprite data in vram indicates fast or slow sprite
-	;jp z,pd_top_cut_fast
+	bit 0,l ;location of sprite data in vram indicates fast or slow sprite
+	jp z,pd_top_cut_fast
 	call draw_slow_sprite_top_cut ;for now assume all sprites are slow
+	jp pd_check_unlucky_and_tongue
+
+pd_top_cut_fast:
+	call draw_fast_sprite_top_cut
+	jp pd_check_unlucky_and_tongue
+
+pd_check_unlucky_and_tongue:
 	
+pd_unlucky_display_timer .equ $+1
+	ld a,0
+	or a
+	jp z,pd_unlucky_skip
+	dec a ;dec timer if nonzero
+	ld (pd_unlucky_display_timer),a 
+	;call write_a_to_ram
+	scf 
+pd_unlucky_display_timer_drawncheck .equ $
+	jp c, pd_draw_unlucky
+pd_unlucky_skip:
+	
+	ld a,%11011010;jp c
+	ld (pd_unlucky_display_timer_drawncheck),a ;reset drawn flag
+	
+	;ld a,$11
+	;call write_a_to_ram
 	ld a,(player_flags)
 	bit 2,a 
 	call nz, draw_tongue
 	ret 
-	
 
+pd_draw_unlucky:
+	;draw unlucky by setting offsets and sprite index, call player draw again
+	;ld a,$CA 
+	;call write_a_to_ram
+	
+	;ld a,(player_flags)
+	;bit 2,a 
+	;call nz, draw_tongue
+	;ret 
+	ld a, %11010010 ;jp nc 
+	ld(pd_unlucky_display_timer_drawncheck),a ;ensure only drawn once per frame
+	ld a,11
+	ld (pd_sprite_height_1),a 
+	ld (pd_sprite_height_2),a 
+	
+	ld de ,14 ;default x offset
+	;calculate x offset to clamp within screen
+	
+	call player_x_half
+	cp 9
+	jp c, pd_unlucky_clamp_left
+	cp 139
+	jp nc,pd_unlucky_clamp_right
+	
+pd_unlucky_noclamp:
+	ld a,10
+	ld (pd_y_offset),a
+	ld c,24
+	jp pd_check_offset	
+	
+	
+pd_unlucky_clamp_right:
+	;as a increases, offset should increase
+	ld c,117
+	sub a,c 
+	ld e,a 
+	ld a,$BB
+	call write_a_to_ram
+	jp pd_unlucky_noclamp
+
+pd_unlucky_clamp_left:
+	;as a increases, offset should increase
+	;maybe add to a
+	ld e,a 
+	ld a,$AA
+	call write_a_to_ram
+	jp pd_unlucky_noclamp
+
+
+
+	
 
 
 pd_setup_draw:
@@ -806,28 +895,29 @@ player_sprite_table: ;Add 4 for sprite, add 2 for flip, add 1 for offset
 	.dl FrogDefault_Slow
 	.dl FrogDefault_Slow_O
 	.dl FrogDefault_Slow_F
-	.dl FrogDefault_Slow_O_F
-	.dl FrogCharge_Slow
+	.dl FrogDefault_Slow_O_F ;3
+	.dl FrogCharge_Slow ;4
 	.dl FrogCharge_Slow_O
 	.dl FrogCharge_Slow_F
 	.dl FrogCharge_Slow_O_F
-	.dl FrogChargeLit_Slow
+	.dl FrogChargeLit_Slow ;8
 	.dl FrogChargeLit_Slow_O
 	.dl FrogChargeLit_Slow_F
 	.dl FrogChargeLit_Slow_O_F
-	.dl FrogJump_Slow
+	.dl FrogJump_Slow;12
 	.dl FrogJump_Slow_O
 	.dl FrogJump_Slow_F
 	.dl FrogJump_Slow_O_F
-	.dl FrogJumpMouth_Slow
+	.dl FrogJumpMouth_Slow ;16
 	.dl FrogJumpMouth_Slow_O
 	.dl FrogJumpMouth_Slow_F
 	.dl FrogJumpMouth_Slow_O_F
-	.dl FrogFall_Slow
+	.dl FrogFall_Slow;20
 	.dl FrogFall_Slow_O
 	.dl FrogFall_Slow_F
 	.dl FrogFall_Slow_O_F
-	
+	.dl Unlucky_0_Fast;24
+	.dl Unlucky_0_Fast;25 (same if offset)
 	
 	
 	
