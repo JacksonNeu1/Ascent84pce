@@ -13,8 +13,12 @@
 ;(There is the issue of camera movement, but can just render text only when cam is not moving?)
 
 check_for_text:
+	;ld a,$AE 
+	;call write_a_to_ram
+	
 	;Checks list of text segments against player Y coord, and starts a text type if so 
 	ld a,(character_count)
+	or a 
 	ret nz ;if text has already started, return 
 	ld a,(player_flags)
 	bit 6,a
@@ -22,15 +26,18 @@ check_for_text:
 	
 	
 	ld hl,text_table
-	ld de,7
+	ld de,8
 	ld b,(hl)
 	inc hl
 check_text_ypos_loop:
-	ld a,(player_y_pos)
+
+	ld a,(player_y_pos+2) ;frame num
+
 	cp (hl) ;comare upper byte of y pos to entry in text table data 
-	inc hl ;to second byte of Y (doesn't change z flg)
+	inc hl ;to second y byte
 	jp nz,check_text_ypos_loop_1 ;if no match, go to next entry in table 
 	ld a,(player_y_pos + 1)
+	;call write_a_to_ram
 	cp (hl) ;compare lower byte of y (pixels)
 	jp z, set_text_segment ;if match, set this as current text segment
 check_text_ypos_loop_1:
@@ -46,6 +53,9 @@ set_text_segment:
 	inc hl 
 	inc hl 
 	inc hl 
+	ld a,(hl) 
+	ld (current_text_max_char_count),a 
+	inc hl 
 	ld de,(hl)
 	ld (current_segment_chars),de
 	ret
@@ -54,21 +64,27 @@ set_text_segment:
 render_text:
 	;called every frame 
 	ld a,(character_count)
+	or a 
 	ret z ;if no text active, return 
 	ld (render_text_char_counter),a  ;store char count for loop
 	ld a,(player_flags)
 	bit 6,a 
 	jp z,clear_active_text ; if player not on ground, clear text 
 	ld a,(camera_last_speed)
+	or a 
 	jp nz,clear_active_text ; if camera is moving, clear text 
-	
 	;Able to render text 
 	;b holds current char count 
 render_text_test:	
 	
+	
+	
+	
+	
 
 	;exx ;to shadow 
 	ld hl,(text_pos)
+	;call write_hl_to_ram
 	ld de,(draw_buffer)
 	add hl,de 
 	push hl 
@@ -76,17 +92,21 @@ render_text_test:
 	;exx;out
 	
 	ld hl,(current_segment_chars) ;hl holds pointer to char[] data 
+	;call write_hl_to_ram
 	ld a,(hl) ;a holds char indx 
-
-	cp 29 ;check if large or small font 
+	;call write_a_to_ram 
+	
+	;call prgmpause
+	
+	cp 30 ;check if large or small font 
 	jp nc, render_text_small_setup
 	
-	;if a <29 using large (fast) sprites 
+	;if a <30 using large (fast) sprites 
 	ld a, %11010010 ;jp nc
 	ld (render_text_sizemode),a 
-	ld de, 160*14
+	ld de, 160*15
 	ld (render_text_line_spacing),de 
-	ld de, 10
+	ld de, 9
 	ld (render_text_space_dist),de 
 	ld de,0 
 	ld (render_text_line_spacing_sum), de
@@ -100,9 +120,9 @@ render_text_test:
 render_text_small_setup:
 	ld a,%11011010;jp c
 	ld (render_text_sizemode),a 
-	ld de, 160*8
+	ld de, 160*9
 	ld (render_text_line_spacing),de 
-	ld de, 7
+	ld de, 6
 	ld (render_text_space_dist),de 
 	ld de,0 
 	ld (render_text_line_spacing_sum), de
@@ -125,9 +145,9 @@ render_text_loop:
 	pop hl ;hl holds draw pos 
 	push hl 
 	ex de,hl ;de holds vram pos, hl holds data 
-	cp 55 ;check if newline char (55)
+	cp 71 ;check if newline char (55)
 	jp z, render_text_newline
-    cp 56 ;check if space char (56)
+    cp 70 ;check if space char (56)
 	jp z, render_text_space
 	
 	scf
@@ -175,6 +195,16 @@ render_text_char_counter .equ $ + 1
 	jp nz, render_text_loop 
 	
 	pop hl ;prevent stack overflow 
+	
+	ld a,(frameCount)
+	and %00000001
+	ret z 
+	ld a,(character_count)
+current_text_max_char_count .equ $ + 1
+	cp 32
+	ret nc 
+	inc a 
+	ld (character_count),a 
 	ret 
 	
 
@@ -213,11 +243,11 @@ clear_active_text:
 
 
 character_count:
-.db 30 
+.db 0 
 current_segment_chars:
-.dl test_text_2 ;pointer to char[] of current segment 
+.dl 0 ;pointer to char[] of current segment 
 text_pos:
-.dl 160*20 + 4 ;offset from start of draw buffer to start of text
+.dl 0 ;offset from start of draw buffer to start of text
 
 char_table:
 .dl Font_0_Fast
@@ -249,7 +279,7 @@ char_table:
 .dl Font_26_Fast
 .dl Font_27_Fast
 .dl Font_28_Fast
-.dl Font_29_Slow
+.dl Font_29_Fast
 .dl Font_30_Slow
 .dl Font_31_Slow
 .dl Font_32_Slow
@@ -275,6 +305,10 @@ char_table:
 .dl Font_52_Slow
 .dl Font_53_Slow
 .dl Font_54_Slow
+.dl Font_55_Slow
+.dl Font_56_Slow
+.dl Font_57_Slow
+.dl Font_58_Slow
 	;.dl pointer to sprite
 	
 	

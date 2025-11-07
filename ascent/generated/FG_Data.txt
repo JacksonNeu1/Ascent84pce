@@ -62,102 +62,143 @@ FG_Data_23:
 
 FG_Data_22:
 	.db 0
-	.db 0
+	.db 3
+	.db 128, 255, 22, 7  ;SG_Lantern4
+	.db 133, 255, 11, 7  ;SG_Lantern4
+	.db 98, 255, 128, 1  ;SG_Branch3
 
 FG_Data_21:
 	.db 0
-	.db 0
+	.db 2
+	.db 138, 255, 142, 9  ;SG_Lantern3
+	.db 121, 255, 0, 10  ;SG_Branch6
 
 FG_Data_20:
 	.db 0
-	.db 0
+	.db 4
+	.db 128, 255, 6, 4  ;SG_Lantern2
+	.db 155, 10, 144, 42  ;Branches_7_Fast
+	.db 155, 11, 151, 41  ;Branches_6_Slow
+	.db 221, 255, 111, 14  ;SG_Branch2
 
 FG_Data_19:
 	.db 0
-	.db 0
+	.db 3
+	.db 105, 255, 150, 17  ;SG_Vines8
+	.db 211, 255, 0, 10  ;SG_Branch6
+	.db 164, 255, 114, 5  ;SG_Branch4
 
 FG_Data_18:
 	.db 0
-	.db 0
+	.db 2
+	.db 193, 255, 142, 9  ;SG_Lantern3
+	.db 128, 255, 0, 6  ;SG_Branch5
 
 FG_Data_17:
 	.db 0
-	.db 0
+	.db 1
+	.db 93, 255, 128, 1  ;SG_Branch3
 
 FG_Data_16:
 	.db 0
-	.db 0
+	.db 5
+	.db 183, 255, 132, 8  ;SG_Lantern5
+	.db 169, 255, 143, 8  ;SG_Lantern5
+	.db 113, 10, 0, 42  ;Branches_7_Fast
+	.db 123, 255, 16, 17  ;SG_Vines8
+	.db 172, 255, 5, 2  ;SG_Branch7
 
 FG_Data_15:
 	.db 0
-	.db 0
+	.db 6
+	.db 97, 255, 22, 15  ;SG_Vines3
+	.db 90, 255, 30, 16  ;SG_Vines1
+	.db 133, 255, 57, 11  ;SG_Vines7
+	.db 177, 255, 100, 11  ;SG_Vines7
+	.db 196, 255, 128, 1  ;SG_Branch3
+	.db 107, 255, 0, 10  ;SG_Branch6
 
 FG_Data_14:
 	.db 0
-	.db 0
+	.db 2
+	.db 171, 255, 12, 3  ;SG_Lantern1
+	.db 170, 255, 114, 5  ;SG_Branch4
 
 FG_Data_13:
 	.db 0
-	.db 0
+	.db 1
+	.db 132, 255, 128, 1  ;SG_Branch3
 
 FG_Data_12:
 	.db 0
-	.db 0
+	.db 3
+	.db 222, 255, 141, 4  ;SG_Lantern2
+	.db 210, 255, 0, 10  ;SG_Branch6
+	.db 118, 255, 114, 5  ;SG_Branch4
 
 FG_Data_11:
 	.db 0
-	.db 0
+	.db 1
+	.db 142, 255, 0, 6  ;SG_Branch5
 
 FG_Data_10:
 	.db 0
-	.db 1
+	.db 3
+	.db 120, 255, 141, 7  ;SG_Lantern4
+	.db 171, 255, 14, 9  ;SG_Lantern3
 	.db 202, 255, 128, 1  ;SG_Branch3
 
 FG_Data_9:
 	.db 0
-	.db 5
-	.db 176, 14, 0, 82  ;Branches_3_Fast
-	.db 177, 14, 9, 83  ;Branches_2_Fast
-	.db 177, 14, 18, 63  ;Branches_4_Fast_F
-	.db 213, 255, 114, 5  ;SG_Branch4
+	.db 4
+	.db 176, 14, 0, 85  ;Branches_3_Fast
+	.db 177, 14, 9, 86  ;Branches_2_Fast
+	.db 177, 14, 18, 66  ;Branches_4_Fast_F
 	.db 234, 255, 19, 2  ;SG_Branch7
 
 FG_Data_8:
 	.db 0
-	.db 3
-	.db 124, 14, 151, 80  ;Branches_5_Fast
-	.db 124, 14, 142, 81  ;Branches_4_Fast
-	.db 186, 255, 110, 12  ;SG_Branch2
+	.db 4
+	.db 124, 14, 151, 83  ;Branches_5_Fast
+	.db 124, 14, 142, 84  ;Branches_4_Fast
+	.db 127, 255, 8, 4  ;SG_Lantern2
+	.db 186, 255, 110, 14  ;SG_Branch2
 
 FG_Data_7:
 	.db 0
-	.db 2
+	.db 3
+	.db 86, 255, 138, 7  ;SG_Lantern4
+	.db 237, 255, 0, 10  ;SG_Branch6
 	.db 135, 255, 0, 6  ;SG_Branch5
-	.db 237, 255, 0, 8  ;SG_Branch6
 
 FG_Data_6:
 	.db 0
-	.db 1
-	.db 100, 255, 0, 8  ;SG_Branch6
+	.db 2
+	.db 108, 255, 56, 4  ;SG_Lantern2
+	.db 100, 255, 0, 10  ;SG_Branch6
 
 FG_Data_5:
 	.db 0
-	.db 2
-	.db 215, 255, 128, 1  ;SG_Branch3
+	.db 3
+	.db 182, 255, 8, 3  ;SG_Lantern1
 	.db 93, 255, 0, 6  ;SG_Branch5
+	.db 215, 255, 128, 1  ;SG_Branch3
 
 FG_Data_4:
 	.db 0
-	.db 5
-	.db 143, 255, 110, 9  ;SG_Vines7
-	.db 111, 255, 32, 10  ;SG_Vines5
-	.db 141, 255, 0, 8  ;SG_Branch6
+	.db 6
+	.db 223, 255, 7, 3  ;SG_Lantern1
+	.db 143, 255, 110, 11  ;SG_Vines7
+	.db 111, 255, 32, 12  ;SG_Vines5
+	.db 141, 255, 0, 10  ;SG_Branch6
 	.db 202, 255, 114, 5  ;SG_Branch4
-	.db 110, 255, 24, 11  ;SG_Vines2
+	.db 110, 255, 24, 13  ;SG_Vines2
 
 FG_Data_3:
 	.db 0
-	.db 1
+	.db 3
+	.db 174, 255, 138, 8  ;SG_Lantern5
+	.db 138, 255, 127, 9  ;SG_Lantern3
 	.db 176, 255, 128, 1  ;SG_Branch3
 
 FG_Data_2:

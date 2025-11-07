@@ -196,12 +196,12 @@ get_inputs_return:
 	;ld c,20 
 	;call draw_tongue
 	
-	ld hl, (draw_buffer)
-	ld de, 160*96  + 25
-	add hl,de
-	ex de, hl
-	ld hl,Font_19_Fast
-	call draw_fast_sprite_full
+	;ld hl, (draw_buffer)
+	;ld de, 160*96  + 25
+	;add hl,de
+	;ex de, hl
+	;ld hl,Font_55_Slow
+	;call draw_slow_sprite_full
 
 	
 	;TEsting
@@ -222,9 +222,8 @@ get_inputs_return:
 	call draw_fg
 	
 	
-	ld a,(character_count)
-	ld (render_text_char_counter),a 
-	call render_text_test
+	call check_for_text
+	call render_text
 	
 	
 	
@@ -643,6 +642,7 @@ sd_test_a:
 #include "generated/Collision_Data.txt"
 #include "generated/Animation_Data.txt"
 #include "generated/Tongue_Rings.txt"
+#include "generated/Text_Data.txt"
 
 ;#include "testing/SpriteGroups.txt"
 ;#include "TestingSpriteData.txt"
@@ -657,5 +657,5 @@ sd_test_a:
 ;#include "Sprite_Tables.txt"
 ;#include "TestingBGData.txt"
 ;#include "TestingFGData.txt"
-#include "testing/TestingTextData.txt"
+;#include "testing/TestingTextData.txt"
 

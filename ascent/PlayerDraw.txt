@@ -171,8 +171,8 @@ pmc_move_towards_up:
 pmc_set_speed: ;a holds magnitude of difference btwn current and desired pos 
 	ld (camera_last_speed),a 
 	ld e, 0
-	cp 3
-	ret c ;difference < 3px
+	cp 1
+	ret c ;difference < 1px
 	ld e, 1
 	cp 10
 	ret c ;difference < 8px

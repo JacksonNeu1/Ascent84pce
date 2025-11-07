@@ -68,6 +68,9 @@ Sprite_Table_0:
 	.dl AscentBanner_9_Fast
 	.dl AscentBanner_10_Fast
 	.dl AscentBanner_6_Slow_O
+	.dl Lantern_7_Slow
+	.dl Lantern_7_Slow_O_F
+	.dl Lantern_4_Slow_O
 	.dl Branches_4_Fast_F
 	.dl Branches_7_Fast_F
 	.dl Branches_12_Fast_F
@@ -89,6 +92,10 @@ Sprite_Table_0:
 	.dl Branches_4_Fast
 	.dl Branches_3_Fast
 	.dl Branches_2_Fast
+	.dl Vine2_Slow_F
+	.dl Vine3_Slow_F
+	.dl Vine7_Slow
+	.dl VineVertical_Slow_F
 	.dl GroundDirtFull_Fast_F
 	.dl GroundDirtFull_Fast
 	.dl GroundDirtMound_Fast
@@ -119,13 +126,15 @@ Sprite_Table_0:
 	.dl Tree_2_Fast_F
 	.dl Tree_11_Fast_F
 	.dl Branches_1_Fast
-	.dl Vine7_Slow
+	.dl FrogNPCs1_5_Slow_O
+	.dl FrogNPCs1_2_Slow_O_F
+	.dl FrogNPCs1_7_Slow_F
+	.dl FrogNPCs1_9_Slow
+	.dl FrogNPCs1_0_Slow
 	.dl Branches_1_Fast_F
 	.dl Branches_2_Fast_F
 	.dl Branches_5_Fast_F
 	.dl Vine2_Slow_O
-	.dl Vine2_Slow_F
-	.dl VineVertical_Slow_F
 	.dl Branches_1_Slow_O
 	.dl Branches_2_Slow_O
 	.dl Branches_4_Slow_O
@@ -143,29 +152,54 @@ Sprite_Table_0:
 	.dl TongueRing2_Slow
 	.dl TongueRing1_Slow_F
 	.dl TongueRing2_Slow_F
+	.dl FrogNPCs1_10_Slow
+	.dl FrogNPCs1_4_Slow_O
+	.dl FrogNPCs1_8_Slow_F
+	.dl FrogNPCs1_1_Slow
+	.dl FrogNPCs1_6_Slow_O
 	.dl Spikes_0_Fast
-	.dl GroundDirtDark_Fast
-	.dl GroundDirtDark_Fast_F
-	.dl GroundHumpDark_Fast
-	.dl GroundHumpDark_Fast_F
+	.dl FrogNPCs1_9_Slow_O
+	.dl FrogNPCs1_3_Slow_F
+	.dl FrogNPCs1_5_Slow
+	.dl FrogNPCs1_7_Slow
 	.dl Tree_16_Fast
 	.dl Tree_17_Slow
 	.dl Tree_17_Slow_O_F
 	.dl Tree_18_Slow
 	.dl Tree_18_Slow_O_F
 	.dl Tree_16_Fast_F
-	.dl Clouds_0_Fast
-	.dl Clouds_1_Fast
-	.dl Clouds_3_Fast
-	.dl Clouds_4_Fast
-	.dl Clouds_2_Fast
-	.dl Clouds_0_Fast_F
-	.dl Clouds_1_Fast_F
-	.dl Clouds_4_Fast_F
-	.dl Clouds_3_Fast_F
-	.dl Clouds_2_Fast_F
 
 Sprite_Table_1:
+	.dl SolidPlatform_4_Slow
+	.dl SolidPlatform_1_Slow_O
+	.dl SolidPlatform_1_Slow
+	.dl SolidPlatform_5_Slow_O
+	.dl SolidPlatform_0_Fast
+	.dl SolidPlatform_2_Fast
+	.dl SolidPlatform_3_Fast
+	.dl GroundDirtDark_Fast
+	.dl GroundDirtDark_Fast_F
+	.dl GroundHumpDark_Fast
+	.dl GroundHumpDark_Fast_F
+	.dl CloudsNew_1_Fast
+	.dl CloudsNew_6_Fast
+	.dl CloudsNew_5_Fast
+	.dl CloudsNew_6_Fast_F
+	.dl CloudsNew_2_Fast_F
+	.dl CloudsNew_4_Fast
+	.dl CloudsNew_3_Fast
+	.dl CloudsNew_8_Fast
+	.dl CloudsNew_2_Fast
+	.dl CloudsNew_0_Fast
+	.dl CloudsNew_9_Fast
+	.dl CloudsNew_7_Slow_O
+	.dl CloudsNew_5_Slow_O
+	.dl CloudsNew_0_Fast_F
+	.dl CloudsNew_7_Slow_F
+	.dl CloudsNew_1_Slow_O
+	.dl CloudsNew_6_Slow_O
+	.dl CloudsNew_4_Fast_F
+	.dl CloudsNew_9_Slow_O_F
 
 Sprite_Table_2:
 

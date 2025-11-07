@@ -7,11 +7,16 @@ Sprite_Groups:
 	.dl SG_Branch4
 	.dl SG_Branch5
 	.dl SG_Lantern4
+	.dl SG_Lantern5
+	.dl SG_Lantern3
 	.dl SG_Branch6
 	.dl SG_Vines7
 	.dl SG_Vines5
 	.dl SG_Vines2
 	.dl SG_Branch2
+	.dl SG_Vines3
+	.dl SG_Vines1
+	.dl SG_Vines8
 	.dl SG_GroundChunk2
 	.dl SG_GroundChunk1
 	.dl SG_Root1
@@ -24,7 +29,6 @@ Sprite_Groups:
 	.dl SG_Vines6
 	.dl SG_BranchBase3
 	.dl SG_Vines4
-	.dl SG_Vines8
 	.dl SG_BranchBase2
 	.dl SG_BranchBase4
 	.dl SG_BranchBase1
@@ -33,10 +37,15 @@ Sprite_Groups:
 	.dl SG_Platform1
 	.dl SG_TongueRing
 	.dl SG_Platform2
+	.dl SG_Platform5
+	.dl SG_Platform6
+	.dl SG_SolidPlatform1
+	.dl SG_SolidPlatform2
 	.dl SG_DarkGroundChunk
 	.dl SG_BGTree1
 	.dl SG_BGTree2
-	.dl SG_Cloud1
+	.dl SG_Cloud2
+	.dl SG_Cloud3
 
 
 
@@ -165,51 +174,66 @@ SG_Lantern4:
 	.db 24, 21, 4, 45  ;Lantern_6_Slow
 	.db 24, 21, 0, 46  ;Lantern_6_Slow_O_F
 
+SG_Lantern5:
+	.db 0
+	.db 4
+	.db 0, 24, 4, 30  ;Lantern_0_Fast
+	.db 0, 24, 0, 33  ;Lantern_0_Fast_F
+	.db 24, 21, 4, 63  ;Lantern_7_Slow
+	.db 24, 21, 0, 64  ;Lantern_7_Slow_O_F
+
+SG_Lantern3:
+	.db 0
+	.db 3
+	.db 0, 24, 4, 30  ;Lantern_0_Fast
+	.db 0, 24, 0, 33  ;Lantern_0_Fast_F
+	.db 24, 21, 0, 65  ;Lantern_4_Slow_O
+
 SG_Branch6:
 	.db 0
 	.db 13
 	.db 47, 21, 21, 19  ;LeavesDark_Fast
 	.db 0, 21, 9, 18  ;LeavesLight_Fast
 	.db 38, 21, 17, 13  ;Leaves1_Fast
-	.db 37, 14, 0, 63  ;Branches_4_Fast_F
-	.db 38, 10, 9, 64  ;Branches_7_Fast_F
+	.db 37, 14, 0, 66  ;Branches_4_Fast_F
+	.db 38, 10, 9, 67  ;Branches_7_Fast_F
 	.db 33, 14, 18, 9  ;Branches_9_Fast
-	.db 32, 10, 27, 65  ;Branches_12_Fast_F
+	.db 32, 10, 27, 68  ;Branches_12_Fast_F
 	.db 11, 21, 5, 13  ;Leaves1_Fast
 	.db 24, 19, 34, 6  ;DualLeaf4_Slow
 	.db 25, 14, 14, 20  ;Branches_14_Slow
 	.db 41, 13, 22, 44  ;Branches_16_Slow_O_F
-	.db 12, 21, 15, 66  ;Leaves1_Fast_F
+	.db 12, 21, 15, 69  ;Leaves1_Fast_F
 	.db 46, 18, 28, 28  ;Leaves2_Fast
 
 SG_Vines7:
 	.db 0
 	.db 5
-	.db 33, 16, 0, 67  ;Vine5_Slow
-	.db 31, 10, 8, 68  ;Vine6_Slow
-	.db 24, 16, 18, 67  ;Vine5_Slow
-	.db 15, 16, 26, 67  ;Vine5_Slow
-	.db 0, 18, 34, 69  ;Vine4_Slow
+	.db 33, 16, 0, 70  ;Vine5_Slow
+	.db 31, 10, 8, 71  ;Vine6_Slow
+	.db 24, 16, 18, 70  ;Vine5_Slow
+	.db 15, 16, 26, 70  ;Vine5_Slow
+	.db 0, 18, 34, 72  ;Vine4_Slow
 
 SG_Vines5:
 	.db 0
 	.db 9
-	.db 0, 18, 0, 70  ;Vine4_Slow_F
-	.db 17, 18, 7, 71  ;Vine4_Slow_O_F
-	.db 33, 16, 15, 72  ;Vine5_Slow_O_F
-	.db 40, 10, 25, 68  ;Vine6_Slow
-	.db 42, 10, 35, 73  ;Vine7_Slow_O
-	.db 34, 16, 42, 74  ;Vine5_Slow_O
-	.db 33, 10, 50, 75  ;Vine6_Slow_O
-	.db 26, 16, 61, 67  ;Vine5_Slow
-	.db 12, 18, 68, 76  ;Vine4_Slow_O
+	.db 0, 18, 0, 73  ;Vine4_Slow_F
+	.db 17, 18, 7, 74  ;Vine4_Slow_O_F
+	.db 33, 16, 15, 75  ;Vine5_Slow_O_F
+	.db 40, 10, 25, 71  ;Vine6_Slow
+	.db 42, 10, 35, 76  ;Vine7_Slow_O
+	.db 34, 16, 42, 77  ;Vine5_Slow_O
+	.db 33, 10, 50, 78  ;Vine6_Slow_O
+	.db 26, 16, 61, 70  ;Vine5_Slow
+	.db 12, 18, 68, 79  ;Vine4_Slow_O
 
 SG_Vines2:
 	.db 0
 	.db 4
-	.db 0, 16, 3, 77  ;Vine2_Slow
-	.db 16, 18, 2, 78  ;VineVertical_Slow_O
-	.db 34, 18, 2, 79  ;VineVertical_Slow
+	.db 0, 16, 3, 80  ;Vine2_Slow
+	.db 16, 18, 2, 81  ;VineVertical_Slow_O
+	.db 34, 18, 2, 82  ;VineVertical_Slow
 	.db 51, 12, 0, 17  ;DualLeaf2_Fast
 
 SG_Branch2:
@@ -217,8 +241,8 @@ SG_Branch2:
 	.db 19
 	.db 0, 21, 9, 18  ;LeavesLight_Fast
 	.db 1, 21, 21, 18  ;LeavesLight_Fast
-	.db 10, 21, 28, 66  ;Leaves1_Fast_F
-	.db 13, 21, 6, 66  ;Leaves1_Fast_F
+	.db 10, 21, 28, 69  ;Leaves1_Fast_F
+	.db 13, 21, 6, 69  ;Leaves1_Fast_F
 	.db 11, 21, 16, 13  ;Leaves1_Fast
 	.db 60, 14, 29, 43  ;Branches_8_Fast_F
 	.db 53, 14, 25, 43  ;Branches_8_Fast_F
@@ -235,96 +259,118 @@ SG_Branch2:
 	.db 58, 18, 12, 28  ;Leaves2_Fast
 	.db 28, 18, 34, 28  ;Leaves2_Fast
 
+SG_Vines3:
+	.db 0
+	.db 3
+	.db 0, 16, 0, 87  ;Vine2_Slow_F
+	.db 13, 17, 1, 88  ;Vine3_Slow_F
+	.db 28, 10, 5, 89  ;Vine7_Slow
+
+SG_Vines1:
+	.db 0
+	.db 3
+	.db 10, 16, 10, 70  ;Vine5_Slow
+	.db 16, 10, 0, 71  ;Vine6_Slow
+	.db 0, 16, 18, 70  ;Vine5_Slow
+
+SG_Vines8:
+	.db 0
+	.db 4
+	.db 0, 16, 0, 87  ;Vine2_Slow_F
+	.db 16, 18, 1, 90  ;VineVertical_Slow_F
+	.db 34, 18, 1, 82  ;VineVertical_Slow
+	.db 51, 12, 0, 17  ;DualLeaf2_Fast
+
 SG_GroundChunk2:
 	.db 0
 	.db 6
-	.db 14, 16, 0, 84  ;GroundDirtFull_Fast_F
-	.db 15, 16, 8, 85  ;GroundDirtFull_Fast
-	.db 14, 16, 16, 84  ;GroundDirtFull_Fast_F
-	.db 2, 12, 0, 86  ;GroundDirtMound_Fast
-	.db 3, 12, 8, 86  ;GroundDirtMound_Fast
-	.db 2, 12, 16, 86  ;GroundDirtMound_Fast
+	.db 14, 16, 0, 91  ;GroundDirtFull_Fast_F
+	.db 15, 16, 8, 92  ;GroundDirtFull_Fast
+	.db 14, 16, 16, 91  ;GroundDirtFull_Fast_F
+	.db 2, 12, 0, 93  ;GroundDirtMound_Fast
+	.db 3, 12, 8, 93  ;GroundDirtMound_Fast
+	.db 2, 12, 16, 93  ;GroundDirtMound_Fast
 
 SG_GroundChunk1:
 	.db 0
 	.db 7
-	.db 16, 16, 0, 85  ;GroundDirtFull_Fast
-	.db 15, 16, 8, 85  ;GroundDirtFull_Fast
-	.db 14, 16, 16, 84  ;GroundDirtFull_Fast_F
-	.db 2, 12, 16, 86  ;GroundDirtMound_Fast
-	.db 3, 12, 8, 86  ;GroundDirtMound_Fast
-	.db 4, 12, 0, 87  ;GroundDirtMound_Fast_F
-	.db 0, 12, 12, 86  ;GroundDirtMound_Fast
+	.db 16, 16, 0, 92  ;GroundDirtFull_Fast
+	.db 15, 16, 8, 92  ;GroundDirtFull_Fast
+	.db 14, 16, 16, 91  ;GroundDirtFull_Fast_F
+	.db 2, 12, 16, 93  ;GroundDirtMound_Fast
+	.db 3, 12, 8, 93  ;GroundDirtMound_Fast
+	.db 4, 12, 0, 94  ;GroundDirtMound_Fast_F
+	.db 0, 12, 12, 93  ;GroundDirtMound_Fast
 
 SG_Root1:
 	.db 0
 	.db 3
 	.db 6, 14, 0, 22  ;Branches_8_Fast
-	.db 3, 14, 13, 88  ;Branches_8_Slow_O_F
-	.db 0, 14, 4, 89  ;Branches_9_Slow_O
+	.db 3, 14, 13, 95  ;Branches_8_Slow_O_F
+	.db 0, 14, 4, 96  ;Branches_9_Slow_O
 
 SG_TreeRow3:
 	.db 0
 	.db 7
-	.db 0, 16, 0, 90  ;Tree_2_Fast
-	.db 0, 16, 13, 91  ;Tree_4_Fast
-	.db 0, 16, 26, 92  ;Tree_7_Fast
-	.db 0, 16, 39, 93  ;Tree_9_Fast
-	.db 0, 16, 52, 94  ;Tree_6_Fast_F
-	.db 0, 16, 65, 95  ;Tree_3_Fast_F
-	.db 0, 16, 78, 96  ;Tree_0_Fast_F
+	.db 0, 16, 0, 97  ;Tree_2_Fast
+	.db 0, 16, 13, 98  ;Tree_4_Fast
+	.db 0, 16, 26, 99  ;Tree_7_Fast
+	.db 0, 16, 39, 100  ;Tree_9_Fast
+	.db 0, 16, 52, 101  ;Tree_6_Fast_F
+	.db 0, 16, 65, 102  ;Tree_3_Fast_F
+	.db 0, 16, 78, 103  ;Tree_0_Fast_F
 
 SG_TreeRow5:
 	.db 0
 	.db 7
-	.db 0, 16, 0, 90  ;Tree_2_Fast
-	.db 0, 16, 13, 97  ;Tree_3_Fast
-	.db 0, 16, 26, 98  ;Tree_8_Fast
-	.db 0, 16, 39, 99  ;Tree_9_Fast_F
-	.db 0, 16, 52, 100  ;Tree_8_Fast_F
-	.db 0, 16, 65, 101  ;Tree_4_Fast_F
-	.db 0, 16, 78, 96  ;Tree_0_Fast_F
+	.db 0, 16, 0, 97  ;Tree_2_Fast
+	.db 0, 16, 13, 104  ;Tree_3_Fast
+	.db 0, 16, 26, 105  ;Tree_8_Fast
+	.db 0, 16, 39, 106  ;Tree_9_Fast_F
+	.db 0, 16, 52, 107  ;Tree_8_Fast_F
+	.db 0, 16, 65, 108  ;Tree_4_Fast_F
+	.db 0, 16, 78, 103  ;Tree_0_Fast_F
 
 SG_TreeRow1:
 	.db 0
 	.db 7
-	.db 0, 16, 0, 102  ;Tree_0_Fast
-	.db 0, 16, 13, 97  ;Tree_3_Fast
-	.db 0, 16, 26, 103  ;Tree_6_Fast
-	.db 0, 16, 39, 104  ;Tree_10_Fast
-	.db 0, 16, 52, 105  ;Tree_7_Fast_F
-	.db 0, 16, 65, 101  ;Tree_4_Fast_F
-	.db 0, 16, 78, 106  ;Tree_1_Fast_F
+	.db 0, 16, 0, 109  ;Tree_0_Fast
+	.db 0, 16, 13, 104  ;Tree_3_Fast
+	.db 0, 16, 26, 110  ;Tree_6_Fast
+	.db 0, 16, 39, 111  ;Tree_10_Fast
+	.db 0, 16, 52, 112  ;Tree_7_Fast_F
+	.db 0, 16, 65, 108  ;Tree_4_Fast_F
+	.db 0, 16, 78, 113  ;Tree_1_Fast_F
 
 SG_TreeRow2:
 	.db 0
 	.db 7
-	.db 0, 16, 0, 107  ;Tree_1_Fast
-	.db 0, 16, 13, 108  ;Tree_5_Fast
-	.db 0, 16, 26, 98  ;Tree_8_Fast
-	.db 0, 16, 39, 109  ;Tree_11_Fast
-	.db 0, 16, 52, 100  ;Tree_8_Fast_F
-	.db 0, 16, 65, 110  ;Tree_5_Fast_F
-	.db 0, 16, 78, 111  ;Tree_2_Fast_F
+	.db 0, 16, 0, 114  ;Tree_1_Fast
+	.db 0, 16, 13, 115  ;Tree_5_Fast
+	.db 0, 16, 26, 105  ;Tree_8_Fast
+	.db 0, 16, 39, 116  ;Tree_11_Fast
+	.db 0, 16, 52, 107  ;Tree_8_Fast_F
+	.db 0, 16, 65, 117  ;Tree_5_Fast_F
+	.db 0, 16, 78, 118  ;Tree_2_Fast_F
 
 SG_TreeRow4:
 	.db 0
 	.db 7
-	.db 0, 16, 0, 102  ;Tree_0_Fast
-	.db 0, 16, 13, 108  ;Tree_5_Fast
-	.db 0, 16, 26, 103  ;Tree_6_Fast
-	.db 0, 16, 39, 112  ;Tree_11_Fast_F
-	.db 0, 16, 52, 94  ;Tree_6_Fast_F
-	.db 0, 16, 65, 95  ;Tree_3_Fast_F
-	.db 0, 16, 78, 106  ;Tree_1_Fast_F
+	.db 0, 16, 0, 109  ;Tree_0_Fast
+	.db 0, 16, 13, 115  ;Tree_5_Fast
+	.db 0, 16, 26, 110  ;Tree_6_Fast
+	.db 0, 16, 39, 119  ;Tree_11_Fast_F
+	.db 0, 16, 52, 101  ;Tree_6_Fast_F
+	.db 0, 16, 65, 102  ;Tree_3_Fast_F
+	.db 0, 16, 78, 113  ;Tree_1_Fast_F
 
 SG_Branch1:
 	.db 0
 	.db 15
-	.db 25, 14, 52, 113  ;Branches_1_Fast
-	.db 25, 14, 44, 83  ;Branches_2_Fast
-	.db 26, 14, 35, 82  ;Branches_3_Fast
-	.db 27, 14, 26, 80  ;Branches_5_Fast
+	.db 25, 14, 52, 120  ;Branches_1_Fast
+	.db 25, 14, 44, 86  ;Branches_2_Fast
+	.db 26, 14, 35, 85  ;Branches_3_Fast
+	.db 27, 14, 26, 83  ;Branches_5_Fast
 	.db 29, 10, 17, 42  ;Branches_7_Fast
 	.db 7, 21, 17, 13  ;Leaves1_Fast
 	.db 0, 18, 10, 28  ;Leaves2_Fast
@@ -340,154 +386,203 @@ SG_Branch1:
 SG_Vines6:
 	.db 0
 	.db 5
-	.db 0, 18, 0, 70  ;Vine4_Slow_F
-	.db 15, 18, 7, 71  ;Vine4_Slow_O_F
-	.db 31, 16, 15, 72  ;Vine5_Slow_O_F
-	.db 38, 10, 24, 75  ;Vine6_Slow_O
-	.db 40, 10, 35, 114  ;Vine7_Slow
+	.db 0, 18, 0, 73  ;Vine4_Slow_F
+	.db 15, 18, 7, 74  ;Vine4_Slow_O_F
+	.db 31, 16, 15, 75  ;Vine5_Slow_O_F
+	.db 38, 10, 24, 78  ;Vine6_Slow_O
+	.db 40, 10, 35, 89  ;Vine7_Slow
 
 SG_BranchBase3:
 	.db 0
 	.db 4
-	.db 11, 14, 0, 115  ;Branches_1_Fast_F
-	.db 10, 14, 9, 116  ;Branches_2_Fast_F
-	.db 9, 14, 18, 117  ;Branches_5_Fast_F
+	.db 11, 14, 0, 126  ;Branches_1_Fast_F
+	.db 10, 14, 9, 127  ;Branches_2_Fast_F
+	.db 9, 14, 18, 128  ;Branches_5_Fast_F
 	.db 0, 14, 14, 20  ;Branches_14_Slow
 
 SG_Vines4:
 	.db 0
 	.db 2
-	.db 0, 16, 0, 118  ;Vine2_Slow_O
-	.db 13, 18, 0, 79  ;VineVertical_Slow
-
-SG_Vines8:
-	.db 0
-	.db 4
-	.db 0, 16, 0, 119  ;Vine2_Slow_F
-	.db 16, 18, 1, 120  ;VineVertical_Slow_F
-	.db 34, 18, 1, 79  ;VineVertical_Slow
-	.db 51, 12, 0, 17  ;DualLeaf2_Fast
+	.db 0, 16, 0, 129  ;Vine2_Slow_O
+	.db 13, 18, 0, 82  ;VineVertical_Slow
 
 SG_BranchBase2:
 	.db 0
 	.db 6
-	.db 0, 14, 42, 121  ;Branches_1_Slow_O
-	.db 1, 14, 33, 122  ;Branches_2_Slow_O
-	.db 2, 14, 24, 123  ;Branches_4_Slow_O
-	.db 4, 14, 6, 89  ;Branches_9_Slow_O
-	.db 4, 10, 15, 124  ;Branches_7_Slow_O
+	.db 0, 14, 42, 130  ;Branches_1_Slow_O
+	.db 1, 14, 33, 131  ;Branches_2_Slow_O
+	.db 2, 14, 24, 132  ;Branches_4_Slow_O
+	.db 4, 14, 6, 96  ;Branches_9_Slow_O
+	.db 4, 10, 15, 133  ;Branches_7_Slow_O
 	.db 11, 14, 0, 11  ;Branches_10_Fast
 
 SG_BranchBase4:
 	.db 0
 	.db 4
-	.db 13, 14, 0, 125  ;Branches_0_Fast_F
-	.db 7, 14, 8, 126  ;Branches_8_Slow_O
-	.db 18, 14, 9, 127  ;Branches_9_Fast_F
-	.db 0, 14, 12, 89  ;Branches_9_Slow_O
+	.db 13, 14, 0, 134  ;Branches_0_Fast_F
+	.db 7, 14, 8, 135  ;Branches_8_Slow_O
+	.db 18, 14, 9, 136  ;Branches_9_Fast_F
+	.db 0, 14, 12, 96  ;Branches_9_Slow_O
 
 SG_BranchBase1:
 	.db 0
 	.db 5
-	.db 4, 14, 20, 128  ;Branches_0_Fast
-	.db 4, 14, 11, 82  ;Branches_3_Fast
+	.db 4, 14, 20, 137  ;Branches_0_Fast
+	.db 4, 14, 11, 85  ;Branches_3_Fast
 	.db 6, 11, 2, 41  ;Branches_6_Slow
 	.db 15, 14, 0, 9  ;Branches_9_Fast
-	.db 9, 14, 7, 126  ;Branches_8_Slow_O
+	.db 9, 14, 7, 135  ;Branches_8_Slow_O
 
 SG_Platform3:
 	.db 0
 	.db 6
-	.db 0, 9, 0, 129  ;Platforms_0_Fast
-	.db 0, 9, 10, 130  ;Platforms_1_Fast
-	.db 0, 9, 40, 131  ;Platforms_0_Fast_F
-	.db 8, 14, 0, 132  ;Platforms_2_Slow_O_F
-	.db 0, 9, 20, 130  ;Platforms_1_Fast
-	.db 0, 9, 30, 130  ;Platforms_1_Fast
+	.db 0, 9, 0, 138  ;Platforms_0_Fast
+	.db 0, 9, 10, 139  ;Platforms_1_Fast
+	.db 0, 9, 40, 140  ;Platforms_0_Fast_F
+	.db 8, 14, 0, 141  ;Platforms_2_Slow_O_F
+	.db 0, 9, 20, 139  ;Platforms_1_Fast
+	.db 0, 9, 30, 139  ;Platforms_1_Fast
 
 SG_Platform4:
 	.db 0
 	.db 6
-	.db 0, 9, 0, 129  ;Platforms_0_Fast
-	.db 0, 9, 10, 130  ;Platforms_1_Fast
-	.db 0, 9, 40, 131  ;Platforms_0_Fast_F
-	.db 8, 14, 42, 133  ;Platforms_2_Slow_O
-	.db 0, 9, 20, 130  ;Platforms_1_Fast
-	.db 0, 9, 30, 130  ;Platforms_1_Fast
+	.db 0, 9, 0, 138  ;Platforms_0_Fast
+	.db 0, 9, 10, 139  ;Platforms_1_Fast
+	.db 0, 9, 40, 140  ;Platforms_0_Fast_F
+	.db 8, 14, 42, 142  ;Platforms_2_Slow_O
+	.db 0, 9, 20, 139  ;Platforms_1_Fast
+	.db 0, 9, 30, 139  ;Platforms_1_Fast
 
 SG_Platform1:
 	.db 0
 	.db 4
-	.db 0, 9, 0, 129  ;Platforms_0_Fast
-	.db 0, 9, 10, 130  ;Platforms_1_Fast
-	.db 0, 9, 20, 131  ;Platforms_0_Fast_F
-	.db 8, 14, 22, 133  ;Platforms_2_Slow_O
+	.db 0, 9, 0, 138  ;Platforms_0_Fast
+	.db 0, 9, 10, 139  ;Platforms_1_Fast
+	.db 0, 9, 20, 140  ;Platforms_0_Fast_F
+	.db 8, 14, 22, 142  ;Platforms_2_Slow_O
 
 SG_TongueRing:
 	.db 0
 	.db 2
-	.db 0, 16, 4, 135  ;TongueRing1_Slow
-	.db 0, 16, 0, 137  ;TongueRing1_Slow_F
+	.db 0, 16, 4, 144  ;TongueRing1_Slow
+	.db 0, 16, 0, 146  ;TongueRing1_Slow_F
 
 SG_Platform2:
 	.db 0
 	.db 4
-	.db 0, 9, 0, 129  ;Platforms_0_Fast
-	.db 0, 9, 10, 130  ;Platforms_1_Fast
-	.db 0, 9, 20, 131  ;Platforms_0_Fast_F
-	.db 8, 14, 0, 132  ;Platforms_2_Slow_O_F
+	.db 0, 9, 0, 138  ;Platforms_0_Fast
+	.db 0, 9, 10, 139  ;Platforms_1_Fast
+	.db 0, 9, 20, 140  ;Platforms_0_Fast_F
+	.db 8, 14, 0, 141  ;Platforms_2_Slow_O_F
+
+SG_Platform5:
+	.db 0
+	.db 3
+	.db 0, 9, 0, 138  ;Platforms_0_Fast
+	.db 0, 9, 7, 140  ;Platforms_0_Fast_F
+	.db 8, 14, 9, 142  ;Platforms_2_Slow_O
+
+SG_Platform6:
+	.db 0
+	.db 3
+	.db 0, 9, 0, 138  ;Platforms_0_Fast
+	.db 0, 9, 7, 140  ;Platforms_0_Fast_F
+	.db 8, 14, 0, 141  ;Platforms_2_Slow_O_F
+
+SG_SolidPlatform1:
+	.db 1
+	.db 4
+	.db 0, 14, 0, 0  ;SolidPlatform_4_Slow
+	.db 0, 14, 8, 1  ;SolidPlatform_1_Slow_O
+	.db 0, 14, 16, 2  ;SolidPlatform_1_Slow
+	.db 0, 14, 23, 3  ;SolidPlatform_5_Slow_O
+
+SG_SolidPlatform2:
+	.db 1
+	.db 4
+	.db 32, 15, 0, 4  ;SolidPlatform_0_Fast
+	.db 17, 15, 0, 4  ;SolidPlatform_0_Fast
+	.db 0, 17, 0, 5  ;SolidPlatform_2_Fast
+	.db 47, 17, 0, 6  ;SolidPlatform_3_Fast
 
 SG_DarkGroundChunk:
-	.db 0
+	.db 1
 	.db 7
-	.db 17, 12, 0, 139  ;GroundDirtDark_Fast
-	.db 17, 12, 8, 139  ;GroundDirtDark_Fast
-	.db 16, 12, 16, 140  ;GroundDirtDark_Fast_F
-	.db 5, 13, 0, 141  ;GroundHumpDark_Fast
-	.db 5, 13, 8, 141  ;GroundHumpDark_Fast
-	.db 4, 13, 16, 142  ;GroundHumpDark_Fast_F
-	.db 0, 13, 12, 142  ;GroundHumpDark_Fast_F
+	.db 17, 12, 0, 7  ;GroundDirtDark_Fast
+	.db 17, 12, 8, 7  ;GroundDirtDark_Fast
+	.db 16, 12, 16, 8  ;GroundDirtDark_Fast_F
+	.db 5, 13, 0, 9  ;GroundHumpDark_Fast
+	.db 5, 13, 8, 9  ;GroundHumpDark_Fast
+	.db 4, 13, 16, 10  ;GroundHumpDark_Fast_F
+	.db 0, 13, 12, 10  ;GroundHumpDark_Fast_F
 
 SG_BGTree1:
 	.db 0
 	.db 8
 	.db 3, 21, 0, 19  ;LeavesDark_Fast
-	.db 27, 16, 11, 143  ;Tree_16_Fast
-	.db 15, 14, 14, 144  ;Tree_17_Slow
-	.db 17, 14, 9, 145  ;Tree_17_Slow_O_F
-	.db 43, 16, 11, 143  ;Tree_16_Fast
-	.db 37, 14, 8, 145  ;Tree_17_Slow_O_F
+	.db 27, 16, 11, 157  ;Tree_16_Fast
+	.db 15, 14, 14, 158  ;Tree_17_Slow
+	.db 17, 14, 9, 159  ;Tree_17_Slow_O_F
+	.db 43, 16, 11, 157  ;Tree_16_Fast
+	.db 37, 14, 8, 159  ;Tree_17_Slow_O_F
 	.db 0, 21, 12, 19  ;LeavesDark_Fast
 	.db 31, 11, 3, 8  ;DualLeaf3_Fast
 
 SG_BGTree2:
 	.db 0
 	.db 8
-	.db 55, 14, 11, 146  ;Tree_18_Slow
-	.db 55, 14, 5, 144  ;Tree_17_Slow
-	.db 55, 14, 6, 147  ;Tree_18_Slow_O_F
-	.db 42, 16, 5, 148  ;Tree_16_Fast_F
-	.db 26, 16, 6, 143  ;Tree_16_Fast
-	.db 17, 14, 6, 146  ;Tree_18_Slow
+	.db 55, 14, 11, 160  ;Tree_18_Slow
+	.db 55, 14, 5, 158  ;Tree_17_Slow
+	.db 55, 14, 6, 161  ;Tree_18_Slow_O_F
+	.db 42, 16, 5, 162  ;Tree_16_Fast_F
+	.db 26, 16, 6, 157  ;Tree_16_Fast
+	.db 17, 14, 6, 160  ;Tree_18_Slow
 	.db 0, 21, 0, 19  ;LeavesDark_Fast
 	.db 51, 12, 9, 15  ;DualLeaf2_Fast
 
-SG_Cloud1:
-	.db 0
-	.db 13
-	.db 20, 10, 6, 149  ;Clouds_0_Fast
-	.db 13, 14, 0, 150  ;Clouds_1_Fast
-	.db 0, 11, 7, 151  ;Clouds_3_Fast
-	.db 3, 10, 3, 152  ;Clouds_4_Fast
-	.db 8, 16, 6, 153  ;Clouds_2_Fast
-	.db 20, 10, 14, 149  ;Clouds_0_Fast
-	.db 19, 10, 20, 154  ;Clouds_0_Fast_F
-	.db 11, 14, 28, 155  ;Clouds_1_Fast_F
-	.db 3, 10, 27, 156  ;Clouds_4_Fast_F
-	.db 1, 11, 15, 157  ;Clouds_3_Fast_F
-	.db 1, 11, 21, 151  ;Clouds_3_Fast
-	.db 6, 16, 20, 153  ;Clouds_2_Fast
-	.db 6, 16, 12, 158  ;Clouds_2_Fast_F
+SG_Cloud2:
+	.db 1
+	.db 17
+	.db 15, 13, 6, 11  ;CloudsNew_1_Fast
+	.db 2, 10, 6, 12  ;CloudsNew_6_Fast
+	.db 3, 9, 14, 13  ;CloudsNew_5_Fast
+	.db 0, 10, 19, 12  ;CloudsNew_6_Fast
+	.db 2, 10, 24, 14  ;CloudsNew_6_Fast_F
+	.db 16, 13, 21, 11  ;CloudsNew_1_Fast
+	.db 14, 12, 26, 15  ;CloudsNew_2_Fast_F
+	.db 9, 8, 18, 16  ;CloudsNew_4_Fast
+	.db 7, 8, 4, 17  ;CloudsNew_3_Fast
+	.db 8, 7, 0, 18  ;CloudsNew_8_Fast
+	.db 13, 12, 1, 19  ;CloudsNew_2_Fast
+	.db 17, 11, 13, 20  ;CloudsNew_0_Fast
+	.db 9, 8, 25, 17  ;CloudsNew_3_Fast
+	.db 10, 8, 12, 17  ;CloudsNew_3_Fast
+	.db 15, 6, 7, 21  ;CloudsNew_9_Fast
+	.db 17, 6, 18, 21  ;CloudsNew_9_Fast
+	.db 16, 6, 25, 21  ;CloudsNew_9_Fast
+
+SG_Cloud3:
+	.db 1
+	.db 19
+	.db 19, 12, 0, 19  ;CloudsNew_2_Fast
+	.db 12, 11, 0, 20  ;CloudsNew_0_Fast
+	.db 6, 7, 0, 22  ;CloudsNew_7_Slow_O
+	.db 10, 8, 5, 16  ;CloudsNew_4_Fast
+	.db 20, 13, 6, 11  ;CloudsNew_1_Fast
+	.db 14, 8, 13, 17  ;CloudsNew_3_Fast
+	.db 1, 9, 16, 23  ;CloudsNew_5_Slow_O
+	.db 22, 11, 13, 20  ;CloudsNew_0_Fast
+	.db 22, 11, 22, 24  ;CloudsNew_0_Fast_F
+	.db 0, 9, 10, 23  ;CloudsNew_5_Slow_O
+	.db 16, 11, 21, 20  ;CloudsNew_0_Fast
+	.db 7, 7, 29, 25  ;CloudsNew_7_Slow_F
+	.db 14, 13, 26, 26  ;CloudsNew_1_Slow_O
+	.db 5, 9, 13, 13  ;CloudsNew_5_Fast
+	.db 2, 10, 4, 27  ;CloudsNew_6_Slow_O
+	.db 1, 9, 23, 13  ;CloudsNew_5_Fast
+	.db 18, 6, 7, 21  ;CloudsNew_9_Fast
+	.db 10, 8, 21, 28  ;CloudsNew_4_Fast_F
+	.db 22, 6, 18, 29  ;CloudsNew_9_Slow_O_F
 
 
 
