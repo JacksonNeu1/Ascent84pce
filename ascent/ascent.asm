@@ -5,6 +5,10 @@
  .org userMem-2
  .db tExtTok,tAsm84CeCmp
 
+;TODO
+;-Unlucky bounce still bugged (seem to be after multiple spike hits?) -improved RNG and fixed inc bounces counter 
+;Moving colliders for hazards?
+
 
 
 ;0E30000h + 0200h
@@ -38,31 +42,92 @@
 	;ld de, Moss_0_Fast_0
 	;call sprite_decompress
 	
+;c040004f6f00000000f5ffff00000000	mostly workes but sometimes dont???
+;c04000026f00000000f5ffff00000000	mostly workes but sometimes dont???
+;difference in subpixel ypos?
+;nonzero subpixel pos is issue?? 
+
+;Still crashes even with 0 subpixel pos 
+
+;Due to spawning too near to platform?
+;but crashes still happened in air
+
+;Also, crash happens before/during decompression, so not a rendering issue 
+;Problem with calculating cam pos? 
+;And is random when it occurs
 	
-	
+;Could be due to changing where pixelshadow sprite data is started? 	
+
+;Sometihng with trying to draw frame before decompression? Timer isnt working properly?
+
+
 	;call prgmpause
 
 
-	ld hl,$008300
+
+	ld hl,(player_start_pos_testing)
 	ld (player_x_pos),hl 
-	ld hl,$006E00
+	ld hl,(player_start_pos_testing+3)
 	ld (player_y_pos),hl 
 	ld (player_y_pos_prev),hl
 	
-	call player_to_cam_coords
-	ld de,80
-	sbc hl,de 
-	jp nc, set_cam_0_pos_skip_start
-	ld hl,0
-set_cam_0_pos_skip_start:
-	ld (cam_pos),hl
-	;ld (bg_cam_pos),hl
+	
+	;ld hl,$0040c0
+	;ld (player_x_pos),hl 
+	;ld hl,$006f00
+	;ld (player_y_pos),hl 
+	;ld (player_y_pos_prev),hl
 	
 	
+	;jp player_load_pos_skip
+	
+	ld a,(Player_Data_Save+16)
+	xor %11010010    ;these bytes act as a key to indicate valid data is saved here 
+	jp nz, player_load_pos_skip
+	
+	ld a,(Player_Data_Save+17)
+	xor %00010001
+	jp nz, player_load_pos_skip
+	
+	;otherwise have found valid player data 
+	;Could do parity check as well?
+	
+	
+	ld hl, (Player_Data_Save) ;Player x pos save 
+	ld (player_x_pos),hl 
+	ld (player_x_pos_prev),hl
+	;call write_hl_to_ram
+	ld hl, (Player_Data_Save+3) ;Player y pos save 
+	ld (player_y_pos),hl 
+	ld (player_y_pos_prev),hl
+	;call write_hl_to_ram
+	ld hl, (Player_Data_Save+6) ;Player xvel save
+	ld (player_x_vel),hl
+	;call write_hl_to_ram	
+	ld hl, (Player_Data_Save+9) ;Player yvel save
+	ld (player_y_vel),hl 
+	;call write_hl_to_ram
+	ld a,(Player_Data_Save+12) ;player flags 
+	ld (player_flags),a 
+	ld hl, (Player_Data_Save+13) ;Spike hit height
+	ld (spike_hit_height),hl 
+	
+	
+	;call prgmpause
+	
+player_load_pos_skip:	
+	
+
 	ld a,%00000010;disable, 32768hz
 	ld ($F20030),a	
+	ld a,0
+	ld ($F20000),a;32768hz
+	ld ($F20001),a;128hz
+	ld ($F20002),a;0.5hz
+	ld ($F20003),a
 	
 	call setup_decompress_queue
+	
 	
 	;Decompress sprites in preframes for setup
 	ld hl,decompress_frame_up_pre3 
@@ -77,13 +142,36 @@ set_cam_0_pos_skip_start:
 	
 	;call draw_fg
 	
-	ld a,0
-	call cfdc_cam_move_up ;need to skip here for frame 0
-	
-	;call prgmpause
+;when loading game need to gradually move cam up to player pos and run sprite decompressions 
 
+
+	call player_to_cam_coords
+	ld de,80
+	sbc hl,de 
+	jp nc, set_cam_0_pos_skip_start
+	ld hl,0
+set_cam_0_pos_skip_start:
+	ld (cam_pos),hl
+	;ld (bg_cam_pos),hl
+	
+	
+	ld a,0
+loading_cam_move_loop:
+	call cfdc_cam_move_up ;need to skip here for frame 0
 	call continue_decompressions
 	
+	ld a, (cam_pos + 1) ;frame# of cam pos 
+	ld b,a 
+loading_cam_frame_num .equ $+1
+	ld a,0
+	cp b
+	jp nc,loading_cam_move_complete
+	inc a 
+	ld (loading_cam_frame_num),a 
+	jp loading_cam_move_loop
+loading_cam_move_complete:
+
+
 	;call prgmpause
 	nop ;This needs to be here for some reason
 ;	call decompress_calls
@@ -180,6 +268,7 @@ get_inputs_return:
 	call draw_mg
 	
 	call draw_mg2
+	
 	
 	
 	call player_draw 
@@ -440,21 +529,16 @@ wait_int:
 
 	ld hl,0
 	
-	ld a,($F20002)
-	ld h,a
-	ld a,($F20001)
-	ld l,a
-	ld bc,(totalTime)
-	add hl,bc 
-	ld (totalTime),hl 
-	
-	
-	
+	;ld a,($F20002)
+	;ld h,a
+	;ld a,($F20001)
+	;ld l,a
+	;ld bc,(totalTime)
+	;add hl,bc 
+	;ld (totalTime),hl 
 	
 
-	
-
-	jp nz,main_loop
+	jp main_loop
 		
 	;print debug times 
 	ld hl,vRam
@@ -492,13 +576,44 @@ wait_int:
 	
 	
 exit_prgm:
+
+	ld hl,(player_x_pos)
+	ld (Player_Data_Save),hl ;Player x pos save 
+	
+	ld hl,(player_y_pos)
+	ld (Player_Data_Save+3),hl ;Player y pos save 
+	
+	ld hl,(player_x_vel)
+	ld (Player_Data_Save+6),hl ;Player xvel save
+	
+	ld hl,(player_y_vel)
+	ld (Player_Data_Save+9), hl ;Player yvel save
+	
+	
+	ld a,(player_flags) 
+	ld (Player_Data_Save+12),a ;player flags 
+	
+	
+	ld hl,(spike_hit_height)
+	ld (Player_Data_Save+13),hl ;Spike hit height
+
+	ld a, %11010010    ;these bytes act as a key to indicate valid data is saved here 
+	ld (Player_Data_Save+16),a 
+	ld a, %00010001
+	ld (Player_Data_Save+17),a 
+	
+
+
+
+	call _SetTblGraphDraw
+
 	ld hl,vRam
 	ld (mpLcdBase),hl
 	call _ClrScrnFull
 	ld	a,lcdBpp16
 	ld	(mpLcdCtrl),a
 	call _DrawStatusBar
-	
+
 	ei				; reset screen back to normal
 	ret			; return to os
 	;graphDraw		equ 0		;0=graph is valid, 1=redraw graph(dirty)
@@ -524,7 +639,7 @@ write_a_to_ram:
 	push hl 
 write_a_to_ram_addr .equ $ + 1 
 	ld hl, $D09466 ;PlotSSCreen
-	ld (hl),a 
+	;ld (hl),a 
 	inc hl 
 	ld (write_a_to_ram_addr),hl 
 	pop hl 
@@ -536,7 +651,7 @@ write_hl_to_ram:
 	push de 
 	ex de,hl
 	ld hl,(write_a_to_ram_addr)
-	ld (hl),de 
+	;ld (hl),de 
 	inc hl
 	inc hl
 	inc hl
@@ -574,6 +689,9 @@ BG_draw_buffer: ;Address of the uppermost line of the background buffer. This is
 	.dl 0
 BG_buffer .equ vram + (160*240) ;Start of BG buffer 
 
+
+Player_Data_Save .equ $D052C6
+;This is start of pixelshadow2. First 16 bytes used to save player x,y,xvel,yvel,flags,spikeHitHeight, savecode (2byte) 
 
 ;d40000 = Decompressed sprite data
 ;d49600 = BG buffer

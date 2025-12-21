@@ -29,183 +29,508 @@ MG2_Data_frame_table:
 	.dl MG2_Data_27
 	.dl MG2_Data_28
 	.dl MG2_Data_29
+	.dl MG2_Data_30
+	.dl MG2_Data_31
+	.dl MG2_Data_32
+	.dl MG2_Data_33
+	.dl MG2_Data_34
+	.dl MG2_Data_35
 
 
+
+MG2_Data_35:
+	.db 0
+	.db 0
+
+MG2_Data_34:
+	.db 0
+	.db 0
+
+MG2_Data_33:
+	.db 0
+	.db 0
+
+MG2_Data_32:
+	.db 1
+	.db 1
+	.db 247, 9, 3, 14  ;Spikes_3_Fast
+
+MG2_Data_31:
+	.db 1
+	.db 3
+	.db 21, 255, 88, 42  ;SG_Platform6
+	.db 94, 255, 27, 38  ;SG_Platform4
+	.db 94, 255, 79, 37  ;SG_Platform3
+
+MG2_Data_30:
+	.db 1
+	.db 8
+	.db 72, 255, 72, 42  ;SG_Platform6
+	.db 72, 255, 18, 41  ;SG_Platform5
+	.db 140, 255, 23, 41  ;SG_Platform5
+	.db 195, 255, 75, 42  ;SG_Platform6
+	.db 195, 255, 58, 41  ;SG_Platform5
+	.db 3, 9, 78, 14  ;Spikes_3_Fast
+	.db 81, 9, 22, 14  ;Spikes_3_Fast
+	.db 204, 9, 69, 11  ;Spikes_0_Fast
 
 MG2_Data_29:
 	.db 1
-	.db 0
+	.db 9
+	.db 37, 255, 30, 42  ;SG_Platform6
+	.db 27, 255, 96, 44  ;SG_SolidPlatform2
+	.db 16, 255, 102, 42  ;SG_Platform6
+	.db 107, 255, 55, 42  ;SG_Platform6
+	.db 146, 255, 17, 41  ;SG_Platform5
+	.db 216, 255, 35, 42  ;SG_Platform6
+	.db 250, 255, 71, 42  ;SG_Platform6
+	.db 36, 9, 97, 14  ;Spikes_3_Fast
+	.db 155, 9, 29, 14  ;Spikes_3_Fast
 
 MG2_Data_28:
 	.db 1
-	.db 0
+	.db 7
+	.db 77, 255, 61, 46  ;SG_TongueRing
+	.db 138, 255, 13, 38  ;SG_Platform4
+	.db 138, 255, 64, 40  ;SG_Platform2
+	.db 179, 255, 106, 41  ;SG_Platform5
+	.db 221, 255, 122, 44  ;SG_SolidPlatform2
+	.db 253, 255, 80, 41  ;SG_Platform5
+	.db 157, 19, 24, 40  ;FrogNPCs1_1_Slow_O
 
 MG2_Data_27:
 	.db 1
-	.db 0
+	.db 9
+	.db 8, 255, 5, 38  ;SG_Platform4
+	.db 52, 255, 19, 38  ;SG_Platform4
+	.db 23, 255, 114, 42  ;SG_Platform6
+	.db 175, 255, 97, 46  ;SG_TongueRing
+	.db 69, 17, 52, 7  ;FrogNPCs1_4_Slow_O
+	.db 17, 9, 5, 11  ;Spikes_0_Fast
+	.db 17, 9, 17, 11  ;Spikes_0_Fast
+	.db 17, 9, 29, 11  ;Spikes_0_Fast
+	.db 17, 9, 41, 11  ;Spikes_0_Fast
 
 MG2_Data_26:
 	.db 1
-	.db 0
+	.db 19
+	.db 41, 255, 52, 42  ;SG_Platform6
+	.db 150, 255, 124, 40  ;SG_Platform2
+	.db 57, 255, 90, 43  ;SG_SolidPlatform1
+	.db 57, 14, 90, 18  ;SolidPlatform_4_Slow
+	.db 57, 14, 98, 19  ;SolidPlatform_1_Slow_O
+	.db 57, 14, 106, 20  ;SolidPlatform_1_Slow
+	.db 57, 14, 113, 21  ;SolidPlatform_5_Slow_O
+	.db 139, 255, 103, 46  ;SG_TongueRing
+	.db 142, 14, 51, 21  ;SolidPlatform_5_Slow_O
+	.db 142, 14, 43, 18  ;SolidPlatform_4_Slow
+	.db 142, 255, 43, 45  ;SG_SolidPlatform3
+	.db 186, 255, 5, 38  ;SG_Platform4
+	.db 41, 255, 56, 44  ;SG_SolidPlatform2
+	.db 255, 255, 5, 38  ;SG_Platform4
+	.db 66, 9, 90, 11  ;Spikes_0_Fast
+	.db 66, 9, 110, 11  ;Spikes_0_Fast
+	.db 66, 9, 102, 11  ;Spikes_0_Fast
+	.db 195, 9, 42, 11  ;Spikes_0_Fast
+	.db 195, 9, 34, 11  ;Spikes_0_Fast
 
 MG2_Data_25:
-	.db 1
 	.db 0
+	.db 7
+	.db 52, 255, 47, 46  ;SG_TongueRing
+	.db 119, 255, 26, 38  ;SG_Platform4
+	.db 120, 255, 101, 37  ;SG_Platform3
+	.db 183, 255, 123, 41  ;SG_Platform5
+	.db 236, 255, 106, 42  ;SG_Platform6
+	.db 250, 255, 49, 42  ;SG_Platform6
+	.db 137, 17, 134, 139  ;FrogNPCs1_5_Slow_O
 
 MG2_Data_24:
 	.db 1
-	.db 0
+	.db 4
+	.db 59, 255, 74, 41  ;SG_Platform5
+	.db 55, 255, 115, 46  ;SG_TongueRing
+	.db 115, 255, 42, 42  ;SG_Platform6
+	.db 253, 255, 98, 40  ;SG_Platform2
 
 MG2_Data_23:
 	.db 1
-	.db 0
+	.db 18
+	.db 127, 255, 58, 44  ;SG_SolidPlatform2
+	.db 190, 255, 141, 42  ;SG_Platform6
+	.db 221, 255, 116, 44  ;SG_SolidPlatform2
+	.db 153, 255, 9, 38  ;SG_Platform4
+	.db 128, 255, 140, 44  ;SG_SolidPlatform2
+	.db 78, 14, 131, 21  ;SolidPlatform_5_Slow_O
+	.db 9, 17, 83, 26  ;FrogNPCs1_0_Slow
+	.db 78, 14, 123, 18  ;SolidPlatform_4_Slow
+	.db 135, 255, 64, 42  ;SG_Platform6
+	.db 175, 255, 58, 44  ;SG_SolidPlatform2
+	.db 107, 255, 35, 46  ;SG_TongueRing
+	.db 78, 255, 123, 45  ;SG_SolidPlatform3
+	.db 170, 17, 9, 10  ;FrogNPCs1_6_Slow_O
+	.db 184, 9, 59, 14  ;Spikes_3_Fast
+	.db 148, 24, 53, 31  ;Spikes_1_Fast
+	.db 102, 24, 135, 31  ;Spikes_1_Fast
+	.db 124, 24, 53, 31  ;Spikes_1_Fast
+	.db 230, 9, 117, 14  ;Spikes_3_Fast
 
 MG2_Data_22:
 	.db 1
-	.db 0
+	.db 17
+	.db 34, 255, 8, 41  ;SG_Platform5
+	.db 248, 255, 64, 39  ;SG_Platform1
+	.db 198, 14, 108, 21  ;SolidPlatform_5_Slow_O
+	.db 198, 14, 100, 18  ;SolidPlatform_4_Slow
+	.db 198, 255, 100, 45  ;SG_SolidPlatform3
+	.db 248, 255, 93, 44  ;SG_SolidPlatform2
+	.db 102, 255, 85, 37  ;SG_Platform3
+	.db 80, 14, 70, 20  ;SolidPlatform_1_Slow
+	.db 80, 14, 62, 19  ;SolidPlatform_1_Slow_O
+	.db 80, 14, 54, 18  ;SolidPlatform_4_Slow
+	.db 80, 255, 54, 43  ;SG_SolidPlatform1
+	.db 130, 255, 79, 44  ;SG_SolidPlatform2
+	.db 80, 14, 77, 21  ;SolidPlatform_5_Slow_O
+	.db 171, 255, 125, 40  ;SG_Platform2
+	.db 129, 24, 74, 31  ;Spikes_1_Fast
+	.db 111, 9, 109, 11  ;Spikes_0_Fast
+	.db 222, 24, 100, 30  ;Spikes_1_Fast_F
 
 MG2_Data_21:
 	.db 1
-	.db 0
+	.db 5
+	.db 22, 255, 142, 42  ;SG_Platform6
+	.db 98, 255, 138, 42  ;SG_Platform6
+	.db 219, 255, 92, 46  ;SG_TongueRing
+	.db 228, 255, 38, 39  ;SG_Platform1
+	.db 107, 9, 149, 14  ;Spikes_3_Fast
 
 MG2_Data_20:
 	.db 1
-	.db 0
+	.db 5
+	.db 60, 255, 106, 40  ;SG_Platform2
+	.db 147, 255, 56, 46  ;SG_TongueRing
+	.db 200, 255, 106, 39  ;SG_Platform1
+	.db 174, 255, 33, 37  ;SG_Platform3
+	.db 209, 9, 115, 11  ;Spikes_0_Fast
 
 MG2_Data_19:
 	.db 1
-	.db 0
+	.db 9
+	.db 71, 19, 102, 9  ;FrogNPCs1_1_Slow
+	.db 51, 255, 11, 41  ;SG_Platform5
+	.db 74, 255, 54, 42  ;SG_Platform6
+	.db 108, 255, 94, 44  ;SG_SolidPlatform2
+	.db 96, 255, 100, 42  ;SG_Platform6
+	.db 254, 255, 121, 46  ;SG_TongueRing
+	.db 53, 255, 101, 40  ;SG_Platform2
+	.db 83, 9, 55, 14  ;Spikes_3_Fast
+	.db 117, 9, 95, 14  ;Spikes_3_Fast
 
 MG2_Data_18:
 	.db 1
-	.db 0
+	.db 5
+	.db 73, 255, 82, 46  ;SG_TongueRing
+	.db 121, 255, 104, 40  ;SG_Platform2
+	.db 121, 255, 36, 39  ;SG_Platform1
+	.db 188, 255, 70, 39  ;SG_Platform1
+	.db 236, 255, 25, 41  ;SG_Platform5
 
 MG2_Data_17:
 	.db 1
-	.db 0
+	.db 10
+	.db 117, 255, 101, 41  ;SG_Platform5
+	.db 34, 255, 62, 41  ;SG_Platform5
+	.db 117, 255, 111, 44  ;SG_SolidPlatform2
+	.db 74, 255, 106, 45  ;SG_SolidPlatform3
+	.db 74, 14, 106, 18  ;SolidPlatform_4_Slow
+	.db 74, 14, 114, 21  ;SolidPlatform_5_Slow_O
+	.db 179, 255, 60, 38  ;SG_Platform4
+	.db 191, 255, 17, 39  ;SG_Platform1
+	.db 117, 255, 117, 42  ;SG_Platform6
+	.db 201, 10, 22, 35  ;FrogNPCs1_10_Slow_O
 
 MG2_Data_16:
 	.db 1
-	.db 0
+	.db 12
+	.db 151, 255, 59, 42  ;SG_Platform6
+	.db 29, 255, 22, 41  ;SG_Platform5
+	.db 151, 255, 57, 44  ;SG_SolidPlatform2
+	.db 87, 255, 44, 40  ;SG_Platform2
+	.db 188, 255, 111, 44  ;SG_SolidPlatform2
+	.db 244, 255, 111, 44  ;SG_SolidPlatform2
+	.db 140, 255, 117, 42  ;SG_Platform6
+	.db 208, 255, 140, 42  ;SG_Platform6
+	.db 244, 255, 95, 41  ;SG_Platform5
+	.db 66, 255, 117, 40  ;SG_Platform2
+	.db 75, 9, 141, 14  ;Spikes_3_Fast
+	.db 253, 9, 96, 14  ;Spikes_3_Fast
 
 MG2_Data_15:
 	.db 1
-	.db 0
+	.db 41
+	.db 23, 255, 14, 44  ;SG_SolidPlatform2
+	.db 225, 10, 50, 32  ;FrogNPCs1_8_Slow_O
+	.db 215, 255, 79, 42  ;SG_Platform6
+	.db 182, 255, 108, 42  ;SG_Platform6
+	.db 107, 255, 108, 40  ;SG_Platform2
+	.db 215, 255, 26, 38  ;SG_Platform4
+	.db 183, 255, 84, 44  ;SG_SolidPlatform2
+	.db 133, 14, 72, 21  ;SolidPlatform_5_Slow_O
+	.db 133, 14, 64, 18  ;SolidPlatform_4_Slow
+	.db 133, 255, 64, 45  ;SG_SolidPlatform3
+	.db 151, 255, 14, 44  ;SG_SolidPlatform2
+	.db 101, 14, 32, 21  ;SolidPlatform_5_Slow_O
+	.db 101, 14, 24, 18  ;SolidPlatform_4_Slow
+	.db 225, 10, 63, 33  ;FrogNPCs1_9_Slow_F
+	.db 119, 255, 84, 44  ;SG_SolidPlatform2
+	.db 69, 14, 72, 21  ;SolidPlatform_5_Slow_O
+	.db 101, 255, 24, 45  ;SG_SolidPlatform3
+	.db 37, 255, 24, 45  ;SG_SolidPlatform3
+	.db 55, 255, 84, 44  ;SG_SolidPlatform2
+	.db 5, 255, 64, 45  ;SG_SolidPlatform3
+	.db 5, 14, 64, 18  ;SolidPlatform_4_Slow
+	.db 5, 14, 72, 21  ;SolidPlatform_5_Slow_O
+	.db 69, 14, 64, 18  ;SolidPlatform_4_Slow
+	.db 37, 14, 24, 18  ;SolidPlatform_4_Slow
+	.db 37, 14, 32, 21  ;SolidPlatform_5_Slow_O
+	.db 232, 17, 34, 34  ;FrogNPCs1_4_Slow
+	.db 87, 255, 14, 44  ;SG_SolidPlatform2
+	.db 69, 255, 64, 45  ;SG_SolidPlatform3
+	.db 125, 24, 21, 30  ;Spikes_1_Fast_F
+	.db 61, 24, 21, 30  ;Spikes_1_Fast_F
+	.db 157, 24, 79, 31  ;Spikes_1_Fast
+	.db 181, 24, 79, 31  ;Spikes_1_Fast
+	.db 29, 24, 79, 31  ;Spikes_1_Fast
+	.db 85, 24, 21, 30  ;Spikes_1_Fast_F
+	.db 192, 9, 85, 14  ;Spikes_3_Fast
+	.db 160, 9, 15, 14  ;Spikes_3_Fast
+	.db 53, 24, 79, 31  ;Spikes_1_Fast
+	.db 117, 24, 79, 31  ;Spikes_1_Fast
+	.db 21, 24, 21, 30  ;Spikes_1_Fast_F
+	.db 149, 24, 21, 30  ;Spikes_1_Fast_F
+	.db 93, 24, 79, 31  ;Spikes_1_Fast
 
 MG2_Data_14:
 	.db 1
-	.db 0
+	.db 20
+	.db 63, 255, 52, 44  ;SG_SolidPlatform2
+	.db 63, 255, 49, 41  ;SG_Platform5
+	.db 229, 14, 32, 21  ;SolidPlatform_5_Slow_O
+	.db 229, 14, 24, 18  ;SolidPlatform_4_Slow
+	.db 229, 255, 24, 45  ;SG_SolidPlatform3
+	.db 190, 255, 56, 44  ;SG_SolidPlatform2
+	.db 164, 255, 93, 44  ;SG_SolidPlatform2
+	.db 29, 255, 98, 40  ;SG_Platform2
+	.db 114, 14, 116, 21  ;SolidPlatform_5_Slow_O
+	.db 114, 14, 101, 19  ;SolidPlatform_1_Slow_O
+	.db 114, 14, 93, 18  ;SolidPlatform_4_Slow
+	.db 114, 255, 93, 43  ;SG_SolidPlatform1
+	.db 86, 255, 124, 42  ;SG_Platform6
+	.db 114, 14, 109, 20  ;SolidPlatform_1_Slow
+	.db 46, 17, 106, 29  ;FrogNPCs1_6_Slow
+	.db 123, 9, 120, 14  ;Spikes_3_Fast
+	.db 253, 24, 21, 30  ;Spikes_1_Fast_F
+	.db 55, 24, 48, 31  ;Spikes_1_Fast
+	.db 47, 24, 48, 31  ;Spikes_1_Fast
+	.db 23, 24, 48, 31  ;Spikes_1_Fast
 
 MG2_Data_13:
 	.db 1
-	.db 0
+	.db 8
+	.db 63, 255, 101, 40  ;SG_Platform2
+	.db 150, 255, 73, 44  ;SG_SolidPlatform2
+	.db 99, 255, 43, 39  ;SG_Platform1
+	.db 153, 255, 111, 41  ;SG_Platform5
+	.db 140, 255, 6, 41  ;SG_Platform5
+	.db 211, 255, 6, 41  ;SG_Platform5
+	.db 255, 255, 37, 41  ;SG_Platform5
+	.db 159, 9, 74, 14  ;Spikes_3_Fast
 
 MG2_Data_12:
 	.db 1
-	.db 0
+	.db 7
+	.db 65, 255, 115, 40  ;SG_Platform2
+	.db 108, 255, 66, 39  ;SG_Platform1
+	.db 154, 255, 37, 44  ;SG_SolidPlatform2
+	.db 220, 255, 52, 42  ;SG_Platform6
+	.db 248, 255, 119, 42  ;SG_Platform6
+	.db 84, 19, 124, 28  ;FrogNPCs1_3_Slow
+	.db 8, 9, 87, 11  ;Spikes_0_Fast
 
 MG2_Data_11:
 	.db 1
-	.db 0
+	.db 16
+	.db 30, 255, 136, 42  ;SG_Platform6
+	.db 90, 255, 115, 40  ;SG_Platform2
+	.db 145, 255, 109, 44  ;SG_SolidPlatform2
+	.db 145, 255, 115, 42  ;SG_Platform6
+	.db 51, 255, 0, 38  ;SG_Platform4
+	.db 106, 255, 28, 41  ;SG_Platform5
+	.db 170, 255, 38, 44  ;SG_SolidPlatform2
+	.db 170, 255, 22, 41  ;SG_Platform5
+	.db 234, 255, 22, 41  ;SG_Platform5
+	.db 234, 255, 38, 44  ;SG_SolidPlatform2
+	.db 255, 255, 74, 41  ;SG_Platform5
+	.db 255, 14, 84, 18  ;SolidPlatform_4_Slow
+	.db 255, 14, 92, 21  ;SolidPlatform_5_Slow_O
+	.db 255, 255, 95, 42  ;SG_Platform6
+	.db 68, 17, 1, 7  ;FrogNPCs1_4_Slow_O
+	.db 255, 255, 84, 45  ;SG_SolidPlatform3
 
 MG2_Data_10:
 	.db 1
-	.db 0
+	.db 18
+	.db 43, 255, 55, 41  ;SG_Platform5
+	.db 202, 255, 91, 37  ;SG_Platform3
+	.db 202, 14, 78, 21  ;SolidPlatform_5_Slow_O
+	.db 202, 14, 71, 20  ;SolidPlatform_1_Slow
+	.db 202, 14, 63, 19  ;SolidPlatform_1_Slow_O
+	.db 202, 14, 55, 18  ;SolidPlatform_4_Slow
+	.db 202, 255, 55, 43  ;SG_SolidPlatform1
+	.db 202, 255, 1, 38  ;SG_Platform4
+	.db 122, 14, 60, 21  ;SolidPlatform_5_Slow_O
+	.db 122, 14, 53, 20  ;SolidPlatform_1_Slow
+	.db 122, 14, 45, 19  ;SolidPlatform_1_Slow_O
+	.db 122, 14, 37, 18  ;SolidPlatform_4_Slow
+	.db 122, 255, 37, 43  ;SG_SolidPlatform1
+	.db 100, 255, 90, 42  ;SG_Platform6
+	.db 155, 255, 14, 41  ;SG_Platform5
+	.db 211, 9, 39, 11  ;Spikes_0_Fast
+	.db 131, 9, 62, 14  ;Spikes_3_Fast
+	.db 211, 9, 91, 11  ;Spikes_0_Fast
 
 MG2_Data_9:
 	.db 1
-	.db 0
+	.db 8
+	.db 28, 255, 18, 39  ;SG_Platform1
+	.db 85, 255, 68, 42  ;SG_Platform6
+	.db 30, 9, 65, 3  ;Platforms_0_Fast_F
+	.db 134, 255, 93, 42  ;SG_Platform6
+	.db 189, 255, 55, 41  ;SG_Platform5
+	.db 244, 255, 93, 42  ;SG_Platform6
+	.db 38, 10, 20, 27  ;FrogNPCs1_11_Slow
+	.db 85, 255, 62, 44  ;SG_SolidPlatform2
 
 MG2_Data_8:
 	.db 1
-	.db 0
+	.db 10
+	.db 9, 255, 110, 40  ;SG_Platform2
+	.db 51, 255, 88, 41  ;SG_Platform5
+	.db 101, 255, 34, 39  ;SG_Platform1
+	.db 172, 255, 32, 41  ;SG_Platform5
+	.db 189, 255, 57, 37  ;SG_Platform3
+	.db 255, 255, 106, 42  ;SG_Platform6
+	.db 51, 255, 104, 44  ;SG_SolidPlatform2
+	.db 198, 9, 57, 11  ;Spikes_0_Fast
+	.db 198, 9, 61, 11  ;Spikes_0_Fast
+	.db 198, 9, 95, 11  ;Spikes_0_Fast
 
 MG2_Data_7:
 	.db 1
-	.db 0
+	.db 11
+	.db 22, 255, 109, 40  ;SG_Platform2
+	.db 112, 255, 86, 44  ;SG_SolidPlatform2
+	.db 86, 255, 70, 41  ;SG_Platform5
+	.db 86, 255, 92, 40  ;SG_Platform2
+	.db 112, 255, 22, 39  ;SG_Platform1
+	.db 200, 255, 30, 38  ;SG_Platform4
+	.db 252, 9, 98, 1  ;Platforms_0_Fast
+	.db 41, 19, 123, 25  ;FrogNPCs1_2_Slow_O_F
+	.db 217, 17, 64, 26  ;FrogNPCs1_0_Slow
+	.db 121, 9, 87, 14  ;Spikes_3_Fast
+	.db 121, 9, 40, 11  ;Spikes_0_Fast
 
 MG2_Data_6:
 	.db 1
-	.db 7
-	.db 53, 255, 60, 40  ;SG_SolidPlatform1
-	.db 53, 14, 60, 0  ;SolidPlatform_4_Slow
-	.db 53, 14, 68, 1  ;SolidPlatform_1_Slow_O
-	.db 53, 14, 76, 2  ;SolidPlatform_1_Slow
-	.db 53, 14, 83, 3  ;SolidPlatform_5_Slow_O
-	.db 147, 255, 27, 41  ;SG_SolidPlatform2
-	.db 117, 255, 33, 39  ;SG_Platform6
+	.db 12
+	.db 53, 255, 52, 43  ;SG_SolidPlatform1
+	.db 53, 14, 52, 18  ;SolidPlatform_4_Slow
+	.db 53, 14, 60, 19  ;SolidPlatform_1_Slow_O
+	.db 53, 14, 68, 20  ;SolidPlatform_1_Slow
+	.db 53, 14, 75, 21  ;SolidPlatform_5_Slow_O
+	.db 8, 255, 90, 42  ;SG_Platform6
+	.db 147, 255, 27, 44  ;SG_SolidPlatform2
+	.db 107, 255, 33, 42  ;SG_Platform6
+	.db 147, 255, 11, 41  ;SG_Platform5
+	.db 219, 255, 24, 39  ;SG_Platform1
+	.db 70, 17, 55, 7  ;FrogNPCs1_4_Slow_O
+	.db 190, 255, 108, 42  ;SG_Platform6
 
 MG2_Data_5:
-	.db 0
+	.db 1
 	.db 6
-	.db 129, 255, 57, 34  ;SG_Platform4
-	.db 178, 255, 10, 35  ;SG_Platform1
-	.db 69, 255, 112, 39  ;SG_Platform6
-	.db 246, 255, 51, 33  ;SG_Platform3
-	.db 188, 10, 12, 124  ;FrogNPCs1_9_Slow
-	.db 138, 9, 68, 152  ;Spikes_0_Fast
+	.db 129, 255, 57, 38  ;SG_Platform4
+	.db 178, 255, 10, 39  ;SG_Platform1
+	.db 69, 255, 112, 42  ;SG_Platform6
+	.db 247, 255, 53, 41  ;SG_Platform5
+	.db 188, 10, 12, 17  ;FrogNPCs1_9_Slow
+	.db 138, 9, 69, 11  ;Spikes_0_Fast
 
 MG2_Data_4:
-	.db 0
+	.db 1
 	.db 11
-	.db 40, 255, 23, 35  ;SG_Platform1
-	.db 40, 255, 64, 33  ;SG_Platform3
-	.db 107, 255, 91, 37  ;SG_Platform2
-	.db 159, 255, 55, 38  ;SG_Platform5
-	.db 214, 255, 91, 37  ;SG_Platform2
-	.db 244, 255, 134, 39  ;SG_Platform6
-	.db 161, 255, 9, 35  ;SG_Platform1
-	.db 178, 17, 10, 155  ;FrogNPCs1_5_Slow
-	.db 254, 10, 144, 156  ;FrogNPCs1_7_Slow
-	.db 49, 9, 64, 152  ;Spikes_0_Fast
-	.db 49, 9, 102, 152  ;Spikes_0_Fast
+	.db 47, 255, 23, 39  ;SG_Platform1
+	.db 40, 255, 64, 37  ;SG_Platform3
+	.db 107, 255, 91, 40  ;SG_Platform2
+	.db 159, 255, 55, 41  ;SG_Platform5
+	.db 214, 255, 91, 40  ;SG_Platform2
+	.db 244, 255, 134, 42  ;SG_Platform6
+	.db 161, 255, 9, 39  ;SG_Platform1
+	.db 178, 17, 10, 15  ;FrogNPCs1_5_Slow
+	.db 254, 10, 144, 16  ;FrogNPCs1_7_Slow
+	.db 49, 9, 64, 11  ;Spikes_0_Fast
+	.db 49, 9, 102, 11  ;Spikes_0_Fast
 
 MG2_Data_3:
-	.db 0
+	.db 1
 	.db 6
-	.db 53, 255, 82, 35  ;SG_Platform1
-	.db 137, 255, 102, 37  ;SG_Platform2
-	.db 177, 255, 68, 35  ;SG_Platform1
-	.db 224, 255, 23, 35  ;SG_Platform1
-	.db 243, 19, 24, 154  ;FrogNPCs1_3_Slow_F
-	.db 186, 9, 85, 152  ;Spikes_0_Fast
+	.db 53, 255, 82, 39  ;SG_Platform1
+	.db 137, 255, 102, 40  ;SG_Platform2
+	.db 177, 255, 68, 39  ;SG_Platform1
+	.db 224, 255, 23, 39  ;SG_Platform1
+	.db 243, 19, 24, 13  ;FrogNPCs1_3_Slow_F
+	.db 186, 9, 91, 14  ;Spikes_3_Fast
 
 MG2_Data_2:
-	.db 0
-	.db 9
-	.db 21, 255, 79, 33  ;SG_Platform3
-	.db 94, 255, 36, 34  ;SG_Platform4
-	.db 172, 255, 18, 35  ;SG_Platform1
-	.db 242, 255, 17, 35  ;SG_Platform1
-	.db 241, 255, 115, 37  ;SG_Platform2
-	.db 251, 10, 117, 153  ;FrogNPCs1_9_Slow_O
-	.db 30, 9, 105, 152  ;Spikes_0_Fast
-	.db 30, 9, 117, 152  ;Spikes_0_Fast
-	.db 103, 9, 55, 152  ;Spikes_0_Fast
+	.db 1
+	.db 8
+	.db 21, 255, 79, 37  ;SG_Platform3
+	.db 94, 255, 36, 38  ;SG_Platform4
+	.db 172, 255, 18, 39  ;SG_Platform1
+	.db 242, 255, 17, 39  ;SG_Platform1
+	.db 241, 255, 115, 40  ;SG_Platform2
+	.db 251, 10, 117, 12  ;FrogNPCs1_9_Slow_O
+	.db 30, 9, 105, 11  ;Spikes_0_Fast
+	.db 103, 9, 55, 11  ;Spikes_0_Fast
 
 MG2_Data_1:
-	.db 0
+	.db 1
 	.db 9
-	.db 97, 255, 48, 33  ;SG_Platform3
-	.db 24, 255, 6, 34  ;SG_Platform4
-	.db 98, 255, 103, 37  ;SG_Platform2
-	.db 176, 255, 103, 37  ;SG_Platform2
-	.db 205, 255, 39, 35  ;SG_Platform1
-	.db 186, 10, 124, 149  ;FrogNPCs1_8_Slow_F
-	.db 224, 19, 41, 150  ;FrogNPCs1_1_Slow
-	.db 114, 17, 51, 151  ;FrogNPCs1_6_Slow_O
-	.db 106, 9, 70, 152  ;Spikes_0_Fast
+	.db 97, 255, 48, 37  ;SG_Platform3
+	.db 24, 255, 6, 38  ;SG_Platform4
+	.db 98, 255, 103, 40  ;SG_Platform2
+	.db 176, 255, 103, 40  ;SG_Platform2
+	.db 205, 255, 39, 39  ;SG_Platform1
+	.db 186, 10, 124, 8  ;FrogNPCs1_8_Slow_F
+	.db 224, 19, 41, 9  ;FrogNPCs1_1_Slow
+	.db 114, 17, 51, 10  ;FrogNPCs1_6_Slow_O
+	.db 106, 9, 70, 11  ;Spikes_0_Fast
 
 MG2_Data_0:
-	.db 0
-	.db 7
-	.db 92, 255, 99, 33  ;SG_Platform3
-	.db 93, 255, 12, 34  ;SG_Platform4
-	.db 145, 255, 65, 35  ;SG_Platform1
-	.db 232, 255, 84, 35  ;SG_Platform1
-	.db 200, 255, 35, 36  ;SG_TongueRing
-	.db 102, 10, 138, 147  ;FrogNPCs1_10_Slow
-	.db 162, 17, 66, 148  ;FrogNPCs1_4_Slow_O
+	.db 1
+	.db 6
+	.db 92, 255, 99, 37  ;SG_Platform3
+	.db 93, 255, 12, 38  ;SG_Platform4
+	.db 145, 255, 65, 39  ;SG_Platform1
+	.db 232, 255, 84, 39  ;SG_Platform1
+	.db 102, 10, 138, 6  ;FrogNPCs1_10_Slow
+	.db 162, 17, 66, 7  ;FrogNPCs1_4_Slow_O
 
 
 
+
+
+player_start_pos_testing:
+	.dl 6912
+	.dl 12032

@@ -1,279 +1,290 @@
-FrogFall_Slow_O_F .equ 13894081 ; vRam + 1 - 378
-FrogTongue_Slow .equ 13894459 ; vRam + 379 - 448
-FrogTongue_Slow_O .equ 13894529 ; vRam + 449 - 522
-Unlucky_0_Fast .equ 13894602 ; vRam + 522 - 875
-Font_0_Fast .equ 13894956 ; vRam + 876 - 982
-Font_1_Fast .equ 13895062 ; vRam + 982 - 1082
-Font_2_Fast .equ 13895162 ; vRam + 1082 - 1162
-Font_3_Fast .equ 13895242 ; vRam + 1162 - 1263
-Font_4_Fast .equ 13895344 ; vRam + 1264 - 1354
-Font_5_Fast .equ 13895434 ; vRam + 1354 - 1435
-Font_6_Fast .equ 13895516 ; vRam + 1436 - 1531
-Font_7_Fast .equ 13895612 ; vRam + 1532 - 1650
-Font_8_Fast .equ 13895730 ; vRam + 1650 - 1740
-Font_9_Fast .equ 13895820 ; vRam + 1740 - 1822
-Font_10_Fast .equ 13895902 ; vRam + 1822 - 1934
-Font_11_Fast .equ 13896014 ; vRam + 1934 - 2009
-Font_12_Fast .equ 13896090 ; vRam + 2010 - 2141
-Font_13_Fast .equ 13896222 ; vRam + 2142 - 2264
-Font_14_Fast .equ 13896344 ; vRam + 2264 - 2374
-Font_15_Fast .equ 13896454 ; vRam + 2374 - 2465
-Font_16_Fast .equ 13896546 ; vRam + 2466 - 2583
-Font_17_Fast .equ 13896664 ; vRam + 2584 - 2688
-Font_18_Fast .equ 13896768 ; vRam + 2688 - 2779
-Font_19_Fast .equ 13896860 ; vRam + 2780 - 2858
-Font_20_Fast .equ 13896938 ; vRam + 2858 - 2972
-Font_21_Fast .equ 13897052 ; vRam + 2972 - 3074
-Font_22_Fast .equ 13897154 ; vRam + 3074 - 3205
-Font_23_Fast .equ 13897286 ; vRam + 3206 - 3304
-Font_24_Fast .equ 13897384 ; vRam + 3304 - 3394
-Font_25_Fast .equ 13897474 ; vRam + 3394 - 3481
-Font_26_Fast .equ 13897562 ; vRam + 3482 - 3609
-Font_27_Fast .equ 13897690 ; vRam + 3610 - 3737
-Font_28_Fast .equ 13897818 ; vRam + 3738 - 3865
-Font_29_Fast .equ 13897946 ; vRam + 3866 - 3932
-Font_30_Slow .equ 13898013 ; vRam + 3933 - 4008
-Font_31_Slow .equ 13898089 ; vRam + 4009 - 4077
-Font_32_Slow .equ 13898157 ; vRam + 4077 - 4140
-Font_33_Slow .equ 13898221 ; vRam + 4141 - 4210
-Font_34_Slow .equ 13898291 ; vRam + 4211 - 4278
-Font_35_Slow .equ 13898359 ; vRam + 4279 - 4343
-Font_36_Slow .equ 13898423 ; vRam + 4343 - 4410
-Font_37_Slow .equ 13898491 ; vRam + 4411 - 4492
-Font_38_Slow .equ 13898573 ; vRam + 4493 - 4562
-Font_39_Slow .equ 13898643 ; vRam + 4563 - 4628
-Font_40_Slow .equ 13898709 ; vRam + 4629 - 4708
-Font_41_Slow .equ 13898789 ; vRam + 4709 - 4770
-Font_42_Slow .equ 13898851 ; vRam + 4771 - 4866
-Font_43_Slow .equ 13898947 ; vRam + 4867 - 4948
-Font_44_Slow .equ 13899029 ; vRam + 4949 - 5018
-Font_45_Slow .equ 13899099 ; vRam + 5019 - 5084
-Font_46_Slow .equ 13899165 ; vRam + 5085 - 5160
-Font_47_Slow .equ 13899241 ; vRam + 5161 - 5235
-Font_48_Slow .equ 13899315 ; vRam + 5235 - 5302
-Font_49_Slow .equ 13899383 ; vRam + 5303 - 5366
-Font_50_Slow .equ 13899447 ; vRam + 5367 - 5442
-Font_51_Slow .equ 13899523 ; vRam + 5443 - 5516
-Font_52_Slow .equ 13899597 ; vRam + 5517 - 5612
-Font_53_Slow .equ 13899693 ; vRam + 5613 - 5690
-Font_54_Slow .equ 13899771 ; vRam + 5691 - 5760
-Font_55_Slow .equ 13899841 ; vRam + 5761 - 5828
-Font_56_Slow .equ 13899909 ; vRam + 5829 - 5886
-Font_57_Slow .equ 13899967 ; vRam + 5887 - 5949
-Font_58_Slow .equ 13900029 ; vRam + 5949 - 5985
-Platforms_2_Slow_O .equ 13900065 ; vRam + 5985 - 6108
-Spikes_0_Fast .equ 13900188 ; vRam + 6108 - 6236
-TongueRing1_Slow .equ 13900317 ; vRam + 6237 - 6368
-TongueRing2_Slow .equ 13900449 ; vRam + 6369 - 6500
-TongueRing1_Slow_F .equ 13900581 ; vRam + 6501 - 6632
-TongueRing2_Slow_F .equ 13900713 ; vRam + 6633 - 6764
-FrogNPCs1_10_Slow .equ 13900845 ; vRam + 6765 - 6889
-FrogNPCs1_4_Slow_O .equ 13900969 ; vRam + 6889 - 7144
-FrogNPCs1_8_Slow_F .equ 13901225 ; vRam + 7145 - 7269
-FrogNPCs1_1_Slow .equ 13901349 ; vRam + 7269 - 7605
-FrogNPCs1_6_Slow_O .equ 13901685 ; vRam + 7605 - 7860
-FrogNPCs1_9_Slow_O .equ 13901941 ; vRam + 7861 - 7989
-GroundDirtDark_Fast .equ 13902070 ; vRam + 7990 - 8123
-GroundDirtDark_Fast_F .equ 13902204 ; vRam + 8124 - 8257
-GroundHumpDark_Fast .equ 13902338 ; vRam + 8258 - 8392
-GroundHumpDark_Fast_F .equ 13902472 ; vRam + 8392 - 8526
-Tree_16_Fast .equ 13902606 ; vRam + 8526 - 8611
-Tree_17_Slow .equ 13902691 ; vRam + 8611 - 8712
-Tree_17_Slow_O_F .equ 13902793 ; vRam + 8713 - 8814
-Tree_18_Slow .equ 13902895 ; vRam + 8815 - 8915
-Tree_18_Slow_O_F .equ 13902995 ; vRam + 8915 - 9015
-Tree_16_Fast_F .equ 13903096 ; vRam + 9016 - 9101
-CloudsNew_1_Fast .equ 13903182 ; vRam + 9102 - 9227
-CloudsNew_0_Fast .equ 13903308 ; vRam + 9228 - 9349
-CloudsNew_2_Fast .equ 13903430 ; vRam + 9350 - 9443
-CloudsNew_8_Fast .equ 13903524 ; vRam + 9444 - 9491
-CloudsNew_3_Fast .equ 13903572 ; vRam + 9492 - 9581
-CloudsNew_4_Fast .equ 13903662 ; vRam + 9582 - 9671
-CloudsNew_2_Fast_F .equ 13903752 ; vRam + 9672 - 9765
-CloudsNew_6_Fast .equ 13903846 ; vRam + 9766 - 9873
-CloudsNew_5_Fast .equ 13903954 ; vRam + 9874 - 9965
-CloudsNew_9_Fast .equ 13904046 ; vRam + 9966 - 10012
-CloudsNew_6_Fast_F .equ 13904092 ; vRam + 10012 - 10119
-CloudsNew_7_Slow_O .equ 13904199 ; vRam + 10119 - 10187
-CloudsNew_4_Fast_F .equ 13904268 ; vRam + 10188 - 10277
-CloudsNew_0_Fast_F .equ 13904358 ; vRam + 10278 - 10399
-CloudsNew_7_Slow_F .equ 13904479 ; vRam + 10399 - 10467
-CloudsNew_1_Slow_O .equ 13904547 ; vRam + 10467 - 10631
-CloudsNew_6_Slow_O .equ 13904711 ; vRam + 10631 - 10768
-CloudsNew_5_Slow_O .equ 13904849 ; vRam + 10769 - 10887
-CloudsNew_9_Slow_O_F .equ 13904967 ; vRam + 10887 - 10951
-FrogDefault_Slow .equ 13905031 ; vRam + 10951 - 11254
-FrogDefault_Slow_O .equ 13905335 ; vRam + 11255 - 11558
-FrogDefault_Slow_F .equ 13905639 ; vRam + 11559 - 11862
-FrogDefault_Slow_O_F .equ 13905943 ; vRam + 11863 - 12166
-FrogChargeLit_Slow .equ 13906247 ; vRam + 12167 - 12455
-FrogChargeLit_Slow_O .equ 13906535 ; vRam + 12455 - 12748
-FrogChargeLit_Slow_F .equ 13906829 ; vRam + 12749 - 13042
-FrogChargeLit_Slow_O_F .equ 13907123 ; vRam + 13043 - 13331
-FrogCharge_Slow .equ 13907411 ; vRam + 13331 - 13619
-FrogCharge_Slow_O .equ 13907699 ; vRam + 13619 - 13912
-FrogCharge_Slow_F .equ 13907993 ; vRam + 13913 - 14206
-FrogCharge_Slow_O_F .equ 13908287 ; vRam + 14207 - 14495
-FrogJump_Slow .equ 13908575 ; vRam + 14495 - 14871
-FrogJump_Slow_O .equ 13908951 ; vRam + 14871 - 15256
-FrogJump_Slow_F .equ 13909337 ; vRam + 15257 - 15633
-FrogJump_Slow_O_F .equ 13909713 ; vRam + 15633 - 16018
-FrogJumpMouth_Slow .equ 13910099 ; vRam + 16019 - 16395
-FrogJumpMouth_Slow_O .equ 13910475 ; vRam + 16395 - 16780
-FrogJumpMouth_Slow_F .equ 13910861 ; vRam + 16781 - 17157
-FrogJumpMouth_Slow_O_F .equ 13911237 ; vRam + 17157 - 17542
-FrogFall_Slow .equ 13911623 ; vRam + 17543 - 17910
-FrogFall_Slow_O .equ 13911991 ; vRam + 17911 - 18288
-FrogFall_Slow_F .equ 13912369 ; vRam + 18289 - 18656
-Vine5_Slow .equ 13912737 ; vRam + 18657 - 18846
-Vine6_Slow .equ 13912927 ; vRam + 18847 - 19011
-Vine4_Slow .equ 13913091 ; vRam + 19011 - 19203
-Vine4_Slow_F .equ 13913283 ; vRam + 19203 - 19394
-Vine4_Slow_O_F .equ 13913475 ; vRam + 19395 - 19587
-Vine5_Slow_O_F .equ 13913667 ; vRam + 19587 - 19778
-Vine7_Slow_O .equ 13913859 ; vRam + 19779 - 19907
-Vine5_Slow_O .equ 13913987 ; vRam + 19907 - 20096
-Vine6_Slow_O .equ 13914177 ; vRam + 20097 - 20263
-Vine4_Slow_O .equ 13914343 ; vRam + 20263 - 20453
-Vine2_Slow .equ 13914533 ; vRam + 20453 - 20612
-VineVertical_Slow_O .equ 13914693 ; vRam + 20613 - 20784
-VineVertical_Slow .equ 13914865 ; vRam + 20785 - 20958
-Branches_5_Fast .equ 13915038 ; vRam + 20958 - 21118
-Branches_3_Fast .equ 13915198 ; vRam + 21118 - 21285
-Branches_2_Fast .equ 13915366 ; vRam + 21286 - 21455
-Lantern_7_Slow_O_F .equ 13915535 ; vRam + 21455 - 21644
-Lantern_4_Slow_O .equ 13915725 ; vRam + 21645 - 21925
-Vine2_Slow_F .equ 13916005 ; vRam + 21925 - 22085
-Vine7_Slow .equ 13916165 ; vRam + 22085 - 22218
-VineVertical_Slow_F .equ 13916299 ; vRam + 22219 - 22393
-GroundDirtFull_Fast_F .equ 13916474 ; vRam + 22394 - 22571
-GroundDirtFull_Fast .equ 13916652 ; vRam + 22572 - 22749
-GroundDirtMound_Fast .equ 13916830 ; vRam + 22750 - 22877
-GroundDirtMound_Fast_F .equ 13916958 ; vRam + 22878 - 23005
-Branches_8_Slow_O_F .equ 13917085 ; vRam + 23005 - 23141
-Branches_9_Slow_O .equ 13917221 ; vRam + 23141 - 23316
-FrogNPCs1_2_Slow_O_F .equ 13917397 ; vRam + 23317 - 23653
-FrogNPCs1_5_Slow_O .equ 13917733 ; vRam + 23653 - 23908
-FrogNPCs1_9_Slow .equ 13917989 ; vRam + 23909 - 24033
-FrogNPCs1_7_Slow_F .equ 13918113 ; vRam + 24033 - 24157
-FrogNPCs1_0_Slow .equ 13918237 ; vRam + 24157 - 24412
-Tree_2_Fast .equ 13918492 ; vRam + 24412 - 24663
-Tree_4_Fast .equ 13918744 ; vRam + 24664 - 24921
-Tree_7_Fast .equ 13919002 ; vRam + 24922 - 25179
-Tree_9_Fast .equ 13919260 ; vRam + 25180 - 25437
-Tree_6_Fast_F .equ 13919518 ; vRam + 25438 - 25695
-Tree_3_Fast_F .equ 13919776 ; vRam + 25696 - 25953
-Tree_0_Fast_F .equ 13920034 ; vRam + 25954 - 26205
-Tree_3_Fast .equ 13920286 ; vRam + 26206 - 26463
-Tree_8_Fast .equ 13920544 ; vRam + 26464 - 26721
-Tree_9_Fast_F .equ 13920802 ; vRam + 26722 - 26979
-Tree_8_Fast_F .equ 13921060 ; vRam + 26980 - 27237
-Tree_4_Fast_F .equ 13921318 ; vRam + 27238 - 27495
-Tree_0_Fast .equ 13921576 ; vRam + 27496 - 27747
-Tree_6_Fast .equ 13921828 ; vRam + 27748 - 28005
-Tree_10_Fast .equ 13922086 ; vRam + 28006 - 28263
-Tree_7_Fast_F .equ 13922344 ; vRam + 28264 - 28521
-Tree_1_Fast_F .equ 13922602 ; vRam + 28522 - 28776
-Tree_1_Fast .equ 13922856 ; vRam + 28776 - 29030
-Tree_5_Fast .equ 13923110 ; vRam + 29030 - 29287
-Tree_11_Fast .equ 13923368 ; vRam + 29288 - 29545
-Tree_5_Fast_F .equ 13923626 ; vRam + 29546 - 29803
-Tree_2_Fast_F .equ 13923884 ; vRam + 29804 - 30055
-Tree_11_Fast_F .equ 13924136 ; vRam + 30056 - 30313
-Branches_1_Fast .equ 13924394 ; vRam + 30314 - 30466
-Branches_1_Fast_F .equ 13924546 ; vRam + 30466 - 30618
-Branches_2_Fast_F .equ 13924698 ; vRam + 30618 - 30787
-Branches_5_Fast_F .equ 13924868 ; vRam + 30788 - 30948
-Vine2_Slow_O .equ 13925029 ; vRam + 30949 - 31109
-Platforms_0_Fast .equ 13925190 ; vRam + 31110 - 31228
-Platforms_1_Fast .equ 13925308 ; vRam + 31228 - 31346
-Platforms_0_Fast_F .equ 13925426 ; vRam + 31346 - 31464
-Platforms_2_Slow_O_F .equ 13925545 ; vRam + 31465 - 31588
-BigGrassBase_Fast .equ 13925668 ; vRam + 31588 - 31948
-BigGrassTop_Fast .equ 13926028 ; vRam + 31948 - 32193
-BigGrassBase_Slow_O .equ 13926273 ; vRam + 32193 - 32631
-BigGrassBase_Fast_F .equ 13926712 ; vRam + 32632 - 32992
-BigGrassTop_Fast_F .equ 13927072 ; vRam + 32992 - 33237
-BigGrassTop_Slow_O .equ 13927317 ; vRam + 33237 - 33551
-DualLeaf4_Slow .equ 13927631 ; vRam + 33551 - 33727
-DualLeaf4_Slow_F .equ 13927807 ; vRam + 33727 - 33903
-DualLeaf3_Fast .equ 13927984 ; vRam + 33904 - 34024
-Branches_10_Fast .equ 13928104 ; vRam + 34024 - 34143
-Branches_9_Fast .equ 13928224 ; vRam + 34144 - 34274
-Branches_16_Slow .equ 13928355 ; vRam + 34275 - 34383
-Branches_13_Fast .equ 13928464 ; vRam + 34384 - 34433
-Leaves1_Fast .equ 13928514 ; vRam + 34434 - 34714
-DualLeaf1_Fast .equ 13928794 ; vRam + 34714 - 34825
-DualLeaf2_Fast .equ 13928906 ; vRam + 34826 - 34938
-DualLeaf2_Slow_O .equ 13929019 ; vRam + 34939 - 35108
-DualLeaf1_Slow_O .equ 13929189 ; vRam + 35109 - 35277
-AscentBanner_6_Slow_O .equ 13929357 ; vRam + 35277 - 35454
-AscentBanner_9_Fast .equ 13929534 ; vRam + 35454 - 35527
-AscentBanner_10_Fast .equ 13929608 ; vRam + 35528 - 35626
-AscentBanner_1_Fast .equ 13929706 ; vRam + 35626 - 35747
-AscentBanner_2_Fast .equ 13929828 ; vRam + 35748 - 35869
-AscentBanner_3_Fast .equ 13929950 ; vRam + 35870 - 36039
-AscentBanner_0_Fast .equ 13930120 ; vRam + 36040 - 36129
-AscentBanner_4_Fast .equ 13930210 ; vRam + 36130 - 36251
-AscentBanner_5_Fast .equ 13930332 ; vRam + 36252 - 36373
-AscentBanner_10_Fast_F .equ 13930454 ; vRam + 36374 - 36472
-AscentBanner_9_Fast_F .equ 13930552 ; vRam + 36472 - 36545
-AscentBanner_6_Slow_F .equ 13930625 ; vRam + 36545 - 36722
-AscentBanner_7_Fast .equ 13930802 ; vRam + 36722 - 36793
-AscentBanner_8_Slow_O .equ 13930873 ; vRam + 36793 - 36903
-AscentBanner_8_Slow .equ 13930983 ; vRam + 36903 - 37006
-AscentBanner_7_Slow_O .equ 13931087 ; vRam + 37007 - 37108
-Branches_6_Slow .equ 13931189 ; vRam + 37109 - 37266
-Branches_10_Fast_F .equ 13931346 ; vRam + 37266 - 37385
-Branches_7_Fast .equ 13931466 ; vRam + 37386 - 37507
-Branches_15_Slow .equ 13931587 ; vRam + 37507 - 37619
-Branches_8_Fast_F .equ 13931700 ; vRam + 37620 - 37714
-Branches_12_Fast .equ 13931794 ; vRam + 37714 - 37805
-Branches_15_Slow_O_F .equ 13931885 ; vRam + 37805 - 37917
-LeavesDark_Fast .equ 13644278 ; pixShadow+ 0 - 280
-LeavesDark_Fast_F .equ 13644558 ; pixShadow+ 280 - 560
-Leaves2_Fast .equ 13644838 ; pixShadow+ 560 - 795
-Leaves2_Fast_F .equ 13645074 ; pixShadow+ 796 - 1031
-LeavesLight_Fast .equ 13645310 ; pixShadow+ 1032 - 1312
-Branches_8_Fast .equ 13645590 ; pixShadow+ 1312 - 1406
-Branches_11_Fast_F .equ 13645684 ; pixShadow+ 1406 - 1509
-Branches_16_Slow_O_F .equ 13645787 ; pixShadow+ 1509 - 1617
-Branches_13_Fast_F .equ 13645896 ; pixShadow+ 1618 - 1667
-Branches_14_Slow .equ 13645945 ; pixShadow+ 1667 - 1775
-Lantern_0_Fast .equ 13646054 ; pixShadow+ 1776 - 1943
-Lantern_1_Fast .equ 13646222 ; pixShadow+ 1944 - 2111
-Lantern_2_Fast .equ 13646390 ; pixShadow+ 2112 - 2279
-Lantern_0_Fast_F .equ 13646558 ; pixShadow+ 2280 - 2447
-Lantern_1_Fast_F .equ 13646726 ; pixShadow+ 2448 - 2615
-Lantern_2_Fast_F .equ 13646894 ; pixShadow+ 2616 - 2783
-Lantern_6_Slow .equ 13647061 ; pixShadow+ 2783 - 2972
-Lantern_6_Slow_O_F .equ 13647251 ; pixShadow+ 2973 - 3162
-Lantern_5_Slow .equ 13647441 ; pixShadow+ 3163 - 3352
-Lantern_5_Slow_O_F .equ 13647631 ; pixShadow+ 3353 - 3542
-Lantern_3_Slow .equ 13647821 ; pixShadow+ 3543 - 3732
-Lantern_3_Slow_O_F .equ 13648011 ; pixShadow+ 3733 - 3922
-Lantern_7_Slow .equ 13648201 ; pixShadow+ 3923 - 4112
-Branches_4_Fast_F .equ 13648390 ; pixShadow+ 4112 - 4270
-Branches_7_Fast_F .equ 13648548 ; pixShadow+ 4270 - 4391
-Branches_12_Fast_F .equ 13648670 ; pixShadow+ 4392 - 4483
-Leaves1_Fast_F .equ 13648762 ; pixShadow+ 4484 - 4764
-Branches_1_Slow_O .equ 13649043 ; pixShadow+ 4765 - 4962
-Branches_2_Slow_O .equ 13649241 ; pixShadow+ 4963 - 5186
-Branches_4_Slow_O .equ 13649465 ; pixShadow+ 5187 - 5390
-Branches_7_Slow_O .equ 13649669 ; pixShadow+ 5391 - 5554
-FrogNPCs1_3_Slow_F .equ 13649833 ; pixShadow+ 5555 - 5896
-Branches_0_Fast_F .equ 13925668 ; vRam + 31588 - 31739
-Branches_8_Slow_O .equ 13925819 ; vRam + 31739 - 31875
-Branches_9_Fast_F .equ 13925956 ; vRam + 31876 - 32006
-FrogNPCs1_5_Slow .equ 13926087 ; vRam + 32007 - 32262
-FrogNPCs1_7_Slow .equ 13926343 ; vRam + 32263 - 32387
-Branches_4_Fast .equ 13926468 ; vRam + 32388 - 32546
-Branches_0_Fast .equ 13900316 ; vRam + 6236 - 6387
-SolidPlatform_4_Slow .equ 13900467 ; vRam + 6387 - 6584
-SolidPlatform_1_Slow_O .equ 13900665 ; vRam + 6585 - 6768
-SolidPlatform_1_Slow .equ 13900849 ; vRam + 6769 - 6952
-SolidPlatform_5_Slow_O .equ 13901033 ; vRam + 6953 - 7150
-SolidPlatform_0_Fast .equ 13901230 ; vRam + 7150 - 7301
-SolidPlatform_2_Fast .equ 13901382 ; vRam + 7302 - 7473
-SolidPlatform_3_Fast .equ 13901554 ; vRam + 7474 - 7645
-Vine3_Slow_F .equ 13901725 ; vRam + 7645 - 7825
+Font_0_Fast .equ 13894080 ; vRam + 0 - 106
+Font_1_Fast .equ 13894186 ; vRam + 106 - 206
+Font_2_Fast .equ 13894286 ; vRam + 206 - 286
+Font_3_Fast .equ 13894366 ; vRam + 286 - 387
+Font_4_Fast .equ 13894468 ; vRam + 388 - 478
+Font_5_Fast .equ 13894558 ; vRam + 478 - 559
+Font_6_Fast .equ 13894640 ; vRam + 560 - 655
+Font_7_Fast .equ 13894736 ; vRam + 656 - 774
+Font_8_Fast .equ 13894854 ; vRam + 774 - 864
+Font_9_Fast .equ 13894944 ; vRam + 864 - 946
+Font_10_Fast .equ 13895026 ; vRam + 946 - 1058
+Font_11_Fast .equ 13895138 ; vRam + 1058 - 1133
+Font_12_Fast .equ 13895214 ; vRam + 1134 - 1265
+Font_13_Fast .equ 13895346 ; vRam + 1266 - 1388
+Font_14_Fast .equ 13895468 ; vRam + 1388 - 1498
+Font_15_Fast .equ 13895578 ; vRam + 1498 - 1589
+Font_16_Fast .equ 13895670 ; vRam + 1590 - 1707
+Font_17_Fast .equ 13895788 ; vRam + 1708 - 1812
+Font_18_Fast .equ 13895892 ; vRam + 1812 - 1903
+Font_19_Fast .equ 13895984 ; vRam + 1904 - 1982
+Font_20_Fast .equ 13896062 ; vRam + 1982 - 2096
+Font_21_Fast .equ 13896176 ; vRam + 2096 - 2198
+Font_22_Fast .equ 13896278 ; vRam + 2198 - 2329
+Font_23_Fast .equ 13896410 ; vRam + 2330 - 2428
+Font_24_Fast .equ 13896508 ; vRam + 2428 - 2518
+Font_25_Fast .equ 13896598 ; vRam + 2518 - 2605
+Font_26_Fast .equ 13896686 ; vRam + 2606 - 2733
+Font_27_Fast .equ 13896814 ; vRam + 2734 - 2861
+Font_28_Fast .equ 13896942 ; vRam + 2862 - 2989
+Font_29_Fast .equ 13897070 ; vRam + 2990 - 3056
+Font_30_Slow .equ 13897137 ; vRam + 3057 - 3132
+Font_31_Slow .equ 13897213 ; vRam + 3133 - 3201
+Font_32_Slow .equ 13897281 ; vRam + 3201 - 3264
+Font_33_Slow .equ 13897345 ; vRam + 3265 - 3334
+Font_34_Slow .equ 13897415 ; vRam + 3335 - 3402
+Font_35_Slow .equ 13897483 ; vRam + 3403 - 3467
+Font_36_Slow .equ 13897547 ; vRam + 3467 - 3534
+Font_37_Slow .equ 13897615 ; vRam + 3535 - 3616
+Font_38_Slow .equ 13897697 ; vRam + 3617 - 3686
+Font_39_Slow .equ 13897767 ; vRam + 3687 - 3752
+Font_40_Slow .equ 13897833 ; vRam + 3753 - 3832
+Font_41_Slow .equ 13897913 ; vRam + 3833 - 3894
+Font_42_Slow .equ 13897975 ; vRam + 3895 - 3990
+Font_43_Slow .equ 13898071 ; vRam + 3991 - 4072
+Font_44_Slow .equ 13898153 ; vRam + 4073 - 4142
+Font_45_Slow .equ 13898223 ; vRam + 4143 - 4208
+Font_46_Slow .equ 13898289 ; vRam + 4209 - 4284
+Font_47_Slow .equ 13898365 ; vRam + 4285 - 4359
+Font_48_Slow .equ 13898439 ; vRam + 4359 - 4426
+Font_49_Slow .equ 13898507 ; vRam + 4427 - 4490
+Font_50_Slow .equ 13898571 ; vRam + 4491 - 4566
+Font_51_Slow .equ 13898647 ; vRam + 4567 - 4640
+Font_52_Slow .equ 13898721 ; vRam + 4641 - 4736
+Font_53_Slow .equ 13898817 ; vRam + 4737 - 4814
+Font_54_Slow .equ 13898895 ; vRam + 4815 - 4884
+Font_55_Slow .equ 13898965 ; vRam + 4885 - 4952
+Font_56_Slow .equ 13899033 ; vRam + 4953 - 5010
+Font_57_Slow .equ 13899091 ; vRam + 5011 - 5073
+Font_58_Slow .equ 13899153 ; vRam + 5073 - 5109
+CloudsNew_1_Fast .equ 13899190 ; vRam + 5110 - 5235
+CloudsNew_0_Fast .equ 13899316 ; vRam + 5236 - 5357
+CloudsNew_2_Fast .equ 13899438 ; vRam + 5358 - 5451
+CloudsNew_8_Fast .equ 13899532 ; vRam + 5452 - 5499
+CloudsNew_3_Fast .equ 13899580 ; vRam + 5500 - 5589
+CloudsNew_4_Fast .equ 13899670 ; vRam + 5590 - 5679
+CloudsNew_2_Fast_F .equ 13899760 ; vRam + 5680 - 5773
+CloudsNew_6_Fast .equ 13899854 ; vRam + 5774 - 5881
+CloudsNew_5_Fast .equ 13899962 ; vRam + 5882 - 5973
+CloudsNew_9_Fast .equ 13900054 ; vRam + 5974 - 6020
+CloudsNew_6_Fast_F .equ 13900100 ; vRam + 6020 - 6127
+CloudsNew_7_Slow_O .equ 13900207 ; vRam + 6127 - 6195
+CloudsNew_4_Fast_F .equ 13900276 ; vRam + 6196 - 6285
+CloudsNew_0_Fast_F .equ 13900366 ; vRam + 6286 - 6407
+CloudsNew_7_Slow_F .equ 13900487 ; vRam + 6407 - 6475
+CloudsNew_1_Slow_O .equ 13900555 ; vRam + 6475 - 6639
+CloudsNew_6_Slow_O .equ 13900719 ; vRam + 6639 - 6776
+CloudsNew_5_Slow_O .equ 13900857 ; vRam + 6777 - 6895
+CloudsNew_9_Slow_O_F .equ 13900975 ; vRam + 6895 - 6959
+Platforms_2_Slow_O .equ 13901039 ; vRam + 6959 - 7082
+Spikes_0_Fast .equ 13901162 ; vRam + 7082 - 7210
+FrogNPCs1_10_Slow .equ 13901291 ; vRam + 7211 - 7335
+FrogNPCs1_4_Slow_O .equ 13901415 ; vRam + 7335 - 7590
+FrogNPCs1_8_Slow_F .equ 13901671 ; vRam + 7591 - 7715
+FrogNPCs1_1_Slow .equ 13901795 ; vRam + 7715 - 8051
+FrogNPCs1_6_Slow_O .equ 13902131 ; vRam + 8051 - 8306
+FrogNPCs1_9_Slow_O .equ 13902387 ; vRam + 8307 - 8435
+FrogDefault_Slow .equ 13902515 ; vRam + 8435 - 8738
+GroundDirtDark_Fast .equ 13902818 ; vRam + 8738 - 8871
+GroundDirtDark_Fast_F .equ 13902952 ; vRam + 8872 - 9005
+GroundHumpDark_Fast .equ 13903086 ; vRam + 9006 - 9140
+GroundHumpDark_Fast_F .equ 13903220 ; vRam + 9140 - 9274
+Tree_16_Fast .equ 13903354 ; vRam + 9274 - 9359
+Tree_17_Slow .equ 13903439 ; vRam + 9359 - 9460
+Tree_17_Slow_O_F .equ 13903541 ; vRam + 9461 - 9562
+Tree_18_Slow .equ 13903643 ; vRam + 9563 - 9663
+Tree_18_Slow_O_F .equ 13903743 ; vRam + 9663 - 9763
+Tree_16_Fast_F .equ 13903844 ; vRam + 9764 - 9849
+FrogDefault_Slow_O .equ 13903929 ; vRam + 9849 - 10152
+FrogDefault_Slow_F .equ 13904233 ; vRam + 10153 - 10456
+FrogDefault_Slow_O_F .equ 13904537 ; vRam + 10457 - 10760
+FrogChargeLit_Slow .equ 13904841 ; vRam + 10761 - 11049
+FrogChargeLit_Slow_O .equ 13905129 ; vRam + 11049 - 11342
+FrogChargeLit_Slow_F .equ 13905423 ; vRam + 11343 - 11636
+FrogChargeLit_Slow_O_F .equ 13905717 ; vRam + 11637 - 11925
+FrogCharge_Slow .equ 13906005 ; vRam + 11925 - 12213
+FrogCharge_Slow_O .equ 13906293 ; vRam + 12213 - 12506
+FrogCharge_Slow_F .equ 13906587 ; vRam + 12507 - 12800
+FrogCharge_Slow_O_F .equ 13906881 ; vRam + 12801 - 13089
+FrogJump_Slow .equ 13907169 ; vRam + 13089 - 13465
+FrogJump_Slow_O .equ 13907545 ; vRam + 13465 - 13850
+FrogJump_Slow_F .equ 13907931 ; vRam + 13851 - 14227
+FrogJump_Slow_O_F .equ 13908307 ; vRam + 14227 - 14612
+FrogJumpMouth_Slow .equ 13908693 ; vRam + 14613 - 14989
+FrogJumpMouth_Slow_O .equ 13909069 ; vRam + 14989 - 15374
+FrogJumpMouth_Slow_F .equ 13909455 ; vRam + 15375 - 15751
+FrogJumpMouth_Slow_O_F .equ 13909831 ; vRam + 15751 - 16136
+FrogFall_Slow .equ 13910217 ; vRam + 16137 - 16504
+FrogFall_Slow_O .equ 13910585 ; vRam + 16505 - 16882
+FrogFall_Slow_F .equ 13910963 ; vRam + 16883 - 17250
+FrogFall_Slow_O_F .equ 13911331 ; vRam + 17251 - 17628
+FrogTongue_Slow .equ 13911709 ; vRam + 17629 - 17698
+FrogTongue_Slow_O .equ 13911779 ; vRam + 17699 - 17772
+Unlucky_0_Fast .equ 13911852 ; vRam + 17772 - 18125
+Vine5_Slow .equ 13912205 ; vRam + 18125 - 18314
+Vine6_Slow .equ 13912395 ; vRam + 18315 - 18479
+Vine4_Slow .equ 13912559 ; vRam + 18479 - 18671
+Vine4_Slow_F .equ 13912751 ; vRam + 18671 - 18862
+Vine4_Slow_O_F .equ 13912943 ; vRam + 18863 - 19055
+Vine5_Slow_O_F .equ 13913135 ; vRam + 19055 - 19246
+Vine7_Slow_O .equ 13913327 ; vRam + 19247 - 19375
+Vine5_Slow_O .equ 13913455 ; vRam + 19375 - 19564
+Vine6_Slow_O .equ 13913645 ; vRam + 19565 - 19731
+Vine4_Slow_O .equ 13913811 ; vRam + 19731 - 19921
+Vine2_Slow .equ 13914001 ; vRam + 19921 - 20080
+VineVertical_Slow_O .equ 13914161 ; vRam + 20081 - 20252
+VineVertical_Slow .equ 13914333 ; vRam + 20253 - 20426
+Branches_5_Fast .equ 13914506 ; vRam + 20426 - 20586
+Branches_3_Fast .equ 13914666 ; vRam + 20586 - 20753
+Branches_2_Fast .equ 13914834 ; vRam + 20754 - 20923
+Lantern_7_Slow_O_F .equ 13915003 ; vRam + 20923 - 21112
+Lantern_4_Slow_O .equ 13915193 ; vRam + 21113 - 21393
+Vine2_Slow_F .equ 13915473 ; vRam + 21393 - 21553
+VineVertical_Slow_F .equ 13915633 ; vRam + 21553 - 21727
+GroundDirtFull_Fast_F .equ 13915808 ; vRam + 21728 - 21905
+GroundDirtFull_Fast .equ 13915986 ; vRam + 21906 - 22083
+GroundDirtMound_Fast .equ 13916164 ; vRam + 22084 - 22211
+GroundDirtMound_Fast_F .equ 13916292 ; vRam + 22212 - 22339
+Branches_8_Slow_O_F .equ 13916419 ; vRam + 22339 - 22475
+Branches_9_Slow_O .equ 13916555 ; vRam + 22475 - 22650
+FrogNPCs1_2_Slow_O_F .equ 13916731 ; vRam + 22651 - 22987
+FrogNPCs1_5_Slow_O .equ 13917067 ; vRam + 22987 - 23242
+FrogNPCs1_9_Slow .equ 13917323 ; vRam + 23243 - 23367
+FrogNPCs1_7_Slow_F .equ 13917447 ; vRam + 23367 - 23491
+FrogNPCs1_0_Slow .equ 13917571 ; vRam + 23491 - 23746
+Tree_2_Fast .equ 13917826 ; vRam + 23746 - 23997
+Tree_4_Fast .equ 13918078 ; vRam + 23998 - 24255
+Tree_7_Fast .equ 13918336 ; vRam + 24256 - 24513
+Tree_9_Fast .equ 13918594 ; vRam + 24514 - 24771
+Tree_6_Fast_F .equ 13918852 ; vRam + 24772 - 25029
+Tree_3_Fast_F .equ 13919110 ; vRam + 25030 - 25287
+Tree_0_Fast_F .equ 13919368 ; vRam + 25288 - 25539
+Tree_3_Fast .equ 13919620 ; vRam + 25540 - 25797
+Tree_8_Fast .equ 13919878 ; vRam + 25798 - 26055
+Tree_9_Fast_F .equ 13920136 ; vRam + 26056 - 26313
+Tree_8_Fast_F .equ 13920394 ; vRam + 26314 - 26571
+Tree_4_Fast_F .equ 13920652 ; vRam + 26572 - 26829
+Tree_0_Fast .equ 13920910 ; vRam + 26830 - 27081
+Tree_6_Fast .equ 13921162 ; vRam + 27082 - 27339
+Tree_10_Fast .equ 13921420 ; vRam + 27340 - 27597
+Tree_7_Fast_F .equ 13921678 ; vRam + 27598 - 27855
+Tree_1_Fast_F .equ 13921936 ; vRam + 27856 - 28110
+Tree_1_Fast .equ 13922190 ; vRam + 28110 - 28364
+Tree_5_Fast .equ 13922444 ; vRam + 28364 - 28621
+Tree_11_Fast .equ 13922702 ; vRam + 28622 - 28879
+Tree_5_Fast_F .equ 13922960 ; vRam + 28880 - 29137
+Tree_2_Fast_F .equ 13923218 ; vRam + 29138 - 29389
+Tree_11_Fast_F .equ 13923470 ; vRam + 29390 - 29647
+Branches_1_Fast .equ 13923728 ; vRam + 29648 - 29800
+Vine7_Slow .equ 13923881 ; vRam + 29801 - 29934
+Branches_1_Fast_F .equ 13924014 ; vRam + 29934 - 30086
+Branches_2_Fast_F .equ 13924166 ; vRam + 30086 - 30255
+Branches_5_Fast_F .equ 13924336 ; vRam + 30256 - 30416
+Vine2_Slow_O .equ 13924497 ; vRam + 30417 - 30577
+Platforms_0_Fast .equ 13924658 ; vRam + 30578 - 30696
+Platforms_1_Fast .equ 13924776 ; vRam + 30696 - 30814
+Platforms_0_Fast_F .equ 13924894 ; vRam + 30814 - 30932
+Platforms_2_Slow_O_F .equ 13925013 ; vRam + 30933 - 31056
+BigGrassBase_Fast .equ 13925136 ; vRam + 31056 - 31416
+BigGrassTop_Fast .equ 13925496 ; vRam + 31416 - 31661
+BigGrassBase_Slow_O .equ 13925741 ; vRam + 31661 - 32099
+BigGrassBase_Fast_F .equ 13926180 ; vRam + 32100 - 32460
+BigGrassTop_Fast_F .equ 13926540 ; vRam + 32460 - 32705
+BigGrassTop_Slow_O .equ 13926785 ; vRam + 32705 - 33019
+DualLeaf4_Slow .equ 13927099 ; vRam + 33019 - 33195
+DualLeaf4_Slow_F .equ 13927275 ; vRam + 33195 - 33371
+DualLeaf3_Fast .equ 13927452 ; vRam + 33372 - 33492
+Branches_10_Fast .equ 13927572 ; vRam + 33492 - 33611
+Branches_9_Fast .equ 13927692 ; vRam + 33612 - 33742
+Branches_16_Slow .equ 13927823 ; vRam + 33743 - 33851
+Branches_13_Fast .equ 13927932 ; vRam + 33852 - 33901
+Leaves1_Fast .equ 13927982 ; vRam + 33902 - 34182
+DualLeaf1_Fast .equ 13928262 ; vRam + 34182 - 34293
+DualLeaf2_Fast .equ 13928374 ; vRam + 34294 - 34406
+DualLeaf2_Slow_O .equ 13928487 ; vRam + 34407 - 34576
+DualLeaf1_Slow_O .equ 13928657 ; vRam + 34577 - 34745
+AscentBanner_6_Slow_O .equ 13928825 ; vRam + 34745 - 34922
+AscentBanner_9_Fast .equ 13929002 ; vRam + 34922 - 34995
+AscentBanner_10_Fast .equ 13929076 ; vRam + 34996 - 35094
+AscentBanner_1_Fast .equ 13929174 ; vRam + 35094 - 35215
+AscentBanner_2_Fast .equ 13929296 ; vRam + 35216 - 35337
+AscentBanner_3_Fast .equ 13929418 ; vRam + 35338 - 35507
+AscentBanner_0_Fast .equ 13929588 ; vRam + 35508 - 35597
+AscentBanner_4_Fast .equ 13929678 ; vRam + 35598 - 35719
+AscentBanner_5_Fast .equ 13929800 ; vRam + 35720 - 35841
+AscentBanner_10_Fast_F .equ 13929922 ; vRam + 35842 - 35940
+AscentBanner_9_Fast_F .equ 13930020 ; vRam + 35940 - 36013
+AscentBanner_6_Slow_F .equ 13930093 ; vRam + 36013 - 36190
+AscentBanner_7_Fast .equ 13930270 ; vRam + 36190 - 36261
+AscentBanner_8_Slow_O .equ 13930341 ; vRam + 36261 - 36371
+AscentBanner_8_Slow .equ 13930451 ; vRam + 36371 - 36474
+AscentBanner_7_Slow_O .equ 13930555 ; vRam + 36475 - 36576
+Branches_6_Slow .equ 13930657 ; vRam + 36577 - 36734
+Branches_10_Fast_F .equ 13930814 ; vRam + 36734 - 36853
+Branches_7_Fast .equ 13930934 ; vRam + 36854 - 36975
+Branches_15_Slow .equ 13931055 ; vRam + 36975 - 37087
+Branches_8_Fast_F .equ 13931168 ; vRam + 37088 - 37182
+Branches_12_Fast .equ 13931262 ; vRam + 37182 - 37273
+Branches_15_Slow_O_F .equ 13931353 ; vRam + 37273 - 37385
+LeavesDark_Fast .equ 13931466 ; vRam + 37386 - 37666
+LeavesDark_Fast_F .equ 13931746 ; vRam + 37666 - 37946
+Leaves2_Fast .equ 13652704 ; pixShadow+ 0 - 235
+Leaves2_Fast_F .equ 13652940 ; pixShadow+ 236 - 471
+LeavesLight_Fast .equ 13653176 ; pixShadow+ 472 - 752
+Branches_8_Fast .equ 13653456 ; pixShadow+ 752 - 846
+Branches_11_Fast_F .equ 13653550 ; pixShadow+ 846 - 949
+Branches_16_Slow_O_F .equ 13653653 ; pixShadow+ 949 - 1057
+Branches_13_Fast_F .equ 13653762 ; pixShadow+ 1058 - 1107
+Branches_14_Slow .equ 13653811 ; pixShadow+ 1107 - 1215
+Lantern_0_Fast .equ 13653920 ; pixShadow+ 1216 - 1383
+Lantern_1_Fast .equ 13654088 ; pixShadow+ 1384 - 1551
+Lantern_2_Fast .equ 13654256 ; pixShadow+ 1552 - 1719
+Lantern_0_Fast_F .equ 13654424 ; pixShadow+ 1720 - 1887
+Lantern_1_Fast_F .equ 13654592 ; pixShadow+ 1888 - 2055
+Lantern_2_Fast_F .equ 13654760 ; pixShadow+ 2056 - 2223
+Lantern_6_Slow .equ 13654927 ; pixShadow+ 2223 - 2412
+Lantern_6_Slow_O_F .equ 13655117 ; pixShadow+ 2413 - 2602
+Lantern_5_Slow .equ 13655307 ; pixShadow+ 2603 - 2792
+Lantern_5_Slow_O_F .equ 13655497 ; pixShadow+ 2793 - 2982
+Lantern_3_Slow .equ 13655687 ; pixShadow+ 2983 - 3172
+Lantern_3_Slow_O_F .equ 13655877 ; pixShadow+ 3173 - 3362
+Lantern_7_Slow .equ 13656067 ; pixShadow+ 3363 - 3552
+Branches_4_Fast_F .equ 13656256 ; pixShadow+ 3552 - 3710
+Branches_7_Fast_F .equ 13656414 ; pixShadow+ 3710 - 3831
+Branches_12_Fast_F .equ 13656536 ; pixShadow+ 3832 - 3923
+Leaves1_Fast_F .equ 13656628 ; pixShadow+ 3924 - 4204
+Branches_1_Slow_O .equ 13656909 ; pixShadow+ 4205 - 4402
+Branches_2_Slow_O .equ 13657107 ; pixShadow+ 4403 - 4626
+Branches_4_Slow_O .equ 13657331 ; pixShadow+ 4627 - 4830
+Branches_7_Slow_O .equ 13657535 ; pixShadow+ 4831 - 4994
+Spikes_3_Fast .equ 13657698 ; pixShadow+ 4994 - 5059
+FrogNPCs1_3_Slow_F .equ 13657763 ; pixShadow+ 5059 - 5400
+Branches_0_Fast_F .equ 13925136 ; vRam + 31056 - 31207
+Branches_8_Slow_O .equ 13925287 ; vRam + 31207 - 31343
+Branches_9_Fast_F .equ 13925424 ; vRam + 31344 - 31474
+FrogNPCs1_5_Slow .equ 13925555 ; vRam + 31475 - 31730
+FrogNPCs1_7_Slow .equ 13925811 ; vRam + 31731 - 31855
+Branches_4_Fast .equ 13925936 ; vRam + 31856 - 32014
+Branches_0_Fast .equ 13926094 ; vRam + 32014 - 32165
+SolidPlatform_4_Slow .equ 13926245 ; vRam + 32165 - 32362
+SolidPlatform_1_Slow_O .equ 13926443 ; vRam + 32363 - 32546
+SolidPlatform_1_Slow .equ 13926627 ; vRam + 32547 - 32730
+SolidPlatform_5_Slow_O .equ 13926811 ; vRam + 32731 - 32928
+SolidPlatform_0_Fast .equ 13927276 ; vRam + 33196 - 33347
+SolidPlatform_2_Fast .equ 13928826 ; vRam + 34746 - 34917
+SolidPlatform_3_Fast .equ 13928998 ; vRam + 34918 - 35089
+FrogNPCs1_11_Slow .equ 13902387 ; vRam + 8307 - 8431
+FrogNPCs1_3_Slow .equ 13902819 ; vRam + 8739 - 9075
+Spikes_1_Fast .equ 13903156 ; vRam + 9076 - 9245
+Spikes_1_Fast_F .equ 13903326 ; vRam + 9246 - 9415
+FrogNPCs1_6_Slow .equ 13903495 ; vRam + 9415 - 9670
+FrogNPCs1_8_Slow_O .equ 13903751 ; vRam + 9671 - 9799
+FrogNPCs1_9_Slow_F .equ 13902387 ; vRam + 8307 - 8431
+FrogNPCs1_4_Slow .equ 13915003 ; vRam + 20923 - 21178
+FrogNPCs1_10_Slow_O .equ 13902819 ; vRam + 8739 - 8867
+TongueRing1_Slow .equ 13902947 ; vRam + 8867 - 8998
+TongueRing2_Slow .equ 13915259 ; vRam + 21179 - 21310
+TongueRing1_Slow_F .equ 13915807 ; vRam + 21727 - 21858
+TongueRing2_Slow_F .equ 13915939 ; vRam + 21859 - 21990
+Vines_4_Slow .equ 13903495 ; vRam + 9415 - 9597
+FrogNPCs1_1_Slow_O .equ 13901671 ; vRam + 7591 - 7932

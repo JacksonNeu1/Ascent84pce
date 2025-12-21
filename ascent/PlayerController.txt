@@ -324,6 +324,10 @@ pu_jump_notmin:
 	
 	ld hl,0 
 	ld a,(jump_strength_up)
+	cp 70
+	jp nc,pu_jump_min_height
+	ld a,70; base jump height
+pu_jump_min_height:
 	ld l,a
 	;call write_a_to_ram
 
@@ -751,26 +755,38 @@ check_end_fall:
 	res 3,a 
 	ld (player_flags),a ;reset fall flag 
 	
-	ld a,$B1
-	call write_a_to_ram
+	;ld a,$B1
+	;call write_a_to_ram
 	
 	;pop hl 
 	ld a, (fall_num_bounces)
+	;call write_a_to_ram
 	ld b,a 
 	;call write_a_to_ram
 	call random_val
 	ld e,a 
-	call write_a_to_ram
+	;call write_a_to_ram
+unlucky_check_mask .equ $+1
 	ld c,%00000001 ;can set to 11 for hard mode
 unlucky_bounce_loop: ;number of bounces determines num loops = more chances to land successfully
+	;(SHOULD START AT 25% CHANCE?)
+	;call write_a_to_ram
 	ld a,e ;restore random val
-	and a,c 
+	and a,c ;need to be zero to land
 	jp z,colis_vert_down_not_fall ;player lands
 	rlc c 
 	jp c,colis_vert_down_not_fall ;break loop after 8 shifts (incase rand val is all 0)
 	djnz unlucky_bounce_loop
 	
 ;Player has hit unlucky bounce 
+	;ld a,$B2 
+	;call write_a_to_ram
+	;call write_a_to_ram
+	
+	ld a, (fall_num_bounces)
+	inc a 
+	ld (fall_num_bounces),a 
+	
 	push hl 
 	call spike_hit_bounce
 	pop hl
@@ -781,8 +797,47 @@ unlucky_bounce_loop: ;number of bounces determines num loops = more chances to l
 	
 	jp check_col_skip_0 ;continue 
 	
+toggle_unlucky_mode:
+	
+	nop
+	
+	ld a,%11001001 ;ret 
+	ld (toggle_unlucky_mode),a 
+	
+	ld a, (unlucky_check_mask)
+	or a 
+	jp nz, disable_unlucky_bounce
+	
+	;Enable unlucky bounce 
+	ld a, %00000001
+	ld (unlucky_check_mask),a 
+	call setup_palette_1
+	ret
+
+disable_unlucky_bounce:
+	ld a, %00000000
+	ld (unlucky_check_mask),a 
+	
+	ld hl,mpLcdPalette+30
+	ld a,%00011010
+	ld (hl),a 
+	inc hl
+	ld a,%10110101
+	ld (hl),a 
+	ret 
+
+toggle_unlucky_mode_res:
+	
+	ld a,%00000000 ;ret 
+	ld (toggle_unlucky_mode),a 
+	ret 
+	
+
+	
+	
 	
 colis_vert_down_not_fall:
+
 	;player is moving down 
 	ld a,(hl) ;flags 
 	bit 7,a ;semisolid 
@@ -977,7 +1032,7 @@ reverse_x_vel:;bounce player off wall
 random_val:
 	ld a, (player_y_pos)
 	ld c,a 
-	ld a,($F20000) ;fast timer 
+	ld a,(totalTime) ;fast timer 
 	xor c
 	ret 
 
@@ -1006,12 +1061,12 @@ timer_max_val .equ 32
 player_collider_height .equ 18
 player_collider_width .equ 20 ;width -1 
 
-
+;D1C040
 player_x_pos:
-	.dl 0 ; (MSB fullpixel, Fullpixels, subpixels)
+	.dl 9216 ; (MSB fullpixel, Fullpixels, subpixels)
 	
 player_y_pos:
-	.dl 0 ; (Frame #, Fullpixels, subpixels)
+	.dl 14080 ; (Frame #, Fullpixels, subpixels)
 
 player_x_vel:
 	.dl 0 ; (Unused, Fullpixels, subpixels)
@@ -1021,10 +1076,10 @@ player_y_vel:
 
 
 player_x_pos_prev: ;x position before update, revert to this if collision 
-	.dl 0 ; (MSB fullpixel, Fullpixels, subpixels)
+	.dl 9216 ; (MSB fullpixel, Fullpixels, subpixels)
 	
 player_y_pos_prev: ;y position before update, revert to this if collision :
-	.dl 0 ; (Frame #, Fullpixels, subpixels)
+	.dl 14080 ; (Frame #, Fullpixels, subpixels)
 
 player_last_ground_pos:
 	.dl 0

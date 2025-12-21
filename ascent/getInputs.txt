@@ -41,6 +41,12 @@ scan_wait:
 	bit kbit4,a 
 	call nz, charge_jump_left
 	
+	ld a,(kbdG3)
+	bit kbit0,a 
+	call nz, toggle_unlucky_mode
+	ld a,(kbdG3)
+	bit kbit0,a 
+	call z, toggle_unlucky_mode_res
 
 	jp get_inputs_return
 	

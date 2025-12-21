@@ -1,5 +1,5 @@
 position_animation_data:
-	.db 96
+	.db 112
 	.dl FG_Data_22 + 2
 	.dl sine_05_15_2
 	.db 128
@@ -22,11 +22,11 @@ position_animation_data:
 	.dl sine_05_15_1
 	.db 169
 	.dl FG_Data_15 + 6
-	.dl sine_2_7_2
-	.db 90
+	.dl sine_2_7_3
+	.db 86
 	.dl FG_Data_15 + 10
-	.dl sine_2_3_2
-	.db 133
+	.dl sine_2_3_4
+	.db 131
 	.dl FG_Data_14 + 2
 	.dl sine_2_15_1
 	.db 171
@@ -114,9 +114,63 @@ position_animation_data:
 	.dl FG_Data_1 + 6
 	.dl sine_1_15_2
 	.db 65
-	.dl MG_Data_8 + 66
+	.dl MG_Data_16 + 68
+	.dl sine_05_3_1
+	.db 9
+	.dl MG_Data_16 + 66
+	.dl sine_1_15_1
+	.db 188
+	.dl MG_Data_16 + 70
 	.dl sine_8_1_1
 	.db 138
+	.dl MG_Data_14 + 70
+	.dl sine_05_15_1
+	.db 122
+	.dl MG_Data_13 + 6
+	.dl sine_2_3_4
+	.db 40
+	.dl MG_Data_13 + 10
+	.dl sine_05_31_1
+	.db 122
+	.dl MG_Data_13 + 30
+	.dl sine_2_3_4
+	.db 40
+	.dl MG_Data_12 + 66
+	.dl sine_2_15_2
+	.db 87
+	.dl MG_Data_12 + 70
+	.dl sine_2_3_4
+	.db 112
+	.dl MG_Data_12 + 82
+	.dl sine_2_3_4
+	.db 109
+	.dl MG_Data_10 + 70
+	.dl sine_05_31_1
+	.db 91
+	.dl MG_Data_9 + 10
+	.dl sine_2_3_4
+	.db 40
+	.dl MG_Data_9 + 14
+	.dl sine_2_3_4
+	.db 40
+	.dl MG_Data_9 + 78
+	.dl sine_05_15_1
+	.db 106
+	.dl MG_Data_8 + 66
+	.dl sine_05_15_1
+	.db 87
+	.dl MG_Data_8 + 78
+	.dl sine_8_1_1
+	.db 138
+	.dl MG_Data_7 + 26
+	.dl sine_05_15_1
+	.db 95
+	.dl MG_Data_7 + 70
+	.dl sine_05_15_3
+	.db 105
+	.dl MG_Data_6 + 70
+	.dl sine_05_15_2
+	.db 207
 	.dl MG_Data_5 + 70
 	.dl sine_05_31_1
 	.db 165
@@ -261,12 +315,6 @@ position_animation_data:
 	.dl SG_Branch2 + 72
 	.dl sine_2_1_3
 	.db 12
-	.dl SG_Vines3 + 6
-	.dl sine_4_3_4
-	.db 13
-	.dl SG_Vines3 + 10
-	.dl sine_4_3_4
-	.db 28
 	.dl SG_Branch1 + 26
 	.dl sine_4_1_3
 	.db 0
@@ -474,24 +522,24 @@ sprite_animation_data:
 	.db 17
 	.dl SG_Vines8 + 17
 	.dl linrep_8_7_1
-	.db 143
-	.db 144
-	.db 143
-	.db 144
-	.db 143
-	.db 144
-	.db 143
-	.db 144
+	.db 36
+	.db 37
+	.db 36
+	.db 37
+	.db 36
+	.db 37
+	.db 36
+	.db 37
 	.dl SG_TongueRing + 5
 	.dl linrep_8_7_1
-	.db 145
-	.db 146
-	.db 145
-	.db 146
-	.db 145
-	.db 146
-	.db 145
-	.db 146
+	.db 38
+	.db 39
+	.db 38
+	.db 39
+	.db 38
+	.db 39
+	.db 38
+	.db 39
 	.dl SG_TongueRing + 9
 
 
