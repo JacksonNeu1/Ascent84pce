@@ -811,19 +811,19 @@ toggle_unlucky_mode:
 	;Enable unlucky bounce 
 	ld a, %00000001
 	ld (unlucky_check_mask),a 
-	call setup_palette_1
+	;call setup_palette_1
 	ret
 
 disable_unlucky_bounce:
 	ld a, %00000000
 	ld (unlucky_check_mask),a 
 	
-	ld hl,mpLcdPalette+30
-	ld a,%00011010
-	ld (hl),a 
-	inc hl
-	ld a,%10110101
-	ld (hl),a 
+	;ld hl,mpLcdPalette+30
+	;ld a,%00011010
+	;ld (hl),a 
+	;inc hl
+	;ld a,%10110101
+	;ld (hl),a 
 	ret 
 
 toggle_unlucky_mode_res:
@@ -1281,9 +1281,9 @@ player_move_debug_right:
 
 player_move_debug_up:
 	ld hl,(player_y_pos)
-	ld bc, 128
+	ld bc, 2560
 	add hl,bc 
-	ld (player_y_pos),hl 
+	ld (player_y_pos),hl	
 	call check_collisions
 	ret 
 

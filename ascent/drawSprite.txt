@@ -1,6 +1,6 @@
 
 
-
+;DEPRECATED
 
 
 ;hl = data, de = vram, a = linenum (0 indexed from top)

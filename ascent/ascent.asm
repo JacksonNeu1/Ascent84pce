@@ -21,6 +21,13 @@
 	
 	
 	call setup_palette_1
+	
+	;TODO just for visualizing loading, can remove 
+	ld hl, temp_palette_buffer
+	ld de,mpLcdPalette
+	ld bc,32
+	ldir 
+	
 
 	call _os_ClearVRAMLines	; set all of vram to index 255
 	ld	a,lcdBpp4
@@ -130,6 +137,9 @@ player_load_pos_skip:
 	
 	
 	;Decompress sprites in preframes for setup
+	ld hl,decompress_frame_up_pre4 
+	call cfdc_direct_add_decompress_frame
+	call continue_decompressions ;Run decompression (Will finish as timer has not started)
 	ld hl,decompress_frame_up_pre3 
 	call cfdc_direct_add_decompress_frame
 	call continue_decompressions ;Run decompression (Will finish as timer has not started)
@@ -150,7 +160,9 @@ player_load_pos_skip:
 	sbc hl,de 
 	jp nc, set_cam_0_pos_skip_start
 	ld hl,0
+
 set_cam_0_pos_skip_start:
+	res 3,l ;bg cam pos must start on even value for setup_bg to work correctly
 	ld (cam_pos),hl
 	;ld (bg_cam_pos),hl
 	
@@ -205,9 +217,14 @@ loading_cam_move_complete:
 
 	;call draw_mg
 
+	ld a, (cam_pos+1) ;cam frame #
+	cp 66
+	call nc, set_bg_scroll_mode
+
 	call setup_bg ;after initial decompressions and cam setup
+	
 	;call prgmpause
-	;call prgmpause
+	
 main_loop:
 
 	
@@ -239,6 +256,30 @@ get_inputs_return:
 	call breakaway_timer_update
 	
 	call player_move_cam
+	
+	;Check palette setup 
+	
+
+	ld a, (cam_pos+1) ;cam frame #
+zone_2_entered .equ $ + 1 ;set %00000000 to when zone 2 is entered	
+	and a, %11111111
+	cp 66
+	call nc, setup_zone_2
+
+	ld a, (cam_pos+1) ;cam frame #
+zone_1_entered .equ $ + 1 ;set to 1111111 when zone 1 is entered	
+	or a, %00000000
+	cp 66
+	call c, setup_zone_1
+
+	
+	call lerp_bg_color_1
+	
+	;move palette buffer to lcdpalette
+	ld hl, temp_palette_buffer
+	ld de,mpLcdPalette
+	ld bc,32
+	ldir 
 	
 	call draw_bg
 
@@ -529,13 +570,13 @@ wait_int:
 
 	ld hl,0
 	
-	;ld a,($F20002)
-	;ld h,a
-	;ld a,($F20001)
-	;ld l,a
-	;ld bc,(totalTime)
-	;add hl,bc 
-	;ld (totalTime),hl 
+	ld a,($F20002)
+	ld h,a
+	ld a,($F20001)
+	ld l,a
+	ld bc,(totalTime)
+	add hl,bc 
+	ld (totalTime),hl 
 	
 
 	jp main_loop
@@ -619,6 +660,24 @@ exit_prgm:
 	;graphDraw		equ 0		;0=graph is valid, 1=redraw graph(dirty)
 	;May need to mark as dirty due to writing to plotSSCren buffer to prevent crash
 
+
+
+setup_zone_2:
+	call setup_palette_2
+	call set_bg_scroll_mode
+	ld a, %00000000
+	ld (zone_2_entered),a 
+	ld (zone_1_entered),a
+	ret
+	
+setup_zone_1:
+	call setup_palette_1
+	call reset_bg_scroll_mode
+	ld a, %11111111
+	ld (zone_1_entered),a 
+	ld (zone_2_entered),a 
+	ret
+
 printHL:;=================REMOVE
 	push hl
 	ld hl,vRam
@@ -639,7 +698,7 @@ write_a_to_ram:
 	push hl 
 write_a_to_ram_addr .equ $ + 1 
 	ld hl, $D09466 ;PlotSSCreen
-	;ld (hl),a 
+	ld (hl),a 
 	inc hl 
 	ld (write_a_to_ram_addr),hl 
 	pop hl 
@@ -651,7 +710,7 @@ write_hl_to_ram:
 	push de 
 	ex de,hl
 	ld hl,(write_a_to_ram_addr)
-	;ld (hl),de 
+	ld (hl),de 
 	inc hl
 	inc hl
 	inc hl
@@ -689,6 +748,9 @@ BG_draw_buffer: ;Address of the uppermost line of the background buffer. This is
 	.dl 0
 BG_buffer .equ vram + (160*240) ;Start of BG buffer 
 
+temp_palette_buffer:
+	.dw 0,0,0,0,0,0,0,0
+	.dw 0,0,0,0,0,0,0,0
 
 Player_Data_Save .equ $D052C6
 ;This is start of pixelshadow2. First 16 bytes used to save player x,y,xvel,yvel,flags,spikeHitHeight, savecode (2byte) 
@@ -730,9 +792,9 @@ sd_test_a:
 
 
 
-
 #include "timeTesting.txt"
 #include "drawBGSprite.txt"
+#include "drawBGScroll.txt"
 #include "drawFGSprite.txt"
 #include "BetterSpriteDecompress.txt"
 #include "drawFG.txt"
@@ -777,3 +839,13 @@ sd_test_a:
 ;#include "TestingFGData.txt"
 ;#include "testing/TestingTextData.txt"
 
+
+
+
+;Scrolling BG thoughts
+;Half vertical resolution of BG layer 
+;Rows in BG buffer are twice as long 
+;When copying from BG buffer to draw buffer, offset where you are copying from for each row
+;Each row will be copied individaully, and doubled 
+
+;When drawing lines to BG buffers, X pos of sprites should be doubled so full width (640px) can be achived with 1 byte pos data 

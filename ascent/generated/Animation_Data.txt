@@ -522,24 +522,24 @@ sprite_animation_data:
 	.db 17
 	.dl SG_Vines8 + 17
 	.dl linrep_8_7_1
-	.db 36
-	.db 37
-	.db 36
-	.db 37
-	.db 36
-	.db 37
-	.db 36
-	.db 37
+	.db 74
+	.db 75
+	.db 74
+	.db 75
+	.db 74
+	.db 75
+	.db 74
+	.db 75
 	.dl SG_TongueRing + 5
 	.dl linrep_8_7_1
-	.db 38
-	.db 39
-	.db 38
-	.db 39
-	.db 38
-	.db 39
-	.db 38
-	.db 39
+	.db 76
+	.db 77
+	.db 76
+	.db 77
+	.db 76
+	.db 77
+	.db 76
+	.db 77
 	.dl SG_TongueRing + 9
 
 

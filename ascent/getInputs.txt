@@ -48,6 +48,10 @@ scan_wait:
 	bit kbit0,a 
 	call z, toggle_unlucky_mode_res
 
+	ld a,(kbdG4)
+	bit kbit8,a 
+	call nz, player_move_debug_up
+
 	jp get_inputs_return
 	
 	

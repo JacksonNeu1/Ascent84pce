@@ -70,65 +70,126 @@ FG_Data_frame_table:
 	.dl FG_Data_68
 	.dl FG_Data_69
 	.dl FG_Data_70
+	.dl FG_Data_71
+	.dl FG_Data_72
+	.dl FG_Data_73
+	.dl FG_Data_74
+	.dl FG_Data_75
+	.dl FG_Data_76
+	.dl FG_Data_77
+	.dl FG_Data_78
 
 
+
+FG_Data_78:
+	.db 0
+	.db 0
+
+FG_Data_77:
+	.db 0
+	.db 0
+
+FG_Data_76:
+	.db 0
+	.db 0
+
+FG_Data_75:
+	.db 0
+	.db 3
+	.db 198, 255, 2, 18  ;SG_MedCloud1
+	.db 183, 17, 0, 105  ;CloudsNewer_10_Fast_F
+	.db 199, 19, 0, 102  ;CloudsNewer_9_Fast_F
+
+FG_Data_74:
+	.db 0
+	.db 2
+	.db 223, 255, 121, 18  ;SG_MedCloud1
+	.db 78, 255, 8, 18  ;SG_MedCloud1
+
+FG_Data_73:
+	.db 0
+	.db 1
+	.db 185, 255, 5, 20  ;SG_BigCloud1
+
+FG_Data_72:
+	.db 0
+	.db 3
+	.db 53, 255, 127, 18  ;SG_MedCloud1
+	.db 30, 17, 148, 103  ;CloudsNewer_10_Fast
+	.db 53, 19, 147, 104  ;CloudsNewer_9_Fast
+
+FG_Data_71:
+	.db 0
+	.db 3
+	.db 143, 255, 4, 17  ;SG_MedCloud2
+	.db 66, 255, 124, 18  ;SG_MedCloud1
+	.db 76, 255, 127, 18  ;SG_MedCloud1
 
 FG_Data_70:
 	.db 0
-	.db 0
+	.db 2
+	.db 146, 255, 0, 18  ;SG_MedCloud1
+	.db 146, 19, 0, 102  ;CloudsNewer_9_Fast_F
 
 FG_Data_69:
 	.db 0
-	.db 0
+	.db 1
+	.db 224, 255, 103, 19  ;SG_BigCloud3
 
 FG_Data_68:
 	.db 0
-	.db 0
+	.db 2
+	.db 233, 255, 114, 17  ;SG_MedCloud2
+	.db 90, 255, 122, 18  ;SG_MedCloud1
 
 FG_Data_67:
 	.db 0
-	.db 1
-	.db 82, 255, 20, 17  ;SG_Cloud2
+	.db 3
+	.db 198, 255, 2, 18  ;SG_MedCloud1
+	.db 183, 17, 0, 105  ;CloudsNewer_10_Fast_F
+	.db 199, 19, 0, 102  ;CloudsNewer_9_Fast_F
 
 FG_Data_66:
 	.db 0
 	.db 2
-	.db 82, 255, 122, 17  ;SG_Cloud2
-	.db 209, 255, 0, 18  ;SG_Cloud3
+	.db 223, 255, 121, 18  ;SG_MedCloud1
+	.db 78, 255, 8, 18  ;SG_MedCloud1
 
 FG_Data_65:
 	.db 0
 	.db 1
-	.db 41, 255, 20, 17  ;SG_Cloud2
+	.db 185, 255, 5, 20  ;SG_BigCloud1
 
 FG_Data_64:
 	.db 0
 	.db 3
-	.db 61, 255, 118, 17  ;SG_Cloud2
-	.db 208, 255, 121, 18  ;SG_Cloud3
-	.db 61, 255, 91, 18  ;SG_Cloud3
+	.db 53, 255, 127, 18  ;SG_MedCloud1
+	.db 30, 17, 148, 103  ;CloudsNewer_10_Fast
+	.db 53, 19, 147, 104  ;CloudsNewer_9_Fast
 
 FG_Data_63:
 	.db 0
-	.db 2
-	.db 74, 255, 118, 17  ;SG_Cloud2
-	.db 216, 255, 20, 17  ;SG_Cloud2
+	.db 3
+	.db 143, 255, 4, 17  ;SG_MedCloud2
+	.db 66, 255, 124, 18  ;SG_MedCloud1
+	.db 76, 255, 127, 18  ;SG_MedCloud1
 
 FG_Data_62:
 	.db 0
 	.db 2
-	.db 89, 255, 7, 17  ;SG_Cloud2
-	.db 95, 255, 33, 18  ;SG_Cloud3
+	.db 146, 255, 0, 18  ;SG_MedCloud1
+	.db 146, 19, 0, 102  ;CloudsNewer_9_Fast_F
 
 FG_Data_61:
 	.db 0
 	.db 1
-	.db 158, 255, 123, 17  ;SG_Cloud2
+	.db 224, 255, 103, 19  ;SG_BigCloud3
 
 FG_Data_60:
 	.db 0
-	.db 1
-	.db 146, 255, 5, 17  ;SG_Cloud2
+	.db 2
+	.db 233, 255, 114, 17  ;SG_MedCloud2
+	.db 90, 255, 122, 18  ;SG_MedCloud1
 
 FG_Data_59:
 	.db 0

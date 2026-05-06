@@ -5,6 +5,10 @@ BGMaxSpriteHeight .equ 120
 
 draw_bg:; function for drawing background buffer to the draw buffer, clearing the frame for fg sprites to be drawn over 
 	call move_bg
+	scf
+bg_scroll_mod_12 .equ $	
+	jp nc, draw_bg_scroll
+	
 	ld hl,$d52c00;BG_buffer_end
 	ld bc,(BG_draw_buffer)
 	scf 
@@ -31,6 +35,8 @@ draw_bg:; function for drawing background buffer to the draw buffer, clearing th
 ;function for moving the backgrond buffer. checks if camera has moved since the buffer was last updated.
 ;if so will draw new lines of the bg buffer to move it up or down until it is in the correct position
 move_bg:
+
+
 	ld hl,(cam_pos);load cam pos 
 	;call write_hl_to_ram
 	srl h
@@ -39,7 +45,20 @@ move_bg:
 	rr l
 	srl h
 	rr l	;div by 8 to get location of BG layer
-	;hl holds bg cam pos, lowest visible line of bg layer 
+	;hl holds bg cam pos, lowest visible line of bg layer
+	
+	;ld a,$FB 
+	;call write_a_to_ram
+	;call write_hl_to_ram
+
+	;call prgmpause
+
+	bit 0, l  ;NEW
+bg_scroll_mod_1 .equ $
+	nop ; set to ret nz for scroll mode ;If not even dont move
+	
+	;call prgmpause
+	
 	ld bc,(bg_cam_pos);previous BG cam location 
 	scf
 	ccf
@@ -55,11 +74,13 @@ move_bg_down:
 
 dec_bg:;move bg cam down 1px 
 
-	
 	;Testibng
 	;ld a,$AD
 	;call write_a_to_ram
-	
+	;ld hl,(bg_cam_pos)
+	;call write_hl_to_ram
+	;Testing
+
 
 	;write on draw buffer line 
 	ld hl,(BG_draw_buffer) ;topmost line of bg buffer will be overwritten with new bottom line 
@@ -68,6 +89,8 @@ dec_bg:;move bg cam down 1px
 	ld hl,(bg_cam_pos)
 	dec hl ;dec bg cam pos by 1 
 	ld (bg_cam_pos),hl 
+	
+	
 	
 	ld bc,0 ;clear bc reg
 	ld c,h;bottom y value msb 
@@ -80,50 +103,52 @@ dec_bg:;move bg cam down 1px
 	ld hl,(hl) ;hl now points to bg frame data 
 	call draw_bg_line
 	
-
 	;move buffer pos
 	ld hl,(BG_draw_buffer)
-	ld bc,$d52b60;BG_buffer_end, start of last line of vram buffer 
-	scf 
-	ccf 
-	sbc hl,bc ;compare to current line 
-	ld hl,(BG_draw_buffer)
-	jp nz,dec_bg_bottom_skip
-	ld hl,$d49560;1 row above top of bg buffer 
-dec_bg_bottom_skip:
+bg_scroll_mod_3 .equ $ + 1 ;set to 320 for scroll mode 
 	ld bc,160 
 	add hl,bc
+	ld (BG_draw_buffer),hl
+	ld bc,$d52B80;in final line of bg buffer 
+
+	sbc hl,bc ;compare to current line 
+	ret c ;if carry, still within buffer 
+	;otherwise reset to top 
+	ld hl,$d49600;top of bg buffer 
 	ld (BG_draw_buffer),hl 
 	ret
 
 
 inc_bg:;move cam up 
 
+	;for moving up, need to inc BG Buffer Pos, and then draw, otherwise would draw on top of previious top line 
 	
-	;Testibng
-	;ld a,$00
-	;call write_a_to_ram
-	;call prgmpause
 
 	ld hl,(BG_draw_buffer)
-	ld bc,BG_buffer
-	scf 
-	ccf 
-	sbc hl,bc ;compare current drawing line to top of bg buffer 
-	ld hl,(BG_draw_buffer)
-	jp nz,inc_bg_top_skip ;if they are not equal, continue
-	ld hl,$d52c00;otherwise need to wrap back to bottom of buffer, set hl to 1 below bottom of bg buffer 
-inc_bg_top_skip:
+bg_scroll_mod_4 .equ $ + 1 ;set to 320 for scroll mode 	
 	ld bc,160 
 	scf
 	ccf 
 	sbc hl,bc ;move up line, hl now points to line drawing location in vram 
+	ld (BG_draw_buffer),hl
+	
+	ld bc,$D495E0
+	sbc hl,bc ;compare current drawing line to top of bg buffer 
+	jp nc,inc_bg_top_skip
+bg_scroll_mod_5 .equ $ + 1 ;set to 320 bytes prior to bg end for scroll mode (D52AC0)	
+	ld hl,$d52b60;otherwise need to wrap back to bottom of buffer, set hl to bottom row 
 	ld (BG_draw_buffer),hl 
+	;call prgmpause
+inc_bg_top_skip:
+	ld hl,(BG_draw_buffer)
 	ld (dbgl_vram_line_start),hl 
+	
 	ld hl,(bg_cam_pos)
 	inc hl 
 	ld (bg_cam_pos),hl ;incremnet cam pos 
+	
 	;call write_hl_to_ram
+bg_scroll_mod_7 .equ $ + 1 ;set to 139 for scroll mode 
 	ld bc,239
 	add hl,bc ;gets uppermost visible line y value in bg layer
 	ld c,h;cam pos msb 
@@ -137,11 +162,15 @@ inc_bg_top_skip:
 	call draw_bg_line
 	ret
 	
-
-
-
+;09 82 where cloud sprites are 
 
 setup_bg: ;Draws entire BG buffer when loading game 
+	
+	;ld a,$FA 
+	;call write_a_to_ram
+	ld hl,BG_buffer ;start of bg drawing buffer 
+	ld (BG_draw_buffer),hl ;set current bg line drawing location 
+	
 	ld hl,(cam_pos)
 	srl h
 	rr l
@@ -149,50 +178,61 @@ setup_bg: ;Draws entire BG buffer when loading game
 	rr l
 	srl h
 	rr l ;div by 8
-	;hl holds bg cam pos 
+	
+	
+	;hl holds bg cam pos
+bg_scroll_mod_6 .equ $ + 1 ;set to 120 for scroll
+	ld bc,240
+	add hl,bc 
 	ld (bg_cam_pos),hl
+	call move_bg 
+	;??
+		
+	ret
 	
-	ld bc,239
-	add hl,bc;hl holds y position of uppermost visible line in bg layer 
+; bg_scroll_mod_6 .equ $ + 1  ;set to 120 for scoll mode	
+	; ld bc,240
+	; add hl,bc;hl holds y position of uppermost visible line in bg layer 
 	
-	inc hl;to be dec in loop
-	push hl ;save uppermost line y val
-	ld hl,BG_buffer ;start of bg drawing buffer 
-	ld (BG_draw_buffer),hl ;set current bg line drawing location 
-	push hl 
+	; push hl ;save uppermost line y val
+	; ld hl,BG_buffer ;start of bg drawing buffer 
+	; ld (BG_draw_buffer),hl ;set current bg line drawing location 
+	; push hl 
 	
-	ld a,240 ;num loops
-	ld (setup_bg_loop_count),a
-setup_bg_loop:
+; bg_scroll_mod_7 .equ $ + 1  ;set to 120 for scoll mode	
+	; ld a,240 ;num loops
+	; ld (setup_bg_loop_count),a
+; setup_bg_loop:
 
-	pop hl;vram draw pos, next line of bg drawn here 
-	ld (dbgl_vram_line_start),hl ;set drawing pos 
-	ld bc,160
-	add hl,bc 
-	ex de,hl ;put next vram pos in de 
-	pop hl;uppermost line y val
-	dec hl ;dec line y value (move to next lowest line)
-	push hl;push uppermost line y val
-	push de ;push vram pos 
-	ld bc,0
-	ld c,h;cam pos msb 
-	ld a,l ;a holds line number in current frame 
-	ld hl,BG_Data_frame_table
-	inc c ;add 1 to get to upper frame
-	add hl,bc 
-	add hl,bc 
-	add hl,bc 
-	ld hl,(hl) ;hl now points to upper frame data 
-	call draw_bg_line ;hl pts to upper frame data, a = line num in target frame
+	; pop hl;vram draw pos, next line of bg drawn here 
+	; ld (dbgl_vram_line_start),hl ;set drawing pos 
+; bg_scroll_mod_8 .equ $ + 1	;set to 320 for scroll mode 
+	; ld bc,160
+	; add hl,bc 
+	; ex de,hl ;put next vram pos in de 
+	; pop hl;uppermost line y val
+	; dec hl ;dec line y value (move to next lowest line)
+	; push hl;push uppermost line y val
+	; push de ;push vram pos 
+	; ld bc,0
+	; ld c,h;cam pos msb 
+	; ld a,l ;a holds line number in current frame 
+	; ld hl,BG_Data_frame_table
+	; inc c ;add 1 to get to upper frame
+	; add hl,bc 
+	; add hl,bc 
+	; add hl,bc 
+	; ld hl,(hl) ;hl now points to upper frame data 
+	; call draw_bg_line ;hl pts to upper frame data, a = line num in target frame
 	
-setup_bg_loop_count .equ $ + 1
-	ld a,0
-	dec a ;dec loop counter
-	ld (setup_bg_loop_count),a
-	jp nz,setup_bg_loop 
-	pop hl ;pop vram pos 
-	pop hl ;pop current line number 
-	ret 
+; setup_bg_loop_count .equ $ + 1
+	; ld a,0
+	; dec a ;dec loop counter
+	; ld (setup_bg_loop_count),a
+	; jp nz,setup_bg_loop 
+	; pop hl ;pop vram pos 
+	; pop hl ;pop current line number 
+	; ret 
 
 
 
@@ -214,6 +254,9 @@ draw_bg_line:
 	
 	push hl ;upper frame sprite table pointer 
 	ld a,$FF ;Set all of line to FF to clear it with color 16
+	;call random_val
+	
+bg_scroll_mod_9 .equ $ + 1	;set to 320 for scroll mode 
 	ld bc,160
 	ld hl,(dbgl_vram_line_start) ;Drawing address of line 
 	call _MemSet ;Clear all of line 
@@ -329,9 +372,13 @@ dbgl_setup_and_draw:
 dbgl_vram_line_start .equ $ + 1	
 	ld hl,0
 	add hl,de;add x pos
+bg_scroll_mod_10 .equ $ ;set to add hl,de for scroll mode 
+	nop 
 dbgl_sg_x_origin .equ $ + 1
 	ld e,0 
 	add hl,de;add x pos
+bg_scroll_mod_11 .equ $ ;set to add hl,de for scroll mode 
+	nop 	
 	
 	ex de,hl;put vram pos into de 
 	
@@ -366,6 +413,67 @@ dbgl_slow_sprite:
 	ret
 	
 
+
+
+lerp_bg_color_1:
+	ld a, (cam_pos+1) ;cam frame #
+	;call write_a_to_ram
+	sub 59
+	ret c ;return if frame is not >=59
+	cp 8 
+	ret nc
+	
+	ld bc, 0 
+	ld c, a 
+	
+	;ld a, $00
+	;call write_a_to_ram
+	
+	ld a, (cam_pos)
+	;call write_a_to_ram
+	srl c
+	rra ;div cam pos by 2 
+	srl c
+	rra ;div cam pos by 2 
+	srl c
+	rra ;div cam pos by 2 
+	srl a ;must be max of 128
+	res 0, a ;must be even
+	;call write_a_to_ram	
+	ld c, a
+	
+	ld hl, bg_col_lerp_1
+	add hl, bc 
+	ld a,(hl)
+	inc hl 
+	ld e, (hl)
+	ld hl, temp_palette_buffer+30
+	ld (hl),a 
+	inc hl 
+	ld (hl),e 
+	
+	ld hl, cloud_col_lerp_1
+	add hl, bc 
+	ld a,(hl)
+	inc hl 
+	ld e, (hl)
+	ld hl, temp_palette_buffer+12
+	ld (hl),a 
+	inc hl 
+	ld (hl),e 
+	
+	ld hl, cloud_col_lerp_2
+	add hl, bc 
+	ld a,(hl)
+	inc hl 
+	ld e, (hl)
+	ld hl, temp_palette_buffer+14
+	ld (hl),a 
+	inc hl 
+	ld (hl),e 
+	
+	ret 
+	
 
 
 
