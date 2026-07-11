@@ -128,6 +128,10 @@ draw_bg_scroll_num_loops .equ $ + 1
 	
 	pop hl ;need to balance stack
 	
+	ld a,(frameCount)
+	bit 0,a 
+	ret nz
+	
 	ld hl,(bg_scroll_buffer_x_offset)
 	dec hl
 	ld (bg_scroll_buffer_x_offset), hl 
@@ -159,8 +163,8 @@ set_bg_scroll_mode:
 	ld (BG_draw_buffer),hl ;set current bg line drawing location 
 	
 	
-	ld a, %11000000 ;ret nz 
-	ld (bg_scroll_mod_1),a 
+	;ld a, %11000000 ;ret nz 
+	;ld (bg_scroll_mod_1),a 
 	ld hl, 320 
 	ld (bg_scroll_mod_3),hl
 	ld (bg_scroll_mod_4),hl
@@ -195,7 +199,7 @@ reset_bg_scroll_mode:
 	ld (BG_draw_buffer),hl ;set current bg line drawing location 
 
 	ld a, %00000000 ;nop
-	ld (bg_scroll_mod_1),a 
+	;ld (bg_scroll_mod_1),a 
 	ld (bg_scroll_mod_10),a 
 	ld (bg_scroll_mod_11),a 
 	ld hl, 160 

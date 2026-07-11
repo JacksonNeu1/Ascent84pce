@@ -907,11 +907,19 @@ vert_col_down_solid:
 	ld bc,0 
 	ld c,a ;index 
 	add hl,bc 
-	;hl pts to correct timer
+	;hl pts to correct timer	
 	ld a,(hl)
 	or a 
 	jp nz, start_breakaway_skip
-	;if timer is zero, set to 1 
+	;if timer is zero, set to 1 or 20 if fast 
+	
+	ld a,c ;c holds timer indx
+	cp 12 ; if timer index >= 12, fast breakaway 
+	jp c, start_notfast_breakaway
+	ld a, 20
+	ld (hl),a 
+	jp not_breakaway ;platform is solid 
+start_notfast_breakaway:
 	ld a,1 
 	ld (hl),a 
 	jp not_breakaway ;platform is solid 
@@ -1198,7 +1206,7 @@ breakaway_platform_return_timer_loop:
 breakaway_timers: ;If not zero, count up by 1 every frame, solid when timer btwn 0-32
 	.db 0 ;Unused
 	.db 0
-	.db 1
+	.db 0
 	.db 0
 	.db 0
 	.db 0

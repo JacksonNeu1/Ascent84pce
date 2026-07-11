@@ -35,41 +35,160 @@ update_animation_position_loop:
 	dec a 
 	jp nz,update_animation_position_loop
 	
+
+; Enable sprites, 7 bytes per animated property 	
+	ex af, af' ;'
+	ld hl,disable_animation_data
+	ld a,(hl)
+	inc hl
+update_animation_enable_loop:
+	ex af, af' ;'
+	ld de,(hl);load address of property
+	inc hl
+	inc hl 
+	inc hl 
+	ld bc,(hl) ;address of anim curve 
+	inc hl 
+	inc hl 
+	inc hl
+	ld a,(bc) ;value of anim curve
+	bit 6,a 
+	jp nz,update_animation_enable_height
+	inc hl
+	ex af, af' ;'
+	dec a 
+	jp nz,update_animation_enable_loop
+	jp update_animation_sprite
+	
+update_animation_enable_height:
+	ld a,(hl)
+	inc hl
+	ld (de),a 
+	ex af, af' ;'
+	dec a 
+	jp nz,update_animation_enable_loop
+
+	;call write_a_to_ram
 	
 	
-	ld de,0 ;clear upper byte 
+update_animation_sprite:	
+	
+	
 	ex af, af' ;' ;in
 	ld hl,sprite_animation_data
 	ld a,(hl)
 	inc hl
 update_animation_sprite_loop:
 	ex af, af' ;' ;out
+	ld de,0 ;clear upper byte 
 	ld bc,(hl) ;animation curve address
 	inc hl 
 	inc hl
 	inc hl
 	ld a,(bc) ;anim curve value (btwn 0 and 7)
+	rlca ;double it and give it to the next person
 	ld e,a 
 	add hl,de ;jump to correct place
 	neg ;a holds -curve value
-	add a,8; a holds amt to jump to get past sprite table
+	add a,15; a holds amt to jump to get past sprite table
 	ld e,a 
-	ld a,(hl);correct sprite index 
+	ld b,(hl);correct sprite index 
+	inc hl 
+	ld c,(hl) ;sprite height value 
 	add hl,de ;to address of target property
-	ld bc,(hl)
-	ld (bc),a 
+	ld de,(hl)
+	ld a,b
+	ld (de),a ;sprite index 
+	dec de
+	dec de ;to height 
+	ld a,c
+	ld (de),a ;sprite height
 	inc hl 
 	inc hl 
-	inc hl
+	inc hl ;to next
 	ex af, af' ;' ;in
 	dec a 
 	jp nz,update_animation_sprite_loop
 	
+;SPrite animations isnt updating height values in object data
+;this mainly impacts when sprite is cutoff at top as height is used to calculate how many lines to draw
+;otherwise for fullsprite all lines are drawn, height is irrelevant
+;Easiest fix would be to have sprite anim include height data
+;This would increase memory use of sprite animations 
+;Also would need other way to do disable anims, as height would also be set by sprite anim 
+;X and Y properties are also animated
+;Actually should be OK to use height = 0 because disable anim is executed after sprite anims 
+;But what about restoring default height value? would mess up value set by sprite anim 
+;Use two loops? one for 'un disable' prior to sprite anims, then disable after sprite anims 
 	
+; Disable sprites, 7 bytes per animated property 	
+	ex af, af' ;'
+	ld hl,disable_animation_data
+	ld a,(hl)
+	inc hl
+update_animation_disable_loop:
+	ex af, af' ;'
+	ld de,(hl);load address of property
+	inc hl
+	inc hl 
+	inc hl 
+	ld bc,(hl) ;address of anim curve 
+	inc hl 
+	inc hl 
+	inc hl
+	ld a,(bc) ;value of anim curve
+	bit 6,a 
+	jp z,update_animation_disable_zero_height
+	inc hl
+	ex af, af' ;'
+	dec a 
+	jp nz,update_animation_disable_loop
+	jp update_palette_anim
+	
+update_animation_disable_zero_height:
+	ld a,0
+	inc hl
+	ld (de),a 
+	ex af, af' ;'
+	dec a 
+	jp nz,update_animation_disable_loop
+
 	;call write_a_to_ram
-	ret 
+	
+update_palette_anim:
+	ld a, (cam_pos+1) ;cam frame #
+	;call write_a_to_ram
+	sub 134
+	ret c ;return if frame is not >=136
+	
+	ld de, space_gradients
+	;ld a, $00
+	;call write_a_to_ram
+	ld a, (lin_05_31_1) ;~4s timer
+	ld hl,0
+	ld l,a 
+	ld h,20 
+	mlt hl
+	add hl,de ;hl points to correct part of gradient data 
+	;4,6,20,14,26,28,22,24,0,2
+	
+	;reorder gradient data such that ldir can be used for most of it
+	
+	;ldir 0,2,4,6
+	;ldi 14 
+	;ldir 20,22,24,26,28
+	
+	ld de, temp_palette_buffer
+	ld bc,4
+	ldir 
+	ld de, temp_palette_buffer+14
+	ldi
+	ld de, temp_palette_buffer+20
+	ld bc,5
+	ldir 
 	
 	
+	ret	
 	
 	
 	;SPRITE
@@ -87,7 +206,15 @@ update_animation_sprite_loop:
 	;.dl lin_05_3_2
 	;.db 168
 	
-	
+;disable_animation_data: ;7 bytes per animation
+	;.db number of animations
+	;.dl address of target property
+	;.dl address of desired animation curve value (could use lookup table to reduce memory)
+	;.db base height value 
+	;...
+	;.dl MG_Data_0 + 18 
+	;.dl lin_05_3_2
+	;.db 168
 
 ;sprite_animation_data: ;14 bytes per animation
 	;.db number of animations

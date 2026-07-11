@@ -49,25 +49,6 @@
 	;ld de, Moss_0_Fast_0
 	;call sprite_decompress
 	
-;c040004f6f00000000f5ffff00000000	mostly workes but sometimes dont???
-;c04000026f00000000f5ffff00000000	mostly workes but sometimes dont???
-;difference in subpixel ypos?
-;nonzero subpixel pos is issue?? 
-
-;Still crashes even with 0 subpixel pos 
-
-;Due to spawning too near to platform?
-;but crashes still happened in air
-
-;Also, crash happens before/during decompression, so not a rendering issue 
-;Problem with calculating cam pos? 
-;And is random when it occurs
-	
-;Could be due to changing where pixelshadow sprite data is started? 	
-
-;Sometihng with trying to draw frame before decompression? Timer isnt working properly?
-
-
 	;call prgmpause
 
 
@@ -218,9 +199,12 @@ loading_cam_move_complete:
 	;call draw_mg
 
 	ld a, (cam_pos+1) ;cam frame #
+	cp 134
+	jp nc, no_scroll_bg_setup
 	cp 66
 	call nc, set_bg_scroll_mode
 
+no_scroll_bg_setup:
 	call setup_bg ;after initial decompressions and cam setup
 	
 	;call prgmpause
@@ -246,11 +230,12 @@ get_inputs_return:
 	;call player_move_debug
 	call player_update
 	call check_collisions
-	
+
+
 	call update_sine_vals
 	;ld a,(lin_4_7_1)
 	;call write_a_to_ram
-	
+
 	call update_animations
 	
 	call breakaway_timer_update
@@ -258,22 +243,39 @@ get_inputs_return:
 	call player_move_cam
 	
 	;Check palette setup 
+
 	
+	ld a, (cam_pos+1) ;cam frame #
+	cp 134
+	jp c, zone_2_check ;if cam < 134 check zone 2 setup 
+	
+zone_3_entered .equ $ + 1 ;set to 1111111 when zone 3 is entered	
+	and a, %00000000 ;if zone 3 not setup, setup zone
+	jp z, setup_zone_3
+	jp post_zone_setup
+	
+zone_2_check:
 
 	ld a, (cam_pos+1) ;cam frame #
-zone_2_entered .equ $ + 1 ;set %00000000 to when zone 2 is entered	
-	and a, %11111111
 	cp 66
-	call nc, setup_zone_2
+	jp c, zone_1_check ;if cam < 66 check zone 1 setup 
+zone_2_entered .equ $ + 1 ;set %11111111 when zone 2 is entered	
+	and a, %00000000 ;if zone 2 not setup, setup zone
+	jp z, setup_zone_2
+	jp post_zone_setup
+	
+zone_1_check:
 
-	ld a, (cam_pos+1) ;cam frame #
 zone_1_entered .equ $ + 1 ;set to 1111111 when zone 1 is entered	
-	or a, %00000000
-	cp 66
-	call c, setup_zone_1
+	ld a, %00000000 ;if zone 1 not setup, setup zone
+	or a
+	jp z, setup_zone_1
+	
+post_zone_setup:
 
 	
 	call lerp_bg_color_1
+	call lerp_bg_color_2
 	
 	;move palette buffer to lcdpalette
 	ld hl, temp_palette_buffer
@@ -666,17 +668,32 @@ setup_zone_2:
 	call setup_palette_2
 	call set_bg_scroll_mode
 	ld a, %00000000
-	ld (zone_2_entered),a 
+	ld (zone_3_entered),a 
 	ld (zone_1_entered),a
-	ret
+	ld a, %11111111
+	ld (zone_2_entered),a
+	jp post_zone_setup	
 	
 setup_zone_1:
 	call setup_palette_1
 	call reset_bg_scroll_mode
+	ld a, %00000000
+	ld (zone_3_entered),a 
+	ld (zone_2_entered),a
 	ld a, %11111111
-	ld (zone_1_entered),a 
+	ld (zone_1_entered),a
+	jp post_zone_setup	
+	
+setup_zone_3:
+	call setup_palette_3
+	call reset_bg_scroll_mode
+	ld a, %00000000
 	ld (zone_2_entered),a 
-	ret
+	ld (zone_1_entered),a
+	ld a, %11111111
+	ld (zone_3_entered),a
+	jp post_zone_setup	
+	
 
 printHL:;=================REMOVE
 	push hl

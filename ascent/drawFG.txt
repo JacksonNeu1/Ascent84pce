@@ -196,11 +196,9 @@ dfgs_upper_skip_2:
 	
 
 dfgs_upper_skip:
-
 	inc hl ;to x
 	inc hl ;to index 
 	inc hl;to y 
-	
 	ret ;end of dfgs_draw_upper_sprite
 	
 	;ld a,$AA
@@ -299,14 +297,10 @@ dfgs_mid_full_fast:
 dfgs_mid_skip_1:
 	pop hl ;hl holds (height)
 	
-	
 dfgs_mid_skip:;sprite is entirely above or below cam pos 
 	inc hl ;x
 	inc hl ;index 
 	inc hl;to y 
-	
-	
-	
 	ret
 	
 
@@ -319,12 +313,10 @@ dfgs_vram_bottom_2 .equ $ + 1  ;Bottom Cut SPRITE, a = lines above bottom of vie
 	bit 0,l ;location of sprite data in vram indicates fast or slow sprite
 	jp z,dfgs_mid_bcut_fast
 	call draw_slow_sprite_bottom_cut
-	jp dfgs_mid_skip_2
+	jp dfgs_mid_skip_1
 dfgs_mid_bcut_fast:
 	call draw_fast_sprite_bottom_cut
-dfgs_mid_skip_2:
-	pop hl ;hl holds (height)
-	jp dfgs_mid_skip
+	jp dfgs_mid_skip_1
 
 dfgs_mid_sprite_above:
 	
@@ -340,12 +332,10 @@ dfgs_vram_top_2 .equ $ + 1
 	bit 0,l ;location of sprite data in vram indicates fast or slow sprite
 	jp z,dfgs_mid_tcut_fast
 	call draw_slow_sprite_top_cut
-	jp dfgs_mid_skip_3
+	jp dfgs_mid_skip_1
 dfgs_mid_tcut_fast:
 	call draw_fast_sprite_top_cut
-dfgs_mid_skip_3:
-	pop hl ;hl holds (height)
-	jp dfgs_mid_skip
+	jp dfgs_mid_skip_1
 	
 	
 ;BOTTOM FRAME, FULL OR BOTTOM CUT===========================================================================		
@@ -453,12 +443,10 @@ dfgs_vram_bottom_4 .equ $ + 1  ;FULL SPRITE, a = lines above bottom of viewport
 	bit 0,l ;location of sprite data in vram indicates fast or slow sprite
 	jp z,dfgs_lower_bcut_fast ;even= fast
 	call draw_slow_sprite_bottom_cut
-	jp dfgs_lower_skip_2
+	jp dfgs_lower_skip_1
 dfgs_lower_bcut_fast:
 	call draw_fast_sprite_bottom_cut
-dfgs_lower_skip_2:
-	pop hl ;hl holds (height)
-	jp dfgs_lower_skip
+	jp dfgs_lower_skip_1
 	
 
 ;===================================================================================================================
@@ -647,6 +635,11 @@ dfgs_sprite_pointers_4 .equ $ + 1
 ;Subtracts a lines from de (initial vram pos),
 ;returns hl = sprite data, de = new vram position
 dfgs_setup_draw:
+	ld c,a 
+	ld a,(hl)
+	or a 
+	jp z, dfgs_disabled_sprite ;if height = 0 skip drawing (used for disabling sprites)
+	ld a,c 
 	inc hl ;x pos 
 	ld bc,0
 	ld c,(hl); x pos
@@ -696,7 +689,13 @@ sprite_table_from_index:
 	ret 
 	
 
-
+dfgs_disabled_sprite:
+	pop hl ; pop call ptr 
+	pop hl ; to sprite height 
+	inc hl
+	inc hl 
+	inc hl 
+	ret
 	
 	
 	

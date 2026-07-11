@@ -318,6 +318,7 @@ sdcomp_3bpc .equ $
 	jp nc,sdcomp_get_color_from_index	
 
 ;4bpp, interpret as color data, not indexed	
+
 	ld a,(hl)
 	and c 
 	call sdcomp_next_in_bitstream
@@ -1232,6 +1233,7 @@ sdcomp_set_4bpc:
 	ld (sdcomp_0bpc),a
 	ld (sdcomp_1bpc),a
 	ld (sdcomp_2bpc),a
+	ld (sdcomp_3bpc),a
 
 	ld a,%11011010;jp c
 

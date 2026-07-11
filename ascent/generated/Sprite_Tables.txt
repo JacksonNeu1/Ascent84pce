@@ -5,263 +5,335 @@ Sprite_Table_Table:
 
 
 Sprite_Table_0:
-	.dl BigGrassBase_Slow_O
-	.dl BigGrassBase_Fast_F
-	.dl BigGrassBase_Fast
-	.dl BigGrassTop_Fast
-	.dl BigGrassTop_Fast_F
-	.dl BigGrassTop_Slow_O
-	.dl DualLeaf4_Slow
-	.dl DualLeaf4_Slow_F
-	.dl DualLeaf3_Fast
-	.dl Branches_9_Fast
-	.dl Branches_13_Fast
-	.dl Branches_10_Fast
-	.dl Branches_16_Slow
-	.dl Leaves1_Fast
-	.dl DualLeaf1_Fast
-	.dl DualLeaf2_Fast
-	.dl DualLeaf2_Slow_O
-	.dl DualLeaf1_Slow_O
-	.dl LeavesLight_Fast
-	.dl LeavesDark_Fast
-	.dl Branches_14_Slow
-	.dl Branches_15_Slow_O_F
-	.dl Branches_8_Fast
-	.dl Branches_15_Slow
-	.dl Branches_11_Fast_F
-	.dl Branches_13_Fast_F
-	.dl Branches_10_Fast_F
-	.dl Leaves2_Fast_F
-	.dl Leaves2_Fast
-	.dl Lantern_0_Fast
-	.dl Lantern_1_Fast
-	.dl Lantern_2_Fast
-	.dl Lantern_0_Fast_F
-	.dl Lantern_1_Fast_F
-	.dl Lantern_2_Fast_F
-	.dl Lantern_3_Slow
-	.dl Lantern_3_Slow_O_F
-	.dl Lantern_5_Slow
-	.dl Lantern_5_Slow_O_F
-	.dl LeavesDark_Fast_F
-	.dl Branches_12_Fast
-	.dl Branches_6_Slow
-	.dl Branches_7_Fast
-	.dl Branches_8_Fast_F
-	.dl Branches_16_Slow_O_F
-	.dl Lantern_6_Slow
-	.dl Lantern_6_Slow_O_F
-	.dl AscentBanner_8_Slow
-	.dl AscentBanner_8_Slow_O
-	.dl AscentBanner_7_Fast
-	.dl AscentBanner_7_Slow_O
-	.dl AscentBanner_9_Fast_F
-	.dl AscentBanner_6_Slow_F
-	.dl AscentBanner_10_Fast_F
-	.dl AscentBanner_5_Fast
-	.dl AscentBanner_4_Fast
-	.dl AscentBanner_0_Fast
-	.dl AscentBanner_3_Fast
-	.dl AscentBanner_2_Fast
-	.dl AscentBanner_1_Fast
-	.dl AscentBanner_9_Fast
-	.dl AscentBanner_10_Fast
-	.dl AscentBanner_6_Slow_O
-	.dl Lantern_7_Slow
-	.dl Lantern_7_Slow_O_F
-	.dl Lantern_4_Slow_O
-	.dl Branches_4_Fast_F
-	.dl Branches_7_Fast_F
-	.dl Branches_12_Fast_F
-	.dl Leaves1_Fast_F
-	.dl Vine5_Slow
-	.dl Vine6_Slow
-	.dl Vine4_Slow
-	.dl Vine4_Slow_F
-	.dl Vine4_Slow_O_F
-	.dl Vine5_Slow_O_F
-	.dl Vine7_Slow_O
-	.dl Vine5_Slow_O
-	.dl Vine6_Slow_O
-	.dl Vine4_Slow_O
-	.dl Vine2_Slow
-	.dl VineVertical_Slow_O
-	.dl VineVertical_Slow
-	.dl Branches_5_Fast
-	.dl Branches_4_Fast
-	.dl Branches_3_Fast
-	.dl Branches_2_Fast
-	.dl Vine2_Slow_F
-	.dl VineVertical_Slow_F
-	.dl CloudsNewer_6_Slow
-	.dl CloudsNewer_3_Fast
-	.dl CloudsNewer_7_Fast
-	.dl CloudsNewer_1_Fast
-	.dl CloudsNewer_3_Fast_F
-	.dl CloudsNewer_4_Fast_F
-	.dl CloudsNewer_2_Fast
-	.dl CloudsNewer_0_Fast
-	.dl CloudsNewer_8_Fast
-	.dl CloudsNewer_4_Fast
-	.dl CloudsNewer_1_Fast_F
-	.dl CloudsNewer_5_Fast
-	.dl CloudsNewer_5_Fast_F
-	.dl CloudsNewer_9_Fast_F
-	.dl CloudsNewer_10_Fast
-	.dl CloudsNewer_9_Fast
-	.dl CloudsNewer_10_Fast_F
-	.dl GroundDirtFull_Fast_F
-	.dl GroundDirtFull_Fast
-	.dl GroundDirtMound_Fast
-	.dl GroundDirtMound_Fast_F
-	.dl Branches_8_Slow_O_F
-	.dl Branches_9_Slow_O
-	.dl Tree_2_Fast
-	.dl Tree_4_Fast
-	.dl Tree_7_Fast
-	.dl Tree_9_Fast
-	.dl Tree_6_Fast_F
-	.dl Tree_3_Fast_F
-	.dl Tree_0_Fast_F
-	.dl Tree_3_Fast
-	.dl Tree_8_Fast
-	.dl Tree_9_Fast_F
-	.dl Tree_8_Fast_F
-	.dl Tree_4_Fast_F
-	.dl Tree_0_Fast
-	.dl Tree_6_Fast
-	.dl Tree_10_Fast
-	.dl Tree_7_Fast_F
-	.dl Tree_1_Fast_F
-	.dl Tree_1_Fast
-	.dl Tree_5_Fast
-	.dl Tree_11_Fast
-	.dl Tree_5_Fast_F
-	.dl Tree_2_Fast_F
-	.dl Tree_11_Fast_F
-	.dl Branches_1_Fast
-	.dl Vine7_Slow
-	.dl FrogNPCs1_5_Slow_O
-	.dl FrogNPCs1_2_Slow_O_F
-	.dl FrogNPCs1_7_Slow_F
-	.dl FrogNPCs1_9_Slow
-	.dl FrogNPCs1_0_Slow
-	.dl Branches_1_Fast_F
-	.dl Branches_2_Fast_F
-	.dl Branches_5_Fast_F
-	.dl Vine2_Slow_O
-	.dl Branches_1_Slow_O
-	.dl Branches_2_Slow_O
-	.dl Branches_4_Slow_O
-	.dl Branches_7_Slow_O
-	.dl Branches_0_Fast_F
-	.dl Branches_8_Slow_O
-	.dl Branches_9_Fast_F
-	.dl Branches_0_Fast
-	.dl CloudsNewer_0_Fast_F
-	.dl CloudsNewer_8_Fast_F
-	.dl CloudsNewer_7_Fast_F
-	.dl CloudCityWelcomeComitte_0_Slow
-	.dl Tree_16_Fast
-	.dl Tree_17_Slow
-	.dl Tree_17_Slow_O_F
-	.dl Tree_18_Slow
-	.dl Tree_18_Slow_O_F
-	.dl Tree_16_Fast_F
+	.dl BigGrassBase_Slow_O  ;0
+	.dl BigGrassBase_Fast_F  ;1
+	.dl BigGrassBase_Fast  ;2
+	.dl BigGrassTop_Fast  ;3
+	.dl BigGrassTop_Fast_F  ;4
+	.dl BigGrassTop_Slow_O  ;5
+	.dl DualLeaf4_Slow  ;6
+	.dl DualLeaf4_Slow_F  ;7
+	.dl DualLeaf3_Fast  ;8
+	.dl Branches_9_Fast  ;9
+	.dl Branches_13_Fast  ;10
+	.dl Branches_10_Fast  ;11
+	.dl Branches_16_Slow  ;12
+	.dl Leaves1_Fast  ;13
+	.dl DualLeaf1_Fast  ;14
+	.dl DualLeaf2_Fast  ;15
+	.dl DualLeaf2_Slow_O  ;16
+	.dl DualLeaf1_Slow_O  ;17
+	.dl LeavesLight_Fast  ;18
+	.dl LeavesDark_Fast  ;19
+	.dl Branches_14_Slow  ;20
+	.dl Branches_15_Slow_O_F  ;21
+	.dl Branches_8_Fast  ;22
+	.dl Branches_15_Slow  ;23
+	.dl Branches_11_Fast_F  ;24
+	.dl Branches_13_Fast_F  ;25
+	.dl Branches_10_Fast_F  ;26
+	.dl Leaves2_Fast_F  ;27
+	.dl Leaves2_Fast  ;28
+	.dl Lantern_0_Fast  ;29
+	.dl Lantern_1_Fast  ;30
+	.dl Lantern_2_Fast  ;31
+	.dl Lantern_0_Fast_F  ;32
+	.dl Lantern_1_Fast_F  ;33
+	.dl Lantern_2_Fast_F  ;34
+	.dl Lantern_3_Slow  ;35
+	.dl Lantern_3_Slow_O_F  ;36
+	.dl Lantern_5_Slow  ;37
+	.dl Lantern_5_Slow_O_F  ;38
+	.dl LeavesDark_Fast_F  ;39
+	.dl Branches_12_Fast  ;40
+	.dl Branches_6_Slow  ;41
+	.dl Branches_7_Fast  ;42
+	.dl Branches_8_Fast_F  ;43
+	.dl Branches_16_Slow_O_F  ;44
+	.dl Lantern_6_Slow  ;45
+	.dl Lantern_6_Slow_O_F  ;46
+	.dl AscentBanner_8_Slow  ;47
+	.dl AscentBanner_8_Slow_O  ;48
+	.dl AscentBanner_7_Fast  ;49
+	.dl AscentBanner_7_Slow_O  ;50
+	.dl AscentBanner_9_Fast_F  ;51
+	.dl AscentBanner_6_Slow_F  ;52
+	.dl AscentBanner_10_Fast_F  ;53
+	.dl AscentBanner_5_Fast  ;54
+	.dl AscentBanner_4_Fast  ;55
+	.dl AscentBanner_0_Fast  ;56
+	.dl AscentBanner_3_Fast  ;57
+	.dl AscentBanner_2_Fast  ;58
+	.dl AscentBanner_1_Fast  ;59
+	.dl AscentBanner_9_Fast  ;60
+	.dl AscentBanner_10_Fast  ;61
+	.dl AscentBanner_6_Slow_O  ;62
+	.dl Lantern_7_Slow  ;63
+	.dl Lantern_7_Slow_O_F  ;64
+	.dl Lantern_4_Slow_O  ;65
+	.dl Branches_4_Fast_F  ;66
+	.dl Branches_7_Fast_F  ;67
+	.dl Branches_12_Fast_F  ;68
+	.dl Leaves1_Fast_F  ;69
+	.dl Vine5_Slow  ;70
+	.dl Vine6_Slow  ;71
+	.dl Vine4_Slow  ;72
+	.dl Vine4_Slow_F  ;73
+	.dl Vine4_Slow_O_F  ;74
+	.dl Vine5_Slow_O_F  ;75
+	.dl Vine7_Slow_O  ;76
+	.dl Vine5_Slow_O  ;77
+	.dl Vine6_Slow_O  ;78
+	.dl Vine4_Slow_O  ;79
+	.dl Vine2_Slow  ;80
+	.dl VineVertical_Slow_O  ;81
+	.dl VineVertical_Slow  ;82
+	.dl Branches_5_Fast  ;83
+	.dl Branches_4_Fast  ;84
+	.dl Branches_3_Fast  ;85
+	.dl Branches_2_Fast  ;86
+	.dl Vine2_Slow_F  ;87
+	.dl VineVertical_Slow_F  ;88
+	.dl CloudsNewer_6_Slow  ;89
+	.dl CloudsNewer_3_Fast  ;90
+	.dl CloudsNewer_7_Fast  ;91
+	.dl CloudsNewer_1_Fast  ;92
+	.dl CloudsNewer_3_Fast_F  ;93
+	.dl CloudsNewer_4_Fast_F  ;94
+	.dl CloudsNewer_2_Fast  ;95
+	.dl CloudsNewer_0_Fast  ;96
+	.dl CloudsNewer_8_Fast  ;97
+	.dl CloudsNewer_4_Fast  ;98
+	.dl CloudsNewer_1_Fast_F  ;99
+	.dl CloudsNewer_5_Fast  ;100
+	.dl CloudsNewer_5_Fast_F  ;101
+	.dl CloudsNewer_9_Fast_F  ;102
+	.dl CloudsNewer_10_Fast  ;103
+	.dl CloudsNewer_9_Fast  ;104
+	.dl CloudsNewer_0_Fast_F  ;105
+	.dl CloudsNewer_8_Fast_F  ;106
+	.dl CloudsNewer_10_Fast_F  ;107
+	.dl CloudsNewer_7_Fast_F  ;108
+	.dl Truetle_4_Fast  ;109
+	.dl Truetle_4_Fast_F  ;110
+	.dl Truetle_6_Slow  ;111
+	.dl Truetle_11_Slow  ;112
+	.dl Truetle_9_Slow  ;113
+	.dl Truetle_6_Slow_F  ;114
+	.dl Truetle_11_Slow_F  ;115
+	.dl Truetle_9_Slow_F  ;116
+	.dl Truetle_0_Fast  ;117
+	.dl Truetle_0_Fast_F  ;118
+	.dl Truetle_2_Slow  ;119
+	.dl Truetle_7_Slow  ;120
+	.dl Truetle_5_Slow  ;121
+	.dl Truetle_2_Slow_F  ;122
+	.dl Truetle_7_Slow_F  ;123
+	.dl Truetle_5_Slow_F  ;124
+	.dl Truetle_1_Fast  ;125
+	.dl Truetle_1_Fast_F  ;126
+	.dl Truetle_3_Slow  ;127
+	.dl Truetle_10_Slow  ;128
+	.dl Truetle_8_Slow  ;129
+	.dl Truetle_3_Slow_F  ;130
+	.dl Truetle_10_Slow_F  ;131
+	.dl Truetle_8_Slow_F  ;132
+	.dl GroundDirtFull_Fast_F  ;133
+	.dl GroundDirtFull_Fast  ;134
+	.dl GroundDirtMound_Fast  ;135
+	.dl GroundDirtMound_Fast_F  ;136
+	.dl Branches_8_Slow_O_F  ;137
+	.dl Branches_9_Slow_O  ;138
+	.dl Tree_2_Fast  ;139
+	.dl Tree_4_Fast  ;140
+	.dl Tree_7_Fast  ;141
+	.dl Tree_9_Fast  ;142
+	.dl Tree_6_Fast_F  ;143
+	.dl Tree_3_Fast_F  ;144
+	.dl Tree_0_Fast_F  ;145
+	.dl Tree_3_Fast  ;146
+	.dl Tree_8_Fast  ;147
+	.dl Tree_9_Fast_F  ;148
+	.dl Tree_8_Fast_F  ;149
+	.dl Tree_4_Fast_F  ;150
+	.dl Tree_0_Fast  ;151
+	.dl Tree_6_Fast  ;152
+	.dl Tree_10_Fast  ;153
+	.dl Tree_7_Fast_F  ;154
+	.dl Tree_1_Fast_F  ;155
+	.dl Tree_1_Fast  ;156
+	.dl Tree_5_Fast  ;157
+	.dl Tree_11_Fast  ;158
+	.dl Tree_5_Fast_F  ;159
+	.dl Tree_2_Fast_F  ;160
+	.dl Tree_11_Fast_F  ;161
+	.dl Branches_1_Fast  ;162
+	.dl Vine7_Slow  ;163
+	.dl FrogNPCs1_5_Slow_O  ;164
+	.dl FrogNPCs1_2_Slow_O_F  ;165
+	.dl FrogNPCs1_7_Slow_F  ;166
+	.dl FrogNPCs1_9_Slow  ;167
+	.dl FrogNPCs1_0_Slow  ;168
+	.dl Vine2_Slow_O  ;169
+	.dl Branches_1_Slow_O  ;170
+	.dl Branches_2_Slow_O  ;171
+	.dl Branches_4_Slow_O  ;172
+	.dl Branches_7_Slow_O  ;173
+	.dl Branches_0_Fast  ;174
+	.dl Branches_8_Slow_O  ;175
+	.dl CityBanners_1_Fast  ;176
+	.dl CityBanners_1_Fast_F  ;177
+	.dl CloudCityWelcomeComitte_0_Slow  ;178
+	.dl Tree_16_Fast  ;179
+	.dl Tree_17_Slow  ;180
+	.dl Tree_17_Slow_O_F  ;181
+	.dl Tree_18_Slow  ;182
+	.dl Tree_18_Slow_O_F  ;183
+	.dl Tree_16_Fast_F  ;184
 
 Sprite_Table_1:
-	.dl Vines_4_Slow
-	.dl CastleWindow_0_Fast
-	.dl CastleWindow_1_Fast
-	.dl CastleWindow_2_Fast
-	.dl Bricks_0_Fast
-	.dl Bricks_9_Fast
-	.dl Bricks_14_Fast
-	.dl Bricks_5_Fast
-	.dl Bricks_7_Fast
-	.dl Bricks_20_Slow_O
-	.dl Bricks_20_Slow_O_F
-	.dl Bricks_19_Fast
-	.dl Bricks_19_Fast_F
-	.dl Bricks_22_Slow_O
-	.dl Bricks_22_Slow_O_F
-	.dl Bricks_21_Fast_F
-	.dl Bricks_21_Fast
-	.dl Bricks_23_Fast
-	.dl CastleVines_15_Slow
-	.dl CastleVines_15_Slow_O
-	.dl CastleVines_16_Slow
-	.dl CastleVines_17_Slow
-	.dl CastleVines_9_Slow_O
-	.dl CastleVines_10_Slow
-	.dl CastleVines_9_Slow
-	.dl CastleVines_11_Slow_O
-	.dl CastleVines_10_Slow_O
-	.dl CastleVines_17_Slow_F
-	.dl CastleVines_16_Slow_O_F
-	.dl CastleVines_17_Slow_O_F
-	.dl CastleVines_14_Slow_O
-	.dl CastleVines_12_Slow_O
-	.dl CastleVines_13_Slow
-	.dl CastleVines_16_Slow_O
-	.dl CastleVines_16_Slow_F
-	.dl Bricks_28_Fast
-	.dl Bricks_22_Fast
-	.dl Bricks_24_Fast
-	.dl Bricks_22_Fast_F
-	.dl Platforms_0_Fast
-	.dl Platforms_1_Fast
-	.dl Platforms_0_Fast_F
-	.dl Platforms_2_Slow_O_F
-	.dl Platforms_2_Slow_O
-	.dl FrogNPCs1_10_Slow
-	.dl FrogNPCs1_4_Slow_O
-	.dl FrogNPCs1_8_Slow_F
-	.dl FrogNPCs1_1_Slow
-	.dl FrogNPCs1_6_Slow_O
-	.dl Spikes_0_Fast
-	.dl FrogNPCs1_9_Slow_O
-	.dl FrogNPCs1_3_Slow_F
-	.dl Spikes_3_Fast
-	.dl FrogNPCs1_5_Slow
-	.dl FrogNPCs1_7_Slow
-	.dl FrogNPCs1_9_Slow
-	.dl SolidPlatform_4_Slow
-	.dl SolidPlatform_1_Slow_O
-	.dl SolidPlatform_1_Slow
-	.dl SolidPlatform_5_Slow_O
-	.dl SolidPlatform_0_Fast
-	.dl SolidPlatform_2_Fast
-	.dl SolidPlatform_3_Fast
-	.dl FrogNPCs1_2_Slow_O_F
-	.dl FrogNPCs1_0_Slow
-	.dl FrogNPCs1_11_Slow
-	.dl FrogNPCs1_3_Slow
-	.dl FrogNPCs1_6_Slow
-	.dl Spikes_1_Fast_F
-	.dl Spikes_1_Fast
-	.dl FrogNPCs1_8_Slow_O
-	.dl FrogNPCs1_9_Slow_F
-	.dl FrogNPCs1_4_Slow
-	.dl FrogNPCs1_10_Slow_O
-	.dl TongueRing1_Slow
-	.dl TongueRing2_Slow
-	.dl TongueRing1_Slow_F
-	.dl TongueRing2_Slow_F
-	.dl FrogNPCs1_1_Slow_O
-	.dl CloudSemisolid_0_Fast
-	.dl CloudSemisolid_1_Fast
-	.dl CloudSemisolid_0_Fast_F
-	.dl GroundDirtDark_Fast
-	.dl GroundDirtDark_Fast_F
-	.dl GroundHumpDark_Fast
-	.dl GroundHumpDark_Fast_F
-	.dl PurpleClouds_0_Fast
-	.dl PurpleClouds_2_Fast
-	.dl PurpleClouds_3_Fast
-	.dl PurpleClouds_1_Fast
-	.dl PurpleClouds_4_Fast
+	.dl Branches_1_Fast_F  ;0
+	.dl Branches_2_Fast_F  ;1
+	.dl Branches_5_Fast_F  ;2
+	.dl Branches_14_Slow  ;3
+	.dl Branches_0_Fast_F  ;4
+	.dl Branches_8_Slow_O  ;5
+	.dl Branches_9_Fast_F  ;6
+	.dl Branches_9_Slow_O  ;7
+	.dl Vines_4_Slow  ;8
+	.dl CastleWindow_0_Fast  ;9
+	.dl CastleWindow_1_Fast  ;10
+	.dl CastleWindow_2_Fast  ;11
+	.dl Bricks_2_2_Fast  ;12
+	.dl Bricks_2_1_Fast  ;13
+	.dl Bricks_2_11_Fast  ;14
+	.dl Bricks_20_Slow_O  ;15
+	.dl Bricks_20_Slow_O_F  ;16
+	.dl Bricks_0_Fast  ;17
+	.dl Bricks_19_Fast  ;18
+	.dl Bricks_19_Fast_F  ;19
+	.dl Bricks_22_Slow_O  ;20
+	.dl Bricks_22_Slow_O_F  ;21
+	.dl Bricks_21_Fast_F  ;22
+	.dl Bricks_21_Fast  ;23
+	.dl Bricks_23_Fast  ;24
+	.dl CastleVines_15_Slow  ;25
+	.dl CastleVines_15_Slow_O  ;26
+	.dl CastleVines_16_Slow  ;27
+	.dl CastleVines_17_Slow  ;28
+	.dl CastleVines_9_Slow_O  ;29
+	.dl CastleVines_10_Slow  ;30
+	.dl CastleVines_9_Slow  ;31
+	.dl CastleVines_11_Slow_O  ;32
+	.dl CastleVines_10_Slow_O  ;33
+	.dl CastleVines_17_Slow_F  ;34
+	.dl CastleVines_16_Slow_O_F  ;35
+	.dl CastleVines_17_Slow_O_F  ;36
+	.dl CastleVines_14_Slow_O  ;37
+	.dl CastleVines_12_Slow_O  ;38
+	.dl CastleVines_13_Slow  ;39
+	.dl CastleVines_16_Slow_O  ;40
+	.dl CastleVines_16_Slow_F  ;41
+	.dl CityBanners_2_Fast  ;42
+	.dl CityBanners_3_Fast  ;43
+	.dl CityBanners_3_Slow_O  ;44
+	.dl CityBanners_5_Fast  ;45
+	.dl CityBanners_5_Slow_O  ;46
+	.dl CityBanners_6_Fast  ;47
+	.dl CityBanners_6_Slow_O  ;48
+	.dl CityBanners_4_Slow  ;49
+	.dl CityBanners_4_Slow_O  ;50
+	.dl CityBanners_9_Fast  ;51
+	.dl CityBanners_9_Slow_O  ;52
+	.dl CityBanners_10_Fast  ;53
+	.dl CityBanners_10_Slow_O  ;54
+	.dl Bricks_24_Fast  ;55
+	.dl Bricks_22_Fast_F  ;56
+	.dl Bricks_22_Fast  ;57
+	.dl Bricks_28_Fast  ;58
+	.dl CastleVines_18_Slow_O_F  ;59
+	.dl CastleVines_6_Slow  ;60
+	.dl CastleVines_7_Slow  ;61
+	.dl CastleVines_8_Slow  ;62
+	.dl CityBanners_7_Fast  ;63
+	.dl CityBanners_7_Slow_O  ;64
+	.dl CityBanners_8_Fast  ;65
+	.dl CityBanners_8_Slow_O  ;66
+	.dl Platforms_0_Fast  ;67
+	.dl Platforms_1_Fast  ;68
+	.dl Platforms_0_Fast_F  ;69
+	.dl Platforms_2_Slow_O_F  ;70
+	.dl Platforms_2_Slow_O  ;71
+	.dl FrogNPCs1_10_Slow  ;72
+	.dl FrogNPCs1_4_Slow_O  ;73
+	.dl FrogNPCs1_8_Slow_F  ;74
+	.dl FrogNPCs1_1_Slow  ;75
+	.dl FrogNPCs1_6_Slow_O  ;76
+	.dl Spikes_0_Fast  ;77
+	.dl FrogNPCs1_9_Slow_O  ;78
+	.dl FrogNPCs1_3_Slow_F  ;79
+	.dl Spikes_3_Fast  ;80
+	.dl FrogNPCs1_5_Slow  ;81
+	.dl FrogNPCs1_7_Slow  ;82
+	.dl FrogNPCs1_9_Slow  ;83
+	.dl SolidPlatform_4_Slow  ;84
+	.dl SolidPlatform_1_Slow_O  ;85
+	.dl SolidPlatform_1_Slow  ;86
+	.dl SolidPlatform_5_Slow_O  ;87
+	.dl SolidPlatform_0_Fast  ;88
+	.dl SolidPlatform_2_Fast  ;89
+	.dl SolidPlatform_3_Fast  ;90
+	.dl FrogNPCs1_2_Slow_O_F  ;91
+	.dl FrogNPCs1_0_Slow  ;92
+	.dl FrogNPCs1_11_Slow  ;93
+	.dl FrogNPCs1_3_Slow  ;94
+	.dl FrogNPCs1_6_Slow  ;95
+	.dl Spikes_1_Fast_F  ;96
+	.dl Spikes_1_Fast  ;97
+	.dl FrogNPCs1_8_Slow_O  ;98
+	.dl FrogNPCs1_9_Slow_F  ;99
+	.dl FrogNPCs1_4_Slow  ;100
+	.dl TongueRing1_Slow  ;101
+	.dl TongueRing2_Slow  ;102
+	.dl TongueRing1_Slow_F  ;103
+	.dl TongueRing2_Slow_F  ;104
+	.dl FrogNPCs1_1_Slow_O  ;105
+	.dl CloudSemisolid_0_Fast  ;106
+	.dl CloudSemisolid_1_Fast  ;107
+	.dl CloudSemisolid_0_Fast_F  ;108
+	.dl SpikesPurple_0_Fast  ;109
+	.dl CastlePlatforms_9_Fast  ;110
+	.dl SpikesPurple_3_Fast  ;111
+	.dl CloudSemisolid_2_Fast  ;112
+	.dl CloudSemisolid_3_Fast  ;113
+	.dl CloudSemisolid_4_Fast  ;114
+	.dl CloudSemisolid_5_Fast  ;115
+	.dl CastlePlatforms_1_Fast  ;116
+	.dl CastlePlatforms_5_Fast  ;117
+	.dl CastlePlatforms_4_Fast  ;118
+	.dl CastlePlatforms_7_Fast  ;119
+	.dl CastlePlatforms_7_Fast_F  ;120
+	.dl SpikesPurple_1_Fast_F  ;121
+	.dl SpikesPurple_1_Fast  ;122
+	.dl SpikesPurple_2_Fast  ;123
+	.dl FrogNPCs1_4_Slow_O_F  ;124
+	.dl SpikesPurple_4_Fast  ;125
+	.dl CastlePlatforms_6_Fast  ;126
+	.dl CityBanners_0_Fast  ;127
+	.dl CityBanners_0_Fast_F  ;128
+	.dl CloudTransitory_0_Fast  ;129
+	.dl CloudTransitory_0_Fast_F  ;130
+	.dl Palette3_0_Fast  ;131
+	.dl Palette2_0_Fast  ;132
+	.dl GroundDirtDark_Fast  ;133
+	.dl GroundDirtDark_Fast_F  ;134
+	.dl GroundHumpDark_Fast  ;135
+	.dl GroundHumpDark_Fast_F  ;136
+	.dl PurpleClouds_7_Fast  ;137
+	.dl PurpleClouds_5_Fast  ;138
+	.dl PurpleClouds_8_Fast  ;139
+	.dl PurpleClouds_6_Slow  ;140
+	.dl PurpleClouds_6_Slow_F  ;141
 
 Sprite_Table_2:
 

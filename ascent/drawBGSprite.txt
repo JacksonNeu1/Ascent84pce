@@ -53,9 +53,8 @@ move_bg:
 
 	;call prgmpause
 
-	bit 0, l  ;NEW
-bg_scroll_mod_1 .equ $
-	nop ; set to ret nz for scroll mode ;If not even dont move
+;bg_scroll_mod_1 .equ $
+;	nop ; set to ret nz for scroll mode ;If not even dont move
 	
 	;call prgmpause
 	
@@ -64,6 +63,7 @@ bg_scroll_mod_1 .equ $
 	ccf
 	sbc hl,bc ;compare to the updated location
 	ret z ;if 0, the bg buffer does not need to be moved 
+	
 	jp c,move_bg_down ;if previous cam pos id above current pos, screen has moved down, go to move bg down 1 line
 	call inc_bg ;otherwise, screen has moved up, need to move bg up 1 line
 	jp move_bg ;repeat until bg is in correct pos
@@ -474,7 +474,42 @@ lerp_bg_color_1:
 	
 	ret 
 	
-
+lerp_bg_color_2:
+	ld a, (cam_pos+1) ;cam frame #
+	;call write_a_to_ram
+	sub 130
+	ret c ;return if frame is not >=118
+	cp 4 
+	ret nc
+	
+	ld bc, 0 
+	ld c, a 
+	
+	;ld a, $00
+	;call write_a_to_ram
+	
+	ld a, (cam_pos)
+	;call write_a_to_ram 
+	srl c
+	rra ;div cam pos by 2 
+	srl c
+	rra ;div cam pos by 2 
+	srl a ;must be max of 128
+	res 0, a ;must be even
+	;call write_a_to_ram	
+	ld c, a
+	
+	ld hl, bg_col_lerp_2
+	add hl, bc 
+	ld a,(hl)
+	inc hl 
+	ld e, (hl)
+	ld hl, temp_palette_buffer+30
+	ld (hl),a 
+	inc hl 
+	ld (hl),e 
+	
+	ret
 
 
 

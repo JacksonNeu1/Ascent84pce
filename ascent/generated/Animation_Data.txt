@@ -1,5 +1,167 @@
 position_animation_data:
+	.db 246
+	.dl FG_Data_128 + 6
+	.dl sine_2_7_1
+	.db 48
+	.dl FG_Data_128 + 10
+	.dl sine_4_7_3
+	.db 43
+	.dl FG_Data_122 + 2
+	.dl sine_4_7_3
+	.db 124
+	.dl FG_Data_121 + 14
+	.dl sine_2_7_1
+	.db 178
+	.dl FG_Data_120 + 2
+	.dl sine_4_7_3
+	.db 108
+	.dl FG_Data_120 + 6
+	.dl sine_05_7_1
+	.db 136
+	.dl FG_Data_119 + 30
+	.dl sine_4_7_1
+	.db 197
+	.dl FG_Data_118 + 10
+	.dl sine_4_7_3
+	.db 40
+	.dl FG_Data_117 + 2
+	.dl sine_4_7_3
+	.db 43
+	.dl FG_Data_117 + 6
+	.dl sine_4_3_2
+	.db 95
+	.dl FG_Data_116 + 2
+	.dl sine_4_7_3
+	.db 232
+	.dl FG_Data_116 + 6
+	.dl sine_4_31_4
+	.db 188
+	.dl FG_Data_116 + 10
+	.dl sine_2_7_1
+	.db 102
+	.dl FG_Data_116 + 14
+	.dl sine_05_7_1
+	.db 33
+	.dl FG_Data_115 + 2
+	.dl sine_2_7_1
+	.db 208
+	.dl FG_Data_115 + 6
+	.dl sine_4_7_1
+	.db 161
+	.dl FG_Data_115 + 10
+	.dl sine_4_7_3
 	.db 112
+	.dl FG_Data_115 + 14
+	.dl sine_2_7_1
+	.db 66
+	.dl FG_Data_114 + 6
+	.dl sine_4_7_3
+	.db 228
+	.dl FG_Data_114 + 10
+	.dl sine_4_7_1
+	.db 185
+	.dl FG_Data_114 + 14
+	.dl sine_4_7_3
+	.db 160
+	.dl FG_Data_113 + 2
+	.dl sine_2_7_1
+	.db 112
+	.dl FG_Data_113 + 6
+	.dl sine_4_7_1
+	.db 197
+	.dl FG_Data_113 + 46
+	.dl sine_4_3_2
+	.db 151
+	.dl FG_Data_110 + 2
+	.dl sine_2_7_1
+	.db 25
+	.dl FG_Data_108 + 18
+	.dl sine_4_7_3
+	.db 158
+	.dl FG_Data_108 + 22
+	.dl sine_4_3_2
+	.db 210
+	.dl FG_Data_106 + 2
+	.dl sine_4_7_1
+	.db 181
+	.dl FG_Data_104 + 2
+	.dl sine_4_7_3
+	.db 132
+	.dl FG_Data_104 + 6
+	.dl sine_4_7_3
+	.db 160
+	.dl FG_Data_104 + 30
+	.dl sine_4_3_2
+	.db 213
+	.dl FG_Data_96 + 2
+	.dl sine_05_7_1
+	.db 161
+	.dl FG_Data_96 + 14
+	.dl sine_4_7_1
+	.db 36
+	.dl FG_Data_95 + 6
+	.dl sine_4_7_1
+	.db 83
+	.dl FG_Data_95 + 10
+	.dl sine_2_7_1
+	.db 24
+	.dl FG_Data_93 + 2
+	.dl sine_2_7_1
+	.db 60
+	.dl FG_Data_93 + 6
+	.dl sine_4_31_4
+	.db 133
+	.dl FG_Data_92 + 6
+	.dl sine_4_7_3
+	.db 227
+	.dl FG_Data_92 + 10
+	.dl sine_4_3_2
+	.db 198
+	.dl FG_Data_92 + 14
+	.dl sine_2_7_1
+	.db 133
+	.dl FG_Data_92 + 18
+	.dl sine_2_15_2
+	.db 235
+	.dl FG_Data_91 + 10
+	.dl sine_4_7_1
+	.db 238
+	.dl FG_Data_91 + 18
+	.dl sine_4_7_3
+	.db 70
+	.dl FG_Data_89 + 18
+	.dl sine_4_7_1
+	.db 175
+	.dl FG_Data_83 + 6
+	.dl sine_2_15_2
+	.db 163
+	.dl FG_Data_83 + 26
+	.dl sine_4_7_1
+	.db 224
+	.dl FG_Data_82 + 14
+	.dl sine_4_7_1
+	.db 69
+	.dl FG_Data_82 + 18
+	.dl sine_4_7_3
+	.db 50
+	.dl FG_Data_77 + 6
+	.dl sine_4_3_2
+	.db 27
+	.dl FG_Data_76 + 10
+	.dl sine_4_7_1
+	.db 64
+	.dl FG_Data_76 + 14
+	.dl sine_4_7_3
+	.db 138
+	.dl FG_Data_76 + 18
+	.dl sine_05_7_1
+	.db 112
+	.dl FG_Data_75 + 6
+	.dl sine_4_7_3
+	.db 43
+	.dl FG_Data_74 + 10
+	.dl sine_4_7_3
+	.db 107
 	.dl FG_Data_22 + 2
 	.dl sine_05_15_2
 	.db 128
@@ -114,6 +276,144 @@ position_animation_data:
 	.dl FG_Data_1 + 6
 	.dl sine_1_15_2
 	.db 65
+	.dl MG_Data_60 + 38
+	.dl sine_4_7_1
+	.db 102
+	.dl MG_Data_60 + 42
+	.dl sine_4_3_2
+	.db 125
+	.dl MG_Data_59 + 6
+	.dl sine_4_7_3
+	.db 213
+	.dl MG_Data_59 + 10
+	.dl sine_2_15_2
+	.db 148
+	.dl MG_Data_59 + 50
+	.dl sine_4_7_1
+	.db 51
+	.dl MG_Data_55 + 2
+	.dl sine_4_7_1
+	.db 219
+	.dl MG_Data_55 + 14
+	.dl sine_4_7_3
+	.db 136
+	.dl MG_Data_55 + 18
+	.dl sine_2_7_1
+	.db 236
+	.dl MG_Data_54 + 2
+	.dl sine_2_15_2
+	.db 230
+	.dl MG_Data_54 + 10
+	.dl sine_4_31_4
+	.db 172
+	.dl MG_Data_53 + 6
+	.dl sine_05_7_1
+	.db 179
+	.dl MG_Data_53 + 10
+	.dl sine_4_7_3
+	.db 186
+	.dl MG_Data_52 + 10
+	.dl sine_2_7_1
+	.db 207
+	.dl MG_Data_52 + 14
+	.dl sine_4_3_2
+	.db 170
+	.dl MG_Data_52 + 18
+	.dl sine_4_7_3
+	.db 201
+	.dl MG_Data_50 + 10
+	.dl sine_4_7_1
+	.db 47
+	.dl MG_Data_50 + 14
+	.dl sine_2_15_2
+	.db 89
+	.dl MG_Data_49 + 2
+	.dl sine_2_15_2
+	.db 236
+	.dl MG_Data_49 + 10
+	.dl sine_4_7_3
+	.db 83
+	.dl MG_Data_49 + 14
+	.dl sine_4_3_2
+	.db 130
+	.dl MG_Data_48 + 58
+	.dl sine_4_7_3
+	.db 109
+	.dl MG_Data_48 + 62
+	.dl sine_2_7_1
+	.db 132
+	.dl MG_Data_46 + 2
+	.dl sine_4_7_3
+	.db 195
+	.dl MG_Data_46 + 18
+	.dl sine_4_7_1
+	.db 149
+	.dl MG_Data_46 + 22
+	.dl sine_2_15_2
+	.db 184
+	.dl MG_Data_46 + 26
+	.dl sine_4_3_2
+	.db 164
+	.dl MG_Data_44 + 50
+	.dl sine_05_7_1
+	.db 120
+	.dl MG_Data_44 + 54
+	.dl sine_4_3_2
+	.db 107
+	.dl MG_Data_44 + 58
+	.dl sine_4_7_3
+	.db 159
+	.dl MG_Data_44 + 62
+	.dl sine_2_15_2
+	.db 85
+	.dl MG_Data_44 + 66
+	.dl sine_4_7_1
+	.db 130
+	.dl MG_Data_43 + 6
+	.dl sine_05_7_1
+	.db 82
+	.dl MG_Data_42 + 6
+	.dl sine_2_15_2
+	.db 110
+	.dl MG_Data_42 + 38
+	.dl sine_4_7_3
+	.db 74
+	.dl MG_Data_42 + 42
+	.dl sine_4_31_4
+	.db 194
+	.dl MG_Data_41 + 14
+	.dl sine_4_7_1
+	.db 138
+	.dl MG_Data_41 + 66
+	.dl sine_2_7_1
+	.db 71
+	.dl MG_Data_41 + 74
+	.dl sine_4_7_3
+	.db 193
+	.dl MG_Data_40 + 2
+	.dl sine_2_15_2
+	.db 102
+	.dl MG_Data_40 + 70
+	.dl sine_2_15_2
+	.db 237
+	.dl MG_Data_38 + 2
+	.dl sine_4_7_3
+	.db 219
+	.dl MG_Data_38 + 10
+	.dl sine_4_7_1
+	.db 107
+	.dl MG_Data_37 + 26
+	.dl sine_2_15_2
+	.db 227
+	.dl MG_Data_36 + 2
+	.dl sine_4_3_2
+	.db 106
+	.dl MG_Data_36 + 114
+	.dl sine_4_7_1
+	.db 241
+	.dl MG_Data_36 + 138
+	.dl sine_4_7_3
+	.db 199
 	.dl MG_Data_16 + 68
 	.dl sine_05_3_1
 	.db 9
@@ -216,6 +516,36 @@ position_animation_data:
 	.dl MG_Data_0 + 78
 	.dl sine_05_15_1
 	.db 157
+	.dl MG2_Data_61 + 6
+	.dl sine_1_3_2
+	.db 23
+	.dl MG2_Data_57 + 26
+	.dl sine_1_3_1
+	.db 80
+	.dl MG2_Data_55 + 46
+	.dl sine_1_3_3
+	.db 192
+	.dl MG2_Data_53 + 18
+	.dl sine_1_3_2
+	.db 41
+	.dl MG2_Data_51 + 34
+	.dl sine_1_3_3
+	.db 102
+	.dl MG2_Data_48 + 26
+	.dl sine_1_3_1
+	.db 210
+	.dl MG2_Data_46 + 22
+	.dl sine_1_3_3
+	.db 115
+	.dl MG2_Data_42 + 34
+	.dl sine_1_3_2
+	.db 153
+	.dl MG2_Data_41 + 18
+	.dl sine_1_3_1
+	.db 121
+	.dl MG2_Data_38 + 22
+	.dl sine_1_3_2
+	.db 213
 	.dl SG_GroundGrass + 16
 	.dl sine_2_1_3
 	.db 2
@@ -315,6 +645,78 @@ position_animation_data:
 	.dl SG_Branch2 + 72
 	.dl sine_2_1_3
 	.db 12
+	.dl SG_TurtleY1 + 4
+	.dl sine_1_63_1
+	.db 1
+	.dl SG_TurtleY1 + 8
+	.dl sine_1_63_1
+	.db 0
+	.dl SG_TurtleY1 + 12
+	.dl sine_1_63_1
+	.db 3
+	.dl SG_TurtleB + 4
+	.dl sine_1_63_1
+	.db 1
+	.dl SG_TurtleB + 8
+	.dl sine_1_63_1
+	.db 0
+	.dl SG_TurtleB + 12
+	.dl sine_1_63_1
+	.db 3
+	.dl SG_TurtleP + 4
+	.dl sine_1_31_4
+	.db 1
+	.dl SG_TurtleP + 8
+	.dl sine_1_31_4
+	.db 0
+	.dl SG_TurtleP + 12
+	.dl sine_1_31_4
+	.db 3
+	.dl SG_TurtleY2 + 4
+	.dl sine_05_31_2
+	.db 1
+	.dl SG_TurtleY2 + 8
+	.dl sine_05_31_2
+	.db 0
+	.dl SG_TurtleY2 + 12
+	.dl sine_05_31_2
+	.db 3
+	.dl SG_TurtleP2 + 4
+	.dl sine_1_63_3
+	.db 1
+	.dl SG_TurtleP2 + 8
+	.dl sine_1_63_3
+	.db 0
+	.dl SG_TurtleP2 + 12
+	.dl sine_1_63_3
+	.db 3
+	.dl SG_TurtleB2 + 4
+	.dl sine_05_63_2
+	.db 1
+	.dl SG_TurtleB2 + 8
+	.dl sine_05_63_2
+	.db 0
+	.dl SG_TurtleB2 + 12
+	.dl sine_05_63_2
+	.db 3
+	.dl SG_TurtleY3 + 4
+	.dl sine_1_63_4
+	.db 1
+	.dl SG_TurtleY3 + 8
+	.dl sine_1_63_4
+	.db 0
+	.dl SG_TurtleY3 + 12
+	.dl sine_1_63_4
+	.db 3
+	.dl SG_TurtleP3 + 4
+	.dl sine_05_127_2
+	.db 1
+	.dl SG_TurtleP3 + 8
+	.dl sine_05_127_2
+	.db 0
+	.dl SG_TurtleP3 + 12
+	.dl sine_05_127_2
+	.db 3
 	.dl SG_Branch1 + 26
 	.dl sine_4_1_3
 	.db 0
@@ -340,232 +742,835 @@ position_animation_data:
 
 
 sprite_animation_data:
-	.db 20
+	.db 59
 	.dl sine_2_7_1
-	.db 47
-	.db 48
-	.db 47
-	.db 47
-	.db 48
-	.db 47
-	.db 48
-	.db 48
+	.db 47, 10 ; AscentBanner_8_Slow
+	.db 48, 10 ; AscentBanner_8_Slow_O
+	.db 47, 10 ; AscentBanner_8_Slow
+	.db 47, 10 ; AscentBanner_8_Slow
+	.db 48, 10 ; AscentBanner_8_Slow_O
+	.db 47, 10 ; AscentBanner_8_Slow
+	.db 48, 10 ; AscentBanner_8_Slow_O
+	.db 48, 10 ; AscentBanner_8_Slow_O
 	.dl FG_Data_2 + 13
 	.dl sine_2_7_1
-	.db 50
-	.db 49
-	.db 49
-	.db 49
-	.db 50
-	.db 49
-	.db 50
-	.db 50
+	.db 50, 10 ; AscentBanner_7_Slow_O
+	.db 49, 10 ; AscentBanner_7_Fast
+	.db 49, 10 ; AscentBanner_7_Fast
+	.db 49, 10 ; AscentBanner_7_Fast
+	.db 50, 10 ; AscentBanner_7_Slow_O
+	.db 49, 10 ; AscentBanner_7_Fast
+	.db 50, 10 ; AscentBanner_7_Slow_O
+	.db 50, 10 ; AscentBanner_7_Slow_O
 	.dl FG_Data_2 + 21
 	.dl sine_4_7_1
-	.db 48
-	.db 47
-	.db 47
-	.db 47
-	.db 48
-	.db 48
-	.db 47
-	.db 47
+	.db 48, 10 ; AscentBanner_8_Slow_O
+	.db 47, 10 ; AscentBanner_8_Slow
+	.db 47, 10 ; AscentBanner_8_Slow
+	.db 47, 10 ; AscentBanner_8_Slow
+	.db 48, 10 ; AscentBanner_8_Slow_O
+	.db 48, 10 ; AscentBanner_8_Slow_O
+	.db 47, 10 ; AscentBanner_8_Slow
+	.db 47, 10 ; AscentBanner_8_Slow
 	.dl FG_Data_2 + 25
 	.dl lin_4_7_4
-	.db 14
-	.db 15
-	.db 16
-	.db 17
-	.db 14
-	.db 15
-	.db 14
-	.db 17
+	.db 14, 12 ; DualLeaf1_Fast
+	.db 15, 12 ; DualLeaf2_Fast
+	.db 16, 12 ; DualLeaf2_Slow_O
+	.db 17, 12 ; DualLeaf1_Slow_O
+	.db 14, 12 ; DualLeaf1_Fast
+	.db 15, 12 ; DualLeaf2_Fast
+	.db 14, 12 ; DualLeaf1_Fast
+	.db 17, 12 ; DualLeaf1_Slow_O
 	.dl SG_Branch3 + 25
 	.dl linrep_4_7_1
-	.db 29
-	.db 30
-	.db 31
-	.db 30
-	.db 29
-	.db 30
-	.db 31
-	.db 30
+	.db 29, 24 ; Lantern_0_Fast
+	.db 30, 24 ; Lantern_1_Fast
+	.db 31, 24 ; Lantern_2_Fast
+	.db 30, 24 ; Lantern_1_Fast
+	.db 29, 24 ; Lantern_0_Fast
+	.db 30, 24 ; Lantern_1_Fast
+	.db 31, 24 ; Lantern_2_Fast
+	.db 30, 24 ; Lantern_1_Fast
 	.dl SG_Lantern1 + 5
 	.dl linrep_4_7_1
-	.db 32
-	.db 33
-	.db 34
-	.db 33
-	.db 32
-	.db 33
-	.db 34
-	.db 33
+	.db 32, 24 ; Lantern_0_Fast_F
+	.db 33, 24 ; Lantern_1_Fast_F
+	.db 34, 24 ; Lantern_2_Fast_F
+	.db 33, 24 ; Lantern_1_Fast_F
+	.db 32, 24 ; Lantern_0_Fast_F
+	.db 33, 24 ; Lantern_1_Fast_F
+	.db 34, 24 ; Lantern_2_Fast_F
+	.db 33, 24 ; Lantern_1_Fast_F
 	.dl SG_Lantern1 + 9
 	.dl linrep_4_7_1
-	.db 29
-	.db 30
-	.db 31
-	.db 30
-	.db 29
-	.db 30
-	.db 31
-	.db 30
+	.db 29, 24 ; Lantern_0_Fast
+	.db 30, 24 ; Lantern_1_Fast
+	.db 31, 24 ; Lantern_2_Fast
+	.db 30, 24 ; Lantern_1_Fast
+	.db 29, 24 ; Lantern_0_Fast
+	.db 30, 24 ; Lantern_1_Fast
+	.db 31, 24 ; Lantern_2_Fast
+	.db 30, 24 ; Lantern_1_Fast
 	.dl SG_Lantern2 + 5
 	.dl linrep_4_7_1
-	.db 32
-	.db 33
-	.db 34
-	.db 33
-	.db 32
-	.db 33
-	.db 34
-	.db 33
+	.db 32, 24 ; Lantern_0_Fast_F
+	.db 33, 24 ; Lantern_1_Fast_F
+	.db 34, 24 ; Lantern_2_Fast_F
+	.db 33, 24 ; Lantern_1_Fast_F
+	.db 32, 24 ; Lantern_0_Fast_F
+	.db 33, 24 ; Lantern_1_Fast_F
+	.db 34, 24 ; Lantern_2_Fast_F
+	.db 33, 24 ; Lantern_1_Fast_F
 	.dl SG_Lantern2 + 9
 	.dl linrep_4_7_1
-	.db 29
-	.db 30
-	.db 31
-	.db 30
-	.db 29
-	.db 30
-	.db 31
-	.db 30
+	.db 29, 24 ; Lantern_0_Fast
+	.db 30, 24 ; Lantern_1_Fast
+	.db 31, 24 ; Lantern_2_Fast
+	.db 30, 24 ; Lantern_1_Fast
+	.db 29, 24 ; Lantern_0_Fast
+	.db 30, 24 ; Lantern_1_Fast
+	.db 31, 24 ; Lantern_2_Fast
+	.db 30, 24 ; Lantern_1_Fast
 	.dl SG_Lantern4 + 5
 	.dl linrep_4_7_1
-	.db 32
-	.db 33
-	.db 34
-	.db 33
-	.db 32
-	.db 33
-	.db 34
-	.db 33
+	.db 32, 24 ; Lantern_0_Fast_F
+	.db 33, 24 ; Lantern_1_Fast_F
+	.db 34, 24 ; Lantern_2_Fast_F
+	.db 33, 24 ; Lantern_1_Fast_F
+	.db 32, 24 ; Lantern_0_Fast_F
+	.db 33, 24 ; Lantern_1_Fast_F
+	.db 34, 24 ; Lantern_2_Fast_F
+	.db 33, 24 ; Lantern_1_Fast_F
 	.dl SG_Lantern4 + 9
 	.dl linrep_4_7_1
-	.db 29
-	.db 30
-	.db 31
-	.db 30
-	.db 29
-	.db 30
-	.db 31
-	.db 30
+	.db 29, 24 ; Lantern_0_Fast
+	.db 30, 24 ; Lantern_1_Fast
+	.db 31, 24 ; Lantern_2_Fast
+	.db 30, 24 ; Lantern_1_Fast
+	.db 29, 24 ; Lantern_0_Fast
+	.db 30, 24 ; Lantern_1_Fast
+	.db 31, 24 ; Lantern_2_Fast
+	.db 30, 24 ; Lantern_1_Fast
 	.dl SG_Lantern5 + 5
 	.dl linrep_4_7_1
-	.db 32
-	.db 33
-	.db 34
-	.db 33
-	.db 32
-	.db 33
-	.db 34
-	.db 33
+	.db 32, 24 ; Lantern_0_Fast_F
+	.db 33, 24 ; Lantern_1_Fast_F
+	.db 34, 24 ; Lantern_2_Fast_F
+	.db 33, 24 ; Lantern_1_Fast_F
+	.db 32, 24 ; Lantern_0_Fast_F
+	.db 33, 24 ; Lantern_1_Fast_F
+	.db 34, 24 ; Lantern_2_Fast_F
+	.db 33, 24 ; Lantern_1_Fast_F
 	.dl SG_Lantern5 + 9
 	.dl linrep_4_7_1
-	.db 29
-	.db 30
-	.db 31
-	.db 30
-	.db 29
-	.db 30
-	.db 31
-	.db 30
+	.db 29, 24 ; Lantern_0_Fast
+	.db 30, 24 ; Lantern_1_Fast
+	.db 31, 24 ; Lantern_2_Fast
+	.db 30, 24 ; Lantern_1_Fast
+	.db 29, 24 ; Lantern_0_Fast
+	.db 30, 24 ; Lantern_1_Fast
+	.db 31, 24 ; Lantern_2_Fast
+	.db 30, 24 ; Lantern_1_Fast
 	.dl SG_Lantern3 + 5
 	.dl linrep_4_7_1
-	.db 32
-	.db 33
-	.db 34
-	.db 33
-	.db 32
-	.db 33
-	.db 34
-	.db 33
+	.db 32, 24 ; Lantern_0_Fast_F
+	.db 33, 24 ; Lantern_1_Fast_F
+	.db 34, 24 ; Lantern_2_Fast_F
+	.db 33, 24 ; Lantern_1_Fast_F
+	.db 32, 24 ; Lantern_0_Fast_F
+	.db 33, 24 ; Lantern_1_Fast_F
+	.db 34, 24 ; Lantern_2_Fast_F
+	.db 33, 24 ; Lantern_1_Fast_F
 	.dl SG_Lantern3 + 9
 	.dl lin_4_7_2
-	.db 82
-	.db 81
-	.db 81
-	.db 82
-	.db 82
-	.db 82
-	.db 81
-	.db 82
+	.db 82, 18 ; VineVertical_Slow
+	.db 81, 18 ; VineVertical_Slow_O
+	.db 81, 18 ; VineVertical_Slow_O
+	.db 82, 18 ; VineVertical_Slow
+	.db 82, 18 ; VineVertical_Slow
+	.db 82, 18 ; VineVertical_Slow
+	.db 81, 18 ; VineVertical_Slow_O
+	.db 82, 18 ; VineVertical_Slow
 	.dl SG_Vines2 + 13
 	.dl lin_4_7_2
-	.db 15
-	.db 15
-	.db 14
-	.db 17
-	.db 16
-	.db 14
-	.db 15
-	.db 17
+	.db 15, 12 ; DualLeaf2_Fast
+	.db 15, 12 ; DualLeaf2_Fast
+	.db 14, 12 ; DualLeaf1_Fast
+	.db 17, 12 ; DualLeaf1_Slow_O
+	.db 16, 12 ; DualLeaf2_Slow_O
+	.db 14, 12 ; DualLeaf1_Fast
+	.db 15, 12 ; DualLeaf2_Fast
+	.db 17, 12 ; DualLeaf1_Slow_O
 	.dl SG_Vines2 + 17
 	.dl lin_4_7_2
-	.db 82
-	.db 81
-	.db 81
-	.db 82
-	.db 82
-	.db 82
-	.db 81
-	.db 82
+	.db 82, 18 ; VineVertical_Slow
+	.db 81, 18 ; VineVertical_Slow_O
+	.db 81, 18 ; VineVertical_Slow_O
+	.db 82, 18 ; VineVertical_Slow
+	.db 82, 18 ; VineVertical_Slow
+	.db 82, 18 ; VineVertical_Slow
+	.db 81, 18 ; VineVertical_Slow_O
+	.db 82, 18 ; VineVertical_Slow
 	.dl SG_Vines8 + 13
 	.dl lin_4_7_3
-	.db 15
-	.db 15
-	.db 17
-	.db 14
-	.db 16
-	.db 17
-	.db 15
-	.db 17
+	.db 15, 12 ; DualLeaf2_Fast
+	.db 15, 12 ; DualLeaf2_Fast
+	.db 17, 12 ; DualLeaf1_Slow_O
+	.db 14, 12 ; DualLeaf1_Fast
+	.db 16, 12 ; DualLeaf2_Slow_O
+	.db 17, 12 ; DualLeaf1_Slow_O
+	.db 15, 12 ; DualLeaf2_Fast
+	.db 17, 12 ; DualLeaf1_Slow_O
 	.dl SG_Vines8 + 17
+	.dl lin_1_7_2
+	.db 109, 10 ; Truetle_4_Fast
+	.db 109, 10 ; Truetle_4_Fast
+	.db 109, 10 ; Truetle_4_Fast
+	.db 109, 10 ; Truetle_4_Fast
+	.db 110, 10 ; Truetle_4_Fast_F
+	.db 110, 10 ; Truetle_4_Fast_F
+	.db 110, 10 ; Truetle_4_Fast_F
+	.db 110, 10 ; Truetle_4_Fast_F
+	.dl SG_TurtleY1 + 5
+	.dl lin_4_7_1
+	.db 111, 7 ; Truetle_6_Slow
+	.db 111, 7 ; Truetle_6_Slow
+	.db 112, 5 ; Truetle_11_Slow
+	.db 113, 3 ; Truetle_9_Slow
+	.db 113, 3 ; Truetle_9_Slow
+	.db 113, 3 ; Truetle_9_Slow
+	.db 112, 5 ; Truetle_11_Slow
+	.db 112, 5 ; Truetle_11_Slow
+	.dl SG_TurtleY1 + 9
+	.dl lin_4_7_1
+	.db 114, 7 ; Truetle_6_Slow_F
+	.db 114, 7 ; Truetle_6_Slow_F
+	.db 115, 5 ; Truetle_11_Slow_F
+	.db 116, 3 ; Truetle_9_Slow_F
+	.db 116, 3 ; Truetle_9_Slow_F
+	.db 116, 3 ; Truetle_9_Slow_F
+	.db 115, 5 ; Truetle_11_Slow_F
+	.db 115, 5 ; Truetle_11_Slow_F
+	.dl SG_TurtleY1 + 13
+	.dl lin_1_7_2
+	.db 117, 10 ; Truetle_0_Fast
+	.db 117, 10 ; Truetle_0_Fast
+	.db 117, 10 ; Truetle_0_Fast
+	.db 117, 10 ; Truetle_0_Fast
+	.db 118, 10 ; Truetle_0_Fast_F
+	.db 118, 10 ; Truetle_0_Fast_F
+	.db 118, 10 ; Truetle_0_Fast_F
+	.db 118, 10 ; Truetle_0_Fast_F
+	.dl SG_TurtleB + 5
+	.dl lin_4_7_1
+	.db 119, 7 ; Truetle_2_Slow
+	.db 119, 7 ; Truetle_2_Slow
+	.db 120, 5 ; Truetle_7_Slow
+	.db 121, 3 ; Truetle_5_Slow
+	.db 121, 3 ; Truetle_5_Slow
+	.db 121, 3 ; Truetle_5_Slow
+	.db 120, 5 ; Truetle_7_Slow
+	.db 120, 5 ; Truetle_7_Slow
+	.dl SG_TurtleB + 9
+	.dl lin_4_7_1
+	.db 122, 7 ; Truetle_2_Slow_F
+	.db 122, 7 ; Truetle_2_Slow_F
+	.db 123, 5 ; Truetle_7_Slow_F
+	.db 124, 3 ; Truetle_5_Slow_F
+	.db 124, 3 ; Truetle_5_Slow_F
+	.db 124, 3 ; Truetle_5_Slow_F
+	.db 123, 5 ; Truetle_7_Slow_F
+	.db 123, 5 ; Truetle_7_Slow_F
+	.dl SG_TurtleB + 13
+	.dl lin_1_7_1
+	.db 125, 10 ; Truetle_1_Fast
+	.db 125, 10 ; Truetle_1_Fast
+	.db 125, 10 ; Truetle_1_Fast
+	.db 125, 10 ; Truetle_1_Fast
+	.db 126, 10 ; Truetle_1_Fast_F
+	.db 126, 10 ; Truetle_1_Fast_F
+	.db 126, 10 ; Truetle_1_Fast_F
+	.db 126, 10 ; Truetle_1_Fast_F
+	.dl SG_TurtleP + 5
+	.dl lin_4_7_1
+	.db 127, 7 ; Truetle_3_Slow
+	.db 127, 7 ; Truetle_3_Slow
+	.db 128, 5 ; Truetle_10_Slow
+	.db 128, 5 ; Truetle_10_Slow
+	.db 129, 3 ; Truetle_8_Slow
+	.db 129, 3 ; Truetle_8_Slow
+	.db 128, 5 ; Truetle_10_Slow
+	.db 128, 5 ; Truetle_10_Slow
+	.dl SG_TurtleP + 9
+	.dl lin_4_7_1
+	.db 130, 7 ; Truetle_3_Slow_F
+	.db 130, 7 ; Truetle_3_Slow_F
+	.db 131, 5 ; Truetle_10_Slow_F
+	.db 131, 5 ; Truetle_10_Slow_F
+	.db 132, 3 ; Truetle_8_Slow_F
+	.db 132, 3 ; Truetle_8_Slow_F
+	.db 131, 5 ; Truetle_10_Slow_F
+	.db 131, 5 ; Truetle_10_Slow_F
+	.dl SG_TurtleP + 13
+	.dl lin_05_7_3
+	.db 109, 10 ; Truetle_4_Fast
+	.db 109, 10 ; Truetle_4_Fast
+	.db 109, 10 ; Truetle_4_Fast
+	.db 109, 10 ; Truetle_4_Fast
+	.db 110, 10 ; Truetle_4_Fast_F
+	.db 110, 10 ; Truetle_4_Fast_F
+	.db 110, 10 ; Truetle_4_Fast_F
+	.db 110, 10 ; Truetle_4_Fast_F
+	.dl SG_TurtleY2 + 5
+	.dl lin_1_7_2
+	.db 111, 7 ; Truetle_6_Slow
+	.db 111, 7 ; Truetle_6_Slow
+	.db 112, 5 ; Truetle_11_Slow
+	.db 113, 3 ; Truetle_9_Slow
+	.db 113, 3 ; Truetle_9_Slow
+	.db 113, 3 ; Truetle_9_Slow
+	.db 112, 5 ; Truetle_11_Slow
+	.db 112, 5 ; Truetle_11_Slow
+	.dl SG_TurtleY2 + 9
+	.dl lin_1_7_2
+	.db 114, 7 ; Truetle_6_Slow_F
+	.db 114, 7 ; Truetle_6_Slow_F
+	.db 115, 5 ; Truetle_11_Slow_F
+	.db 116, 3 ; Truetle_9_Slow_F
+	.db 116, 3 ; Truetle_9_Slow_F
+	.db 116, 3 ; Truetle_9_Slow_F
+	.db 115, 5 ; Truetle_11_Slow_F
+	.db 115, 5 ; Truetle_11_Slow_F
+	.dl SG_TurtleY2 + 13
+	.dl lin_1_7_4
+	.db 125, 10 ; Truetle_1_Fast
+	.db 125, 10 ; Truetle_1_Fast
+	.db 125, 10 ; Truetle_1_Fast
+	.db 125, 10 ; Truetle_1_Fast
+	.db 126, 10 ; Truetle_1_Fast_F
+	.db 126, 10 ; Truetle_1_Fast_F
+	.db 126, 10 ; Truetle_1_Fast_F
+	.db 126, 10 ; Truetle_1_Fast_F
+	.dl SG_TurtleP2 + 5
+	.dl lin_2_7_4
+	.db 127, 7 ; Truetle_3_Slow
+	.db 127, 7 ; Truetle_3_Slow
+	.db 128, 5 ; Truetle_10_Slow
+	.db 128, 5 ; Truetle_10_Slow
+	.db 129, 3 ; Truetle_8_Slow
+	.db 129, 3 ; Truetle_8_Slow
+	.db 128, 5 ; Truetle_10_Slow
+	.db 128, 5 ; Truetle_10_Slow
+	.dl SG_TurtleP2 + 9
+	.dl lin_2_7_4
+	.db 130, 7 ; Truetle_3_Slow_F
+	.db 130, 7 ; Truetle_3_Slow_F
+	.db 131, 5 ; Truetle_10_Slow_F
+	.db 131, 5 ; Truetle_10_Slow_F
+	.db 132, 3 ; Truetle_8_Slow_F
+	.db 132, 3 ; Truetle_8_Slow_F
+	.db 131, 5 ; Truetle_10_Slow_F
+	.db 131, 5 ; Truetle_10_Slow_F
+	.dl SG_TurtleP2 + 13
+	.dl lin_05_7_3
+	.db 117, 10 ; Truetle_0_Fast
+	.db 117, 10 ; Truetle_0_Fast
+	.db 117, 10 ; Truetle_0_Fast
+	.db 117, 10 ; Truetle_0_Fast
+	.db 118, 10 ; Truetle_0_Fast_F
+	.db 118, 10 ; Truetle_0_Fast_F
+	.db 118, 10 ; Truetle_0_Fast_F
+	.db 118, 10 ; Truetle_0_Fast_F
+	.dl SG_TurtleB2 + 5
+	.dl lin_4_7_1
+	.db 119, 7 ; Truetle_2_Slow
+	.db 119, 7 ; Truetle_2_Slow
+	.db 120, 5 ; Truetle_7_Slow
+	.db 121, 3 ; Truetle_5_Slow
+	.db 121, 3 ; Truetle_5_Slow
+	.db 121, 3 ; Truetle_5_Slow
+	.db 120, 5 ; Truetle_7_Slow
+	.db 120, 5 ; Truetle_7_Slow
+	.dl SG_TurtleB2 + 9
+	.dl lin_4_7_1
+	.db 122, 7 ; Truetle_2_Slow_F
+	.db 122, 7 ; Truetle_2_Slow_F
+	.db 123, 5 ; Truetle_7_Slow_F
+	.db 124, 3 ; Truetle_5_Slow_F
+	.db 124, 3 ; Truetle_5_Slow_F
+	.db 124, 3 ; Truetle_5_Slow_F
+	.db 123, 5 ; Truetle_7_Slow_F
+	.db 123, 5 ; Truetle_7_Slow_F
+	.dl SG_TurtleB2 + 13
+	.dl lin_1_7_1
+	.db 109, 10 ; Truetle_4_Fast
+	.db 109, 10 ; Truetle_4_Fast
+	.db 109, 10 ; Truetle_4_Fast
+	.db 109, 10 ; Truetle_4_Fast
+	.db 110, 10 ; Truetle_4_Fast_F
+	.db 110, 10 ; Truetle_4_Fast_F
+	.db 110, 10 ; Truetle_4_Fast_F
+	.db 110, 10 ; Truetle_4_Fast_F
+	.dl SG_TurtleY3 + 5
+	.dl lin_4_7_1
+	.db 111, 7 ; Truetle_6_Slow
+	.db 111, 7 ; Truetle_6_Slow
+	.db 112, 5 ; Truetle_11_Slow
+	.db 113, 3 ; Truetle_9_Slow
+	.db 113, 3 ; Truetle_9_Slow
+	.db 113, 3 ; Truetle_9_Slow
+	.db 112, 5 ; Truetle_11_Slow
+	.db 112, 5 ; Truetle_11_Slow
+	.dl SG_TurtleY3 + 9
+	.dl lin_4_7_1
+	.db 114, 7 ; Truetle_6_Slow_F
+	.db 114, 7 ; Truetle_6_Slow_F
+	.db 115, 5 ; Truetle_11_Slow_F
+	.db 116, 3 ; Truetle_9_Slow_F
+	.db 116, 3 ; Truetle_9_Slow_F
+	.db 116, 3 ; Truetle_9_Slow_F
+	.db 115, 5 ; Truetle_11_Slow_F
+	.db 115, 5 ; Truetle_11_Slow_F
+	.dl SG_TurtleY3 + 13
+	.dl lin_05_7_3
+	.db 125, 10 ; Truetle_1_Fast
+	.db 125, 10 ; Truetle_1_Fast
+	.db 125, 10 ; Truetle_1_Fast
+	.db 125, 10 ; Truetle_1_Fast
+	.db 126, 10 ; Truetle_1_Fast_F
+	.db 126, 10 ; Truetle_1_Fast_F
+	.db 126, 10 ; Truetle_1_Fast_F
+	.db 126, 10 ; Truetle_1_Fast_F
+	.dl SG_TurtleP3 + 5
+	.dl lin_4_7_3
+	.db 127, 7 ; Truetle_3_Slow
+	.db 127, 7 ; Truetle_3_Slow
+	.db 128, 5 ; Truetle_10_Slow
+	.db 128, 5 ; Truetle_10_Slow
+	.db 129, 3 ; Truetle_8_Slow
+	.db 129, 3 ; Truetle_8_Slow
+	.db 128, 5 ; Truetle_10_Slow
+	.db 128, 5 ; Truetle_10_Slow
+	.dl SG_TurtleP3 + 9
+	.dl lin_4_7_3
+	.db 130, 7 ; Truetle_3_Slow_F
+	.db 130, 7 ; Truetle_3_Slow_F
+	.db 131, 5 ; Truetle_10_Slow_F
+	.db 131, 5 ; Truetle_10_Slow_F
+	.db 132, 3 ; Truetle_8_Slow_F
+	.db 132, 3 ; Truetle_8_Slow_F
+	.db 131, 5 ; Truetle_10_Slow_F
+	.db 131, 5 ; Truetle_10_Slow_F
+	.dl SG_TurtleP3 + 13
+	.dl sine_4_7_1
+	.db 43, 6 ; CityBanners_3_Fast
+	.db 43, 6 ; CityBanners_3_Fast
+	.db 43, 6 ; CityBanners_3_Fast
+	.db 43, 6 ; CityBanners_3_Fast
+	.db 44, 6 ; CityBanners_3_Slow_O
+	.db 44, 6 ; CityBanners_3_Slow_O
+	.db 44, 6 ; CityBanners_3_Slow_O
+	.db 44, 6 ; CityBanners_3_Slow_O
+	.dl SG_Banner1 + 9
+	.dl sine_4_7_2
+	.db 45, 6 ; CityBanners_5_Fast
+	.db 45, 6 ; CityBanners_5_Fast
+	.db 45, 6 ; CityBanners_5_Fast
+	.db 45, 6 ; CityBanners_5_Fast
+	.db 45, 6 ; CityBanners_5_Fast
+	.db 46, 6 ; CityBanners_5_Slow_O
+	.db 46, 6 ; CityBanners_5_Slow_O
+	.db 46, 6 ; CityBanners_5_Slow_O
+	.dl SG_Banner1 + 13
+	.dl sine_4_7_3
+	.db 47, 6 ; CityBanners_6_Fast
+	.db 47, 6 ; CityBanners_6_Fast
+	.db 47, 6 ; CityBanners_6_Fast
+	.db 47, 6 ; CityBanners_6_Fast
+	.db 48, 6 ; CityBanners_6_Slow_O
+	.db 48, 6 ; CityBanners_6_Slow_O
+	.db 48, 6 ; CityBanners_6_Slow_O
+	.db 48, 6 ; CityBanners_6_Slow_O
+	.dl SG_Banner1 + 17
+	.dl sine_4_7_4
+	.db 49, 11 ; CityBanners_4_Slow
+	.db 49, 11 ; CityBanners_4_Slow
+	.db 49, 11 ; CityBanners_4_Slow
+	.db 49, 11 ; CityBanners_4_Slow
+	.db 49, 11 ; CityBanners_4_Slow
+	.db 50, 11 ; CityBanners_4_Slow_O
+	.db 50, 11 ; CityBanners_4_Slow_O
+	.db 50, 11 ; CityBanners_4_Slow_O
+	.dl SG_Banner1 + 21
+	.dl sine_4_7_2
+	.db 43, 6 ; CityBanners_3_Fast
+	.db 43, 6 ; CityBanners_3_Fast
+	.db 43, 6 ; CityBanners_3_Fast
+	.db 44, 6 ; CityBanners_3_Slow_O
+	.db 44, 6 ; CityBanners_3_Slow_O
+	.db 44, 6 ; CityBanners_3_Slow_O
+	.db 44, 6 ; CityBanners_3_Slow_O
+	.db 43, 6 ; CityBanners_3_Fast
+	.dl SG_Banner2 + 9
+	.dl sine_4_7_3
+	.db 51, 6 ; CityBanners_9_Fast
+	.db 51, 6 ; CityBanners_9_Fast
+	.db 51, 6 ; CityBanners_9_Fast
+	.db 51, 6 ; CityBanners_9_Fast
+	.db 51, 6 ; CityBanners_9_Fast
+	.db 52, 6 ; CityBanners_9_Slow_O
+	.db 52, 6 ; CityBanners_9_Slow_O
+	.db 51, 6 ; CityBanners_9_Fast
+	.dl SG_Banner2 + 13
+	.dl sine_4_7_4
+	.db 53, 6 ; CityBanners_10_Fast
+	.db 53, 6 ; CityBanners_10_Fast
+	.db 53, 6 ; CityBanners_10_Fast
+	.db 53, 6 ; CityBanners_10_Fast
+	.db 54, 6 ; CityBanners_10_Slow_O
+	.db 54, 6 ; CityBanners_10_Slow_O
+	.db 54, 6 ; CityBanners_10_Slow_O
+	.db 53, 6 ; CityBanners_10_Fast
+	.dl SG_Banner2 + 17
+	.dl sine_4_7_1
+	.db 49, 11 ; CityBanners_4_Slow
+	.db 49, 11 ; CityBanners_4_Slow
+	.db 49, 11 ; CityBanners_4_Slow
+	.db 49, 11 ; CityBanners_4_Slow
+	.db 50, 11 ; CityBanners_4_Slow_O
+	.db 50, 11 ; CityBanners_4_Slow_O
+	.db 50, 11 ; CityBanners_4_Slow_O
+	.db 50, 11 ; CityBanners_4_Slow_O
+	.dl SG_Banner2 + 21
+	.dl sine_4_7_2
+	.db 43, 6 ; CityBanners_3_Fast
+	.db 43, 6 ; CityBanners_3_Fast
+	.db 43, 6 ; CityBanners_3_Fast
+	.db 43, 6 ; CityBanners_3_Fast
+	.db 44, 6 ; CityBanners_3_Slow_O
+	.db 44, 6 ; CityBanners_3_Slow_O
+	.db 44, 6 ; CityBanners_3_Slow_O
+	.db 44, 6 ; CityBanners_3_Slow_O
+	.dl SG_Banner3 + 9
+	.dl sine_4_7_3
+	.db 63, 6 ; CityBanners_7_Fast
+	.db 63, 6 ; CityBanners_7_Fast
+	.db 63, 6 ; CityBanners_7_Fast
+	.db 63, 6 ; CityBanners_7_Fast
+	.db 64, 6 ; CityBanners_7_Slow_O
+	.db 64, 6 ; CityBanners_7_Slow_O
+	.db 64, 6 ; CityBanners_7_Slow_O
+	.db 63, 6 ; CityBanners_7_Fast
+	.dl SG_Banner3 + 13
+	.dl sine_4_7_4
+	.db 65, 6 ; CityBanners_8_Fast
+	.db 65, 6 ; CityBanners_8_Fast
+	.db 65, 6 ; CityBanners_8_Fast
+	.db 65, 6 ; CityBanners_8_Fast
+	.db 66, 6 ; CityBanners_8_Slow_O
+	.db 66, 6 ; CityBanners_8_Slow_O
+	.db 66, 6 ; CityBanners_8_Slow_O
+	.db 66, 6 ; CityBanners_8_Slow_O
+	.dl SG_Banner3 + 17
+	.dl sine_4_7_1
+	.db 49, 11 ; CityBanners_4_Slow
+	.db 49, 11 ; CityBanners_4_Slow
+	.db 49, 11 ; CityBanners_4_Slow
+	.db 50, 11 ; CityBanners_4_Slow_O
+	.db 50, 11 ; CityBanners_4_Slow_O
+	.db 50, 11 ; CityBanners_4_Slow_O
+	.db 50, 11 ; CityBanners_4_Slow_O
+	.db 50, 11 ; CityBanners_4_Slow_O
+	.dl SG_Banner3 + 21
 	.dl linrep_8_7_1
-	.db 74
-	.db 75
-	.db 74
-	.db 75
-	.db 74
-	.db 75
-	.db 74
-	.db 75
+	.db 101, 16 ; TongueRing1_Slow
+	.db 102, 16 ; TongueRing2_Slow
+	.db 101, 16 ; TongueRing1_Slow
+	.db 102, 16 ; TongueRing2_Slow
+	.db 101, 16 ; TongueRing1_Slow
+	.db 102, 16 ; TongueRing2_Slow
+	.db 101, 16 ; TongueRing1_Slow
+	.db 102, 16 ; TongueRing2_Slow
 	.dl SG_TongueRing + 5
 	.dl linrep_8_7_1
-	.db 76
-	.db 77
-	.db 76
-	.db 77
-	.db 76
-	.db 77
-	.db 76
-	.db 77
+	.db 103, 16 ; TongueRing1_Slow_F
+	.db 104, 16 ; TongueRing2_Slow_F
+	.db 103, 16 ; TongueRing1_Slow_F
+	.db 104, 16 ; TongueRing2_Slow_F
+	.db 103, 16 ; TongueRing1_Slow_F
+	.db 104, 16 ; TongueRing2_Slow_F
+	.db 103, 16 ; TongueRing1_Slow_F
+	.db 104, 16 ; TongueRing2_Slow_F
 	.dl SG_TongueRing + 9
+	.dl lin_2_7_3
+	.db 119, 7 ; Truetle_2_Slow
+	.db 119, 7 ; Truetle_2_Slow
+	.db 120, 5 ; Truetle_7_Slow
+	.db 121, 3 ; Truetle_5_Slow
+	.db 121, 3 ; Truetle_5_Slow
+	.db 121, 3 ; Truetle_5_Slow
+	.db 120, 5 ; Truetle_7_Slow
+	.db 120, 5 ; Truetle_7_Slow
+	.dl SG_TurtleB4 + 9
+	.dl lin_2_7_3
+	.db 127, 7 ; Truetle_3_Slow
+	.db 127, 7 ; Truetle_3_Slow
+	.db 128, 5 ; Truetle_10_Slow
+	.db 128, 5 ; Truetle_10_Slow
+	.db 129, 3 ; Truetle_8_Slow
+	.db 129, 3 ; Truetle_8_Slow
+	.db 128, 5 ; Truetle_10_Slow
+	.db 128, 5 ; Truetle_10_Slow
+	.dl SG_TurtleP4 + 9
+	.dl lin_4_7_1
+	.db 114, 7 ; Truetle_6_Slow_F
+	.db 114, 7 ; Truetle_6_Slow_F
+	.db 115, 5 ; Truetle_11_Slow_F
+	.db 116, 3 ; Truetle_9_Slow_F
+	.db 116, 3 ; Truetle_9_Slow_F
+	.db 116, 3 ; Truetle_9_Slow_F
+	.db 115, 5 ; Truetle_11_Slow_F
+	.db 115, 5 ; Truetle_11_Slow_F
+	.dl SG_TurtleY4 + 9
+
+
+
+disable_animation_data:
+	.db 16
+	.dl SG_TurtleY1 + 7
+	.dl lin_1_127_4
+	.db 5
+	.dl SG_TurtleY1 + 11
+	.dl lin_1_127_2
+	.db 5
+	.dl SG_TurtleB + 7
+	.dl lin_1_127_4
+	.db 5
+	.dl SG_TurtleB + 11
+	.dl lin_1_127_2
+	.db 5
+	.dl SG_TurtleP + 7
+	.dl lin_1_127_3
+	.db 5
+	.dl SG_TurtleP + 11
+	.dl lin_1_127_1
+	.db 5
+	.dl SG_TurtleY2 + 7
+	.dl lin_05_127_1
+	.db 5
+	.dl SG_TurtleY2 + 11
+	.dl lin_05_127_3
+	.db 5
+	.dl SG_TurtleP2 + 7
+	.dl lin_1_127_2
+	.db 5
+	.dl SG_TurtleP2 + 11
+	.dl lin_1_127_4
+	.db 5
+	.dl SG_TurtleB2 + 7
+	.dl lin_05_127_1
+	.db 5
+	.dl SG_TurtleB2 + 11
+	.dl lin_05_127_3
+	.db 5
+	.dl SG_TurtleY3 + 7
+	.dl lin_1_127_3
+	.db 5
+	.dl SG_TurtleY3 + 11
+	.dl lin_1_127_1
+	.db 5
+	.dl SG_TurtleP3 + 7
+	.dl lin_05_127_1
+	.db 5
+	.dl SG_TurtleP3 + 11
+	.dl lin_05_127_3
+	.db 5
 
 
 
 breakaway_platform_data_0
-	.db 0
+	.db 8
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_62 + 13
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_59 + 17
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_55 + 41
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_52 + 5
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_47 + 17
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_43 + 21
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_42 + 21
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_38 + 21
 
 
 breakaway_platform_data_1
-	.db 0
+	.db 7
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_62 + 29
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_59 + 13
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_56 + 29
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_47 + 13
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_44 + 9
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_42 + 29
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_39 + 9
 
 
 breakaway_platform_data_2
-	.db 0
+	.db 6
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_62 + 33
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_59 + 9
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_53 + 17
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_45 + 13
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_43 + 9
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_39 + 13
 
 
 breakaway_platform_data_3
-	.db 0
+	.db 5
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_64 + 9
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_60 + 21
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_54 + 17
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_43 + 13
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_39 + 17
 
 
 breakaway_platform_data_4
-	.db 0
+	.db 3
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_60 + 17
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_43 + 17
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_40 + 29
 
 
 breakaway_platform_data_5
-	.db 0
+	.db 3
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_60 + 13
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_42 + 9
+	.db 112
+	.db 113
+	.db 114
+	.db 115
+	.dl MG2_Data_42 + 13
 
 
 breakaway_platform_data_6
@@ -589,18 +1594,78 @@ breakaway_platform_data_10
 
 
 breakaway_platform_data_11
-	.db 0
+	.db 4
+	.db 114
+	.db 114
+	.db 114
+	.db 115
+	.dl MG2_Data_62 + 5
+	.db 114
+	.db 114
+	.db 114
+	.db 115
+	.dl MG2_Data_59 + 21
+	.db 114
+	.db 114
+	.db 114
+	.db 115
+	.dl MG2_Data_51 + 49
+	.db 114
+	.db 114
+	.db 114
+	.db 115
+	.dl MG2_Data_48 + 9
 
 
 breakaway_platform_data_12
-	.db 0
+	.db 4
+	.db 114
+	.db 114
+	.db 114
+	.db 115
+	.dl MG2_Data_63 + 41
+	.db 114
+	.db 114
+	.db 114
+	.db 115
+	.dl MG2_Data_60 + 25
+	.db 114
+	.db 114
+	.db 114
+	.db 115
+	.dl MG2_Data_51 + 61
+	.db 114
+	.db 114
+	.db 114
+	.db 115
+	.dl MG2_Data_48 + 21
 
 
 breakaway_platform_data_13
-	.db 0
+	.db 3
+	.db 114
+	.db 114
+	.db 114
+	.db 115
+	.dl MG2_Data_64 + 5
+	.db 114
+	.db 114
+	.db 114
+	.db 115
+	.dl MG2_Data_60 + 9
+	.db 114
+	.db 114
+	.db 114
+	.db 115
+	.dl MG2_Data_51 + 17
 
 
 breakaway_platform_data_14
-	.db 0
+	.db 1
+	.db 114
+	.db 114
+	.db 114
+	.db 115
+	.dl MG2_Data_51 + 25
 
 

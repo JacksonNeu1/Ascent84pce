@@ -75,7 +75,11 @@ lin_apply_amplitudes:
 	ex de,hl 
 	srl a ;div 2 
 linrep_apply_amplitudes:
-	srl a 
+	ld (hl),a ;amplitude of 127 
+	inc hl
+	srl a
+	ld (hl),a ;amplitude of 63 
+	inc hl 
 	srl a ;amplitude of 31 
 	ld (hl),a 
 	inc hl 
@@ -163,7 +167,11 @@ sine_modes_table:
 
 
 
-sine_05_1: ;half frequency, no phase shift
+sine_05_1: ;half frequency, 1 phase shift
+sine_05_127_1: ;freqMult, amplitude, phase 
+	.db 0 
+sine_05_63_1: ;freqMult, amplitude, phase 
+	.db 0 	
 sine_05_31_1: ;freqMult, amplitude, phase 
 	.db 0  
 sine_05_15_1: ;freqMult, amplitude, phase 
@@ -177,7 +185,11 @@ sine_05_1_1: ;freqMult, amplitude, phase
 
 	
 	
-sine_05_2: ;half frequency, no phase shift 
+sine_05_2: ;half frequency, 2 phase shift
+sine_05_127_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_05_63_2: ;freqMult, amplitude, phase 
+	.db 0 	
 sine_05_31_2: ;freqMult, amplitude, phase 
 	.db 0 
 sine_05_15_2: ;freqMult, amplitude, phase 
@@ -190,7 +202,11 @@ sine_05_1_2: ;freqMult, amplitude, phase
 	.db 0 
 
 	
-sine_05_3: ;half frequency, no phase shift
+sine_05_3: ;half frequency, 3 phase shift
+sine_05_127_3: ;freqMult, amplitude, phase 
+	.db 0
+sine_05_63_3: ;freqMult, amplitude, phase 
+	.db 0
 sine_05_31_3: ;freqMult, amplitude, phase 
 	.db 0  
 sine_05_15_3: ;freqMult, amplitude, phase 
@@ -203,7 +219,11 @@ sine_05_1_3: ;freqMult, amplitude, phase
 	.db 0 
 
 
-sine_05_4: ;half frequency, no phase shift 
+sine_05_4: ;half frequency, 4 phase shift 
+sine_05_127_4: ;freqMult, amplitude, phase 
+	.db 0
+sine_05_63_4: ;freqMult, amplitude, phase 
+	.db 0
 sine_05_31_4: ;freqMult, amplitude, phase 
 	.db 0
 sine_05_15_4: ;freqMult, amplitude, phase 
@@ -217,7 +237,11 @@ sine_05_1_4: ;freqMult, amplitude, phase
 
 
 	
-sine_1_1: ;no freq mult, no phase shift
+sine_1_1: ;no freq mult, 1 phase shift
+sine_1_127_1: ;freqMult, amplitude, phase 
+	.db 0 
+sine_1_63_1: ;freqMult, amplitude, phase 
+	.db 0 
 sine_1_31_1: ;freqMult, amplitude, phase 
 	.db 0  
 sine_1_15_1: ;freqMult, amplitude, phase 
@@ -230,7 +254,11 @@ sine_1_1_1: ;freqMult, amplitude, phase
 	.db 0 
 
 	
-sine_1_2: ;no freq mult, no phase shift 
+sine_1_2: ;no freq mult, 2 phase shift 
+sine_1_127_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_1_63_2: ;freqMult, amplitude, phase 
+	.db 0 
 sine_1_31_2: ;freqMult, amplitude, phase 
 	.db 0 
 sine_1_15_2: ;freqMult, amplitude, phase 
@@ -242,7 +270,11 @@ sine_1_3_2: ;freqMult, amplitude, phase
 sine_1_1_2: ;freqMult, amplitude, phase 
 	.db 0 
 
-sine_1_3: ;no freq mult, no phase shift 
+sine_1_3: ;no freq mult, 3 phase shift 
+sine_1_127_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_1_63_3: ;freqMult, amplitude, phase 
+	.db 0 
 sine_1_31_3: ;freqMult, amplitude, phase 
 	.db 0 
 sine_1_15_3: ;freqMult, amplitude, phase 
@@ -255,7 +287,11 @@ sine_1_1_3: ;freqMult, amplitude, phase
 	.db 0 
 
 	
-sine_1_4: ;no freq mult, no phase shift
+sine_1_4: ;no freq mult, 4 phase shift
+sine_1_127_4: ;freqMult, amplitude, phase 
+	.db 0 
+sine_1_63_4: ;freqMult, amplitude, phase 
+	.db 0 
 sine_1_31_4: ;freqMult, amplitude, phase 
 	.db 0  
 sine_1_15_4: ;freqMult, amplitude, phase 
@@ -271,6 +307,10 @@ sine_1_1_4: ;freqMult, amplitude, phase
 
 
 sine_2_1: ;double freq mult
+sine_2_127_1: ;freqMult, amplitude, phase 
+	.db 0 
+sine_2_63_1: ;freqMult, amplitude, phase 
+	.db 0
 sine_2_31_1: ;freqMult, amplitude, phase 
 	.db 0 
 sine_2_15_1: ;freqMult, amplitude, phase 
@@ -284,6 +324,10 @@ sine_2_1_1: ;freqMult, amplitude, phase
 
 	
 sine_2_2: 
+sine_2_127_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_2_63_2: ;freqMult, amplitude, phase 
+	.db 0 
 sine_2_31_2: ;freqMult, amplitude, phase 
 	.db 0 
 sine_2_15_2: ;freqMult, amplitude, phase 
@@ -297,6 +341,10 @@ sine_2_1_2: ;freqMult, amplitude, phase
 
 	
 sine_2_3: 
+sine_2_127_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_2_63_3: ;freqMult, amplitude, phase 
+	.db 0 
 sine_2_31_3: ;freqMult, amplitude, phase 
 	.db 0 
 sine_2_15_3: ;freqMult, amplitude, phase 
@@ -310,6 +358,10 @@ sine_2_1_3: ;freqMult, amplitude, phase
 
 	
 sine_2_4: 
+sine_2_127_4: ;freqMult, amplitude, phase 
+	.db 0
+sine_2_63_4: ;freqMult, amplitude, phase 
+	.db 0
 sine_2_31_4: ;freqMult, amplitude, phase 
 	.db 0	
 sine_2_15_4: ;freqMult, amplitude, phase 
@@ -325,6 +377,10 @@ sine_2_1_4: ;freqMult, amplitude, phase
 
 
 sine_4_1: ;double freq mult
+sine_4_127_1: ;freqMult, amplitude, phase 
+	.db 0
+sine_4_63_1: ;freqMult, amplitude, phase 
+	.db 0
 sine_4_31_1: ;freqMult, amplitude, phase 
 	.db 0 
 sine_4_15_1: ;freqMult, amplitude, phase 
@@ -338,6 +394,10 @@ sine_4_1_1: ;freqMult, amplitude, phase
 
 	
 sine_4_2: 
+sine_4_127_2: ;freqMult, amplitude, phase 
+	.db 0
+sine_4_63_2: ;freqMult, amplitude, phase 
+	.db 0
 sine_4_31_2: ;freqMult, amplitude, phase 
 	.db 0
 sine_4_15_2: ;freqMult, amplitude, phase 
@@ -351,6 +411,10 @@ sine_4_1_2: ;freqMult, amplitude, phase
 
 	
 sine_4_3: 
+sine_4_127_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_4_63_3: ;freqMult, amplitude, phase 
+	.db 0 
 sine_4_31_3: ;freqMult, amplitude, phase 
 	.db 0 
 sine_4_15_3: ;freqMult, amplitude, phase 
@@ -364,7 +428,11 @@ sine_4_1_3: ;freqMult, amplitude, phase
 
 	
 sine_4_4: 
-sine_4_314: ;freqMult, amplitude, phase 
+sine_4_127_4: ;freqMult, amplitude, phase 
+	.db 0
+sine_4_63_4: ;freqMult, amplitude, phase 
+	.db 0
+sine_4_31_4: ;freqMult, amplitude, phase 
 	.db 0
 sine_4_15_4: ;freqMult, amplitude, phase 
 	.db 0 
@@ -380,6 +448,10 @@ sine_4_1_4: ;freqMult, amplitude, phase
 
 
 sine_8_1: ;double freq mult
+sine_8_127_1: ;freqMult, amplitude, phase 
+	.db 0 
+sine_8_63_1: ;freqMult, amplitude, phase 
+	.db 0 
 sine_8_31_1: ;freqMult, amplitude, phase 
 	.db 0 
 sine_8_15_1: ;freqMult, amplitude, phase 
@@ -393,6 +465,10 @@ sine_8_1_1: ;freqMult, amplitude, phase
 
 	
 sine_8_2: 
+sine_8_127_2: ;freqMult, amplitude, phase 
+	.db 0 
+sine_8_63_2: ;freqMult, amplitude, phase 
+	.db 0 
 sine_8_31_2: ;freqMult, amplitude, phase 
 	.db 0 
 sine_8_15_2: ;freqMult, amplitude, phase 
@@ -406,7 +482,11 @@ sine_8_1_2: ;freqMult, amplitude, phase
 
 	
 sine_8_3: 
-sine_8_313: ;freqMult, amplitude, phase 
+sine_8_127_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_8_63_3: ;freqMult, amplitude, phase 
+	.db 0 
+sine_8_31_3: ;freqMult, amplitude, phase 
 	.db 0 
 sine_8_15_3: ;freqMult, amplitude, phase 
 	.db 0 
@@ -419,6 +499,10 @@ sine_8_1_3: ;freqMult, amplitude, phase
 
 	
 sine_8_4: 
+sine_8_127_4: ;freqMult, amplitude, phase 
+	.db 0
+sine_8_63_4: ;freqMult, amplitude, phase 
+	.db 0
 sine_8_31_4: ;freqMult, amplitude, phase 
 	.db 0
 sine_8_15_4: ;freqMult, amplitude, phase 
@@ -434,6 +518,10 @@ sine_8_1_4: ;freqMult, amplitude, phase
 
 
 lin_05_1:
+lin_05_127_1:
+	.db 0 
+lin_05_63_1:
+	.db 0 
 lin_05_31_1:
 	.db 0 
 lin_05_15_1:
@@ -446,6 +534,10 @@ lin_05_1_1:
 	.db 0 
 
 lin_05_2:
+lin_05_127_2:
+	.db 0 
+lin_05_63_2:
+	.db 0 
 lin_05_31_2:
 	.db 0 
 lin_05_15_2:
@@ -458,6 +550,10 @@ lin_05_1_2:
 	.db 0 	
 	
 lin_05_3:
+lin_05_127_3:
+	.db 0 
+lin_05_63_3:
+	.db 0 
 lin_05_31_3:
 	.db 0 
 lin_05_15_3:
@@ -470,6 +566,10 @@ lin_05_1_3:
 	.db 0 	
 	
 lin_05_4:
+lin_05_127_4:
+	.db 0 
+lin_05_63_4:
+	.db 0 
 lin_05_31_4:
 	.db 0 
 lin_05_15_4:
@@ -482,6 +582,10 @@ lin_05_1_4:
 	.db 0 
 
 lin_1_1:
+lin_1_127_1:
+	.db 0 
+lin_1_63_1:
+	.db 0 
 lin_1_31_1:
 	.db 0 
 lin_1_15_1:
@@ -494,6 +598,10 @@ lin_1_1_1:
 	.db 0 	
 
 lin_1_2:
+lin_1_127_2:
+	.db 0 
+lin_1_63_2:
+	.db 0 
 lin_1_31_2:
 	.db 0 
 lin_1_15_2:
@@ -506,6 +614,10 @@ lin_1_1_2:
 	.db 0 
 	
 lin_1_3:
+lin_1_127_3:
+	.db 0 
+lin_1_63_3:
+	.db 0 
 lin_1_31_3:
 	.db 0 
 lin_1_15_3:
@@ -518,6 +630,10 @@ lin_1_1_3:
 	.db 0 
 	
 lin_1_4:
+lin_1_127_4:
+	.db 0 
+lin_1_63_4:
+	.db 0 
 lin_1_31_4:
 	.db 0 
 lin_1_15_4:
@@ -530,6 +646,10 @@ lin_1_1_4:
 	.db 0 
 	
 lin_2_1:
+lin_2_127_1:
+	.db 0
+lin_2_63_1:
+	.db 0
 lin_2_31_1:
 	.db 0 
 lin_2_15_1:
@@ -542,6 +662,10 @@ lin_2_1_1:
 	.db 0
 
 lin_2_2:
+lin_2_127_2:
+	.db 0 
+lin_2_63_2:
+	.db 0 
 lin_2_31_2:
 	.db 0 
 lin_2_15_2:
@@ -554,6 +678,10 @@ lin_2_1_2:
 	.db 0 
 	
 lin_2_3:
+lin_2_127_3:
+	.db 0
+lin_2_63_3:
+	.db 0
 lin_2_31_3:
 	.db 0 
 lin_2_15_3:
@@ -566,6 +694,10 @@ lin_2_1_3:
 	.db 0 
 	
 lin_2_4:
+lin_2_127_4:
+	.db 0 
+lin_2_63_4:
+	.db 0 
 lin_2_31_4:
 	.db 0 
 lin_2_15_4:
@@ -578,6 +710,10 @@ lin_2_1_4:
 	.db 0 
 	
 lin_4_1:
+lin_4_127_1:
+	.db 0 
+lin_4_63_1:
+	.db 0 
 lin_4_31_1:
 	.db 0 
 lin_4_15_1:
@@ -591,6 +727,10 @@ lin_4_1_1:
 
 
 lin_4_2:
+lin_4_127_2:
+	.db 0
+lin_4_63_2:
+	.db 0
 lin_4_31_2:
 	.db 0 
 lin_4_15_2:
@@ -603,6 +743,10 @@ lin_4_1_2:
 	.db 0 
 	
 lin_4_3:
+lin_4_127_3:
+	.db 0 
+lin_4_63_3:
+	.db 0 
 lin_4_31_3:
 	.db 0 
 lin_4_15_3:
@@ -615,6 +759,10 @@ lin_4_1_3:
 	.db 0 
 	
 lin_4_4:
+lin_4_127_4:
+	.db 0 
+lin_4_63_4:
+	.db 0 
 lin_4_31_4:
 	.db 0 
 lin_4_15_4:
@@ -628,6 +776,10 @@ lin_4_1_4:
 	
 	
 lin_8_1:
+lin_8_127_1:
+	.db 0 
+lin_8_63_1:
+	.db 0 
 lin_8_31_1:
 	.db 0 
 lin_8_15_1:
@@ -640,6 +792,10 @@ lin_8_1_1:
 	.db 0 
 
 lin_8_2:
+lin_8_127_2:
+	.db 0 
+lin_8_63_2:
+	.db 0 
 lin_8_31_2:
 	.db 0 
 lin_8_15_2:
@@ -652,6 +808,10 @@ lin_8_1_2:
 	.db 0 
 	
 lin_8_3:
+lin_8_127_3:
+	.db 0 
+lin_8_63_3:
+	.db 0 
 lin_8_31_3:
 	.db 0 
 lin_8_15_3:
@@ -664,6 +824,10 @@ lin_8_1_3:
 	.db 0 
 	
 lin_8_4:
+lin_8_127_4:
+	.db 0
+lin_8_63_4:
+	.db 0 
 lin_8_31_4:
 	.db 0 
 lin_8_15_4:
@@ -680,6 +844,10 @@ lin_8_1_4:
 
 
 linrep_05_1:
+linrep_05_127_1:
+	.db 0 
+linrep_05_63_1:
+	.db 0 
 linrep_05_31_1:
 	.db 0 
 linrep_05_15_1:
@@ -692,6 +860,10 @@ linrep_05_1_1:
 	.db 0 
 
 linrep_05_2:
+linrep_05_127_2:
+	.db 0 
+linrep_05_63_2:
+	.db 0 
 linrep_05_31_2:
 	.db 0 
 linrep_05_15_2:
@@ -704,6 +876,10 @@ linrep_05_1_2:
 	.db 0 	
 	
 linrep_05_3:
+linrep_05_127_3:
+	.db 0 
+linrep_05_63_3:
+	.db 0 
 linrep_05_31_3:
 	.db 0 
 linrep_05_15_3:
@@ -716,6 +892,10 @@ linrep_05_1_3:
 	.db 0 	
 	
 linrep_05_4:
+linrep_05_127_4:
+	.db 0
+linrep_05_63_4:
+	.db 0
 linrep_05_31_4:
 	.db 0 
 linrep_05_15_4:
@@ -728,6 +908,10 @@ linrep_05_1_4:
 	.db 0 
 
 linrep_1_1:
+linrep_1_127_1:
+	.db 0 
+linrep_1_63_1:
+	.db 0 
 linrep_1_31_1:
 	.db 0 
 linrep_1_15_1:
@@ -740,6 +924,10 @@ linrep_1_1_1:
 	.db 0 	
 
 linrep_1_2:
+linrep_1_127_2:
+	.db 0 
+linrep_1_63_2:
+	.db 0 
 linrep_1_31_2:
 	.db 0 
 linrep_1_15_2:
@@ -752,6 +940,10 @@ linrep_1_1_2:
 	.db 0 
 	
 linrep_1_3:
+linrep_1_127_3:
+	.db 0
+linrep_1_63_3:
+	.db 0
 linrep_1_31_3:
 	.db 0 
 linrep_1_15_3:
@@ -764,6 +956,10 @@ linrep_1_1_3:
 	.db 0 
 	
 linrep_1_4:
+linrep_1_127_4:
+	.db 0 
+linrep_1_63_4:
+	.db 0 
 linrep_1_31_4:
 	.db 0 
 linrep_1_15_4:
@@ -776,6 +972,10 @@ linrep_1_1_4:
 	.db 0 
 	
 linrep_2_1:
+linrep_2_127_1:
+	.db 0 
+linrep_2_63_1:
+	.db 0 
 linrep_2_31_1:
 	.db 0 
 linrep_2_15_1:
@@ -788,6 +988,10 @@ linrep_2_1_1:
 	.db 0
 
 linrep_2_2:
+linrep_2_127_2:
+	.db 0 
+linrep_2_63_2:
+	.db 0 
 linrep_2_31_2:
 	.db 0 
 linrep_2_15_2:
@@ -800,6 +1004,10 @@ linrep_2_1_2:
 	.db 0 
 	
 linrep_2_3:
+linrep_2_127_3:
+	.db 0 
+linrep_2_63_3:
+	.db 0 
 linrep_2_31_3:
 	.db 0 
 linrep_2_15_3:
@@ -812,6 +1020,10 @@ linrep_2_1_3:
 	.db 0 
 	
 linrep_2_4:
+linrep_2_127_4:
+	.db 0 
+linrep_2_63_4:
+	.db 0 
 linrep_2_31_4:
 	.db 0 
 linrep_2_15_4:
@@ -824,6 +1036,10 @@ linrep_2_1_4:
 	.db 0 
 	
 linrep_4_1:
+linrep_4_127_1:
+	.db 0 
+linrep_4_63_1:
+	.db 0 
 linrep_4_31_1:
 	.db 0 
 linrep_4_15_1:
@@ -837,6 +1053,10 @@ linrep_4_1_1:
 
 
 linrep_4_2:
+linrep_4_127_2:
+	.db 0 
+linrep_4_63_2:
+	.db 0 
 linrep_4_31_2:
 	.db 0 
 linrep_4_15_2:
@@ -849,6 +1069,10 @@ linrep_4_1_2:
 	.db 0 
 	
 linrep_4_3:
+linrep_4_127_3:
+	.db 0 
+linrep_4_63_3:
+	.db 0 
 linrep_4_31_3:
 	.db 0 
 linrep_4_15_3:
@@ -861,6 +1085,10 @@ linrep_4_1_3:
 	.db 0 
 	
 linrep_4_4:
+linrep_4_127_4:
+	.db 0 
+linrep_4_63_4:
+	.db 0 
 linrep_4_31_4:
 	.db 0 
 linrep_4_15_4:
@@ -874,6 +1102,10 @@ linrep_4_1_4:
 	
 	
 linrep_8_1:
+linrep_8_127_1:
+	.db 0
+linrep_8_63_1:
+	.db 0 
 linrep_8_31_1:
 	.db 0 
 linrep_8_15_1:
@@ -886,6 +1118,10 @@ linrep_8_1_1:
 	.db 0 
 
 linrep_8_2:
+linrep_8_127_2:
+	.db 0 
+linrep_8_63_2:
+	.db 0 
 linrep_8_31_2:
 	.db 0 
 linrep_8_15_2:
@@ -898,6 +1134,10 @@ linrep_8_1_2:
 	.db 0 
 	
 linrep_8_3:
+linrep_8_127_3:
+	.db 0
+linrep_8_63_3:
+	.db 0
 linrep_8_31_3:
 	.db 0 
 linrep_8_15_3:
@@ -910,6 +1150,10 @@ linrep_8_1_3:
 	.db 0 
 	
 linrep_8_4:
+linrep_8_127_4:
+	.db 0 
+linrep_8_63_4:
+	.db 0 
 linrep_8_31_4:
 	.db 0 
 linrep_8_15_4:
