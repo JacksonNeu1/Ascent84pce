@@ -14,7 +14,7 @@ update_animations:
 	;7 bytes per animated value
 	ex af, af' ;'
 	ld hl,position_animation_data
-	ld a,(hl)
+	ld a,(hl) ;replace w shadow bc for >256 vals 
 	inc hl
 update_animation_position_loop:
 	ex af, af' ;'
@@ -36,7 +36,7 @@ update_animation_position_loop:
 	jp nz,update_animation_position_loop
 	
 
-; Enable sprites, 7 bytes per animated property 	
+; Enable sprites, 8 bytes per animated property 	
 	ex af, af' ;'
 	ld hl,disable_animation_data
 	ld a,(hl)
@@ -52,8 +52,23 @@ update_animation_enable_loop:
 	inc hl 
 	inc hl
 	ld a,(bc) ;value of anim curve
-	bit 6,a 
+	ld c,a 
+	ld a,(hl) ;bitmask (first bit = negate)
+	inc hl 
+	bit 7,a 
+	jp nz,update_animation_enable_inverted
+	and c 
 	jp nz,update_animation_enable_height
+	inc hl
+	ex af, af' ;'
+	dec a 
+	jp nz,update_animation_enable_loop
+	jp update_animation_sprite
+	
+update_animation_enable_inverted:
+	and c 
+	jp z,update_animation_enable_height
+	
 	inc hl
 	ex af, af' ;'
 	dec a 
@@ -121,7 +136,7 @@ update_animation_sprite_loop:
 ;But what about restoring default height value? would mess up value set by sprite anim 
 ;Use two loops? one for 'un disable' prior to sprite anims, then disable after sprite anims 
 	
-; Disable sprites, 7 bytes per animated property 	
+; Disable sprites, 8 bytes per animated property 	
 	ex af, af' ;'
 	ld hl,disable_animation_data
 	ld a,(hl)
@@ -137,8 +152,22 @@ update_animation_disable_loop:
 	inc hl 
 	inc hl
 	ld a,(bc) ;value of anim curve
-	bit 6,a 
+	ld c,a 
+	ld a,(hl)
+	inc hl
+	bit 7,a 
+	jp nz,update_animation_disable_inverted
+	and c  
 	jp z,update_animation_disable_zero_height
+	inc hl
+	ex af, af' ;'
+	dec a 
+	jp nz,update_animation_disable_loop
+	jp update_palette_anim
+	
+update_animation_disable_inverted:
+	and c  
+	jp nz,update_animation_disable_zero_height
 	inc hl
 	ex af, af' ;'
 	dec a 
@@ -164,7 +193,7 @@ update_palette_anim:
 	ld de, space_gradients
 	;ld a, $00
 	;call write_a_to_ram
-	ld a, (lin_05_31_1) ;~4s timer
+	ld a, (lin_2_31_1) ;~4s timer
 	ld hl,0
 	ld l,a 
 	ld h,20 
@@ -179,12 +208,13 @@ update_palette_anim:
 	;ldir 20,22,24,26,28
 	
 	ld de, temp_palette_buffer
-	ld bc,4
+	ld bc,8
 	ldir 
 	ld de, temp_palette_buffer+14
 	ldi
+	ldi
 	ld de, temp_palette_buffer+20
-	ld bc,5
+	ld bc,10
 	ldir 
 	
 	

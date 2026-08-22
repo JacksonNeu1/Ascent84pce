@@ -675,8 +675,6 @@ sdcomp_no_alpha_2 .equ $
 	;add number of bytes to skip 
 	add hl,bc ;HL points to start of color data 
 	
-	
-	
 sdcomp_no_alpha_2_skip:
 
 	
@@ -686,11 +684,14 @@ sdcomp_no_alpha_2_skip:
 	ld b,a ;save for after
 	;GET LOCAL PALETTE DATA
 	
+	
 	scf 
 sdcomp_1bpc_1 .equ $ 
 	jp nc,sdcomp_1bpc_1_skip ;skip if not 1bpc or 2bpc or 3bpc
-	
+
+sdcomp_alt_col_1 .equ $ 	
 	ld a,(hl);color data 	
+	nop
 	ld (sdcomp_indexed_color_data_1),a 
 	inc hl 
 	
@@ -700,8 +701,10 @@ sdcomp_1bpc_1_skip:
 	scf 
 sdcomp_2bpc_1 .equ $ 
 	jp nc,sdcomp_2bpc_1_skip ;skip if not 2bpc or 3bpc
-	
+
+sdcomp_alt_col_2 .equ $ 	
 	ld a,(hl);color data 
+	nop
 	ld (sdcomp_indexed_color_data_2),a 
 	inc hl 
 	
@@ -712,10 +715,14 @@ sdcomp_2bpc_1_skip:
 sdcomp_3bpc_1 .equ $ 
 	jp c,sdcomp_3bpc_1_skip ;skip if not 3bpc
 	
+sdcomp_alt_col_3 .equ $ 
 	ld a,(hl);color data 
+	nop
 	ld (sdcomp_indexed_color_data_3),a 
 	inc hl 
+sdcomp_alt_col_4 .equ $ 
 	ld a,(hl);color data 
+	nop
 	ld (sdcomp_indexed_color_data_4),a 
 	inc hl 
 	
@@ -944,14 +951,15 @@ sdcomp_ldir_write:
 	;ld a,b 
 	;call write_a_to_ram
 	;pop af ;TEST
-
+sdcomp_testeste_3 .equ $ 
 	push af;save ending pixels
 	ld a,b
 	exx ;out 
 	ld (de),a;write ldir length
 	inc de 
+sdcomp_testeste_2 .equ $ 	
 	call sdcomp_write_ldir_data_loop
-
+sdcomp_testeste .equ $ 
 	pop af;return ending pixels
 	
 	scf
@@ -1271,7 +1279,41 @@ sdcomp_4bpc_flip:
 	ld (sdcomp_traverse_bit_check),a 
 	
 	ret 
+
+sdcomp_set_alt_color:
+	;hl pointing to start of alt color data 
 	
+	ld a, %00111110 ;ld imm8
+	ld (sdcomp_alt_col_1), a
+	ld (sdcomp_alt_col_2), a
+	ld (sdcomp_alt_col_3), a
+	ld (sdcomp_alt_col_4), a
+	ld a,(hl) 
+	ld (sdcomp_alt_col_1+1), a
+	inc hl
+	ld a,(hl) 
+	ld (sdcomp_alt_col_2+1), a
+	inc hl
+	ld a,(hl) 
+	ld (sdcomp_alt_col_3+1), a
+	inc hl
+	ld a,(hl) 
+	ld (sdcomp_alt_col_4+1), a
+	ret 
+
+sdcomp_reset_alt_color:
+	ld a, %01111110 ;ld a, (hl)
+	ld (sdcomp_alt_col_1), a
+	ld (sdcomp_alt_col_2), a
+	ld (sdcomp_alt_col_3), a
+	ld (sdcomp_alt_col_4), a
+	ld a, %00000000 ;nop
+	ld (sdcomp_alt_col_1+1), a
+	ld (sdcomp_alt_col_2+1), a
+	ld (sdcomp_alt_col_3+1), a
+	ld (sdcomp_alt_col_4+1), a
+	ret 
+
 	
 sdcomp_set_noalpha:
 	ld a, %11010010 ;jp nc 

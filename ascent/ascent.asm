@@ -118,15 +118,27 @@ player_load_pos_skip:
 	
 	
 	;Decompress sprites in preframes for setup
-	ld hl,decompress_frame_up_pre4 
-	call cfdc_direct_add_decompress_frame
-	call continue_decompressions ;Run decompression (Will finish as timer has not started)
+	;ld hl,decompress_frame_up_pre4 
+	;call cfdc_direct_add_decompress_frame
+	;call continue_decompressions ;Run decompression (Will finish as timer has not started)
 	ld hl,decompress_frame_up_pre3 
 	call cfdc_direct_add_decompress_frame
 	call continue_decompressions ;Run decompression (Will finish as timer has not started)
 	ld hl,decompress_frame_up_pre2 
 	call cfdc_direct_add_decompress_frame
 	call continue_decompressions ;Run decompression (Will finish as timer has not started)
+	
+	
+	ld hl, (draw_buffer)
+	ld de, 160*126  + 45
+	add hl,de
+	ex de, hl
+	ld hl,FrogChargeLit_Slow
+	call draw_slow_sprite_full
+	
+	call prgmpause
+	
+	
 	ld hl,decompress_frame_up_pre1
 	call cfdc_direct_add_decompress_frame
 	call continue_decompressions ;Run decompression (Will finish as timer has not started)

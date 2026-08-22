@@ -675,14 +675,13 @@ sprite_table_from_index:
 	push hl ;save 
 	ld de,0
 	ld e,(hl) ;e holds table index
+
 	ld hl,Sprite_Table_Table
 	add hl,de 
 	add hl,de 
 	add hl,de ;inc to correct table
 	ld de,(hl)
-	
 
-	
 	;call prgmpause Seems to work
 	
 	pop hl 

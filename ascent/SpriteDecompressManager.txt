@@ -2,8 +2,8 @@
 
 decompress_queue_start .equ vram
 
-decompress_queue_end .equ vram + (7*64) ;Max queue length of 64
-
+decompress_queue_end .equ vram + (11*64) ;Max queue length of 64 (size of elements is always 11)
+;D402C0
 decompress_tail_ptr:
 	.dl decompress_queue_start + 6  ;points to sprite being currently decompressed (parameters byte)
 
@@ -11,58 +11,21 @@ decompress_head_ptr: ;points to where next element will be added to queue
 	.dl decompress_queue_start
 
 ;Decompress queue format
-; .dl Sprite data ptr, decompress location, parameters (7 = fast, 6 = offset, 5 = flip, 4 =started decompressing 3 = finished decompressing )
+; .dl Sprite data ptr, decompress location, parameters (7 = fast, 6 = offset, 5 = flip, 432 = num of alt colors, 1 = started decompressing, 0 = finished decomp)
 
 setup_decompress_queue: ;clears memory in queue
 	ld a,$FF
-	ld bc, 7*64
+	ld bc, 11*64
 	ld hl, decompress_queue_start
-	ld (decompress_head_ptr),hl 
+	ld (decompress_head_ptr),hl ;Is this needed?
 	call _MemSet
-	ld hl, decompress_queue_start + 6
-	ld (decompress_tail_ptr),hl 
+	ld hl, decompress_queue_start + 6 ;Is this needed?
+	ld (decompress_tail_ptr),hl  ;Is this needed?
 	ld a,0 
-	ld (last_decompressed_cam_pos),a
+	ld (last_decompressed_cam_pos),a ;Is this needed?
 	ret 
 
-;bc = sprite data ptr, de = decompress location, a = params
-;adds sprite to queue
-add_to_decompress_queue:
-	ld hl, (decompress_head_ptr)
-	ld (hl), bc 
-	inc hl
-	inc hl 
-	inc hl 
 
-	ld (hl),de
-	
-	inc hl 
-	inc hl 
-	inc hl 
-	
-	ld (hl), a 
-	inc hl ;start of next element 
-	
-	push hl 
-	ld de, decompress_queue_end
-	scf
-	ccf
-	sbc hl,de ;check if we have reached end of queue to wrap around
-	pop hl
-	jp z, a2dq_back_to_start
-	
-	ld (decompress_head_ptr),hl
-	;ld a,$AB ;testing
-	;call write_a_to_ram
-	ret
-	
-a2dq_back_to_start:
-	;ld a,$AA ;testing
-	;call write_a_to_ram
-
-	ld hl,decompress_queue_start
-	ld (decompress_head_ptr),hl
-	ret
 	
 	
 
@@ -75,19 +38,19 @@ a2dq_back_to_start:
 continue_decompressions:
 	ld hl, (decompress_tail_ptr)
 	ld a,(hl) ;decompress params 
-	bit 3,a 
+	bit 0,a 
 	ret nz ;sprite is done decompressing, at end of queue 
 	
 	;testing
-	;push af
-	;ld a,$55
-	;call write_a_to_ram
-	;pop af
+	push af
+	ld a,$55
+	call write_a_to_ram
+	pop af
 	
 	
 	
 	
-	bit 4,a
+	bit 1,a
 	jp z, cd_begin_decompression
 	
 	;has started,not ended 
@@ -98,12 +61,14 @@ continue_decompressions:
 cd_done_decompressing:
 	;sprite finished decompressing
 	ld hl, (decompress_tail_ptr)	
-	set 3,(hl) ;set finished flag
-	ld de,7 
+	set 0,(hl) ;set finished flag
+	ld a,(hl)
+	ld de,11 
+
 	add hl,de ;points to next element in queue
 	
 	push hl 
-	ld de, decompress_queue_end
+	ld de, decompress_queue_end + 6 
 	scf
 	ccf
 	sbc hl,de ;check if need to wrap to start of queue
@@ -113,9 +78,13 @@ cd_done_decompressing:
 	jp continue_decompressions ;Move on to next sprite 
 	
 cd_back_to_start:
-	ld hl,decompress_queue_start
-	ld de,6 ;tail points to the parameters byte
-	add hl,de
+
+	ld a, $5B
+	call write_a_to_ram
+
+	ld hl,decompress_queue_start + 6
+	;ld de,6 ;tail points to the parameters byte
+	;add hl,de
 	ld (decompress_tail_ptr),hl
 	jp continue_decompressions ;Move on to next sprite 
 
@@ -128,40 +97,32 @@ cd_begin_decompression:
 	;pop af
 	
 	;setup and begin decompressing
-	set 4,(hl) ;set start flag
-	push af 
-	bit 7,a 
+	set 1,(hl) ;set start flag
+	ld c,a ;save byte 
+	
+	bit 7,c 
 	call nz, sdcomp_set_fast
-	pop af 
-	
-	push af 
-	bit 7,a 
+	bit 7,c 
 	call z, sdcomp_reset_fast
-	pop af 
-	
-	push af 
-	bit 6,a 
+	bit 6,c 
 	call nz, sdcomp_set_offset
-	pop af 
-	
-	push af 
-	bit 6,a 
+	bit 6,c
 	call z, sdcomp_reset_offset
-	pop af 
-	
-	push af 
-	bit 5,a 
+	bit 5,c 
 	call nz, sdcomp_set_flip
-	pop af 
-	
-	push af 
-	bit 5,a 
+	bit 5,c 
 	call z, sdcomp_reset_flip
-	pop af 
 	
-	ld hl, (decompress_tail_ptr) ;may be unnessecary
+	call sdcomp_reset_alt_color
+	inc hl ;start of alt color data 
+	ld a,c 
+	and %00011100
+	call nz, sdcomp_set_alt_color
 	
-	dec hl 
+	
+	ld hl, (decompress_tail_ptr) ;return to flags byte
+	
+	dec hl ;traverse back to decomp location
 	dec hl 
 	dec hl 
 	ld de,(hl) ;load decompress location
@@ -204,7 +165,7 @@ cfdc_add_calls_to_queue:
 	;call write_a_to_ram
 
 	ld bc,0
-	ld c,a
+	ld c,a ;current cam frame
 	add hl,bc 
 	add hl,bc 
 	add hl,bc 
@@ -221,6 +182,7 @@ cfdc_direct_add_decompress_frame:
 	inc a ;to be decd later
 	ex af,af' ;'
 	
+	ld de, (decompress_head_ptr) ;position in decomp queue to add to 
 	inc hl ;points to first sprite data 
 cfdc_add_to_queue_loop:
 	ex af,af' ;'
@@ -228,21 +190,98 @@ cfdc_add_to_queue_loop:
 	dec a ;account for cases where frame has 0 elements 
 	ret z
 	ex af,af' ;'
-	ld bc ,(hl) ;load sprite data 
+	
+	ldi ;copy compressed sprite name to decomp queue
+	ldi 
+	ldi 
+	
+	ld a,(hl) ;index in table 
+	ld (cfdc_add_idx_in_tbl),a 
 	inc hl 
-	inc hl
-	inc hl 
-	ld de,(hl) ;load decomp location 
-	inc hl 
-	inc hl
-	inc hl 
-	ld a,(hl) ;ld params
-	inc hl 
+	ld a,(hl) ;ld params ;params (7=isFast,6=isOffset,5=isFlip, 432 = num of alt colors, 10 = sprite tbl index )
+	
 	push hl
-	call add_to_decompress_queue
-	pop hl
+	ld bc,0 
+	and %00000011 ;get table index
+	ld c,a
+	;c should hold sprite table index 
+	ld hl,Sprite_Table_Table
+	add hl,bc
+	add hl,bc 
+	add hl,bc ;inc to correct table
+	ld hl,(hl)
+cfdc_add_idx_in_tbl .equ $ + 1
+	ld c,0
+	add hl,bc
+	add hl,bc 
+	add hl,bc ;inc to decompress pos 
+	ldi ;copy decompres pos to queue  
+	ldi
+	ldi
+	pop hl 
+	
+	ld a,(hl) ;params byte 
+	and %11111100 ;clear tbl index bits to be used for started/ended flags
+	ld (de), a
+	inc de ;start of next element (or color data)
+	inc hl 
+	and %00011100
+	jp z,a2dq_0_alt_col
+	bit 2,a 
+	jp nz,a2dq_1_alt_col
+	bit 3,a 
+	jp nz,a2dq_2_alt_col
+
+;4 alt colors	
+	ldi 
+	ldi
+	ldi 
+	ldi
+	jp a2dq_post_alt_col
+a2dq_2_alt_col:
+	ldi
+	ldi
+	inc de 
+	inc de
+	jp a2dq_post_alt_col
+a2dq_1_alt_col:
+	ldi
+	inc de 
+	inc de 
+	inc de
+	jp a2dq_post_alt_col
+a2dq_0_alt_col:	
+	
+	inc de 
+	inc de 
+	inc de 
+	inc de
+a2dq_post_alt_col:
+	
+	;Check if reached end of decomp queue
+	push de 
+	ex de,hl
+	ld bc, decompress_queue_end
+	scf
+	ccf
+	sbc hl,bc ;check if we have reached end of queue to wrap around
+	ex de,hl
+	pop de
+	jp nc, a2dq_back_to_start
+	
+	ld (decompress_head_ptr),de
+	;ld a,$AB ;testing
+	;call write_a_to_ram
 	jp cfdc_add_to_queue_loop
 	
+a2dq_back_to_start:
+
+	ld a, $5C
+	call write_a_to_ram
+
+	ld de,decompress_queue_start
+	ld (decompress_head_ptr),de
+	jp cfdc_add_to_queue_loop	
 	
 
 

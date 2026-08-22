@@ -19,237 +19,275 @@ BG_Data_frame_table:
 	.dl BG_Data_17
 	.dl BG_Data_18
 	.dl BG_Data_19
+	.dl BG_Data_20
+	.dl BG_Data_21
+	.dl BG_Data_22
+	.dl BG_Data_23
 
 
+
+BG_Data_23:
+	.db 0
+	.db 0
+
+BG_Data_22:
+	.db 0
+	.db 0
+
+BG_Data_21:
+	.db 0
+	.db 0
+
+BG_Data_20:
+	.db 2
+	.db 5
+	.db 85, 255, 129, 103  ;SG_Stars6
+	.db 189, 255, 7, 107  ;SG_Stars4
+	.db 185, 255, 80, 106  ;SG_Stars3
+	.db 79, 255, 68, 108  ;SG_Stars1
+	.db 81, 255, 5, 105  ;SG_Stars5
 
 BG_Data_19:
-	.db 0
-	.db 0
+	.db 2
+	.db 6
+	.db 237, 255, 93, 107  ;SG_Stars4
+	.db 230, 255, 7, 108  ;SG_Stars1
+	.db 112, 255, 2, 105  ;SG_Stars5
+	.db 128, 255, 80, 106  ;SG_Stars3
+	.db 13, 255, 70, 108  ;SG_Stars1
+	.db 1, 255, 3, 105  ;SG_Stars5
 
 BG_Data_18:
-	.db 0
-	.db 0
+	.db 2
+	.db 7
+	.db 254, 255, 134, 103  ;SG_Stars6
+	.db 150, 255, 2, 103  ;SG_Stars6
+	.db 19, 255, 136, 103  ;SG_Stars6
+	.db 156, 255, 30, 104  ;SG_Stars2
+	.db 139, 255, 97, 104  ;SG_Stars2
+	.db 39, 255, 76, 105  ;SG_Stars5
+	.db 28, 255, 3, 106  ;SG_Stars3
 
 BG_Data_17:
-	.db 0
+	.db 2
 	.db 0
 
 BG_Data_16:
-	.db 1
+	.db 2
 	.db 5
-	.db 103, 255, 119, 87  ;SG_PurpleCloud5
-	.db 95, 255, 37, 87  ;SG_PurpleCloud5
-	.db 27, 255, 7, 89  ;SG_PurpleCloud6
-	.db 55, 255, 79, 89  ;SG_PurpleCloud6
-	.db 19, 255, 88, 88  ;SG_PurpleCloud7
+	.db 103, 255, 119, 100  ;SG_PurpleCloud5
+	.db 95, 255, 37, 100  ;SG_PurpleCloud5
+	.db 27, 255, 7, 102  ;SG_PurpleCloud6
+	.db 55, 255, 79, 102  ;SG_PurpleCloud6
+	.db 19, 255, 88, 101  ;SG_PurpleCloud7
 
 BG_Data_15:
-	.db 1
+	.db 2
 	.db 9
-	.db 243, 255, 123, 87  ;SG_PurpleCloud5
-	.db 239, 255, 52, 89  ;SG_PurpleCloud6
-	.db 203, 255, 40, 86  ;SG_PurpleCloud4
-	.db 143, 255, 74, 87  ;SG_PurpleCloud5
-	.db 155, 255, 103, 89  ;SG_PurpleCloud6
-	.db 115, 255, 93, 88  ;SG_PurpleCloud7
-	.db 103, 255, 14, 87  ;SG_PurpleCloud5
-	.db 87, 255, 32, 89  ;SG_PurpleCloud6
-	.db 67, 255, 4, 87  ;SG_PurpleCloud5
+	.db 243, 255, 123, 100  ;SG_PurpleCloud5
+	.db 239, 255, 52, 102  ;SG_PurpleCloud6
+	.db 203, 255, 40, 99  ;SG_PurpleCloud4
+	.db 143, 255, 74, 100  ;SG_PurpleCloud5
+	.db 155, 255, 103, 102  ;SG_PurpleCloud6
+	.db 115, 255, 93, 101  ;SG_PurpleCloud7
+	.db 103, 255, 14, 100  ;SG_PurpleCloud5
+	.db 87, 255, 32, 102  ;SG_PurpleCloud6
+	.db 67, 255, 4, 100  ;SG_PurpleCloud5
 
 BG_Data_14:
-	.db 1
+	.db 2
 	.db 13
-	.db 251, 255, 58, 87  ;SG_PurpleCloud5
-	.db 187, 255, 18, 87  ;SG_PurpleCloud5
-	.db 215, 255, 109, 89  ;SG_PurpleCloud6
-	.db 211, 255, 89, 89  ;SG_PurpleCloud6
-	.db 151, 255, 122, 86  ;SG_PurpleCloud4
-	.db 167, 255, 51, 89  ;SG_PurpleCloud6
-	.db 123, 255, 46, 88  ;SG_PurpleCloud7
-	.db 63, 255, 81, 86  ;SG_PurpleCloud4
-	.db 83, 255, 110, 87  ;SG_PurpleCloud5
-	.db 63, 255, 107, 88  ;SG_PurpleCloud7
-	.db 75, 255, 22, 87  ;SG_PurpleCloud5
-	.db 51, 255, 10, 86  ;SG_PurpleCloud4
-	.db 103, 255, 89, 89  ;SG_PurpleCloud6
+	.db 251, 255, 58, 100  ;SG_PurpleCloud5
+	.db 187, 255, 18, 100  ;SG_PurpleCloud5
+	.db 215, 255, 109, 102  ;SG_PurpleCloud6
+	.db 211, 255, 89, 102  ;SG_PurpleCloud6
+	.db 151, 255, 122, 99  ;SG_PurpleCloud4
+	.db 167, 255, 51, 102  ;SG_PurpleCloud6
+	.db 123, 255, 46, 101  ;SG_PurpleCloud7
+	.db 63, 255, 81, 99  ;SG_PurpleCloud4
+	.db 83, 255, 110, 100  ;SG_PurpleCloud5
+	.db 63, 255, 107, 101  ;SG_PurpleCloud7
+	.db 75, 255, 22, 100  ;SG_PurpleCloud5
+	.db 51, 255, 10, 99  ;SG_PurpleCloud4
+	.db 103, 255, 89, 102  ;SG_PurpleCloud6
 
 BG_Data_13:
-	.db 1
+	.db 2
 	.db 15
-	.db 203, 255, 94, 89  ;SG_PurpleCloud6
-	.db 179, 255, 76, 88  ;SG_PurpleCloud7
-	.db 171, 255, 113, 86  ;SG_PurpleCloud4
-	.db 155, 255, 95, 89  ;SG_PurpleCloud6
-	.db 231, 255, 51, 87  ;SG_PurpleCloud5
-	.db 183, 255, 20, 89  ;SG_PurpleCloud6
-	.db 183, 255, 1, 87  ;SG_PurpleCloud5
-	.db 147, 255, 0, 88  ;SG_PurpleCloud7
-	.db 127, 255, 115, 86  ;SG_PurpleCloud4
-	.db 55, 255, 123, 87  ;SG_PurpleCloud5
-	.db 87, 255, 54, 89  ;SG_PurpleCloud6
-	.db 51, 255, 34, 87  ;SG_PurpleCloud5
-	.db 47, 255, 65, 87  ;SG_PurpleCloud5
-	.db 31, 255, 42, 88  ;SG_PurpleCloud7
-	.db 23, 255, 0, 89  ;SG_PurpleCloud6
+	.db 203, 255, 94, 102  ;SG_PurpleCloud6
+	.db 179, 255, 76, 101  ;SG_PurpleCloud7
+	.db 171, 255, 113, 99  ;SG_PurpleCloud4
+	.db 155, 255, 95, 102  ;SG_PurpleCloud6
+	.db 231, 255, 51, 100  ;SG_PurpleCloud5
+	.db 183, 255, 20, 102  ;SG_PurpleCloud6
+	.db 183, 255, 1, 100  ;SG_PurpleCloud5
+	.db 147, 255, 0, 101  ;SG_PurpleCloud7
+	.db 127, 255, 115, 99  ;SG_PurpleCloud4
+	.db 55, 255, 123, 100  ;SG_PurpleCloud5
+	.db 87, 255, 54, 102  ;SG_PurpleCloud6
+	.db 51, 255, 34, 100  ;SG_PurpleCloud5
+	.db 47, 255, 65, 100  ;SG_PurpleCloud5
+	.db 31, 255, 42, 101  ;SG_PurpleCloud7
+	.db 23, 255, 0, 102  ;SG_PurpleCloud6
 
 BG_Data_12:
-	.db 1
+	.db 2
 	.db 13
-	.db 239, 255, 103, 86  ;SG_PurpleCloud4
-	.db 243, 255, 84, 89  ;SG_PurpleCloud6
-	.db 191, 255, 41, 87  ;SG_PurpleCloud5
-	.db 179, 255, 15, 87  ;SG_PurpleCloud5
-	.db 127, 255, 55, 86  ;SG_PurpleCloud4
-	.db 131, 255, 98, 86  ;SG_PurpleCloud4
-	.db 91, 255, 123, 89  ;SG_PurpleCloud6
-	.db 75, 255, 79, 87  ;SG_PurpleCloud5
-	.db 55, 255, 72, 88  ;SG_PurpleCloud7
-	.db 71, 255, 21, 86  ;SG_PurpleCloud4
-	.db 51, 255, 29, 89  ;SG_PurpleCloud6
-	.db 43, 255, 4, 89  ;SG_PurpleCloud6
-	.db 171, 255, 109, 87  ;SG_PurpleCloud5
+	.db 239, 255, 103, 99  ;SG_PurpleCloud4
+	.db 243, 255, 84, 102  ;SG_PurpleCloud6
+	.db 191, 255, 41, 100  ;SG_PurpleCloud5
+	.db 179, 255, 15, 100  ;SG_PurpleCloud5
+	.db 127, 255, 55, 99  ;SG_PurpleCloud4
+	.db 131, 255, 98, 99  ;SG_PurpleCloud4
+	.db 91, 255, 123, 102  ;SG_PurpleCloud6
+	.db 75, 255, 79, 100  ;SG_PurpleCloud5
+	.db 55, 255, 72, 101  ;SG_PurpleCloud7
+	.db 71, 255, 21, 99  ;SG_PurpleCloud4
+	.db 51, 255, 29, 102  ;SG_PurpleCloud6
+	.db 43, 255, 4, 102  ;SG_PurpleCloud6
+	.db 171, 255, 109, 100  ;SG_PurpleCloud5
 
 BG_Data_11:
-	.db 1
+	.db 2
 	.db 13
-	.db 7, 255, 11, 87  ;SG_PurpleCloud5
-	.db 159, 255, 39, 89  ;SG_PurpleCloud6
-	.db 95, 255, 69, 87  ;SG_PurpleCloud5
-	.db 243, 255, 50, 89  ;SG_PurpleCloud6
-	.db 199, 255, 57, 87  ;SG_PurpleCloud5
-	.db 67, 255, 118, 89  ;SG_PurpleCloud6
-	.db 175, 255, 85, 87  ;SG_PurpleCloud5
-	.db 163, 255, 102, 89  ;SG_PurpleCloud6
-	.db 131, 255, 85, 88  ;SG_PurpleCloud7
-	.db 79, 255, 33, 87  ;SG_PurpleCloud5
-	.db 119, 255, 9, 89  ;SG_PurpleCloud6
-	.db 79, 255, 0, 86  ;SG_PurpleCloud4
-	.db 227, 255, 28, 87  ;SG_PurpleCloud5
+	.db 7, 255, 11, 100  ;SG_PurpleCloud5
+	.db 159, 255, 39, 102  ;SG_PurpleCloud6
+	.db 95, 255, 69, 100  ;SG_PurpleCloud5
+	.db 243, 255, 50, 102  ;SG_PurpleCloud6
+	.db 199, 255, 57, 100  ;SG_PurpleCloud5
+	.db 67, 255, 118, 102  ;SG_PurpleCloud6
+	.db 175, 255, 85, 100  ;SG_PurpleCloud5
+	.db 163, 255, 102, 102  ;SG_PurpleCloud6
+	.db 131, 255, 85, 101  ;SG_PurpleCloud7
+	.db 79, 255, 33, 100  ;SG_PurpleCloud5
+	.db 119, 255, 9, 102  ;SG_PurpleCloud6
+	.db 79, 255, 0, 99  ;SG_PurpleCloud4
+	.db 227, 255, 28, 100  ;SG_PurpleCloud5
 
 BG_Data_10:
-	.db 1
+	.db 2
 	.db 13
-	.db 93, 255, 67, 87  ;SG_PurpleCloud5
-	.db 73, 255, 35, 89  ;SG_PurpleCloud6
-	.db 48, 255, 7, 88  ;SG_PurpleCloud7
-	.db 66, 255, 96, 89  ;SG_PurpleCloud6
-	.db 53, 255, 122, 89  ;SG_PurpleCloud6
-	.db 227, 255, 123, 87  ;SG_PurpleCloud5
-	.db 195, 255, 95, 89  ;SG_PurpleCloud6
-	.db 171, 255, 119, 86  ;SG_PurpleCloud4
-	.db 247, 255, 70, 87  ;SG_PurpleCloud5
-	.db 239, 255, 47, 89  ;SG_PurpleCloud6
-	.db 83, 255, 6, 89  ;SG_PurpleCloud6
-	.db 151, 255, 87, 87  ;SG_PurpleCloud5
-	.db 147, 255, 116, 88  ;SG_PurpleCloud7
+	.db 93, 255, 67, 100  ;SG_PurpleCloud5
+	.db 73, 255, 35, 102  ;SG_PurpleCloud6
+	.db 48, 255, 7, 101  ;SG_PurpleCloud7
+	.db 66, 255, 96, 102  ;SG_PurpleCloud6
+	.db 53, 255, 122, 102  ;SG_PurpleCloud6
+	.db 227, 255, 123, 100  ;SG_PurpleCloud5
+	.db 195, 255, 95, 102  ;SG_PurpleCloud6
+	.db 171, 255, 119, 99  ;SG_PurpleCloud4
+	.db 247, 255, 70, 100  ;SG_PurpleCloud5
+	.db 239, 255, 47, 102  ;SG_PurpleCloud6
+	.db 83, 255, 6, 102  ;SG_PurpleCloud6
+	.db 151, 255, 87, 100  ;SG_PurpleCloud5
+	.db 147, 255, 116, 101  ;SG_PurpleCloud7
 
 BG_Data_9:
-	.db 1
+	.db 2
 	.db 15
-	.db 190, 255, 67, 88  ;SG_PurpleCloud7
-	.db 247, 255, 83, 86  ;SG_PurpleCloud4
-	.db 238, 255, 123, 87  ;SG_PurpleCloud5
-	.db 217, 255, 67, 86  ;SG_PurpleCloud4
-	.db 249, 255, 39, 87  ;SG_PurpleCloud5
-	.db 214, 255, 96, 86  ;SG_PurpleCloud4
-	.db 108, 255, 68, 87  ;SG_PurpleCloud5
-	.db 125, 255, 37, 86  ;SG_PurpleCloud4
-	.db 141, 255, 11, 87  ;SG_PurpleCloud5
-	.db 93, 255, 0, 86  ;SG_PurpleCloud4
-	.db 160, 255, 75, 86  ;SG_PurpleCloud4
-	.db 177, 255, 121, 89  ;SG_PurpleCloud6
-	.db 136, 255, 114, 87  ;SG_PurpleCloud5
-	.db 215, 255, 0, 89  ;SG_PurpleCloud6
-	.db 192, 255, 46, 89  ;SG_PurpleCloud6
+	.db 190, 255, 67, 101  ;SG_PurpleCloud7
+	.db 247, 255, 83, 99  ;SG_PurpleCloud4
+	.db 238, 255, 123, 100  ;SG_PurpleCloud5
+	.db 217, 255, 67, 99  ;SG_PurpleCloud4
+	.db 249, 255, 39, 100  ;SG_PurpleCloud5
+	.db 214, 255, 96, 99  ;SG_PurpleCloud4
+	.db 108, 255, 68, 100  ;SG_PurpleCloud5
+	.db 125, 255, 37, 99  ;SG_PurpleCloud4
+	.db 141, 255, 11, 100  ;SG_PurpleCloud5
+	.db 93, 255, 0, 99  ;SG_PurpleCloud4
+	.db 160, 255, 75, 99  ;SG_PurpleCloud4
+	.db 177, 255, 121, 102  ;SG_PurpleCloud6
+	.db 136, 255, 114, 100  ;SG_PurpleCloud5
+	.db 215, 255, 0, 102  ;SG_PurpleCloud6
+	.db 192, 255, 46, 102  ;SG_PurpleCloud6
 
 BG_Data_8:
-	.db 1
 	.db 2
-	.db 10, 255, 9, 22  ;SG_BigCloud4
-	.db 43, 255, 11, 21  ;SG_BigCloud2
+	.db 2
+	.db 10, 255, 9, 21  ;SG_BigCloud4
+	.db 43, 255, 11, 20  ;SG_BigCloud2
 
 BG_Data_7:
 	.db 0
 	.db 4
-	.db 242, 255, 127, 18  ;SG_MedCloud1
-	.db 80, 255, 6, 20  ;SG_BigCloud1
-	.db 239, 19, 147, 104  ;CloudsNewer_9_Fast
-	.db 90, 255, 40, 21  ;SG_BigCloud2
+	.db 242, 255, 127, 17  ;SG_MedCloud1
+	.db 80, 255, 6, 19  ;SG_BigCloud1
+	.db 239, 19, 147, 97  ;CloudsNewer_9_Fast
+	.db 90, 255, 40, 20  ;SG_BigCloud2
 
 BG_Data_6:
-	.db 1
 	.db 2
-	.db 219, 255, 124, 18  ;SG_MedCloud1
-	.db 143, 255, 12, 19  ;SG_BigCloud3
+	.db 2
+	.db 219, 255, 124, 17  ;SG_MedCloud1
+	.db 143, 255, 12, 18  ;SG_BigCloud3
 
 BG_Data_5:
 	.db 0
 	.db 3
-	.db 146, 255, 110, 17  ;SG_MedCloud2
-	.db 203, 19, 0, 102  ;CloudsNewer_9_Fast_F
-	.db 187, 17, 0, 107  ;CloudsNewer_10_Fast_F
+	.db 146, 255, 110, 16  ;SG_MedCloud2
+	.db 203, 19, 0, 95  ;CloudsNewer_9_Fast_F
+	.db 187, 17, 0, 100  ;CloudsNewer_10_Fast_F
 
 BG_Data_4:
-	.db 1
 	.db 2
-	.db 215, 255, 6, 18  ;SG_MedCloud1
-	.db 80, 255, 93, 20  ;SG_BigCloud1
+	.db 2
+	.db 215, 255, 6, 17  ;SG_MedCloud1
+	.db 80, 255, 93, 19  ;SG_BigCloud1
 
 BG_Data_3:
-	.db 1
+	.db 2
 	.db 4
-	.db 53, 255, 104, 22  ;SG_BigCloud4
-	.db 186, 255, 25, 20  ;SG_BigCloud1
-	.db 186, 255, 8, 17  ;SG_MedCloud2
-	.db 70, 255, 108, 17  ;SG_MedCloud2
+	.db 53, 255, 104, 21  ;SG_BigCloud4
+	.db 186, 255, 25, 19  ;SG_BigCloud1
+	.db 186, 255, 8, 16  ;SG_MedCloud2
+	.db 70, 255, 108, 16  ;SG_MedCloud2
 
 BG_Data_2:
-	.db 1
 	.db 2
-	.db 218, 255, 6, 19  ;SG_BigCloud3
-	.db 163, 255, 112, 18  ;SG_MedCloud1
+	.db 2
+	.db 218, 255, 6, 18  ;SG_BigCloud3
+	.db 163, 255, 112, 17  ;SG_MedCloud1
 
 BG_Data_1:
 	.db 0
 	.db 6
-	.db 241, 255, 0, 21  ;SG_BigCloud2
-	.db 241, 255, 96, 21  ;SG_BigCloud2
-	.db 148, 255, 29, 17  ;SG_MedCloud2
-	.db 94, 255, 5, 18  ;SG_MedCloud1
-	.db 227, 17, 0, 107  ;CloudsNewer_10_Fast_F
-	.db 211, 19, 0, 102  ;CloudsNewer_9_Fast_F
+	.db 241, 255, 0, 20  ;SG_BigCloud2
+	.db 241, 255, 96, 20  ;SG_BigCloud2
+	.db 148, 255, 29, 16  ;SG_MedCloud2
+	.db 94, 255, 5, 17  ;SG_MedCloud1
+	.db 227, 17, 0, 100  ;CloudsNewer_10_Fast_F
+	.db 211, 19, 0, 95  ;CloudsNewer_9_Fast_F
 
 BG_Data_0:
 	.db 0
 	.db 28
-	.db 85, 255, 0, 83  ;SG_DarkGroundChunk
-	.db 79, 255, 136, 83  ;SG_DarkGroundChunk
-	.db 85, 255, 24, 83  ;SG_DarkGroundChunk
-	.db 80, 255, 112, 83  ;SG_DarkGroundChunk
-	.db 196, 255, 108, 22  ;SG_BigCloud4
-	.db 230, 255, 105, 19  ;SG_BigCloud3
-	.db 250, 255, 6, 20  ;SG_BigCloud1
-	.db 132, 255, 127, 85  ;SG_BGTree2
-	.db 129, 255, 111, 85  ;SG_BGTree2
-	.db 129, 255, 142, 85  ;SG_BGTree2
-	.db 136, 255, 22, 85  ;SG_BGTree2
-	.db 141, 255, 11, 85  ;SG_BGTree2
-	.db 124, 255, 134, 84  ;SG_BGTree1
-	.db 128, 255, 128, 84  ;SG_BGTree1
-	.db 129, 255, 31, 84  ;SG_BGTree1
-	.db 132, 255, 0, 84  ;SG_BGTree1
-	.db 38, 255, 112, 31  ;SG_GroundChunk2
-	.db 38, 255, 136, 32  ;SG_GroundChunk1
-	.db 42, 255, 0, 31  ;SG_GroundChunk2
-	.db 45, 255, 24, 32  ;SG_GroundChunk1
-	.db 65, 255, 24, 31  ;SG_GroundChunk2
-	.db 60, 255, 136, 31  ;SG_GroundChunk2
-	.db 61, 255, 112, 32  ;SG_GroundChunk1
-	.db 67, 255, 0, 32  ;SG_GroundChunk1
-	.db 127, 255, 119, 84  ;SG_BGTree1
-	.db 188, 17, 148, 103  ;CloudsNewer_10_Fast
-	.db 204, 19, 147, 104  ;CloudsNewer_9_Fast
-	.db 221, 19, 147, 104  ;CloudsNewer_9_Fast
+	.db 85, 255, 0, 96  ;SG_DarkGroundChunk
+	.db 79, 255, 136, 96  ;SG_DarkGroundChunk
+	.db 85, 255, 24, 96  ;SG_DarkGroundChunk
+	.db 80, 255, 112, 96  ;SG_DarkGroundChunk
+	.db 196, 255, 108, 21  ;SG_BigCloud4
+	.db 230, 255, 105, 18  ;SG_BigCloud3
+	.db 250, 255, 6, 19  ;SG_BigCloud1
+	.db 132, 255, 127, 98  ;SG_BGTree2
+	.db 129, 255, 111, 98  ;SG_BGTree2
+	.db 129, 255, 142, 98  ;SG_BGTree2
+	.db 136, 255, 22, 98  ;SG_BGTree2
+	.db 141, 255, 11, 98  ;SG_BGTree2
+	.db 124, 255, 134, 97  ;SG_BGTree1
+	.db 128, 255, 128, 97  ;SG_BGTree1
+	.db 129, 255, 31, 97  ;SG_BGTree1
+	.db 132, 255, 0, 97  ;SG_BGTree1
+	.db 38, 255, 112, 30  ;SG_GroundChunk2
+	.db 38, 255, 136, 31  ;SG_GroundChunk1
+	.db 42, 255, 0, 30  ;SG_GroundChunk2
+	.db 45, 255, 24, 31  ;SG_GroundChunk1
+	.db 65, 255, 24, 30  ;SG_GroundChunk2
+	.db 60, 255, 136, 30  ;SG_GroundChunk2
+	.db 61, 255, 112, 31  ;SG_GroundChunk1
+	.db 67, 255, 0, 31  ;SG_GroundChunk1
+	.db 127, 255, 119, 97  ;SG_BGTree1
+	.db 188, 17, 148, 96  ;CloudsNewer_10_Fast
+	.db 204, 19, 147, 97  ;CloudsNewer_9_Fast
+	.db 221, 19, 147, 97  ;CloudsNewer_9_Fast
 
 
 

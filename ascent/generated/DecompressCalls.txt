@@ -509,567 +509,1091 @@ decompress_frame_up_pre4:
 	.db 0
 
 decompress_frame_up_pre3:
+	.db 53
+	.dl Font_6
+	.db 105
+	.db %10000010
+
+	.dl Font_7
+	.db 104
+	.db %10000010
+
+	.dl Font_8
+	.db 103
+	.db %10000010
+
+	.dl Font_9
+	.db 102
+	.db %10000010
+
+	.dl Font_10
+	.db 101
+	.db %10000010
+
+	.dl Font_11
+	.db 100
+	.db %10000010
+
+	.dl Font_12
+	.db 99
+	.db %10000010
+
+	.dl Font_13
+	.db 98
+	.db %10000010
+
+	.dl Font_14
+	.db 75
+	.db %10000010
+
+	.dl Font_15
+	.db 74
+	.db %10000010
+
+	.dl Font_16
+	.db 73
+	.db %10000010
+
+	.dl Font_17
+	.db 62
+	.db %10000010
+
+	.dl Font_18
+	.db 49
+	.db %10000010
+
+	.dl Font_19
+	.db 48
+	.db %10000010
+
+	.dl Font_20
+	.db 47
+	.db %10000010
+
+	.dl Font_21
+	.db 46
+	.db %10000010
+
+	.dl Font_22
+	.db 45
+	.db %10000010
+
+	.dl Font_23
+	.db 44
+	.db %10000010
+
+	.dl Font_24
+	.db 43
+	.db %10000010
+
+	.dl Font_25
+	.db 42
+	.db %10000010
+
+	.dl Font_26
+	.db 41
+	.db %10000010
+
+	.dl Font_27
+	.db 40
+	.db %10000010
+
+	.dl Font_28
+	.db 39
+	.db %10000010
+
+	.dl Font_29
+	.db 38
+	.db %10000010
+
+	.dl Font_30
+	.db 37
+	.db %00000010
+
+	.dl Font_31
+	.db 36
+	.db %00000010
+
+	.dl Font_32
+	.db 35
+	.db %00000010
+
+	.dl Font_33
+	.db 34
+	.db %00000010
+
+	.dl Font_34
+	.db 33
+	.db %00000010
+
+	.dl Font_35
+	.db 50
+	.db %00000010
+
+	.dl Font_36
+	.db 51
+	.db %00000010
+
+	.dl Font_37
+	.db 52
+	.db %00000010
+
+	.dl Font_38
+	.db 53
+	.db %00000010
+
+	.dl Font_39
+	.db 71
+	.db %00000010
+
+	.dl Font_40
+	.db 70
+	.db %00000010
+
+	.dl Font_41
+	.db 69
+	.db %00000010
+
+	.dl Font_42
+	.db 68
+	.db %00000010
+
+	.dl Font_43
+	.db 67
+	.db %00000010
+
+	.dl Font_44
+	.db 66
+	.db %00000010
+
+	.dl Font_45
+	.db 65
+	.db %00000010
+
+	.dl Font_46
+	.db 64
+	.db %00000010
+
+	.dl Font_47
+	.db 72
+	.db %00000010
+
+	.dl Font_48
+	.db 63
+	.db %00000010
+
+	.dl Font_49
+	.db 61
+	.db %00000010
+
+	.dl Font_50
 	.db 60
-	.dl Unlucky_0, Unlucky_0_Fast
-	.db %10000000
-	.dl Font_0, Font_0_Fast
-	.db %10000000
-	.dl Font_1, Font_1_Fast
-	.db %10000000
-	.dl Font_2, Font_2_Fast
-	.db %10000000
-	.dl Font_3, Font_3_Fast
-	.db %10000000
-	.dl Font_4, Font_4_Fast
-	.db %10000000
-	.dl Font_5, Font_5_Fast
-	.db %10000000
-	.dl Font_6, Font_6_Fast
-	.db %10000000
-	.dl Font_7, Font_7_Fast
-	.db %10000000
-	.dl Font_8, Font_8_Fast
-	.db %10000000
-	.dl Font_9, Font_9_Fast
-	.db %10000000
-	.dl Font_10, Font_10_Fast
-	.db %10000000
-	.dl Font_11, Font_11_Fast
-	.db %10000000
-	.dl Font_12, Font_12_Fast
-	.db %10000000
-	.dl Font_13, Font_13_Fast
-	.db %10000000
-	.dl Font_14, Font_14_Fast
-	.db %10000000
-	.dl Font_15, Font_15_Fast
-	.db %10000000
-	.dl Font_16, Font_16_Fast
-	.db %10000000
-	.dl Font_17, Font_17_Fast
-	.db %10000000
-	.dl Font_18, Font_18_Fast
-	.db %10000000
-	.dl Font_19, Font_19_Fast
-	.db %10000000
-	.dl Font_20, Font_20_Fast
-	.db %10000000
-	.dl Font_21, Font_21_Fast
-	.db %10000000
-	.dl Font_22, Font_22_Fast
-	.db %10000000
-	.dl Font_23, Font_23_Fast
-	.db %10000000
-	.dl Font_24, Font_24_Fast
-	.db %10000000
-	.dl Font_25, Font_25_Fast
-	.db %10000000
-	.dl Font_26, Font_26_Fast
-	.db %10000000
-	.dl Font_27, Font_27_Fast
-	.db %10000000
-	.dl Font_28, Font_28_Fast
-	.db %10000000
-	.dl Font_29, Font_29_Fast
-	.db %10000000
-	.dl Font_30, Font_30_Slow
-	.db %00000000
-	.dl Font_31, Font_31_Slow
-	.db %00000000
-	.dl Font_32, Font_32_Slow
-	.db %00000000
-	.dl Font_33, Font_33_Slow
-	.db %00000000
-	.dl Font_34, Font_34_Slow
-	.db %00000000
-	.dl Font_35, Font_35_Slow
-	.db %00000000
-	.dl Font_36, Font_36_Slow
-	.db %00000000
-	.dl Font_37, Font_37_Slow
-	.db %00000000
-	.dl Font_38, Font_38_Slow
-	.db %00000000
-	.dl Font_39, Font_39_Slow
-	.db %00000000
-	.dl Font_40, Font_40_Slow
-	.db %00000000
-	.dl Font_41, Font_41_Slow
-	.db %00000000
-	.dl Font_42, Font_42_Slow
-	.db %00000000
-	.dl Font_43, Font_43_Slow
-	.db %00000000
-	.dl Font_44, Font_44_Slow
-	.db %00000000
-	.dl Font_45, Font_45_Slow
-	.db %00000000
-	.dl Font_46, Font_46_Slow
-	.db %00000000
-	.dl Font_47, Font_47_Slow
-	.db %00000000
-	.dl Font_48, Font_48_Slow
-	.db %00000000
-	.dl Font_49, Font_49_Slow
-	.db %00000000
-	.dl Font_50, Font_50_Slow
-	.db %00000000
-	.dl Font_51, Font_51_Slow
-	.db %00000000
-	.dl Font_52, Font_52_Slow
-	.db %00000000
-	.dl Font_53, Font_53_Slow
-	.db %00000000
-	.dl Font_54, Font_54_Slow
-	.db %00000000
-	.dl Font_55, Font_55_Slow
-	.db %00000000
-	.dl Font_56, Font_56_Slow
-	.db %00000000
-	.dl Font_57, Font_57_Slow
-	.db %00000000
-	.dl Font_58, Font_58_Slow
-	.db %00000000
+	.db %00000010
+
+	.dl Font_51
+	.db 59
+	.db %00000010
+
+	.dl Font_52
+	.db 58
+	.db %00000010
+
+	.dl Font_53
+	.db 57
+	.db %00000010
+
+	.dl Font_54
+	.db 56
+	.db %00000010
+
+	.dl Font_55
+	.db 55
+	.db %00000010
+
+	.dl Font_56
+	.db 54
+	.db %00000010
+
+	.dl Font_57
+	.db 95
+	.db %00000010
+
+	.dl Font_58
+	.db 117
+	.db %00000010
+
 
 decompress_frame_up_pre2:
 	.db 64
-	.dl CloudsNewer_0, CloudsNewer_0_Fast
+	.dl CloudsNewer_0
+	.db 89
 	.db %10000000
-	.dl CloudsNewer_2, CloudsNewer_2_Fast
+
+	.dl CloudsNewer_2
+	.db 88
 	.db %10000000
-	.dl CloudsNewer_7, CloudsNewer_7_Fast
+
+	.dl CloudsNewer_7
+	.db 84
 	.db %10000000
-	.dl CloudsNewer_8, CloudsNewer_8_Fast
+
+	.dl CloudsNewer_8
+	.db 90
 	.db %10000000
-	.dl CloudsNewer_1, CloudsNewer_1_Fast
+
+	.dl CloudsNewer_1
+	.db 85
 	.db %10000000
-	.dl CloudsNewer_4, CloudsNewer_4_Fast
+
+	.dl CloudsNewer_4
+	.db 91
 	.db %10000000
-	.dl CloudsNewer_4, CloudsNewer_4_Fast_F
+
+	.dl CloudsNewer_4
+	.db 87
 	.db %10100000
-	.dl CloudsNewer_6, CloudsNewer_6_Slow
+
+	.dl CloudsNewer_6
+	.db 82
 	.db %00000000
-	.dl CloudsNewer_5, CloudsNewer_5_Fast
+
+	.dl CloudsNewer_5
+	.db 93
 	.db %10000000
-	.dl CloudsNewer_3, CloudsNewer_3_Fast
+
+	.dl CloudsNewer_3
+	.db 83
 	.db %10000000
-	.dl CloudsNewer_3, CloudsNewer_3_Fast_F
+
+	.dl CloudsNewer_3
+	.db 86
 	.db %10100000
-	.dl CloudsNewer_1, CloudsNewer_1_Fast_F
+
+	.dl CloudsNewer_1
+	.db 92
 	.db %10100000
-	.dl CloudsNewer_5, CloudsNewer_5_Fast_F
+
+	.dl CloudsNewer_5
+	.db 94
 	.db %10100000
-	.dl CloudsNewer_0, CloudsNewer_0_Fast_F
+
+	.dl CloudsNewer_0
+	.db 98
 	.db %10100000
-	.dl CloudsNewer_8, CloudsNewer_8_Fast_F
+
+	.dl CloudsNewer_8
+	.db 99
 	.db %10100000
-	.dl CloudsNewer_7, CloudsNewer_7_Fast_F
+
+	.dl CloudsNewer_7
+	.db 101
 	.db %10100000
-	.dl CloudsNewer_9, CloudsNewer_9_Fast_F
+
+	.dl CloudsNewer_9
+	.db 95
 	.db %10100000
-	.dl CloudsNewer_10, CloudsNewer_10_Fast
+
+	.dl CloudsNewer_10
+	.db 96
 	.db %10000000
-	.dl CloudsNewer_9, CloudsNewer_9_Fast
+
+	.dl CloudsNewer_9
+	.db 97
 	.db %10000000
-	.dl CloudsNewer_10, CloudsNewer_10_Fast_F
+
+	.dl CloudsNewer_10
+	.db 100
 	.db %10100000
-	.dl Platforms_2, Platforms_2_Slow_O
-	.db %01000000
-	.dl Spikes_0, Spikes_0_Fast
+
+	.dl FrogNPCs1_9
+	.db 97
+	.db %01000001
+
+	.dl FrogDefault
+	.db 93
+	.db %01000010
+
+	.dl GroundDirtDark
+	.db 0
+	.db %10000010
+
+	.dl GroundDirtDark
+	.db 1
+	.db %10100010
+
+	.dl GroundHumpDark
+	.db 2
+	.db %10000010
+
+	.dl GroundHumpDark
+	.db 3
+	.db %10100010
+
+	.dl Tree_16
+	.db 179
 	.db %10000000
-	.dl FrogNPCs1_10, FrogNPCs1_10_Slow
+
+	.dl Tree_17
+	.db 180
 	.db %00000000
-	.dl FrogNPCs1_4, FrogNPCs1_4_Slow_O
-	.db %01000000
-	.dl FrogNPCs1_8, FrogNPCs1_8_Slow_F
-	.db %00100000
-	.dl FrogNPCs1_1, FrogNPCs1_1_Slow
-	.db %00000000
-	.dl FrogNPCs1_6, FrogNPCs1_6_Slow_O
-	.db %01000000
-	.dl FrogNPCs1_9, FrogNPCs1_9_Slow_O
-	.db %01000000
-	.dl FrogDefault, FrogDefault_Slow_O
-	.db %01000000
-	.dl GroundDirtDark, GroundDirtDark_Fast
-	.db %10000000
-	.dl GroundDirtDark, GroundDirtDark_Fast_F
-	.db %10100000
-	.dl GroundHumpDark, GroundHumpDark_Fast
-	.db %10000000
-	.dl GroundHumpDark, GroundHumpDark_Fast_F
-	.db %10100000
-	.dl Tree_16, Tree_16_Fast
-	.db %10000000
-	.dl Tree_17, Tree_17_Slow
-	.db %00000000
-	.dl Tree_17, Tree_17_Slow_O_F
+
+	.dl Tree_17
+	.db 181
 	.db %01100000
-	.dl Tree_18, Tree_18_Slow
+
+	.dl Tree_18
+	.db 182
 	.db %00000000
-	.dl Tree_18, Tree_18_Slow_O_F
+
+	.dl Tree_18
+	.db 183
 	.db %01100000
-	.dl Tree_16, Tree_16_Fast_F
+
+	.dl Tree_16
+	.db 184
 	.db %10100000
-	.dl FrogDefault, FrogDefault_Slow
-	.db %00000000
-	.dl FrogDefault, FrogDefault_Slow_F
-	.db %00100000
-	.dl FrogDefault, FrogDefault_Slow_O_F
-	.db %01100000
-	.dl FrogChargeLit, FrogChargeLit_Slow
-	.db %00000000
-	.dl FrogChargeLit, FrogChargeLit_Slow_O
-	.db %01000000
-	.dl FrogChargeLit, FrogChargeLit_Slow_F
-	.db %00100000
-	.dl FrogChargeLit, FrogChargeLit_Slow_O_F
-	.db %01100000
-	.dl FrogCharge, FrogCharge_Slow
-	.db %00000000
-	.dl FrogCharge, FrogCharge_Slow_O
-	.db %01000000
-	.dl FrogCharge, FrogCharge_Slow_F
-	.db %00100000
-	.dl FrogCharge, FrogCharge_Slow_O_F
-	.db %01100000
-	.dl FrogJump, FrogJump_Slow
-	.db %00000000
-	.dl FrogJump, FrogJump_Slow_O
-	.db %01000000
-	.dl FrogJump, FrogJump_Slow_F
-	.db %00100000
-	.dl FrogJump, FrogJump_Slow_O_F
-	.db %01100000
-	.dl FrogJumpMouth, FrogJumpMouth_Slow
-	.db %00000000
-	.dl FrogJumpMouth, FrogJumpMouth_Slow_O
-	.db %01000000
-	.dl FrogJumpMouth, FrogJumpMouth_Slow_F
-	.db %00100000
-	.dl FrogJumpMouth, FrogJumpMouth_Slow_O_F
-	.db %01100000
-	.dl FrogFall, FrogFall_Slow
-	.db %00000000
-	.dl FrogFall, FrogFall_Slow_O
-	.db %01000000
-	.dl FrogFall, FrogFall_Slow_F
-	.db %00100000
-	.dl FrogFall, FrogFall_Slow_O_F
-	.db %01100000
-	.dl FrogTongue, FrogTongue_Slow
-	.db %00000000
-	.dl FrogTongue, FrogTongue_Slow_O
-	.db %01000000
+
+	.dl FrogDefault
+	.db 32
+	.db %00000010
+
+	.dl FrogDefault
+	.db 92
+	.db %00100010
+
+	.dl FrogDefault
+	.db 91
+	.db %01100010
+
+	.dl FrogCharge
+	.db 90
+	.db %00010010
+
+	.db %10011000, %01000110, %10000000, %00000000
+
+	.dl FrogCharge
+	.db 89
+	.db %01010010
+
+	.db %10011000, %01000110, %10000000, %00000000
+
+	.dl FrogCharge
+	.db 88
+	.db %00110010
+
+	.db %10011000, %01000110, %10000000, %00000000
+
+	.dl FrogCharge
+	.db 87
+	.db %01110010
+
+	.db %10011000, %01000110, %10000000, %00000000
+
+	.dl FrogCharge
+	.db 86
+	.db %00000010
+
+	.dl FrogCharge
+	.db 94
+	.db %01000010
+
+	.dl FrogCharge
+	.db 85
+	.db %00100010
+
+	.dl FrogCharge
+	.db 83
+	.db %01100010
+
+	.dl FrogJump
+	.db 82
+	.db %00000010
+
+	.dl FrogJump
+	.db 81
+	.db %01000010
+
+	.dl FrogJump
+	.db 80
+	.db %00100010
+
+	.dl FrogJump
+	.db 79
+	.db %01100010
+
+	.dl FrogJumpMouth
+	.db 78
+	.db %00000010
+
+	.dl FrogJumpMouth
+	.db 77
+	.db %01000010
+
+	.dl FrogJumpMouth
+	.db 76
+	.db %00100010
+
+	.dl FrogJumpMouth
+	.db 84
+	.db %01100010
+
+	.dl FrogFall
+	.db 96
+	.db %00000010
+
+	.dl FrogFall
+	.db 106
+	.db %01000010
+
+	.dl FrogFall
+	.db 97
+	.db %00100010
+
+	.dl FrogFall
+	.db 115
+	.db %01100010
+
+	.dl FrogTongue
+	.db 114
+	.db %00000010
+
+	.dl FrogTongue
+	.db 113
+	.db %01000010
+
+	.dl Unlucky_0
+	.db 112
+	.db %10000010
+
+	.dl Font_0
+	.db 111
+	.db %10000010
+
+	.dl Font_1
+	.db 110
+	.db %10000010
+
+	.dl Font_2
+	.db 109
+	.db %10000010
+
+	.dl Font_3
+	.db 108
+	.db %10000010
+
+	.dl Font_4
+	.db 116
+	.db %10000010
+
+	.dl Font_5
+	.db 107
+	.db %10000010
+
 
 decompress_frame_up_pre1:
 	.db 64
-	.dl Vine5, Vine5_Slow
+	.dl Vine5
+	.db 63
 	.db %00000000
-	.dl Vine6, Vine6_Slow
+
+	.dl Vine6
+	.db 64
 	.db %00000000
-	.dl Vine4, Vine4_Slow
+
+	.dl Vine4
+	.db 65
 	.db %00000000
-	.dl Vine4, Vine4_Slow_F
+
+	.dl Vine4
+	.db 66
 	.db %00100000
-	.dl Vine4, Vine4_Slow_O_F
+
+	.dl Vine4
+	.db 67
 	.db %01100000
-	.dl Vine5, Vine5_Slow_O_F
+
+	.dl Vine5
+	.db 68
 	.db %01100000
-	.dl Vine7, Vine7_Slow_O
+
+	.dl Vine7
+	.db 69
 	.db %01000000
-	.dl Vine5, Vine5_Slow_O
+
+	.dl Vine5
+	.db 70
 	.db %01000000
-	.dl Vine6, Vine6_Slow_O
+
+	.dl Vine6
+	.db 71
 	.db %01000000
-	.dl Vine4, Vine4_Slow_O
+
+	.dl Vine4
+	.db 72
 	.db %01000000
-	.dl Vine2, Vine2_Slow
+
+	.dl Vine2
+	.db 73
 	.db %00000000
-	.dl VineVertical, VineVertical_Slow_O
+
+	.dl VineVertical
+	.db 74
 	.db %01000000
-	.dl VineVertical, VineVertical_Slow
+
+	.dl VineVertical
+	.db 75
 	.db %00000000
-	.dl Branches_5, Branches_5_Fast
+
+	.dl Branches_5
+	.db 76
 	.db %10000000
-	.dl Branches_3, Branches_3_Fast
+
+	.dl Branches_3
+	.db 78
 	.db %10000000
-	.dl Branches_2, Branches_2_Fast
+
+	.dl Branches_2
+	.db 79
 	.db %10000000
-	.dl Lantern_7, Lantern_7_Slow_O_F
-	.db %01100000
-	.dl Lantern_4, Lantern_4_Slow_O
-	.db %01000000
-	.dl Vine2, Vine2_Slow_F
+
+	.dl Vine2
+	.db 80
 	.db %00100000
-	.dl VineVertical, VineVertical_Slow_F
+
+	.dl VineVertical
+	.db 81
 	.db %00100000
-	.dl GroundDirtFull, GroundDirtFull_Fast_F
-	.db %10100000
-	.dl GroundDirtFull, GroundDirtFull_Fast
-	.db %10000000
-	.dl GroundDirtMound, GroundDirtMound_Fast
-	.db %10000000
-	.dl GroundDirtMound, GroundDirtMound_Fast_F
-	.db %10100000
-	.dl Branches_8, Branches_8_Slow_O_F
-	.db %01100000
-	.dl Branches_9, Branches_9_Slow_O
+
+	.dl Branches_9
+	.db 3
+	.db %01000001
+
+	.dl FrogNPCs1_2
+	.db 110
+	.db %01100001
+
+	.dl FrogNPCs1_5
+	.db 157
 	.db %01000000
-	.dl FrogNPCs1_2, FrogNPCs1_2_Slow_O_F
-	.db %01100000
-	.dl FrogNPCs1_5, FrogNPCs1_5_Slow_O
-	.db %01000000
-	.dl FrogNPCs1_9, FrogNPCs1_9_Slow
-	.db %00000000
-	.dl FrogNPCs1_7, FrogNPCs1_7_Slow_F
+
+	.dl FrogNPCs1_9
+	.db 102
+	.db %00000001
+
+	.dl FrogNPCs1_7
+	.db 159
 	.db %00100000
-	.dl FrogNPCs1_0, FrogNPCs1_0_Slow
+
+	.dl FrogNPCs1_0
+	.db 111
+	.db %00000001
+
+	.dl Tree_2
+	.db 132
+	.db %10000000
+
+	.dl Tree_4
+	.db 133
+	.db %10000000
+
+	.dl Tree_7
+	.db 134
+	.db %10000000
+
+	.dl Tree_9
+	.db 135
+	.db %10000000
+
+	.dl Tree_6
+	.db 136
+	.db %10100000
+
+	.dl Tree_3
+	.db 137
+	.db %10100000
+
+	.dl Tree_0
+	.db 138
+	.db %10100000
+
+	.dl Tree_3
+	.db 139
+	.db %10000000
+
+	.dl Tree_8
+	.db 140
+	.db %10000000
+
+	.dl Tree_9
+	.db 141
+	.db %10100000
+
+	.dl Tree_8
+	.db 142
+	.db %10100000
+
+	.dl Tree_4
+	.db 143
+	.db %10100000
+
+	.dl Tree_0
+	.db 144
+	.db %10000000
+
+	.dl Tree_6
+	.db 145
+	.db %10000000
+
+	.dl Tree_10
+	.db 146
+	.db %10000000
+
+	.dl Tree_7
+	.db 147
+	.db %10100000
+
+	.dl Tree_1
+	.db 148
+	.db %10100000
+
+	.dl Tree_1
+	.db 149
+	.db %10000000
+
+	.dl Tree_5
+	.db 150
+	.db %10000000
+
+	.dl Tree_11
+	.db 151
+	.db %10000000
+
+	.dl Tree_5
+	.db 152
+	.db %10100000
+
+	.dl Tree_2
+	.db 153
+	.db %10100000
+
+	.dl Tree_11
+	.db 154
+	.db %10100000
+
+	.dl Branches_1
+	.db 155
+	.db %10000000
+
+	.dl Vine7
+	.db 156
 	.db %00000000
-	.dl Tree_2, Tree_2_Fast
-	.db %10000000
-	.dl Tree_4, Tree_4_Fast
-	.db %10000000
-	.dl Tree_7, Tree_7_Fast
-	.db %10000000
-	.dl Tree_9, Tree_9_Fast
-	.db %10000000
-	.dl Tree_6, Tree_6_Fast_F
+
+	.dl Branches_1
+	.db 162
 	.db %10100000
-	.dl Tree_3, Tree_3_Fast_F
+
+	.dl Branches_2
+	.db 163
 	.db %10100000
-	.dl Tree_0, Tree_0_Fast_F
+
+	.dl Branches_5
+	.db 164
 	.db %10100000
-	.dl Tree_3, Tree_3_Fast
-	.db %10000000
-	.dl Tree_8, Tree_8_Fast
-	.db %10000000
-	.dl Tree_9, Tree_9_Fast_F
-	.db %10100000
-	.dl Tree_8, Tree_8_Fast_F
-	.db %10100000
-	.dl Tree_4, Tree_4_Fast_F
-	.db %10100000
-	.dl Tree_0, Tree_0_Fast
-	.db %10000000
-	.dl Tree_6, Tree_6_Fast
-	.db %10000000
-	.dl Tree_10, Tree_10_Fast
-	.db %10000000
-	.dl Tree_7, Tree_7_Fast_F
-	.db %10100000
-	.dl Tree_1, Tree_1_Fast_F
-	.db %10100000
-	.dl Tree_1, Tree_1_Fast
-	.db %10000000
-	.dl Tree_5, Tree_5_Fast
-	.db %10000000
-	.dl Tree_11, Tree_11_Fast
-	.db %10000000
-	.dl Tree_5, Tree_5_Fast_F
-	.db %10100000
-	.dl Tree_2, Tree_2_Fast_F
-	.db %10100000
-	.dl Tree_11, Tree_11_Fast_F
-	.db %10100000
-	.dl Branches_1, Branches_1_Fast
-	.db %10000000
-	.dl Vine7, Vine7_Slow
-	.db %00000000
-	.dl Branches_1, Branches_1_Fast_F
-	.db %10100000
-	.dl Branches_2, Branches_2_Fast_F
-	.db %10100000
-	.dl Branches_5, Branches_5_Fast_F
-	.db %10100000
-	.dl Vine2, Vine2_Slow_O
+
+	.dl Vine2
+	.db 165
 	.db %01000000
-	.dl Platforms_0, Platforms_0_Fast
-	.db %10000000
-	.dl Platforms_1, Platforms_1_Fast
-	.db %10000000
-	.dl Platforms_0, Platforms_0_Fast_F
-	.db %10100000
-	.dl Platforms_2, Platforms_2_Slow_O_F
-	.db %01100000
+
+	.dl Platforms_0
+	.db 86
+	.db %10000001
+
+	.dl Platforms_1
+	.db 87
+	.db %10000001
+
+	.dl Platforms_0
+	.db 88
+	.db %10100001
+
+	.dl Platforms_2
+	.db 89
+	.db %01100001
+
+	.dl Platforms_2
+	.db 90
+	.db %01000001
+
+	.dl SpikesPurple_0
+	.db 96
+	.db %10001001
+
+	.db %10010110, %01110000
+
+	.dl FrogNPCs1_10
+	.db 91
+	.db %00000001
+
+	.dl FrogNPCs1_4
+	.db 92
+	.db %01000001
+
+	.dl FrogNPCs1_8
+	.db 93
+	.db %00100001
+
+	.dl FrogNPCs1_1
+	.db 94
+	.db %00000001
+
+	.dl FrogNPCs1_6
+	.db 95
+	.db %01000001
+
 
 decompress_frame_up_0:
 	.db 64
-	.dl BigGrassBase, BigGrassBase_Fast
+	.dl Branches_10
+	.db 2
 	.db %10000000
-	.dl BigGrassTop, BigGrassTop_Fast
+
+	.dl Branches_9
+	.db 0
 	.db %10000000
-	.dl BigGrassBase, BigGrassBase_Slow_O
-	.db %01000000
-	.dl BigGrassBase, BigGrassBase_Fast_F
-	.db %10100000
-	.dl BigGrassTop, BigGrassTop_Fast_F
-	.db %10100000
-	.dl BigGrassTop, BigGrassTop_Slow_O
-	.db %01000000
-	.dl DualLeaf4, DualLeaf4_Slow
+
+	.dl Branches_16
+	.db 3
 	.db %00000000
-	.dl DualLeaf4, DualLeaf4_Slow_F
+
+	.dl Branches_13
+	.db 1
+	.db %10000000
+
+	.dl Leaves1
+	.db 4
+	.db %10000000
+
+	.dl DualLeaf1
+	.db 5
+	.db %10000000
+
+	.dl DualLeaf2
+	.db 6
+	.db %10000000
+
+	.dl DualLeaf2
+	.db 7
+	.db %01000000
+
+	.dl DualLeaf1
+	.db 8
+	.db %01000000
+
+	.dl DualLeaf3
+	.db 9
+	.db %10000000
+
+	.dl AscentBanner_6
+	.db 55
+	.db %01000000
+
+	.dl AscentBanner_9
+	.db 53
+	.db %10000000
+
+	.dl AscentBanner_10
+	.db 54
+	.db %10000000
+
+	.dl AscentBanner_1
+	.db 52
+	.db %10000000
+
+	.dl AscentBanner_2
+	.db 51
+	.db %10000000
+
+	.dl AscentBanner_3
+	.db 50
+	.db %10000000
+
+	.dl AscentBanner_0
+	.db 49
+	.db %10000000
+
+	.dl AscentBanner_4
+	.db 48
+	.db %10000000
+
+	.dl AscentBanner_5
+	.db 47
+	.db %10000000
+
+	.dl AscentBanner_10
+	.db 46
+	.db %10100000
+
+	.dl AscentBanner_9
+	.db 44
+	.db %10100000
+
+	.dl AscentBanner_6
+	.db 45
 	.db %00100000
-	.dl DualLeaf3, DualLeaf3_Fast
+
+	.dl AscentBanner_7
+	.db 42
 	.db %10000000
-	.dl Branches_10, Branches_10_Fast
-	.db %10000000
-	.dl Branches_9, Branches_9_Fast
-	.db %10000000
-	.dl Branches_16, Branches_16_Slow
-	.db %00000000
-	.dl Branches_13, Branches_13_Fast
-	.db %10000000
-	.dl Leaves1, Leaves1_Fast
-	.db %10000000
-	.dl DualLeaf1, DualLeaf1_Fast
-	.db %10000000
-	.dl DualLeaf2, DualLeaf2_Fast
-	.db %10000000
-	.dl DualLeaf2, DualLeaf2_Slow_O
+
+	.dl AscentBanner_8
+	.db 41
 	.db %01000000
-	.dl DualLeaf1, DualLeaf1_Slow_O
+
+	.dl AscentBanner_8
+	.db 40
+	.db %00000000
+
+	.dl AscentBanner_7
+	.db 43
 	.db %01000000
-	.dl AscentBanner_6, AscentBanner_6_Slow_O
+
+	.dl Branches_6
+	.db 33
+	.db %00000000
+
+	.dl Branches_10
+	.db 18
+	.db %10100000
+
+	.dl Branches_7
+	.db 34
+	.db %10000000
+
+	.dl Branches_15
+	.db 15
+	.db %00000000
+
+	.dl Branches_8
+	.db 35
+	.db %10100000
+
+	.dl Branches_12
+	.db 32
+	.db %10000000
+
+	.dl Branches_15
+	.db 13
+	.db %01100000
+
+	.dl LeavesLight
+	.db 11
+	.db %10000100
+
+	.db %01010100
+
+	.dl LeavesLight
+	.db 31
+	.db %10100100
+
+	.db %01010100
+
+	.dl Leaves2
+	.db 20
+	.db %10000000
+
+	.dl Leaves2
+	.db 19
+	.db %10100000
+
+	.dl LeavesLight
+	.db 10
+	.db %10000000
+
+	.dl Branches_8
+	.db 14
+	.db %10000000
+
+	.dl Branches_11
+	.db 16
+	.db %10100000
+
+	.dl Branches_16
+	.db 36
+	.db %01100000
+
+	.dl Branches_13
+	.db 17
+	.db %10100000
+
+	.dl Branches_14
+	.db 12
+	.db %00000000
+
+	.dl DualLeaf4
+	.db 37
+	.db %00000000
+
+	.dl Lantern_0
+	.db 21
+	.db %10000000
+
+	.dl Lantern_1
+	.db 22
+	.db %10000000
+
+	.dl Lantern_2
+	.db 23
+	.db %10000000
+
+	.dl Lantern_0
+	.db 24
+	.db %10100000
+
+	.dl Lantern_1
+	.db 25
+	.db %10100000
+
+	.dl Lantern_2
+	.db 26
+	.db %10100000
+
+	.dl Lantern_6
+	.db 38
+	.db %00000000
+
+	.dl Lantern_6
+	.db 39
+	.db %01100000
+
+	.dl Lantern_5
+	.db 29
+	.db %00000000
+
+	.dl Lantern_5
+	.db 30
+	.db %01100000
+
+	.dl Lantern_3
+	.db 27
+	.db %00000000
+
+	.dl Lantern_3
+	.db 28
+	.db %01100000
+
+	.dl Lantern_7
+	.db 56
+	.db %00000000
+
+	.dl Lantern_7
+	.db 57
+	.db %01100000
+
+	.dl Lantern_4
+	.db 58
 	.db %01000000
-	.dl AscentBanner_9, AscentBanner_9_Fast
-	.db %10000000
-	.dl AscentBanner_10, AscentBanner_10_Fast
-	.db %10000000
-	.dl AscentBanner_1, AscentBanner_1_Fast
-	.db %10000000
-	.dl AscentBanner_2, AscentBanner_2_Fast
-	.db %10000000
-	.dl AscentBanner_3, AscentBanner_3_Fast
-	.db %10000000
-	.dl AscentBanner_0, AscentBanner_0_Fast
-	.db %10000000
-	.dl AscentBanner_4, AscentBanner_4_Fast
-	.db %10000000
-	.dl AscentBanner_5, AscentBanner_5_Fast
-	.db %10000000
-	.dl AscentBanner_10, AscentBanner_10_Fast_F
+
+	.dl GroundDirtFull
+	.db 126
 	.db %10100000
-	.dl AscentBanner_9, AscentBanner_9_Fast_F
-	.db %10100000
-	.dl AscentBanner_6, AscentBanner_6_Slow_F
-	.db %00100000
-	.dl AscentBanner_7, AscentBanner_7_Fast
+
+	.dl GroundDirtFull
+	.db 127
 	.db %10000000
-	.dl AscentBanner_8, AscentBanner_8_Slow_O
-	.db %01000000
-	.dl AscentBanner_8, AscentBanner_8_Slow
-	.db %00000000
-	.dl AscentBanner_7, AscentBanner_7_Slow_O
-	.db %01000000
-	.dl Branches_6, Branches_6_Slow
-	.db %00000000
-	.dl Branches_10, Branches_10_Fast_F
-	.db %10100000
-	.dl Branches_7, Branches_7_Fast
+
+	.dl GroundDirtMound
+	.db 128
 	.db %10000000
-	.dl Branches_15, Branches_15_Slow
-	.db %00000000
-	.dl Branches_8, Branches_8_Fast_F
+
+	.dl GroundDirtMound
+	.db 129
 	.db %10100000
-	.dl Branches_12, Branches_12_Fast
-	.db %10000000
-	.dl Branches_15, Branches_15_Slow_O_F
+
+	.dl Branches_8
+	.db 130
 	.db %01100000
-	.dl LeavesDark, LeavesDark_Fast
-	.db %10000000
-	.dl LeavesDark, LeavesDark_Fast_F
-	.db %10100000
-	.dl Leaves2, Leaves2_Fast
-	.db %10000000
-	.dl Leaves2, Leaves2_Fast_F
-	.db %10100000
-	.dl LeavesLight, LeavesLight_Fast
-	.db %10000000
-	.dl Branches_8, Branches_8_Fast
-	.db %10000000
-	.dl Branches_11, Branches_11_Fast_F
-	.db %10100000
-	.dl Branches_16, Branches_16_Slow_O_F
-	.db %01100000
-	.dl Branches_13, Branches_13_Fast_F
-	.db %10100000
-	.dl Branches_14, Branches_14_Slow
-	.db %00000000
-	.dl Lantern_0, Lantern_0_Fast
-	.db %10000000
-	.dl Lantern_1, Lantern_1_Fast
-	.db %10000000
-	.dl Lantern_2, Lantern_2_Fast
-	.db %10000000
-	.dl Lantern_0, Lantern_0_Fast_F
-	.db %10100000
-	.dl Lantern_1, Lantern_1_Fast_F
-	.db %10100000
-	.dl Lantern_2, Lantern_2_Fast_F
-	.db %10100000
-	.dl Lantern_6, Lantern_6_Slow
-	.db %00000000
-	.dl Lantern_6, Lantern_6_Slow_O_F
-	.db %01100000
-	.dl Lantern_5, Lantern_5_Slow
-	.db %00000000
-	.dl Lantern_5, Lantern_5_Slow_O_F
-	.db %01100000
-	.dl Lantern_3, Lantern_3_Slow
-	.db %00000000
-	.dl Lantern_3, Lantern_3_Slow_O_F
-	.db %01100000
-	.dl Lantern_7, Lantern_7_Slow
-	.db %00000000
+
 
 decompress_frame_up_1:
 	.db 4
-	.dl Branches_4, Branches_4_Fast_F
+	.dl Branches_4
+	.db 59
 	.db %10100000
-	.dl Branches_7, Branches_7_Fast_F
+
+	.dl Branches_7
+	.db 60
 	.db %10100000
-	.dl Branches_12, Branches_12_Fast_F
+
+	.dl Branches_12
+	.db 61
 	.db %10100000
-	.dl Leaves1, Leaves1_Fast_F
+
+	.dl Leaves1
+	.db 62
 	.db %10100000
+
 
 decompress_frame_up_2:
 	.db 6
-	.dl Branches_1, Branches_1_Slow_O
+	.dl Branches_1
+	.db 166
 	.db %01000000
-	.dl Branches_2, Branches_2_Slow_O
+
+	.dl Branches_2
+	.db 167
 	.db %01000000
-	.dl Branches_4, Branches_4_Slow_O
+
+	.dl Branches_4
+	.db 168
 	.db %01000000
-	.dl Branches_7, Branches_7_Slow_O
+
+	.dl Branches_7
+	.db 169
 	.db %01000000
-	.dl Spikes_3, Spikes_3_Fast
-	.db %10000000
-	.dl FrogNPCs1_3, FrogNPCs1_3_Slow_F
-	.db %00100000
+
+	.dl SpikesPurple_3
+	.db 99
+	.db %10001001
+
+	.db %10010110, %01110000
+
+	.dl FrogNPCs1_3
+	.db 98
+	.db %00100001
+
 
 decompress_frame_up_3:
 	.db 0
 
 decompress_frame_up_4:
 	.db 5
-	.dl Branches_0, Branches_0_Fast_F
-	.db %10100000
-	.dl Branches_8, Branches_8_Slow_O
+	.dl Branches_0
+	.db 0
+	.db %10100001
+
+	.dl Branches_8
+	.db 171
 	.db %01000000
-	.dl Branches_9, Branches_9_Fast_F
-	.db %10100000
-	.dl FrogNPCs1_5, FrogNPCs1_5_Slow
-	.db %00000000
-	.dl FrogNPCs1_7, FrogNPCs1_7_Slow
-	.db %00000000
+
+	.dl Branches_9
+	.db 2
+	.db %10100001
+
+	.dl FrogNPCs1_5
+	.db 100
+	.db %00000001
+
+	.dl FrogNPCs1_7
+	.db 101
+	.db %00000001
+
 
 decompress_frame_up_5:
 	.db 1
-	.dl Branches_4, Branches_4_Fast
+	.dl Branches_4
+	.db 77
 	.db %10000000
+
 
 decompress_frame_up_6:
 	.db 0
@@ -1079,22 +1603,38 @@ decompress_frame_up_7:
 
 decompress_frame_up_8:
 	.db 8
-	.dl Branches_0, Branches_0_Fast
+	.dl Branches_0
+	.db 170
 	.db %10000000
-	.dl SolidPlatform_4, SolidPlatform_4_Slow
-	.db %00000000
-	.dl SolidPlatform_1, SolidPlatform_1_Slow_O
-	.db %01000000
-	.dl SolidPlatform_1, SolidPlatform_1_Slow
-	.db %00000000
-	.dl SolidPlatform_5, SolidPlatform_5_Slow_O
-	.db %01000000
-	.dl SolidPlatform_0, SolidPlatform_0_Fast
-	.db %10000000
-	.dl SolidPlatform_2, SolidPlatform_2_Fast
-	.db %10000000
-	.dl SolidPlatform_3, SolidPlatform_3_Fast
-	.db %10000000
+
+	.dl SolidPlatform_4
+	.db 103
+	.db %00000001
+
+	.dl SolidPlatform_1
+	.db 104
+	.db %01000001
+
+	.dl SolidPlatform_1
+	.db 105
+	.db %00000001
+
+	.dl SolidPlatform_5
+	.db 106
+	.db %01000001
+
+	.dl SolidPlatform_0
+	.db 107
+	.db %10000001
+
+	.dl SolidPlatform_2
+	.db 108
+	.db %10000001
+
+	.dl SolidPlatform_3
+	.db 109
+	.db %10000001
+
 
 decompress_frame_up_9:
 	.db 0
@@ -1113,8 +1653,10 @@ decompress_frame_up_13:
 
 decompress_frame_up_14:
 	.db 1
-	.dl FrogNPCs1_11, FrogNPCs1_11_Slow
-	.db %00000000
+	.dl FrogNPCs1_11
+	.db 112
+	.db %00000001
+
 
 decompress_frame_up_15:
 	.db 0
@@ -1133,8 +1675,10 @@ decompress_frame_up_19:
 
 decompress_frame_up_20:
 	.db 1
-	.dl FrogNPCs1_3, FrogNPCs1_3_Slow
-	.db %00000000
+	.dl FrogNPCs1_3
+	.db 113
+	.db %00000001
+
 
 decompress_frame_up_21:
 	.db 0
@@ -1147,24 +1691,40 @@ decompress_frame_up_23:
 
 decompress_frame_up_24:
 	.db 3
-	.dl Spikes_1, Spikes_1_Fast
-	.db %10000000
-	.dl Spikes_1, Spikes_1_Fast_F
-	.db %10100000
-	.dl FrogNPCs1_6, FrogNPCs1_6_Slow
-	.db %00000000
+	.dl SpikesPurple_1
+	.db 116
+	.db %10001001
+
+	.db %10010111, %01100000
+
+	.dl SpikesPurple_1
+	.db 115
+	.db %10101001
+
+	.db %10010111, %01100000
+
+	.dl FrogNPCs1_6
+	.db 114
+	.db %00000001
+
 
 decompress_frame_up_25:
 	.db 0
 
 decompress_frame_up_26:
 	.db 3
-	.dl FrogNPCs1_8, FrogNPCs1_8_Slow_O
-	.db %01000000
-	.dl FrogNPCs1_9, FrogNPCs1_9_Slow_F
-	.db %00100000
-	.dl FrogNPCs1_4, FrogNPCs1_4_Slow
-	.db %00000000
+	.dl FrogNPCs1_8
+	.db 117
+	.db %01000001
+
+	.dl FrogNPCs1_9
+	.db 118
+	.db %00100001
+
+	.dl FrogNPCs1_4
+	.db 119
+	.db %00000001
+
 
 decompress_frame_up_27:
 	.db 0
@@ -1182,15 +1742,15 @@ decompress_frame_up_31:
 	.db 0
 
 decompress_frame_up_32:
-	.db 4
-	.dl TongueRing1, TongueRing1_Slow
-	.db %00000000
-	.dl TongueRing2, TongueRing2_Slow
-	.db %00000000
-	.dl TongueRing1, TongueRing1_Slow_F
-	.db %00100000
-	.dl TongueRing2, TongueRing2_Slow_F
-	.db %00100000
+	.db 2
+	.dl TongueRing1
+	.db 120
+	.db %00000001
+
+	.dl TongueRing1
+	.db 121
+	.db %00100001
+
 
 decompress_frame_up_33:
 	.db 0
@@ -1215,8 +1775,10 @@ decompress_frame_up_39:
 
 decompress_frame_up_40:
 	.db 1
-	.dl Vines_4, Vines_4_Slow
-	.db %00000000
+	.dl Vines_4
+	.db 4
+	.db %00000001
+
 
 decompress_frame_up_41:
 	.db 0
@@ -1253,8 +1815,10 @@ decompress_frame_up_51:
 
 decompress_frame_up_52:
 	.db 1
-	.dl FrogNPCs1_1, FrogNPCs1_1_Slow_O
-	.db %01000000
+	.dl FrogNPCs1_1
+	.db 122
+	.db %01000001
+
 
 decompress_frame_up_53:
 	.db 0
@@ -1264,16 +1828,26 @@ decompress_frame_up_54:
 
 decompress_frame_up_55:
 	.db 5
-	.dl PurpleClouds_6, PurpleClouds_6_Slow
-	.db %00000000
-	.dl PurpleClouds_7, PurpleClouds_7_Fast
-	.db %10000000
-	.dl PurpleClouds_5, PurpleClouds_5_Fast
-	.db %10000000
-	.dl PurpleClouds_8, PurpleClouds_8_Fast
-	.db %10000000
-	.dl PurpleClouds_6, PurpleClouds_6_Slow_F
-	.db %00100000
+	.dl PurpleClouds_6
+	.db 7
+	.db %00000010
+
+	.dl PurpleClouds_7
+	.db 4
+	.db %10000010
+
+	.dl PurpleClouds_5
+	.db 5
+	.db %10000010
+
+	.dl PurpleClouds_8
+	.db 6
+	.db %10000010
+
+	.dl PurpleClouds_6
+	.db 8
+	.db %00100010
+
 
 decompress_frame_up_56:
 	.db 0
@@ -1289,12 +1863,18 @@ decompress_frame_up_59:
 
 decompress_frame_up_60:
 	.db 3
-	.dl CloudSemisolid_0, CloudSemisolid_0_Fast
-	.db %10000000
-	.dl CloudSemisolid_1, CloudSemisolid_1_Fast
-	.db %10000000
-	.dl CloudSemisolid_0, CloudSemisolid_0_Fast_F
-	.db %10100000
+	.dl CloudSemisolid_0
+	.db 123
+	.db %10000001
+
+	.dl CloudSemisolid_1
+	.db 124
+	.db %10000001
+
+	.dl CloudSemisolid_0
+	.db 125
+	.db %10100001
+
 
 decompress_frame_up_61:
 	.db 0
@@ -1313,200 +1893,384 @@ decompress_frame_up_65:
 
 decompress_frame_up_66:
 	.db 1
-	.dl SpikesPurple_0, SpikesPurple_0_Fast
-	.db %10000000
+	.dl SpikesPurple_0
+	.db 126
+	.db %10000001
+
 
 decompress_frame_up_67:
-	.db 2
-	.dl CityBanners_10, CityBanners_10_Slow_O
-	.db %01000000
-	.dl CityBanners_1, CityBanners_1_Fast_F
-	.db %10100000
+	.db 0
 
 decompress_frame_up_68:
-	.db 64
-	.dl Truetle_0, Truetle_0_Fast
+	.db 60
+	.dl Truetle_0
+	.db 110
 	.db %10000000
-	.dl Truetle_0, Truetle_0_Fast_F
+
+	.dl Truetle_0
+	.db 111
 	.db %10100000
-	.dl Truetle_2, Truetle_2_Slow
+
+	.dl Truetle_2
+	.db 112
 	.db %00000000
-	.dl Truetle_7, Truetle_7_Slow
+
+	.dl Truetle_7
+	.db 113
 	.db %00000000
-	.dl Truetle_5, Truetle_5_Slow
+
+	.dl Truetle_5
+	.db 114
 	.db %00000000
-	.dl Truetle_2, Truetle_2_Slow_F
+
+	.dl Truetle_2
+	.db 115
 	.db %00100000
-	.dl Truetle_7, Truetle_7_Slow_F
+
+	.dl Truetle_7
+	.db 116
 	.db %00100000
-	.dl Truetle_5, Truetle_5_Slow_F
+
+	.dl Truetle_5
+	.db 117
 	.db %00100000
-	.dl Truetle_1, Truetle_1_Fast
+
+	.dl Truetle_1
+	.db 118
 	.db %10000000
-	.dl Truetle_1, Truetle_1_Fast_F
+
+	.dl Truetle_1
+	.db 119
 	.db %10100000
-	.dl Truetle_3, Truetle_3_Slow
-	.db %00000000
-	.dl Truetle_10, Truetle_10_Slow
-	.db %00000000
-	.dl Truetle_8, Truetle_8_Slow
-	.db %00000000
-	.dl Truetle_3, Truetle_3_Slow_F
-	.db %00100000
-	.dl Truetle_10, Truetle_10_Slow_F
-	.db %00100000
-	.dl Truetle_8, Truetle_8_Slow_F
-	.db %00100000
-	.dl CastleWindow_0, CastleWindow_0_Fast
+
+	.dl Truetle_2
+	.db 120
+	.db %00001000
+
+	.db %11001110, %10100000
+
+	.dl Truetle_7
+	.db 121
+	.db %00001000
+
+	.db %11001110, %10100000
+
+	.dl Truetle_5
+	.db 122
+	.db %00001000
+
+	.db %11001110, %10100000
+
+	.dl Truetle_2
+	.db 123
+	.db %00101000
+
+	.db %11001110, %10100000
+
+	.dl Truetle_7
+	.db 124
+	.db %00101000
+
+	.db %11001110, %10100000
+
+	.dl Truetle_5
+	.db 125
+	.db %00101000
+
+	.db %11001110, %10100000
+
+	.dl CastleWindow_0
+	.db 5
+	.db %10000001
+
+	.dl CastleWindow_1
+	.db 6
+	.db %10000001
+
+	.dl CastleWindow_2
+	.db 7
+	.db %10000001
+
+	.dl Bricks_2_2
+	.db 8
+	.db %10000001
+
+	.dl Bricks_2_1
+	.db 9
+	.db %10000001
+
+	.dl Bricks_2_11
+	.db 10
+	.db %10000001
+
+	.dl Bricks_2_3
+	.db 14
+	.db %10000001
+
+	.dl Bricks_2_3
+	.db 15
+	.db %10100001
+
+	.dl Bricks_2_5
+	.db 12
+	.db %10100001
+
+	.dl Bricks_2_5
+	.db 11
+	.db %10000001
+
+	.dl Bricks_2_7
+	.db 17
+	.db %10000001
+
+	.dl Bricks_2_8
+	.db 16
+	.db %10000001
+
+	.dl Bricks_2_0
+	.db 13
+	.db %10000001
+
+	.dl CastleVines_15
+	.db 18
+	.db %00000001
+
+	.dl CastleVines_15
+	.db 19
+	.db %01000001
+
+	.dl CastleVines_16
+	.db 20
+	.db %00000001
+
+	.dl CastleVines_17
+	.db 21
+	.db %00000001
+
+	.dl CastleVines_9
+	.db 22
+	.db %01000001
+
+	.dl CastleVines_7
+	.db 23
+	.db %00000101
+
+	.db %00001111
+
+	.dl CastleVines_9
+	.db 24
+	.db %00000001
+
+	.dl CastleVines_11
+	.db 25
+	.db %01000001
+
+	.dl CastleVines_7
+	.db 26
+	.db %01000101
+
+	.db %00001111
+
+	.dl CastleVines_16
+	.db 27
+	.db %01000001
+
+	.dl CastleVines_17
+	.db 28
+	.db %00100001
+
+	.dl CastleVines_16
+	.db 29
+	.db %00100001
+
+	.dl CloudCityWelcomeComitte2_4
+	.db 30
+	.db %00000001
+
+	.dl CloudCityWelcomeComitte2_1
+	.db 31
+	.db %00000001
+
+	.dl CloudCityWelcomeComitte2_3
+	.db 32
+	.db %01000001
+
+	.dl CloudCityWelcomeComitte2_2
+	.db 33
+	.db %01000001
+
+	.dl CityBanners_1
+	.db 173
 	.db %10000000
-	.dl CastleWindow_1, CastleWindow_1_Fast
-	.db %10000000
-	.dl CastleWindow_2, CastleWindow_2_Fast
-	.db %10000000
-	.dl Bricks_2_2, Bricks_2_2_Fast
-	.db %10000000
-	.dl Bricks_2_1, Bricks_2_1_Fast
-	.db %10000000
-	.dl Bricks_2_11, Bricks_2_11_Fast
-	.db %10000000
-	.dl Bricks_28, Bricks_28_Fast
-	.db %10000000
-	.dl Bricks_19, Bricks_19_Fast
-	.db %10000000
-	.dl Bricks_19, Bricks_19_Fast_F
+
+	.dl CityBanners_2
+	.db 34
+	.db %10000001
+
+	.dl CityBanners_5
+	.db 35
+	.db %10001001
+
+	.db %00110010, %00100000
+
+	.dl CityBanners_5
+	.db 36
+	.db %01001001
+
+	.db %00110010, %00100000
+
+	.dl CityBanners_5
+	.db 37
+	.db %10000001
+
+	.dl CityBanners_5
+	.db 38
+	.db %01000001
+
+	.dl CityBanners_6
+	.db 39
+	.db %10000001
+
+	.dl CityBanners_6
+	.db 40
+	.db %01000001
+
+	.dl CityBanners_4
+	.db 41
+	.db %00000001
+
+	.dl CityBanners_4
+	.db 42
+	.db %01000001
+
+	.dl CityBanners_9
+	.db 43
+	.db %10000001
+
+	.dl CityBanners_9
+	.db 44
+	.db %01000001
+
+	.dl CityBanners_10
+	.db 45
+	.db %10000001
+
+	.dl CityBanners_10
+	.db 46
+	.db %01000001
+
+	.dl CityBanners_1
+	.db 172
 	.db %10100000
-	.dl Bricks_21, Bricks_21_Fast_F
-	.db %10100000
-	.dl Bricks_21, Bricks_21_Fast
-	.db %10000000
-	.dl Bricks_23, Bricks_23_Fast
-	.db %10000000
-	.dl Bricks_20, Bricks_20_Slow_O
-	.db %01000000
-	.dl Bricks_20, Bricks_20_Slow_O_F
-	.db %01100000
-	.dl Bricks_0, Bricks_0_Fast
-	.db %10000000
-	.dl Bricks_22, Bricks_22_Slow_O
-	.db %01000000
-	.dl Bricks_22, Bricks_22_Slow_O_F
-	.db %01100000
-	.dl CastleVines_15, CastleVines_15_Slow
-	.db %00000000
-	.dl CastleVines_15, CastleVines_15_Slow_O
-	.db %01000000
-	.dl CastleVines_16, CastleVines_16_Slow
-	.db %00000000
-	.dl CastleVines_17, CastleVines_17_Slow
-	.db %00000000
-	.dl CastleVines_9, CastleVines_9_Slow_O
-	.db %01000000
-	.dl CastleVines_10, CastleVines_10_Slow
-	.db %00000000
-	.dl CastleVines_9, CastleVines_9_Slow
-	.db %00000000
-	.dl CastleVines_11, CastleVines_11_Slow_O
-	.db %01000000
-	.dl CastleVines_10, CastleVines_10_Slow_O
-	.db %01000000
-	.dl CastleVines_17, CastleVines_17_Slow_F
-	.db %00100000
-	.dl CastleVines_16, CastleVines_16_Slow_O_F
-	.db %01100000
-	.dl CastleVines_17, CastleVines_17_Slow_O_F
-	.db %01100000
-	.dl CastleVines_14, CastleVines_14_Slow_O
-	.db %01000000
-	.dl CastleVines_12, CastleVines_12_Slow_O
-	.db %01000000
-	.dl CastleVines_13, CastleVines_13_Slow
-	.db %00000000
-	.dl CastleVines_16, CastleVines_16_Slow_O
-	.db %01000000
-	.dl CastleVines_16, CastleVines_16_Slow_F
-	.db %00100000
-	.dl CloudCityWelcomeComitte_0, CloudCityWelcomeComitte_0_Slow
-	.db %00000000
-	.dl CityBanners_1, CityBanners_1_Fast
-	.db %10000000
-	.dl CityBanners_2, CityBanners_2_Fast
-	.db %10000000
-	.dl CityBanners_3, CityBanners_3_Fast
-	.db %10000000
-	.dl CityBanners_3, CityBanners_3_Slow_O
-	.db %01000000
-	.dl CityBanners_5, CityBanners_5_Fast
-	.db %10000000
-	.dl CityBanners_5, CityBanners_5_Slow_O
-	.db %01000000
-	.dl CityBanners_6, CityBanners_6_Fast
-	.db %10000000
-	.dl CityBanners_6, CityBanners_6_Slow_O
-	.db %01000000
-	.dl CityBanners_4, CityBanners_4_Slow
-	.db %00000000
-	.dl CityBanners_4, CityBanners_4_Slow_O
-	.db %01000000
-	.dl CityBanners_9, CityBanners_9_Fast
-	.db %10000000
-	.dl CityBanners_9, CityBanners_9_Slow_O
-	.db %01000000
-	.dl CityBanners_10, CityBanners_10_Fast
-	.db %10000000
+
 
 decompress_frame_up_69:
 	.db 0
 
 decompress_frame_up_70:
-	.db 9
-	.dl Bricks_22, Bricks_22_Fast
-	.db %10000000
-	.dl Bricks_22, Bricks_22_Fast_F
-	.db %10100000
-	.dl Bricks_24, Bricks_24_Fast
-	.db %10000000
-	.dl CastleVines_18, CastleVines_18_Slow_O_F
-	.db %01100000
-	.dl CastleVines_6, CastleVines_6_Slow
-	.db %00000000
-	.dl CastleVines_7, CastleVines_7_Slow
-	.db %00000000
-	.dl CastleVines_8, CastleVines_8_Slow
-	.db %00000000
-	.dl CastlePlatforms_9, CastlePlatforms_9_Fast
-	.db %10000000
-	.dl SpikesPurple_3, SpikesPurple_3_Fast
-	.db %10000000
+	.db 8
+	.dl Bricks_2_7
+	.db 47
+	.db %10100001
+
+	.dl CastleVines_17
+	.db 48
+	.db %01100001
+
+	.dl CastleVines_18
+	.db 49
+	.db %01100001
+
+	.dl CastleVines_6
+	.db 50
+	.db %00000001
+
+	.dl CastleVines_7
+	.db 51
+	.db %00000001
+
+	.dl CastleVines_8
+	.db 52
+	.db %00000001
+
+	.dl CastlePlatforms_9
+	.db 127
+	.db %10000001
+
+	.dl SpikesPurple_3
+	.db 128
+	.db %10000001
+
 
 decompress_frame_up_71:
 	.db 8
-	.dl Truetle_4, Truetle_4_Fast
+	.dl Truetle_4
+	.db 102
 	.db %10000000
-	.dl Truetle_4, Truetle_4_Fast_F
+
+	.dl Truetle_4
+	.db 103
 	.db %10100000
-	.dl Truetle_6, Truetle_6_Slow
-	.db %00000000
-	.dl Truetle_11, Truetle_11_Slow
-	.db %00000000
-	.dl Truetle_9, Truetle_9_Slow
-	.db %00000000
-	.dl Truetle_6, Truetle_6_Slow_F
-	.db %00100000
-	.dl Truetle_11, Truetle_11_Slow_F
-	.db %00100000
-	.dl Truetle_9, Truetle_9_Slow_F
-	.db %00100000
+
+	.dl Truetle_2
+	.db 104
+	.db %00001000
+
+	.db %10110111, %01100000
+
+	.dl Truetle_7
+	.db 105
+	.db %00001000
+
+	.db %10110111, %01100000
+
+	.dl Truetle_5
+	.db 106
+	.db %00001000
+
+	.db %10110111, %01100000
+
+	.dl Truetle_2
+	.db 107
+	.db %00101000
+
+	.db %10110111, %01100000
+
+	.dl Truetle_7
+	.db 108
+	.db %00101000
+
+	.db %10110111, %01100000
+
+	.dl Truetle_5
+	.db 109
+	.db %00101000
+
+	.db %10110111, %01100000
+
 
 decompress_frame_up_72:
-	.db 4
-	.dl CloudSemisolid_2, CloudSemisolid_2_Fast
-	.db %10000000
-	.dl CloudSemisolid_3, CloudSemisolid_3_Fast
-	.db %10000000
-	.dl CloudSemisolid_4, CloudSemisolid_4_Fast
-	.db %10000000
-	.dl CloudSemisolid_5, CloudSemisolid_5_Fast
-	.db %10000000
+	.db 5
+	.dl CastleVines_16
+	.db 53
+	.db %01100001
+
+	.dl CloudSemisolid_2
+	.db 129
+	.db %10000001
+
+	.dl CloudSemisolid_3
+	.db 130
+	.db %10000001
+
+	.dl CloudSemisolid_4
+	.db 131
+	.db %10000001
+
+	.dl CloudSemisolid_5
+	.db 132
+	.db %10000001
+
 
 decompress_frame_up_73:
 	.db 0
@@ -1519,22 +2283,38 @@ decompress_frame_up_75:
 
 decompress_frame_up_76:
 	.db 8
-	.dl CastlePlatforms_1, CastlePlatforms_1_Fast
-	.db %10000000
-	.dl CastlePlatforms_5, CastlePlatforms_5_Fast
-	.db %10000000
-	.dl CastlePlatforms_4, CastlePlatforms_4_Fast
-	.db %10000000
-	.dl SpikesPurple_1, SpikesPurple_1_Fast_F
-	.db %10100000
-	.dl SpikesPurple_1, SpikesPurple_1_Fast
-	.db %10000000
-	.dl CastlePlatforms_7, CastlePlatforms_7_Fast
-	.db %10000000
-	.dl CastlePlatforms_7, CastlePlatforms_7_Fast_F
-	.db %10100000
-	.dl SpikesPurple_2, SpikesPurple_2_Fast
-	.db %10000000
+	.dl CastlePlatforms_1
+	.db 133
+	.db %10000001
+
+	.dl CastlePlatforms_5
+	.db 134
+	.db %10000001
+
+	.dl CastlePlatforms_4
+	.db 135
+	.db %10000001
+
+	.dl SpikesPurple_1
+	.db 138
+	.db %10100001
+
+	.dl SpikesPurple_1
+	.db 139
+	.db %10000001
+
+	.dl CastlePlatforms_7
+	.db 136
+	.db %10000001
+
+	.dl CastlePlatforms_7
+	.db 137
+	.db %10100001
+
+	.dl SpikesPurple_2
+	.db 140
+	.db %10000001
+
 
 decompress_frame_up_77:
 	.db 0
@@ -1547,14 +2327,22 @@ decompress_frame_up_79:
 
 decompress_frame_up_80:
 	.db 4
-	.dl CityBanners_7, CityBanners_7_Fast
-	.db %10000000
-	.dl CityBanners_7, CityBanners_7_Slow_O
-	.db %01000000
-	.dl CityBanners_8, CityBanners_8_Fast
-	.db %10000000
-	.dl CityBanners_8, CityBanners_8_Slow_O
-	.db %01000000
+	.dl CityBanners_7
+	.db 54
+	.db %10000001
+
+	.dl CityBanners_7
+	.db 55
+	.db %01000001
+
+	.dl CityBanners_8
+	.db 56
+	.db %10000001
+
+	.dl CityBanners_8
+	.db 57
+	.db %01000001
+
 
 decompress_frame_up_81:
 	.db 0
@@ -1567,28 +2355,38 @@ decompress_frame_up_83:
 
 decompress_frame_up_84:
 	.db 1
-	.dl FrogNPCs1_4, FrogNPCs1_4_Slow_O_F
-	.db %01100000
+	.dl FrogNPCs1_4
+	.db 141
+	.db %01100001
+
 
 decompress_frame_up_85:
 	.db 0
 
 decompress_frame_up_86:
 	.db 1
-	.dl SpikesPurple_4, SpikesPurple_4_Fast
-	.db %10000000
+	.dl SpikesPurple_4
+	.db 142
+	.db %10000001
+
 
 decompress_frame_up_87:
 	.db 0
 
 decompress_frame_up_88:
 	.db 3
-	.dl CastlePlatforms_6, CastlePlatforms_6_Fast
-	.db %10000000
-	.dl CityBanners_0, CityBanners_0_Fast
-	.db %10000000
-	.dl CityBanners_0, CityBanners_0_Fast_F
-	.db %10100000
+	.dl CastlePlatforms_6
+	.db 143
+	.db %10000001
+
+	.dl CityBanners_0
+	.db 144
+	.db %10000001
+
+	.dl CityBanners_0
+	.db 145
+	.db %10100001
+
 
 decompress_frame_up_89:
 	.db 0
@@ -1681,7 +2479,77 @@ decompress_frame_up_118:
 	.db 0
 
 decompress_frame_up_119:
-	.db 0
+	.db 14
+	.dl Stars_13
+	.db 12
+	.db %00000110
+
+	.db %01100000
+
+	.dl Stars_15
+	.db 15
+	.db %00000110
+
+	.db %01100000
+
+	.dl Stars_3
+	.db 10
+	.db %00000010
+
+	.dl Stars_6
+	.db 11
+	.db %00000110
+
+	.db %00000110
+
+	.dl Stars_15
+	.db 14
+	.db %00000010
+
+	.dl Stars_5
+	.db 16
+	.db %00000010
+
+	.dl Stars_20
+	.db 27
+	.db %01001010
+
+	.db %00000001, %01100000
+
+	.dl Stars_5
+	.db 28
+	.db %00000110
+
+	.db %00010110
+
+	.dl Stars_20
+	.db 26
+	.db %01000010
+
+	.dl Stars_11
+	.db 17
+	.db %00000010
+
+	.dl Stars_6
+	.db 22
+	.db %00000010
+
+	.dl Stars_15
+	.db 24
+	.db %00000110
+
+	.db %00010000
+
+	.dl Stars_21
+	.db 30
+	.db %00001010
+
+	.db %00000001, %01100000
+
+	.dl Stars_13
+	.db 20
+	.db %00000010
+
 
 decompress_frame_up_120:
 	.db 0
@@ -1705,36 +2573,346 @@ decompress_frame_up_126:
 	.db 0
 
 decompress_frame_up_127:
-	.db 0
+	.db 9
+	.dl Stars_17
+	.db 9
+	.db %00000110
+
+	.db %01100000
+
+	.dl Stars_20
+	.db 13
+	.db %00001010
+
+	.db %00000001, %01100000
+
+	.dl Stars_3
+	.db 29
+	.db %00000110
+
+	.db %00000110
+
+	.dl Stars_2
+	.db 18
+	.db %00000110
+
+	.db %00000110
+
+	.dl Stars_17
+	.db 21
+	.db %00000010
+
+	.dl Stars_2
+	.db 19
+	.db %00000010
+
+	.dl Stars_20
+	.db 31
+	.db %00000010
+
+	.dl Stars_13
+	.db 23
+	.db %00000110
+
+	.db %00010000
+
+	.dl Stars_21
+	.db 25
+	.db %00000010
+
 
 decompress_frame_up_128:
-	.db 4
-	.dl CloudTransitory_0, CloudTransitory_0_Fast
-	.db %10000000
-	.dl CloudTransitory_0, CloudTransitory_0_Fast_F
-	.db %10100000
-	.dl Palette3_0, Palette3_0_Fast
-	.db %10000000
-	.dl Palette2_0, Palette2_0_Fast
-	.db %10000000
+	.db 2
+	.dl CloudSemisolid_0
+	.db 146
+	.db %10001001
+
+	.db %10010110, %01100000
+
+	.dl CloudSemisolid_0
+	.db 147
+	.db %10101001
+
+	.db %10010110, %01100000
+
 
 decompress_frame_up_129:
 	.db 0
 
 decompress_frame_up_130:
-	.db 0
+	.db 1
+	.dl Stars_5
+	.db 177
+	.db %00000100
+
+	.db %01100110
+
 
 decompress_frame_up_131:
 	.db 0
 
 decompress_frame_up_132:
-	.db 0
+	.db 24
+	.dl SpacePlatforms_0
+	.db 149
+	.db %10001001
+
+	.db %10011110, %00110000
+
+	.dl SpacePlatforms_0
+	.db 148
+	.db %10000001
+
+	.dl SpacePlatforms_0
+	.db 151
+	.db %10001001
+
+	.db %10011100, %01110000
+
+	.dl SpacePlatforms_0
+	.db 150
+	.db %10001001
+
+	.db %10011011, %10100000
+
+	.dl SpacePlatforms_1
+	.db 153
+	.db %10001001
+
+	.db %10011110, %00110000
+
+	.dl SpacePlatforms_1
+	.db 152
+	.db %10000001
+
+	.dl SpacePlatforms_1
+	.db 155
+	.db %10001001
+
+	.db %10011100, %01110000
+
+	.dl SpacePlatforms_1
+	.db 154
+	.db %10001001
+
+	.db %10011011, %10100000
+
+	.dl SpacePlatforms_10
+	.db 157
+	.db %10000101
+
+	.db %11100011
+
+	.dl SpacePlatforms_10
+	.db 156
+	.db %10000001
+
+	.dl SpacePlatforms_10
+	.db 159
+	.db %10000101
+
+	.db %11000111
+
+	.dl SpacePlatforms_10
+	.db 158
+	.db %10000101
+
+	.db %10111010
+
+	.dl SpacePlatforms_10
+	.db 161
+	.db %10000101
+
+	.db %11100011
+
+	.dl SpacePlatforms_10
+	.db 160
+	.db %10000101
+
+	.db %11010010
+
+	.dl SpacePlatforms_10
+	.db 163
+	.db %10000101
+
+	.db %11000111
+
+	.dl SpacePlatforms_10
+	.db 162
+	.db %10000101
+
+	.db %10111010
+
+	.dl SpacePlatforms_14
+	.db 165
+	.db %10000101
+
+	.db %11100011
+
+	.dl SpacePlatforms_14
+	.db 164
+	.db %10000001
+
+	.dl SpacePlatforms_14
+	.db 167
+	.db %10000101
+
+	.db %11000111
+
+	.dl SpacePlatforms_14
+	.db 166
+	.db %10000101
+
+	.db %10111010
+
+	.dl SpacePlatforms_14
+	.db 169
+	.db %10000101
+
+	.db %11100011
+
+	.dl SpacePlatforms_14
+	.db 168
+	.db %10000101
+
+	.db %11010010
+
+	.dl SpacePlatforms_14
+	.db 171
+	.db %10000101
+
+	.db %11000111
+
+	.dl SpacePlatforms_14
+	.db 170
+	.db %10000101
+
+	.db %10111010
+
 
 decompress_frame_up_133:
 	.db 0
 
 decompress_frame_up_134:
-	.db 0
+	.db 29
+	.dl Stars_3
+	.db 178
+	.db %00000100
+
+	.db %01100110
+
+	.dl ZigsAndZags_12
+	.db 58
+	.db %00000001
+
+	.dl ZigsAndZags_13
+	.db 59
+	.db %00000001
+
+	.dl ZigsAndZags_12
+	.db 60
+	.db %01000001
+
+	.dl ZigsAndZags_13
+	.db 61
+	.db %01000001
+
+	.dl ZigsAndZags_2
+	.db 62
+	.db %00000001
+
+	.dl ZigsAndZags_3
+	.db 63
+	.db %01000001
+
+	.dl ZigsAndZags_2
+	.db 64
+	.db %01000001
+
+	.dl ZigsAndZags_3
+	.db 65
+	.db %00000001
+
+	.dl ZigsAndZags_0
+	.db 66
+	.db %00000001
+
+	.dl ZigsAndZags_1
+	.db 67
+	.db %00000001
+
+	.dl ZigsAndZags_1
+	.db 68
+	.db %01000001
+
+	.dl ZigsAndZags_0
+	.db 69
+	.db %01000001
+
+	.dl ZigsAndZags_4
+	.db 70
+	.db %00000001
+
+	.dl ZigsAndZags_5
+	.db 71
+	.db %00000001
+
+	.dl ZigsAndZags_5
+	.db 72
+	.db %01000001
+
+	.dl ZigsAndZags_4
+	.db 73
+	.db %01000001
+
+	.dl ZigsAndZags_8
+	.db 74
+	.db %00000001
+
+	.dl ZigsAndZags_10
+	.db 75
+	.db %00000001
+
+	.dl ZigsAndZags_8
+	.db 76
+	.db %01000001
+
+	.dl ZigsAndZags_10
+	.db 77
+	.db %01000001
+
+	.dl ZigsAndZags_22
+	.db 78
+	.db %00000001
+
+	.dl ZigsAndZags_23
+	.db 79
+	.db %00000001
+
+	.dl ZigsAndZags_23
+	.db 80
+	.db %01000001
+
+	.dl ZigsAndZags_22
+	.db 81
+	.db %01000001
+
+	.dl ZigsAndZags_16
+	.db 82
+	.db %00000001
+
+	.dl ZigsAndZags_17
+	.db 83
+	.db %00000001
+
+	.dl ZigsAndZags_16
+	.db 84
+	.db %01000001
+
+	.dl ZigsAndZags_17
+	.db 85
+	.db %01000001
+
 
 decompress_frame_up_135:
 	.db 0
@@ -2090,107 +3268,143 @@ decompress_frame_down_1:
 	.db 0
 
 decompress_frame_down_2:
-	.db 7
-	.dl BigGrassBase, BigGrassBase_Fast
-	.db %10000000
-	.dl BigGrassTop, BigGrassTop_Fast
-	.db %10000000
-	.dl BigGrassBase, BigGrassBase_Slow_O
-	.db %01000000
-	.dl BigGrassBase, BigGrassBase_Fast_F
-	.db %10100000
-	.dl BigGrassTop, BigGrassTop_Fast_F
-	.db %10100000
-	.dl BigGrassTop, BigGrassTop_Slow_O
-	.db %01000000
-	.dl DualLeaf4, DualLeaf4_Slow_F
-	.db %00100000
+	.db 0
 
 decompress_frame_down_3:
 	.db 0
 
 decompress_frame_down_4:
 	.db 18
-	.dl AscentBanner_6, AscentBanner_6_Slow_O
+	.dl AscentBanner_6
+	.db 55
 	.db %01000000
-	.dl AscentBanner_9, AscentBanner_9_Fast
+
+	.dl AscentBanner_9
+	.db 53
 	.db %10000000
-	.dl AscentBanner_10, AscentBanner_10_Fast
+
+	.dl AscentBanner_10
+	.db 54
 	.db %10000000
-	.dl AscentBanner_1, AscentBanner_1_Fast
+
+	.dl AscentBanner_1
+	.db 52
 	.db %10000000
-	.dl AscentBanner_2, AscentBanner_2_Fast
+
+	.dl AscentBanner_2
+	.db 51
 	.db %10000000
-	.dl AscentBanner_3, AscentBanner_3_Fast
+
+	.dl AscentBanner_3
+	.db 50
 	.db %10000000
-	.dl AscentBanner_0, AscentBanner_0_Fast
+
+	.dl AscentBanner_0
+	.db 49
 	.db %10000000
-	.dl AscentBanner_4, AscentBanner_4_Fast
+
+	.dl AscentBanner_4
+	.db 48
 	.db %10000000
-	.dl AscentBanner_5, AscentBanner_5_Fast
+
+	.dl AscentBanner_5
+	.db 47
 	.db %10000000
-	.dl AscentBanner_10, AscentBanner_10_Fast_F
+
+	.dl AscentBanner_10
+	.db 46
 	.db %10100000
-	.dl AscentBanner_9, AscentBanner_9_Fast_F
+
+	.dl AscentBanner_9
+	.db 44
 	.db %10100000
-	.dl AscentBanner_6, AscentBanner_6_Slow_F
+
+	.dl AscentBanner_6
+	.db 45
 	.db %00100000
-	.dl AscentBanner_7, AscentBanner_7_Fast
+
+	.dl AscentBanner_7
+	.db 42
 	.db %10000000
-	.dl AscentBanner_8, AscentBanner_8_Slow_O
+
+	.dl AscentBanner_8
+	.db 41
 	.db %01000000
-	.dl AscentBanner_8, AscentBanner_8_Slow
+
+	.dl AscentBanner_8
+	.db 40
 	.db %00000000
-	.dl AscentBanner_7, AscentBanner_7_Slow_O
+
+	.dl AscentBanner_7
+	.db 43
 	.db %01000000
-	.dl Branches_8, Branches_8_Slow_O_F
+
+	.dl Branches_8
+	.db 130
 	.db %01100000
-	.dl FrogNPCs1_7, FrogNPCs1_7_Slow_F
+
+	.dl FrogNPCs1_7
+	.db 159
 	.db %00100000
+
 
 decompress_frame_down_5:
 	.db 0
 
 decompress_frame_down_6:
 	.db 1
-	.dl FrogNPCs1_8, FrogNPCs1_8_Slow_F
-	.db %00100000
+	.dl FrogNPCs1_8
+	.db 93
+	.db %00100001
+
 
 decompress_frame_down_7:
 	.db 0
 
 decompress_frame_down_8:
 	.db 1
-	.dl FrogNPCs1_9, FrogNPCs1_9_Slow_O
-	.db %01000000
+	.dl FrogNPCs1_9
+	.db 97
+	.db %01000001
+
 
 decompress_frame_down_9:
 	.db 0
 
 decompress_frame_down_10:
 	.db 2
-	.dl Branches_4, Branches_4_Fast
+	.dl Branches_4
+	.db 77
 	.db %10000000
-	.dl FrogNPCs1_3, FrogNPCs1_3_Slow_F
-	.db %00100000
+
+	.dl FrogNPCs1_3
+	.db 98
+	.db %00100001
+
 
 decompress_frame_down_11:
 	.db 0
 
 decompress_frame_down_12:
 	.db 2
-	.dl FrogNPCs1_5, FrogNPCs1_5_Slow
-	.db %00000000
-	.dl FrogNPCs1_7, FrogNPCs1_7_Slow
-	.db %00000000
+	.dl FrogNPCs1_5
+	.db 100
+	.db %00000001
+
+	.dl FrogNPCs1_7
+	.db 101
+	.db %00000001
+
 
 decompress_frame_down_13:
 	.db 0
 
 decompress_frame_down_14:
 	.db 1
-	.dl FrogNPCs1_9, FrogNPCs1_9_Slow
-	.db %00000000
+	.dl FrogNPCs1_9
+	.db 102
+	.db %00000001
+
 
 decompress_frame_down_15:
 	.db 0
@@ -2203,8 +3417,10 @@ decompress_frame_down_17:
 
 decompress_frame_down_18:
 	.db 1
-	.dl FrogNPCs1_2, FrogNPCs1_2_Slow_O_F
-	.db %01100000
+	.dl FrogNPCs1_2
+	.db 110
+	.db %01100001
+
 
 decompress_frame_down_19:
 	.db 0
@@ -2217,48 +3433,84 @@ decompress_frame_down_21:
 
 decompress_frame_down_22:
 	.db 3
-	.dl Lantern_7, Lantern_7_Slow
+	.dl Lantern_7
+	.db 56
 	.db %00000000
-	.dl Lantern_7, Lantern_7_Slow_O_F
+
+	.dl Lantern_7
+	.db 57
 	.db %01100000
-	.dl FrogNPCs1_11, FrogNPCs1_11_Slow
-	.db %00000000
+
+	.dl FrogNPCs1_11
+	.db 112
+	.db %00000001
+
 
 decompress_frame_down_23:
 	.db 1
-	.dl Lantern_4, Lantern_4_Slow_O
+	.dl Lantern_4
+	.db 58
 	.db %01000000
+
 
 decompress_frame_down_24:
 	.db 14
-	.dl GroundDirtFull, GroundDirtFull_Fast_F
+	.dl GroundDirtFull
+	.db 126
 	.db %10100000
-	.dl GroundDirtFull, GroundDirtFull_Fast
+
+	.dl GroundDirtFull
+	.db 127
 	.db %10000000
-	.dl GroundDirtMound, GroundDirtMound_Fast
+
+	.dl GroundDirtMound
+	.db 128
 	.db %10000000
-	.dl GroundDirtMound, GroundDirtMound_Fast_F
+
+	.dl GroundDirtMound
+	.db 129
 	.db %10100000
-	.dl GroundDirtDark, GroundDirtDark_Fast
+
+	.dl GroundDirtDark
+	.db 0
+	.db %10000010
+
+	.dl GroundDirtDark
+	.db 1
+	.db %10100010
+
+	.dl GroundHumpDark
+	.db 2
+	.db %10000010
+
+	.dl GroundHumpDark
+	.db 3
+	.db %10100010
+
+	.dl Tree_16
+	.db 179
 	.db %10000000
-	.dl GroundDirtDark, GroundDirtDark_Fast_F
-	.db %10100000
-	.dl GroundHumpDark, GroundHumpDark_Fast
-	.db %10000000
-	.dl GroundHumpDark, GroundHumpDark_Fast_F
-	.db %10100000
-	.dl Tree_16, Tree_16_Fast
-	.db %10000000
-	.dl Tree_17, Tree_17_Slow
+
+	.dl Tree_17
+	.db 180
 	.db %00000000
-	.dl Tree_17, Tree_17_Slow_O_F
+
+	.dl Tree_17
+	.db 181
 	.db %01100000
-	.dl Tree_18, Tree_18_Slow
+
+	.dl Tree_18
+	.db 182
 	.db %00000000
-	.dl Tree_18, Tree_18_Slow_O_F
+
+	.dl Tree_18
+	.db 183
 	.db %01100000
-	.dl Tree_16, Tree_16_Fast_F
+
+	.dl Tree_16
+	.db 184
 	.db %10100000
+
 
 decompress_frame_down_25:
 	.db 0
@@ -2271,134 +3523,220 @@ decompress_frame_down_27:
 
 decompress_frame_down_28:
 	.db 5
-	.dl Lantern_5, Lantern_5_Slow
+	.dl Lantern_5
+	.db 29
 	.db %00000000
-	.dl Lantern_5, Lantern_5_Slow_O_F
+
+	.dl Lantern_5
+	.db 30
 	.db %01100000
-	.dl Branches_0, Branches_0_Fast_F
-	.db %10100000
-	.dl Branches_9, Branches_9_Fast_F
-	.db %10100000
-	.dl FrogNPCs1_3, FrogNPCs1_3_Slow
-	.db %00000000
+
+	.dl Branches_0
+	.db 0
+	.db %10100001
+
+	.dl Branches_9
+	.db 2
+	.db %10100001
+
+	.dl FrogNPCs1_3
+	.db 113
+	.db %00000001
+
 
 decompress_frame_down_29:
 	.db 0
 
 decompress_frame_down_30:
 	.db 4
-	.dl Branches_1, Branches_1_Fast_F
+	.dl Branches_1
+	.db 162
 	.db %10100000
-	.dl Branches_2, Branches_2_Fast_F
+
+	.dl Branches_2
+	.db 163
 	.db %10100000
-	.dl Branches_5, Branches_5_Fast_F
+
+	.dl Branches_5
+	.db 164
 	.db %10100000
-	.dl Vine2, Vine2_Slow_O
+
+	.dl Vine2
+	.db 165
 	.db %01000000
+
 
 decompress_frame_down_31:
 	.db 0
 
 decompress_frame_down_32:
 	.db 3
-	.dl Lantern_6, Lantern_6_Slow
+	.dl Lantern_6
+	.db 38
 	.db %00000000
-	.dl Lantern_6, Lantern_6_Slow_O_F
+
+	.dl Lantern_6
+	.db 39
 	.db %01100000
-	.dl FrogNPCs1_6, FrogNPCs1_6_Slow
-	.db %00000000
+
+	.dl FrogNPCs1_6
+	.db 114
+	.db %00000001
+
 
 decompress_frame_down_33:
 	.db 0
 
 decompress_frame_down_34:
 	.db 3
-	.dl FrogNPCs1_8, FrogNPCs1_8_Slow_O
-	.db %01000000
-	.dl FrogNPCs1_9, FrogNPCs1_9_Slow_F
-	.db %00100000
-	.dl FrogNPCs1_4, FrogNPCs1_4_Slow
-	.db %00000000
+	.dl FrogNPCs1_8
+	.db 117
+	.db %01000001
+
+	.dl FrogNPCs1_9
+	.db 118
+	.db %00100001
+
+	.dl FrogNPCs1_4
+	.db 119
+	.db %00000001
+
 
 decompress_frame_down_35:
 	.db 0
 
 decompress_frame_down_36:
 	.db 13
-	.dl Lantern_0, Lantern_0_Fast
+	.dl Lantern_0
+	.db 21
 	.db %10000000
-	.dl Lantern_1, Lantern_1_Fast
+
+	.dl Lantern_1
+	.db 22
 	.db %10000000
-	.dl Lantern_2, Lantern_2_Fast
+
+	.dl Lantern_2
+	.db 23
 	.db %10000000
-	.dl Lantern_0, Lantern_0_Fast_F
+
+	.dl Lantern_0
+	.db 24
 	.db %10100000
-	.dl Lantern_1, Lantern_1_Fast_F
+
+	.dl Lantern_1
+	.db 25
 	.db %10100000
-	.dl Lantern_2, Lantern_2_Fast_F
+
+	.dl Lantern_2
+	.db 26
 	.db %10100000
-	.dl Lantern_3, Lantern_3_Slow
+
+	.dl Lantern_3
+	.db 27
 	.db %00000000
-	.dl Lantern_3, Lantern_3_Slow_O_F
+
+	.dl Lantern_3
+	.db 28
 	.db %01100000
-	.dl Branches_9, Branches_9_Slow_O
+
+	.dl Branches_9
+	.db 3
+	.db %01000001
+
+	.dl Branches_1
+	.db 166
 	.db %01000000
-	.dl Branches_1, Branches_1_Slow_O
+
+	.dl Branches_2
+	.db 167
 	.db %01000000
-	.dl Branches_2, Branches_2_Slow_O
+
+	.dl Branches_4
+	.db 168
 	.db %01000000
-	.dl Branches_4, Branches_4_Slow_O
+
+	.dl Branches_7
+	.db 169
 	.db %01000000
-	.dl Branches_7, Branches_7_Slow_O
-	.db %01000000
+
 
 decompress_frame_down_37:
 	.db 0
 
 decompress_frame_down_38:
 	.db 7
-	.dl Tree_4, Tree_4_Fast
+	.dl Tree_4
+	.db 133
 	.db %10000000
-	.dl Tree_9, Tree_9_Fast
+
+	.dl Tree_9
+	.db 135
 	.db %10000000
-	.dl Tree_3, Tree_3_Fast_F
+
+	.dl Tree_3
+	.db 137
 	.db %10100000
-	.dl Tree_11, Tree_11_Fast_F
+
+	.dl Tree_11
+	.db 154
 	.db %10100000
-	.dl Branches_8, Branches_8_Slow_O
+
+	.dl Branches_8
+	.db 171
 	.db %01000000
-	.dl Branches_0, Branches_0_Fast
+
+	.dl Branches_0
+	.db 170
 	.db %10000000
-	.dl FrogNPCs1_10, FrogNPCs1_10_Slow
-	.db %00000000
+
+	.dl FrogNPCs1_10
+	.db 91
+	.db %00000001
+
 
 decompress_frame_down_39:
 	.db 0
 
 decompress_frame_down_40:
 	.db 7
-	.dl Tree_3, Tree_3_Fast
+	.dl Tree_3
+	.db 139
 	.db %10000000
-	.dl Tree_9, Tree_9_Fast_F
+
+	.dl Tree_9
+	.db 141
 	.db %10100000
-	.dl Tree_4, Tree_4_Fast_F
+
+	.dl Tree_4
+	.db 143
 	.db %10100000
-	.dl Tree_10, Tree_10_Fast
+
+	.dl Tree_10
+	.db 146
 	.db %10000000
-	.dl Tree_5, Tree_5_Fast
+
+	.dl Tree_5
+	.db 150
 	.db %10000000
-	.dl Tree_11, Tree_11_Fast
+
+	.dl Tree_11
+	.db 151
 	.db %10000000
-	.dl Tree_5, Tree_5_Fast_F
+
+	.dl Tree_5
+	.db 152
 	.db %10100000
+
 
 decompress_frame_down_41:
 	.db 0
 
 decompress_frame_down_42:
 	.db 1
-	.dl FrogNPCs1_1, FrogNPCs1_1_Slow
-	.db %00000000
+	.dl FrogNPCs1_1
+	.db 94
+	.db %00000001
+
 
 decompress_frame_down_43:
 	.db 0
@@ -2417,24 +3755,40 @@ decompress_frame_down_47:
 
 decompress_frame_down_48:
 	.db 2
-	.dl Vines_4, Vines_4_Slow
-	.db %00000000
-	.dl Spikes_1, Spikes_1_Fast_F
-	.db %10100000
+	.dl Vines_4
+	.db 4
+	.db %00000001
+
+	.dl SpikesPurple_1
+	.db 115
+	.db %10101001
+
+	.db %10010111, %01100000
+
 
 decompress_frame_down_49:
 	.db 0
 
 decompress_frame_down_50:
 	.db 4
-	.dl Vine4, Vine4_Slow
+	.dl Vine4
+	.db 65
 	.db %00000000
-	.dl FrogNPCs1_0, FrogNPCs1_0_Slow
-	.db %00000000
-	.dl FrogNPCs1_6, FrogNPCs1_6_Slow_O
-	.db %01000000
-	.dl Spikes_1, Spikes_1_Fast
-	.db %10000000
+
+	.dl FrogNPCs1_0
+	.db 111
+	.db %00000001
+
+	.dl FrogNPCs1_6
+	.db 95
+	.db %01000001
+
+	.dl SpikesPurple_1
+	.db 116
+	.db %10001001
+
+	.db %10010111, %01100000
+
 
 decompress_frame_down_51:
 	.db 0
@@ -2447,200 +3801,364 @@ decompress_frame_down_53:
 
 decompress_frame_down_54:
 	.db 2
-	.dl FrogNPCs1_5, FrogNPCs1_5_Slow_O
+	.dl FrogNPCs1_5
+	.db 157
 	.db %01000000
-	.dl Vine7, Vine7_Slow
+
+	.dl Vine7
+	.db 156
 	.db %00000000
+
 
 decompress_frame_down_55:
 	.db 0
 
 decompress_frame_down_56:
 	.db 10
-	.dl Branches_5, Branches_5_Fast
+	.dl Branches_5
+	.db 76
 	.db %10000000
-	.dl Branches_3, Branches_3_Fast
+
+	.dl Branches_3
+	.db 78
 	.db %10000000
-	.dl Branches_2, Branches_2_Fast
+
+	.dl Branches_2
+	.db 79
 	.db %10000000
-	.dl Vine2, Vine2_Slow_F
+
+	.dl Vine2
+	.db 80
 	.db %00100000
-	.dl VineVertical, VineVertical_Slow_F
+
+	.dl VineVertical
+	.db 81
 	.db %00100000
-	.dl Branches_1, Branches_1_Fast
+
+	.dl Branches_1
+	.db 155
 	.db %10000000
-	.dl SolidPlatform_4, SolidPlatform_4_Slow
-	.db %00000000
-	.dl SolidPlatform_1, SolidPlatform_1_Slow_O
-	.db %01000000
-	.dl SolidPlatform_1, SolidPlatform_1_Slow
-	.db %00000000
-	.dl SolidPlatform_5, SolidPlatform_5_Slow_O
-	.db %01000000
+
+	.dl SolidPlatform_4
+	.db 103
+	.db %00000001
+
+	.dl SolidPlatform_1
+	.db 104
+	.db %01000001
+
+	.dl SolidPlatform_1
+	.db 105
+	.db %00000001
+
+	.dl SolidPlatform_5
+	.db 106
+	.db %01000001
+
 
 decompress_frame_down_57:
 	.db 0
 
 decompress_frame_down_58:
 	.db 13
-	.dl Vine5, Vine5_Slow
+	.dl Vine5
+	.db 63
 	.db %00000000
-	.dl Vine6, Vine6_Slow
+
+	.dl Vine6
+	.db 64
 	.db %00000000
-	.dl Vine4, Vine4_Slow_F
+
+	.dl Vine4
+	.db 66
 	.db %00100000
-	.dl Vine4, Vine4_Slow_O_F
+
+	.dl Vine4
+	.db 67
 	.db %01100000
-	.dl Vine5, Vine5_Slow_O_F
+
+	.dl Vine5
+	.db 68
 	.db %01100000
-	.dl Vine7, Vine7_Slow_O
+
+	.dl Vine7
+	.db 69
 	.db %01000000
-	.dl Vine5, Vine5_Slow_O
+
+	.dl Vine5
+	.db 70
 	.db %01000000
-	.dl Vine6, Vine6_Slow_O
+
+	.dl Vine6
+	.db 71
 	.db %01000000
-	.dl Vine4, Vine4_Slow_O
+
+	.dl Vine4
+	.db 72
 	.db %01000000
-	.dl Vine2, Vine2_Slow
+
+	.dl Vine2
+	.db 73
 	.db %00000000
-	.dl VineVertical, VineVertical_Slow_O
+
+	.dl VineVertical
+	.db 74
 	.db %01000000
-	.dl VineVertical, VineVertical_Slow
+
+	.dl VineVertical
+	.db 75
 	.db %00000000
-	.dl FrogNPCs1_4, FrogNPCs1_4_Slow_O
-	.db %01000000
+
+	.dl FrogNPCs1_4
+	.db 92
+	.db %01000001
+
 
 decompress_frame_down_59:
 	.db 0
 
 decompress_frame_down_60:
 	.db 2
-	.dl SolidPlatform_3, SolidPlatform_3_Fast
-	.db %10000000
-	.dl FrogNPCs1_1, FrogNPCs1_1_Slow_O
-	.db %01000000
+	.dl SolidPlatform_3
+	.db 109
+	.db %10000001
+
+	.dl FrogNPCs1_1
+	.db 122
+	.db %01000001
+
 
 decompress_frame_down_61:
 	.db 0
 
 decompress_frame_down_62:
 	.db 5
-	.dl Tree_0, Tree_0_Fast_F
+	.dl Tree_0
+	.db 138
 	.db %10100000
-	.dl Tree_8, Tree_8_Fast
+
+	.dl Tree_8
+	.db 140
 	.db %10000000
-	.dl Tree_6, Tree_6_Fast
+
+	.dl Tree_6
+	.db 145
 	.db %10000000
-	.dl SolidPlatform_0, SolidPlatform_0_Fast
-	.db %10000000
-	.dl SolidPlatform_2, SolidPlatform_2_Fast
-	.db %10000000
+
+	.dl SolidPlatform_0
+	.db 107
+	.db %10000001
+
+	.dl SolidPlatform_2
+	.db 108
+	.db %10000001
+
 
 decompress_frame_down_63:
 	.db 0
 
 decompress_frame_down_64:
 	.db 1
-	.dl Spikes_3, Spikes_3_Fast
-	.db %10000000
+	.dl SpikesPurple_3
+	.db 99
+	.db %10001001
+
+	.db %10010110, %01110000
+
 
 decompress_frame_down_65:
 	.db 0
 
 decompress_frame_down_66:
 	.db 46
-	.dl DualLeaf4, DualLeaf4_Slow
+	.dl Branches_10
+	.db 2
+	.db %10000000
+
+	.dl Branches_9
+	.db 0
+	.db %10000000
+
+	.dl Branches_16
+	.db 3
 	.db %00000000
-	.dl DualLeaf3, DualLeaf3_Fast
+
+	.dl Branches_13
+	.db 1
 	.db %10000000
-	.dl Branches_10, Branches_10_Fast
+
+	.dl Leaves1
+	.db 4
 	.db %10000000
-	.dl Branches_9, Branches_9_Fast
+
+	.dl DualLeaf1
+	.db 5
 	.db %10000000
-	.dl Branches_16, Branches_16_Slow
-	.db %00000000
-	.dl Branches_13, Branches_13_Fast
+
+	.dl DualLeaf2
+	.db 6
 	.db %10000000
-	.dl Leaves1, Leaves1_Fast
-	.db %10000000
-	.dl DualLeaf1, DualLeaf1_Fast
-	.db %10000000
-	.dl DualLeaf2, DualLeaf2_Fast
-	.db %10000000
-	.dl DualLeaf2, DualLeaf2_Slow_O
+
+	.dl DualLeaf2
+	.db 7
 	.db %01000000
-	.dl DualLeaf1, DualLeaf1_Slow_O
+
+	.dl DualLeaf1
+	.db 8
 	.db %01000000
-	.dl Branches_6, Branches_6_Slow
+
+	.dl DualLeaf3
+	.db 9
+	.db %10000000
+
+	.dl Branches_6
+	.db 33
 	.db %00000000
-	.dl Branches_10, Branches_10_Fast_F
+
+	.dl Branches_10
+	.db 18
 	.db %10100000
-	.dl Branches_7, Branches_7_Fast
+
+	.dl Branches_7
+	.db 34
 	.db %10000000
-	.dl Branches_15, Branches_15_Slow
+
+	.dl Branches_15
+	.db 15
 	.db %00000000
-	.dl Branches_8, Branches_8_Fast_F
+
+	.dl Branches_8
+	.db 35
 	.db %10100000
-	.dl Branches_12, Branches_12_Fast
+
+	.dl Branches_12
+	.db 32
 	.db %10000000
-	.dl Branches_15, Branches_15_Slow_O_F
+
+	.dl Branches_15
+	.db 13
 	.db %01100000
-	.dl LeavesDark, LeavesDark_Fast
+
+	.dl LeavesLight
+	.db 11
+	.db %10000100
+
+	.db %01010100
+
+	.dl LeavesLight
+	.db 31
+	.db %10100100
+
+	.db %01010100
+
+	.dl Leaves2
+	.db 20
 	.db %10000000
-	.dl LeavesDark, LeavesDark_Fast_F
+
+	.dl Leaves2
+	.db 19
 	.db %10100000
-	.dl Leaves2, Leaves2_Fast
+
+	.dl LeavesLight
+	.db 10
 	.db %10000000
-	.dl Leaves2, Leaves2_Fast_F
+
+	.dl Branches_8
+	.db 14
+	.db %10000000
+
+	.dl Branches_11
+	.db 16
 	.db %10100000
-	.dl LeavesLight, LeavesLight_Fast
-	.db %10000000
-	.dl Branches_8, Branches_8_Fast
-	.db %10000000
-	.dl Branches_11, Branches_11_Fast_F
-	.db %10100000
-	.dl Branches_16, Branches_16_Slow_O_F
+
+	.dl Branches_16
+	.db 36
 	.db %01100000
-	.dl Branches_13, Branches_13_Fast_F
+
+	.dl Branches_13
+	.db 17
 	.db %10100000
-	.dl Branches_14, Branches_14_Slow
+
+	.dl Branches_14
+	.db 12
 	.db %00000000
-	.dl Branches_4, Branches_4_Fast_F
+
+	.dl DualLeaf4
+	.db 37
+	.db %00000000
+
+	.dl Branches_4
+	.db 59
 	.db %10100000
-	.dl Branches_7, Branches_7_Fast_F
+
+	.dl Branches_7
+	.db 60
 	.db %10100000
-	.dl Branches_12, Branches_12_Fast_F
+
+	.dl Branches_12
+	.db 61
 	.db %10100000
-	.dl Leaves1, Leaves1_Fast_F
+
+	.dl Leaves1
+	.db 62
 	.db %10100000
-	.dl Tree_2, Tree_2_Fast
+
+	.dl Tree_2
+	.db 132
 	.db %10000000
-	.dl Tree_7, Tree_7_Fast
+
+	.dl Tree_7
+	.db 134
 	.db %10000000
-	.dl Tree_6, Tree_6_Fast_F
+
+	.dl Tree_6
+	.db 136
 	.db %10100000
-	.dl Tree_8, Tree_8_Fast_F
+
+	.dl Tree_8
+	.db 142
 	.db %10100000
-	.dl Tree_0, Tree_0_Fast
+
+	.dl Tree_0
+	.db 144
 	.db %10000000
-	.dl Tree_7, Tree_7_Fast_F
+
+	.dl Tree_7
+	.db 147
 	.db %10100000
-	.dl Tree_1, Tree_1_Fast_F
+
+	.dl Tree_1
+	.db 148
 	.db %10100000
-	.dl Tree_1, Tree_1_Fast
+
+	.dl Tree_1
+	.db 149
 	.db %10000000
-	.dl Tree_2, Tree_2_Fast_F
+
+	.dl Tree_2
+	.db 153
 	.db %10100000
-	.dl Platforms_0, Platforms_0_Fast
-	.db %10000000
-	.dl Platforms_1, Platforms_1_Fast
-	.db %10000000
-	.dl Platforms_0, Platforms_0_Fast_F
-	.db %10100000
-	.dl Platforms_2, Platforms_2_Slow_O_F
-	.db %01100000
-	.dl Platforms_2, Platforms_2_Slow_O
-	.db %01000000
+
+	.dl Platforms_0
+	.db 86
+	.db %10000001
+
+	.dl Platforms_1
+	.db 87
+	.db %10000001
+
+	.dl Platforms_0
+	.db 88
+	.db %10100001
+
+	.dl Platforms_2
+	.db 89
+	.db %01100001
+
+	.dl Platforms_2
+	.db 90
+	.db %01000001
+
 
 decompress_frame_down_67:
 	.db 0
@@ -2653,8 +4171,12 @@ decompress_frame_down_69:
 
 decompress_frame_down_70:
 	.db 1
-	.dl Spikes_0, Spikes_0_Fast
-	.db %10000000
+	.dl SpikesPurple_0
+	.db 96
+	.db %10001001
+
+	.db %10010110, %01110000
+
 
 decompress_frame_down_71:
 	.db 0
@@ -2672,9 +4194,23 @@ decompress_frame_down_75:
 	.db 0
 
 decompress_frame_down_76:
-	.db 1
-	.dl CloudCityWelcomeComitte_0, CloudCityWelcomeComitte_0_Slow
-	.db %00000000
+	.db 4
+	.dl CloudCityWelcomeComitte2_4
+	.db 30
+	.db %00000001
+
+	.dl CloudCityWelcomeComitte2_1
+	.db 31
+	.db %00000001
+
+	.dl CloudCityWelcomeComitte2_3
+	.db 32
+	.db %01000001
+
+	.dl CloudCityWelcomeComitte2_2
+	.db 33
+	.db %01000001
+
 
 decompress_frame_down_77:
 	.db 0
@@ -2699,8 +4235,10 @@ decompress_frame_down_83:
 
 decompress_frame_down_84:
 	.db 1
-	.dl SpikesPurple_2, SpikesPurple_2_Fast
-	.db %10000000
+	.dl SpikesPurple_2
+	.db 140
+	.db %10000001
+
 
 decompress_frame_down_85:
 	.db 0
@@ -2725,8 +4263,10 @@ decompress_frame_down_91:
 
 decompress_frame_down_92:
 	.db 1
-	.dl FrogNPCs1_4, FrogNPCs1_4_Slow_O_F
-	.db %01100000
+	.dl FrogNPCs1_4
+	.db 141
+	.db %01100001
+
 
 decompress_frame_down_93:
 	.db 0
@@ -2769,8 +4309,10 @@ decompress_frame_down_105:
 
 decompress_frame_down_106:
 	.db 1
-	.dl CastleVines_16, CastleVines_16_Slow_O
-	.db %01000000
+	.dl CastleVines_16
+	.db 27
+	.db %01000001
+
 
 decompress_frame_down_107:
 	.db 0
@@ -2794,13 +4336,23 @@ decompress_frame_down_113:
 	.db 0
 
 decompress_frame_down_114:
-	.db 3
-	.dl CastleVines_16, CastleVines_16_Slow_F
-	.db %00100000
-	.dl CastleVines_18, CastleVines_18_Slow_O_F
-	.db %01100000
-	.dl CastlePlatforms_6, CastlePlatforms_6_Fast
-	.db %10000000
+	.db 4
+	.dl CastleVines_16
+	.db 29
+	.db %00100001
+
+	.dl CastleVines_17
+	.db 48
+	.db %01100001
+
+	.dl CastleVines_18
+	.db 49
+	.db %01100001
+
+	.dl CastlePlatforms_6
+	.db 143
+	.db %10000001
+
 
 decompress_frame_down_115:
 	.db 0
@@ -2818,55 +4370,79 @@ decompress_frame_down_119:
 	.db 0
 
 decompress_frame_down_120:
+	.db 17
+	.dl CloudsNewer_9
+	.db 95
+	.db %10100000
+
+	.dl CloudsNewer_10
+	.db 100
+	.db %10100000
+
+	.dl Bricks_2_7
+	.db 47
+	.db %10100001
+
+	.dl CastleVines_15
+	.db 18
+	.db %00000001
+
+	.dl CastleVines_15
+	.db 19
+	.db %01000001
+
+	.dl CastleVines_16
+	.db 20
+	.db %00000001
+
+	.dl CastleVines_17
+	.db 21
+	.db %00000001
+
+	.dl CastleVines_9
+	.db 22
+	.db %01000001
+
+	.dl CastleVines_7
+	.db 23
+	.db %00000101
+
+	.db %00001111
+
+	.dl CastleVines_9
 	.db 24
-	.dl CloudsNewer_9, CloudsNewer_9_Fast_F
-	.db %10100000
-	.dl CloudsNewer_10, CloudsNewer_10_Fast_F
-	.db %10100000
-	.dl Bricks_28, Bricks_28_Fast
-	.db %10000000
-	.dl Bricks_22, Bricks_22_Fast
-	.db %10000000
-	.dl Bricks_22, Bricks_22_Fast_F
-	.db %10100000
-	.dl Bricks_24, Bricks_24_Fast
-	.db %10000000
-	.dl CastleVines_15, CastleVines_15_Slow
-	.db %00000000
-	.dl CastleVines_15, CastleVines_15_Slow_O
-	.db %01000000
-	.dl CastleVines_16, CastleVines_16_Slow
-	.db %00000000
-	.dl CastleVines_17, CastleVines_17_Slow
-	.db %00000000
-	.dl CastleVines_9, CastleVines_9_Slow_O
-	.db %01000000
-	.dl CastleVines_10, CastleVines_10_Slow
-	.db %00000000
-	.dl CastleVines_9, CastleVines_9_Slow
-	.db %00000000
-	.dl CastleVines_11, CastleVines_11_Slow_O
-	.db %01000000
-	.dl CastleVines_10, CastleVines_10_Slow_O
-	.db %01000000
-	.dl CastleVines_17, CastleVines_17_Slow_F
-	.db %00100000
-	.dl CastleVines_16, CastleVines_16_Slow_O_F
-	.db %01100000
-	.dl CastleVines_17, CastleVines_17_Slow_O_F
-	.db %01100000
-	.dl CastleVines_14, CastleVines_14_Slow_O
-	.db %01000000
-	.dl CastleVines_12, CastleVines_12_Slow_O
-	.db %01000000
-	.dl CastleVines_13, CastleVines_13_Slow
-	.db %00000000
-	.dl CastleVines_6, CastleVines_6_Slow
-	.db %00000000
-	.dl CastleVines_7, CastleVines_7_Slow
-	.db %00000000
-	.dl CastleVines_8, CastleVines_8_Slow
-	.db %00000000
+	.db %00000001
+
+	.dl CastleVines_11
+	.db 25
+	.db %01000001
+
+	.dl CastleVines_7
+	.db 26
+	.db %01000101
+
+	.db %00001111
+
+	.dl CastleVines_17
+	.db 28
+	.db %00100001
+
+	.dl CastleVines_6
+	.db 50
+	.db %00000001
+
+	.dl CastleVines_7
+	.db 51
+	.db %00000001
+
+	.dl CastleVines_8
+	.db 52
+	.db %00000001
+
+	.dl CastleVines_16
+	.db 53
+	.db %01100001
+
 
 decompress_frame_down_121:
 	.db 0
@@ -2879,242 +4455,450 @@ decompress_frame_down_123:
 
 decompress_frame_down_124:
 	.db 8
-	.dl Truetle_1, Truetle_1_Fast
+	.dl Truetle_1
+	.db 118
 	.db %10000000
-	.dl Truetle_1, Truetle_1_Fast_F
+
+	.dl Truetle_1
+	.db 119
 	.db %10100000
-	.dl Truetle_3, Truetle_3_Slow
-	.db %00000000
-	.dl Truetle_10, Truetle_10_Slow
-	.db %00000000
-	.dl Truetle_8, Truetle_8_Slow
-	.db %00000000
-	.dl Truetle_3, Truetle_3_Slow_F
-	.db %00100000
-	.dl Truetle_10, Truetle_10_Slow_F
-	.db %00100000
-	.dl Truetle_8, Truetle_8_Slow_F
-	.db %00100000
+
+	.dl Truetle_2
+	.db 120
+	.db %00001000
+
+	.db %11001110, %10100000
+
+	.dl Truetle_7
+	.db 121
+	.db %00001000
+
+	.db %11001110, %10100000
+
+	.dl Truetle_5
+	.db 122
+	.db %00001000
+
+	.db %11001110, %10100000
+
+	.dl Truetle_2
+	.db 123
+	.db %00101000
+
+	.db %11001110, %10100000
+
+	.dl Truetle_7
+	.db 124
+	.db %00101000
+
+	.db %11001110, %10100000
+
+	.dl Truetle_5
+	.db 125
+	.db %00101000
+
+	.db %11001110, %10100000
+
 
 decompress_frame_down_125:
 	.db 0
 
 decompress_frame_down_126:
 	.db 5
-	.dl CityBanners_7, CityBanners_7_Fast
-	.db %10000000
-	.dl CityBanners_7, CityBanners_7_Slow_O
-	.db %01000000
-	.dl CityBanners_8, CityBanners_8_Fast
-	.db %10000000
-	.dl CityBanners_8, CityBanners_8_Slow_O
-	.db %01000000
-	.dl SpikesPurple_1, SpikesPurple_1_Fast_F
-	.db %10100000
+	.dl CityBanners_7
+	.db 54
+	.db %10000001
+
+	.dl CityBanners_7
+	.db 55
+	.db %01000001
+
+	.dl CityBanners_8
+	.db 56
+	.db %10000001
+
+	.dl CityBanners_8
+	.db 57
+	.db %01000001
+
+	.dl SpikesPurple_1
+	.db 138
+	.db %10100001
+
 
 decompress_frame_down_127:
 	.db 0
 
 decompress_frame_down_128:
 	.db 1
-	.dl CityBanners_0, CityBanners_0_Fast
-	.db %10000000
+	.dl CityBanners_0
+	.db 144
+	.db %10000001
+
 
 decompress_frame_down_129:
 	.db 0
 
 decompress_frame_down_130:
-	.db 28
-	.dl Truetle_4, Truetle_4_Fast
+	.db 26
+	.dl Truetle_4
+	.db 102
 	.db %10000000
-	.dl Truetle_4, Truetle_4_Fast_F
+
+	.dl Truetle_4
+	.db 103
 	.db %10100000
-	.dl Truetle_6, Truetle_6_Slow
-	.db %00000000
-	.dl Truetle_11, Truetle_11_Slow
-	.db %00000000
-	.dl Truetle_9, Truetle_9_Slow
-	.db %00000000
-	.dl Truetle_6, Truetle_6_Slow_F
-	.db %00100000
-	.dl Truetle_11, Truetle_11_Slow_F
-	.db %00100000
-	.dl Truetle_9, Truetle_9_Slow_F
-	.db %00100000
-	.dl Truetle_0, Truetle_0_Fast
+
+	.dl Truetle_2
+	.db 104
+	.db %00001000
+
+	.db %10110111, %01100000
+
+	.dl Truetle_7
+	.db 105
+	.db %00001000
+
+	.db %10110111, %01100000
+
+	.dl Truetle_5
+	.db 106
+	.db %00001000
+
+	.db %10110111, %01100000
+
+	.dl Truetle_2
+	.db 107
+	.db %00101000
+
+	.db %10110111, %01100000
+
+	.dl Truetle_7
+	.db 108
+	.db %00101000
+
+	.db %10110111, %01100000
+
+	.dl Truetle_5
+	.db 109
+	.db %00101000
+
+	.db %10110111, %01100000
+
+	.dl Truetle_0
+	.db 110
 	.db %10000000
-	.dl Truetle_0, Truetle_0_Fast_F
+
+	.dl Truetle_0
+	.db 111
 	.db %10100000
-	.dl Truetle_2, Truetle_2_Slow
+
+	.dl Truetle_2
+	.db 112
 	.db %00000000
-	.dl Truetle_7, Truetle_7_Slow
+
+	.dl Truetle_7
+	.db 113
 	.db %00000000
-	.dl Truetle_5, Truetle_5_Slow
+
+	.dl Truetle_5
+	.db 114
 	.db %00000000
-	.dl Truetle_2, Truetle_2_Slow_F
+
+	.dl Truetle_2
+	.db 115
 	.db %00100000
-	.dl Truetle_7, Truetle_7_Slow_F
+
+	.dl Truetle_7
+	.db 116
 	.db %00100000
-	.dl Truetle_5, Truetle_5_Slow_F
+
+	.dl Truetle_5
+	.db 117
 	.db %00100000
-	.dl Bricks_2_11, Bricks_2_11_Fast
+
+	.dl Bricks_2_11
+	.db 10
+	.db %10000001
+
+	.dl CityBanners_1
+	.db 173
 	.db %10000000
-	.dl CityBanners_1, CityBanners_1_Fast
-	.db %10000000
-	.dl CityBanners_1, CityBanners_1_Fast_F
+
+	.dl CityBanners_1
+	.db 172
 	.db %10100000
-	.dl TongueRing1, TongueRing1_Slow
-	.db %00000000
-	.dl TongueRing2, TongueRing2_Slow
-	.db %00000000
-	.dl TongueRing1, TongueRing1_Slow_F
-	.db %00100000
-	.dl TongueRing2, TongueRing2_Slow_F
-	.db %00100000
-	.dl SpikesPurple_3, SpikesPurple_3_Fast
-	.db %10000000
-	.dl SpikesPurple_1, SpikesPurple_1_Fast
-	.db %10000000
-	.dl CastlePlatforms_7, CastlePlatforms_7_Fast
-	.db %10000000
-	.dl CastlePlatforms_7, CastlePlatforms_7_Fast_F
-	.db %10100000
-	.dl SpikesPurple_4, SpikesPurple_4_Fast
-	.db %10000000
+
+	.dl TongueRing1
+	.db 120
+	.db %00000001
+
+	.dl TongueRing1
+	.db 121
+	.db %00100001
+
+	.dl SpikesPurple_3
+	.db 128
+	.db %10000001
+
+	.dl SpikesPurple_1
+	.db 139
+	.db %10000001
+
+	.dl CastlePlatforms_7
+	.db 136
+	.db %10000001
+
+	.dl CastlePlatforms_7
+	.db 137
+	.db %10100001
+
+	.dl SpikesPurple_4
+	.db 142
+	.db %10000001
+
 
 decompress_frame_down_131:
 	.db 0
 
 decompress_frame_down_132:
+	.db 34
+	.dl CastleWindow_0
+	.db 5
+	.db %10000001
+
+	.dl CastleWindow_1
+	.db 6
+	.db %10000001
+
+	.dl CastleWindow_2
+	.db 7
+	.db %10000001
+
+	.dl Bricks_2_2
+	.db 8
+	.db %10000001
+
+	.dl Bricks_2_1
+	.db 9
+	.db %10000001
+
+	.dl Bricks_2_3
+	.db 14
+	.db %10000001
+
+	.dl Bricks_2_3
+	.db 15
+	.db %10100001
+
+	.dl Bricks_2_5
+	.db 12
+	.db %10100001
+
+	.dl Bricks_2_5
+	.db 11
+	.db %10000001
+
+	.dl Bricks_2_7
+	.db 17
+	.db %10000001
+
+	.dl Bricks_2_8
+	.db 16
+	.db %10000001
+
+	.dl Bricks_2_0
+	.db 13
+	.db %10000001
+
+	.dl CityBanners_2
+	.db 34
+	.db %10000001
+
+	.dl CityBanners_5
+	.db 35
+	.db %10001001
+
+	.db %00110010, %00100000
+
+	.dl CityBanners_5
+	.db 36
+	.db %01001001
+
+	.db %00110010, %00100000
+
+	.dl CityBanners_5
 	.db 37
-	.dl CastleWindow_0, CastleWindow_0_Fast
-	.db %10000000
-	.dl CastleWindow_1, CastleWindow_1_Fast
-	.db %10000000
-	.dl CastleWindow_2, CastleWindow_2_Fast
-	.db %10000000
-	.dl Bricks_2_2, Bricks_2_2_Fast
-	.db %10000000
-	.dl Bricks_2_1, Bricks_2_1_Fast
-	.db %10000000
-	.dl Bricks_19, Bricks_19_Fast
-	.db %10000000
-	.dl Bricks_19, Bricks_19_Fast_F
-	.db %10100000
-	.dl Bricks_21, Bricks_21_Fast_F
-	.db %10100000
-	.dl Bricks_21, Bricks_21_Fast
-	.db %10000000
-	.dl Bricks_23, Bricks_23_Fast
-	.db %10000000
-	.dl Bricks_20, Bricks_20_Slow_O
-	.db %01000000
-	.dl Bricks_20, Bricks_20_Slow_O_F
-	.db %01100000
-	.dl Bricks_0, Bricks_0_Fast
-	.db %10000000
-	.dl Bricks_22, Bricks_22_Slow_O
-	.db %01000000
-	.dl Bricks_22, Bricks_22_Slow_O_F
-	.db %01100000
-	.dl CityBanners_2, CityBanners_2_Fast
-	.db %10000000
-	.dl CityBanners_3, CityBanners_3_Fast
-	.db %10000000
-	.dl CityBanners_3, CityBanners_3_Slow_O
-	.db %01000000
-	.dl CityBanners_5, CityBanners_5_Fast
-	.db %10000000
-	.dl CityBanners_5, CityBanners_5_Slow_O
-	.db %01000000
-	.dl CityBanners_6, CityBanners_6_Fast
-	.db %10000000
-	.dl CityBanners_6, CityBanners_6_Slow_O
-	.db %01000000
-	.dl CityBanners_4, CityBanners_4_Slow
-	.db %00000000
-	.dl CityBanners_4, CityBanners_4_Slow_O
-	.db %01000000
-	.dl CityBanners_9, CityBanners_9_Fast
-	.db %10000000
-	.dl CityBanners_9, CityBanners_9_Slow_O
-	.db %01000000
-	.dl CityBanners_10, CityBanners_10_Fast
-	.db %10000000
-	.dl CityBanners_10, CityBanners_10_Slow_O
-	.db %01000000
-	.dl CastlePlatforms_9, CastlePlatforms_9_Fast
-	.db %10000000
-	.dl CloudSemisolid_2, CloudSemisolid_2_Fast
-	.db %10000000
-	.dl CloudSemisolid_3, CloudSemisolid_3_Fast
-	.db %10000000
-	.dl CloudSemisolid_4, CloudSemisolid_4_Fast
-	.db %10000000
-	.dl CloudSemisolid_5, CloudSemisolid_5_Fast
-	.db %10000000
-	.dl CastlePlatforms_1, CastlePlatforms_1_Fast
-	.db %10000000
-	.dl CastlePlatforms_5, CastlePlatforms_5_Fast
-	.db %10000000
-	.dl CastlePlatforms_4, CastlePlatforms_4_Fast
-	.db %10000000
-	.dl CityBanners_0, CityBanners_0_Fast_F
-	.db %10100000
+	.db %10000001
+
+	.dl CityBanners_5
+	.db 38
+	.db %01000001
+
+	.dl CityBanners_6
+	.db 39
+	.db %10000001
+
+	.dl CityBanners_6
+	.db 40
+	.db %01000001
+
+	.dl CityBanners_4
+	.db 41
+	.db %00000001
+
+	.dl CityBanners_4
+	.db 42
+	.db %01000001
+
+	.dl CityBanners_9
+	.db 43
+	.db %10000001
+
+	.dl CityBanners_9
+	.db 44
+	.db %01000001
+
+	.dl CityBanners_10
+	.db 45
+	.db %10000001
+
+	.dl CityBanners_10
+	.db 46
+	.db %01000001
+
+	.dl CastlePlatforms_9
+	.db 127
+	.db %10000001
+
+	.dl CloudSemisolid_2
+	.db 129
+	.db %10000001
+
+	.dl CloudSemisolid_3
+	.db 130
+	.db %10000001
+
+	.dl CloudSemisolid_4
+	.db 131
+	.db %10000001
+
+	.dl CloudSemisolid_5
+	.db 132
+	.db %10000001
+
+	.dl CastlePlatforms_1
+	.db 133
+	.db %10000001
+
+	.dl CastlePlatforms_5
+	.db 134
+	.db %10000001
+
+	.dl CastlePlatforms_4
+	.db 135
+	.db %10000001
+
+	.dl CityBanners_0
+	.db 145
+	.db %10100001
+
 
 decompress_frame_down_133:
 	.db 0
 
 decompress_frame_down_134:
 	.db 4
-	.dl CloudsNewer_1, CloudsNewer_1_Fast_F
+	.dl CloudsNewer_1
+	.db 92
 	.db %10100000
-	.dl CloudsNewer_5, CloudsNewer_5_Fast_F
+
+	.dl CloudsNewer_5
+	.db 94
 	.db %10100000
-	.dl CloudsNewer_10, CloudsNewer_10_Fast
+
+	.dl CloudsNewer_10
+	.db 96
 	.db %10000000
-	.dl CloudsNewer_9, CloudsNewer_9_Fast
+
+	.dl CloudsNewer_9
+	.db 97
 	.db %10000000
+
 
 decompress_frame_down_135:
 	.db 0
 
 decompress_frame_down_136:
 	.db 17
-	.dl CloudsNewer_0, CloudsNewer_0_Fast
+	.dl CloudsNewer_0
+	.db 89
 	.db %10000000
-	.dl CloudsNewer_2, CloudsNewer_2_Fast
+
+	.dl CloudsNewer_2
+	.db 88
 	.db %10000000
-	.dl CloudsNewer_7, CloudsNewer_7_Fast
+
+	.dl CloudsNewer_7
+	.db 84
 	.db %10000000
-	.dl CloudsNewer_8, CloudsNewer_8_Fast
+
+	.dl CloudsNewer_8
+	.db 90
 	.db %10000000
-	.dl CloudsNewer_4, CloudsNewer_4_Fast
+
+	.dl CloudsNewer_4
+	.db 91
 	.db %10000000
-	.dl CloudsNewer_4, CloudsNewer_4_Fast_F
+
+	.dl CloudsNewer_4
+	.db 87
 	.db %10100000
-	.dl CloudsNewer_6, CloudsNewer_6_Slow
+
+	.dl CloudsNewer_6
+	.db 82
 	.db %00000000
-	.dl CloudsNewer_5, CloudsNewer_5_Fast
+
+	.dl CloudsNewer_5
+	.db 93
 	.db %10000000
-	.dl CloudsNewer_3, CloudsNewer_3_Fast
+
+	.dl CloudsNewer_3
+	.db 83
 	.db %10000000
-	.dl CloudsNewer_3, CloudsNewer_3_Fast_F
+
+	.dl CloudsNewer_3
+	.db 86
 	.db %10100000
-	.dl CloudsNewer_0, CloudsNewer_0_Fast_F
+
+	.dl CloudsNewer_0
+	.db 98
 	.db %10100000
-	.dl CloudsNewer_8, CloudsNewer_8_Fast_F
+
+	.dl CloudsNewer_8
+	.db 99
 	.db %10100000
-	.dl CloudsNewer_7, CloudsNewer_7_Fast_F
+
+	.dl CloudsNewer_7
+	.db 101
 	.db %10100000
-	.dl CloudSemisolid_0, CloudSemisolid_0_Fast
-	.db %10000000
-	.dl CloudSemisolid_1, CloudSemisolid_1_Fast
-	.db %10000000
-	.dl CloudSemisolid_0, CloudSemisolid_0_Fast_F
-	.db %10100000
-	.dl SpikesPurple_0, SpikesPurple_0_Fast
-	.db %10000000
+
+	.dl CloudSemisolid_0
+	.db 123
+	.db %10000001
+
+	.dl CloudSemisolid_1
+	.db 124
+	.db %10000001
+
+	.dl CloudSemisolid_0
+	.db 125
+	.db %10100001
+
+	.dl SpikesPurple_0
+	.db 126
+	.db %10000001
+
 
 decompress_frame_down_137:
 	.db 0
@@ -3126,29 +4910,295 @@ decompress_frame_down_139:
 	.db 0
 
 decompress_frame_down_140:
-	.db 2
-	.dl Palette3_0, Palette3_0_Fast
+	.db 3
+	.dl CloudsNewer_1
+	.db 85
 	.db %10000000
-	.dl Palette2_0, Palette2_0_Fast
-	.db %10000000
+
+	.dl CloudSemisolid_0
+	.db 146
+	.db %10001001
+
+	.db %10010110, %01100000
+
+	.dl CloudSemisolid_0
+	.db 147
+	.db %10101001
+
+	.db %10010110, %01100000
+
 
 decompress_frame_down_141:
 	.db 0
 
 decompress_frame_down_142:
-	.db 0
+	.db 53
+	.dl Stars_3
+	.db 178
+	.db %00000100
+
+	.db %01100110
+
+	.dl ZigsAndZags_12
+	.db 58
+	.db %00000001
+
+	.dl ZigsAndZags_13
+	.db 59
+	.db %00000001
+
+	.dl ZigsAndZags_12
+	.db 60
+	.db %01000001
+
+	.dl ZigsAndZags_13
+	.db 61
+	.db %01000001
+
+	.dl ZigsAndZags_2
+	.db 62
+	.db %00000001
+
+	.dl ZigsAndZags_3
+	.db 63
+	.db %01000001
+
+	.dl ZigsAndZags_2
+	.db 64
+	.db %01000001
+
+	.dl ZigsAndZags_3
+	.db 65
+	.db %00000001
+
+	.dl ZigsAndZags_0
+	.db 66
+	.db %00000001
+
+	.dl ZigsAndZags_1
+	.db 67
+	.db %00000001
+
+	.dl ZigsAndZags_1
+	.db 68
+	.db %01000001
+
+	.dl ZigsAndZags_0
+	.db 69
+	.db %01000001
+
+	.dl ZigsAndZags_4
+	.db 70
+	.db %00000001
+
+	.dl ZigsAndZags_5
+	.db 71
+	.db %00000001
+
+	.dl ZigsAndZags_5
+	.db 72
+	.db %01000001
+
+	.dl ZigsAndZags_4
+	.db 73
+	.db %01000001
+
+	.dl ZigsAndZags_8
+	.db 74
+	.db %00000001
+
+	.dl ZigsAndZags_10
+	.db 75
+	.db %00000001
+
+	.dl ZigsAndZags_8
+	.db 76
+	.db %01000001
+
+	.dl ZigsAndZags_10
+	.db 77
+	.db %01000001
+
+	.dl ZigsAndZags_22
+	.db 78
+	.db %00000001
+
+	.dl ZigsAndZags_23
+	.db 79
+	.db %00000001
+
+	.dl ZigsAndZags_23
+	.db 80
+	.db %01000001
+
+	.dl ZigsAndZags_22
+	.db 81
+	.db %01000001
+
+	.dl ZigsAndZags_16
+	.db 82
+	.db %00000001
+
+	.dl ZigsAndZags_17
+	.db 83
+	.db %00000001
+
+	.dl ZigsAndZags_16
+	.db 84
+	.db %01000001
+
+	.dl ZigsAndZags_17
+	.db 85
+	.db %01000001
+
+	.dl SpacePlatforms_0
+	.db 149
+	.db %10001001
+
+	.db %10011110, %00110000
+
+	.dl SpacePlatforms_0
+	.db 148
+	.db %10000001
+
+	.dl SpacePlatforms_0
+	.db 151
+	.db %10001001
+
+	.db %10011100, %01110000
+
+	.dl SpacePlatforms_0
+	.db 150
+	.db %10001001
+
+	.db %10011011, %10100000
+
+	.dl SpacePlatforms_1
+	.db 153
+	.db %10001001
+
+	.db %10011110, %00110000
+
+	.dl SpacePlatforms_1
+	.db 152
+	.db %10000001
+
+	.dl SpacePlatforms_1
+	.db 155
+	.db %10001001
+
+	.db %10011100, %01110000
+
+	.dl SpacePlatforms_1
+	.db 154
+	.db %10001001
+
+	.db %10011011, %10100000
+
+	.dl SpacePlatforms_10
+	.db 157
+	.db %10000101
+
+	.db %11100011
+
+	.dl SpacePlatforms_10
+	.db 156
+	.db %10000001
+
+	.dl SpacePlatforms_10
+	.db 159
+	.db %10000101
+
+	.db %11000111
+
+	.dl SpacePlatforms_10
+	.db 158
+	.db %10000101
+
+	.db %10111010
+
+	.dl SpacePlatforms_10
+	.db 161
+	.db %10000101
+
+	.db %11100011
+
+	.dl SpacePlatforms_10
+	.db 160
+	.db %10000101
+
+	.db %11010010
+
+	.dl SpacePlatforms_10
+	.db 163
+	.db %10000101
+
+	.db %11000111
+
+	.dl SpacePlatforms_10
+	.db 162
+	.db %10000101
+
+	.db %10111010
+
+	.dl SpacePlatforms_14
+	.db 165
+	.db %10000101
+
+	.db %11100011
+
+	.dl SpacePlatforms_14
+	.db 164
+	.db %10000001
+
+	.dl SpacePlatforms_14
+	.db 167
+	.db %10000101
+
+	.db %11000111
+
+	.dl SpacePlatforms_14
+	.db 166
+	.db %10000101
+
+	.db %10111010
+
+	.dl SpacePlatforms_14
+	.db 169
+	.db %10000101
+
+	.db %11100011
+
+	.dl SpacePlatforms_14
+	.db 168
+	.db %10000101
+
+	.db %11010010
+
+	.dl SpacePlatforms_14
+	.db 171
+	.db %10000101
+
+	.db %11000111
+
+	.dl SpacePlatforms_14
+	.db 170
+	.db %10000101
+
+	.db %10111010
+
 
 decompress_frame_down_143:
 	.db 0
 
 decompress_frame_down_144:
-	.db 3
-	.dl CloudsNewer_1, CloudsNewer_1_Fast
-	.db %10000000
-	.dl CloudTransitory_0, CloudTransitory_0_Fast
-	.db %10000000
-	.dl CloudTransitory_0, CloudTransitory_0_Fast_F
-	.db %10100000
+	.db 1
+	.dl Stars_5
+	.db 177
+	.db %00000100
+
+	.db %01100110
+
 
 decompress_frame_down_145:
 	.db 0
@@ -3173,16 +5223,26 @@ decompress_frame_down_151:
 
 decompress_frame_down_152:
 	.db 5
-	.dl PurpleClouds_6, PurpleClouds_6_Slow
-	.db %00000000
-	.dl PurpleClouds_7, PurpleClouds_7_Fast
-	.db %10000000
-	.dl PurpleClouds_5, PurpleClouds_5_Fast
-	.db %10000000
-	.dl PurpleClouds_8, PurpleClouds_8_Fast
-	.db %10000000
-	.dl PurpleClouds_6, PurpleClouds_6_Slow_F
-	.db %00100000
+	.dl PurpleClouds_6
+	.db 7
+	.db %00000010
+
+	.dl PurpleClouds_7
+	.db 4
+	.db %10000010
+
+	.dl PurpleClouds_5
+	.db 5
+	.db %10000010
+
+	.dl PurpleClouds_8
+	.db 6
+	.db %10000010
+
+	.dl PurpleClouds_6
+	.db 8
+	.db %00100010
+
 
 decompress_frame_down_153:
 	.db 0
@@ -3230,7 +5290,17 @@ decompress_frame_down_167:
 	.db 0
 
 decompress_frame_down_168:
-	.db 0
+	.db 2
+	.dl Stars_13
+	.db 23
+	.db %00000110
+
+	.db %00010000
+
+	.dl Stars_21
+	.db 25
+	.db %00000010
+
 
 decompress_frame_down_169:
 	.db 0
@@ -3254,7 +5324,11 @@ decompress_frame_down_175:
 	.db 0
 
 decompress_frame_down_176:
-	.db 0
+	.db 1
+	.dl Stars_13
+	.db 20
+	.db %00000010
+
 
 decompress_frame_down_177:
 	.db 0
@@ -3278,7 +5352,109 @@ decompress_frame_down_183:
 	.db 0
 
 decompress_frame_down_184:
-	.db 0
+	.db 20
+	.dl Stars_17
+	.db 9
+	.db %00000110
+
+	.db %01100000
+
+	.dl Stars_13
+	.db 12
+	.db %00000110
+
+	.db %01100000
+
+	.dl Stars_15
+	.db 15
+	.db %00000110
+
+	.db %01100000
+
+	.dl Stars_3
+	.db 10
+	.db %00000010
+
+	.dl Stars_6
+	.db 11
+	.db %00000110
+
+	.db %00000110
+
+	.dl Stars_20
+	.db 13
+	.db %00001010
+
+	.db %00000001, %01100000
+
+	.dl Stars_15
+	.db 14
+	.db %00000010
+
+	.dl Stars_5
+	.db 16
+	.db %00000010
+
+	.dl Stars_20
+	.db 27
+	.db %01001010
+
+	.db %00000001, %01100000
+
+	.dl Stars_5
+	.db 28
+	.db %00000110
+
+	.db %00010110
+
+	.dl Stars_20
+	.db 26
+	.db %01000010
+
+	.dl Stars_11
+	.db 17
+	.db %00000010
+
+	.dl Stars_3
+	.db 29
+	.db %00000110
+
+	.db %00000110
+
+	.dl Stars_2
+	.db 18
+	.db %00000110
+
+	.db %00000110
+
+	.dl Stars_6
+	.db 22
+	.db %00000010
+
+	.dl Stars_17
+	.db 21
+	.db %00000010
+
+	.dl Stars_15
+	.db 24
+	.db %00000110
+
+	.db %00010000
+
+	.dl Stars_21
+	.db 30
+	.db %00001010
+
+	.db %00000001, %01100000
+
+	.dl Stars_2
+	.db 19
+	.db %00000010
+
+	.dl Stars_20
+	.db 31
+	.db %00000010
+
 
 decompress_frame_down_185:
 	.db 0
@@ -3465,181 +5641,361 @@ decompress_frame_down_245:
 
 decompress_frame_down_246:
 	.db 64
-	.dl FrogDefault, FrogDefault_Slow_O
-	.db %01000000
-	.dl FrogDefault, FrogDefault_Slow
-	.db %00000000
-	.dl FrogDefault, FrogDefault_Slow_F
-	.db %00100000
-	.dl FrogDefault, FrogDefault_Slow_O_F
-	.db %01100000
-	.dl FrogChargeLit, FrogChargeLit_Slow
-	.db %00000000
-	.dl FrogChargeLit, FrogChargeLit_Slow_O
-	.db %01000000
-	.dl FrogChargeLit, FrogChargeLit_Slow_F
-	.db %00100000
-	.dl FrogChargeLit, FrogChargeLit_Slow_O_F
-	.db %01100000
-	.dl FrogCharge, FrogCharge_Slow
-	.db %00000000
-	.dl FrogCharge, FrogCharge_Slow_O
-	.db %01000000
-	.dl FrogCharge, FrogCharge_Slow_F
-	.db %00100000
-	.dl FrogCharge, FrogCharge_Slow_O_F
-	.db %01100000
-	.dl FrogJump, FrogJump_Slow
-	.db %00000000
-	.dl FrogJump, FrogJump_Slow_O
-	.db %01000000
-	.dl FrogJump, FrogJump_Slow_F
-	.db %00100000
-	.dl FrogJump, FrogJump_Slow_O_F
-	.db %01100000
-	.dl FrogJumpMouth, FrogJumpMouth_Slow
-	.db %00000000
-	.dl FrogJumpMouth, FrogJumpMouth_Slow_O
-	.db %01000000
-	.dl FrogJumpMouth, FrogJumpMouth_Slow_F
-	.db %00100000
-	.dl FrogJumpMouth, FrogJumpMouth_Slow_O_F
-	.db %01100000
-	.dl FrogFall, FrogFall_Slow
-	.db %00000000
-	.dl FrogFall, FrogFall_Slow_O
-	.db %01000000
-	.dl FrogFall, FrogFall_Slow_F
-	.db %00100000
-	.dl FrogFall, FrogFall_Slow_O_F
-	.db %01100000
-	.dl FrogTongue, FrogTongue_Slow
-	.db %00000000
-	.dl FrogTongue, FrogTongue_Slow_O
-	.db %01000000
-	.dl Unlucky_0, Unlucky_0_Fast
-	.db %10000000
-	.dl Font_0, Font_0_Fast
-	.db %10000000
-	.dl Font_1, Font_1_Fast
-	.db %10000000
-	.dl Font_2, Font_2_Fast
-	.db %10000000
-	.dl Font_3, Font_3_Fast
-	.db %10000000
-	.dl Font_4, Font_4_Fast
-	.db %10000000
-	.dl Font_5, Font_5_Fast
-	.db %10000000
-	.dl Font_6, Font_6_Fast
-	.db %10000000
-	.dl Font_7, Font_7_Fast
-	.db %10000000
-	.dl Font_8, Font_8_Fast
-	.db %10000000
-	.dl Font_9, Font_9_Fast
-	.db %10000000
-	.dl Font_10, Font_10_Fast
-	.db %10000000
-	.dl Font_11, Font_11_Fast
-	.db %10000000
-	.dl Font_12, Font_12_Fast
-	.db %10000000
-	.dl Font_13, Font_13_Fast
-	.db %10000000
-	.dl Font_14, Font_14_Fast
-	.db %10000000
-	.dl Font_15, Font_15_Fast
-	.db %10000000
-	.dl Font_16, Font_16_Fast
-	.db %10000000
-	.dl Font_17, Font_17_Fast
-	.db %10000000
-	.dl Font_18, Font_18_Fast
-	.db %10000000
-	.dl Font_19, Font_19_Fast
-	.db %10000000
-	.dl Font_20, Font_20_Fast
-	.db %10000000
-	.dl Font_21, Font_21_Fast
-	.db %10000000
-	.dl Font_22, Font_22_Fast
-	.db %10000000
-	.dl Font_23, Font_23_Fast
-	.db %10000000
-	.dl Font_24, Font_24_Fast
-	.db %10000000
-	.dl Font_25, Font_25_Fast
-	.db %10000000
-	.dl Font_26, Font_26_Fast
-	.db %10000000
-	.dl Font_27, Font_27_Fast
-	.db %10000000
-	.dl Font_28, Font_28_Fast
-	.db %10000000
-	.dl Font_29, Font_29_Fast
-	.db %10000000
-	.dl Font_30, Font_30_Slow
-	.db %00000000
-	.dl Font_31, Font_31_Slow
-	.db %00000000
-	.dl Font_32, Font_32_Slow
-	.db %00000000
-	.dl Font_33, Font_33_Slow
-	.db %00000000
-	.dl Font_34, Font_34_Slow
-	.db %00000000
-	.dl Font_35, Font_35_Slow
-	.db %00000000
-	.dl Font_36, Font_36_Slow
-	.db %00000000
+	.dl FrogDefault
+	.db 93
+	.db %01000010
+
+	.dl FrogDefault
+	.db 32
+	.db %00000010
+
+	.dl FrogDefault
+	.db 92
+	.db %00100010
+
+	.dl FrogDefault
+	.db 91
+	.db %01100010
+
+	.dl FrogCharge
+	.db 90
+	.db %00010010
+
+	.db %10011000, %01000110, %10000000, %00000000
+
+	.dl FrogCharge
+	.db 89
+	.db %01010010
+
+	.db %10011000, %01000110, %10000000, %00000000
+
+	.dl FrogCharge
+	.db 88
+	.db %00110010
+
+	.db %10011000, %01000110, %10000000, %00000000
+
+	.dl FrogCharge
+	.db 87
+	.db %01110010
+
+	.db %10011000, %01000110, %10000000, %00000000
+
+	.dl FrogCharge
+	.db 86
+	.db %00000010
+
+	.dl FrogCharge
+	.db 94
+	.db %01000010
+
+	.dl FrogCharge
+	.db 85
+	.db %00100010
+
+	.dl FrogCharge
+	.db 83
+	.db %01100010
+
+	.dl FrogJump
+	.db 82
+	.db %00000010
+
+	.dl FrogJump
+	.db 81
+	.db %01000010
+
+	.dl FrogJump
+	.db 80
+	.db %00100010
+
+	.dl FrogJump
+	.db 79
+	.db %01100010
+
+	.dl FrogJumpMouth
+	.db 78
+	.db %00000010
+
+	.dl FrogJumpMouth
+	.db 77
+	.db %01000010
+
+	.dl FrogJumpMouth
+	.db 76
+	.db %00100010
+
+	.dl FrogJumpMouth
+	.db 84
+	.db %01100010
+
+	.dl FrogFall
+	.db 96
+	.db %00000010
+
+	.dl FrogFall
+	.db 106
+	.db %01000010
+
+	.dl FrogFall
+	.db 97
+	.db %00100010
+
+	.dl FrogFall
+	.db 115
+	.db %01100010
+
+	.dl FrogTongue
+	.db 114
+	.db %00000010
+
+	.dl FrogTongue
+	.db 113
+	.db %01000010
+
+	.dl Unlucky_0
+	.db 112
+	.db %10000010
+
+	.dl Font_0
+	.db 111
+	.db %10000010
+
+	.dl Font_1
+	.db 110
+	.db %10000010
+
+	.dl Font_2
+	.db 109
+	.db %10000010
+
+	.dl Font_3
+	.db 108
+	.db %10000010
+
+	.dl Font_4
+	.db 116
+	.db %10000010
+
+	.dl Font_5
+	.db 107
+	.db %10000010
+
+	.dl Font_6
+	.db 105
+	.db %10000010
+
+	.dl Font_7
+	.db 104
+	.db %10000010
+
+	.dl Font_8
+	.db 103
+	.db %10000010
+
+	.dl Font_9
+	.db 102
+	.db %10000010
+
+	.dl Font_10
+	.db 101
+	.db %10000010
+
+	.dl Font_11
+	.db 100
+	.db %10000010
+
+	.dl Font_12
+	.db 99
+	.db %10000010
+
+	.dl Font_13
+	.db 98
+	.db %10000010
+
+	.dl Font_14
+	.db 75
+	.db %10000010
+
+	.dl Font_15
+	.db 74
+	.db %10000010
+
+	.dl Font_16
+	.db 73
+	.db %10000010
+
+	.dl Font_17
+	.db 62
+	.db %10000010
+
+	.dl Font_18
+	.db 49
+	.db %10000010
+
+	.dl Font_19
+	.db 48
+	.db %10000010
+
+	.dl Font_20
+	.db 47
+	.db %10000010
+
+	.dl Font_21
+	.db 46
+	.db %10000010
+
+	.dl Font_22
+	.db 45
+	.db %10000010
+
+	.dl Font_23
+	.db 44
+	.db %10000010
+
+	.dl Font_24
+	.db 43
+	.db %10000010
+
+	.dl Font_25
+	.db 42
+	.db %10000010
+
+	.dl Font_26
+	.db 41
+	.db %10000010
+
+	.dl Font_27
+	.db 40
+	.db %10000010
+
+	.dl Font_28
+	.db 39
+	.db %10000010
+
+	.dl Font_29
+	.db 38
+	.db %10000010
+
+	.dl Font_30
+	.db 37
+	.db %00000010
+
+	.dl Font_31
+	.db 36
+	.db %00000010
+
+	.dl Font_32
+	.db 35
+	.db %00000010
+
+	.dl Font_33
+	.db 34
+	.db %00000010
+
+	.dl Font_34
+	.db 33
+	.db %00000010
+
+	.dl Font_35
+	.db 50
+	.db %00000010
+
+	.dl Font_36
+	.db 51
+	.db %00000010
+
 
 decompress_frame_down_247:
 	.db 22
-	.dl Font_37, Font_37_Slow
-	.db %00000000
-	.dl Font_38, Font_38_Slow
-	.db %00000000
-	.dl Font_39, Font_39_Slow
-	.db %00000000
-	.dl Font_40, Font_40_Slow
-	.db %00000000
-	.dl Font_41, Font_41_Slow
-	.db %00000000
-	.dl Font_42, Font_42_Slow
-	.db %00000000
-	.dl Font_43, Font_43_Slow
-	.db %00000000
-	.dl Font_44, Font_44_Slow
-	.db %00000000
-	.dl Font_45, Font_45_Slow
-	.db %00000000
-	.dl Font_46, Font_46_Slow
-	.db %00000000
-	.dl Font_47, Font_47_Slow
-	.db %00000000
-	.dl Font_48, Font_48_Slow
-	.db %00000000
-	.dl Font_49, Font_49_Slow
-	.db %00000000
-	.dl Font_50, Font_50_Slow
-	.db %00000000
-	.dl Font_51, Font_51_Slow
-	.db %00000000
-	.dl Font_52, Font_52_Slow
-	.db %00000000
-	.dl Font_53, Font_53_Slow
-	.db %00000000
-	.dl Font_54, Font_54_Slow
-	.db %00000000
-	.dl Font_55, Font_55_Slow
-	.db %00000000
-	.dl Font_56, Font_56_Slow
-	.db %00000000
-	.dl Font_57, Font_57_Slow
-	.db %00000000
-	.dl Font_58, Font_58_Slow
-	.db %00000000
+	.dl Font_37
+	.db 52
+	.db %00000010
+
+	.dl Font_38
+	.db 53
+	.db %00000010
+
+	.dl Font_39
+	.db 71
+	.db %00000010
+
+	.dl Font_40
+	.db 70
+	.db %00000010
+
+	.dl Font_41
+	.db 69
+	.db %00000010
+
+	.dl Font_42
+	.db 68
+	.db %00000010
+
+	.dl Font_43
+	.db 67
+	.db %00000010
+
+	.dl Font_44
+	.db 66
+	.db %00000010
+
+	.dl Font_45
+	.db 65
+	.db %00000010
+
+	.dl Font_46
+	.db 64
+	.db %00000010
+
+	.dl Font_47
+	.db 72
+	.db %00000010
+
+	.dl Font_48
+	.db 63
+	.db %00000010
+
+	.dl Font_49
+	.db 61
+	.db %00000010
+
+	.dl Font_50
+	.db 60
+	.db %00000010
+
+	.dl Font_51
+	.db 59
+	.db %00000010
+
+	.dl Font_52
+	.db 58
+	.db %00000010
+
+	.dl Font_53
+	.db 57
+	.db %00000010
+
+	.dl Font_54
+	.db 56
+	.db %00000010
+
+	.dl Font_55
+	.db 55
+	.db %00000010
+
+	.dl Font_56
+	.db 54
+	.db %00000010
+
+	.dl Font_57
+	.db 95
+	.db %00000010
+
+	.dl Font_58
+	.db 117
+	.db %00000010
+
 
 decompress_frame_down_248:
 	.db 0

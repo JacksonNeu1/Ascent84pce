@@ -158,187 +158,187 @@ FG_Data_138:
 FG_Data_137:
 	.db 0
 	.db 1
-	.db 63, 14, 0, 92  ;CloudsNewer_1_Fast
+	.db 63, 14, 0, 85  ;CloudsNewer_1_Fast
 
 FG_Data_136:
 	.db 0
 	.db 1
-	.db 101, 14, 0, 92  ;CloudsNewer_1_Fast
+	.db 101, 14, 0, 85  ;CloudsNewer_1_Fast
 
 FG_Data_135:
 	.db 0
 	.db 1
-	.db 68, 14, 0, 92  ;CloudsNewer_1_Fast
+	.db 68, 14, 0, 85  ;CloudsNewer_1_Fast
 
 FG_Data_134:
 	.db 0
 	.db 1
-	.db 61, 14, 0, 92  ;CloudsNewer_1_Fast
+	.db 61, 14, 0, 85  ;CloudsNewer_1_Fast
 
 FG_Data_133:
 	.db 0
 	.db 1
-	.db 37, 14, 0, 92  ;CloudsNewer_1_Fast
+	.db 37, 14, 0, 85  ;CloudsNewer_1_Fast
 
 FG_Data_132:
 	.db 0
 	.db 1
-	.db 29, 14, 0, 92  ;CloudsNewer_1_Fast
+	.db 29, 14, 0, 85  ;CloudsNewer_1_Fast
 
 FG_Data_131:
 	.db 0
 	.db 2
-	.db 55, 255, 15, 21  ;SG_BigCloud2
-	.db 100, 255, 126, 18  ;SG_MedCloud1
+	.db 55, 255, 15, 20  ;SG_BigCloud2
+	.db 100, 255, 126, 17  ;SG_MedCloud1
 
 FG_Data_130:
 	.db 0
 	.db 6
-	.db 99, 255, 119, 17  ;SG_MedCloud2
-	.db 86, 255, 45, 19  ;SG_BigCloud3
-	.db 103, 255, 3, 20  ;SG_BigCloud1
-	.db 65, 255, 19, 18  ;SG_MedCloud1
-	.db 237, 255, 83, 18  ;SG_MedCloud1
-	.db 218, 255, 24, 17  ;SG_MedCloud2
+	.db 99, 255, 119, 16  ;SG_MedCloud2
+	.db 86, 255, 45, 18  ;SG_BigCloud3
+	.db 103, 255, 3, 19  ;SG_BigCloud1
+	.db 65, 255, 19, 17  ;SG_MedCloud1
+	.db 237, 255, 83, 17  ;SG_MedCloud1
+	.db 218, 255, 24, 16  ;SG_MedCloud2
 
 FG_Data_129:
 	.db 0
 	.db 3
-	.db 199, 255, 0, 19  ;SG_BigCloud3
-	.db 214, 255, 58, 18  ;SG_MedCloud1
-	.db 179, 255, 63, 20  ;SG_BigCloud1
+	.db 199, 255, 0, 18  ;SG_BigCloud3
+	.db 214, 255, 58, 17  ;SG_MedCloud1
+	.db 179, 255, 63, 19  ;SG_BigCloud1
 
 FG_Data_128:
 	.db 0
 	.db 6
-	.db 18, 255, 0, 17  ;SG_MedCloud2
-	.db 48, 255, 27, 28  ;SG_TurtleB2
-	.db 43, 255, 68, 23  ;SG_TurtleY1
-	.db 163, 255, 67, 21  ;SG_BigCloud2
-	.db 169, 255, 119, 17  ;SG_MedCloud2
-	.db 252, 255, 115, 18  ;SG_MedCloud1
+	.db 18, 255, 0, 16  ;SG_MedCloud2
+	.db 48, 255, 27, 27  ;SG_TurtleB2
+	.db 43, 255, 68, 22  ;SG_TurtleY1
+	.db 163, 255, 67, 20  ;SG_BigCloud2
+	.db 169, 255, 119, 16  ;SG_MedCloud2
+	.db 252, 255, 115, 17  ;SG_MedCloud1
 
 FG_Data_127:
 	.db 0
 	.db 3
-	.db 134, 255, 0, 21  ;SG_BigCloud2
-	.db 157, 255, 4, 18  ;SG_MedCloud1
-	.db 215, 255, 103, 20  ;SG_BigCloud1
+	.db 134, 255, 0, 20  ;SG_BigCloud2
+	.db 157, 255, 4, 17  ;SG_MedCloud1
+	.db 215, 255, 103, 19  ;SG_BigCloud1
 
 FG_Data_126:
 	.db 0
 	.db 3
-	.db 23, 255, 123, 18  ;SG_MedCloud1
-	.db 59, 255, 10, 18  ;SG_MedCloud1
-	.db 93, 255, 0, 17  ;SG_MedCloud2
+	.db 23, 255, 123, 17  ;SG_MedCloud1
+	.db 59, 255, 10, 17  ;SG_MedCloud1
+	.db 93, 255, 0, 16  ;SG_MedCloud2
 
 FG_Data_125:
 	.db 0
 	.db 1
-	.db 22, 255, 0, 17  ;SG_MedCloud2
+	.db 22, 255, 0, 16  ;SG_MedCloud2
 
 FG_Data_124:
 	.db 0
 	.db 1
-	.db 74, 255, 101, 21  ;SG_BigCloud2
+	.db 74, 255, 101, 20  ;SG_BigCloud2
 
 FG_Data_123:
 	.db 0
 	.db 2
-	.db 128, 255, 116, 17  ;SG_MedCloud2
-	.db 210, 255, 0, 18  ;SG_MedCloud1
+	.db 128, 255, 116, 16  ;SG_MedCloud2
+	.db 210, 255, 0, 17  ;SG_MedCloud1
 
 FG_Data_122:
 	.db 0
 	.db 1
-	.db 124, 255, 22, 23  ;SG_TurtleY1
+	.db 124, 255, 22, 22  ;SG_TurtleY1
 
 FG_Data_121:
 	.db 0
 	.db 5
-	.db 160, 255, 101, 20  ;SG_BigCloud1
-	.db 106, 255, 88, 18  ;SG_MedCloud1
-	.db 96, 255, 106, 17  ;SG_MedCloud2
-	.db 178, 255, 22, 28  ;SG_TurtleB2
-	.db 146, 255, 9, 17  ;SG_MedCloud2
+	.db 160, 255, 101, 19  ;SG_BigCloud1
+	.db 106, 255, 88, 17  ;SG_MedCloud1
+	.db 96, 255, 106, 16  ;SG_MedCloud2
+	.db 178, 255, 22, 27  ;SG_TurtleB2
+	.db 146, 255, 9, 16  ;SG_MedCloud2
 
 FG_Data_120:
 	.db 0
 	.db 5
-	.db 108, 255, 33, 23  ;SG_TurtleY1
-	.db 136, 255, 32, 26  ;SG_TurtleY2
-	.db 99, 255, 0, 20  ;SG_BigCloud1
-	.db 59, 255, 17, 18  ;SG_MedCloud1
-	.db 203, 255, 81, 18  ;SG_MedCloud1
+	.db 108, 255, 33, 22  ;SG_TurtleY1
+	.db 136, 255, 32, 25  ;SG_TurtleY2
+	.db 99, 255, 0, 19  ;SG_BigCloud1
+	.db 59, 255, 17, 17  ;SG_MedCloud1
+	.db 203, 255, 81, 17  ;SG_MedCloud1
 
 FG_Data_119:
 	.db 0
 	.db 8
-	.db 15, 255, 31, 17  ;SG_MedCloud2
-	.db 27, 255, 0, 18  ;SG_MedCloud1
-	.db 82, 255, 1, 20  ;SG_BigCloud1
-	.db 84, 255, 101, 21  ;SG_BigCloud2
-	.db 105, 255, 102, 18  ;SG_MedCloud1
-	.db 201, 255, 113, 17  ;SG_MedCloud2
-	.db 230, 255, 10, 18  ;SG_MedCloud1
-	.db 197, 255, 3, 25  ;SG_TurtleP
+	.db 15, 255, 31, 16  ;SG_MedCloud2
+	.db 27, 255, 0, 17  ;SG_MedCloud1
+	.db 82, 255, 1, 19  ;SG_BigCloud1
+	.db 84, 255, 101, 20  ;SG_BigCloud2
+	.db 105, 255, 102, 17  ;SG_MedCloud1
+	.db 201, 255, 113, 16  ;SG_MedCloud2
+	.db 230, 255, 10, 17  ;SG_MedCloud1
+	.db 197, 255, 3, 24  ;SG_TurtleP
 
 FG_Data_118:
 	.db 0
 	.db 6
-	.db 13, 255, 85, 18  ;SG_MedCloud1
-	.db 20, 255, 112, 18  ;SG_MedCloud1
-	.db 40, 255, 75, 24  ;SG_TurtleB
-	.db 227, 255, 0, 19  ;SG_BigCloud3
-	.db 183, 17, 0, 107  ;CloudsNewer_10_Fast_F
-	.db 215, 19, 0, 102  ;CloudsNewer_9_Fast_F
+	.db 13, 255, 85, 17  ;SG_MedCloud1
+	.db 20, 255, 112, 17  ;SG_MedCloud1
+	.db 40, 255, 75, 23  ;SG_TurtleB
+	.db 227, 255, 0, 18  ;SG_BigCloud3
+	.db 183, 17, 0, 100  ;CloudsNewer_10_Fast_F
+	.db 215, 19, 0, 95  ;CloudsNewer_9_Fast_F
 
 FG_Data_117:
 	.db 0
 	.db 3
-	.db 43, 255, 60, 23  ;SG_TurtleY1
-	.db 95, 255, 68, 27  ;SG_TurtleP2
-	.db 228, 255, 103, 20  ;SG_BigCloud1
+	.db 43, 255, 60, 22  ;SG_TurtleY1
+	.db 95, 255, 68, 26  ;SG_TurtleP2
+	.db 228, 255, 103, 19  ;SG_BigCloud1
 
 FG_Data_116:
 	.db 0
 	.db 4
-	.db 232, 255, 76, 24  ;SG_TurtleB
-	.db 188, 255, 0, 30  ;SG_TurtleP3
-	.db 102, 255, 66, 28  ;SG_TurtleB2
-	.db 33, 255, 7, 26  ;SG_TurtleY2
+	.db 232, 255, 76, 23  ;SG_TurtleB
+	.db 188, 255, 0, 29  ;SG_TurtleP3
+	.db 102, 255, 66, 27  ;SG_TurtleB2
+	.db 33, 255, 7, 25  ;SG_TurtleY2
 
 FG_Data_115:
 	.db 0
 	.db 4
-	.db 208, 255, 68, 28  ;SG_TurtleB2
-	.db 161, 255, 45, 25  ;SG_TurtleP
-	.db 112, 255, 74, 23  ;SG_TurtleY1
-	.db 66, 255, 20, 28  ;SG_TurtleB2
+	.db 208, 255, 68, 27  ;SG_TurtleB2
+	.db 161, 255, 45, 24  ;SG_TurtleP
+	.db 112, 255, 74, 22  ;SG_TurtleY1
+	.db 66, 255, 20, 27  ;SG_TurtleB2
 
 FG_Data_114:
 	.db 0
 	.db 4
-	.db 4, 255, 96, 18  ;SG_MedCloud1
-	.db 228, 255, 74, 23  ;SG_TurtleY1
-	.db 185, 255, 62, 25  ;SG_TurtleP
-	.db 160, 255, 18, 24  ;SG_TurtleB
+	.db 4, 255, 96, 17  ;SG_MedCloud1
+	.db 228, 255, 74, 22  ;SG_TurtleY1
+	.db 185, 255, 62, 24  ;SG_TurtleP
+	.db 160, 255, 18, 23  ;SG_TurtleB
 
 FG_Data_113:
 	.db 0
 	.db 12
-	.db 112, 255, 22, 28  ;SG_TurtleB2
-	.db 197, 255, 56, 25  ;SG_TurtleP
-	.db 107, 255, 34, 21  ;SG_BigCloud2
-	.db 10, 255, 59, 17  ;SG_MedCloud2
-	.db 14, 255, 10, 19  ;SG_BigCloud3
-	.db 190, 255, 0, 18  ;SG_MedCloud1
-	.db 186, 255, 0, 20  ;SG_BigCloud1
-	.db 169, 19, 0, 102  ;CloudsNewer_9_Fast_F
-	.db 148, 17, 0, 107  ;CloudsNewer_10_Fast_F
-	.db 202, 255, 70, 18  ;SG_MedCloud1
-	.db 249, 255, 22, 21  ;SG_BigCloud2
-	.db 151, 255, 13, 27  ;SG_TurtleP2
+	.db 112, 255, 22, 27  ;SG_TurtleB2
+	.db 197, 255, 56, 24  ;SG_TurtleP
+	.db 107, 255, 34, 20  ;SG_BigCloud2
+	.db 10, 255, 59, 16  ;SG_MedCloud2
+	.db 14, 255, 10, 18  ;SG_BigCloud3
+	.db 190, 255, 0, 17  ;SG_MedCloud1
+	.db 186, 255, 0, 19  ;SG_BigCloud1
+	.db 169, 19, 0, 95  ;CloudsNewer_9_Fast_F
+	.db 148, 17, 0, 100  ;CloudsNewer_10_Fast_F
+	.db 202, 255, 70, 17  ;SG_MedCloud1
+	.db 249, 255, 22, 20  ;SG_BigCloud2
+	.db 151, 255, 13, 26  ;SG_TurtleP2
 
 FG_Data_112:
 	.db 0
@@ -351,59 +351,59 @@ FG_Data_111:
 FG_Data_110:
 	.db 0
 	.db 1
-	.db 25, 255, 17, 28  ;SG_TurtleB2
+	.db 25, 255, 17, 27  ;SG_TurtleB2
 
 FG_Data_109:
 	.db 0
 	.db 2
-	.db 232, 255, 1, 21  ;SG_BigCloud2
-	.db 210, 255, 47, 18  ;SG_MedCloud1
+	.db 232, 255, 1, 20  ;SG_BigCloud2
+	.db 210, 255, 47, 17  ;SG_MedCloud1
 
 FG_Data_108:
 	.db 0
 	.db 6
-	.db 146, 255, 55, 18  ;SG_MedCloud1
-	.db 147, 255, 0, 21  ;SG_BigCloud2
-	.db 247, 255, 85, 20  ;SG_BigCloud1
-	.db 250, 255, 127, 18  ;SG_MedCloud1
-	.db 158, 255, 23, 23  ;SG_TurtleY1
-	.db 210, 255, 59, 27  ;SG_TurtleP2
+	.db 146, 255, 55, 17  ;SG_MedCloud1
+	.db 147, 255, 0, 20  ;SG_BigCloud2
+	.db 247, 255, 85, 19  ;SG_BigCloud1
+	.db 250, 255, 127, 17  ;SG_MedCloud1
+	.db 158, 255, 23, 22  ;SG_TurtleY1
+	.db 210, 255, 59, 26  ;SG_TurtleP2
 
 FG_Data_107:
 	.db 0
 	.db 3
-	.db 62, 255, 3, 19  ;SG_BigCloud3
-	.db 93, 255, 46, 18  ;SG_MedCloud1
-	.db 57, 255, 125, 18  ;SG_MedCloud1
+	.db 62, 255, 3, 18  ;SG_BigCloud3
+	.db 93, 255, 46, 17  ;SG_MedCloud1
+	.db 57, 255, 125, 17  ;SG_MedCloud1
 
 FG_Data_106:
 	.db 0
 	.db 4
-	.db 181, 255, 64, 25  ;SG_TurtleP
-	.db 178, 255, 63, 21  ;SG_BigCloud2
-	.db 175, 255, 118, 18  ;SG_MedCloud1
-	.db 155, 255, 8, 17  ;SG_MedCloud2
+	.db 181, 255, 64, 24  ;SG_TurtleP
+	.db 178, 255, 63, 20  ;SG_BigCloud2
+	.db 175, 255, 118, 17  ;SG_MedCloud1
+	.db 155, 255, 8, 16  ;SG_MedCloud2
 
 FG_Data_105:
 	.db 0
 	.db 5
-	.db 14, 255, 42, 22  ;SG_BigCloud4
-	.db 55, 255, 44, 19  ;SG_BigCloud3
-	.db 35, 255, 0, 20  ;SG_BigCloud1
-	.db 102, 255, 11, 18  ;SG_MedCloud1
-	.db 133, 255, 57, 17  ;SG_MedCloud2
+	.db 14, 255, 42, 21  ;SG_BigCloud4
+	.db 55, 255, 44, 18  ;SG_BigCloud3
+	.db 35, 255, 0, 19  ;SG_BigCloud1
+	.db 102, 255, 11, 17  ;SG_MedCloud1
+	.db 133, 255, 57, 16  ;SG_MedCloud2
 
 FG_Data_104:
 	.db 0
 	.db 8
-	.db 132, 255, 6, 24  ;SG_TurtleB
-	.db 160, 255, 49, 23  ;SG_TurtleY1
-	.db 130, 255, 6, 21  ;SG_BigCloud2
-	.db 166, 255, 60, 18  ;SG_MedCloud1
-	.db 184, 255, 21, 17  ;SG_MedCloud2
-	.db 224, 255, 73, 20  ;SG_BigCloud1
-	.db 242, 255, 0, 18  ;SG_MedCloud1
-	.db 213, 255, 34, 27  ;SG_TurtleP2
+	.db 132, 255, 6, 23  ;SG_TurtleB
+	.db 160, 255, 49, 22  ;SG_TurtleY1
+	.db 130, 255, 6, 20  ;SG_BigCloud2
+	.db 166, 255, 60, 17  ;SG_MedCloud1
+	.db 184, 255, 21, 16  ;SG_MedCloud2
+	.db 224, 255, 73, 19  ;SG_BigCloud1
+	.db 242, 255, 0, 17  ;SG_MedCloud1
+	.db 213, 255, 34, 26  ;SG_TurtleP2
 
 FG_Data_103:
 	.db 0
@@ -416,19 +416,19 @@ FG_Data_102:
 FG_Data_101:
 	.db 0
 	.db 1
-	.db 82, 255, 107, 17  ;SG_MedCloud2
+	.db 82, 255, 107, 16  ;SG_MedCloud2
 
 FG_Data_100:
 	.db 0
 	.db 2
-	.db 159, 255, 119, 18  ;SG_MedCloud1
-	.db 227, 255, 33, 18  ;SG_MedCloud1
+	.db 159, 255, 119, 17  ;SG_MedCloud1
+	.db 227, 255, 33, 17  ;SG_MedCloud1
 
 FG_Data_99:
 	.db 0
 	.db 2
-	.db 10, 255, 106, 18  ;SG_MedCloud1
-	.db 110, 255, 3, 17  ;SG_MedCloud2
+	.db 10, 255, 106, 17  ;SG_MedCloud1
+	.db 110, 255, 3, 16  ;SG_MedCloud2
 
 FG_Data_98:
 	.db 0
@@ -437,68 +437,68 @@ FG_Data_98:
 FG_Data_97:
 	.db 0
 	.db 2
-	.db 46, 255, 37, 21  ;SG_BigCloud2
-	.db 74, 255, 0, 18  ;SG_MedCloud1
+	.db 46, 255, 37, 20  ;SG_BigCloud2
+	.db 74, 255, 0, 17  ;SG_MedCloud1
 
 FG_Data_96:
 	.db 0
 	.db 6
-	.db 161, 255, 33, 26  ;SG_TurtleY2
-	.db 182, 255, 54, 18  ;SG_MedCloud1
-	.db 219, 255, 7, 20  ;SG_BigCloud1
-	.db 36, 255, 54, 25  ;SG_TurtleP
-	.db 18, 255, 117, 18  ;SG_MedCloud1
-	.db 43, 255, 74, 20  ;SG_BigCloud1
+	.db 161, 255, 33, 25  ;SG_TurtleY2
+	.db 182, 255, 54, 17  ;SG_MedCloud1
+	.db 219, 255, 7, 19  ;SG_BigCloud1
+	.db 36, 255, 54, 24  ;SG_TurtleP
+	.db 18, 255, 117, 17  ;SG_MedCloud1
+	.db 43, 255, 74, 19  ;SG_BigCloud1
 
 FG_Data_95:
 	.db 0
 	.db 5
-	.db 106, 255, 105, 19  ;SG_BigCloud3
-	.db 83, 255, 62, 25  ;SG_TurtleP
-	.db 24, 255, 17, 28  ;SG_TurtleB2
-	.db 155, 255, 95, 18  ;SG_MedCloud1
-	.db 167, 255, 119, 17  ;SG_MedCloud2
+	.db 106, 255, 105, 18  ;SG_BigCloud3
+	.db 83, 255, 62, 24  ;SG_TurtleP
+	.db 24, 255, 17, 27  ;SG_TurtleB2
+	.db 155, 255, 95, 17  ;SG_MedCloud1
+	.db 167, 255, 119, 16  ;SG_MedCloud2
 
 FG_Data_94:
 	.db 0
 	.db 9
-	.db 14, 255, 0, 19  ;SG_BigCloud3
-	.db 2, 19, 0, 102  ;CloudsNewer_9_Fast_F
-	.db 17, 255, 123, 18  ;SG_MedCloud1
-	.db 99, 255, 26, 20  ;SG_BigCloud1
-	.db 111, 255, 67, 21  ;SG_BigCloud2
-	.db 181, 255, 1, 19  ;SG_BigCloud3
-	.db 186, 255, 70, 17  ;SG_MedCloud2
-	.db 245, 255, 100, 21  ;SG_BigCloud2
-	.db 253, 255, 75, 17  ;SG_MedCloud2
+	.db 14, 255, 0, 18  ;SG_BigCloud3
+	.db 2, 19, 0, 95  ;CloudsNewer_9_Fast_F
+	.db 17, 255, 123, 17  ;SG_MedCloud1
+	.db 99, 255, 26, 19  ;SG_BigCloud1
+	.db 111, 255, 67, 20  ;SG_BigCloud2
+	.db 181, 255, 1, 18  ;SG_BigCloud3
+	.db 186, 255, 70, 16  ;SG_MedCloud2
+	.db 245, 255, 100, 20  ;SG_BigCloud2
+	.db 253, 255, 75, 16  ;SG_MedCloud2
 
 FG_Data_93:
 	.db 0
 	.db 6
-	.db 60, 255, 43, 28  ;SG_TurtleB2
-	.db 133, 255, 0, 30  ;SG_TurtleP3
-	.db 223, 17, 0, 107  ;CloudsNewer_10_Fast_F
-	.db 240, 17, 0, 107  ;CloudsNewer_10_Fast_F
-	.db 231, 255, 39, 18  ;SG_MedCloud1
-	.db 178, 255, 39, 17  ;SG_MedCloud2
+	.db 60, 255, 43, 27  ;SG_TurtleB2
+	.db 133, 255, 0, 29  ;SG_TurtleP3
+	.db 223, 17, 0, 100  ;CloudsNewer_10_Fast_F
+	.db 240, 17, 0, 100  ;CloudsNewer_10_Fast_F
+	.db 231, 255, 39, 17  ;SG_MedCloud1
+	.db 178, 255, 39, 16  ;SG_MedCloud2
 
 FG_Data_92:
 	.db 0
 	.db 5
-	.db 24, 255, 108, 17  ;SG_MedCloud2
-	.db 227, 255, 16, 23  ;SG_TurtleY1
-	.db 198, 255, 40, 27  ;SG_TurtleP2
-	.db 133, 255, 35, 28  ;SG_TurtleB2
-	.db 235, 255, 64, 29  ;SG_TurtleY3
+	.db 24, 255, 108, 16  ;SG_MedCloud2
+	.db 227, 255, 16, 22  ;SG_TurtleY1
+	.db 198, 255, 40, 26  ;SG_TurtleP2
+	.db 133, 255, 35, 27  ;SG_TurtleB2
+	.db 235, 255, 64, 28  ;SG_TurtleY3
 
 FG_Data_91:
 	.db 0
 	.db 5
-	.db 97, 255, 101, 21  ;SG_BigCloud2
-	.db 222, 255, 79, 20  ;SG_BigCloud1
-	.db 238, 255, 78, 25  ;SG_TurtleP
-	.db 57, 255, 2, 17  ;SG_MedCloud2
-	.db 70, 255, 13, 24  ;SG_TurtleB
+	.db 97, 255, 101, 20  ;SG_BigCloud2
+	.db 222, 255, 79, 19  ;SG_BigCloud1
+	.db 238, 255, 78, 24  ;SG_TurtleP
+	.db 57, 255, 2, 16  ;SG_MedCloud2
+	.db 70, 255, 13, 23  ;SG_TurtleB
 
 FG_Data_90:
 	.db 0
@@ -507,604 +507,600 @@ FG_Data_90:
 FG_Data_89:
 	.db 0
 	.db 5
-	.db 30, 255, 0, 19  ;SG_BigCloud3
-	.db 141, 255, 52, 18  ;SG_MedCloud1
-	.db 158, 255, 1, 21  ;SG_BigCloud2
-	.db 14, 19, 0, 102  ;CloudsNewer_9_Fast_F
-	.db 175, 255, 6, 25  ;SG_TurtleP
+	.db 30, 255, 0, 18  ;SG_BigCloud3
+	.db 141, 255, 52, 17  ;SG_MedCloud1
+	.db 158, 255, 1, 20  ;SG_BigCloud2
+	.db 14, 19, 0, 95  ;CloudsNewer_9_Fast_F
+	.db 175, 255, 6, 24  ;SG_TurtleP
 
 FG_Data_88:
 	.db 0
 	.db 2
-	.db 234, 255, 7, 18  ;SG_MedCloud1
-	.db 242, 17, 0, 107  ;CloudsNewer_10_Fast_F
+	.db 234, 255, 7, 17  ;SG_MedCloud1
+	.db 242, 17, 0, 100  ;CloudsNewer_10_Fast_F
 
 FG_Data_87:
 	.db 0
 	.db 3
-	.db 11, 255, 38, 18  ;SG_MedCloud1
-	.db 9, 255, 9, 17  ;SG_MedCloud2
-	.db 132, 255, 107, 18  ;SG_MedCloud1
+	.db 11, 255, 38, 17  ;SG_MedCloud1
+	.db 9, 255, 9, 16  ;SG_MedCloud2
+	.db 132, 255, 107, 17  ;SG_MedCloud1
 
 FG_Data_86:
 	.db 0
 	.db 1
-	.db 125, 255, 127, 18  ;SG_MedCloud1
+	.db 125, 255, 127, 17  ;SG_MedCloud1
 
 FG_Data_85:
 	.db 0
 	.db 4
-	.db 86, 19, 147, 104  ;CloudsNewer_9_Fast
-	.db 102, 19, 147, 104  ;CloudsNewer_9_Fast
-	.db 59, 255, 58, 18  ;SG_MedCloud1
-	.db 105, 255, 96, 21  ;SG_BigCloud2
+	.db 86, 19, 147, 97  ;CloudsNewer_9_Fast
+	.db 102, 19, 147, 97  ;CloudsNewer_9_Fast
+	.db 59, 255, 58, 17  ;SG_MedCloud1
+	.db 105, 255, 96, 20  ;SG_BigCloud2
 
 FG_Data_84:
 	.db 0
 	.db 1
-	.db 123, 255, 83, 17  ;SG_MedCloud2
+	.db 123, 255, 83, 16  ;SG_MedCloud2
 
 FG_Data_83:
 	.db 0
 	.db 7
-	.db 198, 255, 2, 18  ;SG_MedCloud1
-	.db 163, 255, 10, 28  ;SG_TurtleB2
-	.db 211, 255, 15, 18  ;SG_MedCloud1
-	.db 183, 17, 0, 107  ;CloudsNewer_10_Fast_F
-	.db 199, 19, 0, 102  ;CloudsNewer_9_Fast_F
-	.db 155, 255, 15, 21  ;SG_BigCloud2
-	.db 224, 255, 27, 25  ;SG_TurtleP
+	.db 198, 255, 2, 17  ;SG_MedCloud1
+	.db 163, 255, 10, 27  ;SG_TurtleB2
+	.db 211, 255, 15, 17  ;SG_MedCloud1
+	.db 183, 17, 0, 100  ;CloudsNewer_10_Fast_F
+	.db 199, 19, 0, 95  ;CloudsNewer_9_Fast_F
+	.db 155, 255, 15, 20  ;SG_BigCloud2
+	.db 224, 255, 27, 24  ;SG_TurtleP
 
 FG_Data_82:
 	.db 0
 	.db 6
-	.db 70, 255, 101, 20  ;SG_BigCloud1
-	.db 223, 255, 121, 18  ;SG_MedCloud1
-	.db 78, 255, 8, 18  ;SG_MedCloud1
-	.db 69, 255, 87, 25  ;SG_TurtleP
-	.db 50, 255, 76, 23  ;SG_TurtleY1
-	.db 114, 255, 102, 18  ;SG_MedCloud1
+	.db 70, 255, 101, 19  ;SG_BigCloud1
+	.db 223, 255, 121, 17  ;SG_MedCloud1
+	.db 78, 255, 8, 17  ;SG_MedCloud1
+	.db 69, 255, 87, 24  ;SG_TurtleP
+	.db 50, 255, 76, 22  ;SG_TurtleY1
+	.db 114, 255, 102, 17  ;SG_MedCloud1
 
 FG_Data_81:
 	.db 0
 	.db 1
-	.db 185, 255, 5, 20  ;SG_BigCloud1
+	.db 185, 255, 5, 19  ;SG_BigCloud1
 
 FG_Data_80:
 	.db 0
 	.db 3
-	.db 53, 255, 127, 18  ;SG_MedCloud1
-	.db 30, 17, 148, 103  ;CloudsNewer_10_Fast
-	.db 53, 19, 147, 104  ;CloudsNewer_9_Fast
+	.db 53, 255, 127, 17  ;SG_MedCloud1
+	.db 30, 17, 148, 96  ;CloudsNewer_10_Fast
+	.db 53, 19, 147, 97  ;CloudsNewer_9_Fast
 
 FG_Data_79:
 	.db 0
 	.db 3
-	.db 143, 255, 4, 17  ;SG_MedCloud2
-	.db 66, 255, 124, 18  ;SG_MedCloud1
-	.db 76, 255, 127, 18  ;SG_MedCloud1
+	.db 143, 255, 4, 16  ;SG_MedCloud2
+	.db 66, 255, 124, 17  ;SG_MedCloud1
+	.db 76, 255, 127, 17  ;SG_MedCloud1
 
 FG_Data_78:
 	.db 0
 	.db 2
-	.db 146, 255, 0, 18  ;SG_MedCloud1
-	.db 146, 19, 0, 102  ;CloudsNewer_9_Fast_F
+	.db 146, 255, 0, 17  ;SG_MedCloud1
+	.db 146, 19, 0, 95  ;CloudsNewer_9_Fast_F
 
 FG_Data_77:
 	.db 0
 	.db 2
-	.db 224, 255, 103, 19  ;SG_BigCloud3
-	.db 27, 255, 0, 27  ;SG_TurtleP2
+	.db 224, 255, 103, 18  ;SG_BigCloud3
+	.db 27, 255, 0, 26  ;SG_TurtleP2
 
 FG_Data_76:
 	.db 0
 	.db 5
-	.db 248, 255, 74, 17  ;SG_MedCloud2
-	.db 90, 255, 122, 18  ;SG_MedCloud1
-	.db 64, 255, 53, 25  ;SG_TurtleP
-	.db 138, 255, 24, 24  ;SG_TurtleB
-	.db 112, 255, 38, 26  ;SG_TurtleY2
+	.db 248, 255, 74, 16  ;SG_MedCloud2
+	.db 90, 255, 122, 17  ;SG_MedCloud1
+	.db 64, 255, 53, 24  ;SG_TurtleP
+	.db 138, 255, 24, 23  ;SG_TurtleB
+	.db 112, 255, 38, 25  ;SG_TurtleY2
 
 FG_Data_75:
 	.db 0
 	.db 4
-	.db 198, 255, 2, 18  ;SG_MedCloud1
-	.db 43, 255, 73, 24  ;SG_TurtleB
-	.db 183, 17, 0, 107  ;CloudsNewer_10_Fast_F
-	.db 199, 19, 0, 102  ;CloudsNewer_9_Fast_F
+	.db 198, 255, 2, 17  ;SG_MedCloud1
+	.db 43, 255, 73, 23  ;SG_TurtleB
+	.db 183, 17, 0, 100  ;CloudsNewer_10_Fast_F
+	.db 199, 19, 0, 95  ;CloudsNewer_9_Fast_F
 
 FG_Data_74:
 	.db 0
 	.db 3
-	.db 223, 255, 121, 18  ;SG_MedCloud1
-	.db 116, 255, 8, 18  ;SG_MedCloud1
-	.db 107, 255, 45, 23  ;SG_TurtleY1
+	.db 223, 255, 121, 17  ;SG_MedCloud1
+	.db 116, 255, 8, 17  ;SG_MedCloud1
+	.db 107, 255, 45, 22  ;SG_TurtleY1
 
 FG_Data_73:
 	.db 0
 	.db 1
-	.db 185, 255, 5, 20  ;SG_BigCloud1
+	.db 185, 255, 5, 19  ;SG_BigCloud1
 
 FG_Data_72:
 	.db 0
 	.db 3
-	.db 53, 255, 127, 18  ;SG_MedCloud1
-	.db 30, 17, 148, 103  ;CloudsNewer_10_Fast
-	.db 53, 19, 147, 104  ;CloudsNewer_9_Fast
+	.db 53, 255, 127, 17  ;SG_MedCloud1
+	.db 30, 17, 148, 96  ;CloudsNewer_10_Fast
+	.db 53, 19, 147, 97  ;CloudsNewer_9_Fast
 
 FG_Data_71:
 	.db 0
 	.db 3
-	.db 120, 255, 4, 17  ;SG_MedCloud2
-	.db 63, 255, 114, 18  ;SG_MedCloud1
-	.db 76, 255, 127, 18  ;SG_MedCloud1
+	.db 120, 255, 4, 16  ;SG_MedCloud2
+	.db 63, 255, 114, 17  ;SG_MedCloud1
+	.db 76, 255, 127, 17  ;SG_MedCloud1
 
 FG_Data_70:
 	.db 0
 	.db 3
-	.db 217, 255, 54, 21  ;SG_BigCloud2
-	.db 146, 255, 0, 18  ;SG_MedCloud1
-	.db 146, 19, 0, 102  ;CloudsNewer_9_Fast_F
+	.db 217, 255, 54, 20  ;SG_BigCloud2
+	.db 146, 255, 0, 17  ;SG_MedCloud1
+	.db 146, 19, 0, 95  ;CloudsNewer_9_Fast_F
 
 FG_Data_69:
 	.db 0
 	.db 3
-	.db 177, 255, 2, 22  ;SG_BigCloud4
-	.db 224, 255, 103, 19  ;SG_BigCloud3
-	.db 208, 255, 8, 21  ;SG_BigCloud2
+	.db 177, 255, 2, 21  ;SG_BigCloud4
+	.db 224, 255, 103, 18  ;SG_BigCloud3
+	.db 208, 255, 8, 20  ;SG_BigCloud2
 
 FG_Data_68:
 	.db 0
 	.db 5
-	.db 236, 255, 34, 20  ;SG_BigCloud1
-	.db 219, 255, 0, 21  ;SG_BigCloud2
-	.db 233, 255, 114, 17  ;SG_MedCloud2
-	.db 90, 255, 122, 18  ;SG_MedCloud1
-	.db 123, 255, 78, 18  ;SG_MedCloud1
+	.db 236, 255, 34, 19  ;SG_BigCloud1
+	.db 219, 255, 0, 20  ;SG_BigCloud2
+	.db 233, 255, 114, 16  ;SG_MedCloud2
+	.db 90, 255, 122, 17  ;SG_MedCloud1
+	.db 123, 255, 78, 17  ;SG_MedCloud1
 
 FG_Data_67:
 	.db 0
 	.db 4
-	.db 198, 255, 2, 18  ;SG_MedCloud1
-	.db 155, 255, 21, 19  ;SG_BigCloud3
-	.db 183, 17, 0, 107  ;CloudsNewer_10_Fast_F
-	.db 199, 19, 0, 102  ;CloudsNewer_9_Fast_F
+	.db 198, 255, 2, 17  ;SG_MedCloud1
+	.db 155, 255, 21, 18  ;SG_BigCloud3
+	.db 183, 17, 0, 100  ;CloudsNewer_10_Fast_F
+	.db 199, 19, 0, 95  ;CloudsNewer_9_Fast_F
 
 FG_Data_66:
 	.db 0
 	.db 5
-	.db 223, 255, 121, 18  ;SG_MedCloud1
-	.db 78, 255, 8, 18  ;SG_MedCloud1
-	.db 13, 255, 106, 19  ;SG_BigCloud3
-	.db 129, 255, 103, 20  ;SG_BigCloud1
-	.db 226, 255, 62, 18  ;SG_MedCloud1
+	.db 223, 255, 121, 17  ;SG_MedCloud1
+	.db 78, 255, 8, 17  ;SG_MedCloud1
+	.db 13, 255, 106, 18  ;SG_BigCloud3
+	.db 129, 255, 103, 19  ;SG_BigCloud1
+	.db 226, 255, 62, 17  ;SG_MedCloud1
 
 FG_Data_65:
 	.db 0
 	.db 5
-	.db 185, 255, 5, 20  ;SG_BigCloud1
-	.db 57, 255, 10, 18  ;SG_MedCloud1
-	.db 102, 255, 38, 21  ;SG_BigCloud2
-	.db 200, 255, 119, 17  ;SG_MedCloud2
-	.db 249, 255, 85, 18  ;SG_MedCloud1
+	.db 185, 255, 5, 19  ;SG_BigCloud1
+	.db 57, 255, 10, 17  ;SG_MedCloud1
+	.db 102, 255, 38, 20  ;SG_BigCloud2
+	.db 200, 255, 119, 16  ;SG_MedCloud2
+	.db 249, 255, 85, 17  ;SG_MedCloud1
 
 FG_Data_64:
 	.db 0
 	.db 7
-	.db 53, 255, 127, 18  ;SG_MedCloud1
-	.db 30, 17, 148, 103  ;CloudsNewer_10_Fast
-	.db 53, 19, 147, 104  ;CloudsNewer_9_Fast
-	.db 158, 255, 125, 18  ;SG_MedCloud1
-	.db 113, 255, 0, 19  ;SG_BigCloud3
-	.db 229, 255, 8, 20  ;SG_BigCloud1
-	.db 175, 255, 67, 17  ;SG_MedCloud2
+	.db 53, 255, 127, 17  ;SG_MedCloud1
+	.db 30, 17, 148, 96  ;CloudsNewer_10_Fast
+	.db 53, 19, 147, 97  ;CloudsNewer_9_Fast
+	.db 158, 255, 125, 17  ;SG_MedCloud1
+	.db 113, 255, 0, 18  ;SG_BigCloud3
+	.db 229, 255, 8, 19  ;SG_BigCloud1
+	.db 175, 255, 67, 16  ;SG_MedCloud2
 
 FG_Data_63:
 	.db 0
 	.db 3
-	.db 143, 255, 4, 17  ;SG_MedCloud2
-	.db 66, 255, 124, 18  ;SG_MedCloud1
-	.db 76, 255, 127, 18  ;SG_MedCloud1
+	.db 143, 255, 4, 16  ;SG_MedCloud2
+	.db 66, 255, 124, 17  ;SG_MedCloud1
+	.db 76, 255, 127, 17  ;SG_MedCloud1
 
 FG_Data_62:
 	.db 0
 	.db 2
-	.db 146, 255, 0, 18  ;SG_MedCloud1
-	.db 146, 19, 0, 102  ;CloudsNewer_9_Fast_F
+	.db 146, 255, 0, 17  ;SG_MedCloud1
+	.db 146, 19, 0, 95  ;CloudsNewer_9_Fast_F
 
 FG_Data_61:
 	.db 0
 	.db 1
-	.db 224, 255, 103, 19  ;SG_BigCloud3
+	.db 224, 255, 103, 18  ;SG_BigCloud3
 
 FG_Data_60:
 	.db 0
 	.db 2
-	.db 233, 255, 114, 17  ;SG_MedCloud2
-	.db 90, 255, 122, 18  ;SG_MedCloud1
+	.db 233, 255, 114, 16  ;SG_MedCloud2
+	.db 90, 255, 122, 17  ;SG_MedCloud1
 
 FG_Data_59:
 	.db 0
 	.db 1
-	.db 149, 255, 0, 10  ;SG_Branch6
+	.db 149, 255, 0, 9  ;SG_Branch6
 
 FG_Data_58:
 	.db 0
 	.db 1
-	.db 216, 255, 0, 10  ;SG_Branch6
+	.db 216, 255, 0, 9  ;SG_Branch6
 
 FG_Data_57:
 	.db 0
 	.db 1
-	.db 178, 255, 114, 5  ;SG_Branch4
+	.db 178, 255, 114, 4  ;SG_Branch4
 
 FG_Data_56:
 	.db 0
 	.db 1
-	.db 97, 255, 0, 10  ;SG_Branch6
+	.db 97, 255, 0, 9  ;SG_Branch6
 
 FG_Data_55:
 	.db 0
 	.db 2
-	.db 67, 255, 128, 1  ;SG_Branch3
-	.db 246, 255, 114, 5  ;SG_Branch4
+	.db 67, 255, 128, 0  ;SG_Branch3
+	.db 246, 255, 114, 4  ;SG_Branch4
 
 FG_Data_54:
 	.db 0
 	.db 1
-	.db 83, 255, 128, 1  ;SG_Branch3
+	.db 83, 255, 128, 0  ;SG_Branch3
 
 FG_Data_53:
 	.db 0
 	.db 1
-	.db 102, 255, 0, 6  ;SG_Branch5
+	.db 102, 255, 0, 5  ;SG_Branch5
 
 FG_Data_52:
 	.db 0
 	.db 1
-	.db 127, 255, 114, 5  ;SG_Branch4
+	.db 127, 255, 114, 4  ;SG_Branch4
 
 FG_Data_51:
 	.db 0
 	.db 1
-	.db 166, 255, 0, 6  ;SG_Branch5
+	.db 166, 255, 0, 5  ;SG_Branch5
 
 FG_Data_50:
 	.db 0
 	.db 2
-	.db 190, 255, 128, 1  ;SG_Branch3
-	.db 113, 255, 0, 10  ;SG_Branch6
+	.db 190, 255, 128, 0  ;SG_Branch3
+	.db 113, 255, 0, 9  ;SG_Branch6
 
 FG_Data_49:
 	.db 0
 	.db 1
-	.db 216, 255, 0, 10  ;SG_Branch6
+	.db 216, 255, 0, 9  ;SG_Branch6
 
 FG_Data_48:
 	.db 0
 	.db 1
-	.db 178, 255, 114, 5  ;SG_Branch4
+	.db 178, 255, 114, 4  ;SG_Branch4
 
 FG_Data_47:
 	.db 0
 	.db 1
-	.db 97, 255, 0, 10  ;SG_Branch6
+	.db 97, 255, 0, 9  ;SG_Branch6
 
 FG_Data_46:
 	.db 0
 	.db 1
-	.db 67, 255, 128, 1  ;SG_Branch3
+	.db 67, 255, 128, 0  ;SG_Branch3
 
 FG_Data_45:
 	.db 0
 	.db 1
-	.db 83, 255, 128, 1  ;SG_Branch3
+	.db 83, 255, 128, 0  ;SG_Branch3
 
 FG_Data_44:
 	.db 0
 	.db 1
-	.db 152, 255, 0, 10  ;SG_Branch6
+	.db 152, 255, 0, 9  ;SG_Branch6
 
 FG_Data_43:
 	.db 0
 	.db 1
-	.db 127, 255, 114, 5  ;SG_Branch4
+	.db 127, 255, 114, 4  ;SG_Branch4
 
 FG_Data_42:
 	.db 0
 	.db 1
-	.db 166, 255, 0, 6  ;SG_Branch5
+	.db 166, 255, 0, 5  ;SG_Branch5
 
 FG_Data_41:
 	.db 0
 	.db 2
-	.db 190, 255, 128, 1  ;SG_Branch3
-	.db 113, 255, 0, 10  ;SG_Branch6
+	.db 190, 255, 128, 0  ;SG_Branch3
+	.db 113, 255, 0, 9  ;SG_Branch6
 
 FG_Data_40:
 	.db 0
 	.db 1
-	.db 216, 255, 0, 10  ;SG_Branch6
+	.db 216, 255, 0, 9  ;SG_Branch6
 
 FG_Data_39:
 	.db 0
 	.db 1
-	.db 178, 255, 114, 5  ;SG_Branch4
+	.db 178, 255, 114, 4  ;SG_Branch4
 
 FG_Data_38:
 	.db 0
 	.db 1
-	.db 202, 255, 0, 10  ;SG_Branch6
+	.db 202, 255, 0, 9  ;SG_Branch6
 
 FG_Data_37:
 	.db 0
 	.db 2
-	.db 67, 255, 128, 1  ;SG_Branch3
-	.db 246, 255, 114, 5  ;SG_Branch4
+	.db 67, 255, 128, 0  ;SG_Branch3
+	.db 246, 255, 114, 4  ;SG_Branch4
 
 FG_Data_36:
 	.db 0
 	.db 1
-	.db 83, 255, 128, 1  ;SG_Branch3
+	.db 83, 255, 128, 0  ;SG_Branch3
 
 FG_Data_35:
 	.db 0
 	.db 2
-	.db 102, 255, 0, 6  ;SG_Branch5
-	.db 152, 255, 0, 10  ;SG_Branch6
+	.db 102, 255, 0, 5  ;SG_Branch5
+	.db 152, 255, 0, 9  ;SG_Branch6
 
 FG_Data_34:
 	.db 0
 	.db 1
-	.db 127, 255, 114, 5  ;SG_Branch4
+	.db 127, 255, 114, 4  ;SG_Branch4
 
 FG_Data_33:
 	.db 0
 	.db 1
-	.db 166, 255, 0, 6  ;SG_Branch5
+	.db 166, 255, 0, 5  ;SG_Branch5
 
 FG_Data_32:
 	.db 0
 	.db 2
-	.db 190, 255, 128, 1  ;SG_Branch3
-	.db 113, 255, 0, 10  ;SG_Branch6
+	.db 190, 255, 128, 0  ;SG_Branch3
+	.db 113, 255, 0, 9  ;SG_Branch6
 
 FG_Data_31:
 	.db 0
 	.db 1
-	.db 216, 255, 0, 10  ;SG_Branch6
+	.db 216, 255, 0, 9  ;SG_Branch6
 
 FG_Data_30:
 	.db 0
 	.db 1
-	.db 178, 255, 114, 5  ;SG_Branch4
+	.db 178, 255, 114, 4  ;SG_Branch4
 
 FG_Data_29:
 	.db 0
 	.db 1
-	.db 97, 255, 0, 10  ;SG_Branch6
+	.db 97, 255, 0, 9  ;SG_Branch6
 
 FG_Data_28:
 	.db 0
 	.db 2
-	.db 67, 255, 128, 1  ;SG_Branch3
-	.db 246, 255, 114, 5  ;SG_Branch4
+	.db 67, 255, 128, 0  ;SG_Branch3
+	.db 246, 255, 114, 4  ;SG_Branch4
 
 FG_Data_27:
 	.db 0
 	.db 1
-	.db 83, 255, 128, 1  ;SG_Branch3
+	.db 83, 255, 128, 0  ;SG_Branch3
 
 FG_Data_26:
 	.db 0
 	.db 1
-	.db 174, 255, 0, 10  ;SG_Branch6
+	.db 174, 255, 0, 9  ;SG_Branch6
 
 FG_Data_25:
 	.db 0
 	.db 1
-	.db 127, 255, 114, 5  ;SG_Branch4
+	.db 127, 255, 114, 4  ;SG_Branch4
 
 FG_Data_24:
 	.db 0
 	.db 1
-	.db 166, 255, 0, 6  ;SG_Branch5
+	.db 166, 255, 0, 5  ;SG_Branch5
 
 FG_Data_23:
 	.db 0
 	.db 2
-	.db 190, 255, 128, 1  ;SG_Branch3
-	.db 113, 255, 0, 10  ;SG_Branch6
+	.db 190, 255, 128, 0  ;SG_Branch3
+	.db 113, 255, 0, 9  ;SG_Branch6
 
 FG_Data_22:
 	.db 0
 	.db 3
-	.db 128, 255, 22, 7  ;SG_Lantern4
-	.db 133, 255, 11, 7  ;SG_Lantern4
-	.db 98, 255, 128, 1  ;SG_Branch3
+	.db 128, 255, 22, 6  ;SG_Lantern4
+	.db 133, 255, 11, 6  ;SG_Lantern4
+	.db 98, 255, 128, 0  ;SG_Branch3
 
 FG_Data_21:
 	.db 0
 	.db 2
-	.db 138, 255, 142, 9  ;SG_Lantern3
-	.db 121, 255, 0, 10  ;SG_Branch6
+	.db 138, 255, 142, 8  ;SG_Lantern3
+	.db 121, 255, 0, 9  ;SG_Branch6
 
 FG_Data_20:
 	.db 0
 	.db 4
-	.db 128, 255, 6, 4  ;SG_Lantern2
-	.db 155, 10, 144, 42  ;Branches_7_Fast
-	.db 155, 11, 151, 41  ;Branches_6_Slow
-	.db 221, 255, 111, 14  ;SG_Branch2
+	.db 128, 255, 6, 3  ;SG_Lantern2
+	.db 155, 10, 144, 34  ;Branches_7_Fast
+	.db 155, 11, 151, 33  ;Branches_6_Slow
+	.db 221, 255, 111, 13  ;SG_Branch2
 
 FG_Data_19:
 	.db 0
 	.db 3
-	.db 105, 255, 150, 16  ;SG_Vines8
-	.db 211, 255, 0, 10  ;SG_Branch6
-	.db 164, 255, 114, 5  ;SG_Branch4
+	.db 105, 255, 150, 15  ;SG_Vines8
+	.db 211, 255, 0, 9  ;SG_Branch6
+	.db 164, 255, 114, 4  ;SG_Branch4
 
 FG_Data_18:
 	.db 0
 	.db 2
-	.db 193, 255, 142, 9  ;SG_Lantern3
-	.db 128, 255, 0, 6  ;SG_Branch5
+	.db 193, 255, 142, 8  ;SG_Lantern3
+	.db 128, 255, 0, 5  ;SG_Branch5
 
 FG_Data_17:
 	.db 0
 	.db 1
-	.db 93, 255, 128, 1  ;SG_Branch3
+	.db 93, 255, 128, 0  ;SG_Branch3
 
 FG_Data_16:
 	.db 0
 	.db 5
-	.db 183, 255, 132, 8  ;SG_Lantern5
-	.db 169, 255, 143, 8  ;SG_Lantern5
-	.db 113, 10, 0, 42  ;Branches_7_Fast
-	.db 123, 255, 16, 16  ;SG_Vines8
-	.db 172, 255, 5, 2  ;SG_Branch7
+	.db 183, 255, 132, 7  ;SG_Lantern5
+	.db 169, 255, 143, 7  ;SG_Lantern5
+	.db 113, 10, 0, 34  ;Branches_7_Fast
+	.db 123, 255, 16, 15  ;SG_Vines8
+	.db 172, 255, 5, 1  ;SG_Branch7
 
 FG_Data_15:
 	.db 0
 	.db 6
-	.db 38, 10, 0, 42  ;Branches_7_Fast
-	.db 86, 255, 30, 15  ;SG_Vines1
-	.db 131, 255, 57, 11  ;SG_Vines7
-	.db 177, 255, 100, 11  ;SG_Vines7
-	.db 97, 255, 6, 2  ;SG_Branch7
-	.db 196, 255, 128, 1  ;SG_Branch3
+	.db 38, 10, 0, 34  ;Branches_7_Fast
+	.db 86, 255, 30, 14  ;SG_Vines1
+	.db 131, 255, 57, 10  ;SG_Vines7
+	.db 177, 255, 100, 10  ;SG_Vines7
+	.db 97, 255, 6, 1  ;SG_Branch7
+	.db 196, 255, 128, 0  ;SG_Branch3
 
 FG_Data_14:
 	.db 0
 	.db 2
-	.db 171, 255, 12, 3  ;SG_Lantern1
-	.db 170, 255, 114, 5  ;SG_Branch4
+	.db 171, 255, 12, 2  ;SG_Lantern1
+	.db 170, 255, 114, 4  ;SG_Branch4
 
 FG_Data_13:
 	.db 0
 	.db 1
-	.db 132, 255, 128, 1  ;SG_Branch3
+	.db 132, 255, 128, 0  ;SG_Branch3
 
 FG_Data_12:
 	.db 0
 	.db 3
-	.db 222, 255, 141, 4  ;SG_Lantern2
-	.db 210, 255, 0, 10  ;SG_Branch6
-	.db 118, 255, 114, 5  ;SG_Branch4
+	.db 222, 255, 141, 3  ;SG_Lantern2
+	.db 210, 255, 0, 9  ;SG_Branch6
+	.db 118, 255, 114, 4  ;SG_Branch4
 
 FG_Data_11:
 	.db 0
 	.db 1
-	.db 184, 255, 0, 6  ;SG_Branch5
+	.db 184, 255, 0, 5  ;SG_Branch5
 
 FG_Data_10:
 	.db 0
 	.db 3
-	.db 120, 255, 141, 7  ;SG_Lantern4
-	.db 171, 255, 14, 9  ;SG_Lantern3
-	.db 202, 255, 128, 1  ;SG_Branch3
+	.db 120, 255, 141, 6  ;SG_Lantern4
+	.db 171, 255, 14, 8  ;SG_Lantern3
+	.db 202, 255, 128, 0  ;SG_Branch3
 
 FG_Data_9:
 	.db 0
 	.db 4
-	.db 176, 14, 0, 85  ;Branches_3_Fast
-	.db 177, 14, 9, 86  ;Branches_2_Fast
-	.db 177, 14, 18, 66  ;Branches_4_Fast_F
-	.db 234, 255, 19, 2  ;SG_Branch7
+	.db 176, 14, 0, 78  ;Branches_3_Fast
+	.db 177, 14, 9, 79  ;Branches_2_Fast
+	.db 177, 14, 18, 59  ;Branches_4_Fast_F
+	.db 234, 255, 19, 1  ;SG_Branch7
 
 FG_Data_8:
 	.db 0
 	.db 4
-	.db 124, 14, 151, 83  ;Branches_5_Fast
-	.db 124, 14, 142, 84  ;Branches_4_Fast
-	.db 127, 255, 8, 4  ;SG_Lantern2
-	.db 186, 255, 110, 14  ;SG_Branch2
+	.db 124, 14, 151, 76  ;Branches_5_Fast
+	.db 124, 14, 142, 77  ;Branches_4_Fast
+	.db 127, 255, 8, 3  ;SG_Lantern2
+	.db 186, 255, 110, 13  ;SG_Branch2
 
 FG_Data_7:
 	.db 0
 	.db 3
-	.db 86, 255, 138, 7  ;SG_Lantern4
-	.db 237, 255, 0, 10  ;SG_Branch6
-	.db 135, 255, 0, 6  ;SG_Branch5
+	.db 86, 255, 138, 6  ;SG_Lantern4
+	.db 237, 255, 0, 9  ;SG_Branch6
+	.db 135, 255, 0, 5  ;SG_Branch5
 
 FG_Data_6:
 	.db 0
 	.db 2
-	.db 108, 255, 56, 4  ;SG_Lantern2
-	.db 100, 255, 0, 10  ;SG_Branch6
+	.db 108, 255, 56, 3  ;SG_Lantern2
+	.db 100, 255, 0, 9  ;SG_Branch6
 
 FG_Data_5:
 	.db 0
 	.db 3
-	.db 182, 255, 8, 3  ;SG_Lantern1
-	.db 93, 255, 0, 6  ;SG_Branch5
-	.db 215, 255, 128, 1  ;SG_Branch3
+	.db 182, 255, 8, 2  ;SG_Lantern1
+	.db 93, 255, 0, 5  ;SG_Branch5
+	.db 215, 255, 128, 0  ;SG_Branch3
 
 FG_Data_4:
 	.db 0
 	.db 6
-	.db 223, 255, 7, 3  ;SG_Lantern1
-	.db 143, 255, 110, 11  ;SG_Vines7
-	.db 111, 255, 32, 12  ;SG_Vines5
-	.db 141, 255, 0, 10  ;SG_Branch6
-	.db 202, 255, 114, 5  ;SG_Branch4
-	.db 110, 255, 24, 13  ;SG_Vines2
+	.db 223, 255, 7, 2  ;SG_Lantern1
+	.db 143, 255, 110, 10  ;SG_Vines7
+	.db 111, 255, 32, 11  ;SG_Vines5
+	.db 141, 255, 0, 9  ;SG_Branch6
+	.db 202, 255, 114, 4  ;SG_Branch4
+	.db 110, 255, 24, 12  ;SG_Vines2
 
 FG_Data_3:
 	.db 0
 	.db 3
-	.db 174, 255, 138, 8  ;SG_Lantern5
-	.db 138, 255, 127, 9  ;SG_Lantern3
-	.db 176, 255, 128, 1  ;SG_Branch3
+	.db 174, 255, 138, 7  ;SG_Lantern5
+	.db 138, 255, 127, 8  ;SG_Lantern3
+	.db 176, 255, 128, 0  ;SG_Branch3
 
 FG_Data_2:
 	.db 0
 	.db 28
-	.db 58, 255, 30, 7  ;SG_Lantern4
-	.db 56, 255, 144, 7  ;SG_Lantern4
-	.db 61, 10, 16, 48  ;AscentBanner_8_Slow
-	.db 88, 10, 16, 49  ;AscentBanner_7_Fast
-	.db 78, 10, 152, 50  ;AscentBanner_7_Slow_O
-	.db 68, 10, 152, 47  ;AscentBanner_8_Slow_O
-	.db 88, 10, 152, 49  ;AscentBanner_7_Fast
-	.db 147, 255, 0, 6  ;SG_Branch5
-	.db 156, 255, 114, 5  ;SG_Branch4
-	.db 85, 12, 143, 51  ;AscentBanner_9_Fast_F
-	.db 81, 12, 139, 51  ;AscentBanner_9_Fast_F
-	.db 96, 19, 147, 52  ;AscentBanner_6_Slow_F
-	.db 77, 12, 135, 51  ;AscentBanner_9_Fast_F
-	.db 73, 12, 131, 51  ;AscentBanner_9_Fast_F
-	.db 69, 11, 123, 53  ;AscentBanner_10_Fast_F
-	.db 65, 8, 111, 54  ;AscentBanner_5_Fast
-	.db 64, 8, 99, 55  ;AscentBanner_4_Fast
-	.db 63, 8, 91, 56  ;AscentBanner_0_Fast
-	.db 62, 8, 73, 57  ;AscentBanner_3_Fast
-	.db 62, 8, 61, 58  ;AscentBanner_2_Fast
-	.db 63, 8, 49, 59  ;AscentBanner_1_Fast
-	.db 71, 12, 37, 60  ;AscentBanner_9_Fast
-	.db 75, 12, 33, 60  ;AscentBanner_9_Fast
-	.db 67, 11, 41, 61  ;AscentBanner_10_Fast
-	.db 79, 12, 29, 60  ;AscentBanner_9_Fast
-	.db 83, 12, 25, 60  ;AscentBanner_9_Fast
-	.db 95, 19, 17, 62  ;AscentBanner_6_Slow_O
-	.db 62, 255, 4, 4  ;SG_Lantern2
+	.db 58, 255, 30, 6  ;SG_Lantern4
+	.db 56, 255, 144, 6  ;SG_Lantern4
+	.db 61, 10, 16, 41  ;AscentBanner_8_Slow
+	.db 88, 10, 16, 42  ;AscentBanner_7_Fast
+	.db 78, 10, 152, 43  ;AscentBanner_7_Slow_O
+	.db 68, 10, 152, 40  ;AscentBanner_8_Slow_O
+	.db 88, 10, 152, 42  ;AscentBanner_7_Fast
+	.db 147, 255, 0, 5  ;SG_Branch5
+	.db 156, 255, 114, 4  ;SG_Branch4
+	.db 85, 12, 143, 44  ;AscentBanner_9_Fast_F
+	.db 81, 12, 139, 44  ;AscentBanner_9_Fast_F
+	.db 96, 19, 147, 45  ;AscentBanner_6_Slow_F
+	.db 77, 12, 135, 44  ;AscentBanner_9_Fast_F
+	.db 73, 12, 131, 44  ;AscentBanner_9_Fast_F
+	.db 69, 11, 123, 46  ;AscentBanner_10_Fast_F
+	.db 65, 8, 111, 47  ;AscentBanner_5_Fast
+	.db 64, 8, 99, 48  ;AscentBanner_4_Fast
+	.db 63, 8, 91, 49  ;AscentBanner_0_Fast
+	.db 62, 8, 73, 50  ;AscentBanner_3_Fast
+	.db 62, 8, 61, 51  ;AscentBanner_2_Fast
+	.db 63, 8, 49, 52  ;AscentBanner_1_Fast
+	.db 71, 12, 37, 53  ;AscentBanner_9_Fast
+	.db 75, 12, 33, 53  ;AscentBanner_9_Fast
+	.db 67, 11, 41, 54  ;AscentBanner_10_Fast
+	.db 79, 12, 29, 53  ;AscentBanner_9_Fast
+	.db 83, 12, 25, 53  ;AscentBanner_9_Fast
+	.db 95, 19, 17, 55  ;AscentBanner_6_Slow_O
+	.db 62, 255, 4, 3  ;SG_Lantern2
 
 FG_Data_1:
 	.db 0
 	.db 5
-	.db 57, 255, 20, 3  ;SG_Lantern1
-	.db 65, 255, 35, 4  ;SG_Lantern2
-	.db 80, 14, 0, 9  ;Branches_9_Fast
-	.db 201, 255, 128, 1  ;SG_Branch3
-	.db 135, 255, 0, 2  ;SG_Branch7
+	.db 57, 255, 20, 2  ;SG_Lantern1
+	.db 65, 255, 35, 3  ;SG_Lantern2
+	.db 80, 14, 0, 0  ;Branches_9_Fast
+	.db 201, 255, 128, 0  ;SG_Branch3
+	.db 135, 255, 0, 1  ;SG_Branch7
 
 FG_Data_0:
 	.db 0
-	.db 4
-	.db 25, 26, 148, 2  ;BigGrassBase_Fast
-	.db 51, 255, 0, 0  ;SG_GroundGrass
-	.db 51, 255, 34, 0  ;SG_GroundGrass
-	.db 51, 255, 95, 0  ;SG_GroundGrass
+	.db 0
 
 
 
