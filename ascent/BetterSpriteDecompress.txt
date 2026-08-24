@@ -77,9 +77,9 @@ sdcomp_flip_bitstream_2 .equ $
 sdcomp_get_next_alpha:
 	;ld a,$A2;test 
 	;call write_a_to_ram
-	ld a,c 
+	;ld a,c 
 	;call write_a_to_ram 
-	ld a,(hl)
+	;ld a,(hl)
 	;call write_a_to_ram
 	
 	scf 
@@ -111,23 +111,23 @@ sdcomp_bit_offset .equ $ ;jp nc for offset
 	ret ;return 0 first bit
 sdcomp_bit_offset_skip:;skip bit offset
 		
-	;ld a,$EF
-	;call write_a_to_ram
+
+	ld a,(sdcomp_alpha_inc_bitstream_call)
+sdcomp_fast_4 .equ $ + 1
+	xor %00001000
+	ld (sdcomp_alpha_inc_bitstream_call),a 
+
 	ld a,(hl)
-	;push af 
-	;call write_a_to_ram
-	;ld a,c
-	;call write_a_to_ram
-	;pop af 
-	
-	
 	and c 
-	call sdcomp_next_in_bitstream;incs bitstream
+
+	scf
+sdcomp_alpha_inc_bitstream_call .equ $
+	call c,sdcomp_next_in_bitstream;incs bitstream
 	;a holds data to return
 	;call write_a_to_ram
 	scf 
 sdcomp_no_alpha_1 .equ $;Load a with 1 if no alpha
-	jp c,sdcomp_no_alpha_1_skip
+	jp c,sdcomp_no_alpha_1_skip ;Maybe just use NOP instead?
 	ld a,1
 sdcomp_no_alpha_1_skip:
 	
@@ -430,18 +430,37 @@ sdcomp_alpha_data_line_end_mask .equ $ + 1
 	ld c,0
 sdcomp_traverse_initial:
 	push de
+	ld d,0 ;so that when rrc d there is no carry
 sdcomp_sprite_width .equ $ + 1
 	ld e, 0
 	;e holds sprite width 
 	
+	;push af 
+	;ld a,$BC 
+	;call write_a_to_ram
+	;pop af 
+	;call write_hl_to_ram 
+	
+	
 	;Read forward through alpha data and inc color pointer if alpha is 1 
 sdcomp_traverse_line_data_loop:
-	rrc c 
+
+	ld a, (sdcomp_traverse_fast_alphamask)
+sdcomp_fast_6 .equ $ + 1 ;set to 0 for slow sprites
+	xor %00000011  ;will swap rrc c and rrc d 
+	ld (sdcomp_traverse_fast_alphamask),a 
+;for fast sprites only rotate every other time this is called 
+sdcomp_traverse_fast_alphamask .equ $ + 1 
+	rrc c ;can alternate with rrc d for toggling (start on rrc d for fast)
 	jp nc,sdcomp_traverse_line_data_alpha_inc_skip ;if not reached end of byte, skip
 	inc hl ;have reached end of alpha byte, inc hl 
 sdcomp_traverse_line_data_alpha_inc_skip:
 	ld a,(hl)
 	and c ;read alpha data 
+	
+	;call write_a_to_ram 
+	;call prgmpause
+	
 sdcomp_no_alpha_3 .equ $ ;jp c for no alpha sprites to always inc color 
 	jp z,sdcomp_traverse_line_data_color_skip;if no alpha skip incrementing color. 
 	exx;out of shadow 
@@ -488,6 +507,7 @@ sdcomp_traverse_line_data_color_skip:
 	;call write_a_to_ram 
 	;ld a,c 
 	;call write_a_to_ram 
+	;call prgmpause
 	
 	exx;to shadow 
 	ret
@@ -629,11 +649,7 @@ sdcomp_offset_2 .equ $
 	;call write_a_to_ram
 	
 	
-	ld a,(hl);load width again
-	
-	ld b,a 
-	
-
+	ld b,(hl);load width again
 	inc hl ;hl points to height 
 	ld a,(hl);height
 	ld (sdcomp_lines_remaining),a ;write height to lines remaining counter
@@ -652,7 +668,6 @@ sdcomp_offset_2 .equ $
 	;at this point a = height, b = width 
 	
 	scf
-	
 sdcomp_no_alpha_2 .equ $
 	jp nc,sdcomp_no_alpha_2_skip ; if no alpha skip this part
 	
@@ -670,6 +685,14 @@ sdcomp_no_alpha_2 .equ $
 	rr l 
 	srl h 
 	rr l 
+	
+	scf 
+sdcomp_fast_5 .equ $
+	jp c,sdcomp_fast_5_skip
+	srl h 
+	rr l 
+sdcomp_fast_5_skip:
+
 	inc hl 
 	pop bc ;initial hl location
 	;add number of bytes to skip 
@@ -677,11 +700,9 @@ sdcomp_no_alpha_2 .equ $
 	
 sdcomp_no_alpha_2_skip:
 
-	
 	;HL POINTING TO COLOR PALETTE DATA
-
 	
-	ld b,a ;save for after
+	ld b,a ;save height for after
 	;GET LOCAL PALETTE DATA
 	
 	
@@ -1390,7 +1411,16 @@ sdcomp_set_fast:
 	ld(sdcomp_fast_1),a 
 	ld(sdcomp_fast_2),a 
 	ld(sdcomp_fast_3),a 
-	
+	ld a,%00001000
+	ld (sdcomp_fast_4),a 
+	ld a, %11011100 ;call c
+	ld (sdcomp_alpha_inc_bitstream_call),a 
+	ld a, %11010010 ;jp nc 
+	ld (sdcomp_fast_5),a 
+	ld a, %00000011
+	ld (sdcomp_fast_6) ,a 
+	ld a, %00001010 ;rrc d 
+	ld (sdcomp_traverse_fast_alphamask),a 
 	ret 
 
 sdcomp_reset_fast:
@@ -1398,7 +1428,15 @@ sdcomp_reset_fast:
 	ld(sdcomp_fast_1),a 
 	ld(sdcomp_fast_2),a 
 	ld(sdcomp_fast_3),a 
-	
+	ld a,%00000000
+	ld (sdcomp_fast_4),a 
+	ld (sdcomp_fast_6) ,a
+	ld a, %11011100 ;call c
+	ld (sdcomp_alpha_inc_bitstream_call),a 
+	ld a,%11011010;jp c
+	ld (sdcomp_fast_5),a 
+	ld a, %00001001 ;rrc c
+	ld (sdcomp_traverse_fast_alphamask),a 
 	ret 
 
 

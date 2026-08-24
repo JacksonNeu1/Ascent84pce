@@ -114,6 +114,26 @@ player_load_pos_skip:
 	ld ($F20002),a;0.5hz
 	ld ($F20003),a
 	
+
+
+	call sdcomp_set_fast
+	call sdcomp_set_flip
+	ld hl, CloudsNewer_1 
+	ld de, CloudsNewer_1_Fast
+	call sprite_decompress
+	
+	call prgmpause
+	
+	ld hl, (draw_buffer)
+	ld de, 160*126  + 55
+	add hl,de
+	ex de, hl
+	ld hl,CloudsNewer_1_Fast
+	call draw_fast_sprite_full
+	
+	call prgmpause
+	
+	
 	call setup_decompress_queue
 	
 	
@@ -133,8 +153,26 @@ player_load_pos_skip:
 	ld de, 160*126  + 45
 	add hl,de
 	ex de, hl
-	ld hl,FrogChargeLit_Slow
+	ld hl,FrogChargeLit_Slow_F
 	call draw_slow_sprite_full
+	
+	call prgmpause 
+	
+	ld hl, (draw_buffer)
+	ld de, 160*126  + 55
+	add hl,de
+	ex de, hl
+	ld hl,CloudsNewer_1_Fast
+	call draw_fast_sprite_full
+	
+	call prgmpause
+	
+	ld hl, (draw_buffer)
+	ld de, 160*126  + 75
+	add hl,de
+	ex de, hl
+	ld hl,CloudsNewer_1_Fast_F
+	call draw_fast_sprite_full
 	
 	call prgmpause
 	
