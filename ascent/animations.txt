@@ -1,6 +1,6 @@
  
 update_animations:
-	;Will update all animations every frame. Not significant performance impact
+	;Will update all animations every frame.
 	
 	;POSITION
 	;load hl with data pointer (dataframe or sprite group)
@@ -11,22 +11,26 @@ update_animations:
 	;add a,xx ;Base value
 	;ld (hl),a
 
-	;7 bytes per animated value
+	;5 bytes per animated value
 	ex af, af' ;'
 	ld hl,position_animation_data
-	ld a,(hl) ;replace w shadow bc for >256 vals 
+	ld a,(hl) ;replace w shadow bc for >256 vals?
 	inc hl
 update_animation_position_loop:
 	ex af, af' ;'
 	ld de,(hl);load address of property
 	inc hl
 	inc hl 
-	inc hl 
-	ld bc,(hl) ;address of anim curve 
-	inc hl 
-	inc hl 
 	inc hl
-	ld a,(bc) ;value of anim curve
+	
+	ld a,(hl) ; curve index
+	inc hl
+	exx 
+	ld hl, anim_curve_sin_values_start
+	call get_curve_value
+	exx 
+	;a holds anim curve value
+	
 	ld c, (hl) ;base value
 	inc hl
 	add a,c
@@ -35,6 +39,8 @@ update_animation_position_loop:
 	dec a 
 	jp nz,update_animation_position_loop
 	
+	
+
 
 ; Enable sprites, 8 bytes per animated property 	
 	ex af, af' ;'
@@ -47,11 +53,14 @@ update_animation_enable_loop:
 	inc hl
 	inc hl 
 	inc hl 
-	ld bc,(hl) ;address of anim curve 
-	inc hl 
-	inc hl 
+	
+	ld a,(hl) ; curve index
 	inc hl
-	ld a,(bc) ;value of anim curve
+	exx 
+	ld hl, anim_curve_lin_values_start
+	call get_curve_value
+	exx 
+	
 	ld c,a 
 	ld a,(hl) ;bitmask (first bit = negate)
 	inc hl 
@@ -96,11 +105,14 @@ update_animation_sprite:
 update_animation_sprite_loop:
 	ex af, af' ;' ;out
 	ld de,0 ;clear upper byte 
-	ld bc,(hl) ;animation curve address
-	inc hl 
+	
+	ld a,(hl) ; curve index
 	inc hl
-	inc hl
-	ld a,(bc) ;anim curve value (btwn 0 and 7)
+	exx 
+	ld hl, anim_curve_lin_values_start
+	call get_curve_value
+	exx 
+	
 	rlca ;double it and give it to the next person
 	ld e,a 
 	add hl,de ;jump to correct place
@@ -147,11 +159,14 @@ update_animation_disable_loop:
 	inc hl
 	inc hl 
 	inc hl 
-	ld bc,(hl) ;address of anim curve 
-	inc hl 
-	inc hl 
+	
+	ld a,(hl) ; curve index
 	inc hl
-	ld a,(bc) ;value of anim curve
+	exx 
+	ld hl, anim_curve_lin_values_start
+	call get_curve_value
+	exx 
+
 	ld c,a 
 	ld a,(hl)
 	inc hl
@@ -193,7 +208,7 @@ update_palette_anim:
 	ld de, space_gradients
 	;ld a, $00
 	;call write_a_to_ram
-	ld a, (lin_2_31_1) ;~4s timer
+	ld a, (anim_curve_lin_values_start + 58) ;~4s timer
 	ld hl,0
 	ld l,a 
 	ld h,20 
@@ -220,6 +235,14 @@ update_palette_anim:
 	
 	ret	
 	
+	
+get_curve_value:
+	;hl holds start of curve values in vram. a holds curve index 
+	ld de,0
+	ld e,a 
+	add hl,de 
+	ld a,(hl)
+	ret
 	
 	;SPRITE
 	;ld hl with base data ptr

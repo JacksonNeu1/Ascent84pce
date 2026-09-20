@@ -1,0 +1,160 @@
+
+sprite_decompression_full:
+
+	ld de, compressed_sprite_data
+	push de
+
+	ld hl, new_decomp_calls_all
+	ld bc,(hl)
+	ld (sdf_loop_counter), bc 
+	
+	inc hl 
+	inc hl 
+	inc hl 
+	
+sdf_loop:
+
+	;ld a, c 
+	;call write_a_to_ram
+
+	ld a,(hl) ; index of sprite in table 
+	ld (sdf_add_idx_in_tbl),a 
+	
+	inc hl ;to flags
+	
+	ld c,(hl) 
+	
+	bit 2,c ;indicates new compressed sprite 
+	jp nz,sdf_new_comp_sprite
+	
+	;otherwise need to restore DE to where it was prior to calling sprite decompression 
+	pop de 
+	push de
+
+sdf_new_comp_sprite:
+	
+	pop af ;keeps value of DE
+	push de
+	
+	
+	;ld a,c 
+	;call write_a_to_ram
+	;call prgmpause 
+	
+	
+	bit 7,c
+	jp z,sdf_not_fast_offset
+	bit 6,c
+	jp z,sdf_not_fast_offset
+	
+	;otherwise sprite is both fast and offset 
+	call sdcomp_reset_fast
+	call sdcomp_set_fast_offset
+	call sdcomp_set_offset
+	jp sdf_fast_offset_skip
+	
+sdf_not_fast_offset:
+	bit 7,c 
+	call nz, sdcomp_set_fast
+	bit 7,c 
+	call z, sdcomp_reset_fast
+	bit 6,c 
+	call nz, sdcomp_set_offset
+	bit 6,c
+	call z, sdcomp_reset_offset
+sdf_fast_offset_skip:	
+	bit 5,c 
+	call nz, sdcomp_set_flip
+	bit 5,c 
+	call z, sdcomp_reset_flip
+	
+	call sdcomp_reset_alt_color
+	inc hl ;start of alt color data (or next element)
+	ld a,c 
+	and %00011000
+	jp z, sdf_no_alt_colr
+	call sdcomp_set_alt_color
+	
+	inc hl ;to next element
+	
+	;if c = 11 4 alt colrs bytes, already had 4 incs, no dec needed
+	;if c = 10, 2 alt colr bytes, need 2 decs 
+	;if c = 01 , need 3 decs 
+	ld a,c 
+	xor %00011000
+	and %00011000
+	jp z, sdf_no_alt_colr
+	dec hl
+	dec hl 
+	bit 3,a
+	jp nz,sdf_no_alt_colr
+	dec hl 
+	;whack
+	
+sdf_no_alt_colr:
+	
+	;hl should now be pointing to start of next element 
+	
+	push hl
+	ld a,c ;restore params byte
+	ld bc,0 
+	and %00000011 ;get table index
+	ld c,a
+	;c should hold sprite table index 
+	ld hl,Sprite_Table_Table
+	add hl,bc
+	add hl,bc 
+	add hl,bc ;inc to correct table
+	ld hl,(hl)
+sdf_add_idx_in_tbl .equ $ + 1
+	ld c,0
+	add hl,bc
+	add hl,bc 
+	add hl,bc ;inc to decompress pos 
+	ld hl,(hl)
+	;hl now points to decompressed sprite location 
+	;de should point to start of comp sprite data 
+	
+	;want de decompress location, hl = sprite data
+	
+	;call write_hl_to_ram
+	
+	ex de,hl
+	;call write_hl_to_ram 
+	
+	;call prgmpause
+	;call prgmpause
+	
+	call sprite_decompress
+	
+	inc hl 
+	
+	;call write_hl_to_ram 
+	
+	;hl maybe points to start of next compressed sprite?
+	ex de,hl ;put in DE 
+	
+	pop hl ;restore hl to start of next element in decompress calls 
+	;top of stack should now hold data of most recent compressed sprite 
+
+	;call prgmpause
+	
+	;Need loop counter
+sdf_loop_counter .equ $ + 1
+	ld bc, 0 
+	dec bc 
+	ld (sdf_loop_counter),bc 
+	ld a,c 
+	or b 
+	jp nz, sdf_loop 
+	
+	pop de 
+	
+	
+	ret
+	
+	
+	
+	
+	
+

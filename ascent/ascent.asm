@@ -114,72 +114,108 @@ player_load_pos_skip:
 	ld ($F20002),a;0.5hz
 	ld ($F20003),a
 	
+;1color fast flip, 1color fast offset flip	 hl 1 before next sprite 
+;1color fast, 1color fast offset  - hl on next sprite
+
+	
+;2color fast - hl 1 before next sprite 
+;2color fast flip - hl 1 before next sprite 
+;2color fast offset - 1 before 
+;2color fast offset flip - 1 before 
+
+;4 color fast - hl 1 before
+;4 color fast flip - 1 before 
+;4 color fast offet - 1 before 
+;4 color fast offset flip - 1 before 
+
+;1 color no alpha , fast - on next sprite 
+;1 color no alpha, fast flip - 1 before 
+;1 color no alpha, fast offset - on next sprite 
+;1 color no alpha, fast offset flip - 1 before
+
+;4 color no alpha, fast - on next sprite 
+;4 color no alpha, fast flip - 1 before 
+;4 color no alpha, fast offset - on next sprite 
+;4 color no alpha, fast offet flip - 1 before 
+
+;8 color slow - 1 before 
+;8 color slow flip - 1 before 
+;8 color slow offset - 1 before 
+;8 color slow offset flip - 1 before 
 
 
-	call sdcomp_set_fast
-	call sdcomp_set_flip
-	ld hl, CloudsNewer_1 
+
+;on next sprite when 1 color no flip or no alpha no flip 
+
+
+
+;Branches 10 fast - 1 before 
+;Branches 10 fast flip - 1 before 
+
+;Branches 9 fast, 1 before next 
+;Branches 9 fast flip - 1 before 
+;Branches 9 fast offset - 1 before
+;Branches 9 fast offset flip - 1 before
+
+;clouds8 - 1 before 
+
+
+
+	call sdcomp_reset_fast
+	;call sdcomp_set_fast_offset
+	;call sdcomp_set_fast
+	;call sdcomp_set_flip
+	;call sdcomp_set_offset
+	ld hl, purpleVinesifitwasPurple_4
 	ld de, CloudsNewer_1_Fast
 	call sprite_decompress
 	
-	call prgmpause
+
+	call write_hl_to_ram
+	
 	
 	ld hl, (draw_buffer)
 	ld de, 160*126  + 55
 	add hl,de
 	ex de, hl
 	ld hl,CloudsNewer_1_Fast
-	call draw_fast_sprite_full
+	call draw_slow_sprite_full
 	
 	call prgmpause
+	;call prgmpause
+	;call prgmpause
 	
 	
-	call setup_decompress_queue
+	;call setup_decompress_queue
 	
+	call sprite_decompression_full 
+	
+	
+	;call prgmpause
+	
+	ld hl, (draw_buffer)
+	ld de, 160*126  + 55
+	add hl,de
+	ex de, hl
+	
+	ld hl,purpleVinesifitwasPurple_4_Slow
+	call draw_slow_sprite_full
+	
+	call prgmpause
 	
 	;Decompress sprites in preframes for setup
 	;ld hl,decompress_frame_up_pre4 
 	;call cfdc_direct_add_decompress_frame
 	;call continue_decompressions ;Run decompression (Will finish as timer has not started)
-	ld hl,decompress_frame_up_pre3 
-	call cfdc_direct_add_decompress_frame
-	call continue_decompressions ;Run decompression (Will finish as timer has not started)
-	ld hl,decompress_frame_up_pre2 
-	call cfdc_direct_add_decompress_frame
-	call continue_decompressions ;Run decompression (Will finish as timer has not started)
-	
-	
-	ld hl, (draw_buffer)
-	ld de, 160*126  + 45
-	add hl,de
-	ex de, hl
-	ld hl,FrogChargeLit_Slow_F
-	call draw_slow_sprite_full
-	
-	call prgmpause 
-	
-	ld hl, (draw_buffer)
-	ld de, 160*126  + 55
-	add hl,de
-	ex de, hl
-	ld hl,CloudsNewer_1_Fast
-	call draw_fast_sprite_full
-	
-	call prgmpause
-	
-	ld hl, (draw_buffer)
-	ld de, 160*126  + 75
-	add hl,de
-	ex de, hl
-	ld hl,CloudsNewer_1_Fast_F
-	call draw_fast_sprite_full
-	
-	call prgmpause
-	
-	
-	ld hl,decompress_frame_up_pre1
-	call cfdc_direct_add_decompress_frame
-	call continue_decompressions ;Run decompression (Will finish as timer has not started)
+	;ld hl,decompress_frame_up_pre3 
+	;call cfdc_direct_add_decompress_frame
+	;call continue_decompressions ;Run decompression (Will finish as timer has not started)
+	;ld hl,decompress_frame_up_pre2 
+	;call cfdc_direct_add_decompress_frame
+	;call continue_decompressions ;Run decompression (Will finish as timer has not started)
+	;ld hl,decompress_frame_up_pre1
+	;call cfdc_direct_add_decompress_frame
+	;call continue_decompressions ;Run decompression (Will finish as timer has not started)
 	
 	;call draw_fg
 	
@@ -198,21 +234,21 @@ set_cam_0_pos_skip_start:
 	;ld (bg_cam_pos),hl
 	
 	
-	ld a,0
-loading_cam_move_loop:
-	call cfdc_cam_move_up ;need to skip here for frame 0
-	call continue_decompressions
+	;ld a,0
+;loading_cam_move_loop:
+	;call cfdc_cam_move_up ;need to skip here for frame 0
+	;call continue_decompressions
 	
-	ld a, (cam_pos + 1) ;frame# of cam pos 
-	ld b,a 
-loading_cam_frame_num .equ $+1
-	ld a,0
-	cp b
-	jp nc,loading_cam_move_complete
-	inc a 
-	ld (loading_cam_frame_num),a 
-	jp loading_cam_move_loop
-loading_cam_move_complete:
+;	ld a, (cam_pos + 1) ;frame# of cam pos 
+;	ld b,a 
+;loading_cam_frame_num .equ $+1
+;	ld a,0
+;	cp b
+;	jp nc,loading_cam_move_complete
+;	inc a 
+;	ld (loading_cam_frame_num),a 
+;	jp loading_cam_move_loop
+;loading_cam_move_complete:
 
 
 	;call prgmpause
@@ -235,7 +271,8 @@ loading_cam_move_complete:
 	ld (mpLcdBase),hl
 	
 	
-
+	
+	
 	;ld hl,BG_buffer+(160*5)
 	;ld (dbgl_vram_line_start),hl
 
@@ -256,12 +293,10 @@ loading_cam_move_complete:
 
 no_scroll_bg_setup:
 	call setup_bg ;after initial decompressions and cam setup
-	
-	;call prgmpause
-	
-main_loop:
 
 	
+	
+main_loop:
 
 	;clear timer
 	ld a,0
@@ -281,19 +316,21 @@ get_inputs_return:
 	call player_update
 	call check_collisions
 
+	;call prgmpause
 
 	call update_sine_vals
 	;ld a,(lin_4_7_1)
 	;call write_a_to_ram
 
+
 	call update_animations
-	
+
 	call breakaway_timer_update
 	
 	call player_move_cam
 	
 	;Check palette setup 
-
+	
 	
 	ld a, (cam_pos+1) ;cam frame #
 	cp 134
@@ -485,9 +522,9 @@ longest_frame_skip:
 	
 	;check if lcd has drawn first frame
 
-	call check_for_decompress_calls
+	;call check_for_decompress_calls
 	;Sprite decompression will occur here
-	call continue_decompressions
+	;call continue_decompressions
 	
 	;TEsting
 	ld hl,0
@@ -859,13 +896,14 @@ sd_test_a:
 
 
 
-#include "timeTesting.txt"
+;#include "timeTesting.txt"
 #include "drawBGSprite.txt"
 #include "drawBGScroll.txt"
 #include "drawFGSprite.txt"
 #include "BetterSpriteDecompress.txt"
 #include "drawFG.txt"
-#include "SpriteDecompressManager.txt"
+;#include "SpriteDecompressManager.txt"
+#include "NewDecompressManagerAll.txt"
 #include "getInputs.txt"
 #include "PlayerController.txt"
 #include "PlayerDraw.txt"
@@ -880,7 +918,8 @@ sd_test_a:
 #include "generated/MG_Data.txt"
 #include "generated/MG2_Data.txt"
 #include "generated/FG_Data.txt"
-#include "generated/DecompressCalls.txt"
+;#include "generated/DecompressCalls.txt"
+#include "generated/New_Decomp_Calls_All.txt"
 #include "generated/Palette_Setup.txt"
 #include "generated/Sprite_Tables.txt"
 #include "generated/Sprite_Data.txt"

@@ -100,6 +100,19 @@ cd_begin_decompression:
 	set 1,(hl) ;set start flag
 	ld c,a ;save byte 
 	
+	;if sprite is fast and offset, should call reset_fast, set_fast_offset, and set_offset
+	bit 7,c
+	jp z,cd_not_fast_offset
+	bit 6,c
+	jp z,cd_not_fast_offset
+	
+	;otherwise sprite is both fast and offset 
+	call sdcomp_reset_fast
+	call sdcomp_set_fast_offset
+	call sdcomp_set_offset
+	jp cd_fast_offset_skip
+	
+cd_not_fast_offset:
 	bit 7,c 
 	call nz, sdcomp_set_fast
 	bit 7,c 
@@ -108,6 +121,7 @@ cd_begin_decompression:
 	call nz, sdcomp_set_offset
 	bit 6,c
 	call z, sdcomp_reset_offset
+cd_fast_offset_skip:	
 	bit 5,c 
 	call nz, sdcomp_set_flip
 	bit 5,c 

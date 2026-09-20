@@ -832,6 +832,12 @@ sdcomp_dec_gap_btwn_rows .equ $
 	ld (sdcomp_end_of_line_alp),a ;Reset virtual zero flag, reading alpha data will now be the next line 
 	ld (sdcomp_end_of_line_gaplength),a ;Reset flag for adding interline gaplength 
 	
+;CHANGED !()_@*$)_!(@*$_)!(@*%_)!(*@$_)	
+	
+	scf 
+sdcomp_end_reached_flag .equ $;check if end of sprite reached
+	jp nc,sdcomp_end
+	
 	scf
 sdcomp_flip_traverse .equ $
 	call nc,sdcomp_traverse_line_data ;call line data traverse if flip
@@ -842,9 +848,7 @@ sdcomp_flip_traverse .equ $
 	inc de
 	
 	
-	scf 
-sdcomp_end_reached_flag .equ $;check if end of sprite reached
-	jp nc,sdcomp_end
+
 
 	
 sdcomp_end_of_line_gaplength_skip:
@@ -972,15 +976,15 @@ sdcomp_ldir_write:
 	;ld a,b 
 	;call write_a_to_ram
 	;pop af ;TEST
-sdcomp_testeste_3 .equ $ 
+;sdcomp_testeste_3 .equ $ 
 	push af;save ending pixels
 	ld a,b
 	exx ;out 
 	ld (de),a;write ldir length
 	inc de 
-sdcomp_testeste_2 .equ $ 	
+;sdcomp_testeste_2 .equ $ 	
 	call sdcomp_write_ldir_data_loop
-sdcomp_testeste .equ $ 
+;sdcomp_testeste .equ $ 
 	pop af;return ending pixels
 	
 	scf
@@ -1113,11 +1117,58 @@ sdcomp_end:
 	;ld a,$69
 	;call write_a_to_ram
 	
+	
+	;Write loops/line data as we have reached a gap btwn lines 
+	ld a,(sdcomp_loops_per_line_counter)
+	ld (de),a ;write loops/line data 
+	inc de
+	
 	ld a, %11010010 ;jp nc 
 	ld (sdcomp_end_reached_flag),a 
 	
+	exx ;to color data 
+
+;======================================================== DO THIS	
+	;if c = 1000000
+	;then dec hl (if not flipped?)
+;========================================================
+	
+	
 	ld a,0 ;return 0 if finished decompressing 
+	
+	scf
+sdcomp_flip_end .equ $
+	jp c, sdcomp_noflip_end ;jp nc if flip
+	
+
+	ld hl, (sdcomp_color_data_line_end_byte)
+	ret
+	
+sdcomp_noflip_end:
+
+	bit 7,c 
+	jp z,sdcomp_noflip_end_2
+	dec hl 
+sdcomp_noflip_end_2:
+
+	;not flip sprite 
+;	scf
+;sdcomp_noalpha_end .equ $
+;	jp nc, sdcomp_dec_end ;set to jp c if no alpha 
+;
+;sdcomp_1color_end .equ $
+;	jp nc, sdcomp_dec_end ;set to jp c if 1 color
+	
+	
 	ret 
+	
+;sdcomp_dec_end:
+	;dec hl 
+	
+	
+;	ret
+	
+	
 
 
 ;bit orders
@@ -1131,19 +1182,21 @@ sdcomp_end:
 sdcomp_set_0bpc:
 	ld a,%11011010;jp c
 	ld (sdcomp_0bpc),a
-	
 	ld (sdcomp_2bpc_1),a ;for setting local pallete data
 	ld (sdcomp_3bpc_1),a 
+	;ld (sdcomp_1color_end), a
 	
 	ld a, %11010010 ;jp nc 
 	ld (sdcomp_1bpc_1),a ;for setting local pallete data
 	ld a,%00000000
 	ld (sdcomp_traverse_bit_check),a 
+	
 	ret 
 	
 sdcomp_set_1bpc:
 	ld a,%11010010;jp nc
 	ld (sdcomp_0bpc),a
+	;ld (sdcomp_1color_end), a
 	ld a,%11011010;jp c
 	ld (sdcomp_1bpc),a
 	
@@ -1170,6 +1223,7 @@ sdcomp_set_2bpc:
 	ld a,%11010010;jp nc
 	ld (sdcomp_0bpc),a
 	ld (sdcomp_1bpc),a
+	;ld (sdcomp_1color_end), a
 	
 	ld a,%11011010;jp c
 	ld (sdcomp_2bpc),a
@@ -1214,6 +1268,7 @@ sdcomp_set_3bpc:
 	ld (sdcomp_0bpc),a
 	ld (sdcomp_1bpc),a
 	ld (sdcomp_2bpc),a
+	;ld (sdcomp_1color_end), a
 	
 	ld a,%11011010;jp c
 	ld (sdcomp_3bpc),a
@@ -1263,6 +1318,7 @@ sdcomp_set_4bpc:
 	ld (sdcomp_1bpc),a
 	ld (sdcomp_2bpc),a
 	ld (sdcomp_3bpc),a
+	;ld (sdcomp_1color_end), a
 
 	ld a,%11011010;jp c
 
@@ -1342,6 +1398,8 @@ sdcomp_set_noalpha:
 	ld a,%11011010;jp c
 	ld (sdcomp_no_alpha_2),a 
 	ld (sdcomp_no_alpha_3),a 
+	;ld (sdcomp_noalpha_end), a
+	
 	ret
 	
 sdcomp_reset_noalpha:
@@ -1350,8 +1408,9 @@ sdcomp_reset_noalpha:
 	ld (sdcomp_no_alpha_1),a 
 	ld a, %11010010 ;jp nc
 	ld (sdcomp_no_alpha_2),a 
+	;ld (sdcomp_noalpha_end), a
 	ld a, %11001010 ;jp z
-	ld (sdcomp_no_alpha_3),a 
+	ld (sdcomp_no_alpha_3),a 	
 	ret
 
 
@@ -1386,6 +1445,7 @@ sdcomp_set_flip:
 	ld (sdcomp_flip_4bpc),a
 	ld a, %11010010 ;jp nc 
 	ld (sdcomp_flip_setup),a 
+	ld (sdcomp_flip_end),a 
 	
 	ret 
 
@@ -1403,6 +1463,8 @@ sdcomp_reset_flip:
 	ld (sdcomp_flip_4bpc),a
 	ld a,%11011010;jp c
 	ld (sdcomp_flip_setup),a 
+	ld (sdcomp_flip_end),a 
+	
 	ret 
 
 
@@ -1411,6 +1473,8 @@ sdcomp_set_fast:
 	ld(sdcomp_fast_1),a 
 	ld(sdcomp_fast_2),a 
 	ld(sdcomp_fast_3),a 
+sdcomp_set_fast_offset:
+	;this is if sprite data is fast, but can still be converted to a slow offset sprite 
 	ld a,%00001000
 	ld (sdcomp_fast_4),a 
 	ld a, %11011100 ;call c

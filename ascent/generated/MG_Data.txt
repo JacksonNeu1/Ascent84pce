@@ -92,10 +92,10 @@ MG_Data_70:
 	.db 0
 	.db 5
 	.db 31, 255, 112, 65  ;SG_FGStars3
-	.db 9, 8, 118, 177  ;Stars_25_Slow
-	.db 8, 5, 141, 174  ;Stars_8_Slow
-	.db 24, 3, 136, 175  ;Stars_9_Slow
-	.db 31, 5, 112, 174  ;Stars_8_Slow
+	.db 9, 8, 118, 170  ;Stars_25_Slow
+	.db 8, 5, 141, 167  ;Stars_8_Slow
+	.db 24, 3, 136, 168  ;Stars_9_Slow
+	.db 31, 5, 112, 167  ;Stars_8_Slow
 
 MG_Data_69:
 	.db 0
@@ -113,58 +113,58 @@ MG_Data_69:
 	.db 198, 255, 115, 68  ;SG_Zig1
 	.db 155, 255, 12, 67  ;SG_Zig3
 	.db 248, 255, 65, 66  ;SG_Zig7
-	.db 162, 3, 116, 175  ;Stars_9_Slow
-	.db 200, 5, 76, 174  ;Stars_8_Slow
-	.db 193, 3, 100, 175  ;Stars_9_Slow
-	.db 142, 7, 108, 176  ;Stars_12_Slow
-	.db 177, 5, 105, 174  ;Stars_8_Slow
-	.db 178, 8, 82, 177  ;Stars_25_Slow
-	.db 152, 3, 95, 175  ;Stars_9_Slow
-	.db 141, 5, 85, 174  ;Stars_8_Slow
+	.db 162, 3, 116, 168  ;Stars_9_Slow
+	.db 200, 5, 76, 167  ;Stars_8_Slow
+	.db 193, 3, 100, 168  ;Stars_9_Slow
+	.db 142, 7, 108, 169  ;Stars_12_Slow
+	.db 177, 5, 105, 167  ;Stars_8_Slow
+	.db 178, 8, 82, 170  ;Stars_25_Slow
+	.db 152, 3, 95, 168  ;Stars_9_Slow
+	.db 141, 5, 85, 167  ;Stars_8_Slow
 	.db 200, 255, 76, 65  ;SG_FGStars3
 	.db 97, 255, 27, 63  ;SG_FGStars2
 	.db 70, 255, 122, 64  ;SG_FGStars1
-	.db 249, 3, 152, 175  ;Stars_9_Slow
-	.db 229, 7, 144, 176  ;Stars_12_Slow
-	.db 239, 3, 131, 175  ;Stars_9_Slow
-	.db 228, 5, 121, 174  ;Stars_8_Slow
+	.db 249, 3, 152, 168  ;Stars_9_Slow
+	.db 229, 7, 144, 169  ;Stars_12_Slow
+	.db 239, 3, 131, 168  ;Stars_9_Slow
+	.db 228, 5, 121, 167  ;Stars_8_Slow
 	.db 108, 255, 82, 67  ;SG_Zig3
 	.db 16, 255, 113, 68  ;SG_Zig1
 
 MG_Data_68:
 	.db 0
 	.db 10
-	.db 5, 14, 83, 85  ;CloudsNewer_1_Fast
-	.db 108, 14, 53, 85  ;CloudsNewer_1_Fast
-	.db 103, 14, 68, 85  ;CloudsNewer_1_Fast
-	.db 117, 14, 59, 85  ;CloudsNewer_1_Fast
-	.db 113, 14, 72, 85  ;CloudsNewer_1_Fast
-	.db 54, 5, 134, 174  ;Stars_8_Slow
-	.db 88, 8, 119, 177  ;Stars_25_Slow
-	.db 100, 7, 140, 176  ;Stars_12_Slow
-	.db 30, 3, 144, 175  ;Stars_9_Slow
+	.db 5, 14, 83, 83  ;CloudsNewer_1_Fast
+	.db 108, 14, 53, 83  ;CloudsNewer_1_Fast
+	.db 103, 14, 68, 83  ;CloudsNewer_1_Fast
+	.db 117, 14, 59, 83  ;CloudsNewer_1_Fast
+	.db 113, 14, 72, 83  ;CloudsNewer_1_Fast
+	.db 54, 5, 134, 167  ;Stars_8_Slow
+	.db 88, 8, 119, 170  ;Stars_25_Slow
+	.db 100, 7, 140, 169  ;Stars_12_Slow
+	.db 30, 3, 144, 168  ;Stars_9_Slow
 	.db 203, 255, 7, 63  ;SG_FGStars2
 
 MG_Data_67:
 	.db 0
 	.db 17
-	.db 43, 14, 74, 85  ;CloudsNewer_1_Fast
-	.db 72, 5, 118, 174  ;Stars_8_Slow
-	.db 62, 3, 110, 175  ;Stars_9_Slow
-	.db 187, 7, 70, 176  ;Stars_12_Slow
-	.db 146, 8, 42, 177  ;Stars_25_Slow
-	.db 43, 5, 123, 174  ;Stars_8_Slow
-	.db 251, 14, 93, 85  ;CloudsNewer_1_Fast
-	.db 193, 5, 17, 174  ;Stars_8_Slow
-	.db 243, 14, 77, 85  ;CloudsNewer_1_Fast
-	.db 139, 14, 103, 85  ;CloudsNewer_1_Fast
-	.db 125, 14, 112, 85  ;CloudsNewer_1_Fast
-	.db 134, 14, 116, 85  ;CloudsNewer_1_Fast
-	.db 125, 14, 100, 85  ;CloudsNewer_1_Fast
-	.db 50, 14, 70, 85  ;CloudsNewer_1_Fast
-	.db 41, 14, 61, 85  ;CloudsNewer_1_Fast
-	.db 255, 14, 73, 85  ;CloudsNewer_1_Fast
-	.db 182, 7, 36, 176  ;Stars_12_Slow
+	.db 43, 14, 74, 83  ;CloudsNewer_1_Fast
+	.db 72, 5, 118, 167  ;Stars_8_Slow
+	.db 62, 3, 110, 168  ;Stars_9_Slow
+	.db 187, 7, 70, 169  ;Stars_12_Slow
+	.db 146, 8, 42, 170  ;Stars_25_Slow
+	.db 43, 5, 123, 167  ;Stars_8_Slow
+	.db 251, 14, 93, 83  ;CloudsNewer_1_Fast
+	.db 193, 5, 17, 167  ;Stars_8_Slow
+	.db 243, 14, 77, 83  ;CloudsNewer_1_Fast
+	.db 139, 14, 103, 83  ;CloudsNewer_1_Fast
+	.db 125, 14, 112, 83  ;CloudsNewer_1_Fast
+	.db 134, 14, 116, 83  ;CloudsNewer_1_Fast
+	.db 125, 14, 100, 83  ;CloudsNewer_1_Fast
+	.db 50, 14, 70, 83  ;CloudsNewer_1_Fast
+	.db 41, 14, 61, 83  ;CloudsNewer_1_Fast
+	.db 255, 14, 73, 83  ;CloudsNewer_1_Fast
+	.db 182, 7, 36, 169  ;Stars_12_Slow
 
 MG_Data_66:
 	.db 0
@@ -173,9 +173,9 @@ MG_Data_66:
 	.db 94, 255, 101, 17  ;SG_MedCloud1
 	.db 94, 255, 48, 20  ;SG_BigCloud2
 	.db 53, 255, 92, 21  ;SG_BigCloud4
-	.db 211, 14, 56, 85  ;CloudsNewer_1_Fast
-	.db 212, 14, 43, 85  ;CloudsNewer_1_Fast
-	.db 222, 14, 57, 85  ;CloudsNewer_1_Fast
+	.db 211, 14, 56, 83  ;CloudsNewer_1_Fast
+	.db 212, 14, 43, 83  ;CloudsNewer_1_Fast
+	.db 222, 14, 57, 83  ;CloudsNewer_1_Fast
 
 MG_Data_65:
 	.db 0
@@ -188,17 +188,17 @@ MG_Data_65:
 	.db 68, 255, 106, 18  ;SG_BigCloud3
 	.db 28, 255, 67, 21  ;SG_BigCloud4
 	.db 14, 255, 108, 21  ;SG_BigCloud4
-	.db 53, 19, 147, 97  ;CloudsNewer_9_Fast
-	.db 28, 19, 147, 97  ;CloudsNewer_9_Fast
-	.db 11, 17, 148, 96  ;CloudsNewer_10_Fast
+	.db 53, 19, 147, 95  ;CloudsNewer_9_Fast
+	.db 28, 19, 147, 95  ;CloudsNewer_9_Fast
+	.db 11, 17, 148, 94  ;CloudsNewer_10_Fast
 
 MG_Data_64:
 	.db 0
 	.db 20
-	.db 229, 17, 148, 96  ;CloudsNewer_10_Fast
+	.db 229, 17, 148, 94  ;CloudsNewer_10_Fast
 	.db 133, 255, 0, 17  ;SG_MedCloud1
 	.db 213, 255, 17, 20  ;SG_BigCloud2
-	.db 246, 17, 148, 96  ;CloudsNewer_10_Fast
+	.db 246, 17, 148, 94  ;CloudsNewer_10_Fast
 	.db 137, 255, 40, 50  ;SG_CastleTop1
 	.db 209, 255, 88, 50  ;SG_CastleTop1
 	.db 144, 255, 89, 51  ;SG_CastleSegment1
@@ -220,10 +220,10 @@ MG_Data_63:
 	.db 0
 	.db 21
 	.db 177, 255, 64, 50  ;SG_CastleTop1
-	.db 29, 6, 26, 172  ;CityBanners_1_Fast_F
-	.db 9, 6, 119, 173  ;CityBanners_1_Fast
-	.db 176, 6, 26, 172  ;CityBanners_1_Fast_F
-	.db 134, 6, 26, 172  ;CityBanners_1_Fast_F
+	.db 29, 6, 26, 165  ;CityBanners_1_Fast_F
+	.db 9, 6, 119, 166  ;CityBanners_1_Fast
+	.db 176, 6, 26, 165  ;CityBanners_1_Fast_F
+	.db 134, 6, 26, 165  ;CityBanners_1_Fast_F
 	.db 124, 255, 41, 62  ;SG_CastleSegment5
 	.db 148, 255, 41, 62  ;SG_CastleSegment5
 	.db 184, 255, 89, 51  ;SG_CastleSegment1
@@ -245,8 +245,8 @@ MG_Data_62:
 	.db 0
 	.db 27
 	.db 248, 255, 115, 16  ;SG_MedCloud2
-	.db 243, 6, 26, 172  ;CityBanners_1_Fast_F
-	.db 222, 6, 119, 173  ;CityBanners_1_Fast
+	.db 243, 6, 26, 165  ;CityBanners_1_Fast_F
+	.db 222, 6, 119, 166  ;CityBanners_1_Fast
 	.db 179, 255, 127, 17  ;SG_MedCloud1
 	.db 236, 255, 41, 62  ;SG_CastleSegment5
 	.db 212, 255, 41, 62  ;SG_CastleSegment5
@@ -395,10 +395,10 @@ MG_Data_56:
 	.db 75, 255, 34, 20  ;SG_BigCloud2
 	.db 101, 255, 0, 18  ;SG_BigCloud3
 	.db 53, 255, 0, 21  ;SG_BigCloud4
-	.db 6, 17, 148, 96  ;CloudsNewer_10_Fast
-	.db 31, 17, 0, 100  ;CloudsNewer_10_Fast_F
-	.db 53, 17, 0, 100  ;CloudsNewer_10_Fast_F
-	.db 74, 19, 0, 95  ;CloudsNewer_9_Fast_F
+	.db 6, 17, 148, 94  ;CloudsNewer_10_Fast
+	.db 31, 17, 0, 98  ;CloudsNewer_10_Fast_F
+	.db 53, 17, 0, 98  ;CloudsNewer_10_Fast_F
+	.db 74, 19, 0, 93  ;CloudsNewer_9_Fast_F
 	.db 42, 255, 128, 59  ;SG_CastleVine5
 
 MG_Data_55:
@@ -414,7 +414,7 @@ MG_Data_55:
 	.db 122, 255, 106, 18  ;SG_BigCloud3
 	.db 88, 255, 58, 20  ;SG_BigCloud2
 	.db 42, 255, 113, 16  ;SG_MedCloud2
-	.db 241, 19, 147, 97  ;CloudsNewer_9_Fast
+	.db 241, 19, 147, 95  ;CloudsNewer_9_Fast
 	.db 147, 255, 114, 59  ;SG_CastleVine5
 	.db 247, 255, 68, 58  ;SG_CastleVine4
 	.db 171, 255, 69, 52  ;SG_CastleVine1
@@ -462,8 +462,8 @@ MG_Data_52:
 	.db 254, 255, 101, 20  ;SG_BigCloud2
 	.db 156, 255, 106, 18  ;SG_BigCloud3
 	.db 62, 255, 32, 16  ;SG_MedCloud2
-	.db 142, 19, 147, 97  ;CloudsNewer_9_Fast
-	.db 115, 17, 148, 96  ;CloudsNewer_10_Fast
+	.db 142, 19, 147, 95  ;CloudsNewer_9_Fast
+	.db 115, 17, 148, 94  ;CloudsNewer_10_Fast
 	.db 5, 255, 90, 50  ;SG_CastleTop1
 	.db 77, 255, 66, 50  ;SG_CastleTop1
 	.db 5, 255, 42, 50  ;SG_CastleTop1
@@ -502,14 +502,14 @@ MG_Data_50:
 	.db 47, 255, 31, 24  ;SG_TurtleP
 	.db 89, 255, 69, 28  ;SG_TurtleY3
 	.db 252, 255, 18, 16  ;SG_MedCloud2
-	.db 176, 6, 44, 173  ;CityBanners_1_Fast
+	.db 176, 6, 44, 166  ;CityBanners_1_Fast
 	.db 171, 255, 47, 61  ;SG_Banner3
-	.db 66, 6, 44, 173  ;CityBanners_1_Fast
-	.db 66, 6, 99, 172  ;CityBanners_1_Fast_F
+	.db 66, 6, 44, 166  ;CityBanners_1_Fast
+	.db 66, 6, 99, 165  ;CityBanners_1_Fast_F
 	.db 61, 255, 102, 61  ;SG_Banner3
-	.db 136, 6, 99, 172  ;CityBanners_1_Fast_F
-	.db 176, 6, 99, 172  ;CityBanners_1_Fast_F
-	.db 26, 6, 44, 173  ;CityBanners_1_Fast
+	.db 136, 6, 99, 165  ;CityBanners_1_Fast_F
+	.db 176, 6, 99, 165  ;CityBanners_1_Fast_F
+	.db 26, 6, 44, 166  ;CityBanners_1_Fast
 	.db 96, 255, 127, 17  ;SG_MedCloud1
 	.db 217, 255, 114, 51  ;SG_CastleSegment1
 	.db 145, 255, 114, 51  ;SG_CastleSegment1
@@ -542,17 +542,17 @@ MG_Data_49:
 	.db 130, 255, 27, 26  ;SG_TurtleP2
 	.db 43, 255, 14, 51  ;SG_CastleSegment1
 	.db 77, 255, 114, 51  ;SG_CastleSegment1
-	.db 102, 6, 44, 173  ;CityBanners_1_Fast
-	.db 62, 6, 44, 173  ;CityBanners_1_Fast
-	.db 172, 6, 99, 172  ;CityBanners_1_Fast_F
+	.db 102, 6, 44, 166  ;CityBanners_1_Fast
+	.db 62, 6, 44, 166  ;CityBanners_1_Fast
+	.db 172, 6, 99, 165  ;CityBanners_1_Fast_F
 	.db 207, 255, 47, 61  ;SG_Banner3
-	.db 102, 6, 99, 172  ;CityBanners_1_Fast_F
-	.db 212, 6, 44, 173  ;CityBanners_1_Fast
+	.db 102, 6, 99, 165  ;CityBanners_1_Fast_F
+	.db 212, 6, 44, 166  ;CityBanners_1_Fast
 	.db 17, 255, 0, 20  ;SG_BigCloud2
 	.db 49, 255, 106, 18  ;SG_BigCloud3
 	.db 46, 255, 66, 20  ;SG_BigCloud2
 	.db 97, 255, 102, 61  ;SG_Banner3
-	.db 212, 6, 99, 172  ;CityBanners_1_Fast_F
+	.db 212, 6, 99, 165  ;CityBanners_1_Fast_F
 	.db 149, 255, 114, 51  ;SG_CastleSegment1
 	.db 185, 255, 114, 51  ;SG_CastleSegment1
 	.db 113, 255, 114, 51  ;SG_CastleSegment1
@@ -584,8 +584,8 @@ MG_Data_48:
 	.db 95, 255, 77, 16  ;SG_MedCloud2
 	.db 91, 255, 22, 20  ;SG_BigCloud2
 	.db 50, 255, 21, 21  ;SG_BigCloud4
-	.db 99, 19, 147, 97  ;CloudsNewer_9_Fast
-	.db 193, 19, 147, 97  ;CloudsNewer_9_Fast
+	.db 99, 19, 147, 95  ;CloudsNewer_9_Fast
+	.db 193, 19, 147, 95  ;CloudsNewer_9_Fast
 	.db 109, 255, 42, 22  ;SG_TurtleY1
 	.db 132, 255, 60, 27  ;SG_TurtleB2
 
@@ -615,14 +615,14 @@ MG_Data_46:
 	.db 195, 255, 70, 22  ;SG_TurtleY1
 	.db 134, 255, 99, 51  ;SG_CastleSegment1
 	.db 38, 255, 23, 49  ;SG_CastleSegment3
-	.db 79, 6, 8, 172  ;CityBanners_1_Fast_F
+	.db 79, 6, 8, 165  ;CityBanners_1_Fast_F
 	.db 149, 255, 8, 24  ;SG_TurtleP
 	.db 184, 255, 17, 27  ;SG_TurtleB2
 	.db 164, 255, 30, 26  ;SG_TurtleP2
-	.db 99, 19, 147, 97  ;CloudsNewer_9_Fast
-	.db 68, 17, 148, 96  ;CloudsNewer_10_Fast
-	.db 83, 19, 147, 97  ;CloudsNewer_9_Fast
-	.db 12, 6, 8, 172  ;CityBanners_1_Fast_F
+	.db 99, 19, 147, 95  ;CloudsNewer_9_Fast
+	.db 68, 17, 148, 94  ;CloudsNewer_10_Fast
+	.db 83, 19, 147, 95  ;CloudsNewer_9_Fast
+	.db 12, 6, 8, 165  ;CityBanners_1_Fast_F
 	.db 155, 255, 132, 61  ;SG_Banner3
 	.db 14, 255, 7, 19  ;SG_BigCloud1
 	.db 202, 255, 87, 56  ;SG_Banner2
@@ -651,10 +651,10 @@ MG_Data_45:
 	.db 34, 255, 91, 17  ;SG_MedCloud1
 	.db 227, 255, 85, 20  ;SG_BigCloud2
 	.db 156, 255, 119, 16  ;SG_MedCloud2
-	.db 77, 6, 97, 173  ;CityBanners_1_Fast
-	.db 114, 6, 97, 173  ;CityBanners_1_Fast
+	.db 77, 6, 97, 166  ;CityBanners_1_Fast
+	.db 114, 6, 97, 166  ;CityBanners_1_Fast
 	.db 90, 255, 58, 56  ;SG_Banner2
-	.db 95, 6, 55, 172  ;CityBanners_1_Fast_F
+	.db 95, 6, 55, 165  ;CityBanners_1_Fast_F
 	.db 108, 255, 127, 51  ;SG_CastleSegment1
 	.db 72, 255, 127, 51  ;SG_CastleSegment1
 	.db 36, 255, 127, 51  ;SG_CastleSegment1
@@ -684,9 +684,9 @@ MG_Data_44:
 	.db 228, 255, 37, 19  ;SG_BigCloud1
 	.db 202, 255, 86, 18  ;SG_BigCloud3
 	.db 189, 255, 36, 20  ;SG_BigCloud2
-	.db 224, 19, 147, 97  ;CloudsNewer_9_Fast
-	.db 194, 19, 147, 97  ;CloudsNewer_9_Fast
-	.db 206, 17, 148, 96  ;CloudsNewer_10_Fast
+	.db 224, 19, 147, 95  ;CloudsNewer_9_Fast
+	.db 194, 19, 147, 95  ;CloudsNewer_9_Fast
+	.db 206, 17, 148, 94  ;CloudsNewer_10_Fast
 	.db 28, 255, 62, 57  ;SG_CastleTop2
 	.db 120, 255, 64, 25  ;SG_TurtleY2
 	.db 107, 255, 31, 26  ;SG_TurtleP2
@@ -701,8 +701,8 @@ MG_Data_43:
 	.db 82, 255, 22, 25  ;SG_TurtleY2
 	.db 72, 255, 63, 49  ;SG_CastleSegment3
 	.db 172, 255, 106, 18  ;SG_BigCloud3
-	.db 131, 19, 147, 97  ;CloudsNewer_9_Fast
-	.db 157, 17, 148, 96  ;CloudsNewer_10_Fast
+	.db 131, 19, 147, 95  ;CloudsNewer_9_Fast
+	.db 157, 17, 148, 94  ;CloudsNewer_10_Fast
 	.db 19, 255, 40, 19  ;SG_BigCloud1
 	.db 52, 255, 61, 16  ;SG_MedCloud2
 	.db 108, 255, 63, 49  ;SG_CastleSegment3
@@ -724,11 +724,11 @@ MG_Data_43:
 MG_Data_42:
 	.db 0
 	.db 22
-	.db 143, 6, 111, 172  ;CityBanners_1_Fast_F
+	.db 143, 6, 111, 165  ;CityBanners_1_Fast_F
 	.db 110, 255, 76, 27  ;SG_TurtleB2
-	.db 184, 6, 111, 172  ;CityBanners_1_Fast_F
+	.db 184, 6, 111, 165  ;CityBanners_1_Fast_F
 	.db 59, 255, 124, 51  ;SG_CastleSegment1
-	.db 113, 6, 109, 172  ;CityBanners_1_Fast_F
+	.db 113, 6, 109, 165  ;CityBanners_1_Fast_F
 	.db 172, 255, 17, 18  ;SG_BigCloud3
 	.db 248, 255, 14, 20  ;SG_BigCloud2
 	.db 67, 255, 72, 17  ;SG_MedCloud1
@@ -796,7 +796,7 @@ MG_Data_39:
 	.db 0
 	.db 14
 	.db 230, 255, 84, 49  ;SG_CastleSegment3
-	.db 46, 6, 51, 173  ;CityBanners_1_Fast
+	.db 46, 6, 51, 166  ;CityBanners_1_Fast
 	.db 41, 255, 54, 55  ;SG_Banner1
 	.db 233, 255, 0, 16  ;SG_MedCloud2
 	.db 79, 255, 73, 18  ;SG_BigCloud3
@@ -820,7 +820,7 @@ MG_Data_38:
 	.db 35, 255, 46, 16  ;SG_MedCloud2
 	.db 28, 255, 106, 18  ;SG_BigCloud3
 	.db 219, 255, 63, 22  ;SG_TurtleY1
-	.db 14, 19, 147, 97  ;CloudsNewer_9_Fast
+	.db 14, 19, 147, 95  ;CloudsNewer_9_Fast
 	.db 100, 255, 76, 49  ;SG_CastleSegment3
 	.db 64, 255, 76, 49  ;SG_CastleSegment3
 	.db 132, 255, 75, 57  ;SG_CastleTop2
@@ -840,7 +840,7 @@ MG_Data_37:
 	.db 89, 255, 5, 18  ;SG_BigCloud3
 	.db 96, 255, 95, 20  ;SG_BigCloud2
 	.db 40, 255, 67, 17  ;SG_MedCloud1
-	.db 243, 19, 147, 97  ;CloudsNewer_9_Fast
+	.db 243, 19, 147, 95  ;CloudsNewer_9_Fast
 	.db 200, 255, 15, 18  ;SG_BigCloud3
 	.db 191, 255, 102, 18  ;SG_BigCloud3
 	.db 227, 255, 54, 27  ;SG_TurtleB2
@@ -857,18 +857,18 @@ MG_Data_36:
 	.db 60, 255, 65, 20  ;SG_BigCloud2
 	.db 1, 255, 21, 17  ;SG_MedCloud1
 	.db 40, 255, 0, 19  ;SG_BigCloud1
-	.db 189, 6, 102, 172  ;CityBanners_1_Fast_F
+	.db 189, 6, 102, 165  ;CityBanners_1_Fast_F
 	.db 236, 255, 83, 16  ;SG_MedCloud2
 	.db 184, 255, 105, 56  ;SG_Banner2
 	.db 213, 255, 63, 55  ;SG_Banner1
-	.db 218, 6, 60, 173  ;CityBanners_1_Fast
-	.db 174, 19, 147, 97  ;CloudsNewer_9_Fast
+	.db 218, 6, 60, 166  ;CityBanners_1_Fast
+	.db 174, 19, 147, 95  ;CloudsNewer_9_Fast
 	.db 176, 255, 52, 18  ;SG_BigCloud3
 	.db 136, 255, 2, 20  ;SG_BigCloud2
-	.db 157, 17, 148, 96  ;CloudsNewer_10_Fast
-	.db 124, 19, 0, 95  ;CloudsNewer_9_Fast_F
+	.db 157, 17, 148, 94  ;CloudsNewer_10_Fast
+	.db 124, 19, 0, 93  ;CloudsNewer_9_Fast_F
 	.db 103, 255, 117, 51  ;SG_CastleSegment1
-	.db 106, 17, 0, 100  ;CloudsNewer_10_Fast_F
+	.db 106, 17, 0, 98  ;CloudsNewer_10_Fast_F
 	.db 211, 255, 117, 51  ;SG_CastleSegment1
 	.db 175, 255, 117, 51  ;SG_CastleSegment1
 	.db 139, 255, 117, 51  ;SG_CastleSegment1
@@ -910,8 +910,8 @@ MG_Data_34:
 	.db 80, 255, 53, 20  ;SG_BigCloud2
 	.db 104, 255, 99, 18  ;SG_BigCloud3
 	.db 60, 255, 96, 20  ;SG_BigCloud2
-	.db 169, 17, 0, 100  ;CloudsNewer_10_Fast_F
-	.db 187, 19, 0, 95  ;CloudsNewer_9_Fast_F
+	.db 169, 17, 0, 98  ;CloudsNewer_10_Fast_F
+	.db 187, 19, 0, 93  ;CloudsNewer_9_Fast_F
 	.db 212, 255, 70, 18  ;SG_BigCloud3
 
 MG_Data_33:
@@ -925,8 +925,8 @@ MG_Data_33:
 	.db 184, 255, 103, 19  ;SG_BigCloud1
 	.db 99, 255, 31, 20  ;SG_BigCloud2
 	.db 62, 255, 58, 21  ;SG_BigCloud4
-	.db 151, 17, 148, 96  ;CloudsNewer_10_Fast
-	.db 175, 19, 147, 97  ;CloudsNewer_9_Fast
+	.db 151, 17, 148, 94  ;CloudsNewer_10_Fast
+	.db 175, 19, 147, 95  ;CloudsNewer_9_Fast
 	.db 103, 255, 77, 18  ;SG_BigCloud3
 
 MG_Data_32:
@@ -974,15 +974,15 @@ MG_Data_31:
 	.db 148, 21, 91, 4  ;Leaves1_Fast
 	.db 136, 21, 55, 4  ;Leaves1_Fast
 	.db 145, 21, 63, 4  ;Leaves1_Fast
-	.db 136, 21, 110, 62  ;Leaves1_Fast_F
-	.db 118, 21, 62, 62  ;Leaves1_Fast_F
+	.db 136, 21, 110, 60  ;Leaves1_Fast_F
+	.db 118, 21, 62, 60  ;Leaves1_Fast_F
 	.db 137, 21, 37, 4  ;Leaves1_Fast
 	.db 155, 21, 112, 4  ;Leaves1_Fast
 	.db 162, 21, 100, 4  ;Leaves1_Fast
-	.db 121, 21, 51, 62  ;Leaves1_Fast_F
+	.db 121, 21, 51, 60  ;Leaves1_Fast_F
 	.db 146, 21, 77, 4  ;Leaves1_Fast
-	.db 164, 21, 46, 62  ;Leaves1_Fast_F
-	.db 159, 21, 70, 62  ;Leaves1_Fast_F
+	.db 164, 21, 46, 60  ;Leaves1_Fast_F
+	.db 159, 21, 70, 60  ;Leaves1_Fast_F
 	.db 113, 18, 115, 20  ;Leaves2_Fast
 	.db 212, 255, 23, 13  ;SG_Branch2
 	.db 166, 18, 65, 20  ;Leaves2_Fast
@@ -994,12 +994,12 @@ MG_Data_31:
 	.db 105, 18, 54, 20  ;Leaves2_Fast
 	.db 124, 18, 113, 20  ;Leaves2_Fast
 	.db 104, 18, 109, 20  ;Leaves2_Fast
-	.db 182, 21, 102, 62  ;Leaves1_Fast_F
-	.db 161, 21, 120, 62  ;Leaves1_Fast_F
-	.db 170, 21, 130, 62  ;Leaves1_Fast_F
-	.db 245, 21, 77, 62  ;Leaves1_Fast_F
-	.db 146, 21, 49, 62  ;Leaves1_Fast_F
-	.db 196, 21, 99, 62  ;Leaves1_Fast_F
+	.db 182, 21, 102, 60  ;Leaves1_Fast_F
+	.db 161, 21, 120, 60  ;Leaves1_Fast_F
+	.db 170, 21, 130, 60  ;Leaves1_Fast_F
+	.db 245, 21, 77, 60  ;Leaves1_Fast_F
+	.db 146, 21, 49, 60  ;Leaves1_Fast_F
+	.db 196, 21, 99, 60  ;Leaves1_Fast_F
 
 MG_Data_30:
 	.db 1
@@ -1128,10 +1128,10 @@ MG_Data_23:
 	.db 135, 255, 63, 4  ;SG_Branch4
 
 MG_Data_22:
-	.db 1
+	.db 0
 	.db 15
-	.db 235, 13, 99, 4  ;Vines_4_Slow
 	.db 131, 255, 63, 10  ;SG_Vines7
+	.db 234, 16, 99, 61  ;Vine5_Slow
 	.db 197, 255, 62, 1  ;SG_Branch7
 	.db 255, 255, 106, 46  ;SG_TreeRowMed1
 	.db 191, 255, 103, 45  ;SG_TreeRowMed3
@@ -1269,7 +1269,7 @@ MG_Data_16:
 	.db 207, 255, 32, 35  ;SG_TreeRow1
 	.db 223, 255, 33, 34  ;SG_TreeRow5
 	.db 188, 255, 9, 2  ;SG_Lantern1
-	.db 138, 18, 34, 66  ;Vine4_Slow_F
+	.db 138, 18, 34, 64  ;Vine4_Slow_F
 	.db 227, 255, 114, 9  ;SG_Branch6
 	.db 121, 255, 42, 11  ;SG_Vines5
 	.db 159, 255, 32, 42  ;SG_BranchBase2
@@ -1322,13 +1322,13 @@ MG_Data_13:
 	.db 0
 	.db 24
 	.db 15, 255, 17, 35  ;SG_TreeRow1
-	.db 40, 10, 144, 71  ;Vine6_Slow_O
+	.db 40, 10, 144, 69  ;Vine6_Slow_O
 	.db 122, 255, 146, 2  ;SG_Lantern1
 	.db 79, 255, 14, 34  ;SG_TreeRow5
 	.db 143, 255, 12, 34  ;SG_TreeRow5
 	.db 47, 255, 15, 37  ;SG_TreeRow4
 	.db 95, 255, 13, 33  ;SG_TreeRow3
-	.db 40, 10, 149, 71  ;Vine6_Slow_O
+	.db 40, 10, 149, 69  ;Vine6_Slow_O
 	.db 111, 255, 14, 36  ;SG_TreeRow2
 	.db 63, 255, 14, 36  ;SG_TreeRow2
 	.db 207, 255, 8, 37  ;SG_TreeRow4
@@ -1366,10 +1366,10 @@ MG_Data_12:
 	.db 239, 255, 18, 35  ;SG_TreeRow1
 	.db 223, 255, 19, 36  ;SG_TreeRow2
 	.db 87, 255, 13, 3  ;SG_Lantern2
-	.db 112, 10, 34, 71  ;Vine6_Slow_O
+	.db 112, 10, 34, 69  ;Vine6_Slow_O
 	.db 184, 255, 92, 15  ;SG_Vines8
 	.db 153, 255, 45, 10  ;SG_Vines7
-	.db 109, 16, 25, 63  ;Vine5_Slow
+	.db 109, 16, 25, 61  ;Vine5_Slow
 	.db 203, 255, 72, 43  ;SG_BranchBase4
 	.db 232, 255, 89, 5  ;SG_Branch5
 	.db 254, 255, 93, 5  ;SG_Branch5
@@ -1429,8 +1429,8 @@ MG_Data_9:
 	.db 25
 	.db 220, 255, 0, 39  ;SG_Vines6
 	.db 15, 255, 27, 33  ;SG_TreeRow3
-	.db 40, 10, 149, 71  ;Vine6_Slow_O
-	.db 40, 10, 144, 71  ;Vine6_Slow_O
+	.db 40, 10, 149, 69  ;Vine6_Slow_O
+	.db 40, 10, 144, 69  ;Vine6_Slow_O
 	.db 79, 255, 31, 37  ;SG_TreeRow4
 	.db 63, 255, 30, 34  ;SG_TreeRow5
 	.db 111, 255, 33, 33  ;SG_TreeRow3
@@ -1475,7 +1475,7 @@ MG_Data_8:
 	.db 87, 255, 23, 7  ;SG_Lantern5
 	.db 141, 255, 99, 9  ;SG_Branch6
 	.db 121, 255, 36, 11  ;SG_Vines5
-	.db 138, 18, 28, 66  ;Vine4_Slow_F
+	.db 138, 18, 28, 64  ;Vine4_Slow_F
 	.db 191, 255, 0, 4  ;SG_Branch4
 
 MG_Data_7:
@@ -1579,8 +1579,8 @@ MG_Data_4:
 	.db 127, 255, 35, 35  ;SG_TreeRow1
 	.db 176, 255, 104, 15  ;SG_Vines8
 	.db 145, 255, 57, 10  ;SG_Vines7
-	.db 98, 16, 37, 70  ;Vine5_Slow_O
-	.db 101, 10, 46, 71  ;Vine6_Slow_O
+	.db 98, 16, 37, 68  ;Vine5_Slow_O
+	.db 101, 10, 46, 69  ;Vine6_Slow_O
 	.db 46, 255, 0, 38  ;SG_Branch1
 	.db 224, 255, 101, 5  ;SG_Branch5
 	.db 247, 255, 105, 5  ;SG_Branch5
@@ -1607,7 +1607,7 @@ MG_Data_3:
 	.db 207, 255, 41, 35  ;SG_TreeRow1
 	.db 223, 255, 42, 34  ;SG_TreeRow5
 	.db 188, 255, 18, 2  ;SG_Lantern1
-	.db 138, 18, 43, 66  ;Vine4_Slow_F
+	.db 138, 18, 43, 64  ;Vine4_Slow_F
 	.db 93, 255, 108, 9  ;SG_Branch6
 	.db 121, 255, 51, 11  ;SG_Vines5
 	.db 149, 255, 30, 42  ;SG_BranchBase2
@@ -1618,8 +1618,8 @@ MG_Data_2:
 	.db 26
 	.db 220, 255, 0, 39  ;SG_Vines6
 	.db 15, 255, 34, 33  ;SG_TreeRow3
-	.db 40, 10, 149, 71  ;Vine6_Slow_O
-	.db 40, 10, 144, 71  ;Vine6_Slow_O
+	.db 40, 10, 149, 69  ;Vine6_Slow_O
+	.db 40, 10, 144, 69  ;Vine6_Slow_O
 	.db 79, 255, 38, 37  ;SG_TreeRow4
 	.db 63, 255, 37, 34  ;SG_TreeRow5
 	.db 111, 255, 40, 33  ;SG_TreeRow3
@@ -1670,49 +1670,66 @@ MG_Data_1:
 
 MG_Data_0:
 	.db 0
-	.db 43
-	.db 57, 255, 136, 30  ;SG_GroundChunk2
-	.db 59, 255, 114, 31  ;SG_GroundChunk1
-	.db 59, 255, 22, 30  ;SG_GroundChunk2
-	.db 60, 255, 0, 31  ;SG_GroundChunk1
+	.db 60
+	.db 59, 255, 0, 30  ;SG_GroundChunk1
+	.db 59, 255, 128, 30  ;SG_GroundChunk1
+	.db 54, 12, 121, 124  ;GroundNew_2_Fast
+	.db 59, 12, 32, 124  ;GroundNew_2_Fast
+	.db 43, 12, 30, 124  ;GroundNew_2_Fast
+	.db 45, 12, 121, 124  ;GroundNew_2_Fast
+	.db 239, 255, 35, 33  ;SG_TreeRow3
+	.db 47, 255, 34, 33  ;SG_TreeRow3
 	.db 63, 255, 34, 34  ;SG_TreeRow5
 	.db 79, 255, 34, 35  ;SG_TreeRow1
 	.db 95, 255, 34, 36  ;SG_TreeRow2
 	.db 111, 255, 35, 34  ;SG_TreeRow5
 	.db 127, 255, 35, 33  ;SG_TreeRow3
 	.db 143, 255, 35, 35  ;SG_TreeRow1
+	.db 159, 255, 34, 36  ;SG_TreeRow2
 	.db 175, 255, 34, 37  ;SG_TreeRow4
-	.db 47, 255, 34, 33  ;SG_TreeRow3
 	.db 191, 255, 34, 35  ;SG_TreeRow1
 	.db 207, 255, 35, 34  ;SG_TreeRow5
 	.db 223, 255, 34, 35  ;SG_TreeRow1
-	.db 239, 255, 35, 33  ;SG_TreeRow3
 	.db 255, 255, 34, 36  ;SG_TreeRow2
-	.db 159, 255, 34, 36  ;SG_TreeRow2
 	.db 204, 255, 135, 6  ;SG_Lantern4
 	.db 157, 255, 13, 6  ;SG_Lantern4
-	.db 59, 255, 121, 32  ;SG_Root1
-	.db 71, 17, 10, 157  ;FrogNPCs1_5_Slow_O
-	.db 67, 19, 138, 158  ;FrogNPCs1_2_Slow_O_F
-	.db 15, 16, 131, 127  ;GroundDirtFull_Fast
-	.db 15, 16, 90, 127  ;GroundDirtFull_Fast
-	.db 15, 16, 70, 127  ;GroundDirtFull_Fast
-	.db 53, 255, 18, 32  ;SG_Root1
-	.db 51, 255, 134, 32  ;SG_Root1
-	.db 35, 255, 24, 31  ;SG_GroundChunk1
-	.db 37, 255, 48, 31  ;SG_GroundChunk1
-	.db 34, 255, 0, 30  ;SG_GroundChunk2
-	.db 36, 255, 72, 30  ;SG_GroundChunk2
-	.db 37, 255, 96, 31  ;SG_GroundChunk1
-	.db 34, 255, 120, 30  ;SG_GroundChunk2
-	.db 31, 255, 136, 30  ;SG_GroundChunk2
+	.db 31, 255, 128, 32  ;SG_GroundChunk2
+	.db 59, 255, 121, 31  ;SG_Root1
+	.db 51, 255, 134, 31  ;SG_Root1
+	.db 53, 255, 18, 31  ;SG_Root1
+	.db 31, 255, 0, 32  ;SG_GroundChunk2
+	.db 71, 19, 138, 153  ;FrogNPCs1_2_Slow_O_F
+	.db 71, 17, 10, 154  ;FrogNPCs1_5_Slow_O
+	.db 31, 255, 32, 32  ;SG_GroundChunk2
+	.db 31, 255, 64, 32  ;SG_GroundChunk2
+	.db 31, 255, 96, 32  ;SG_GroundChunk2
 	.db 209, 255, 73, 10  ;SG_Vines7
 	.db 207, 255, 31, 39  ;SG_Vines6
-	.db 219, 16, 116, 63  ;Vine5_Slow
-	.db 42, 10, 72, 159  ;FrogNPCs1_7_Slow_F
+	.db 40, 12, 81, 124  ;GroundNew_2_Fast
+	.db 41, 12, 34, 124  ;GroundNew_2_Fast
+	.db 39, 12, 89, 127  ;GroundNew_2_Fast_F
+	.db 41, 12, 73, 127  ;GroundNew_2_Fast_F
+	.db 39, 12, 42, 124  ;GroundNew_2_Fast
+	.db 37, 12, 50, 124  ;GroundNew_2_Fast
+	.db 37, 12, 58, 127  ;GroundNew_2_Fast_F
+	.db 39, 12, 65, 127  ;GroundNew_2_Fast_F
+	.db 39, 12, 97, 127  ;GroundNew_2_Fast_F
+	.db 40, 12, 105, 124  ;GroundNew_2_Fast
+	.db 38, 12, 113, 124  ;GroundNew_2_Fast
+	.db 36, 12, 121, 124  ;GroundNew_2_Fast
+	.db 219, 16, 116, 61  ;Vine5_Slow
 	.db 233, 255, 0, 38  ;SG_Branch1
-	.db 43, 10, 61, 160  ;FrogNPCs1_9_Slow
-	.db 37, 17, 101, 161  ;FrogNPCs1_0_Slow
+	.db 35, 18, 50, 20  ;Leaves2_Fast
+	.db 42, 11, 14, 9  ;DualLeaf3_Fast
+	.db 40, 11, 126, 9  ;DualLeaf3_Fast
+	.db 47, 18, 91, 20  ;Leaves2_Fast
+	.db 43, 10, 61, 155  ;FrogNPCs1_9_Slow
+	.db 42, 10, 72, 156  ;FrogNPCs1_7_Slow_F
+	.db 48, 17, 107, 157  ;FrogNPCs1_0_Slow
+	.db 29, 11, 144, 9  ;DualLeaf3_Fast
+	.db 43, 21, 147, 4  ;Leaves1_Fast
+	.db 28, 11, 84, 9  ;DualLeaf3_Fast
+	.db 37, 21, 20, 4  ;Leaves1_Fast
 	.db 207, 255, 23, 12  ;SG_Vines2
 
 
