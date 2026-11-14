@@ -12,7 +12,7 @@ update_animations:
 	;ld (hl),a
 
 	;5 bytes per animated value
-	ex af, af' ;'
+;	ex af, af' ;'
 	ld hl,position_animation_data
 	ld a,(hl) ;replace w shadow bc for >256 vals?
 	inc hl
@@ -43,7 +43,7 @@ update_animation_position_loop:
 
 
 ; Enable sprites, 8 bytes per animated property 	
-	ex af, af' ;'
+;	ex af, af' ;'
 	ld hl,disable_animation_data
 	ld a,(hl)
 	inc hl
@@ -97,45 +97,55 @@ update_animation_enable_height:
 	
 update_animation_sprite:	
 	
+	ld a, %11010010 ;jp nc 
+	ld (update_animation_sprite_const_flag),a 
+	ld a,%00000111 ;rlca
+	ld (update_animation_sprite_rlca),a
 	
-	ex af, af' ;' ;in
+	;ex af, af' ;' ;in
+	ld a,15
+	ld (update_animation_sprite_jumpval),a
 	ld hl,sprite_animation_data
 	ld a,(hl)
 	inc hl
-update_animation_sprite_loop:
-	ex af, af' ;' ;out
-	ld de,0 ;clear upper byte 
+	call update_animation_sprite_loop
+	;then 4 frame sprites 
+	ld a,7
+	ld (update_animation_sprite_jumpval),a
+	ld a,(hl)
+	inc hl 
+	call update_animation_sprite_loop
+	;2 frame sprites 
+	ld a,3
+	ld (update_animation_sprite_jumpval),a
+	ld a,(hl)
+	inc hl 
+	call update_animation_sprite_loop
+	;also for constant height anims? 
 	
-	ld a,(hl) ; curve index
+	ld a,%11011010;jp c
+	ld (update_animation_sprite_const_flag),a 
+	ld a,%00000000 ;nop
+	ld (update_animation_sprite_rlca),a
+	
+	ld a,8
+	ld (update_animation_sprite_jumpval),a
+	ld a,(hl)
 	inc hl
-	exx 
-	ld hl, anim_curve_lin_values_start
-	call get_curve_value
-	exx 
+	call update_animation_sprite_loop
+	;then 4 frame sprites 
+	ld a,4
+	ld (update_animation_sprite_jumpval),a
+	ld a,(hl)
+	inc hl 
+	call update_animation_sprite_loop
+	;2 frame sprites 
+	ld a,2
+	ld (update_animation_sprite_jumpval),a
+	ld a,(hl)
+	inc hl 
+	call update_animation_sprite_loop
 	
-	rlca ;double it and give it to the next person
-	ld e,a 
-	add hl,de ;jump to correct place
-	neg ;a holds -curve value
-	add a,15; a holds amt to jump to get past sprite table
-	ld e,a 
-	ld b,(hl);correct sprite index 
-	inc hl 
-	ld c,(hl) ;sprite height value 
-	add hl,de ;to address of target property
-	ld de,(hl)
-	ld a,b
-	ld (de),a ;sprite index 
-	dec de
-	dec de ;to height 
-	ld a,c
-	ld (de),a ;sprite height
-	inc hl 
-	inc hl 
-	inc hl ;to next
-	ex af, af' ;' ;in
-	dec a 
-	jp nz,update_animation_sprite_loop
 	
 ;SPrite animations isnt updating height values in object data
 ;this mainly impacts when sprite is cutoff at top as height is used to calculate how many lines to draw
@@ -149,7 +159,7 @@ update_animation_sprite_loop:
 ;Use two loops? one for 'un disable' prior to sprite anims, then disable after sprite anims 
 	
 ; Disable sprites, 8 bytes per animated property 	
-	ex af, af' ;'
+	;ex af, af' ;'
 	ld hl,disable_animation_data
 	ld a,(hl)
 	inc hl
@@ -208,13 +218,19 @@ update_palette_anim:
 	ld de, space_gradients
 	;ld a, $00
 	;call write_a_to_ram
-	ld a, (anim_curve_lin_values_start + 58) ;~4s timer
+	ld a, (anim_curve_lin_values_start + 58) ;~4s timer 0-32
+	
+	bit 4,a 
+	jp z,palette_anim_skip_invert
+	cpl 
+	and %00001111
+
+palette_anim_skip_invert:
 	ld hl,0
 	ld l,a 
 	ld h,20 
 	mlt hl
 	add hl,de ;hl points to correct part of gradient data 
-	;4,6,20,14,26,28,22,24,0,2
 	
 	;reorder gradient data such that ldir can be used for most of it
 	
@@ -235,6 +251,64 @@ update_palette_anim:
 	
 	ret	
 	
+	
+update_animation_sprite_loop:
+	ex af, af' ;' ;out
+	ld de,0 ;clear upper byte 
+	
+	ld a,(hl) ; curve index
+	inc hl
+	exx 
+	ld hl, anim_curve_lin_values_start
+	call get_curve_value
+	exx 
+	
+	;replace with nop for const height
+update_animation_sprite_rlca .equ $
+	rlca ;double it and give it to the next person
+	ld e,a 
+	add hl,de ;jump to correct place
+	neg ;a holds -curve value
+update_animation_sprite_jumpval .equ $ + 1
+	add a,15; a holds amt to jump to get past sprite table
+	ld e,a 
+	ld b,(hl);correct sprite index 
+	
+	scf 
+update_animation_sprite_const_flag .equ $ ;set jp c for const height
+	jp nc,update_animation_sprite_const_height
+	
+	
+	inc hl 
+	ld c,(hl) ;sprite height value 
+	add hl,de ;to address of target property
+	ld de,(hl)
+	ld a,b
+	ld (de),a ;sprite index 
+	dec de
+	dec de ;to height 
+	ld a,c
+	ld (de),a ;sprite height
+	inc hl 
+	inc hl 
+	inc hl ;to next
+	ex af, af' ;' ;in
+	dec a 
+	jp nz,update_animation_sprite_loop
+	ret	
+	
+update_animation_sprite_const_height:
+	add hl,de ;to address of target property
+	ld de,(hl)
+	ld a,b
+	ld (de),a ;sprite index 
+	inc hl 
+	inc hl 
+	inc hl ;to next
+	ex af, af' ;' ;in
+	dec a 
+	jp nz,update_animation_sprite_loop
+	ret	
 	
 get_curve_value:
 	;hl holds start of curve values in vram. a holds curve index 

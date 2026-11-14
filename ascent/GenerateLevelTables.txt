@@ -1,0 +1,90 @@
+
+
+
+;need to order tables from low to high
+
+Generate_FG_Level_Table:
+	ld de, FG_Data_frame_table_end
+	ld hl, FG_Data_topmost_frame
+	ld bc,0
+	ld a, FG_Data_num_frames
+	jp Generate_Level_Table_Loop
+	
+Generate_MG_Level_Table:
+	ld de, MG_Data_frame_table_end
+	ld hl, MG_Data_topmost_frame
+	ld bc,0
+	ld a, MG_Data_num_frames
+	jp Generate_Level_Table_Loop
+	
+Generate_MG2_Level_Table:
+	ld de, MG2_Data_frame_table_end
+	
+	ld hl, MG2_Data_topmost_frame
+	ld bc,0
+	ld a, MG2_Data_num_frames
+	jp Generate_Level_Table_Loop
+	
+Generate_BG_Level_Table:
+	ld de, BG_Data_frame_table_end
+	ld hl, BG_Data_topmost_frame
+	ld bc,0
+	ld a, BG_Data_num_frames
+	jp Generate_Level_Table_Loop
+
+Generate_SG_Level_Table:
+	ld de, Sprite_Groups_table_end
+	ld hl, Sprite_Groups_first
+	ld bc,0
+	ld a, Sprite_Groups_num_groups
+	jp Generate_Level_Table_Loop	
+
+Generate_Collider_Table:
+	ld de, Collision_Data_table_end
+	ld hl, Collision_Data_first
+	ld bc,0
+	ld a, Collision_Data_num_frames
+	jp Generate_Level_Table_Loop	
+	
+	
+Generate_Level_Table_Loop:
+	ex de,hl
+	ld (hl), de 
+	ex de,hl 
+	dec de 
+	dec de 
+	dec de
+Generate_Level_Table_Loop_1 .equ $	;replace w nop for collision data
+	inc hl ;past sprite tbl number 
+	ld c,(hl) ; num elements 
+	inc hl ;to first element
+Generate_Level_Table_Loop_2 .equ $	;replace w add hl,bc
+	nop 
+	add hl,bc 
+	add hl,bc 
+	add hl,bc 
+	add hl,bc 
+	dec a 
+	jp nz,Generate_Level_Table_Loop
+	ret 
+	
+
+
+
+;Generate_Collider_Table_Loop:
+;	ex de,hl
+;	ld (hl), de 
+;	ex de,hl 
+;	dec de 
+;	dec de 
+;	dec de 
+;	ld c,(hl) ; num elements 
+;	inc hl ;past sprite tbl number 
+;	add hl,bc 
+;	add hl,bc 
+;	add hl,bc 
+;	add hl,bc 
+;	add hl,bc
+;	dec a 
+;	jp nz,Generate_Collider_Table_Loop
+;	ret 

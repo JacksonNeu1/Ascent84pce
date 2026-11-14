@@ -1,1993 +1,2305 @@
-new_decomp_calls_all: 
- 	.dl 458
+new_decomp_calls_2:
+	.dl 124
 
 
-	.db 2 ; Branches_10   1
-	.db %10000100 ; Branches_10_Fast
+	.db 90 ; BigFishbowl_3   1
+	.db %10000101 ; BigFishbowl_3_Fast
 
 
-	.db 18 ; Branches_10   2
-	.db %10100000 ; Branches_10_Fast_F
+	.db 96 ; BigFishbowl_3   2
+	.db %10100001 ; BigFishbowl_3_Fast_F
 
 
-	.db 0 ; Branches_9   3
-	.db %10000100 ; Branches_9_Fast
+	.db 91 ; BigFishbowl_4   3
+	.db %10000101 ; BigFishbowl_4_Fast
 
 
-	.db 163 ; Branches_9   4
-	.db %10100000 ; Branches_9_Fast_F
+	.db 95 ; BigFishbowl_4   4
+	.db %10100001 ; BigFishbowl_4_Fast_F
 
 
-	.db 3 ; Branches_16   5
-	.db %00000100 ; Branches_16_Slow
+	.db 92 ; BigFishbowl_5   5
+	.db %10000101 ; BigFishbowl_5_Fast
 
 
-	.db 36 ; Branches_16   6
-	.db %01100000 ; Branches_16_Slow_O_F
+	.db 94 ; BigFishbowl_5   6
+	.db %10100001 ; BigFishbowl_5_Fast_F
 
 
-	.db 1 ; Branches_13   7
-	.db %10000100 ; Branches_13_Fast
+	.db 93 ; BigFishbowl_6   7
+	.db %10000101 ; BigFishbowl_6_Fast
 
 
-	.db 17 ; Branches_13   8
-	.db %10100000 ; Branches_13_Fast_F
+	.db 100 ; BigFishbowl_6   8
+	.db %10100001 ; BigFishbowl_6_Fast_F
 
 
-	.db 4 ; Leaves1   9
-	.db %10000100 ; Leaves1_Fast
+	.db 87 ; BigFishbowl_18   9
+	.db %10000101 ; BigFishbowl_18_Fast
 
 
-	.db 60 ; Leaves1   10
-	.db %10100000 ; Leaves1_Fast_F
+	.db 102 ; BigFishbowl_8   10
+	.db %10000101 ; BigFishbowl_8_Fast
 
 
-	.db 5 ; DualLeaf1   11
-	.db %10000100 ; DualLeaf1_Fast
+	.db 123 ; BigFishbowl_8   11
+	.db %10100001 ; BigFishbowl_8_Fast_F
 
 
-	.db 8 ; DualLeaf1   12
-	.db %11000000 ; DualLeaf1_Fast_O
+	.db 103 ; BigFishbowl_9   12
+	.db %10000101 ; BigFishbowl_9_Fast
 
 
-	.db 6 ; DualLeaf2   13
-	.db %10000100 ; DualLeaf2_Fast
+	.db 122 ; BigFishbowl_9   13
+	.db %10100001 ; BigFishbowl_9_Fast_F
 
 
-	.db 7 ; DualLeaf2   14
-	.db %11000000 ; DualLeaf2_Fast_O
+	.db 120 ; BigFishbowl_10   14
+	.db %10000101 ; BigFishbowl_10_Fast
 
 
-	.db 9 ; DualLeaf3   15
-	.db %10000100 ; DualLeaf3_Fast
+	.db 119 ; BigFishbowl_10   15
+	.db %10100001 ; BigFishbowl_10_Fast_F
 
 
-	.db 53 ; AscentBanner_6   16
-	.db %01000100 ; AscentBanner_6_Slow_O
+	.db 121 ; BigFishbowl_11   16
+	.db %10000101 ; BigFishbowl_11_Fast
 
 
-	.db 43 ; AscentBanner_6   17
-	.db %00100000 ; AscentBanner_6_Slow_F
+	.db 118 ; BigFishbowl_11   17
+	.db %10100001 ; BigFishbowl_11_Fast_F
 
 
-	.db 51 ; AscentBanner_9   18
-	.db %10000100 ; AscentBanner_9_Fast
+	.db 89 ; BigFishbowl_2   18
+	.db %10000101 ; BigFishbowl_2_Fast
 
 
-	.db 42 ; AscentBanner_9   19
-	.db %10100000 ; AscentBanner_9_Fast_F
+	.db 97 ; BigFishbowl_2   19
+	.db %10100001 ; BigFishbowl_2_Fast_F
 
 
-	.db 52 ; AscentBanner_10   20
-	.db %10000100 ; AscentBanner_10_Fast
+	.db 104 ; BigFishbowl_7   20
+	.db %10000101 ; BigFishbowl_7_Fast
 
 
-	.db 44 ; AscentBanner_10   21
-	.db %10100000 ; AscentBanner_10_Fast_F
+	.db 105 ; BigFishbowl_7   21
+	.db %10100001 ; BigFishbowl_7_Fast_F
 
 
-	.db 50 ; AscentBanner_1   22
-	.db %10000100 ; AscentBanner_1_Fast
+	.db 117 ; BigFishbowl_15   22
+	.db %10000101 ; BigFishbowl_15_Fast
 
 
-	.db 49 ; AscentBanner_2   23
-	.db %10000100 ; AscentBanner_2_Fast
+	.db 110 ; BigFishbowl_15   23
+	.db %10100001 ; BigFishbowl_15_Fast_F
 
 
-	.db 48 ; AscentBanner_3   24
-	.db %10000100 ; AscentBanner_3_Fast
+	.db 114 ; BigFishbowl_12   24
+	.db %10000101 ; BigFishbowl_12_Fast
 
 
-	.db 47 ; AscentBanner_0   25
-	.db %10000100 ; AscentBanner_0_Fast
+	.db 113 ; BigFishbowl_12   25
+	.db %10100001 ; BigFishbowl_12_Fast_F
 
 
-	.db 46 ; AscentBanner_4   26
-	.db %10000100 ; AscentBanner_4_Fast
+	.db 115 ; BigFishbowl_13   26
+	.db %10000101 ; BigFishbowl_13_Fast
 
 
-	.db 45 ; AscentBanner_5   27
-	.db %10000100 ; AscentBanner_5_Fast
+	.db 112 ; BigFishbowl_13   27
+	.db %10100001 ; BigFishbowl_13_Fast_F
 
 
-	.db 41 ; AscentBanner_7   28
-	.db %10000100 ; AscentBanner_7_Fast
+	.db 108 ; BigFishbowl_16   28
+	.db %10000101 ; BigFishbowl_16_Fast
 
 
-	.db 40 ; AscentBanner_8   29
-	.db %00000100 ; AscentBanner_8_Slow
+	.db 107 ; BigFishbowl_16   29
+	.db %10100001 ; BigFishbowl_16_Fast_F
 
 
-	.db 33 ; Branches_6   30
-	.db %00000100 ; Branches_6_Slow
+	.db 109 ; BigFishbowl_17   30
+	.db %10000101 ; BigFishbowl_17_Fast
 
 
-	.db 34 ; Branches_7   31
-	.db %10000100 ; Branches_7_Fast
+	.db 106 ; BigFishbowl_17   31
+	.db %10100001 ; BigFishbowl_17_Fast_F
 
 
-	.db 58 ; Branches_7   32
-	.db %10100000 ; Branches_7_Fast_F
+	.db 124 ; BigFishbowl_19   32
+	.db %10000101 ; BigFishbowl_19_Fast
 
 
-	.db 15 ; Branches_15   33
-	.db %00000100 ; Branches_15_Slow
+	.db 125 ; BigFishbowl_20   33
+	.db %10000101 ; BigFishbowl_20_Fast
 
 
-	.db 13 ; Branches_15   34
-	.db %01100000 ; Branches_15_Slow_O_F
+	.db 101 ; StarsNew_1   34
+	.db %00000110 ; StarsNew_1_Slow
 
 
-	.db 35 ; Branches_8   35
-	.db %10100100 ; Branches_8_Fast_F
+	.db 96 ; StarsNew_9   35
+	.db %00000110 ; StarsNew_9_Slow
 
 
-	.db 14 ; Branches_8   36
-	.db %10000000 ; Branches_8_Fast
+	.db 116 ; BigFishbowl_14   36
+	.db %10000101 ; BigFishbowl_14_Fast
 
 
-	.db 32 ; Branches_12   37
-	.db %10000100 ; Branches_12_Fast
+	.db 111 ; BigFishbowl_14   37
+	.db %10100001 ; BigFishbowl_14_Fast_F
 
 
-	.db 59 ; Branches_12   38
-	.db %10100000 ; Branches_12_Fast_F
+	.db 61 ; ZigsAndZags_4   38
+	.db %01100101 ; ZigsAndZags_4_Slow_O_F
 
 
-	.db 20 ; Leaves2   39
-	.db %10000100 ; Leaves2_Fast
+	.db 88 ; BigFishbowl_1   39
+	.db %10000101 ; BigFishbowl_1_Fast
 
 
-	.db 19 ; Leaves2   40
-	.db %10100000 ; Leaves2_Fast_F
+	.db 98 ; BigFishbowl_1   40
+	.db %10100001 ; BigFishbowl_1_Fast_F
 
 
-	.db 11 ; LeavesLight   41
-	.db %10001100 ; LeavesDark_Fast
+	.db 62 ; ZigsAndZags_6   41
+	.db %00100101 ; ZigsAndZags_6_Slow_F
 
-	.db %01010100
 
+	.db 63 ; ZigsAndZags_5   42
+	.db %01000101 ; ZigsAndZags_5_Slow_O
 
-	.db 31 ; LeavesLight   42
-	.db %10101000 ; LeavesDark_Fast_F
 
-	.db %01010100
+	.db 64 ; ZigsAndZags_7   43
+	.db %00000101 ; ZigsAndZags_7_Slow
 
 
-	.db 10 ; LeavesLight   43
-	.db %10000000 ; LeavesLight_Fast
+	.db 101 ; BigFishbowl_0   44
+	.db %10000101 ; BigFishbowl_0_Fast
 
 
-	.db 16 ; Branches_11   44
-	.db %10100100 ; Branches_11_Fast_F
+	.db 99 ; BigFishbowl_0   45
+	.db %10100001 ; BigFishbowl_0_Fast_F
 
 
-	.db 12 ; Branches_14   45
-	.db %00000100 ; Branches_14_Slow
+	.db 65 ; ZigsAndZags_54   46
+	.db %01001101 ; ZigsAndZags_46_Slow_O
 
+	.db %00100000
 
-	.db 4 ; DualLeaf4   46
-	.db %00000110 ; DualLeaf4_Slow
 
+	.db 69 ; ZigsAndZags_54   47
+	.db %01000001 ; ZigsAndZags_54_Slow_O
 
-	.db 21 ; Lantern_0   47
-	.db %10000100 ; Lantern_0_Fast
 
+	.db 67 ; ZigsAndZags_56   48
+	.db %01001101 ; ZigsAndZags_48_Slow_O
 
-	.db 24 ; Lantern_0   48
-	.db %10100000 ; Lantern_0_Fast_F
+	.db %00100000
 
 
-	.db 22 ; Lantern_1   49
-	.db %10000100 ; Lantern_1_Fast
+	.db 71 ; ZigsAndZags_56   49
+	.db %01000001 ; ZigsAndZags_56_Slow_O
 
 
-	.db 25 ; Lantern_1   50
-	.db %10100000 ; Lantern_1_Fast_F
+	.db 68 ; ZigsAndZags_57   50
+	.db %00001101 ; ZigsAndZags_49_Slow
 
+	.db %00100000
 
-	.db 23 ; Lantern_2   51
-	.db %10000100 ; Lantern_2_Fast
 
+	.db 72 ; ZigsAndZags_57   51
+	.db %01000001 ; ZigsAndZags_57_Slow_O
 
-	.db 26 ; Lantern_2   52
-	.db %10100000 ; Lantern_2_Fast_F
 
-
-	.db 38 ; Lantern_6   53
-	.db %00000100 ; Lantern_6_Slow
-
-
-	.db 39 ; Lantern_6   54
-	.db %01100000 ; Lantern_6_Slow_O_F
-
-
-	.db 29 ; Lantern_5   55
-	.db %00000100 ; Lantern_5_Slow
-
-
-	.db 30 ; Lantern_5   56
-	.db %01100000 ; Lantern_5_Slow_O_F
-
-
-	.db 57 ; Branches_4   57
-	.db %10100100 ; Branches_4_Fast_F
-
-
-	.db 75 ; Branches_4   58
-	.db %10000000 ; Branches_4_Fast
-
-
-	.db 71 ; Vine2   59
-	.db %00000100 ; Vine2_Slow
-
-
-	.db 78 ; Vine2   60
-	.db %00100000 ; Vine2_Slow_F
-
-
-	.db 161 ; Vine2   61
-	.db %01000000 ; Vine2_Slow_O
-
-
-	.db 72 ; VineVertical   62
-	.db %01000100 ; VineVertical_Slow_O
-
-
-	.db 73 ; VineVertical   63
-	.db %00000000 ; VineVertical_Slow
-
-
-	.db 79 ; VineVertical   64
-	.db %00100000 ; VineVertical_Slow_F
-
-
-	.db 74 ; Branches_5   65
-	.db %10000100 ; Branches_5_Fast
-
-
-	.db 160 ; Branches_5   66
-	.db %10100000 ; Branches_5_Fast_F
-
-
-	.db 76 ; Branches_3   67
-	.db %10000100 ; Branches_3_Fast
-
-
-	.db 77 ; Branches_2   68
-	.db %10000100 ; Branches_2_Fast
-
-
-	.db 159 ; Branches_2   69
-	.db %10100000 ; Branches_2_Fast_F
-
-
-	.db 27 ; Lantern_3   70
-	.db %00000100 ; Lantern_3_Slow
-
-
-	.db 28 ; Lantern_3   71
-	.db %01100000 ; Lantern_3_Slow_O_F
-
-
-	.db 54 ; Lantern_7   72
-	.db %00000100 ; Lantern_7_Slow
-
-
-	.db 55 ; Lantern_7   73
-	.db %01100000 ; Lantern_7_Slow_O_F
-
-
-	.db 56 ; Lantern_4   74
-	.db %01000100 ; Lantern_4_Slow_O
-
-
-	.db 87 ; CloudsNewer_0   75
-	.db %10000100 ; CloudsNewer_0_Fast
-
-
-	.db 96 ; CloudsNewer_0   76
-	.db %10100000 ; CloudsNewer_0_Fast_F
-
-
-	.db 86 ; CloudsNewer_2   77
-	.db %10000100 ; CloudsNewer_2_Fast
-
-
-	.db 82 ; CloudsNewer_7   78
-	.db %10000100 ; CloudsNewer_7_Fast
-
-
-	.db 99 ; CloudsNewer_7   79
-	.db %10100000 ; CloudsNewer_7_Fast_F
-
-
-	.db 88 ; CloudsNewer_8   80
-	.db %10000100 ; CloudsNewer_8_Fast
-
-
-	.db 97 ; CloudsNewer_8   81
-	.db %10100000 ; CloudsNewer_8_Fast_F
-
-
-	.db 83 ; CloudsNewer_1   82
-	.db %10000100 ; CloudsNewer_1_Fast
-
-
-	.db 90 ; CloudsNewer_1   83
-	.db %10100000 ; CloudsNewer_1_Fast_F
-
-
-	.db 89 ; CloudsNewer_4   84
-	.db %10000100 ; CloudsNewer_4_Fast
-
-
-	.db 85 ; CloudsNewer_4   85
-	.db %10100000 ; CloudsNewer_4_Fast_F
-
-
-	.db 80 ; CloudsNewer_6   86
-	.db %00000100 ; CloudsNewer_6_Slow
-
-
-	.db 91 ; CloudsNewer_5   87
-	.db %10000100 ; CloudsNewer_5_Fast
-
-
-	.db 92 ; CloudsNewer_5   88
-	.db %10100000 ; CloudsNewer_5_Fast_F
-
-
-	.db 81 ; CloudsNewer_3   89
-	.db %10000100 ; CloudsNewer_3_Fast
-
-
-	.db 84 ; CloudsNewer_3   90
-	.db %10100000 ; CloudsNewer_3_Fast_F
-
-
-	.db 93 ; CloudsNewer_9   91
-	.db %10100100 ; CloudsNewer_9_Fast_F
-
-
-	.db 95 ; CloudsNewer_9   92
-	.db %10000000 ; CloudsNewer_9_Fast
-
-
-	.db 94 ; CloudsNewer_10   93
-	.db %10000100 ; CloudsNewer_10_Fast
-
-
-	.db 98 ; CloudsNewer_10   94
-	.db %10100000 ; CloudsNewer_10_Fast_F
-
-
-	.db 100 ; Truetle_4   95
-	.db %10000100 ; Truetle_4_Fast
-
-
-	.db 101 ; Truetle_4   96
-	.db %10100000 ; Truetle_4_Fast_F
-
-
-	.db 108 ; Truetle_0   97
-	.db %10000100 ; Truetle_0_Fast
-
-
-	.db 109 ; Truetle_0   98
-	.db %10100000 ; Truetle_0_Fast_F
-
-
-	.db 102 ; Truetle_2   99
-	.db %00010100 ; Truetle_6_Slow
-
-	.db %10110111, %01100000
-
-
-	.db 105 ; Truetle_2   100
-	.db %00110000 ; Truetle_6_Slow_F
-
-	.db %10110111, %01100000
-
-
-	.db 110 ; Truetle_2   101
-	.db %00000000 ; Truetle_2_Slow
-
-
-	.db 113 ; Truetle_2   102
-	.db %00100000 ; Truetle_2_Slow_F
-
-
-	.db 118 ; Truetle_2   103
-	.db %00010000 ; Truetle_3_Slow
-
-	.db %11001110, %10100000
-
-
-	.db 121 ; Truetle_2   104
-	.db %00110000 ; Truetle_3_Slow_F
-
-	.db %11001110, %10100000
-
-
-	.db 103 ; Truetle_7   105
-	.db %00010100 ; Truetle_11_Slow
-
-	.db %10110111, %01100000
-
-
-	.db 106 ; Truetle_7   106
-	.db %00110000 ; Truetle_11_Slow_F
-
-	.db %10110111, %01100000
-
-
-	.db 111 ; Truetle_7   107
-	.db %00000000 ; Truetle_7_Slow
-
-
-	.db 114 ; Truetle_7   108
-	.db %00100000 ; Truetle_7_Slow_F
-
-
-	.db 119 ; Truetle_7   109
-	.db %00010000 ; Truetle_10_Slow
-
-	.db %11001110, %10100000
-
-
-	.db 122 ; Truetle_7   110
-	.db %00110000 ; Truetle_10_Slow_F
-
-	.db %11001110, %10100000
-
-
-	.db 104 ; Truetle_5   111
-	.db %00010100 ; Truetle_9_Slow
-
-	.db %10110111, %01100000
-
-
-	.db 107 ; Truetle_5   112
-	.db %00110000 ; Truetle_9_Slow_F
-
-	.db %10110111, %01100000
-
-
-	.db 112 ; Truetle_5   113
-	.db %00000000 ; Truetle_5_Slow
-
-
-	.db 115 ; Truetle_5   114
-	.db %00100000 ; Truetle_5_Slow_F
-
-
-	.db 120 ; Truetle_5   115
-	.db %00010000 ; Truetle_8_Slow
-
-	.db %11001110, %10100000
-
-
-	.db 123 ; Truetle_5   116
-	.db %00110000 ; Truetle_8_Slow_F
-
-	.db %11001110, %10100000
-
-
-	.db 116 ; Truetle_1   117
-	.db %10000100 ; Truetle_1_Fast
-
-
-	.db 117 ; Truetle_1   118
-	.db %10100000 ; Truetle_1_Fast_F
-
-
-	.db 124 ; GroundNew_2   119
-	.db %10000100 ; GroundNew_2_Fast
-
-
-	.db 127 ; GroundNew_2   120
-	.db %10100000 ; GroundNew_2_Fast_F
-
-
-	.db 2 ; GroundNew_2   121
-	.db %10110010 ; GroundNew_3_Fast_F
-
-	.db %00000100, %01010000
-
-
-	.db 3 ; GroundNew_2   122
-	.db %10010010 ; GroundNew_3_Fast
-
-	.db %00000100, %01010000
-
-
-	.db 125 ; GroundNew_0   123
-	.db %10000100 ; GroundNew_0_Fast
-
-
-	.db 126 ; GroundNew_0   124
-	.db %10100000 ; GroundNew_0_Fast_F
-
-
-	.db 0 ; GroundNew_0   125
-	.db %10010010 ; GroundNew_1_Fast
-
-	.db %01010100, %00000000
-
-
-	.db 1 ; GroundNew_0   126
-	.db %10110010 ; GroundNew_1_Fast_F
-
-	.db %01010100, %00000000
-
-
-	.db 154 ; FrogNPCs1_5   127
-	.db %01000100 ; FrogNPCs1_5_Slow_O
-
-
-	.db 96 ; FrogNPCs1_5   128
-	.db %00000001 ; FrogNPCs1_5_Slow
-
-
-	.db 98 ; FrogNPCs1_9   129
-	.db %00000101 ; FrogNPCs1_9_Slow
-
-
-	.db 89 ; FrogNPCs1_9   130
-	.db %00110001 ; FrogNPCs1_8_Slow_F
-
-	.db %01010100, %01000110
-
-
-	.db 93 ; FrogNPCs1_9   131
-	.db %01000001 ; FrogNPCs1_9_Slow_O
-
-
-	.db 113 ; FrogNPCs1_9   132
-	.db %01010001 ; FrogNPCs1_8_Slow_O
-
-	.db %01010100, %01000110
-
-
-	.db 114 ; FrogNPCs1_9   133
-	.db %00100001 ; FrogNPCs1_9_Slow_F
-
-
-	.db 156 ; FrogNPCs1_7   134
-	.db %00100100 ; FrogNPCs1_7_Slow_F
-
-
-	.db 97 ; FrogNPCs1_7   135
-	.db %00000001 ; FrogNPCs1_7_Slow
-
-
-	.db 107 ; FrogNPCs1_0   136
-	.db %00000101 ; FrogNPCs1_0_Slow
-
-
-	.db 128 ; Tree_2   137
-	.db %10000100 ; Tree_2_Fast
-
-
-	.db 149 ; Tree_2   138
-	.db %10100000 ; Tree_2_Fast_F
-
-
-	.db 129 ; Tree_4   139
-	.db %10000100 ; Tree_4_Fast
-
-
-	.db 139 ; Tree_4   140
-	.db %10100000 ; Tree_4_Fast_F
-
-
-	.db 130 ; Tree_7   141
-	.db %10000100 ; Tree_7_Fast
-
-
-	.db 143 ; Tree_7   142
-	.db %10100000 ; Tree_7_Fast_F
-
-
-	.db 131 ; Tree_9   143
-	.db %10000100 ; Tree_9_Fast
-
-
-	.db 137 ; Tree_9   144
-	.db %10100000 ; Tree_9_Fast_F
-
-
-	.db 132 ; Tree_6   145
-	.db %10100100 ; Tree_6_Fast_F
-
-
-	.db 141 ; Tree_6   146
-	.db %10000000 ; Tree_6_Fast
-
-
-	.db 133 ; Tree_3   147
-	.db %10100100 ; Tree_3_Fast_F
-
-
-	.db 135 ; Tree_3   148
-	.db %10000000 ; Tree_3_Fast
-
-
-	.db 134 ; Tree_0   149
-	.db %10100100 ; Tree_0_Fast_F
-
-
-	.db 140 ; Tree_0   150
-	.db %10000000 ; Tree_0_Fast
-
-
-	.db 136 ; Tree_8   151
-	.db %10000100 ; Tree_8_Fast
-
-
-	.db 138 ; Tree_8   152
-	.db %10100000 ; Tree_8_Fast_F
-
-
-	.db 142 ; Tree_10   153
-	.db %10000100 ; Tree_10_Fast
-
-
-	.db 144 ; Tree_1   154
-	.db %10100100 ; Tree_1_Fast_F
-
-
-	.db 145 ; Tree_1   155
-	.db %10000000 ; Tree_1_Fast
-
-
-	.db 146 ; Tree_5   156
-	.db %10000100 ; Tree_5_Fast
-
-
-	.db 148 ; Tree_5   157
-	.db %10100000 ; Tree_5_Fast_F
-
-
-	.db 147 ; Tree_11   158
-	.db %10000100 ; Tree_11_Fast
-
-
-	.db 150 ; Tree_11   159
-	.db %10100000 ; Tree_11_Fast_F
-
-
-	.db 151 ; Branches_1   160
-	.db %10000100 ; Branches_1_Fast
-
-
-	.db 158 ; Branches_1   161
-	.db %10100000 ; Branches_1_Fast_F
-
-
-	.db 162 ; Branches_0   162
-	.db %10100100 ; Branches_0_Fast_F
-
-
-	.db 164 ; Branches_0   163
-	.db %10000000 ; Branches_0_Fast
-
-
-	.db 0 ; CastleWindow_0   164
-	.db %10000101 ; CastleWindow_0_Fast
-
-
-	.db 1 ; CastleWindow_1   165
-	.db %10000101 ; CastleWindow_1_Fast
-
-
-	.db 2 ; CastleWindow_2   166
-	.db %10000101 ; CastleWindow_2_Fast
-
-
-	.db 3 ; Bricks_2_2   167
-	.db %10000101 ; Bricks_2_2_Fast
-
-
-	.db 4 ; Bricks_2_1   168
-	.db %10000101 ; Bricks_2_1_Fast
-
-
-	.db 5 ; Bricks_2_11   169
-	.db %10000101 ; Bricks_2_11_Fast
-
-
-	.db 9 ; Bricks_2_3   170
-	.db %10000101 ; Bricks_2_3_Fast
-
-
-	.db 10 ; Bricks_2_3   171
-	.db %10100001 ; Bricks_2_3_Fast_F
-
-
-	.db 7 ; Bricks_2_5   172
-	.db %10100101 ; Bricks_2_5_Fast_F
-
-
-	.db 6 ; Bricks_2_5   173
-	.db %10000001 ; Bricks_2_5_Fast
-
-
-	.db 12 ; Bricks_2_7   174
-	.db %10000101 ; Bricks_2_7_Fast
-
-
-	.db 42 ; Bricks_2_7   175
-	.db %10100001 ; Bricks_2_7_Fast_F
-
-
-	.db 11 ; Bricks_2_8   176
-	.db %10000101 ; Bricks_2_8_Fast
-
-
-	.db 8 ; Bricks_2_0   177
-	.db %10000101 ; Bricks_2_0_Fast
-
-
-	.db 16 ; CastleVines_9   178
-	.db %01000101 ; CastleVines_9_Slow_O
-
-
-	.db 18 ; CastleVines_9   179
-	.db %00000001 ; CastleVines_9_Slow
-
-
-	.db 19 ; CastleVines_11   180
-	.db %01000101 ; CastleVines_11_Slow_O
-
-
-	.db 24 ; CastleVines_11   181
-	.db %00000001 ; CastleVines_11_Slow
-
-
-	.db 62 ; purpleVinesifitwasPurple_5   182
-	.db %00001100 ; Vine6_Slow
-
-	.db %01000101
-
-
-	.db 69 ; purpleVinesifitwasPurple_5   183
-	.db %01001000 ; Vine6_Slow_O
-
-	.db %01000101
-
-
-	.db 13 ; purpleVinesifitwasPurple_5   184
-	.db %00000001 ; purpleVinesifitwasPurple_5_Slow
-
-
-	.db 44 ; purpleVinesifitwasPurple_5   185
-	.db %01000001 ; purpleVinesifitwasPurple_5_Slow_O
-
-
-	.db 63 ; purpleVinesifitwasPurple_3   186
-	.db %00001100 ; Vine4_Slow
-
-	.db %01000101
-
-
-	.db 64 ; purpleVinesifitwasPurple_3   187
-	.db %00101000 ; Vine4_Slow_F
-
-	.db %01000101
-
-
-	.db 65 ; purpleVinesifitwasPurple_3   188
-	.db %01101000 ; Vine4_Slow_O_F
-
-	.db %01000101
-
-
-	.db 70 ; purpleVinesifitwasPurple_3   189
-	.db %01001000 ; Vine4_Slow_O
-
-	.db %01000101
-
-
-	.db 14 ; purpleVinesifitwasPurple_3   190
-	.db %00000001 ; purpleVinesifitwasPurple_3_Slow
-
-
-	.db 43 ; purpleVinesifitwasPurple_3   191
-	.db %00100001 ; purpleVinesifitwasPurple_3_Slow_F
-
-
-	.db 45 ; purpleVinesifitwasPurple_3   192
-	.db %01100001 ; purpleVinesifitwasPurple_3_Slow_O_F
-
-
-	.db 67 ; purpleVinesifitwasPurple_6   193
-	.db %01001100 ; Vine7_Slow_O
-
-	.db %01000101
-
-
-	.db 152 ; purpleVinesifitwasPurple_6   194
-	.db %00001000 ; Vine7_Slow
-
-	.db %01000101
-
-
-	.db 15 ; purpleVinesifitwasPurple_6   195
-	.db %01000001 ; purpleVinesifitwasPurple_6_Slow_O
-
-
-	.db 61 ; purpleVinesifitwasPurple_4   196
-	.db %00001100 ; Vine5_Slow
-
-	.db %01010100
-
-
-	.db 66 ; purpleVinesifitwasPurple_4   197
-	.db %01101000 ; Vine5_Slow_O_F
-
-	.db %01010100
-
-
-	.db 68 ; purpleVinesifitwasPurple_4   198
-	.db %01001000 ; Vine5_Slow_O
-
-	.db %01010100
-
-
-	.db 21 ; purpleVinesifitwasPurple_4   199
-	.db %00100001 ; purpleVinesifitwasPurple_4_Slow_F
-
-
-	.db 22 ; purpleVinesifitwasPurple_4   200
-	.db %01100001 ; purpleVinesifitwasPurple_4_Slow_O_F
-
-
-	.db 23 ; purpleVinesifitwasPurple_4   201
-	.db %00000001 ; purpleVinesifitwasPurple_4_Slow
-
-
-	.db 49 ; purpleVinesifitwasPurple_4   202
-	.db %01000001 ; purpleVinesifitwasPurple_4_Slow_O
-
-
-	.db 25 ; CloudCityWelcomeComitte2_4   203
-	.db %00000101 ; CloudCityWelcomeComitte2_4_Slow
-
-
-	.db 26 ; CloudCityWelcomeComitte2_1   204
-	.db %00000101 ; CloudCityWelcomeComitte2_1_Slow
-
-
-	.db 27 ; CloudCityWelcomeComitte2_3   205
-	.db %01000101 ; CloudCityWelcomeComitte2_3_Slow_O
-
-
-	.db 28 ; CloudCityWelcomeComitte2_2   206
-	.db %01000101 ; CloudCityWelcomeComitte2_2_Slow_O
-
-
-	.db 166 ; CityBanners_1   207
-	.db %10000100 ; CityBanners_1_Fast
-
-
-	.db 165 ; CityBanners_1   208
-	.db %10100000 ; CityBanners_1_Fast_F
-
-
-	.db 29 ; CityBanners_2   209
-	.db %10000101 ; CityBanners_2_Fast
-
-
-	.db 30 ; CityBanners_5   210
-	.db %10010101 ; CityBanners_3_Fast
-
-	.db %00110010, %00100000
-
-
-	.db 31 ; CityBanners_5   211
-	.db %11010001 ; CityBanners_3_Fast_O
-
-	.db %00110010, %00100000
-
-
-	.db 32 ; CityBanners_5   212
-	.db %10000001 ; CityBanners_5_Fast
-
-
-	.db 33 ; CityBanners_5   213
-	.db %11000001 ; CityBanners_5_Fast_O
-
-
-	.db 34 ; CityBanners_6   214
-	.db %10000101 ; CityBanners_6_Fast
-
-
-	.db 35 ; CityBanners_6   215
-	.db %11000001 ; CityBanners_6_Fast_O
-
-
-	.db 36 ; CityBanners_4   216
-	.db %00000101 ; CityBanners_4_Slow
-
-
-	.db 37 ; CityBanners_4   217
-	.db %01000001 ; CityBanners_4_Slow_O
-
-
-	.db 38 ; CityBanners_9   218
-	.db %10000101 ; CityBanners_9_Fast
-
-
-	.db 39 ; CityBanners_9   219
-	.db %11000001 ; CityBanners_9_Fast_O
-
-
-	.db 40 ; CityBanners_10   220
-	.db %10000101 ; CityBanners_10_Fast
-
-
-	.db 41 ; CityBanners_10   221
-	.db %11000001 ; CityBanners_10_Fast_O
-
-
-	.db 46 ; CastleVines_6   222
-	.db %00000101 ; CastleVines_6_Slow
-
-
-	.db 17 ; CastleVines_7   223
-	.db %00001101 ; CastleVines_10_Slow
-
-	.db %00001111
-
-
-	.db 20 ; CastleVines_7   224
-	.db %01001001 ; CastleVines_10_Slow_O
-
-	.db %00001111
-
-
-	.db 47 ; CastleVines_7   225
-	.db %00000001 ; CastleVines_7_Slow
-
-
-	.db 48 ; CastleVines_8   226
-	.db %00000101 ; CastleVines_8_Slow
-
-
-	.db 50 ; CityBanners_7   227
-	.db %10000101 ; CityBanners_7_Fast
-
-
-	.db 51 ; CityBanners_7   228
-	.db %11000001 ; CityBanners_7_Fast_O
-
-
-	.db 52 ; CityBanners_8   229
-	.db %10000101 ; CityBanners_8_Fast
-
-
-	.db 53 ; CityBanners_8   230
-	.db %11000001 ; CityBanners_8_Fast_O
-
-
-	.db 54 ; ZigsAndZags_12   231
+	.db 73 ; ZigsAndZags_12   52
 	.db %00000101 ; ZigsAndZags_12_Slow
 
 
-	.db 56 ; ZigsAndZags_12   232
-	.db %01000001 ; ZigsAndZags_12_Slow_O
+	.db 75 ; ZigsAndZags_12   53
+	.db %01100001 ; ZigsAndZags_12_Slow_O_F
 
 
-	.db 55 ; ZigsAndZags_13   233
+	.db 74 ; ZigsAndZags_13   54
 	.db %00000101 ; ZigsAndZags_13_Slow
 
 
-	.db 57 ; ZigsAndZags_13   234
+	.db 76 ; ZigsAndZags_13   55
 	.db %01000001 ; ZigsAndZags_13_Slow_O
 
 
-	.db 58 ; ZigsAndZags_2   235
-	.db %00000101 ; ZigsAndZags_2_Slow
+	.db 58 ; ZigsAndZags_38   56
+	.db %00101101 ; ZigsAndZags_41_Slow_F
 
+	.db %10100000
 
-	.db 60 ; ZigsAndZags_2   236
-	.db %01000001 ; ZigsAndZags_2_Slow_O
 
+	.db 60 ; ZigsAndZags_38   57
+	.db %01101001 ; ZigsAndZags_41_Slow_O_F
 
-	.db 59 ; ZigsAndZags_3   237
-	.db %01000101 ; ZigsAndZags_3_Slow_O
+	.db %10100000
 
 
-	.db 61 ; ZigsAndZags_3   238
-	.db %00000001 ; ZigsAndZags_3_Slow
+	.db 77 ; ZigsAndZags_38   58
+	.db %00000001 ; ZigsAndZags_38_Slow
 
 
-	.db 62 ; ZigsAndZags_0   239
-	.db %00000101 ; ZigsAndZags_0_Slow
+	.db 79 ; ZigsAndZags_38   59
+	.db %01000001 ; ZigsAndZags_38_Slow_O
 
 
-	.db 65 ; ZigsAndZags_0   240
-	.db %01000001 ; ZigsAndZags_0_Slow_O
+	.db 84 ; ZigsAndZags_38   60
+	.db %01101001 ; ZigsAndZags_42_Slow_O_F
 
+	.db %11000000
 
-	.db 63 ; ZigsAndZags_1   241
-	.db %00000101 ; ZigsAndZags_1_Slow
 
+	.db 86 ; ZigsAndZags_38   61
+	.db %00101001 ; ZigsAndZags_42_Slow_F
 
-	.db 64 ; ZigsAndZags_1   242
-	.db %01000001 ; ZigsAndZags_1_Slow_O
+	.db %11000000
 
 
-	.db 66 ; ZigsAndZags_4   243
-	.db %00000101 ; ZigsAndZags_4_Slow
+	.db 57 ; ZigsAndZags_39   62
+	.db %00101101 ; ZigsAndZags_40_Slow_F
 
+	.db %10100000
 
-	.db 69 ; ZigsAndZags_4   244
-	.db %01000001 ; ZigsAndZags_4_Slow_O
 
+	.db 59 ; ZigsAndZags_39   63
+	.db %01101001 ; ZigsAndZags_40_Slow_O_F
 
-	.db 67 ; ZigsAndZags_5   245
-	.db %00000101 ; ZigsAndZags_5_Slow
+	.db %10100000
 
 
-	.db 68 ; ZigsAndZags_5   246
-	.db %01000001 ; ZigsAndZags_5_Slow_O
+	.db 78 ; ZigsAndZags_39   64
+	.db %01000001 ; ZigsAndZags_39_Slow_O
 
 
-	.db 70 ; ZigsAndZags_8   247
-	.db %00000101 ; ZigsAndZags_8_Slow
+	.db 80 ; ZigsAndZags_39   65
+	.db %00000001 ; ZigsAndZags_39_Slow
 
 
-	.db 72 ; ZigsAndZags_8   248
-	.db %01000001 ; ZigsAndZags_8_Slow_O
+	.db 85 ; ZigsAndZags_39   66
+	.db %00101001 ; ZigsAndZags_43_Slow_F
 
+	.db %11000000
 
-	.db 71 ; ZigsAndZags_10   249
-	.db %00000101 ; ZigsAndZags_10_Slow
 
+	.db 55 ; ZigsAndZags_34   67
+	.db %01001101 ; ZigsAndZags_33_Slow_O
 
-	.db 73 ; ZigsAndZags_10   250
-	.db %01000001 ; ZigsAndZags_10_Slow_O
+	.db %01110000
 
 
-	.db 74 ; ZigsAndZags_22   251
-	.db %00000101 ; ZigsAndZags_22_Slow
+	.db 81 ; ZigsAndZags_34   68
+	.db %00100001 ; ZigsAndZags_34_Slow_F
 
 
-	.db 77 ; ZigsAndZags_22   252
-	.db %01000001 ; ZigsAndZags_22_Slow_O
+	.db 83 ; ZigsAndZags_34   69
+	.db %01100001 ; ZigsAndZags_34_Slow_O_F
 
 
-	.db 75 ; ZigsAndZags_23   253
-	.db %00000101 ; ZigsAndZags_23_Slow
+	.db 54 ; ZigsAndZags_35   70
+	.db %01001101 ; ZigsAndZags_32_Slow_O
 
+	.db %01110000
 
-	.db 76 ; ZigsAndZags_23   254
-	.db %01000001 ; ZigsAndZags_23_Slow_O
 
+	.db 56 ; ZigsAndZags_35   71
+	.db %00001001 ; ZigsAndZags_32_Slow
 
-	.db 78 ; ZigsAndZags_16   255
-	.db %00000101 ; ZigsAndZags_16_Slow
+	.db %01110000
 
 
-	.db 80 ; ZigsAndZags_16   256
-	.db %01000001 ; ZigsAndZags_16_Slow_O
+	.db 82 ; ZigsAndZags_35   72
+	.db %01100001 ; ZigsAndZags_35_Slow_O_F
 
 
-	.db 79 ; ZigsAndZags_17   257
-	.db %00000101 ; ZigsAndZags_17_Slow
+	.db 66 ; ZigsAndZags_55   73
+	.db %01001101 ; ZigsAndZags_47_Slow_O
 
+	.db %00100000
 
-	.db 81 ; ZigsAndZags_17   258
-	.db %01000001 ; ZigsAndZags_17_Slow_O
 
+	.db 70 ; ZigsAndZags_55   74
+	.db %00000001 ; ZigsAndZags_55_Slow
 
-	.db 82 ; Platforms_0   259
-	.db %10000101 ; Platforms_0_Fast
 
+	.db 44 ; WaveySpaceLines_1   75
+	.db %10001110 ; WaveySpaceLines_0_Fast
 
-	.db 84 ; Platforms_0   260
-	.db %10100001 ; Platforms_0_Fast_F
+	.db %00100000
 
 
-	.db 83 ; Platforms_1   261
-	.db %10000101 ; Platforms_1_Fast
+	.db 45 ; WaveySpaceLines_1   76
+	.db %10000010 ; WaveySpaceLines_1_Fast
 
 
-	.db 85 ; Platforms_2   262
-	.db %01100101 ; Platforms_2_Slow_O_F
+	.db 46 ; WaveySpaceLines_1   77
+	.db %10001010 ; WaveySpaceLines_2_Fast
 
+	.db %01110000
 
-	.db 86 ; Platforms_2   263
-	.db %01000001 ; Platforms_2_Slow_O
 
+	.db 47 ; WaveySpaceLines_1   78
+	.db %10001010 ; WaveySpaceLines_3_Fast
 
-	.db 87 ; FrogNPCs1_10   264
-	.db %00000101 ; FrogNPCs1_10_Slow
+	.db %10100000
 
 
-	.db 108 ; FrogNPCs1_10   265
-	.db %00010001 ; FrogNPCs1_11_Slow
+	.db 48 ; WaveySpaceLines_1   79
+	.db %10001010 ; WaveySpaceLines_4_Fast
 
-	.db %01001000, %01101000
+	.db %10110000
 
 
-	.db 88 ; FrogNPCs1_4   266
-	.db %01000101 ; FrogNPCs1_4_Slow_O
+	.db 49 ; WaveySpaceLines_1   80
+	.db %10001010 ; WaveySpaceLines_5_Fast
 
+	.db %11000000
 
-	.db 115 ; FrogNPCs1_4   267
-	.db %00000001 ; FrogNPCs1_4_Slow
 
+	.db 50 ; WaveySpaceLines_1   81
+	.db %10001010 ; WaveySpaceLines_6_Fast
 
-	.db 137 ; FrogNPCs1_4   268
-	.db %01100001 ; FrogNPCs1_4_Slow_O_F
+	.db %11010000
 
 
-	.db 90 ; FrogNPCs1_1   269
-	.db %00000101 ; FrogNPCs1_1_Slow
+	.db 51 ; WaveySpaceLines_1   82
+	.db %10001010 ; WaveySpaceLines_7_Fast
 
+	.db %11100000
 
-	.db 118 ; FrogNPCs1_1   270
-	.db %01000001 ; FrogNPCs1_1_Slow_O
 
+	.db 28 ; SpacePlatformsNew_4   83
+	.db %10001110 ; SpacePlatformsNew_0_Fast
 
-	.db 91 ; FrogNPCs1_6   271
-	.db %01000101 ; FrogNPCs1_6_Slow_O
+	.db %01110010
 
 
-	.db 110 ; FrogNPCs1_6   272
-	.db %00000001 ; FrogNPCs1_6_Slow
+	.db 29 ; SpacePlatformsNew_4   84
+	.db %10000010 ; SpacePlatformsNew_4_Fast
 
 
-	.db 106 ; FrogNPCs1_3   273
-	.db %01110101 ; FrogNPCs1_2_Slow_O_F
+	.db 30 ; SpacePlatformsNew_4   85
+	.db %10001010 ; SpacePlatformsNew_8_Fast
 
-	.db %01010100, %10000110
+	.db %10110111
 
 
-	.db 94 ; FrogNPCs1_3   274
-	.db %00100001 ; FrogNPCs1_3_Slow_F
+	.db 31 ; SpacePlatformsNew_4   86
+	.db %10001010 ; SpacePlatformsNew_12_Fast
 
+	.db %11001010
 
-	.db 109 ; FrogNPCs1_3   275
-	.db %00000001 ; FrogNPCs1_3_Slow
 
+	.db 32 ; SpacePlatformsNew_4   87
+	.db %10001010 ; SpacePlatformsNew_1_Fast
 
-	.db 99 ; SolidPlatform_4   276
-	.db %00000101 ; SolidPlatform_4_Slow
+	.db %11011011
 
 
-	.db 100 ; SolidPlatform_1   277
-	.db %01000101 ; SolidPlatform_1_Slow_O
+	.db 33 ; SpacePlatformsNew_4   88
+	.db %10001010 ; SpacePlatformsNew_5_Fast
 
+	.db %11101100
 
-	.db 101 ; SolidPlatform_1   278
-	.db %00000001 ; SolidPlatform_1_Slow
 
+	.db 34 ; SpacePlatformsNew_4   89
+	.db %10001010 ; SpacePlatformsNew_9_Fast
 
-	.db 102 ; SolidPlatform_5   279
-	.db %01000101 ; SolidPlatform_5_Slow_O
+	.db %00101101
 
 
-	.db 103 ; SolidPlatform_0   280
-	.db %10000101 ; SolidPlatform_0_Fast
+	.db 35 ; SpacePlatformsNew_4   90
+	.db %10001010 ; SpacePlatformsNew_13_Fast
 
+	.db %00111110
 
-	.db 104 ; SolidPlatform_2   281
-	.db %10000101 ; SolidPlatform_2_Fast
 
+	.db 36 ; SpacePlatformsNew_6   91
+	.db %10001110 ; SpacePlatformsNew_2_Fast
 
-	.db 105 ; SolidPlatform_3   282
-	.db %10000101 ; SolidPlatform_3_Fast
+	.db %01110010
 
 
-	.db 116 ; TongueRing1   283
-	.db %00000101 ; TongueRing1_Slow
+	.db 37 ; SpacePlatformsNew_6   92
+	.db %10000010 ; SpacePlatformsNew_6_Fast
 
 
-	.db 117 ; TongueRing1   284
-	.db %00100001 ; TongueRing1_Slow_F
+	.db 38 ; SpacePlatformsNew_6   93
+	.db %10001010 ; SpacePlatformsNew_10_Fast
 
+	.db %10110111
 
-	.db 119 ; CloudSemisolid_0   285
-	.db %10000101 ; CloudSemisolid_0_Fast
 
+	.db 39 ; SpacePlatformsNew_6   94
+	.db %10001010 ; SpacePlatformsNew_14_Fast
 
-	.db 121 ; CloudSemisolid_0   286
-	.db %10100001 ; CloudSemisolid_0_Fast_F
+	.db %11001010
 
 
-	.db 142 ; CloudSemisolid_0   287
-	.db %10010001 ; CloudTransitory_0_Fast
+	.db 40 ; SpacePlatformsNew_6   95
+	.db %10001010 ; SpacePlatformsNew_3_Fast
 
-	.db %10010110, %01100000
+	.db %11011011
 
 
-	.db 143 ; CloudSemisolid_0   288
-	.db %10110001 ; CloudTransitory_0_Fast_F
+	.db 41 ; SpacePlatformsNew_6   96
+	.db %10001010 ; SpacePlatformsNew_7_Fast
 
-	.db %10010110, %01100000
+	.db %11101100
 
 
-	.db 120 ; CloudSemisolid_1   289
-	.db %10000101 ; CloudSemisolid_1_Fast
+	.db 42 ; SpacePlatformsNew_6   97
+	.db %10001010 ; SpacePlatformsNew_11_Fast
 
+	.db %00101101
 
-	.db 92 ; SpikesPurple_0   290
-	.db %10010101 ; Spikes_0_Fast
 
-	.db %10010110, %01110000
+	.db 43 ; SpacePlatformsNew_6   98
+	.db %10001010 ; SpacePlatformsNew_15_Fast
 
+	.db %00111110
 
-	.db 122 ; SpikesPurple_0   291
-	.db %10000001 ; SpikesPurple_0_Fast
 
+	.db 52 ; WaveySpaceLines_9   99
+	.db %10001110 ; WaveySpaceLines_8_Fast
 
-	.db 123 ; CastlePlatforms_9   292
-	.db %10000101 ; CastlePlatforms_9_Fast
+	.db %00100000
 
 
-	.db 125 ; CloudSemisolid_2   293
-	.db %10000101 ; CloudSemisolid_2_Fast
+	.db 53 ; WaveySpaceLines_9   100
+	.db %10000010 ; WaveySpaceLines_9_Fast
 
 
-	.db 126 ; CloudSemisolid_3   294
-	.db %10000101 ; CloudSemisolid_3_Fast
+	.db 54 ; WaveySpaceLines_9   101
+	.db %10001010 ; WaveySpaceLines_10_Fast
 
+	.db %01110000
 
-	.db 127 ; CloudSemisolid_4   295
-	.db %10000101 ; CloudSemisolid_4_Fast
 
+	.db 55 ; WaveySpaceLines_9   102
+	.db %10001010 ; WaveySpaceLines_11_Fast
 
-	.db 128 ; CloudSemisolid_5   296
-	.db %10000101 ; CloudSemisolid_5_Fast
+	.db %10100000
 
 
-	.db 95 ; SpikesPurple_3   297
+	.db 56 ; WaveySpaceLines_9   103
+	.db %10001010 ; WaveySpaceLines_12_Fast
+
+	.db %10110000
+
+
+	.db 57 ; WaveySpaceLines_9   104
+	.db %10001010 ; WaveySpaceLines_13_Fast
+
+	.db %11000000
+
+
+	.db 58 ; WaveySpaceLines_9   105
+	.db %10001010 ; WaveySpaceLines_14_Fast
+
+	.db %11010000
+
+
+	.db 59 ; WaveySpaceLines_9   106
+	.db %10001010 ; WaveySpaceLines_15_Fast
+
+	.db %11100000
+
+
+	.db 68 ; WaveySpaceLines_9   107
+	.db %10101010 ; WaveySpaceLines_8_Fast_F
+
+	.db %00100000
+
+
+	.db 69 ; WaveySpaceLines_9   108
+	.db %10100010 ; WaveySpaceLines_9_Fast_F
+
+
+	.db 70 ; WaveySpaceLines_9   109
+	.db %10101010 ; WaveySpaceLines_10_Fast_F
+
+	.db %01110000
+
+
+	.db 71 ; WaveySpaceLines_9   110
+	.db %10101010 ; WaveySpaceLines_11_Fast_F
+
+	.db %10100000
+
+
+	.db 72 ; WaveySpaceLines_9   111
+	.db %10101010 ; WaveySpaceLines_12_Fast_F
+
+	.db %10110000
+
+
+	.db 73 ; WaveySpaceLines_9   112
+	.db %10101010 ; WaveySpaceLines_13_Fast_F
+
+	.db %11000000
+
+
+	.db 74 ; WaveySpaceLines_9   113
+	.db %10101010 ; WaveySpaceLines_14_Fast_F
+
+	.db %11010000
+
+
+	.db 75 ; WaveySpaceLines_9   114
+	.db %10101010 ; WaveySpaceLines_15_Fast_F
+
+	.db %11100000
+
+
+	.db 87 ; StarsNew_8   115
+	.db %00000110 ; StarsNew_8_Slow
+
+
+	.db 89 ; StarsNew_0   116
+	.db %10000110 ; StarsNew_0_Fast
+
+
+	.db 60 ; WaveySpaceLines_17   117
+	.db %10001110 ; WaveySpaceLines_16_Fast
+
+	.db %00100000
+
+
+	.db 61 ; WaveySpaceLines_17   118
+	.db %10000010 ; WaveySpaceLines_17_Fast
+
+
+	.db 62 ; WaveySpaceLines_17   119
+	.db %10001010 ; WaveySpaceLines_18_Fast
+
+	.db %01110000
+
+
+	.db 63 ; WaveySpaceLines_17   120
+	.db %10001010 ; WaveySpaceLines_19_Fast
+
+	.db %10100000
+
+
+	.db 64 ; WaveySpaceLines_17   121
+	.db %10001010 ; WaveySpaceLines_20_Fast
+
+	.db %10110000
+
+
+	.db 65 ; WaveySpaceLines_17   122
+	.db %10001010 ; WaveySpaceLines_21_Fast
+
+	.db %11000000
+
+
+	.db 66 ; WaveySpaceLines_17   123
+	.db %10001010 ; WaveySpaceLines_22_Fast
+
+	.db %11010000
+
+
+	.db 67 ; WaveySpaceLines_17   124
+	.db %10001010 ; WaveySpaceLines_23_Fast
+
+	.db %11100000
+
+new_decomp_calls_1:
+	.dl 249
+
+
+	.db 165 ; FrogDefault   1
+	.db %01000110 ; FrogDefault_Slow_O
+
+
+	.db 104 ; FrogDefault   2
+	.db %00000010 ; FrogDefault_Slow
+
+
+	.db 164 ; FrogDefault   3
+	.db %00100010 ; FrogDefault_Slow_F
+
+
+	.db 163 ; FrogDefault   4
+	.db %01100010 ; FrogDefault_Slow_O_F
+
+
+	.db 88 ; StarsNew_10   5
+	.db %00000110 ; StarsNew_10_Slow
+
+
+	.db 83 ; PurpleClouds_8   6
+	.db %10000110 ; PurpleClouds_8_Fast
+
+
+	.db 84 ; PurpleClouds_6   7
+	.db %00000110 ; PurpleClouds_6_Slow
+
+
+	.db 85 ; PurpleClouds_6   8
+	.db %00100010 ; PurpleClouds_6_Slow_F
+
+
+	.db 9 ; CloudSemisolid_2   9
+	.db %10000110 ; CloudSemisolid_2_Fast
+
+
+	.db 10 ; CloudSemisolid_3   10
+	.db %10000110 ; CloudSemisolid_3_Fast
+
+
+	.db 11 ; CloudSemisolid_4   11
+	.db %10000110 ; CloudSemisolid_4_Fast
+
+
+	.db 12 ; CloudSemisolid_5   12
+	.db %10000110 ; CloudSemisolid_5_Fast
+
+
+	.db 139 ; SpikesPurple_3   13
 	.db %10010101 ; Spikes_3_Fast
 
 	.db %10010110, %01110000
 
 
-	.db 124 ; SpikesPurple_3   298
-	.db %10000001 ; SpikesPurple_3_Fast
+	.db 8 ; SpikesPurple_3   14
+	.db %10000010 ; SpikesPurple_3_Fast
 
 
-	.db 129 ; CastlePlatforms_1   299
-	.db %10000101 ; CastlePlatforms_1_Fast
+	.db 13 ; CastlePlatforms_1   15
+	.db %10000110 ; CastlePlatforms_1_Fast
 
 
-	.db 130 ; CastlePlatforms_5   300
-	.db %10000101 ; CastlePlatforms_5_Fast
+	.db 7 ; CastlePlatforms_9   16
+	.db %10000110 ; CastlePlatforms_9_Fast
 
 
-	.db 131 ; CastlePlatforms_4   301
-	.db %10000101 ; CastlePlatforms_4_Fast
+	.db 14 ; CastlePlatforms_5   17
+	.db %10000110 ; CastlePlatforms_5_Fast
 
 
-	.db 112 ; SpikesPurple_1   302
+	.db 156 ; SpikesPurple_1   18
 	.db %10010101 ; Spikes_1_Fast
 
 	.db %10010111, %01100000
 
 
-	.db 111 ; SpikesPurple_1   303
+	.db 155 ; SpikesPurple_1   19
 	.db %10110001 ; Spikes_1_Fast_F
 
 	.db %10010111, %01100000
 
 
-	.db 134 ; SpikesPurple_1   304
-	.db %10100001 ; SpikesPurple_1_Fast_F
+	.db 18 ; SpikesPurple_1   20
+	.db %10100010 ; SpikesPurple_1_Fast_F
 
 
-	.db 135 ; SpikesPurple_1   305
-	.db %10000001 ; SpikesPurple_1_Fast
+	.db 19 ; SpikesPurple_1   21
+	.db %10000010 ; SpikesPurple_1_Fast
 
 
-	.db 132 ; CastlePlatforms_7   306
-	.db %10000101 ; CastlePlatforms_7_Fast
+	.db 16 ; CastlePlatforms_7   22
+	.db %10000110 ; CastlePlatforms_7_Fast
 
 
-	.db 133 ; CastlePlatforms_7   307
-	.db %10100001 ; CastlePlatforms_7_Fast_F
+	.db 17 ; CastlePlatforms_7   23
+	.db %10100010 ; CastlePlatforms_7_Fast_F
 
 
-	.db 136 ; SpikesPurple_2   308
-	.db %10000101 ; SpikesPurple_2_Fast
+	.db 20 ; SpikesPurple_2   24
+	.db %10000110 ; SpikesPurple_2_Fast
 
 
-	.db 139 ; CastlePlatforms_6   309
-	.db %10000101 ; CastlePlatforms_6_Fast
+	.db 23 ; CastlePlatforms_6   25
+	.db %10000110 ; CastlePlatforms_6_Fast
 
 
-	.db 138 ; SpikesPurple_4   310
-	.db %10000101 ; SpikesPurple_4_Fast
+	.db 22 ; SpikesPurple_4   26
+	.db %10000110 ; SpikesPurple_4_Fast
 
 
-	.db 140 ; CityBanners_0   311
-	.db %10000101 ; CityBanners_0_Fast
+	.db 24 ; CityBanners_0   27
+	.db %10000110 ; CityBanners_0_Fast
 
 
-	.db 141 ; CityBanners_0   312
-	.db %10100001 ; CityBanners_0_Fast_F
+	.db 25 ; CityBanners_0   28
+	.db %10100010 ; CityBanners_0_Fast_F
 
 
-	.db 145 ; SpacePlatforms_0   313
-	.db %10010101 ; SpacePlatforms_2_Fast
+	.db 15 ; CastlePlatforms_4   29
+	.db %10000110 ; CastlePlatforms_4_Fast
 
-	.db %10011110, %00110000
 
+	.db 136 ; SpikesPurple_0   30
+	.db %10010101 ; Spikes_0_Fast
 
-	.db 144 ; SpacePlatforms_0   314
-	.db %10000001 ; SpacePlatforms_0_Fast
+	.db %10010110, %01110000
 
 
-	.db 147 ; SpacePlatforms_0   315
-	.db %10010001 ; SpacePlatforms_6_Fast
+	.db 6 ; SpikesPurple_0   31
+	.db %10000010 ; SpikesPurple_0_Fast
 
-	.db %10011100, %01110000
 
+	.db 3 ; CloudSemisolid_0   32
+	.db %10000110 ; CloudSemisolid_0_Fast
 
-	.db 146 ; SpacePlatforms_0   316
-	.db %10010001 ; SpacePlatforms_4_Fast
 
-	.db %10011011, %10100000
+	.db 5 ; CloudSemisolid_0   33
+	.db %10100010 ; CloudSemisolid_0_Fast_F
 
 
-	.db 149 ; SpacePlatforms_1   317
-	.db %10010101 ; SpacePlatforms_3_Fast
+	.db 26 ; CloudSemisolid_0   34
+	.db %10010010 ; CloudTransitory_0_Fast
 
-	.db %10011110, %00110000
+	.db %10010110, %01100000
 
 
-	.db 148 ; SpacePlatforms_1   318
-	.db %10000001 ; SpacePlatforms_1_Fast
+	.db 27 ; CloudSemisolid_0   35
+	.db %10110010 ; CloudTransitory_0_Fast_F
 
+	.db %10010110, %01100000
 
-	.db 151 ; SpacePlatforms_1   319
-	.db %10010001 ; SpacePlatforms_7_Fast
 
-	.db %10011100, %01110000
+	.db 0 ; TongueRing1   36
+	.db %00000110 ; TongueRing1_Slow
 
 
-	.db 150 ; SpacePlatforms_1   320
-	.db %10010001 ; SpacePlatforms_5_Fast
+	.db 1 ; TongueRing1   37
+	.db %00100010 ; TongueRing1_Slow_F
 
-	.db %10011011, %10100000
 
+	.db 98 ; StarsNew_15   38
+	.db %00001110 ; StarsNew_16_Slow
 
-	.db 153 ; SpacePlatforms_10   321
-	.db %10001101 ; SpacePlatforms_18_Fast
+	.db %00000000
 
-	.db %11100011
 
+	.db 102 ; StarsNew_15   39
+	.db %00000010 ; StarsNew_15_Slow
 
-	.db 152 ; SpacePlatforms_10   322
-	.db %10000001 ; SpacePlatforms_10_Fast
 
-
-	.db 155 ; SpacePlatforms_10   323
-	.db %10001001 ; SpacePlatforms_30_Fast
-
-	.db %11000111
-
-
-	.db 154 ; SpacePlatforms_10   324
-	.db %10001001 ; SpacePlatforms_21_Fast
-
-	.db %10111010
-
-
-	.db 157 ; SpacePlatforms_12   325
-	.db %10001101 ; SpacePlatforms_20_Fast
-
-	.db %11100011
-
-
-	.db 156 ; SpacePlatforms_12   326
-	.db %10000001 ; SpacePlatforms_12_Fast
-
-
-	.db 159 ; SpacePlatforms_12   327
-	.db %10001001 ; SpacePlatforms_32_Fast
-
-	.db %11000111
-
-
-	.db 158 ; SpacePlatforms_12   328
-	.db %10001001 ; SpacePlatforms_23_Fast
-
-	.db %10111010
-
-
-	.db 161 ; SpacePlatforms_14   329
-	.db %10001101 ; SpacePlatforms_24_Fast
-
-	.db %11100011
-
-
-	.db 160 ; SpacePlatforms_14   330
-	.db %10000001 ; SpacePlatforms_14_Fast
-
-
-	.db 163 ; SpacePlatforms_14   331
-	.db %10001001 ; SpacePlatforms_33_Fast
-
-	.db %11000111
-
-
-	.db 162 ; SpacePlatforms_14   332
-	.db %10001001 ; SpacePlatforms_27_Fast
-
-	.db %10111010
-
-
-	.db 165 ; SpacePlatforms_16   333
-	.db %10001101 ; SpacePlatforms_26_Fast
-
-	.db %11100011
-
-
-	.db 164 ; SpacePlatforms_16   334
-	.db %10000001 ; SpacePlatforms_16_Fast
-
-
-	.db 167 ; SpacePlatforms_16   335
-	.db %10001001 ; SpacePlatforms_35_Fast
-
-	.db %11000111
-
-
-	.db 166 ; SpacePlatforms_16   336
-	.db %10001001 ; SpacePlatforms_29_Fast
-
-	.db %10111010
-
-
-	.db 94 ; FrogDefault   337
-	.db %01000110 ; FrogDefault_Slow_O
-
-
-	.db 33 ; FrogDefault   338
-	.db %00000010 ; FrogDefault_Slow
-
-
-	.db 93 ; FrogDefault   339
-	.db %00100010 ; FrogDefault_Slow_F
-
-
-	.db 92 ; FrogDefault   340
-	.db %01100010 ; FrogDefault_Slow_O_F
-
-
-	.db 172 ; Tree_16   341
-	.db %10000100 ; Tree_16_Fast
-
-
-	.db 177 ; Tree_16   342
-	.db %10100000 ; Tree_16_Fast_F
-
-
-	.db 173 ; Tree_17   343
-	.db %00000100 ; Tree_17_Slow
-
-
-	.db 174 ; Tree_17   344
-	.db %01100000 ; Tree_17_Slow_O_F
-
-
-	.db 175 ; Tree_18   345
-	.db %00000100 ; Tree_18_Slow
-
-
-	.db 176 ; Tree_18   346
-	.db %01100000 ; Tree_18_Slow_O_F
-
-
-	.db 8 ; PurpleClouds_6   347
-	.db %00000110 ; PurpleClouds_6_Slow
-
-
-	.db 9 ; PurpleClouds_6   348
-	.db %00100010 ; PurpleClouds_6_Slow_F
-
-
-	.db 5 ; PurpleClouds_7   349
-	.db %10000110 ; PurpleClouds_7_Fast
-
-
-	.db 6 ; PurpleClouds_5   350
-	.db %10000110 ; PurpleClouds_5_Fast
-
-
-	.db 7 ; PurpleClouds_8   351
-	.db %10000110 ; PurpleClouds_8_Fast
-
-
-	.db 171 ; Stars_3   352
-	.db %00001100 ; Stars_23_Slow
-
-	.db %01100110
-
-
-	.db 28 ; Stars_3   353
-	.db %00000010 ; Stars_3_Slow
-
-
-	.db 29 ; Stars_3   354
-	.db %00001010 ; Stars_1_Slow
-
-	.db %00000110
-
-
-	.db 11 ; Stars_15   355
-	.db %00001110 ; Stars_9_Slow
-
-	.db %01100000
-
-
-	.db 22 ; Stars_15   356
-	.db %00000010 ; Stars_15_Slow
-
-
-	.db 21 ; Stars_15   357
-	.db %00001010 ; Stars_16_Slow
+	.db 103 ; StarsNew_15   40
+	.db %00001010 ; StarsNew_17_Slow
 
 	.db %00010000
 
 
-	.db 170 ; Stars_5   358
-	.db %00001100 ; Stars_25_Slow
-
-	.db %01100110
+	.db 132 ; FrogNPCs1_4   41
+	.db %01000101 ; FrogNPCs1_4_Slow_O
 
 
-	.db 19 ; Stars_5   359
-	.db %00000010 ; Stars_5_Slow
+	.db 159 ; FrogNPCs1_4   42
+	.db %00000001 ; FrogNPCs1_4_Slow
 
 
-	.db 27 ; Stars_5   360
-	.db %00001010 ; Stars_7_Slow
-
-	.db %00010110
+	.db 21 ; FrogNPCs1_4   43
+	.db %01100010 ; FrogNPCs1_4_Slow_O_F
 
 
-	.db 32 ; Stars_20   361
-	.db %00010110 ; Stars_18_Slow
-
-	.db %00000001, %01100000
-
-
-	.db 26 ; Stars_20   362
-	.db %01010010 ; Stars_18_Slow_O
-
-	.db %00000001, %01100000
-
-
-	.db 25 ; Stars_20   363
-	.db %01000010 ; Stars_20_Slow_O
-
-
-	.db 31 ; Stars_20   364
-	.db %00000010 ; Stars_20_Slow
-
-
-	.db 10 ; Stars_11   365
-	.db %00000110 ; Stars_11_Slow
-
-
-	.db 12 ; Stars_6   366
-	.db %00001110 ; Stars_4_Slow
-
-	.db %00000110
-
-
-	.db 18 ; Stars_6   367
-	.db %00000010 ; Stars_6_Slow
-
-
-	.db 15 ; Stars_17   368
-	.db %00001110 ; Stars_8_Slow
-
-	.db %01100000
-
-
-	.db 17 ; Stars_17   369
-	.db %00000010 ; Stars_17_Slow
-
-
-	.db 13 ; Stars_2   370
-	.db %00001110 ; Stars_0_Slow
-
-	.db %00000110
-
-
-	.db 14 ; Stars_2   371
-	.db %00000010 ; Stars_2_Slow
-
-
-	.db 24 ; Stars_13   372
-	.db %00001110 ; Stars_12_Slow
-
-	.db %01100000
-
-
-	.db 16 ; Stars_13   373
-	.db %00000010 ; Stars_13_Slow
-
-
-	.db 20 ; Stars_13   374
-	.db %00001010 ; Stars_14_Slow
+	.db 100 ; StarsNew_2   44
+	.db %00001110 ; StarsNew_3_Slow
 
 	.db %00010000
 
 
-	.db 30 ; Stars_21   375
-	.db %00010110 ; Stars_19_Slow
-
-	.db %00000001, %01100000
+	.db 99 ; StarsNew_2   45
+	.db %00000010 ; StarsNew_2_Slow
 
 
-	.db 23 ; Stars_21   376
-	.db %00000010 ; Stars_21_Slow
+	.db 97 ; StarsNew_4   46
+	.db %00000110 ; StarsNew_4_Slow
 
 
-	.db 91 ; FrogCharge   377
+	.db 94 ; StarsNew_11   47
+	.db %00001110 ; StarsNew_12_Slow
+
+	.db %00010000
+
+
+	.db 95 ; StarsNew_11   48
+	.db %00000010 ; StarsNew_11_Slow
+
+
+	.db 91 ; StarsNew_7   49
+	.db %00001110 ; StarsNew_6_Slow
+
+	.db %00000000
+
+
+	.db 92 ; StarsNew_7   50
+	.db %00000010 ; StarsNew_7_Slow
+
+
+	.db 93 ; StarsNew_7   51
+	.db %00001010 ; StarsNew_5_Slow
+
+	.db %01100000
+
+
+	.db 86 ; StarsNew_13   52
+	.db %00001110 ; StarsNew_14_Slow
+
+	.db %00010000
+
+
+	.db 90 ; StarsNew_13   53
+	.db %00000010 ; StarsNew_13_Slow
+
+
+	.db 167 ; Font_57   54
+	.db %00000110 ; Font_57_Slow
+
+
+	.db 4 ; CloudSemisolid_1   55
+	.db %10000110 ; CloudSemisolid_1_Fast
+
+
+	.db 189 ; Font_58   56
+	.db %00000110 ; Font_58_Slow
+
+
+	.db 52 ; CityBanners_8   57
+	.db %10000101 ; CityBanners_8_Fast
+
+
+	.db 53 ; CityBanners_8   58
+	.db %11000001 ; CityBanners_8_Fast_O
+
+
+	.db 115 ; Font_24   59
+	.db %10000110 ; Font_24_Fast
+
+
+	.db 116 ; Font_23   60
+	.db %10000110 ; Font_23_Fast
+
+
+	.db 117 ; Font_22   61
+	.db %10000110 ; Font_22_Fast
+
+
+	.db 118 ; Font_21   62
+	.db %10000110 ; Font_21_Fast
+
+
+	.db 119 ; Font_20   63
+	.db %10000110 ; Font_20_Fast
+
+
+	.db 120 ; Font_19   64
+	.db %10000110 ; Font_19_Fast
+
+
+	.db 121 ; Font_18   65
+	.db %10000110 ; Font_18_Fast
+
+
+	.db 134 ; Font_17   66
+	.db %10000110 ; Font_17_Fast
+
+
+	.db 145 ; Font_16   67
+	.db %10000110 ; Font_16_Fast
+
+
+	.db 114 ; Font_25   68
+	.db %10000110 ; Font_25_Fast
+
+
+	.db 146 ; Font_15   69
+	.db %10000110 ; Font_15_Fast
+
+
+	.db 87 ; CloudsNewer_0   70
+	.db %10000100 ; CloudsNewer_0_Fast
+
+
+	.db 96 ; CloudsNewer_0   71
+	.db %10100000 ; CloudsNewer_0_Fast_F
+
+
+	.db 86 ; CloudsNewer_2   72
+	.db %10000100 ; CloudsNewer_2_Fast
+
+
+	.db 82 ; CloudsNewer_7   73
+	.db %10000100 ; CloudsNewer_7_Fast
+
+
+	.db 99 ; CloudsNewer_7   74
+	.db %10100000 ; CloudsNewer_7_Fast_F
+
+
+	.db 88 ; CloudsNewer_8   75
+	.db %10000100 ; CloudsNewer_8_Fast
+
+
+	.db 97 ; CloudsNewer_8   76
+	.db %10100000 ; CloudsNewer_8_Fast_F
+
+
+	.db 83 ; CloudsNewer_1   77
+	.db %10000100 ; CloudsNewer_1_Fast
+
+
+	.db 90 ; CloudsNewer_1   78
+	.db %10100000 ; CloudsNewer_1_Fast_F
+
+
+	.db 89 ; CloudsNewer_4   79
+	.db %10000100 ; CloudsNewer_4_Fast
+
+
+	.db 85 ; CloudsNewer_4   80
+	.db %10100000 ; CloudsNewer_4_Fast_F
+
+
+	.db 80 ; CloudsNewer_6   81
+	.db %00000100 ; CloudsNewer_6_Slow
+
+
+	.db 91 ; CloudsNewer_5   82
+	.db %10000100 ; CloudsNewer_5_Fast
+
+
+	.db 92 ; CloudsNewer_5   83
+	.db %10100000 ; CloudsNewer_5_Fast_F
+
+
+	.db 81 ; CloudsNewer_3   84
+	.db %10000100 ; CloudsNewer_3_Fast
+
+
+	.db 84 ; CloudsNewer_3   85
+	.db %10100000 ; CloudsNewer_3_Fast_F
+
+
+	.db 93 ; CloudsNewer_9   86
+	.db %10100100 ; CloudsNewer_9_Fast_F
+
+
+	.db 95 ; CloudsNewer_9   87
+	.db %10000000 ; CloudsNewer_9_Fast
+
+
+	.db 94 ; CloudsNewer_10   88
+	.db %10000100 ; CloudsNewer_10_Fast
+
+
+	.db 98 ; CloudsNewer_10   89
+	.db %10100000 ; CloudsNewer_10_Fast_F
+
+
+	.db 100 ; Truetle_4   90
+	.db %10000100 ; Truetle_4_Fast
+
+
+	.db 101 ; Truetle_4   91
+	.db %10100000 ; Truetle_4_Fast_F
+
+
+	.db 147 ; Font_14   92
+	.db %10000110 ; Font_14_Fast
+
+
+	.db 113 ; Font_26   93
+	.db %10000110 ; Font_26_Fast
+
+
+	.db 111 ; Font_28   94
+	.db %10000110 ; Font_28_Fast
+
+
+	.db 126 ; Font_56   95
+	.db %00000110 ; Font_56_Slow
+
+
+	.db 127 ; Font_55   96
+	.db %00000110 ; Font_55_Slow
+
+
+	.db 128 ; Font_54   97
+	.db %00000110 ; Font_54_Slow
+
+
+	.db 129 ; Font_53   98
+	.db %00000110 ; Font_53_Slow
+
+
+	.db 130 ; Font_52   99
+	.db %00000110 ; Font_52_Slow
+
+
+	.db 131 ; Font_51   100
+	.db %00000110 ; Font_51_Slow
+
+
+	.db 132 ; Font_50   101
+	.db %00000110 ; Font_50_Slow
+
+
+	.db 133 ; Font_49   102
+	.db %00000110 ; Font_49_Slow
+
+
+	.db 135 ; Font_48   103
+	.db %00000110 ; Font_48_Slow
+
+
+	.db 144 ; Font_47   104
+	.db %00000110 ; Font_47_Slow
+
+
+	.db 136 ; Font_46   105
+	.db %00000110 ; Font_46_Slow
+
+
+	.db 137 ; Font_45   106
+	.db %00000110 ; Font_45_Slow
+
+
+	.db 138 ; Font_44   107
+	.db %00000110 ; Font_44_Slow
+
+
+	.db 112 ; Font_27   108
+	.db %10000110 ; Font_27_Fast
+
+
+	.db 139 ; Font_43   109
+	.db %00000110 ; Font_43_Slow
+
+
+	.db 141 ; Font_41   110
+	.db %00000110 ; Font_41_Slow
+
+
+	.db 142 ; Font_40   111
+	.db %00000110 ; Font_40_Slow
+
+
+	.db 143 ; Font_39   112
+	.db %00000110 ; Font_39_Slow
+
+
+	.db 125 ; Font_38   113
+	.db %00000110 ; Font_38_Slow
+
+
+	.db 124 ; Font_37   114
+	.db %00000110 ; Font_37_Slow
+
+
+	.db 123 ; Font_36   115
+	.db %00000110 ; Font_36_Slow
+
+
+	.db 122 ; Font_35   116
+	.db %00000110 ; Font_35_Slow
+
+
+	.db 105 ; Font_34   117
+	.db %00000110 ; Font_34_Slow
+
+
+	.db 106 ; Font_33   118
+	.db %00000110 ; Font_33_Slow
+
+
+	.db 107 ; Font_32   119
+	.db %00000110 ; Font_32_Slow
+
+
+	.db 108 ; Font_31   120
+	.db %00000110 ; Font_31_Slow
+
+
+	.db 109 ; Font_30   121
+	.db %00000110 ; Font_30_Slow
+
+
+	.db 110 ; Font_29   122
+	.db %10000110 ; Font_29_Fast
+
+
+	.db 140 ; Font_42   123
+	.db %00000110 ; Font_42_Slow
+
+
+	.db 108 ; Truetle_0   124
+	.db %10000100 ; Truetle_0_Fast
+
+
+	.db 109 ; Truetle_0   125
+	.db %10100000 ; Truetle_0_Fast_F
+
+
+	.db 102 ; Truetle_2   126
+	.db %00010100 ; Truetle_6_Slow
+
+	.db %10110111, %01100000
+
+
+	.db 105 ; Truetle_2   127
+	.db %00110000 ; Truetle_6_Slow_F
+
+	.db %10110111, %01100000
+
+
+	.db 110 ; Truetle_2   128
+	.db %00000000 ; Truetle_2_Slow
+
+
+	.db 113 ; Truetle_2   129
+	.db %00100000 ; Truetle_2_Slow_F
+
+
+	.db 118 ; Truetle_2   130
+	.db %00010000 ; Truetle_3_Slow
+
+	.db %11001110, %10100000
+
+
+	.db 121 ; Truetle_2   131
+	.db %00110000 ; Truetle_3_Slow_F
+
+	.db %11001110, %10100000
+
+
+	.db 9 ; Bricks_2_3   132
+	.db %10000101 ; Bricks_2_3_Fast
+
+
+	.db 10 ; Bricks_2_3   133
+	.db %10100001 ; Bricks_2_3_Fast_F
+
+
+	.db 7 ; Bricks_2_5   134
+	.db %10100101 ; Bricks_2_5_Fast_F
+
+
+	.db 6 ; Bricks_2_5   135
+	.db %10000001 ; Bricks_2_5_Fast
+
+
+	.db 12 ; Bricks_2_7   136
+	.db %10000101 ; Bricks_2_7_Fast
+
+
+	.db 42 ; Bricks_2_7   137
+	.db %10100001 ; Bricks_2_7_Fast_F
+
+
+	.db 11 ; Bricks_2_8   138
+	.db %10000101 ; Bricks_2_8_Fast
+
+
+	.db 8 ; Bricks_2_0   139
+	.db %10000101 ; Bricks_2_0_Fast
+
+
+	.db 16 ; CastleVines_9   140
+	.db %01000101 ; CastleVines_9_Slow_O
+
+
+	.db 18 ; CastleVines_9   141
+	.db %00000001 ; CastleVines_9_Slow
+
+
+	.db 19 ; CastleVines_11   142
+	.db %01000101 ; CastleVines_11_Slow_O
+
+
+	.db 24 ; CastleVines_11   143
+	.db %00000001 ; CastleVines_11_Slow
+
+
+	.db 62 ; purpleVinesifitwasPurple_5   144
+	.db %00001100 ; Vine6_Slow
+
+	.db %01000101
+
+
+	.db 69 ; purpleVinesifitwasPurple_5   145
+	.db %01001000 ; Vine6_Slow_O
+
+	.db %01000101
+
+
+	.db 13 ; purpleVinesifitwasPurple_5   146
+	.db %00000001 ; purpleVinesifitwasPurple_5_Slow
+
+
+	.db 44 ; purpleVinesifitwasPurple_5   147
+	.db %01000001 ; purpleVinesifitwasPurple_5_Slow_O
+
+
+	.db 63 ; purpleVinesifitwasPurple_3   148
+	.db %00001100 ; Vine4_Slow
+
+	.db %01000101
+
+
+	.db 64 ; purpleVinesifitwasPurple_3   149
+	.db %00101000 ; Vine4_Slow_F
+
+	.db %01000101
+
+
+	.db 65 ; purpleVinesifitwasPurple_3   150
+	.db %01101000 ; Vine4_Slow_O_F
+
+	.db %01000101
+
+
+	.db 70 ; purpleVinesifitwasPurple_3   151
+	.db %01001000 ; Vine4_Slow_O
+
+	.db %01000101
+
+
+	.db 14 ; purpleVinesifitwasPurple_3   152
+	.db %00000001 ; purpleVinesifitwasPurple_3_Slow
+
+
+	.db 43 ; purpleVinesifitwasPurple_3   153
+	.db %00100001 ; purpleVinesifitwasPurple_3_Slow_F
+
+
+	.db 45 ; purpleVinesifitwasPurple_3   154
+	.db %01100001 ; purpleVinesifitwasPurple_3_Slow_O_F
+
+
+	.db 67 ; purpleVinesifitwasPurple_6   155
+	.db %01001100 ; Vine7_Slow_O
+
+	.db %01000101
+
+
+	.db 152 ; purpleVinesifitwasPurple_6   156
+	.db %00001000 ; Vine7_Slow
+
+	.db %01000101
+
+
+	.db 15 ; purpleVinesifitwasPurple_6   157
+	.db %01000001 ; purpleVinesifitwasPurple_6_Slow_O
+
+
+	.db 61 ; purpleVinesifitwasPurple_4   158
+	.db %00001100 ; Vine5_Slow
+
+	.db %01010100
+
+
+	.db 66 ; purpleVinesifitwasPurple_4   159
+	.db %01101000 ; Vine5_Slow_O_F
+
+	.db %01010100
+
+
+	.db 68 ; purpleVinesifitwasPurple_4   160
+	.db %01001000 ; Vine5_Slow_O
+
+	.db %01010100
+
+
+	.db 21 ; purpleVinesifitwasPurple_4   161
+	.db %00100001 ; purpleVinesifitwasPurple_4_Slow_F
+
+
+	.db 22 ; purpleVinesifitwasPurple_4   162
+	.db %01100001 ; purpleVinesifitwasPurple_4_Slow_O_F
+
+
+	.db 23 ; purpleVinesifitwasPurple_4   163
+	.db %00000001 ; purpleVinesifitwasPurple_4_Slow
+
+
+	.db 49 ; purpleVinesifitwasPurple_4   164
+	.db %01000001 ; purpleVinesifitwasPurple_4_Slow_O
+
+
+	.db 25 ; CloudCityWelcomeComitte2_4   165
+	.db %00000101 ; CloudCityWelcomeComitte2_4_Slow
+
+
+	.db 5 ; Bricks_2_11   166
+	.db %10000101 ; Bricks_2_11_Fast
+
+
+	.db 26 ; CloudCityWelcomeComitte2_1   167
+	.db %00000101 ; CloudCityWelcomeComitte2_1_Slow
+
+
+	.db 28 ; CloudCityWelcomeComitte2_2   168
+	.db %01000101 ; CloudCityWelcomeComitte2_2_Slow_O
+
+
+	.db 166 ; CityBanners_1   169
+	.db %10000100 ; CityBanners_1_Fast
+
+
+	.db 165 ; CityBanners_1   170
+	.db %10100000 ; CityBanners_1_Fast_F
+
+
+	.db 29 ; CityBanners_2   171
+	.db %10000101 ; CityBanners_2_Fast
+
+
+	.db 30 ; CityBanners_5   172
+	.db %10010101 ; CityBanners_3_Fast
+
+	.db %00110010, %00100000
+
+
+	.db 31 ; CityBanners_5   173
+	.db %11010001 ; CityBanners_3_Fast_O
+
+	.db %00110010, %00100000
+
+
+	.db 32 ; CityBanners_5   174
+	.db %10000001 ; CityBanners_5_Fast
+
+
+	.db 33 ; CityBanners_5   175
+	.db %11000001 ; CityBanners_5_Fast_O
+
+
+	.db 34 ; CityBanners_6   176
+	.db %10000101 ; CityBanners_6_Fast
+
+
+	.db 35 ; CityBanners_6   177
+	.db %11000001 ; CityBanners_6_Fast_O
+
+
+	.db 36 ; CityBanners_4   178
+	.db %00000101 ; CityBanners_4_Slow
+
+
+	.db 37 ; CityBanners_4   179
+	.db %01000001 ; CityBanners_4_Slow_O
+
+
+	.db 38 ; CityBanners_9   180
+	.db %10000101 ; CityBanners_9_Fast
+
+
+	.db 39 ; CityBanners_9   181
+	.db %11000001 ; CityBanners_9_Fast_O
+
+
+	.db 40 ; CityBanners_10   182
+	.db %10000101 ; CityBanners_10_Fast
+
+
+	.db 41 ; CityBanners_10   183
+	.db %11000001 ; CityBanners_10_Fast_O
+
+
+	.db 46 ; CastleVines_6   184
+	.db %00000101 ; CastleVines_6_Slow
+
+
+	.db 17 ; CastleVines_7   185
+	.db %00001101 ; CastleVines_10_Slow
+
+	.db %00001111
+
+
+	.db 20 ; CastleVines_7   186
+	.db %01001001 ; CastleVines_10_Slow_O
+
+	.db %00001111
+
+
+	.db 47 ; CastleVines_7   187
+	.db %00000001 ; CastleVines_7_Slow
+
+
+	.db 48 ; CastleVines_8   188
+	.db %00000101 ; CastleVines_8_Slow
+
+
+	.db 50 ; CityBanners_7   189
+	.db %10000101 ; CityBanners_7_Fast
+
+
+	.db 51 ; CityBanners_7   190
+	.db %11000001 ; CityBanners_7_Fast_O
+
+
+	.db 27 ; CloudCityWelcomeComitte2_3   191
+	.db %01000101 ; CloudCityWelcomeComitte2_3_Slow_O
+
+
+	.db 4 ; Bricks_2_1   192
+	.db %10000101 ; Bricks_2_1_Fast
+
+
+	.db 3 ; Bricks_2_2   193
+	.db %10000101 ; Bricks_2_2_Fast
+
+
+	.db 2 ; CastleWindow_2   194
+	.db %10000101 ; CastleWindow_2_Fast
+
+
+	.db 103 ; Truetle_7   195
+	.db %00010100 ; Truetle_11_Slow
+
+	.db %10110111, %01100000
+
+
+	.db 106 ; Truetle_7   196
+	.db %00110000 ; Truetle_11_Slow_F
+
+	.db %10110111, %01100000
+
+
+	.db 111 ; Truetle_7   197
+	.db %00000000 ; Truetle_7_Slow
+
+
+	.db 114 ; Truetle_7   198
+	.db %00100000 ; Truetle_7_Slow_F
+
+
+	.db 119 ; Truetle_7   199
+	.db %00010000 ; Truetle_10_Slow
+
+	.db %11001110, %10100000
+
+
+	.db 122 ; Truetle_7   200
+	.db %00110000 ; Truetle_10_Slow_F
+
+	.db %11001110, %10100000
+
+
+	.db 104 ; Truetle_5   201
+	.db %00010100 ; Truetle_9_Slow
+
+	.db %10110111, %01100000
+
+
+	.db 107 ; Truetle_5   202
+	.db %00110000 ; Truetle_9_Slow_F
+
+	.db %10110111, %01100000
+
+
+	.db 112 ; Truetle_5   203
+	.db %00000000 ; Truetle_5_Slow
+
+
+	.db 115 ; Truetle_5   204
+	.db %00100000 ; Truetle_5_Slow_F
+
+
+	.db 120 ; Truetle_5   205
+	.db %00010000 ; Truetle_8_Slow
+
+	.db %11001110, %10100000
+
+
+	.db 123 ; Truetle_5   206
+	.db %00110000 ; Truetle_8_Slow_F
+
+	.db %11001110, %10100000
+
+
+	.db 116 ; Truetle_1   207
+	.db %10000100 ; Truetle_1_Fast
+
+
+	.db 117 ; Truetle_1   208
+	.db %10100000 ; Truetle_1_Fast_F
+
+
+	.db 170 ; Font_13   209
+	.db %10000110 ; Font_13_Fast
+
+
+	.db 171 ; Font_12   210
+	.db %10000110 ; Font_12_Fast
+
+
+	.db 172 ; Font_11   211
+	.db %10000110 ; Font_11_Fast
+
+
+	.db 173 ; Font_10   212
+	.db %10000110 ; Font_10_Fast
+
+
+	.db 174 ; Font_9   213
+	.db %10000110 ; Font_9_Fast
+
+
+	.db 175 ; Font_8   214
+	.db %10000110 ; Font_8_Fast
+
+
+	.db 176 ; Font_7   215
+	.db %10000110 ; Font_7_Fast
+
+
+	.db 177 ; Font_6   216
+	.db %10000110 ; Font_6_Fast
+
+
+	.db 179 ; Font_5   217
+	.db %10000110 ; Font_5_Fast
+
+
+	.db 188 ; Font_4   218
+	.db %10000110 ; Font_4_Fast
+
+
+	.db 180 ; Font_3   219
+	.db %10000110 ; Font_3_Fast
+
+
+	.db 181 ; Font_2   220
+	.db %10000110 ; Font_2_Fast
+
+
+	.db 182 ; Font_1   221
+	.db %10000110 ; Font_1_Fast
+
+
+	.db 183 ; Font_0   222
+	.db %10000110 ; Font_0_Fast
+
+
+	.db 184 ; Unlucky_0   223
+	.db %10000110 ; Unlucky_0_Fast
+
+
+	.db 186 ; FrogTongue   224
+	.db %00000110 ; FrogTongue_Slow
+
+
+	.db 185 ; FrogTongue   225
+	.db %01000010 ; FrogTongue_Slow_O
+
+
+	.db 168 ; FrogFall   226
+	.db %00000110 ; FrogFall_Slow
+
+
+	.db 178 ; FrogFall   227
+	.db %01000010 ; FrogFall_Slow_O
+
+
+	.db 169 ; FrogFall   228
+	.db %00100010 ; FrogFall_Slow_F
+
+
+	.db 187 ; FrogFall   229
+	.db %01100010 ; FrogFall_Slow_O_F
+
+
+	.db 150 ; FrogJumpMouth   230
+	.db %00000110 ; FrogJumpMouth_Slow
+
+
+	.db 149 ; FrogJumpMouth   231
+	.db %01000010 ; FrogJumpMouth_Slow_O
+
+
+	.db 148 ; FrogJumpMouth   232
+	.db %00100010 ; FrogJumpMouth_Slow_F
+
+
+	.db 156 ; FrogJumpMouth   233
+	.db %01100010 ; FrogJumpMouth_Slow_O_F
+
+
+	.db 154 ; FrogJump   234
+	.db %00000110 ; FrogJump_Slow
+
+
+	.db 153 ; FrogJump   235
+	.db %01000010 ; FrogJump_Slow_O
+
+
+	.db 152 ; FrogJump   236
+	.db %00100010 ; FrogJump_Slow_F
+
+
+	.db 151 ; FrogJump   237
+	.db %01100010 ; FrogJump_Slow_O_F
+
+
+	.db 162 ; FrogCharge   238
 	.db %00011110 ; FrogChargeLit_Slow
 
 	.db %10011000, %01000110, %10000000, %00000000
 
 
-	.db 90 ; FrogCharge   378
+	.db 161 ; FrogCharge   239
 	.db %01011010 ; FrogChargeLit_Slow_O
 
 	.db %10011000, %01000110, %10000000, %00000000
 
 
-	.db 89 ; FrogCharge   379
+	.db 160 ; FrogCharge   240
 	.db %00111010 ; FrogChargeLit_Slow_F
 
 	.db %10011000, %01000110, %10000000, %00000000
 
 
-	.db 88 ; FrogCharge   380
+	.db 159 ; FrogCharge   241
 	.db %01111010 ; FrogChargeLit_Slow_O_F
 
 	.db %10011000, %01000110, %10000000, %00000000
 
 
-	.db 87 ; FrogCharge   381
+	.db 158 ; FrogCharge   242
 	.db %00000010 ; FrogCharge_Slow
 
 
-	.db 95 ; FrogCharge   382
+	.db 166 ; FrogCharge   243
 	.db %01000010 ; FrogCharge_Slow_O
 
 
-	.db 86 ; FrogCharge   383
+	.db 157 ; FrogCharge   244
 	.db %00100010 ; FrogCharge_Slow_F
 
 
-	.db 84 ; FrogCharge   384
+	.db 155 ; FrogCharge   245
 	.db %01100010 ; FrogCharge_Slow_O_F
 
 
-	.db 83 ; FrogJump   385
-	.db %00000110 ; FrogJump_Slow
+	.db 0 ; CastleWindow_0   246
+	.db %10000101 ; CastleWindow_0_Fast
 
 
-	.db 82 ; FrogJump   386
-	.db %01000010 ; FrogJump_Slow_O
+	.db 1 ; CastleWindow_1   247
+	.db %10000101 ; CastleWindow_1_Fast
 
 
-	.db 81 ; FrogJump   387
-	.db %00100010 ; FrogJump_Slow_F
+	.db 81 ; PurpleClouds_7   248
+	.db %10000110 ; PurpleClouds_7_Fast
 
 
-	.db 80 ; FrogJump   388
-	.db %01100010 ; FrogJump_Slow_O_F
+	.db 82 ; PurpleClouds_5   249
+	.db %10000110 ; PurpleClouds_5_Fast
 
+new_decomp_calls_0:
+	.dl 146
 
-	.db 79 ; FrogJumpMouth   389
-	.db %00000110 ; FrogJumpMouth_Slow
 
+	.db 126 ; Platforms_0   1
+	.db %10000101 ; Platforms_0_Fast
 
-	.db 78 ; FrogJumpMouth   390
-	.db %01000010 ; FrogJumpMouth_Slow_O
 
+	.db 128 ; Platforms_0   2
+	.db %10100001 ; Platforms_0_Fast_F
 
-	.db 77 ; FrogJumpMouth   391
-	.db %00100010 ; FrogJumpMouth_Slow_F
 
+	.db 168 ; Tree_17   3
+	.db %00000100 ; Tree_17_Slow
 
-	.db 85 ; FrogJumpMouth   392
-	.db %01100010 ; FrogJumpMouth_Slow_O_F
 
+	.db 169 ; Tree_17   4
+	.db %01100000 ; Tree_17_Slow_O_F
 
-	.db 97 ; FrogFall   393
-	.db %00000110 ; FrogFall_Slow
 
+	.db 35 ; Branches_8   5
+	.db %10100100 ; Branches_8_Fast_F
 
-	.db 107 ; FrogFall   394
-	.db %01000010 ; FrogFall_Slow_O
 
+	.db 14 ; Branches_8   6
+	.db %10000000 ; Branches_8_Fast
 
-	.db 98 ; FrogFall   395
-	.db %00100010 ; FrogFall_Slow_F
 
+	.db 32 ; Branches_12   7
+	.db %10000100 ; Branches_12_Fast
 
-	.db 116 ; FrogFall   396
-	.db %01100010 ; FrogFall_Slow_O_F
 
+	.db 59 ; Branches_12   8
+	.db %10100000 ; Branches_12_Fast_F
 
-	.db 115 ; FrogTongue   397
-	.db %00000110 ; FrogTongue_Slow
 
+	.db 20 ; Leaves2   9
+	.db %10000100 ; Leaves2_Fast
 
-	.db 114 ; FrogTongue   398
-	.db %01000010 ; FrogTongue_Slow_O
 
+	.db 19 ; Leaves2   10
+	.db %10100000 ; Leaves2_Fast_F
 
-	.db 113 ; Unlucky_0   399
-	.db %10000110 ; Unlucky_0_Fast
 
+	.db 11 ; LeavesLight   11
+	.db %10001100 ; LeavesDark_Fast
 
-	.db 112 ; Font_0   400
-	.db %10000110 ; Font_0_Fast
+	.db %01010100
 
 
-	.db 111 ; Font_1   401
-	.db %10000110 ; Font_1_Fast
+	.db 31 ; LeavesLight   12
+	.db %10101000 ; LeavesDark_Fast_F
 
+	.db %01010100
 
-	.db 110 ; Font_2   402
-	.db %10000110 ; Font_2_Fast
 
+	.db 10 ; LeavesLight   13
+	.db %10000000 ; LeavesLight_Fast
 
-	.db 109 ; Font_3   403
-	.db %10000110 ; Font_3_Fast
 
+	.db 16 ; Branches_11   14
+	.db %10100100 ; Branches_11_Fast_F
 
-	.db 117 ; Font_4   404
-	.db %10000110 ; Font_4_Fast
 
+	.db 12 ; Branches_14   15
+	.db %00000100 ; Branches_14_Slow
 
-	.db 108 ; Font_5   405
-	.db %10000110 ; Font_5_Fast
 
+	.db 80 ; DualLeaf4   16
+	.db %00000110 ; DualLeaf4_Slow
 
-	.db 106 ; Font_6   406
-	.db %10000110 ; Font_6_Fast
 
+	.db 21 ; Lantern_0   17
+	.db %10000100 ; Lantern_0_Fast
 
-	.db 105 ; Font_7   407
-	.db %10000110 ; Font_7_Fast
 
+	.db 24 ; Lantern_0   18
+	.db %10100000 ; Lantern_0_Fast_F
 
-	.db 104 ; Font_8   408
-	.db %10000110 ; Font_8_Fast
 
+	.db 22 ; Lantern_1   19
+	.db %10000100 ; Lantern_1_Fast
 
-	.db 103 ; Font_9   409
-	.db %10000110 ; Font_9_Fast
 
+	.db 25 ; Lantern_1   20
+	.db %10100000 ; Lantern_1_Fast_F
 
-	.db 102 ; Font_10   410
-	.db %10000110 ; Font_10_Fast
 
+	.db 23 ; Lantern_2   21
+	.db %10000100 ; Lantern_2_Fast
 
-	.db 101 ; Font_11   411
-	.db %10000110 ; Font_11_Fast
 
+	.db 26 ; Lantern_2   22
+	.db %10100000 ; Lantern_2_Fast_F
 
-	.db 100 ; Font_12   412
-	.db %10000110 ; Font_12_Fast
 
+	.db 38 ; Lantern_6   23
+	.db %00000100 ; Lantern_6_Slow
 
-	.db 99 ; Font_13   413
-	.db %10000110 ; Font_13_Fast
 
+	.db 39 ; Lantern_6   24
+	.db %01100000 ; Lantern_6_Slow_O_F
 
-	.db 76 ; Font_14   414
-	.db %10000110 ; Font_14_Fast
 
+	.db 29 ; Lantern_5   25
+	.db %00000100 ; Lantern_5_Slow
 
-	.db 75 ; Font_15   415
-	.db %10000110 ; Font_15_Fast
 
+	.db 30 ; Lantern_5   26
+	.db %01100000 ; Lantern_5_Slow_O_F
 
-	.db 74 ; Font_16   416
-	.db %10000110 ; Font_16_Fast
 
+	.db 57 ; Branches_4   27
+	.db %10100100 ; Branches_4_Fast_F
 
-	.db 63 ; Font_17   417
-	.db %10000110 ; Font_17_Fast
 
+	.db 75 ; Branches_4   28
+	.db %10000000 ; Branches_4_Fast
 
-	.db 50 ; Font_18   418
-	.db %10000110 ; Font_18_Fast
 
+	.db 71 ; Vine2   29
+	.db %00000100 ; Vine2_Slow
 
-	.db 49 ; Font_19   419
-	.db %10000110 ; Font_19_Fast
 
+	.db 78 ; Vine2   30
+	.db %00100000 ; Vine2_Slow_F
 
-	.db 48 ; Font_20   420
-	.db %10000110 ; Font_20_Fast
 
+	.db 161 ; Vine2   31
+	.db %01000000 ; Vine2_Slow_O
 
-	.db 47 ; Font_21   421
-	.db %10000110 ; Font_21_Fast
 
+	.db 72 ; VineVertical   32
+	.db %01000100 ; VineVertical_Slow_O
 
-	.db 46 ; Font_22   422
-	.db %10000110 ; Font_22_Fast
 
+	.db 73 ; VineVertical   33
+	.db %00000000 ; VineVertical_Slow
 
-	.db 45 ; Font_23   423
-	.db %10000110 ; Font_23_Fast
 
+	.db 79 ; VineVertical   34
+	.db %00100000 ; VineVertical_Slow_F
 
-	.db 44 ; Font_24   424
-	.db %10000110 ; Font_24_Fast
 
+	.db 74 ; Branches_5   35
+	.db %10000100 ; Branches_5_Fast
 
-	.db 43 ; Font_25   425
-	.db %10000110 ; Font_25_Fast
 
+	.db 160 ; Branches_5   36
+	.db %10100000 ; Branches_5_Fast_F
 
-	.db 42 ; Font_26   426
-	.db %10000110 ; Font_26_Fast
 
+	.db 15 ; Branches_15   37
+	.db %00000100 ; Branches_15_Slow
 
-	.db 41 ; Font_27   427
-	.db %10000110 ; Font_27_Fast
 
+	.db 13 ; Branches_15   38
+	.db %01100000 ; Branches_15_Slow_O_F
 
-	.db 40 ; Font_28   428
-	.db %10000110 ; Font_28_Fast
 
+	.db 76 ; Branches_3   39
+	.db %10000100 ; Branches_3_Fast
 
-	.db 39 ; Font_29   429
-	.db %10000110 ; Font_29_Fast
 
+	.db 34 ; Branches_7   40
+	.db %10000100 ; Branches_7_Fast
 
-	.db 38 ; Font_30   430
-	.db %00000110 ; Font_30_Slow
 
+	.db 58 ; Branches_7   41
+	.db %10100000 ; Branches_7_Fast_F
 
-	.db 37 ; Font_31   431
-	.db %00000110 ; Font_31_Slow
 
+	.db 40 ; AscentBanner_8   42
+	.db %00000100 ; AscentBanner_8_Slow
 
-	.db 36 ; Font_32   432
-	.db %00000110 ; Font_32_Slow
 
+	.db 0 ; Branches_9   43
+	.db %10000100 ; Branches_9_Fast
 
-	.db 35 ; Font_33   433
-	.db %00000110 ; Font_33_Slow
 
+	.db 163 ; Branches_9   44
+	.db %10100000 ; Branches_9_Fast_F
 
-	.db 34 ; Font_34   434
-	.db %00000110 ; Font_34_Slow
 
+	.db 3 ; Branches_16   45
+	.db %00000100 ; Branches_16_Slow
 
-	.db 51 ; Font_35   435
-	.db %00000110 ; Font_35_Slow
 
+	.db 36 ; Branches_16   46
+	.db %01100000 ; Branches_16_Slow_O_F
 
-	.db 52 ; Font_36   436
-	.db %00000110 ; Font_36_Slow
 
+	.db 1 ; Branches_13   47
+	.db %10000100 ; Branches_13_Fast
 
-	.db 53 ; Font_37   437
-	.db %00000110 ; Font_37_Slow
 
+	.db 17 ; Branches_13   48
+	.db %10100000 ; Branches_13_Fast_F
 
-	.db 54 ; Font_38   438
-	.db %00000110 ; Font_38_Slow
 
+	.db 4 ; Leaves1   49
+	.db %10000100 ; Leaves1_Fast
 
-	.db 72 ; Font_39   439
-	.db %00000110 ; Font_39_Slow
 
+	.db 60 ; Leaves1   50
+	.db %10100000 ; Leaves1_Fast_F
 
-	.db 71 ; Font_40   440
-	.db %00000110 ; Font_40_Slow
 
+	.db 5 ; DualLeaf1   51
+	.db %10000100 ; DualLeaf1_Fast
 
-	.db 70 ; Font_41   441
-	.db %00000110 ; Font_41_Slow
 
+	.db 8 ; DualLeaf1   52
+	.db %11000000 ; DualLeaf1_Fast_O
 
-	.db 69 ; Font_42   442
-	.db %00000110 ; Font_42_Slow
 
+	.db 6 ; DualLeaf2   53
+	.db %10000100 ; DualLeaf2_Fast
 
-	.db 68 ; Font_43   443
-	.db %00000110 ; Font_43_Slow
 
+	.db 7 ; DualLeaf2   54
+	.db %11000000 ; DualLeaf2_Fast_O
 
-	.db 67 ; Font_44   444
-	.db %00000110 ; Font_44_Slow
 
+	.db 9 ; DualLeaf3   55
+	.db %10000100 ; DualLeaf3_Fast
 
-	.db 66 ; Font_45   445
-	.db %00000110 ; Font_45_Slow
 
+	.db 53 ; AscentBanner_6   56
+	.db %01000100 ; AscentBanner_6_Slow_O
 
-	.db 65 ; Font_46   446
-	.db %00000110 ; Font_46_Slow
 
+	.db 43 ; AscentBanner_6   57
+	.db %00100000 ; AscentBanner_6_Slow_F
 
-	.db 73 ; Font_47   447
-	.db %00000110 ; Font_47_Slow
 
+	.db 51 ; AscentBanner_9   58
+	.db %10000100 ; AscentBanner_9_Fast
 
-	.db 64 ; Font_48   448
-	.db %00000110 ; Font_48_Slow
 
+	.db 42 ; AscentBanner_9   59
+	.db %10100000 ; AscentBanner_9_Fast_F
 
-	.db 62 ; Font_49   449
-	.db %00000110 ; Font_49_Slow
 
+	.db 52 ; AscentBanner_10   60
+	.db %10000100 ; AscentBanner_10_Fast
 
-	.db 61 ; Font_50   450
-	.db %00000110 ; Font_50_Slow
 
+	.db 44 ; AscentBanner_10   61
+	.db %10100000 ; AscentBanner_10_Fast_F
 
-	.db 60 ; Font_51   451
-	.db %00000110 ; Font_51_Slow
 
+	.db 50 ; AscentBanner_1   62
+	.db %10000100 ; AscentBanner_1_Fast
 
-	.db 59 ; Font_52   452
-	.db %00000110 ; Font_52_Slow
 
+	.db 49 ; AscentBanner_2   63
+	.db %10000100 ; AscentBanner_2_Fast
 
-	.db 58 ; Font_53   453
-	.db %00000110 ; Font_53_Slow
 
+	.db 48 ; AscentBanner_3   64
+	.db %10000100 ; AscentBanner_3_Fast
 
-	.db 57 ; Font_54   454
-	.db %00000110 ; Font_54_Slow
 
+	.db 47 ; AscentBanner_0   65
+	.db %10000100 ; AscentBanner_0_Fast
 
-	.db 56 ; Font_55   455
-	.db %00000110 ; Font_55_Slow
 
+	.db 46 ; AscentBanner_4   66
+	.db %10000100 ; AscentBanner_4_Fast
 
-	.db 55 ; Font_56   456
-	.db %00000110 ; Font_56_Slow
 
+	.db 45 ; AscentBanner_5   67
+	.db %10000100 ; AscentBanner_5_Fast
 
-	.db 96 ; Font_57   457
-	.db %00000110 ; Font_57_Slow
 
+	.db 41 ; AscentBanner_7   68
+	.db %10000100 ; AscentBanner_7_Fast
 
-	.db 118 ; Font_58   458
-	.db %00000110 ; Font_58_Slow
+
+	.db 33 ; Branches_6   69
+	.db %00000100 ; Branches_6_Slow
+
+
+	.db 77 ; Branches_2   70
+	.db %10000100 ; Branches_2_Fast
+
+
+	.db 159 ; Branches_2   71
+	.db %10100000 ; Branches_2_Fast_F
+
+
+	.db 27 ; Lantern_3   72
+	.db %00000100 ; Lantern_3_Slow
+
+
+	.db 28 ; Lantern_3   73
+	.db %01100000 ; Lantern_3_Slow_O_F
+
+
+	.db 54 ; Lantern_7   74
+	.db %00000100 ; Lantern_7_Slow
+
+
+	.db 55 ; Lantern_7   75
+	.db %01100000 ; Lantern_7_Slow_O_F
+
+
+	.db 127 ; Platforms_1   76
+	.db %10000101 ; Platforms_1_Fast
+
+
+	.db 129 ; Platforms_2   77
+	.db %01100101 ; Platforms_2_Slow_O_F
+
+
+	.db 130 ; Platforms_2   78
+	.db %01000001 ; Platforms_2_Slow_O
+
+
+	.db 131 ; FrogNPCs1_10   79
+	.db %00000101 ; FrogNPCs1_10_Slow
+
+
+	.db 152 ; FrogNPCs1_10   80
+	.db %00010001 ; FrogNPCs1_11_Slow
+
+	.db %01001000, %01101000
+
+
+	.db 134 ; FrogNPCs1_1   81
+	.db %00000101 ; FrogNPCs1_1_Slow
+
+
+	.db 2 ; FrogNPCs1_1   82
+	.db %01000010 ; FrogNPCs1_1_Slow_O
+
+
+	.db 135 ; FrogNPCs1_6   83
+	.db %01000101 ; FrogNPCs1_6_Slow_O
+
+
+	.db 154 ; FrogNPCs1_6   84
+	.db %00000001 ; FrogNPCs1_6_Slow
+
+
+	.db 150 ; FrogNPCs1_3   85
+	.db %01110101 ; FrogNPCs1_2_Slow_O_F
+
+	.db %01010100, %10000110
+
+
+	.db 138 ; FrogNPCs1_3   86
+	.db %00100001 ; FrogNPCs1_3_Slow_F
+
+
+	.db 153 ; FrogNPCs1_3   87
+	.db %00000001 ; FrogNPCs1_3_Slow
+
+
+	.db 143 ; SolidPlatform_4   88
+	.db %00000101 ; SolidPlatform_4_Slow
+
+
+	.db 144 ; SolidPlatform_1   89
+	.db %01000101 ; SolidPlatform_1_Slow_O
+
+
+	.db 145 ; SolidPlatform_1   90
+	.db %00000001 ; SolidPlatform_1_Slow
+
+
+	.db 146 ; SolidPlatform_5   91
+	.db %01000101 ; SolidPlatform_5_Slow_O
+
+
+	.db 147 ; SolidPlatform_0   92
+	.db %10000101 ; SolidPlatform_0_Fast
+
+
+	.db 148 ; SolidPlatform_2   93
+	.db %10000101 ; SolidPlatform_2_Fast
+
+
+	.db 149 ; SolidPlatform_3   94
+	.db %10000101 ; SolidPlatform_3_Fast
+
+
+	.db 167 ; Tree_16   95
+	.db %10000100 ; Tree_16_Fast
+
+
+	.db 172 ; Tree_16   96
+	.db %10100000 ; Tree_16_Fast_F
+
+
+	.db 162 ; Branches_0   97
+	.db %10100100 ; Branches_0_Fast_F
+
+
+	.db 164 ; Branches_0   98
+	.db %10000000 ; Branches_0_Fast
+
+
+	.db 151 ; Branches_1   99
+	.db %10000100 ; Branches_1_Fast
+
+
+	.db 158 ; Branches_1   100
+	.db %10100000 ; Branches_1_Fast_F
+
+
+	.db 147 ; Tree_11   101
+	.db %10000100 ; Tree_11_Fast
+
+
+	.db 150 ; Tree_11   102
+	.db %10100000 ; Tree_11_Fast_F
+
+
+	.db 146 ; Tree_5   103
+	.db %10000100 ; Tree_5_Fast
+
+
+	.db 148 ; Tree_5   104
+	.db %10100000 ; Tree_5_Fast_F
+
+
+	.db 56 ; Lantern_4   105
+	.db %01000100 ; Lantern_4_Slow_O
+
+
+	.db 124 ; GroundNew_2   106
+	.db %10000100 ; GroundNew_2_Fast
+
+
+	.db 127 ; GroundNew_2   107
+	.db %10100000 ; GroundNew_2_Fast_F
+
+
+	.db 78 ; GroundNew_2   108
+	.db %10110010 ; GroundNew_3_Fast_F
+
+	.db %00000100, %01010000
+
+
+	.db 79 ; GroundNew_2   109
+	.db %10010010 ; GroundNew_3_Fast
+
+	.db %00000100, %01010000
+
+
+	.db 125 ; GroundNew_0   110
+	.db %10000100 ; GroundNew_0_Fast
+
+
+	.db 126 ; GroundNew_0   111
+	.db %10100000 ; GroundNew_0_Fast_F
+
+
+	.db 76 ; GroundNew_0   112
+	.db %10010010 ; GroundNew_1_Fast
+
+	.db %01010100, %00000000
+
+
+	.db 77 ; GroundNew_0   113
+	.db %10110010 ; GroundNew_1_Fast_F
+
+	.db %01010100, %00000000
+
+
+	.db 154 ; FrogNPCs1_5   114
+	.db %01000100 ; FrogNPCs1_5_Slow_O
+
+
+	.db 140 ; FrogNPCs1_5   115
+	.db %00000001 ; FrogNPCs1_5_Slow
+
+
+	.db 142 ; FrogNPCs1_9   116
+	.db %00000101 ; FrogNPCs1_9_Slow
+
+
+	.db 133 ; FrogNPCs1_9   117
+	.db %00110001 ; FrogNPCs1_8_Slow_F
+
+	.db %01010100, %01000110
+
+
+	.db 137 ; FrogNPCs1_9   118
+	.db %01000001 ; FrogNPCs1_9_Slow_O
+
+
+	.db 157 ; FrogNPCs1_9   119
+	.db %01010001 ; FrogNPCs1_8_Slow_O
+
+	.db %01010100, %01000110
+
+
+	.db 158 ; FrogNPCs1_9   120
+	.db %00100001 ; FrogNPCs1_9_Slow_F
+
+
+	.db 156 ; FrogNPCs1_7   121
+	.db %00100100 ; FrogNPCs1_7_Slow_F
+
+
+	.db 141 ; FrogNPCs1_7   122
+	.db %00000001 ; FrogNPCs1_7_Slow
+
+
+	.db 151 ; FrogNPCs1_0   123
+	.db %00000101 ; FrogNPCs1_0_Slow
+
+
+	.db 170 ; Tree_18   124
+	.db %00000100 ; Tree_18_Slow
+
+
+	.db 171 ; Tree_18   125
+	.db %01100000 ; Tree_18_Slow_O_F
+
+
+	.db 128 ; Tree_2   126
+	.db %10000100 ; Tree_2_Fast
+
+
+	.db 149 ; Tree_2   127
+	.db %10100000 ; Tree_2_Fast_F
+
+
+	.db 130 ; Tree_7   128
+	.db %10000100 ; Tree_7_Fast
+
+
+	.db 143 ; Tree_7   129
+	.db %10100000 ; Tree_7_Fast_F
+
+
+	.db 131 ; Tree_9   130
+	.db %10000100 ; Tree_9_Fast
+
+
+	.db 137 ; Tree_9   131
+	.db %10100000 ; Tree_9_Fast_F
+
+
+	.db 132 ; Tree_6   132
+	.db %10100100 ; Tree_6_Fast_F
+
+
+	.db 141 ; Tree_6   133
+	.db %10000000 ; Tree_6_Fast
+
+
+	.db 133 ; Tree_3   134
+	.db %10100100 ; Tree_3_Fast_F
+
+
+	.db 135 ; Tree_3   135
+	.db %10000000 ; Tree_3_Fast
+
+
+	.db 134 ; Tree_0   136
+	.db %10100100 ; Tree_0_Fast_F
+
+
+	.db 140 ; Tree_0   137
+	.db %10000000 ; Tree_0_Fast
+
+
+	.db 136 ; Tree_8   138
+	.db %10000100 ; Tree_8_Fast
+
+
+	.db 138 ; Tree_8   139
+	.db %10100000 ; Tree_8_Fast_F
+
+
+	.db 142 ; Tree_10   140
+	.db %10000100 ; Tree_10_Fast
+
+
+	.db 144 ; Tree_1   141
+	.db %10100100 ; Tree_1_Fast_F
+
+
+	.db 145 ; Tree_1   142
+	.db %10000000 ; Tree_1_Fast
+
+
+	.db 129 ; Tree_4   143
+	.db %10000100 ; Tree_4_Fast
+
+
+	.db 139 ; Tree_4   144
+	.db %10100000 ; Tree_4_Fast_F
+
+
+	.db 2 ; Branches_10   145
+	.db %10000100 ; Branches_10_Fast
+
+
+	.db 18 ; Branches_10   146
+	.db %10100000 ; Branches_10_Fast_F
 

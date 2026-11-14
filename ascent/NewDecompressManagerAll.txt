@@ -1,21 +1,57 @@
 
+load_zone_2_trigger .equ 120
+load_zone_0_trigger .equ 75
+
+
+
+load_zone_2_sprites:
+	ld a,255
+	ld (sprite_load_zone_2_flag),a 
+	ld a,load_zone_0_trigger
+	ld (sprite_load_zone_0_flag),a
+
+	ld de, compressed_sprite_data_zone_2
+	ld hl, new_decomp_calls_2
+	jp sprite_decompression_full
+
+load_zone_1_sprites:
+	ld de, compressed_sprite_data_zone_1
+	ld hl, new_decomp_calls_1
+	jp sprite_decompression_full
+
+load_zone_0_sprites:
+	;call prgmpause
+	ld a,load_zone_2_trigger
+	ld (sprite_load_zone_2_flag),a 
+	ld a,0
+	ld (sprite_load_zone_0_flag),a
+	ld de, compressed_sprite_data_zone_0
+	ld hl, new_decomp_calls_0
+	jp sprite_decompression_full
+
 sprite_decompression_full:
-
-	ld de, compressed_sprite_data
-	push de
-
-	ld hl, new_decomp_calls_all
+	
+	ld a,%11011010;jp c
+	ld (sdf_decomp_active),a 
+	
+	ld (sdf_de_new),de
+	
 	ld bc,(hl)
 	ld (sdf_loop_counter), bc 
 	
 	inc hl 
 	inc hl 
 	inc hl 
+	ld (sdf_hl_save),hl
 	
 sdf_loop:
 
 	;ld a, c 
 	;call write_a_to_ram
+
+sdf_hl_save .equ $ + 1
+	ld hl, 0
+
 
 	ld a,(hl) ; index of sprite in table 
 	ld (sdf_add_idx_in_tbl),a 
@@ -28,19 +64,17 @@ sdf_loop:
 	jp nz,sdf_new_comp_sprite
 	
 	;otherwise need to restore DE to where it was prior to calling sprite decompression 
-	pop de 
-	push de
+sdf_de_previous .equ $ + 1
+	ld de, 0
+	jp sdf_repeat_comp_sprite
 
 sdf_new_comp_sprite:
 	
-	pop af ;keeps value of DE
-	push de
+sdf_de_new .equ $ + 1
+	ld de, 0
+	ld (sdf_de_previous),de 
 	
-	
-	;ld a,c 
-	;call write_a_to_ram
-	;call prgmpause 
-	
+sdf_repeat_comp_sprite:	
 	
 	bit 7,c
 	jp z,sdf_not_fast_offset
@@ -95,7 +129,8 @@ sdf_no_alt_colr:
 	
 	;hl should now be pointing to start of next element 
 	
-	push hl
+	ld (sdf_hl_save),hl
+	
 	ld a,c ;restore params byte
 	ld bc,0 
 	and %00000011 ;get table index
@@ -117,27 +152,20 @@ sdf_add_idx_in_tbl .equ $ + 1
 	
 	;want de decompress location, hl = sprite data
 	
-	;call write_hl_to_ram
+;call write_hl_to_ram
 	
 	ex de,hl
 	;call write_hl_to_ram 
 	
-	;call prgmpause
 	;call prgmpause
 	
 	call sprite_decompress
 	
 	inc hl 
 	
-	;call write_hl_to_ram 
-	
 	;hl maybe points to start of next compressed sprite?
-	ex de,hl ;put in DE 
+	ld (sdf_de_new), hl
 	
-	pop hl ;restore hl to start of next element in decompress calls 
-	;top of stack should now hold data of most recent compressed sprite 
-
-	;call prgmpause
 	
 	;Need loop counter
 sdf_loop_counter .equ $ + 1
@@ -146,15 +174,38 @@ sdf_loop_counter .equ $ + 1
 	ld (sdf_loop_counter),bc 
 	ld a,c 
 	or b 
-	jp nz, sdf_loop 
-	
-	pop de 
-	
-	
+	jp nz, sdf_clock_check_loop 
+
+	ld a, %11010010 ;jp nc
+	ld (sdf_decomp_active),a 
+
 	ret
 	
+	;Check the timer to see if we need to begin rendering next frame 
+	;1090 cycles @ 32768hz ~= 1 frame (1/30s)
+	;Should stop decompressions at 1000 cycles?
+	; = %00000011, 11100000
+sdf_clock_check_loop:
+	ld a,($F20001);128hz clock
+	cp %00000011 ;check if reached 3 
+	jp c,sdf_loop ;msb <= 2, can continue  
+	ld a,($F20000);32768hz clock
+	cp %11100000;check if reached value 
+	jp c,sdf_loop ;msb = 3 and lsb < value, can continue
+		
+	;otherwise pause until next frame 
+	ret 
+
 	
+
 	
+sdf_continue_decompressions:
+	
+	scf 
+sdf_decomp_active .equ $
+	jp nc, sdf_loop 
+	
+	ret 
 	
 	
 

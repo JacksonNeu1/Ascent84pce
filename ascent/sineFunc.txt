@@ -3,12 +3,22 @@
 anim_curve_sin_values_start .equ vram ;140 bytes
 ;sine phase 0 speed half, amp 127-1, then increments phases, then speeds
 
-anim_curve_lin_values_start .equ anim_curve_sin_values_start + 140; 140bytes
+anim_curve_lin_values_start .equ anim_curve_sin_values_start + 140; 141bytes (extra for single frame timer)
 
+anim_curve_single_frame_timer .equ anim_curve_lin_values_start + 140 ;4 bytes
 
 update_sine_vals:
 	ld bc,0
 	
+	ld a, (frameCount)
+	and %00001111
+	ld (anim_curve_single_frame_timer),a
+	and %00000111
+	ld (anim_curve_single_frame_timer+1),a
+	and %00000011
+	ld (anim_curve_single_frame_timer+2),a
+	and %00000001
+	ld (anim_curve_single_frame_timer+3),a
 	ld a, (frameCount+1);middle byte 
 	srl a ;put bit 0 to carry flag 
 	ld a, (frameCount)

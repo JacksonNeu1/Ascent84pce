@@ -1,84 +1,8 @@
-MG_Data_frame_table:
-	.dl MG_Data_0
-	.dl MG_Data_1
-	.dl MG_Data_2
-	.dl MG_Data_3
-	.dl MG_Data_4
-	.dl MG_Data_5
-	.dl MG_Data_6
-	.dl MG_Data_7
-	.dl MG_Data_8
-	.dl MG_Data_9
-	.dl MG_Data_10
-	.dl MG_Data_11
-	.dl MG_Data_12
-	.dl MG_Data_13
-	.dl MG_Data_14
-	.dl MG_Data_15
-	.dl MG_Data_16
-	.dl MG_Data_17
-	.dl MG_Data_18
-	.dl MG_Data_19
-	.dl MG_Data_20
-	.dl MG_Data_21
-	.dl MG_Data_22
-	.dl MG_Data_23
-	.dl MG_Data_24
-	.dl MG_Data_25
-	.dl MG_Data_26
-	.dl MG_Data_27
-	.dl MG_Data_28
-	.dl MG_Data_29
-	.dl MG_Data_30
-	.dl MG_Data_31
-	.dl MG_Data_32
-	.dl MG_Data_33
-	.dl MG_Data_34
-	.dl MG_Data_35
-	.dl MG_Data_36
-	.dl MG_Data_37
-	.dl MG_Data_38
-	.dl MG_Data_39
-	.dl MG_Data_40
-	.dl MG_Data_41
-	.dl MG_Data_42
-	.dl MG_Data_43
-	.dl MG_Data_44
-	.dl MG_Data_45
-	.dl MG_Data_46
-	.dl MG_Data_47
-	.dl MG_Data_48
-	.dl MG_Data_49
-	.dl MG_Data_50
-	.dl MG_Data_51
-	.dl MG_Data_52
-	.dl MG_Data_53
-	.dl MG_Data_54
-	.dl MG_Data_55
-	.dl MG_Data_56
-	.dl MG_Data_57
-	.dl MG_Data_58
-	.dl MG_Data_59
-	.dl MG_Data_60
-	.dl MG_Data_61
-	.dl MG_Data_62
-	.dl MG_Data_63
-	.dl MG_Data_64
-	.dl MG_Data_65
-	.dl MG_Data_66
-	.dl MG_Data_67
-	.dl MG_Data_68
-	.dl MG_Data_69
-	.dl MG_Data_70
-	.dl MG_Data_71
-	.dl MG_Data_72
-	.dl MG_Data_73
+MG_Data_frame_table .equ 13894339
+MG_Data_frame_table_end .equ 13894555
+MG_Data_topmost_frame .equ MG_Data_72
+MG_Data_num_frames .equ 73
 
-
-
-MG_Data_73:
-	.db 0
-	.db 0
 
 MG_Data_72:
 	.db 0
@@ -90,81 +14,60 @@ MG_Data_71:
 
 MG_Data_70:
 	.db 0
-	.db 5
-	.db 31, 255, 112, 65  ;SG_FGStars3
-	.db 9, 8, 118, 170  ;Stars_25_Slow
-	.db 8, 5, 141, 167  ;Stars_8_Slow
-	.db 24, 3, 136, 168  ;Stars_9_Slow
-	.db 31, 5, 112, 167  ;Stars_8_Slow
+	.db 0
 
 MG_Data_69:
-	.db 0
-	.db 30
-	.db 218, 255, 12, 63  ;SG_FGStars2
-	.db 79, 255, 15, 66  ;SG_Zig7
-	.db 171, 255, 43, 72  ;SG_Spiral1
-	.db 222, 255, 128, 71  ;SG_Spiral4
-	.db 60, 255, 89, 71  ;SG_Spiral4
-	.db 40, 255, 28, 70  ;SG_Zig5
-	.db 242, 255, 90, 70  ;SG_Zig5
-	.db 146, 255, 127, 70  ;SG_Zig5
-	.db 245, 255, 17, 69  ;SG_Zig2
-	.db 103, 255, 55, 69  ;SG_Zig2
-	.db 198, 255, 115, 68  ;SG_Zig1
-	.db 155, 255, 12, 67  ;SG_Zig3
-	.db 248, 255, 65, 66  ;SG_Zig7
-	.db 162, 3, 116, 168  ;Stars_9_Slow
-	.db 200, 5, 76, 167  ;Stars_8_Slow
-	.db 193, 3, 100, 168  ;Stars_9_Slow
-	.db 142, 7, 108, 169  ;Stars_12_Slow
-	.db 177, 5, 105, 167  ;Stars_8_Slow
-	.db 178, 8, 82, 170  ;Stars_25_Slow
-	.db 152, 3, 95, 168  ;Stars_9_Slow
-	.db 141, 5, 85, 167  ;Stars_8_Slow
-	.db 200, 255, 76, 65  ;SG_FGStars3
-	.db 97, 255, 27, 63  ;SG_FGStars2
-	.db 70, 255, 122, 64  ;SG_FGStars1
-	.db 249, 3, 152, 168  ;Stars_9_Slow
-	.db 229, 7, 144, 169  ;Stars_12_Slow
-	.db 239, 3, 131, 168  ;Stars_9_Slow
-	.db 228, 5, 121, 167  ;Stars_8_Slow
-	.db 108, 255, 82, 67  ;SG_Zig3
-	.db 16, 255, 113, 68  ;SG_Zig1
+	.db 1
+	.db 26
+	.db 174, 255, 11, 73  ;SG_BigFishbowl
+	.db 196, 255, 22, 63  ;SG_Spiral2
+	.db 60, 9, 96, 76  ;ZigsAndZags_12_Slow
+	.db 60, 255, 96, 69  ;SG_Zig3
+	.db 223, 38, 84, 85  ;ZigsAndZags_42_Slow_O_F
+	.db 223, 255, 84, 72  ;SG_Spiral7
+	.db 73, 33, 12, 82  ;ZigsAndZags_34_Slow_F
+	.db 73, 255, 12, 71  ;SG_Spiral3
+	.db 146, 38, 43, 80  ;ZigsAndZags_38_Slow
+	.db 146, 255, 43, 70  ;SG_Spiral5
+	.db 121, 9, 125, 76  ;ZigsAndZags_12_Slow
+	.db 121, 255, 125, 69  ;SG_Zig3
+	.db 142, 26, 10, 62  ;ZigsAndZags_4_Slow_O_F
+	.db 142, 255, 10, 65  ;SG_Zig4
+	.db 228, 255, 121, 68  ;SG_Star1
+	.db 83, 42, 54, 68  ;ZigsAndZags_46_Slow_O
+	.db 83, 255, 54, 67  ;SG_Star2
+	.db 159, 26, 90, 64  ;ZigsAndZags_5_Slow_O
+	.db 159, 255, 90, 66  ;SG_Zig2
+	.db 250, 26, 59, 62  ;ZigsAndZags_4_Slow_O_F
+	.db 250, 255, 59, 65  ;SG_Zig4
+	.db 99, 37, 128, 60  ;ZigsAndZags_40_Slow_F
+	.db 99, 255, 128, 64  ;SG_Spiral6
+	.db 196, 33, 22, 55  ;ZigsAndZags_32_Slow_O
+	.db 228, 42, 121, 72  ;ZigsAndZags_54_Slow_O
+	.db 161, 255, 12, 74  ;SG_BigFishbowlWater
 
 MG_Data_68:
 	.db 0
-	.db 10
+	.db 5
 	.db 5, 14, 83, 83  ;CloudsNewer_1_Fast
 	.db 108, 14, 53, 83  ;CloudsNewer_1_Fast
 	.db 103, 14, 68, 83  ;CloudsNewer_1_Fast
 	.db 117, 14, 59, 83  ;CloudsNewer_1_Fast
 	.db 113, 14, 72, 83  ;CloudsNewer_1_Fast
-	.db 54, 5, 134, 167  ;Stars_8_Slow
-	.db 88, 8, 119, 170  ;Stars_25_Slow
-	.db 100, 7, 140, 169  ;Stars_12_Slow
-	.db 30, 3, 144, 168  ;Stars_9_Slow
-	.db 203, 255, 7, 63  ;SG_FGStars2
 
 MG_Data_67:
 	.db 0
-	.db 17
+	.db 10
 	.db 43, 14, 74, 83  ;CloudsNewer_1_Fast
-	.db 72, 5, 118, 167  ;Stars_8_Slow
-	.db 62, 3, 110, 168  ;Stars_9_Slow
-	.db 187, 7, 70, 169  ;Stars_12_Slow
-	.db 146, 8, 42, 170  ;Stars_25_Slow
-	.db 43, 5, 123, 167  ;Stars_8_Slow
-	.db 251, 14, 93, 83  ;CloudsNewer_1_Fast
-	.db 193, 5, 17, 167  ;Stars_8_Slow
-	.db 243, 14, 77, 83  ;CloudsNewer_1_Fast
-	.db 139, 14, 103, 83  ;CloudsNewer_1_Fast
-	.db 125, 14, 112, 83  ;CloudsNewer_1_Fast
-	.db 134, 14, 116, 83  ;CloudsNewer_1_Fast
-	.db 125, 14, 100, 83  ;CloudsNewer_1_Fast
-	.db 50, 14, 70, 83  ;CloudsNewer_1_Fast
 	.db 41, 14, 61, 83  ;CloudsNewer_1_Fast
+	.db 50, 14, 70, 83  ;CloudsNewer_1_Fast
+	.db 125, 14, 100, 83  ;CloudsNewer_1_Fast
+	.db 134, 14, 116, 83  ;CloudsNewer_1_Fast
+	.db 125, 14, 112, 83  ;CloudsNewer_1_Fast
+	.db 139, 14, 103, 83  ;CloudsNewer_1_Fast
 	.db 255, 14, 73, 83  ;CloudsNewer_1_Fast
-	.db 182, 7, 36, 169  ;Stars_12_Slow
+	.db 243, 14, 77, 83  ;CloudsNewer_1_Fast
+	.db 251, 14, 93, 83  ;CloudsNewer_1_Fast
 
 MG_Data_66:
 	.db 0

@@ -40,6 +40,9 @@ check_text_ypos_loop:
 	;call write_a_to_ram
 	cp (hl) ;compare lower byte of y (pixels)
 	jp z, set_text_segment ;if match, set this as current text segment
+	dec a ;janky fix for when player is 1px above platform
+	cp (hl) ;compare lower byte of y (pixels)
+	jp z, set_text_segment ;if match, set this as current text segment
 check_text_ypos_loop_1:
 	add hl,de ;to start of next y pos
 	djnz check_text_ypos_loop

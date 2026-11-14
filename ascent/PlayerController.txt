@@ -1,3 +1,5 @@
+jump_horiz_rate .equ 4
+jump_vert_rate .equ 3
 
 
 
@@ -12,14 +14,13 @@ charge_jump_left:
 	cp timer_max_val
 	ret nc
 	ld a,(jump_strength_left)
-	ld b,4
+	ld b,jump_horiz_rate
 	add a,b 
 	ld (jump_strength_left),a
 jump_add_up_strength:
 	ld a,(jump_strength_up)
-	inc a 
-	inc a 
-	inc a 
+	ld b, jump_vert_rate 
+	add a,b 
 	ld (jump_strength_up),a
 	ret
 
@@ -35,7 +36,7 @@ charge_jump_right:
 	cp timer_max_val
 	ret nc
 	ld a,(jump_strength_right)
-	ld b,4
+	ld b,jump_horiz_rate
 	add a,b 
 	ld (jump_strength_right),a
 	jp jump_add_up_strength
@@ -226,7 +227,7 @@ pu_tongue_contract:
 	jp c, pu_tongue_release
 	bit 7,h 
 	jp nz,pu_tongue_release
-	;div by ~6
+	;div by ~6 (DEPENDS ON NUM PHYSICS UPDATES) Change to 3?
 	srl l
 	srl l
 	srl l
@@ -237,7 +238,7 @@ pu_tongue_contract:
 	;call write_a_to_ram
 	;call prgmpause
 	;call write_hl_to_ram
-	ld de,20
+	ld de,20 ;Flat rate acceleration from tongue
 	add hl,de 
 	ex de,hl 
 	ld hl,(player_y_vel)
@@ -371,8 +372,7 @@ pu_physics:
 	bit 6,a 
 	call nz,pu_check_on_ground ;check if player still on ground 
 
-
-	ld a,16 ;num physics loops 
+	ld a,8 ;num physics loops (formerly 16)
 	ld (pu_physics_count),a 
 	
 pu_physics_loop:
@@ -383,12 +383,17 @@ pu_physics_count .equ $ + 1
 	jp z, pu_physics_end
 	ld (pu_physics_count),a
 	
+	
 	ld a,(player_flags)
+	bit 6,a 
+	jp nz, pu_physics_loop
 	
 	res 5,a ;reset in semisolid flag 
 	ld (player_flags),a 
-	bit 6,a 
-	jp nz,pu_physics_loop ;If on ground, no need to do physics 
+	
+	ld a, (player_flags + 1)
+	res 5,a ;reset antigrav flag 
+	ld (player_flags + 1),a 
 	
 	
 
@@ -398,6 +403,7 @@ pu_physics_count .equ $ + 1
 	ex de,hl 
 	ld hl, (player_y_pos) 
 	add hl,de ;add y vel to y pos 
+	add hl,de ;add y vel to y pos DOUBLE for halved physics updates
 	ld (player_y_pos),hl 
 	
 	;check for vertical collisions here 
@@ -412,6 +418,8 @@ pu_update_x_pos:
 	ex de,hl 
 	ld hl, (player_x_pos) 
 	add hl,de ;add x vel to x pos 
+	add hl,de ;add x vel to x pos  DOUBLE for halved physics updates
+	
 	ld (player_x_pos),hl 
 	
 	ld de,$000900
@@ -448,52 +456,112 @@ pu_no_semisolid:
 pu_prev_semisolid:
 	ld (player_flags),a 
 	
+	ld a,(player_flags+1)
+	
+	bit 5,a ;in antigrav flag 
+	jp z, pu_no_antigrav
+	set 4,a	
+	jp pu_prev_antigrav
+pu_no_antigrav:
+	res 4,a 
+pu_prev_antigrav:
+	ld (player_flags+1),a 	
+	
 	jp pu_physics_loop
 	;Apply gravity and terminal v check after loop 
 
 pu_check_on_ground:
 	;checks if player is still on ground or platform has dissapeared 
 	ld a,(player_flags)
+
 	res 6,a 
 	ld (player_flags),a 
 	ld hl, (player_y_pos)
+	
+	ld a,(player_flags + 1)
+	;call write_a_to_ram
+	bit 4,a ;check if antigrav on prior update 
+	jp nz, pu_check_on_ground_anti
 	ld de,-256
+	jp pu_check_on_ground_notanti
+pu_check_on_ground_anti:
+	ld de,256
+pu_check_on_ground_notanti:
 	add hl,de ;dec by 1 full pixel
 	ld (player_y_pos),hl 
 	;check for vertical collisions here 
 	ld a,%11011010;jp c
 	ld (collision_check_vertical),a
-	call check_collisions	
+	call check_collisions
+	
 	ret 
 
 
 pu_physics_end:
-	;Apply gravity 
-	ld hl,(player_y_vel)
-	bit 7,h  ;Check if vel is negative
-	jp z,pu_apply_gravity ;if moving up apply gravity
+	;check terminal vel and Apply gravity	
 	
-	push hl 
-	;check foor terminal vel 
-	ld de, $000080 ;8px per frame
+	ld a,(player_flags)
+	bit 3,a 
+	jp nz,pu_physics_end_normalgrav ;if falling ignore antigrav
+	
+	ld a,(player_flags + 1)
+	bit 4,a ;in antigrav last update 
+	jp nz, pu_physics_end_antigrav
+
+pu_physics_end_normalgrav:
+	;regular gravity 
+	ld hl,(player_y_vel)
+	;call write_hl_to_ram
+	bit 7, h ;check if vel is negative 
+	jp z, pu_apply_gravity ;if moving up in normal grav, dont check terminal vel
+	;check foor negative terminal vel 
+	push hl
+	ld de, $000080 ;Max jump vel per frame
 	add hl,de ;terminal V is negative
 	pop hl 
-	jp nc, pu_terminal_vel
-pu_apply_gravity:
+	ret nc ;if exceeding terminal vel, dont add gravity 
+
+pu_apply_gravity:	
 	ld de,11 ;GRAVITY CONSTANT
 	scf 
 	ccf ;reset carry flag 
 	sbc hl,de 
 	ld (player_y_vel),hl
-
 	ret 
-pu_terminal_vel:
-	ld hl, $ffff80 ;-8 px per frame
-	ld (player_y_vel),hl
+	
+pu_physics_end_antigrav:
+	;anti gravity
+	ld hl,(player_y_vel)
 	;call write_hl_to_ram
+	 
+	bit 7, h ;check if vel is negative 
+	jp nz, pu_apply_gravity_anti ;if down in anti grav, dont check terminal vel
+	;check for positive terminal vel 
+	push hl
+	ld de, $000080 ;Terminal gravity
+	scf 
+	ccf 
+	sbc hl,de
+	pop hl
+	ret nc ;if exceeding positive terminal vel, dont apply antigrav
+
+	
+pu_apply_gravity_anti:
+	ld de,11 ;GRAVITY CONSTANT
+	add hl,de 
+	ld (player_y_vel),hl
 	ret 
-
-
+	
+;pu_terminal_vel:
+;	ld hl, $ffff38 ;-terminal vel
+;	ld (player_y_vel),hl
+;	;call write_hl_to_ram
+;	ret 
+;pu_terminal_vel_positive
+;	ld hl, $0000C8 ;terminal vel
+;	ld (player_y_vel),hl
+;	;call write_hl_to_ram
+;	ret
 
 check_collisions:
 	ld a,(player_y_pos+2) ;Frame Number
@@ -513,6 +581,8 @@ check_collisions:
 	ld a,%11011010;jp c
 	ld(check_col_lower_jump),a 
 	ld (colis_semisolid_down_lower_frame),a 
+	ld a, %11010010 ;jp nc
+	ld (colis_antisemisolid_up_lower_frame),a 
 	
 	;hl points to collision data for this frame 
 	ex af,af' ;' 
@@ -539,7 +609,7 @@ check_collisions_same_loop:
 	;call write_a_to_ram
 	sub a,c
 	jp c, check_col_y_collision
-	sub (hl); cokmpare to collider height -1 
+	sub (hl); cokmpare to collider height -1 to check against top of collider
 	jp c,check_col_y_collision
 	;Otherwise no collision 	
 	jp check_col_skip_3
@@ -559,6 +629,9 @@ check_collisions_lower:
 	ld a, %11010010 ;jp nc 
 	ld (check_col_lower_jump),a 
 	ld (colis_semisolid_down_lower_frame),a 
+	ld a,%11011010;jp c
+	ld (colis_antisemisolid_up_lower_frame),a 
+	
 check_collisions_lower_loop:
 ;hl pts to ymin of collider 
 	ex af,af' ;'
@@ -619,9 +692,9 @@ check_col_x_collision:
  
 	jp c, check_col_skip_1 
 
-
-collision_found: ;A collision has been detected
-	
+;=================================================================================================================
+collision_found: ;A collision has been detected ==================================================================
+;=================================================================================================================
 	;TESTing 
 	;ld a,$AB 
 	;call write_a_to_ram
@@ -630,6 +703,18 @@ collision_found: ;A collision has been detected
 	
 	;ld a,(hl)
 	;call write_a_to_ram
+	
+	ld a,(hl)
+	bit 5,a ;antigrav zone 
+	jp z, collision_found_notantigrav
+	ld a,(player_flags + 1) ;if antigrav, just set flag and continue
+	set 5,a 
+	ld (player_flags + 1),a 
+	jp check_col_skip_0
+
+
+
+collision_found_notantigrav:
 	
 	scf 
 collision_check_vertical .equ $
@@ -650,10 +735,12 @@ colis_horiz_not_fall:
 	bit 7,a ;semisolid 
 	jp nz,vert_col_up_semisolid ;skips semisolid 
 
+	bit 4,a ;antisemisolid 
+	jp nz,vert_col_up_semisolid ;skips semisolid 
+
 	bit 6,a 
 	jp nz, collision_spikes
 	
-	;TODO breakaway platforms 
 	
 	;player has moved horiz and hit a solid wall 
 	;Reverse x velocity 
@@ -670,7 +757,7 @@ collision_check_vert:
 	bit 7,a ;check if moving up or down 
 	jp nz, vert_col_down
 	
-	
+	;moving UP
 	ld a,(player_flags)
 	bit 3,a 
 	jp z,colis_vert_up_not_fall
@@ -685,12 +772,23 @@ colis_vert_up_not_fall:
 	bit 7,a ;semisolid 
 	jp nz,vert_col_up_semisolid ;semisolid and moving up
 
+	;TODO 
+	;Check for antisemisolid
+	bit 4,a 
+	jp nz,vert_col_up_antisemisolid
+
+
 	bit 6,a 
 	jp nz, collision_spikes
 
-	;TODO breakaway platforms 
-	
 	;Plyaer has moved up and hit non spike object 
+	ld a,(player_flags+1)
+	bit 4,a ;in antigrav zone 
+	ld a,(hl)
+	jp nz, vert_col_down_solid ;landed on roof
+
+	
+vert_col_roof:	
 	;Set velocity to 0 
 	push hl 
 	ld hl,0
@@ -700,6 +798,33 @@ colis_vert_up_not_fall:
 	pop hl 
 	
 	jp check_col_skip_0
+	
+vert_col_up_antisemisolid:
+	;if previous y pos was below ymin of semisolid, then do collision
+		;otherwise set semisolid player flag and continue 
+	ld a,(player_y_pos_prev + 1) ;last y pos in frame 
+	dec hl; to xmin 
+	dec hl 
+	dec hl ;height 
+	dec hl ;ymin 
+	sub a,(hl) ;player y - collider bottom. if prev player Y > collider bottom, no collision occurs
+colis_antisemisolid_up_lower_frame .equ $
+	jp nc,check_col_skip_4 ;nc for same frame, c for lower frame 
+	
+	;otherwise, previous y pos was below collider bottom, hit collider
+	inc hl
+	inc hl
+	inc hl 
+	inc hl;flags 
+	
+	ld a, (player_flags+1)
+	bit 4,a ;previously in antigrav 
+	ld a,(hl)
+	jp nz, vert_col_down_solid ;in antigrav and hit collider moving up, set grounded 
+	
+	;otherwise just hit a roof in normal grav 
+	jp vert_col_roof
+	
 	
 vert_col_up_semisolid:
 	ld a,(player_flags)
@@ -726,6 +851,8 @@ vert_col_down:
 	;pop af
 	
 	;check if we are below spike hit height 
+	;Also check that player is not in an antigrav zone (on current or previous update)
+	
 	ld hl,(spike_hit_height)
 	ex de,hl 
 	ld hl,(player_y_pos) 
@@ -733,6 +860,8 @@ vert_col_down:
 	jp c,check_end_fall
 	;Player is above threshold 
 	pop hl ;return collider flags 
+
+	
 	jp check_col_skip_0 ;continue 
 	
 
@@ -745,6 +874,7 @@ check_end_fall:
 	
 	pop hl ;return collider flags 
 	;Player has hit ground below fall threshold 
+	;Antigrav zones should also set semisolid flag
 	bit 4,a ;check we were not in semisolid last update (cant stop fall if player is clipping into a collider)
 	jp nz, check_col_skip_0; player currently in collider 
 	
@@ -773,9 +903,9 @@ unlucky_bounce_loop: ;number of bounces determines num loops = more chances to l
 	;call write_a_to_ram
 	ld a,e ;restore random val
 	and a,c ;need to be zero to land
-	jp z,colis_vert_down_not_fall ;player lands
+	jp z,vert_col_down_solid ;player lands
 	rlc c 
-	jp c,colis_vert_down_not_fall ;break loop after 8 shifts (incase rand val is all 0)
+	jp c,vert_col_down_solid ;break loop after 8 shifts (incase rand val is all 0)
 	djnz unlucky_bounce_loop
 	
 ;Player has hit unlucky bounce 
@@ -797,26 +927,26 @@ unlucky_bounce_loop: ;number of bounces determines num loops = more chances to l
 	
 	jp check_col_skip_0 ;continue 
 	
-toggle_unlucky_mode:
+;toggle_unlucky_mode:
 	
-	nop
+;	nop
 	
-	ld a,%11001001 ;ret 
-	ld (toggle_unlucky_mode),a 
+;	ld a,%11001001 ;ret 
+;	ld (toggle_unlucky_mode),a 
 	
-	ld a, (unlucky_check_mask)
-	or a 
-	jp nz, disable_unlucky_bounce
+;	ld a, (unlucky_check_mask)
+;	or a 
+;	jp nz, disable_unlucky_bounce
 	
-	;Enable unlucky bounce 
-	ld a, %00000001
-	ld (unlucky_check_mask),a 
-	;call setup_palette_1
-	ret
+;	;Enable unlucky bounce 
+;	ld a, %00000001
+;	ld (unlucky_check_mask),a 
+;	;call setup_palette_1
+;	ret
 
-disable_unlucky_bounce:
-	ld a, %00000000
-	ld (unlucky_check_mask),a 
+;disable_unlucky_bounce:
+;	ld a, %00000000
+;	ld (unlucky_check_mask),a 
 	
 	;ld hl,mpLcdPalette+30
 	;ld a,%00011010
@@ -824,13 +954,13 @@ disable_unlucky_bounce:
 	;inc hl
 	;ld a,%10110101
 	;ld (hl),a 
-	ret 
+;	ret 
 
-toggle_unlucky_mode_res:
+;toggle_unlucky_mode_res:
 	
-	ld a,%00000000 ;ret 
-	ld (toggle_unlucky_mode),a 
-	ret 
+;	ld a,%00000000 ;ret 
+;	ld (toggle_unlucky_mode),a 
+;	ret 
 	
 
 	
@@ -840,18 +970,20 @@ colis_vert_down_not_fall:
 
 	;player is moving down 
 	ld a,(hl) ;flags 
+	bit 4,a ;antisemi 
+	jp nz, vert_col_up_semisolid ;down thru antisemisolid is same as up thru semisolid
+	
 	bit 7,a ;semisolid 
-	jp z,vert_col_down_solid 
+	jp nz,vert_col_down_semisolid 
 	
-	;semisolid and moving down
-	;ld a,(player_flags)
-	;set 5,a ;set semisolid flag 
-	;ld (player_flags),a 
-	
-	;ld a,$AC 
-	;call write_a_to_ram
-	;call write_hl_to_ram
-	
+	ld a,(player_flags + 1)
+	bit 4,a ;check antigrav 
+	jp nz, vert_col_roof ;hit roof 
+
+	;otherwise hit solid and not antigrav, land 
+	jp vert_col_down_solid
+
+vert_col_down_semisolid: ;semisolid and moving down	
 	;check if previos y pos was in frame above, if so treat collider as in lower frame 
 	ld a,(player_y_pos+2);current pos frame 
 	ld b,a 
@@ -868,23 +1000,23 @@ colis_semi_same_frame:
 	dec hl 
 	dec hl ;height 
 	dec hl ;ymin 
-	sub a,(hl) ;player y - collider bottom 
+	sub a,(hl) ;player y - collider bottom. if prev player Y < collider bottom, no collision occurs
 colis_semisolid_down_lower_frame .equ $
 	jp nc,check_col_skip_4 ;nc for lower frame, c for same frame 
-	push af
+	;push af
 	;ld a,$A0 
 	;call write_a_to_ram
-	pop af
+	;pop af
 	;call write_a_to_ram
 	inc hl ;height
 	ld c, player_collider_height
-	sub a,c ;player bottom to collider bottom 
-	jp c,check_col_skip_3
+	sub a,c ; a holds player bottom to collider bottom 
+	jp c,check_col_skip_3 ;player bottom was below collider bottom, continue
 	;ld a,$A1 
 	;call write_a_to_ram
 	;call write_a_to_ram
 	sub a,(hl) ;compare to height 
-	jp c,check_col_skip_3 ;we were already within semisolid collider 
+	jp c,check_col_skip_3 ;we were already within semisolid collider on last update
 	inc hl
 	inc hl 
 	inc hl;flags 
@@ -893,12 +1025,12 @@ colis_semisolid_down_lower_frame .equ $
 	;otherwise, hit the collider 
 	ld a,(hl)
 
-vert_col_down_solid:
+vert_col_down_solid: ;also applies to landing upsidedown on roof 
 	bit 6,a 
 	jp nz, collision_spikes
 
 	push hl ;save flags
-	;TODO breakaway platforms 
+	;breakaway platforms 
 	and a,%00001111 ;breakaway index 1-16
 	jp z, not_breakaway
 	
@@ -1038,9 +1170,9 @@ reverse_x_vel:;bounce player off wall
 
 
 random_val:
-	ld a, (player_y_pos)
+	ld a, (player_y_pos+1)
 	ld c,a 
-	ld a,(totalTime) ;fast timer 
+	ld a,(frameCount) ;fast timer 
 	xor c
 	ret 
 
@@ -1064,7 +1196,7 @@ jump_charge_timer:
 	.db 0 
 
 	
-timer_max_val .equ 32
+timer_max_val .equ 33 ;formerly 32
 
 player_collider_height .equ 18
 player_collider_width .equ 20 ;width -1 
@@ -1100,7 +1232,7 @@ tongue_max_length .equ 90
 
 player_flags:
 	.db %00000000 ; (7 = Any jump button held, 6 = on ground,5 = within semisolid, 4 = in semisolid last update, 3= isfalling, 2 = tongueActive, 1 = lastDirection(1=right))
-	.db %00000000 ; 7= cam move up, 6 = cam move down
+	.db %00000000 ; 7= cam move up, 6 = cam move down, 5=antigrav, 4= antigrav last update
 spike_hit_height:
 	.dl 0 ;Height where player can land after hitting spike
 fall_num_bounces:
@@ -1302,3 +1434,17 @@ player_move_debug_down:
 	ld (player_y_pos),hl 
 	call check_collisions
 	ret
+
+
+
+
+;Cant stop fall in antigrav zone
+;Semisolid flags (bits 5 and 4) only used for checking if end fall is valid (Cant end while within a collider)
+;so antigrav should also set bit 5 
+
+;Emergency timeout when not grounded or falling for long enough? Triggers spike hit
+
+;For antisemisolid, just compare player y to ymin of collider. If player Y on last update > Ymin, then no collision
+;No need to check for lower frame bc player would be guaranteed above YMin 
+
+;Need to modify target cam height when grounded inverted 

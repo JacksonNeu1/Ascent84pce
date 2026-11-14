@@ -161,47 +161,47 @@ player_load_pos_skip:
 
 
 
-	call sdcomp_reset_fast
+	;call sdcomp_reset_fast
 	;call sdcomp_set_fast_offset
 	;call sdcomp_set_fast
 	;call sdcomp_set_flip
 	;call sdcomp_set_offset
-	ld hl, purpleVinesifitwasPurple_4
-	ld de, CloudsNewer_1_Fast
-	call sprite_decompress
+	;ld hl, purpleVinesifitwasPurple_4
+	;ld de, CloudsNewer_1_Fast
+	;call sprite_decompress
 	
 
-	call write_hl_to_ram
+	;call write_hl_to_ram
 	
 	
-	ld hl, (draw_buffer)
-	ld de, 160*126  + 55
-	add hl,de
-	ex de, hl
-	ld hl,CloudsNewer_1_Fast
-	call draw_slow_sprite_full
+	;ld hl, (draw_buffer)
+	;ld de, 160*126  + 55
+	;add hl,de
+	;ex de, hl
+	;ld hl,CloudsNewer_1_Fast
+	;call draw_slow_sprite_full
 	
-	call prgmpause
+	;call prgmpause
 	;call prgmpause
 	;call prgmpause
 	
 	
 	;call setup_decompress_queue
 	
-	call sprite_decompression_full 
+	;call sprite_decompression_full 
 	
 	
 	;call prgmpause
 	
-	ld hl, (draw_buffer)
-	ld de, 160*126  + 55
-	add hl,de
-	ex de, hl
+	;ld hl, (draw_buffer)
+	;ld de, 160*126  + 55
+	;add hl,de
+	;ex de, hl
 	
-	ld hl,purpleVinesifitwasPurple_4_Slow
-	call draw_slow_sprite_full
+	;ld hl,purpleVinesifitwasPurple_4_Slow
+	;call draw_slow_sprite_full
 	
-	call prgmpause
+	;call prgmpause
 	
 	;Decompress sprites in preframes for setup
 	;ld hl,decompress_frame_up_pre4 
@@ -218,6 +218,20 @@ player_load_pos_skip:
 	;call continue_decompressions ;Run decompression (Will finish as timer has not started)
 	
 	;call draw_fg
+
+	call Generate_FG_Level_Table
+	call Generate_MG_Level_Table
+	call Generate_MG2_Level_Table
+	call Generate_BG_Level_Table
+	
+	call Generate_SG_Level_Table
+	
+	ld a, %00000000 ;nop
+	ld (Generate_Level_Table_Loop_1),a 
+	ld a, %00001001 ;add hl,bc
+	ld (Generate_Level_Table_Loop_2),a 
+	
+	call Generate_Collider_Table	
 	
 ;when loading game need to gradually move cam up to player pos and run sprite decompressions 
 
@@ -232,6 +246,31 @@ set_cam_0_pos_skip_start:
 	res 3,l ;bg cam pos must start on even value for setup_bg to work correctly
 	ld (cam_pos),hl
 	;ld (bg_cam_pos),hl
+	
+	
+	;call load_zone_0_sprites
+	
+	
+	;ld hl, (draw_buffer)
+	;ld de, 160*126  + 55
+	;add hl,de
+	;ex de, hl
+	
+	;ld hl,Tree_10_Fast
+	;call draw_fast_sprite_full
+	
+	;call prgmpause
+	
+	
+	ld a, (cam_pos+1) ;cam frame #
+	cp 100 ;when going above this load zone 2 sprites 
+	call nc, load_zone_2_sprites
+	
+	ld a, (cam_pos+1) ;cam frame #
+	cp 100 ;when going below this load zone 0 sprites
+	call c, load_zone_0_sprites
+	
+	call load_zone_1_sprites
 	
 	
 	;ld a,0
@@ -252,7 +291,8 @@ set_cam_0_pos_skip_start:
 
 
 	;call prgmpause
-	nop ;This needs to be here for some reason
+	;the nop of blessing and good fortune
+	nop
 ;	call decompress_calls
 	
 
@@ -519,12 +559,23 @@ longest_frame_skip:
 	ld (frameCount),hl
 	
 
-	
-	;check if lcd has drawn first frame
-
 	;call check_for_decompress_calls
 	;Sprite decompression will occur here
-	;call continue_decompressions
+	call sdf_continue_decompressions
+	
+	ld a, (cam_pos+1) ;cam frame #
+sprite_load_zone_2_flag .equ $ + 1 ;set to 255 when zone 2 is loaded
+	cp 120 ;when going above this load zone 3 sprites 
+	call nc, load_zone_2_sprites
+	
+	ld a, (cam_pos+1) ;cam frame #
+sprite_load_zone_0_flag .equ $ + 1 ;set to 0 when zone 0 loaded
+	cp 75 ;when going below this load zone 1 sprites
+	call c, load_zone_0_sprites
+	
+	
+	
+	
 	
 	;TEsting
 	ld hl,0
@@ -638,13 +689,13 @@ longest_frame_skip:
 	;wait until finished drawing second frame
 	;Need to check clock here, there wont always be decompression to wait for
 	;Max time = 00000011 11000000
-main_clock_check_loop:
-	ld a,($F20001);128hz clock
-	cp %00000011 ;check if reached 4 
-	jp c,main_clock_check_loop ;msb <= 2, can continue  
-	ld a,($F20000);32768hz clock
-	cp %11100000;check if reached value 
-	jp c,main_clock_check_loop ;msb = 3 and lsb < value, can continue
+;main_clock_check_loop:
+;	ld a,($F20001);128hz clock
+;	cp %00000011 ;check if reached 4 
+;	jp c,main_clock_check_loop ;msb <= 2, can continue  
+;	ld a,($F20000);32768hz clock
+;	cp %11100000;check if reached value 
+;	jp c,main_clock_check_loop ;msb = 3 and lsb < value, can continue
 	
 
 
@@ -910,6 +961,7 @@ sd_test_a:
 #include "sineFunc.txt"
 #include "animations.txt"
 #include "TextTyper.txt"
+#include "GenerateLevelTables.txt"
 ;#include "levelData.txt"
 ;#include "FGLevelData.txt"
 ;#include "testing/TestingCollisionData.txt"

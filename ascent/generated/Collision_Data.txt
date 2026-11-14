@@ -1,80 +1,9 @@
-Collision_Data_Frame_Table: 
-	.dl collision_data_0
-	.dl collision_data_1
-	.dl collision_data_2
-	.dl collision_data_3
-	.dl collision_data_4
-	.dl collision_data_5
-	.dl collision_data_6
-	.dl collision_data_7
-	.dl collision_data_8
-	.dl collision_data_9
-	.dl collision_data_10
-	.dl collision_data_11
-	.dl collision_data_12
-	.dl collision_data_13
-	.dl collision_data_14
-	.dl collision_data_15
-	.dl collision_data_16
-	.dl collision_data_17
-	.dl collision_data_18
-	.dl collision_data_19
-	.dl collision_data_20
-	.dl collision_data_21
-	.dl collision_data_22
-	.dl collision_data_23
-	.dl collision_data_24
-	.dl collision_data_25
-	.dl collision_data_26
-	.dl collision_data_27
-	.dl collision_data_28
-	.dl collision_data_29
-	.dl collision_data_30
-	.dl collision_data_31
-	.dl collision_data_32
-	.dl collision_data_33
-	.dl collision_data_34
-	.dl collision_data_35
-	.dl collision_data_36
-	.dl collision_data_37
-	.dl collision_data_38
-	.dl collision_data_39
-	.dl collision_data_40
-	.dl collision_data_41
-	.dl collision_data_42
-	.dl collision_data_43
-	.dl collision_data_44
-	.dl collision_data_45
-	.dl collision_data_46
-	.dl collision_data_47
-	.dl collision_data_48
-	.dl collision_data_49
-	.dl collision_data_50
-	.dl collision_data_51
-	.dl collision_data_52
-	.dl collision_data_53
-	.dl collision_data_54
-	.dl collision_data_55
-	.dl collision_data_56
-	.dl collision_data_57
-	.dl collision_data_58
-	.dl collision_data_59
-	.dl collision_data_60
-	.dl collision_data_61
-	.dl collision_data_62
-	.dl collision_data_63
-	.dl collision_data_64
-	.dl collision_data_65
-	.dl collision_data_66
-	.dl collision_data_67
-	.dl collision_data_68
-	.dl collision_data_69
-	.dl collision_data_70
-	.dl collision_data_71
-	.dl collision_data_72
-	.dl collision_data_73
-	.dl collision_data_74
-	.dl collision_data_75
+Collision_Data_Frame_Table .equ 13895176
+Collision_Data_table_end .equ 13895401
+Collision_Data_first .equ collision_data_75
+Collision_Data_num_frames .equ 76
+
+
 
 
 collision_data_75:
@@ -102,16 +31,22 @@ collision_data_70:
 
 
 collision_data_69:
-	.db 3
-	.db 71,4,126,109,%10000000 ;
-	.db 18,4,86,69,%10000000 ;
-	.db 103,4,154,137,%10000000 ;
+	.db 4
+	.db 1,4,104,89,%10000000 ;
+	.db 37,4,130,115,%10000000 ;
+	.db 87,4,104,89,%10000000 ;
+	.db 32,7,104,77,%00010000 ;
 
 
 collision_data_68:
-	.db 2
+	.db 7
 	.db 99,10,77,58,%10000000 ;
-	.db 214,4,55,38,%10000000 ;
+	.db 208,4,68,53,%10000000 ;
+	.db 153,11,145,114,%00000000 ;
+	.db 115,11,128,97,%00000000 ;
+	.db 242,7,121,94,%00010000 ;
+	.db 194,113,153,98,%00100000 ;
+	.db 234,11,158,127,%00000000 ;
 
 
 collision_data_67:

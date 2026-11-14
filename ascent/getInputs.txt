@@ -12,7 +12,9 @@ scan_wait:
 	
 	; https://wikiti.brandonw.net/index.php?title=84PCE:Ports:A000
 	
-	ld a,0
+	ld a,(player_flags+1)
+	res 7,a 
+	res 6,a 
 	ld (player_flags+1),a ;clear cam moove flags
 	
 	ld	a,(kbdG7) ; $F5001E
@@ -41,12 +43,12 @@ scan_wait:
 	bit kbit4,a 
 	call nz, charge_jump_left
 	
-	ld a,(kbdG3)
-	bit kbit0,a 
-	call nz, toggle_unlucky_mode
-	ld a,(kbdG3)
-	bit kbit0,a 
-	call z, toggle_unlucky_mode_res
+	;ld a,(kbdG3)
+	;bit kbit0,a 
+	;call nz, toggle_unlucky_mode
+	;ld a,(kbdG3)
+	;bit kbit0,a 
+	;call z, toggle_unlucky_mode_res
 
 	ld a,(kbdG4)
 	bit kbit8,a 

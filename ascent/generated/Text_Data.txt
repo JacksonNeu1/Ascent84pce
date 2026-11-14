@@ -21,7 +21,7 @@ text_table:
 	.db 25
 	.dl text_5
 	.db 3, 3
-	.dl 22773
+	.dl 22765
 	.db 82
 	.dl text_6
 	.db 3, 242
