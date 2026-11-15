@@ -331,7 +331,16 @@ pu_jump_notmin:
 pu_jump_min_height:
 	ld l,a
 	;call write_a_to_ram
+	ld a,(player_flags + 1)
+	bit 4,a ;in antigrav 
+	jp z,pu_jump_notanti
 
+	;negate hl
+	ld a,l 	
+	ld hl,-1 
+	neg 
+	ld l,a 
+pu_jump_notanti:
 	ld (player_y_vel),hl 
 	;call write_hl_to_ram
 	
@@ -704,8 +713,8 @@ collision_found: ;A collision has been detected ================================
 	;ld a,(hl)
 	;call write_a_to_ram
 	
-	ld a,(hl)
-	bit 5,a ;antigrav zone 
+
+	bit 5,(hl) ;antigrav zone 
 	jp z, collision_found_notantigrav
 	ld a,(player_flags + 1) ;if antigrav, just set flag and continue
 	set 5,a 
@@ -731,14 +740,14 @@ collision_check_vertical .equ $
 	
 colis_horiz_not_fall:
 	;Player is moving horizontal 
-	ld a,(hl) ;flags 
-	bit 7,a ;semisolid 
+
+	bit 7,(hl) ;semisolid 
 	jp nz,vert_col_up_semisolid ;skips semisolid 
 
-	bit 4,a ;antisemisolid 
+	bit 4,(hl) ;antisemisolid 
 	jp nz,vert_col_up_semisolid ;skips semisolid 
 
-	bit 6,a 
+	bit 6,(hl) 
 	jp nz, collision_spikes
 	
 	
@@ -784,7 +793,7 @@ colis_vert_up_not_fall:
 	;Plyaer has moved up and hit non spike object 
 	ld a,(player_flags+1)
 	bit 4,a ;in antigrav zone 
-	ld a,(hl)
+
 	jp nz, vert_col_down_solid ;landed on roof
 
 	
@@ -819,7 +828,7 @@ colis_antisemisolid_up_lower_frame .equ $
 	
 	ld a, (player_flags+1)
 	bit 4,a ;previously in antigrav 
-	ld a,(hl)
+
 	jp nz, vert_col_down_solid ;in antigrav and hit collider moving up, set grounded 
 	
 	;otherwise just hit a roof in normal grav 
@@ -969,11 +978,10 @@ unlucky_bounce_loop: ;number of bounces determines num loops = more chances to l
 colis_vert_down_not_fall:
 
 	;player is moving down 
-	ld a,(hl) ;flags 
-	bit 4,a ;antisemi 
+	bit 4,(hl) ;antisemi 
 	jp nz, vert_col_up_semisolid ;down thru antisemisolid is same as up thru semisolid
 	
-	bit 7,a ;semisolid 
+	bit 7,(hl) ;semisolid 
 	jp nz,vert_col_down_semisolid 
 	
 	ld a,(player_flags + 1)
@@ -1023,13 +1031,13 @@ colis_semisolid_down_lower_frame .equ $
 	;ld a,$A2
 	;call write_a_to_ram
 	;otherwise, hit the collider 
-	ld a,(hl)
 
 vert_col_down_solid: ;also applies to landing upsidedown on roof 
-	bit 6,a 
+	bit 6,(hl) ;collider flags
 	jp nz, collision_spikes
 
 	push hl ;save flags
+	ld a,(hl)
 	;breakaway platforms 
 	and a,%00001111 ;breakaway index 1-16
 	jp z, not_breakaway

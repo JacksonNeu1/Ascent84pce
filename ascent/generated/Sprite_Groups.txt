@@ -1,159 +1,159 @@
 Sprite_Groups .equ 13894846
-Sprite_Groups_table_end .equ 13895173
+Sprite_Groups_table_end .equ 13895167
 Sprite_Groups_first .equ SG_Stars3
-Sprite_Groups_num_groups .equ 110
+Sprite_Groups_num_groups .equ 108
 
 
 SG_Stars3:
 	.db 2
 	.db 16
-	.db 0, 8, 0, 95  ;StarsNew_11_Slow
-	.db 18, 8, 32, 94  ;StarsNew_12_Slow
-	.db 32, 12, 11, 86  ;StarsNew_14_Slow
-	.db 8, 7, 20, 91  ;StarsNew_6_Slow
-	.db 28, 7, 23, 93  ;StarsNew_5_Slow
-	.db 41, 34, 29, 101  ;StarsNew_1_Slow
-	.db 17, 7, 60, 98  ;StarsNew_16_Slow
-	.db 66, 7, 6, 102  ;StarsNew_15_Slow
-	.db 62, 7, 68, 98  ;StarsNew_16_Slow
-	.db 19, 12, 82, 90  ;StarsNew_13_Slow
-	.db 39, 26, 89, 97  ;StarsNew_4_Slow
-	.db 41, 12, 54, 100  ;StarsNew_3_Slow
-	.db 77, 7, 51, 103  ;StarsNew_17_Slow
-	.db 81, 7, 26, 93  ;StarsNew_5_Slow
-	.db 77, 7, 81, 91  ;StarsNew_6_Slow
-	.db 84, 12, 71, 99  ;StarsNew_2_Slow
+	.db 0, 8, 0, 77  ;StarsNew_11_Slow
+	.db 18, 8, 32, 76  ;StarsNew_12_Slow
+	.db 32, 12, 11, 68  ;StarsNew_14_Slow
+	.db 8, 7, 20, 73  ;StarsNew_6_Slow
+	.db 28, 7, 23, 75  ;StarsNew_5_Slow
+	.db 41, 34, 29, 83  ;StarsNew_1_Slow
+	.db 17, 7, 60, 80  ;StarsNew_16_Slow
+	.db 66, 7, 6, 84  ;StarsNew_15_Slow
+	.db 62, 7, 68, 80  ;StarsNew_16_Slow
+	.db 19, 12, 82, 72  ;StarsNew_13_Slow
+	.db 39, 26, 89, 79  ;StarsNew_4_Slow
+	.db 41, 12, 54, 82  ;StarsNew_3_Slow
+	.db 77, 7, 51, 85  ;StarsNew_17_Slow
+	.db 81, 7, 26, 75  ;StarsNew_5_Slow
+	.db 77, 7, 81, 73  ;StarsNew_6_Slow
+	.db 84, 12, 71, 81  ;StarsNew_2_Slow
 
 SG_Stars1:
 	.db 2
 	.db 17
-	.db 0, 38, 0, 89  ;StarsNew_0_Fast
-	.db 48, 7, 7, 98  ;StarsNew_16_Slow
-	.db 75, 8, 51, 95  ;StarsNew_11_Slow
-	.db 78, 12, 70, 86  ;StarsNew_14_Slow
-	.db 15, 8, 22, 94  ;StarsNew_12_Slow
-	.db 5, 7, 52, 92  ;StarsNew_7_Slow
-	.db 62, 7, 73, 91  ;StarsNew_6_Slow
-	.db 69, 7, 66, 98  ;StarsNew_16_Slow
-	.db 49, 7, 52, 93  ;StarsNew_5_Slow
-	.db 77, 12, 36, 100  ;StarsNew_3_Slow
-	.db 65, 26, 59, 97  ;StarsNew_4_Slow
-	.db 3, 26, 35, 97  ;StarsNew_4_Slow
-	.db 8, 34, 57, 101  ;StarsNew_1_Slow
-	.db 70, 20, 8, 88  ;StarsNew_10_Slow
-	.db 41, 32, 30, 87  ;StarsNew_8_Slow
-	.db 43, 12, 19, 99  ;StarsNew_2_Slow
-	.db 55, 7, 65, 92  ;StarsNew_7_Slow
+	.db 0, 38, 0, 71  ;StarsNew_0_Fast
+	.db 48, 7, 7, 80  ;StarsNew_16_Slow
+	.db 75, 8, 51, 77  ;StarsNew_11_Slow
+	.db 78, 12, 70, 68  ;StarsNew_14_Slow
+	.db 15, 8, 22, 76  ;StarsNew_12_Slow
+	.db 5, 7, 52, 74  ;StarsNew_7_Slow
+	.db 62, 7, 73, 73  ;StarsNew_6_Slow
+	.db 69, 7, 66, 80  ;StarsNew_16_Slow
+	.db 49, 7, 52, 75  ;StarsNew_5_Slow
+	.db 77, 12, 36, 82  ;StarsNew_3_Slow
+	.db 65, 26, 59, 79  ;StarsNew_4_Slow
+	.db 3, 26, 35, 79  ;StarsNew_4_Slow
+	.db 8, 34, 57, 83  ;StarsNew_1_Slow
+	.db 70, 20, 8, 70  ;StarsNew_10_Slow
+	.db 41, 32, 30, 69  ;StarsNew_8_Slow
+	.db 43, 12, 19, 81  ;StarsNew_2_Slow
+	.db 55, 7, 65, 74  ;StarsNew_7_Slow
 
 SG_Stars2:
 	.db 2
 	.db 17
-	.db 0, 32, 0, 87  ;StarsNew_8_Slow
-	.db 81, 8, 53, 94  ;StarsNew_12_Slow
-	.db 81, 8, 73, 94  ;StarsNew_12_Slow
-	.db 41, 8, 53, 94  ;StarsNew_12_Slow
-	.db 41, 8, 73, 94  ;StarsNew_12_Slow
-	.db 86, 7, 35, 93  ;StarsNew_5_Slow
-	.db 6, 7, 42, 93  ;StarsNew_5_Slow
-	.db 85, 7, 15, 98  ;StarsNew_16_Slow
-	.db 48, 7, 42, 92  ;StarsNew_7_Slow
-	.db 9, 12, 54, 99  ;StarsNew_2_Slow
-	.db 70, 12, 25, 100  ;StarsNew_3_Slow
-	.db 49, 26, 9, 97  ;StarsNew_4_Slow
-	.db 64, 26, 44, 97  ;StarsNew_4_Slow
-	.db 49, 32, 57, 87  ;StarsNew_8_Slow
-	.db 19, 34, 23, 101  ;StarsNew_1_Slow
-	.db 31, 7, 63, 91  ;StarsNew_6_Slow
-	.db 41, 7, 2, 92  ;StarsNew_7_Slow
+	.db 0, 32, 0, 69  ;StarsNew_8_Slow
+	.db 81, 8, 53, 76  ;StarsNew_12_Slow
+	.db 81, 8, 73, 76  ;StarsNew_12_Slow
+	.db 41, 8, 53, 76  ;StarsNew_12_Slow
+	.db 41, 8, 73, 76  ;StarsNew_12_Slow
+	.db 86, 7, 35, 75  ;StarsNew_5_Slow
+	.db 6, 7, 42, 75  ;StarsNew_5_Slow
+	.db 85, 7, 15, 80  ;StarsNew_16_Slow
+	.db 48, 7, 42, 74  ;StarsNew_7_Slow
+	.db 9, 12, 54, 81  ;StarsNew_2_Slow
+	.db 70, 12, 25, 82  ;StarsNew_3_Slow
+	.db 49, 26, 9, 79  ;StarsNew_4_Slow
+	.db 64, 26, 44, 79  ;StarsNew_4_Slow
+	.db 49, 32, 57, 69  ;StarsNew_8_Slow
+	.db 19, 34, 23, 83  ;StarsNew_1_Slow
+	.db 31, 7, 63, 73  ;StarsNew_6_Slow
+	.db 41, 7, 2, 74  ;StarsNew_7_Slow
 
 SG_Stars4:
 	.db 2
 	.db 13
-	.db 0, 7, 0, 93  ;StarsNew_5_Slow
-	.db 13, 12, 17, 90  ;StarsNew_13_Slow
-	.db 40, 11, 18, 96  ;StarsNew_9_Slow
-	.db 55, 7, 29, 91  ;StarsNew_6_Slow
-	.db 62, 7, 37, 93  ;StarsNew_5_Slow
-	.db 29, 7, 49, 93  ;StarsNew_5_Slow
-	.db 48, 8, 45, 95  ;StarsNew_11_Slow
-	.db 54, 38, 6, 89  ;StarsNew_0_Fast
-	.db 58, 12, 58, 86  ;StarsNew_14_Slow
-	.db 73, 11, 70, 96  ;StarsNew_9_Slow
-	.db 85, 7, 49, 91  ;StarsNew_6_Slow
-	.db 52, 7, 60, 93  ;StarsNew_5_Slow
-	.db 13, 12, 67, 90  ;StarsNew_13_Slow
+	.db 0, 7, 0, 75  ;StarsNew_5_Slow
+	.db 13, 12, 17, 72  ;StarsNew_13_Slow
+	.db 40, 11, 18, 78  ;StarsNew_9_Slow
+	.db 55, 7, 29, 73  ;StarsNew_6_Slow
+	.db 62, 7, 37, 75  ;StarsNew_5_Slow
+	.db 29, 7, 49, 75  ;StarsNew_5_Slow
+	.db 48, 8, 45, 77  ;StarsNew_11_Slow
+	.db 54, 38, 6, 71  ;StarsNew_0_Fast
+	.db 58, 12, 58, 68  ;StarsNew_14_Slow
+	.db 73, 11, 70, 78  ;StarsNew_9_Slow
+	.db 85, 7, 49, 73  ;StarsNew_6_Slow
+	.db 52, 7, 60, 75  ;StarsNew_5_Slow
+	.db 13, 12, 67, 72  ;StarsNew_13_Slow
 
 SG_Stars5:
 	.db 2
 	.db 15
-	.db 0, 12, 0, 86  ;StarsNew_14_Slow
-	.db 23, 32, 32, 87  ;StarsNew_8_Slow
-	.db 47, 20, 20, 88  ;StarsNew_10_Slow
-	.db 26, 20, 54, 88  ;StarsNew_10_Slow
-	.db 54, 38, 64, 89  ;StarsNew_0_Fast
-	.db 18, 12, 18, 90  ;StarsNew_13_Slow
-	.db 72, 7, 40, 91  ;StarsNew_6_Slow
-	.db 73, 7, 6, 92  ;StarsNew_7_Slow
-	.db 62, 7, 8, 93  ;StarsNew_5_Slow
-	.db 82, 8, 25, 94  ;StarsNew_12_Slow
-	.db 85, 8, 17, 95  ;StarsNew_11_Slow
-	.db 31, 11, 4, 96  ;StarsNew_9_Slow
-	.db 13, 11, 47, 96  ;StarsNew_9_Slow
-	.db 5, 26, 72, 97  ;StarsNew_4_Slow
-	.db 74, 11, 53, 96  ;StarsNew_9_Slow
+	.db 0, 12, 0, 68  ;StarsNew_14_Slow
+	.db 23, 32, 32, 69  ;StarsNew_8_Slow
+	.db 47, 20, 20, 70  ;StarsNew_10_Slow
+	.db 26, 20, 54, 70  ;StarsNew_10_Slow
+	.db 54, 38, 64, 71  ;StarsNew_0_Fast
+	.db 18, 12, 18, 72  ;StarsNew_13_Slow
+	.db 72, 7, 40, 73  ;StarsNew_6_Slow
+	.db 73, 7, 6, 74  ;StarsNew_7_Slow
+	.db 62, 7, 8, 75  ;StarsNew_5_Slow
+	.db 82, 8, 25, 76  ;StarsNew_12_Slow
+	.db 85, 8, 17, 77  ;StarsNew_11_Slow
+	.db 31, 11, 4, 78  ;StarsNew_9_Slow
+	.db 13, 11, 47, 78  ;StarsNew_9_Slow
+	.db 5, 26, 72, 79  ;StarsNew_4_Slow
+	.db 74, 11, 53, 78  ;StarsNew_9_Slow
 
 SG_PurpleCloud6:
 	.db 2
 	.db 9
-	.db 26, 18, 12, 82  ;PurpleClouds_5_Fast
-	.db 15, 21, 5, 84  ;PurpleClouds_6_Slow
-	.db 29, 16, 1, 81  ;PurpleClouds_7_Fast
-	.db 38, 13, 22, 83  ;PurpleClouds_8_Fast
-	.db 38, 13, 11, 83  ;PurpleClouds_8_Fast
-	.db 26, 18, 23, 82  ;PurpleClouds_5_Fast
-	.db 40, 13, 0, 83  ;PurpleClouds_8_Fast
-	.db 11, 21, 15, 85  ;PurpleClouds_6_Slow_F
-	.db 0, 21, 10, 84  ;PurpleClouds_6_Slow
+	.db 26, 18, 12, 64  ;PurpleClouds_5_Fast
+	.db 15, 21, 5, 66  ;PurpleClouds_6_Slow
+	.db 29, 16, 1, 63  ;PurpleClouds_7_Fast
+	.db 38, 13, 22, 65  ;PurpleClouds_8_Fast
+	.db 38, 13, 11, 65  ;PurpleClouds_8_Fast
+	.db 26, 18, 23, 64  ;PurpleClouds_5_Fast
+	.db 40, 13, 0, 65  ;PurpleClouds_8_Fast
+	.db 11, 21, 15, 67  ;PurpleClouds_6_Slow_F
+	.db 0, 21, 10, 66  ;PurpleClouds_6_Slow
 
 SG_PurpleCloud7:
 	.db 2
 	.db 13
-	.db 27, 13, 0, 83  ;PurpleClouds_8_Fast
-	.db 27, 13, 11, 83  ;PurpleClouds_8_Fast
-	.db 30, 13, 21, 83  ;PurpleClouds_8_Fast
-	.db 34, 13, 32, 83  ;PurpleClouds_8_Fast
-	.db 19, 13, 21, 83  ;PurpleClouds_8_Fast
-	.db 18, 13, 10, 83  ;PurpleClouds_8_Fast
-	.db 17, 13, 1, 83  ;PurpleClouds_8_Fast
-	.db 4, 13, 20, 83  ;PurpleClouds_8_Fast
-	.db 11, 13, 11, 83  ;PurpleClouds_8_Fast
-	.db 0, 13, 10, 83  ;PurpleClouds_8_Fast
-	.db 11, 16, 23, 81  ;PurpleClouds_7_Fast
-	.db 5, 16, 0, 81  ;PurpleClouds_7_Fast
-	.db 21, 16, 28, 81  ;PurpleClouds_7_Fast
+	.db 27, 13, 0, 65  ;PurpleClouds_8_Fast
+	.db 27, 13, 11, 65  ;PurpleClouds_8_Fast
+	.db 30, 13, 21, 65  ;PurpleClouds_8_Fast
+	.db 34, 13, 32, 65  ;PurpleClouds_8_Fast
+	.db 19, 13, 21, 65  ;PurpleClouds_8_Fast
+	.db 18, 13, 10, 65  ;PurpleClouds_8_Fast
+	.db 17, 13, 1, 65  ;PurpleClouds_8_Fast
+	.db 4, 13, 20, 65  ;PurpleClouds_8_Fast
+	.db 11, 13, 11, 65  ;PurpleClouds_8_Fast
+	.db 0, 13, 10, 65  ;PurpleClouds_8_Fast
+	.db 11, 16, 23, 63  ;PurpleClouds_7_Fast
+	.db 5, 16, 0, 63  ;PurpleClouds_7_Fast
+	.db 21, 16, 28, 63  ;PurpleClouds_7_Fast
 
 SG_PurpleCloud5:
 	.db 2
 	.db 8
-	.db 0, 18, 11, 82  ;PurpleClouds_5_Fast
-	.db 17, 16, 23, 81  ;PurpleClouds_7_Fast
-	.db 22, 16, 0, 81  ;PurpleClouds_7_Fast
-	.db 13, 18, 13, 82  ;PurpleClouds_5_Fast
-	.db 29, 13, 10, 83  ;PurpleClouds_8_Fast
-	.db 29, 13, 19, 83  ;PurpleClouds_8_Fast
-	.db 8, 21, 2, 84  ;PurpleClouds_6_Slow
-	.db 1, 21, 22, 84  ;PurpleClouds_6_Slow
+	.db 0, 18, 11, 64  ;PurpleClouds_5_Fast
+	.db 17, 16, 23, 63  ;PurpleClouds_7_Fast
+	.db 22, 16, 0, 63  ;PurpleClouds_7_Fast
+	.db 13, 18, 13, 64  ;PurpleClouds_5_Fast
+	.db 29, 13, 10, 65  ;PurpleClouds_8_Fast
+	.db 29, 13, 19, 65  ;PurpleClouds_8_Fast
+	.db 8, 21, 2, 66  ;PurpleClouds_6_Slow
+	.db 1, 21, 22, 66  ;PurpleClouds_6_Slow
 
 SG_PurpleCloud4:
 	.db 2
 	.db 7
-	.db 26, 16, 0, 81  ;PurpleClouds_7_Fast
-	.db 24, 16, 12, 81  ;PurpleClouds_7_Fast
-	.db 4, 18, 24, 82  ;PurpleClouds_5_Fast
-	.db 19, 13, 25, 83  ;PurpleClouds_8_Fast
-	.db 8, 21, 14, 84  ;PurpleClouds_6_Slow
-	.db 11, 21, 2, 84  ;PurpleClouds_6_Slow
-	.db 0, 21, 6, 84  ;PurpleClouds_6_Slow
+	.db 26, 16, 0, 63  ;PurpleClouds_7_Fast
+	.db 24, 16, 12, 63  ;PurpleClouds_7_Fast
+	.db 4, 18, 24, 64  ;PurpleClouds_5_Fast
+	.db 19, 13, 25, 65  ;PurpleClouds_8_Fast
+	.db 8, 21, 14, 66  ;PurpleClouds_6_Slow
+	.db 11, 21, 2, 66  ;PurpleClouds_6_Slow
+	.db 0, 21, 6, 66  ;PurpleClouds_6_Slow
 
 SG_BGTree2:
 	.db 0
@@ -182,55 +182,25 @@ SG_BGTree1:
 SG_DarkGroundChunk:
 	.db 2
 	.db 9
-	.db 12, 16, 0, 76  ;GroundNew_1_Fast
-	.db 12, 16, 8, 76  ;GroundNew_1_Fast
-	.db 12, 16, 16, 77  ;GroundNew_1_Fast_F
-	.db 12, 16, 24, 76  ;GroundNew_1_Fast
-	.db 0, 12, 0, 78  ;GroundNew_3_Fast_F
-	.db 1, 12, 8, 78  ;GroundNew_3_Fast_F
-	.db 0, 12, 16, 79  ;GroundNew_3_Fast
-	.db 0, 12, 24, 79  ;GroundNew_3_Fast
-	.db 5, 19, 13, 80  ;DualLeaf4_Slow
-
-SG_SpacePlatform4:
-	.db 2
-	.db 6
-	.db 0, 7, 0, 35  ;SpacePlatformsNew_0_Fast
-	.db 0, 7, 8, 43  ;SpacePlatformsNew_2_Fast
-	.db 8, 3, 1, 51  ;WaveySpaceLines_0_Fast
-	.db 8, 3, 1, 59  ;WaveySpaceLines_8_Fast
-	.db 8, 3, 1, 67  ;WaveySpaceLines_16_Fast
-	.db 8, 3, 1, 75  ;WaveySpaceLines_8_Fast_F
-
-SG_SpacePlatform3:
-	.db 2
-	.db 6
-	.db 0, 7, 0, 35  ;SpacePlatformsNew_0_Fast
-	.db 0, 7, 8, 43  ;SpacePlatformsNew_2_Fast
-	.db 8, 3, 1, 51  ;WaveySpaceLines_0_Fast
-	.db 8, 3, 1, 59  ;WaveySpaceLines_8_Fast
-	.db 8, 3, 1, 67  ;WaveySpaceLines_16_Fast
-	.db 8, 3, 1, 75  ;WaveySpaceLines_8_Fast_F
-
-SG_SpacePlatform2:
-	.db 2
-	.db 6
-	.db 0, 7, 0, 35  ;SpacePlatformsNew_0_Fast
-	.db 0, 7, 8, 43  ;SpacePlatformsNew_2_Fast
-	.db 8, 3, 1, 51  ;WaveySpaceLines_0_Fast
-	.db 8, 3, 1, 59  ;WaveySpaceLines_8_Fast
-	.db 8, 3, 1, 67  ;WaveySpaceLines_16_Fast
-	.db 8, 3, 1, 75  ;WaveySpaceLines_8_Fast_F
+	.db 12, 16, 0, 58  ;GroundNew_1_Fast
+	.db 12, 16, 8, 58  ;GroundNew_1_Fast
+	.db 12, 16, 16, 59  ;GroundNew_1_Fast_F
+	.db 12, 16, 24, 58  ;GroundNew_1_Fast
+	.db 0, 12, 0, 60  ;GroundNew_3_Fast_F
+	.db 1, 12, 8, 60  ;GroundNew_3_Fast_F
+	.db 0, 12, 16, 61  ;GroundNew_3_Fast
+	.db 0, 12, 24, 61  ;GroundNew_3_Fast
+	.db 5, 19, 13, 62  ;DualLeaf4_Slow
 
 SG_SpacePlatform1:
 	.db 2
 	.db 6
-	.db 0, 7, 0, 35  ;SpacePlatformsNew_0_Fast
-	.db 0, 7, 8, 43  ;SpacePlatformsNew_2_Fast
-	.db 8, 3, 1, 51  ;WaveySpaceLines_0_Fast
-	.db 8, 3, 1, 59  ;WaveySpaceLines_8_Fast
-	.db 8, 3, 1, 67  ;WaveySpaceLines_16_Fast
-	.db 8, 3, 1, 75  ;WaveySpaceLines_8_Fast_F
+	.db 0, 7, 0, 15  ;SpacePlatformsNew_0_Fast
+	.db 0, 7, 8, 23  ;SpacePlatformsNew_2_Fast
+	.db 8, 3, 1, 31  ;WaveySpaceLines_0_Fast
+	.db 8, 3, 1, 39  ;WaveySpaceLines_8_Fast
+	.db 8, 3, 1, 47  ;WaveySpaceLines_16_Fast
+	.db 8, 3, 1, 55  ;WaveySpaceLines_8_Fast_F
 
 SG_TurtleY4:
 	.db 0
@@ -241,11 +211,11 @@ SG_TurtleY4:
 SG_SolidPlatform5:
 	.db 2
 	.db 5
-	.db 0, 12, 0, 16  ;CastlePlatforms_7_Fast
-	.db 0, 12, 7, 23  ;CastlePlatforms_6_Fast
-	.db 0, 12, 13, 23  ;CastlePlatforms_6_Fast
-	.db 0, 12, 19, 23  ;CastlePlatforms_6_Fast
-	.db 0, 12, 25, 17  ;CastlePlatforms_7_Fast_F
+	.db 0, 12, 0, 3  ;CastlePlatforms_7_Fast
+	.db 0, 12, 7, 5  ;CastlePlatforms_6_Fast
+	.db 0, 12, 13, 5  ;CastlePlatforms_6_Fast
+	.db 0, 12, 19, 5  ;CastlePlatforms_6_Fast
+	.db 0, 12, 25, 4  ;CastlePlatforms_7_Fast_F
 
 SG_TurtleP4:
 	.db 0
@@ -256,16 +226,16 @@ SG_TurtleP4:
 SG_SolidPlatform6:
 	.db 2
 	.db 2
-	.db 0, 12, 0, 16  ;CastlePlatforms_7_Fast
-	.db 0, 12, 7, 17  ;CastlePlatforms_7_Fast_F
+	.db 0, 12, 0, 3  ;CastlePlatforms_7_Fast
+	.db 0, 12, 7, 4  ;CastlePlatforms_7_Fast_F
 
 SG_SolidPlatform4:
 	.db 2
 	.db 4
-	.db 0, 14, 0, 13  ;CastlePlatforms_1_Fast
-	.db 14, 12, 0, 14  ;CastlePlatforms_5_Fast
-	.db 26, 12, 0, 14  ;CastlePlatforms_5_Fast
-	.db 38, 14, 0, 15  ;CastlePlatforms_4_Fast
+	.db 0, 14, 0, 0  ;CastlePlatforms_1_Fast
+	.db 14, 12, 0, 1  ;CastlePlatforms_5_Fast
+	.db 26, 12, 0, 1  ;CastlePlatforms_5_Fast
+	.db 38, 14, 0, 2  ;CastlePlatforms_4_Fast
 
 SG_TurtleB4:
 	.db 0
@@ -274,183 +244,160 @@ SG_TurtleB4:
 	.db 10, 5, 0, 111  ;Truetle_2_Slow
 
 SG_CloudPlatform3:
+	.db 1
 	.db 2
-	.db 2
-	.db 0, 11, 0, 3  ;CloudSemisolid_0_Fast
-	.db 0, 11, 7, 5  ;CloudSemisolid_0_Fast_F
+	.db 0, 11, 0, 146  ;CloudSemisolid_0_Fast
+	.db 0, 11, 7, 148  ;CloudSemisolid_0_Fast_F
 
 SG_CloudPlatform2:
-	.db 2
+	.db 1
 	.db 5
-	.db 0, 11, 0, 3  ;CloudSemisolid_0_Fast
-	.db 0, 11, 10, 4  ;CloudSemisolid_1_Fast
-	.db 0, 11, 34, 5  ;CloudSemisolid_0_Fast_F
-	.db 0, 11, 18, 4  ;CloudSemisolid_1_Fast
-	.db 0, 11, 26, 4  ;CloudSemisolid_1_Fast
+	.db 0, 11, 0, 146  ;CloudSemisolid_0_Fast
+	.db 0, 11, 10, 147  ;CloudSemisolid_1_Fast
+	.db 0, 11, 34, 148  ;CloudSemisolid_0_Fast_F
+	.db 0, 11, 18, 147  ;CloudSemisolid_1_Fast
+	.db 0, 11, 26, 147  ;CloudSemisolid_1_Fast
 
 SG_CloudPlatform1:
-	.db 2
+	.db 1
 	.db 3
-	.db 0, 11, 0, 3  ;CloudSemisolid_0_Fast
-	.db 0, 11, 10, 4  ;CloudSemisolid_1_Fast
-	.db 0, 11, 18, 5  ;CloudSemisolid_0_Fast_F
+	.db 0, 11, 0, 146  ;CloudSemisolid_0_Fast
+	.db 0, 11, 10, 147  ;CloudSemisolid_1_Fast
+	.db 0, 11, 18, 148  ;CloudSemisolid_0_Fast_F
 
 SG_TongueRing:
+	.db 1
 	.db 2
-	.db 2
-	.db 0, 16, 4, 0  ;TongueRing1_Slow
-	.db 0, 16, 0, 1  ;TongueRing1_Slow_F
+	.db 0, 16, 4, 143  ;TongueRing1_Slow
+	.db 0, 16, 0, 144  ;TongueRing1_Slow_F
 
 SG_SolidPlatform3:
 	.db 1
 	.db 2
-	.db 0, 14, 0, 143  ;SolidPlatform_4_Slow
-	.db 0, 14, 8, 146  ;SolidPlatform_5_Slow_O
+	.db 0, 14, 0, 126  ;SolidPlatform_4_Slow
+	.db 0, 14, 8, 129  ;SolidPlatform_5_Slow_O
 
 SG_SolidPlatform2:
 	.db 1
 	.db 4
-	.db 32, 15, 0, 147  ;SolidPlatform_0_Fast
-	.db 17, 15, 0, 147  ;SolidPlatform_0_Fast
-	.db 0, 17, 0, 148  ;SolidPlatform_2_Fast
-	.db 47, 17, 0, 149  ;SolidPlatform_3_Fast
+	.db 32, 15, 0, 130  ;SolidPlatform_0_Fast
+	.db 17, 15, 0, 130  ;SolidPlatform_0_Fast
+	.db 0, 17, 0, 131  ;SolidPlatform_2_Fast
+	.db 47, 17, 0, 132  ;SolidPlatform_3_Fast
 
 SG_SolidPlatform1:
 	.db 1
 	.db 4
-	.db 0, 14, 0, 143  ;SolidPlatform_4_Slow
-	.db 0, 14, 8, 144  ;SolidPlatform_1_Slow_O
-	.db 0, 14, 16, 145  ;SolidPlatform_1_Slow
-	.db 0, 14, 23, 146  ;SolidPlatform_5_Slow_O
+	.db 0, 14, 0, 126  ;SolidPlatform_4_Slow
+	.db 0, 14, 8, 127  ;SolidPlatform_1_Slow_O
+	.db 0, 14, 16, 128  ;SolidPlatform_1_Slow
+	.db 0, 14, 23, 129  ;SolidPlatform_5_Slow_O
 
 SG_Platform6:
 	.db 1
 	.db 3
-	.db 0, 9, 0, 126  ;Platforms_0_Fast
-	.db 0, 9, 7, 128  ;Platforms_0_Fast_F
-	.db 8, 14, 0, 129  ;Platforms_2_Slow_O_F
+	.db 0, 9, 0, 109  ;Platforms_0_Fast
+	.db 0, 9, 7, 111  ;Platforms_0_Fast_F
+	.db 8, 14, 0, 112  ;Platforms_2_Slow_O_F
 
 SG_Platform5:
 	.db 1
 	.db 3
-	.db 0, 9, 0, 126  ;Platforms_0_Fast
-	.db 0, 9, 7, 128  ;Platforms_0_Fast_F
-	.db 8, 14, 9, 130  ;Platforms_2_Slow_O
+	.db 0, 9, 0, 109  ;Platforms_0_Fast
+	.db 0, 9, 7, 111  ;Platforms_0_Fast_F
+	.db 8, 14, 9, 113  ;Platforms_2_Slow_O
 
 SG_Platform2:
 	.db 1
 	.db 4
-	.db 0, 9, 0, 126  ;Platforms_0_Fast
-	.db 0, 9, 10, 127  ;Platforms_1_Fast
-	.db 0, 9, 20, 128  ;Platforms_0_Fast_F
-	.db 8, 14, 0, 129  ;Platforms_2_Slow_O_F
+	.db 0, 9, 0, 109  ;Platforms_0_Fast
+	.db 0, 9, 10, 110  ;Platforms_1_Fast
+	.db 0, 9, 20, 111  ;Platforms_0_Fast_F
+	.db 8, 14, 0, 112  ;Platforms_2_Slow_O_F
 
 SG_Platform1:
 	.db 1
 	.db 4
-	.db 0, 9, 0, 126  ;Platforms_0_Fast
-	.db 0, 9, 10, 127  ;Platforms_1_Fast
-	.db 0, 9, 20, 128  ;Platforms_0_Fast_F
-	.db 8, 14, 22, 130  ;Platforms_2_Slow_O
+	.db 0, 9, 0, 109  ;Platforms_0_Fast
+	.db 0, 9, 10, 110  ;Platforms_1_Fast
+	.db 0, 9, 20, 111  ;Platforms_0_Fast_F
+	.db 8, 14, 22, 113  ;Platforms_2_Slow_O
 
 SG_Platform4:
 	.db 1
 	.db 6
-	.db 0, 9, 0, 126  ;Platforms_0_Fast
-	.db 0, 9, 10, 127  ;Platforms_1_Fast
-	.db 0, 9, 40, 128  ;Platforms_0_Fast_F
-	.db 8, 14, 42, 130  ;Platforms_2_Slow_O
-	.db 0, 9, 20, 127  ;Platforms_1_Fast
-	.db 0, 9, 30, 127  ;Platforms_1_Fast
+	.db 0, 9, 0, 109  ;Platforms_0_Fast
+	.db 0, 9, 10, 110  ;Platforms_1_Fast
+	.db 0, 9, 40, 111  ;Platforms_0_Fast_F
+	.db 8, 14, 42, 113  ;Platforms_2_Slow_O
+	.db 0, 9, 20, 110  ;Platforms_1_Fast
+	.db 0, 9, 30, 110  ;Platforms_1_Fast
 
 SG_Platform3:
 	.db 1
 	.db 6
-	.db 0, 9, 0, 126  ;Platforms_0_Fast
-	.db 0, 9, 10, 127  ;Platforms_1_Fast
-	.db 0, 9, 40, 128  ;Platforms_0_Fast_F
-	.db 8, 14, 0, 129  ;Platforms_2_Slow_O_F
-	.db 0, 9, 20, 127  ;Platforms_1_Fast
-	.db 0, 9, 30, 127  ;Platforms_1_Fast
+	.db 0, 9, 0, 109  ;Platforms_0_Fast
+	.db 0, 9, 10, 110  ;Platforms_1_Fast
+	.db 0, 9, 40, 111  ;Platforms_0_Fast_F
+	.db 8, 14, 0, 112  ;Platforms_2_Slow_O_F
+	.db 0, 9, 20, 110  ;Platforms_1_Fast
+	.db 0, 9, 30, 110  ;Platforms_1_Fast
 
-SG_BigFishbowlWater:
+SG_AntigravZoneFG_3:
 	.db 1
-	.db 35
-	.db 101, 7, 18, 103  ;BigFishbowl_8_Fast
-	.db 5, 12, 8, 105  ;BigFishbowl_7_Fast
-	.db 5, 12, 24, 105  ;BigFishbowl_7_Fast
-	.db 5, 12, 40, 105  ;BigFishbowl_7_Fast
-	.db 7, 12, 55, 107  ;BigFishbowl_17_Fast_F
-	.db 7, 12, 4, 109  ;BigFishbowl_16_Fast
-	.db 19, 56, 56, 111  ;BigFishbowl_15_Fast_F
-	.db 76, 12, 55, 113  ;BigFishbowl_13_Fast_F
-	.db 76, 13, 4, 115  ;BigFishbowl_12_Fast
-	.db 19, 57, 0, 117  ;BigFishbowl_14_Fast
-	.db 17, 12, 8, 105  ;BigFishbowl_7_Fast
-	.db 17, 12, 24, 105  ;BigFishbowl_7_Fast
-	.db 17, 12, 40, 105  ;BigFishbowl_7_Fast
-	.db 29, 12, 8, 105  ;BigFishbowl_7_Fast
-	.db 29, 12, 24, 105  ;BigFishbowl_7_Fast
-	.db 29, 12, 40, 105  ;BigFishbowl_7_Fast
-	.db 41, 12, 8, 105  ;BigFishbowl_7_Fast
-	.db 77, 12, 8, 105  ;BigFishbowl_7_Fast
-	.db 41, 12, 40, 105  ;BigFishbowl_7_Fast
-	.db 53, 12, 8, 105  ;BigFishbowl_7_Fast
-	.db 53, 12, 24, 105  ;BigFishbowl_7_Fast
-	.db 53, 12, 40, 105  ;BigFishbowl_7_Fast
-	.db 65, 12, 8, 105  ;BigFishbowl_7_Fast
-	.db 65, 12, 24, 105  ;BigFishbowl_7_Fast
-	.db 65, 12, 40, 105  ;BigFishbowl_7_Fast
-	.db 41, 12, 24, 105  ;BigFishbowl_7_Fast
-	.db 77, 12, 24, 105  ;BigFishbowl_7_Fast
-	.db 77, 12, 40, 105  ;BigFishbowl_7_Fast
-	.db 89, 12, 32, 105  ;BigFishbowl_7_Fast
-	.db 89, 10, 48, 119  ;BigFishbowl_11_Fast_F
-	.db 89, 12, 16, 105  ;BigFishbowl_7_Fast
-	.db 89, 9, 9, 121  ;BigFishbowl_10_Fast
-	.db 101, 8, 32, 123  ;BigFishbowl_9_Fast_F
-	.db 8, 28, 7, 124  ;BigFishbowl_19_Fast
-	.db 0, 9, 15, 125  ;BigFishbowl_20_Fast
+	.db 10
+	.db 4, 12, 2, 104  ;AntigravZone_2_Fast
+	.db 4, 12, 2, 108  ;AntigravZone_2_Fast_F
+	.db 4, 12, 18, 104  ;AntigravZone_2_Fast
+	.db 4, 12, 18, 108  ;AntigravZone_2_Fast_F
+	.db 4, 12, 34, 104  ;AntigravZone_2_Fast
+	.db 4, 12, 34, 108  ;AntigravZone_2_Fast_F
+	.db 4, 12, 50, 104  ;AntigravZone_2_Fast
+	.db 4, 12, 50, 108  ;AntigravZone_2_Fast_F
+	.db 0, 16, 66, 92  ;AntigravZone_15_Fast
+	.db 0, 16, 0, 92  ;AntigravZone_15_Fast
 
-SG_BigFishbowl:
+SG_AntigravZoneFG_2:
 	.db 1
-	.db 36
-	.db 76, 19, 34, 87  ;BigFishbowl_18_Fast
-	.db 38, 19, 19, 87  ;BigFishbowl_18_Fast
-	.db 38, 19, 34, 87  ;BigFishbowl_18_Fast
-	.db 19, 19, 19, 87  ;BigFishbowl_18_Fast
-	.db 19, 19, 34, 87  ;BigFishbowl_18_Fast
-	.db 12, 19, 19, 87  ;BigFishbowl_18_Fast
-	.db 12, 19, 34, 87  ;BigFishbowl_18_Fast
-	.db 57, 19, 34, 87  ;BigFishbowl_18_Fast
-	.db 69, 19, 4, 87  ;BigFishbowl_18_Fast
-	.db 32, 19, 4, 87  ;BigFishbowl_18_Fast
-	.db 32, 19, 47, 87  ;BigFishbowl_18_Fast
-	.db 51, 19, 47, 87  ;BigFishbowl_18_Fast
-	.db 69, 19, 47, 87  ;BigFishbowl_18_Fast
-	.db 87, 19, 40, 87  ;BigFishbowl_18_Fast
-	.db 87, 19, 11, 87  ;BigFishbowl_18_Fast
-	.db 50, 19, 4, 87  ;BigFishbowl_18_Fast
-	.db 57, 19, 19, 87  ;BigFishbowl_18_Fast
-	.db 14, 19, 40, 87  ;BigFishbowl_18_Fast
-	.db 76, 19, 19, 87  ;BigFishbowl_18_Fast
-	.db 95, 19, 34, 87  ;BigFishbowl_18_Fast
-	.db 95, 19, 19, 87  ;BigFishbowl_18_Fast
-	.db 14, 19, 11, 87  ;BigFishbowl_18_Fast
-	.db 106, 11, 11, 88  ;BigFishbowl_1_Fast
-	.db 88, 19, 4, 89  ;BigFishbowl_2_Fast
-	.db 31, 58, 0, 90  ;BigFishbowl_3_Fast
-	.db 13, 19, 4, 91  ;BigFishbowl_4_Fast
-	.db 0, 14, 11, 92  ;BigFishbowl_5_Fast
-	.db 4, 8, 19, 93  ;BigFishbowl_6_Fast
-	.db 0, 14, 47, 94  ;BigFishbowl_5_Fast_F
-	.db 13, 19, 55, 95  ;BigFishbowl_4_Fast_F
-	.db 31, 58, 62, 96  ;BigFishbowl_3_Fast_F
-	.db 88, 19, 55, 97  ;BigFishbowl_2_Fast_F
-	.db 106, 11, 47, 98  ;BigFishbowl_1_Fast_F
-	.db 114, 10, 33, 99  ;BigFishbowl_0_Fast_F
-	.db 4, 8, 33, 100  ;BigFishbowl_6_Fast_F
-	.db 114, 10, 19, 101  ;BigFishbowl_0_Fast
+	.db 10
+	.db 0, 12, 2, 96  ;AntigravZone_1_Fast
+	.db 0, 12, 2, 100  ;AntigravZone_1_Fast_F
+	.db 0, 12, 18, 96  ;AntigravZone_1_Fast
+	.db 0, 12, 18, 100  ;AntigravZone_1_Fast_F
+	.db 0, 12, 34, 96  ;AntigravZone_1_Fast
+	.db 0, 12, 34, 100  ;AntigravZone_1_Fast_F
+	.db 0, 12, 50, 96  ;AntigravZone_1_Fast
+	.db 0, 12, 50, 100  ;AntigravZone_1_Fast_F
+	.db 0, 16, 0, 92  ;AntigravZone_15_Fast
+	.db 0, 16, 66, 92  ;AntigravZone_15_Fast
+
+SG_AntigravZoneFG_1:
+	.db 1
+	.db 24
+	.db 0, 16, 2, 88  ;AntigravZone_0_Fast
+	.db 32, 16, 0, 92  ;AntigravZone_15_Fast
+	.db 48, 16, 0, 92  ;AntigravZone_15_Fast
+	.db 0, 16, 66, 92  ;AntigravZone_15_Fast
+	.db 16, 16, 66, 92  ;AntigravZone_15_Fast
+	.db 32, 16, 66, 92  ;AntigravZone_15_Fast
+	.db 48, 16, 66, 92  ;AntigravZone_15_Fast
+	.db 48, 16, 50, 88  ;AntigravZone_0_Fast
+	.db 48, 16, 34, 88  ;AntigravZone_0_Fast
+	.db 48, 16, 18, 88  ;AntigravZone_0_Fast
+	.db 48, 16, 2, 88  ;AntigravZone_0_Fast
+	.db 32, 16, 50, 88  ;AntigravZone_0_Fast
+	.db 32, 16, 34, 88  ;AntigravZone_0_Fast
+	.db 32, 16, 18, 88  ;AntigravZone_0_Fast
+	.db 32, 16, 2, 88  ;AntigravZone_0_Fast
+	.db 16, 16, 50, 88  ;AntigravZone_0_Fast
+	.db 16, 16, 34, 88  ;AntigravZone_0_Fast
+	.db 16, 16, 18, 88  ;AntigravZone_0_Fast
+	.db 16, 16, 2, 88  ;AntigravZone_0_Fast
+	.db 0, 16, 50, 88  ;AntigravZone_0_Fast
+	.db 0, 16, 34, 88  ;AntigravZone_0_Fast
+	.db 0, 16, 18, 88  ;AntigravZone_0_Fast
+	.db 16, 16, 0, 92  ;AntigravZone_15_Fast
+	.db 0, 16, 0, 92  ;AntigravZone_15_Fast
 
 SG_Spiral7:
 	.db 1

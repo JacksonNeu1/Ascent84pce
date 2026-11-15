@@ -1,5 +1,5 @@
-Collision_Data_Frame_Table .equ 13895176
-Collision_Data_table_end .equ 13895401
+Collision_Data_Frame_Table .equ 13895170
+Collision_Data_table_end .equ 13895395
 Collision_Data_first .equ collision_data_75
 Collision_Data_num_frames .equ 76
 
@@ -31,22 +31,18 @@ collision_data_70:
 
 
 collision_data_69:
-	.db 4
-	.db 1,4,104,89,%10000000 ;
-	.db 37,4,130,115,%10000000 ;
-	.db 87,4,104,89,%10000000 ;
-	.db 32,7,104,77,%00010000 ;
+	.db 5
+	.db 83,139,79,14,%00100000 ;
+	.db 203,11,67,36,%00000000 ;
+	.db 200,2,47,36,%01000000 ;
+	.db 136,11,134,103,%00000000 ;
+	.db 147,11,47,16,%00000000 ;
 
 
 collision_data_68:
-	.db 7
+	.db 2
 	.db 99,10,77,58,%10000000 ;
-	.db 208,4,68,53,%10000000 ;
-	.db 153,11,145,114,%00000000 ;
-	.db 115,11,128,97,%00000000 ;
-	.db 242,7,121,94,%00010000 ;
-	.db 194,113,153,98,%00100000 ;
-	.db 234,11,158,127,%00000000 ;
+	.db 229,4,76,61,%10000000 ;
 
 
 collision_data_67:

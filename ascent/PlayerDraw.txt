@@ -18,13 +18,16 @@ player_move_cam:
 	bit 3,a ;is falling 
 	jp nz, pmc_falling
 	;otherwise, check if player below last grounded pos 
+	ld a,(player_flags + 1)
+	bit 4,a 
+	jp nz,pmc_ignore_ground_check ;when anti, skip below ground check
 	ld hl,(player_last_ground_pos)
 	ex de,hl 
 	ld hl,(player_y_pos)
 	sbc hl,de 
 	jp c, pmc_below_last_ground
 	
-	
+pmc_ignore_ground_check:
 	;Check if player is near top or bottom of screen
 	ld hl, (cam_pos)
 	push hl
@@ -54,9 +57,17 @@ pmc_grounded:
 	jp nz,pmc_camscroll_up
 	bit 6,a 
 	jp nz,pmc_camscroll_down
+	bit 4,a ;in antigrav 
+	jp nz, pmc_grounded_anti
 	;If player on ground, desired cam pos = 90px below player 
 	call player_to_cam_coords ;hl holds cam pos to put player at bottom of frame
 	ld de,90
+	jp pmc_grounded_noanti
+pmc_grounded_anti:
+	;If player on ground, desired cam pos = 90px below player 
+	call player_to_cam_coords ;hl holds cam pos to put player at bottom of frame
+	ld de,160
+pmc_grounded_noanti:	
 	sbc hl,de
 	jp nc, set_desired_pos_0_skip
 	ld hl,0
@@ -213,6 +224,9 @@ player_draw:
 	;default, charge, chargelit, jump, jumpmouth, fall
 	;Add 4 for sprite, add 2 for flip, add 1 for offset
 	
+	ld a,20 
+	ld (pd_no_inverse_sprite),a
+	
 	ld a,(player_flags)
 	bit 3,a ;check fall flag 
 	jp nz,pd_set_fall
@@ -236,13 +250,17 @@ player_draw:
 	ld (pd_x_offset_flip),a 
 	ld a,1 
 	ld (pd_y_offset),a
+	ld a,0 
+	ld (pd_y_offset_inv),a
 	ld a,(player_flags)
 	bit 1,a 
 	jp nz,pd_noflip
 	jp pd_flip
 
+
+
 pd_set_fall:
-	ld c,20
+	ld c,16
 	ld a,26
 	ld (pd_sprite_height_1),a 
 	ld (pd_sprite_height_2),a 
@@ -252,6 +270,9 @@ pd_set_fall:
 	ld (pd_x_offset_flip),a 
 	ld a,7 
 	ld (pd_y_offset),a 
+	ld (pd_y_offset_inv),a
+	ld a,0 ;falling has no inverse sprite 
+	ld (pd_no_inverse_sprite),a
 	jp pd_check_flip
 
 pd_set_tongue:
@@ -260,6 +281,7 @@ pd_set_tongue:
 	ld (pd_sprite_height_2),a 
 	ld a,1 
 	ld (pd_y_offset),a 
+	;should never be in tongue state while inverted
 	
 	;Need to check if player center is to the left or right of ring, will determine flip 
 	call player_x_half ;a holds x pos in px pairs
@@ -272,13 +294,13 @@ pd_set_tongue:
 	jp nc, pd_tongue_noflip
 	;ring to left of player, yes flip 
 	ld b,0
-	ld c,18
+	ld c,14
 	ld de,2 ;flip offset
 	jp pd_check_offset
 pd_tongue_noflip:
 	;ring is to the right of player, no sprite flip
 	ld b,0
-	ld c,16
+	ld c,12
 	ld de,7
 	jp pd_check_offset
 
@@ -291,6 +313,8 @@ pd_set_charge:
 	ld (pd_x_offset_flip),a 
 	ld a,0
 	ld (pd_y_offset),a 
+	ld a,0 
+	ld (pd_y_offset_inv),a
 
 	ld a,(jump_charge_timer)
 	cp timer_max_val
@@ -329,6 +353,8 @@ pd_set_jump:
 	ld (pd_x_offset_flip),a 
 	ld a,1
 	ld (pd_y_offset),a 
+	ld a,10
+	ld (pd_y_offset_inv),a 
 	
 
 pd_check_flip:
@@ -364,7 +390,22 @@ pd_check_offset: ;jump here to draw unlucky
 	jp z, pd_even_px 
 	inc c ;add 1 for offset 
 pd_even_px:
-	ld a,c
+
+	ld a,(player_flags + 1)
+	bit 4,a 
+	ld a,c ;sprite index
+	jp nz, pd_inv
+pd_y_offset .equ $+1
+	ld de,0
+	jp pd_no_inv
+pd_inv:	
+pd_y_offset_inv .equ $+1
+	ld de,0
+pd_no_inverse_sprite .equ $+1
+	ld c, 20 ;replace w 0
+	add a,c ;add 20 to get inverted sprite 
+pd_no_inv:
+
 	ld (player_sprite_index),a 
 
 	;call write_a_to_ram
@@ -377,10 +418,9 @@ pd_even_px:
 	ld l,a 
 	;hl holds y pos fullpixels
 	
-pd_y_offset .equ $+1
-	ld de,0 
-	add hl,de ;add y offset
 
+
+	add hl,de ;add y offset
 
 	;Draw player sprite 
 	ex de,hl ;de holds player y 
@@ -515,6 +555,8 @@ pd_draw_unlucky:
 	ld a,11
 	ld (pd_sprite_height_1),a 
 	ld (pd_sprite_height_2),a 
+	ld a,0 ;unlucky has no inverse sprite 
+	ld (pd_no_inverse_sprite),a
 	
 	ld de ,14 ;default x offset
 	;calculate x offset to clamp within screen
@@ -528,7 +570,7 @@ pd_draw_unlucky:
 pd_unlucky_noclamp:
 	ld a,10
 	ld (pd_y_offset),a
-	ld c,24
+	ld c,36
 	jp pd_check_offset	
 	
 	
@@ -904,20 +946,32 @@ player_sprite_table: ;Add 4 for sprite, add 2 for flip, add 1 for offset
 	.dl FrogChargeLit_Slow_O
 	.dl FrogChargeLit_Slow_F
 	.dl FrogChargeLit_Slow_O_F
-	.dl FrogJump_Slow;12
+	.dl FrogJump_Slow ;12
 	.dl FrogJump_Slow_O
 	.dl FrogJump_Slow_F
 	.dl FrogJump_Slow_O_F
-	.dl FrogJumpMouth_Slow ;16
-	.dl FrogJumpMouth_Slow_O
-	.dl FrogJumpMouth_Slow_F
-	.dl FrogJumpMouth_Slow_O_F
-	.dl FrogFall_Slow;20
+	.dl FrogFall_Slow;16
 	.dl FrogFall_Slow_O
 	.dl FrogFall_Slow_F
 	.dl FrogFall_Slow_O_F
-	.dl Unlucky_0_Fast;24
-	.dl Unlucky_0_Fast;25 (same if offset)
+	.dl FrogDefaultInv_Slow;20
+	.dl FrogDefaultInv_Slow_O
+	.dl FrogDefaultInv_Slow_F
+	.dl FrogDefaultInv_Slow_O_F
+	.dl FrogChargeInv_Slow ;24
+	.dl FrogChargeInv_Slow_O
+	.dl FrogChargeInv_Slow_F
+	.dl FrogChargeInv_Slow_O_F 
+	.dl FrogChargeLitInv_Slow ;28
+	.dl FrogChargeLitInv_Slow_O
+	.dl FrogChargeLitInv_Slow_F
+	.dl FrogChargeLitInv_Slow_O_F
+	.dl FrogJumpInv_Slow ;32
+	.dl FrogJumpInv_Slow_O
+	.dl FrogJumpInv_Slow_F
+	.dl FrogJumpInv_Slow_O_F
+	.dl Unlucky_0_Fast;36
+	.dl Unlucky_0_Fast;37 (same if offset)
 	
 	
 	

@@ -354,9 +354,9 @@ get_inputs_return:
 	;call move_bg Draw BG calls MoveBg
 	;call player_move_debug
 	call player_update
-	call check_collisions
+	
+	;call check_collisions
 
-	;call prgmpause
 
 	call update_sine_vals
 	;ld a,(lin_4_7_1)
@@ -365,12 +365,14 @@ get_inputs_return:
 
 	call update_animations
 
+
 	call breakaway_timer_update
+
 	
 	call player_move_cam
 	
 	;Check palette setup 
-	
+
 	
 	ld a, (cam_pos+1) ;cam frame #
 	cp 134
@@ -435,7 +437,9 @@ post_zone_setup:
 	;ld bc, 160*240
 	;ldir
 	
-	call draw_mg
+	scf 
+draw_mg_order .equ $
+	call c, draw_mg ;set nc when in zone 3
 	
 	call draw_mg2
 	
@@ -446,6 +450,9 @@ post_zone_setup:
 	res 7,a ;Reset jump hold flag
 	ld (player_flags),a 
 	
+	scf 
+draw_mg_order_2 .equ $
+	call nc, draw_mg ;set c when in zone 3
 	
 	;ld hl,121
 	;ld (tongue_ring_y_pos),hl 
@@ -810,6 +817,10 @@ setup_zone_2:
 	ld (zone_1_entered),a
 	ld a, %11111111
 	ld (zone_2_entered),a
+	ld a, %11011100 ;call c 
+	ld (draw_mg_order), a
+	ld a, %11010100 ;call nc 
+	ld (draw_mg_order_2), a
 	jp post_zone_setup	
 	
 setup_zone_1:
@@ -820,6 +831,10 @@ setup_zone_1:
 	ld (zone_2_entered),a
 	ld a, %11111111
 	ld (zone_1_entered),a
+	ld a, %11011100 ;call c 
+	ld (draw_mg_order), a
+	ld a, %11010100 ;call nc 
+	ld (draw_mg_order_2), a
 	jp post_zone_setup	
 	
 setup_zone_3:
@@ -830,6 +845,10 @@ setup_zone_3:
 	ld (zone_1_entered),a
 	ld a, %11111111
 	ld (zone_3_entered),a
+	ld a, %11010100 ;call nc 
+	ld (draw_mg_order), a
+	ld a, %11011100 ;call c 
+	ld (draw_mg_order_2), a
 	jp post_zone_setup	
 	
 

@@ -18,8 +18,7 @@ MG_Data_70:
 
 MG_Data_69:
 	.db 1
-	.db 26
-	.db 174, 255, 11, 73  ;SG_BigFishbowl
+	.db 28
 	.db 196, 255, 22, 63  ;SG_Spiral2
 	.db 60, 9, 96, 76  ;ZigsAndZags_12_Slow
 	.db 60, 255, 96, 69  ;SG_Zig3
@@ -31,8 +30,8 @@ MG_Data_69:
 	.db 146, 255, 43, 70  ;SG_Spiral5
 	.db 121, 9, 125, 76  ;ZigsAndZags_12_Slow
 	.db 121, 255, 125, 69  ;SG_Zig3
-	.db 142, 26, 10, 62  ;ZigsAndZags_4_Slow_O_F
 	.db 142, 255, 10, 65  ;SG_Zig4
+	.db 142, 26, 10, 62  ;ZigsAndZags_4_Slow_O_F
 	.db 228, 255, 121, 68  ;SG_Star1
 	.db 83, 42, 54, 68  ;ZigsAndZags_46_Slow_O
 	.db 83, 255, 54, 67  ;SG_Star2
@@ -44,7 +43,10 @@ MG_Data_69:
 	.db 99, 255, 128, 64  ;SG_Spiral6
 	.db 196, 33, 22, 55  ;ZigsAndZags_32_Slow_O
 	.db 228, 42, 121, 72  ;ZigsAndZags_54_Slow_O
-	.db 161, 255, 12, 74  ;SG_BigFishbowlWater
+	.db 89, 255, 13, 74  ;SG_AntigravZoneFG_2
+	.db 153, 255, 13, 73  ;SG_AntigravZoneFG_1
+	.db 217, 255, 13, 73  ;SG_AntigravZoneFG_1
+	.db 233, 255, 13, 75  ;SG_AntigravZoneFG_3
 
 MG_Data_68:
 	.db 0

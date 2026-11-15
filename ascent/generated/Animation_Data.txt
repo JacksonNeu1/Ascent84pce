@@ -902,31 +902,31 @@ sprite_animation_data:
 	.db 85, 38 ; ZigsAndZags_43_Slow_F
 	.db 86, 37 ; ZigsAndZags_42_Slow_F
 	.db 85, 38 ; ZigsAndZags_43_Slow_F
-	.dl MG_Data_69 + 21
+	.dl MG_Data_69 + 17
 	.db 117
 	.db 77, 37 ; ZigsAndZags_38_Slow
 	.db 78, 38 ; ZigsAndZags_39_Slow_O
 	.db 79, 37 ; ZigsAndZags_38_Slow_O
 	.db 80, 38 ; ZigsAndZags_39_Slow
-	.dl MG_Data_69 + 37
+	.dl MG_Data_69 + 33
 	.db 117
 	.db 65, 38 ; ZigsAndZags_46_Slow_O
 	.db 66, 42 ; ZigsAndZags_47_Slow_O
 	.db 67, 43 ; ZigsAndZags_48_Slow_O
 	.db 68, 42 ; ZigsAndZags_49_Slow
-	.dl MG_Data_69 + 65
+	.dl MG_Data_69 + 61
 	.db 117
 	.db 57, 38 ; ZigsAndZags_40_Slow_F
 	.db 58, 37 ; ZigsAndZags_41_Slow_F
 	.db 59, 38 ; ZigsAndZags_40_Slow_O_F
 	.db 60, 37 ; ZigsAndZags_41_Slow_O_F
-	.dl MG_Data_69 + 89
+	.dl MG_Data_69 + 85
 	.db 117
 	.db 69, 38 ; ZigsAndZags_54_Slow_O
 	.db 70, 42 ; ZigsAndZags_55_Slow
 	.db 71, 43 ; ZigsAndZags_56_Slow_O
 	.db 72, 42 ; ZigsAndZags_57_Slow_O
-	.dl MG_Data_69 + 101
+	.dl MG_Data_69 + 97
 	.db 89
 	.db 105, 7 ; Truetle_6_Slow_F
 	.db 106, 5 ; Truetle_11_Slow_F
@@ -976,7 +976,7 @@ sprite_animation_data:
 	.db 60, 37 ; ZigsAndZags_41_Slow_O_F
 	.dl SG_Spiral6 + 5
 
-	.db 13
+	.db 5
 	.db 118
 	.db 61, 24 ; ZigsAndZags_4_Slow_O_F
 	.db 62, 26 ; ZigsAndZags_6_Slow_F
@@ -984,43 +984,11 @@ sprite_animation_data:
 	.db 118
 	.db 63, 25 ; ZigsAndZags_5_Slow_O
 	.db 64, 26 ; ZigsAndZags_7_Slow
-	.dl MG_Data_69 + 73
+	.dl MG_Data_69 + 69
 	.db 118
 	.db 61, 24 ; ZigsAndZags_4_Slow_O_F
 	.db 62, 26 ; ZigsAndZags_6_Slow_F
-	.dl MG_Data_69 + 81
-	.db 143
-	.db 102, 8 ; BigFishbowl_8_Fast
-	.db 103, 7 ; BigFishbowl_9_Fast
-	.dl SG_BigFishbowlWater + 5
-	.db 143
-	.db 110, 57 ; BigFishbowl_15_Fast_F
-	.db 111, 56 ; BigFishbowl_14_Fast_F
-	.dl SG_BigFishbowlWater + 29
-	.db 143
-	.db 112, 13 ; BigFishbowl_13_Fast_F
-	.db 113, 12 ; BigFishbowl_12_Fast_F
-	.dl SG_BigFishbowlWater + 33
-	.db 143
-	.db 114, 12 ; BigFishbowl_12_Fast
-	.db 115, 13 ; BigFishbowl_13_Fast
-	.dl SG_BigFishbowlWater + 37
-	.db 143
-	.db 116, 56 ; BigFishbowl_14_Fast
-	.db 117, 57 ; BigFishbowl_15_Fast
-	.dl SG_BigFishbowlWater + 41
-	.db 143
-	.db 118, 9 ; BigFishbowl_11_Fast_F
-	.db 119, 10 ; BigFishbowl_10_Fast_F
-	.dl SG_BigFishbowlWater + 121
-	.db 143
-	.db 120, 10 ; BigFishbowl_10_Fast
-	.db 121, 9 ; BigFishbowl_11_Fast
-	.dl SG_BigFishbowlWater + 129
-	.db 143
-	.db 122, 7 ; BigFishbowl_9_Fast_F
-	.db 123, 8 ; BigFishbowl_8_Fast_F
-	.dl SG_BigFishbowlWater + 133
+	.dl MG_Data_69 + 77
 	.db 118
 	.db 63, 25 ; ZigsAndZags_5_Slow_O
 	.db 64, 26 ; ZigsAndZags_7_Slow
@@ -1030,433 +998,301 @@ sprite_animation_data:
 	.db 62, 26 ; ZigsAndZags_6_Slow_F
 	.dl SG_Zig4 + 5
 
-	.db 40
-	.db 18
-	.db 44 ; WaveySpaceLines_0_Fast
-	.db 45 ; WaveySpaceLines_1_Fast
-	.db 46 ; WaveySpaceLines_2_Fast
-	.db 47 ; WaveySpaceLines_3_Fast
-	.db 48 ; WaveySpaceLines_4_Fast
-	.db 49 ; WaveySpaceLines_5_Fast
-	.db 50 ; WaveySpaceLines_6_Fast
-	.db 51 ; WaveySpaceLines_7_Fast
-	.dl MG2_Data_69 + 13
-	.db 18
-	.db 52 ; WaveySpaceLines_8_Fast
-	.db 53 ; WaveySpaceLines_9_Fast
-	.db 54 ; WaveySpaceLines_10_Fast
-	.db 55 ; WaveySpaceLines_11_Fast
-	.db 56 ; WaveySpaceLines_12_Fast
-	.db 57 ; WaveySpaceLines_13_Fast
-	.db 58 ; WaveySpaceLines_14_Fast
-	.db 59 ; WaveySpaceLines_15_Fast
-	.dl MG2_Data_69 + 17
-	.db 18
-	.db 60 ; WaveySpaceLines_16_Fast
-	.db 61 ; WaveySpaceLines_17_Fast
-	.db 62 ; WaveySpaceLines_18_Fast
-	.db 63 ; WaveySpaceLines_19_Fast
-	.db 64 ; WaveySpaceLines_20_Fast
-	.db 65 ; WaveySpaceLines_21_Fast
-	.db 66 ; WaveySpaceLines_22_Fast
-	.db 67 ; WaveySpaceLines_23_Fast
-	.dl MG2_Data_69 + 21
-	.db 18
-	.db 68 ; WaveySpaceLines_8_Fast_F
-	.db 69 ; WaveySpaceLines_9_Fast_F
-	.db 70 ; WaveySpaceLines_10_Fast_F
-	.db 71 ; WaveySpaceLines_11_Fast_F
-	.db 72 ; WaveySpaceLines_12_Fast_F
-	.db 73 ; WaveySpaceLines_13_Fast_F
-	.db 74 ; WaveySpaceLines_14_Fast_F
-	.db 75 ; WaveySpaceLines_15_Fast_F
-	.dl MG2_Data_69 + 25
-	.db 25
-	.db 44 ; WaveySpaceLines_0_Fast
-	.db 45 ; WaveySpaceLines_1_Fast
-	.db 46 ; WaveySpaceLines_2_Fast
-	.db 47 ; WaveySpaceLines_3_Fast
-	.db 48 ; WaveySpaceLines_4_Fast
-	.db 49 ; WaveySpaceLines_5_Fast
-	.db 50 ; WaveySpaceLines_6_Fast
-	.db 51 ; WaveySpaceLines_7_Fast
-	.dl MG2_Data_69 + 33
-	.db 25
-	.db 52 ; WaveySpaceLines_8_Fast
-	.db 53 ; WaveySpaceLines_9_Fast
-	.db 54 ; WaveySpaceLines_10_Fast
-	.db 55 ; WaveySpaceLines_11_Fast
-	.db 56 ; WaveySpaceLines_12_Fast
-	.db 57 ; WaveySpaceLines_13_Fast
-	.db 58 ; WaveySpaceLines_14_Fast
-	.db 59 ; WaveySpaceLines_15_Fast
-	.dl MG2_Data_69 + 37
-	.db 25
-	.db 60 ; WaveySpaceLines_16_Fast
-	.db 61 ; WaveySpaceLines_17_Fast
-	.db 62 ; WaveySpaceLines_18_Fast
-	.db 63 ; WaveySpaceLines_19_Fast
-	.db 64 ; WaveySpaceLines_20_Fast
-	.db 65 ; WaveySpaceLines_21_Fast
-	.db 66 ; WaveySpaceLines_22_Fast
-	.db 67 ; WaveySpaceLines_23_Fast
-	.dl MG2_Data_69 + 41
-	.db 25
-	.db 68 ; WaveySpaceLines_8_Fast_F
-	.db 69 ; WaveySpaceLines_9_Fast_F
-	.db 70 ; WaveySpaceLines_10_Fast_F
-	.db 71 ; WaveySpaceLines_11_Fast_F
-	.db 72 ; WaveySpaceLines_12_Fast_F
-	.db 73 ; WaveySpaceLines_13_Fast_F
-	.db 74 ; WaveySpaceLines_14_Fast_F
-	.db 75 ; WaveySpaceLines_15_Fast_F
-	.dl MG2_Data_69 + 45
+	.db 10
 	.db 4
-	.db 44 ; WaveySpaceLines_0_Fast
-	.db 45 ; WaveySpaceLines_1_Fast
-	.db 46 ; WaveySpaceLines_2_Fast
-	.db 47 ; WaveySpaceLines_3_Fast
-	.db 48 ; WaveySpaceLines_4_Fast
-	.db 49 ; WaveySpaceLines_5_Fast
-	.db 50 ; WaveySpaceLines_6_Fast
-	.db 51 ; WaveySpaceLines_7_Fast
+	.db 24 ; WaveySpaceLines_0_Fast
+	.db 25 ; WaveySpaceLines_1_Fast
+	.db 26 ; WaveySpaceLines_2_Fast
+	.db 27 ; WaveySpaceLines_3_Fast
+	.db 28 ; WaveySpaceLines_4_Fast
+	.db 29 ; WaveySpaceLines_5_Fast
+	.db 30 ; WaveySpaceLines_6_Fast
+	.db 31 ; WaveySpaceLines_7_Fast
 	.dl MG2_Data_68 + 17
 	.db 4
-	.db 52 ; WaveySpaceLines_8_Fast
-	.db 53 ; WaveySpaceLines_9_Fast
-	.db 54 ; WaveySpaceLines_10_Fast
-	.db 55 ; WaveySpaceLines_11_Fast
-	.db 56 ; WaveySpaceLines_12_Fast
-	.db 57 ; WaveySpaceLines_13_Fast
-	.db 58 ; WaveySpaceLines_14_Fast
-	.db 59 ; WaveySpaceLines_15_Fast
+	.db 32 ; WaveySpaceLines_8_Fast
+	.db 33 ; WaveySpaceLines_9_Fast
+	.db 34 ; WaveySpaceLines_10_Fast
+	.db 35 ; WaveySpaceLines_11_Fast
+	.db 36 ; WaveySpaceLines_12_Fast
+	.db 37 ; WaveySpaceLines_13_Fast
+	.db 38 ; WaveySpaceLines_14_Fast
+	.db 39 ; WaveySpaceLines_15_Fast
 	.dl MG2_Data_68 + 21
 	.db 4
-	.db 60 ; WaveySpaceLines_16_Fast
-	.db 61 ; WaveySpaceLines_17_Fast
-	.db 62 ; WaveySpaceLines_18_Fast
-	.db 63 ; WaveySpaceLines_19_Fast
-	.db 64 ; WaveySpaceLines_20_Fast
-	.db 65 ; WaveySpaceLines_21_Fast
-	.db 66 ; WaveySpaceLines_22_Fast
-	.db 67 ; WaveySpaceLines_23_Fast
+	.db 40 ; WaveySpaceLines_16_Fast
+	.db 41 ; WaveySpaceLines_17_Fast
+	.db 42 ; WaveySpaceLines_18_Fast
+	.db 43 ; WaveySpaceLines_19_Fast
+	.db 44 ; WaveySpaceLines_20_Fast
+	.db 45 ; WaveySpaceLines_21_Fast
+	.db 46 ; WaveySpaceLines_22_Fast
+	.db 47 ; WaveySpaceLines_23_Fast
 	.dl MG2_Data_68 + 25
 	.db 4
-	.db 68 ; WaveySpaceLines_8_Fast_F
-	.db 69 ; WaveySpaceLines_9_Fast_F
-	.db 70 ; WaveySpaceLines_10_Fast_F
-	.db 71 ; WaveySpaceLines_11_Fast_F
-	.db 72 ; WaveySpaceLines_12_Fast_F
-	.db 73 ; WaveySpaceLines_13_Fast_F
-	.db 74 ; WaveySpaceLines_14_Fast_F
-	.db 75 ; WaveySpaceLines_15_Fast_F
+	.db 48 ; WaveySpaceLines_8_Fast_F
+	.db 49 ; WaveySpaceLines_9_Fast_F
+	.db 50 ; WaveySpaceLines_10_Fast_F
+	.db 51 ; WaveySpaceLines_11_Fast_F
+	.db 52 ; WaveySpaceLines_12_Fast_F
+	.db 53 ; WaveySpaceLines_13_Fast_F
+	.db 54 ; WaveySpaceLines_14_Fast_F
+	.db 55 ; WaveySpaceLines_15_Fast_F
 	.dl MG2_Data_68 + 29
-	.db 11
-	.db 44 ; WaveySpaceLines_0_Fast
-	.db 45 ; WaveySpaceLines_1_Fast
-	.db 46 ; WaveySpaceLines_2_Fast
-	.db 47 ; WaveySpaceLines_3_Fast
-	.db 48 ; WaveySpaceLines_4_Fast
-	.db 49 ; WaveySpaceLines_5_Fast
-	.db 50 ; WaveySpaceLines_6_Fast
-	.db 51 ; WaveySpaceLines_7_Fast
-	.dl MG2_Data_68 + 33
-	.db 11
-	.db 52 ; WaveySpaceLines_8_Fast
-	.db 53 ; WaveySpaceLines_9_Fast
-	.db 54 ; WaveySpaceLines_10_Fast
-	.db 55 ; WaveySpaceLines_11_Fast
-	.db 56 ; WaveySpaceLines_12_Fast
-	.db 57 ; WaveySpaceLines_13_Fast
-	.db 58 ; WaveySpaceLines_14_Fast
-	.db 59 ; WaveySpaceLines_15_Fast
-	.dl MG2_Data_68 + 37
-	.db 11
-	.db 60 ; WaveySpaceLines_16_Fast
-	.db 61 ; WaveySpaceLines_17_Fast
-	.db 62 ; WaveySpaceLines_18_Fast
-	.db 63 ; WaveySpaceLines_19_Fast
-	.db 64 ; WaveySpaceLines_20_Fast
-	.db 65 ; WaveySpaceLines_21_Fast
-	.db 66 ; WaveySpaceLines_22_Fast
-	.db 67 ; WaveySpaceLines_23_Fast
-	.dl MG2_Data_68 + 41
-	.db 11
-	.db 68 ; WaveySpaceLines_8_Fast_F
-	.db 69 ; WaveySpaceLines_9_Fast_F
-	.db 70 ; WaveySpaceLines_10_Fast_F
-	.db 71 ; WaveySpaceLines_11_Fast_F
-	.db 72 ; WaveySpaceLines_12_Fast_F
-	.db 73 ; WaveySpaceLines_13_Fast_F
-	.db 74 ; WaveySpaceLines_14_Fast_F
-	.db 75 ; WaveySpaceLines_15_Fast_F
-	.dl MG2_Data_68 + 45
-	.db 25
-	.db 28 ; SpacePlatformsNew_0_Fast
-	.db 29 ; SpacePlatformsNew_4_Fast
-	.db 30 ; SpacePlatformsNew_8_Fast
-	.db 31 ; SpacePlatformsNew_12_Fast
-	.db 32 ; SpacePlatformsNew_1_Fast
-	.db 33 ; SpacePlatformsNew_5_Fast
-	.db 34 ; SpacePlatformsNew_9_Fast
-	.db 35 ; SpacePlatformsNew_13_Fast
-	.dl SG_SpacePlatform4 + 5
-	.db 25
-	.db 36 ; SpacePlatformsNew_2_Fast
-	.db 37 ; SpacePlatformsNew_6_Fast
-	.db 38 ; SpacePlatformsNew_10_Fast
-	.db 39 ; SpacePlatformsNew_14_Fast
-	.db 40 ; SpacePlatformsNew_3_Fast
-	.db 41 ; SpacePlatformsNew_7_Fast
-	.db 42 ; SpacePlatformsNew_11_Fast
-	.db 43 ; SpacePlatformsNew_15_Fast
-	.dl SG_SpacePlatform4 + 9
-	.db 25
-	.db 44 ; WaveySpaceLines_0_Fast
-	.db 45 ; WaveySpaceLines_1_Fast
-	.db 46 ; WaveySpaceLines_2_Fast
-	.db 47 ; WaveySpaceLines_3_Fast
-	.db 48 ; WaveySpaceLines_4_Fast
-	.db 49 ; WaveySpaceLines_5_Fast
-	.db 50 ; WaveySpaceLines_6_Fast
-	.db 51 ; WaveySpaceLines_7_Fast
-	.dl SG_SpacePlatform4 + 13
-	.db 25
-	.db 52 ; WaveySpaceLines_8_Fast
-	.db 53 ; WaveySpaceLines_9_Fast
-	.db 54 ; WaveySpaceLines_10_Fast
-	.db 55 ; WaveySpaceLines_11_Fast
-	.db 56 ; WaveySpaceLines_12_Fast
-	.db 57 ; WaveySpaceLines_13_Fast
-	.db 58 ; WaveySpaceLines_14_Fast
-	.db 59 ; WaveySpaceLines_15_Fast
-	.dl SG_SpacePlatform4 + 17
-	.db 25
-	.db 60 ; WaveySpaceLines_16_Fast
-	.db 61 ; WaveySpaceLines_17_Fast
-	.db 62 ; WaveySpaceLines_18_Fast
-	.db 63 ; WaveySpaceLines_19_Fast
-	.db 64 ; WaveySpaceLines_20_Fast
-	.db 65 ; WaveySpaceLines_21_Fast
-	.db 66 ; WaveySpaceLines_22_Fast
-	.db 67 ; WaveySpaceLines_23_Fast
-	.dl SG_SpacePlatform4 + 21
-	.db 25
-	.db 68 ; WaveySpaceLines_8_Fast_F
-	.db 69 ; WaveySpaceLines_9_Fast_F
-	.db 70 ; WaveySpaceLines_10_Fast_F
-	.db 71 ; WaveySpaceLines_11_Fast_F
-	.db 72 ; WaveySpaceLines_12_Fast_F
-	.db 73 ; WaveySpaceLines_13_Fast_F
-	.db 74 ; WaveySpaceLines_14_Fast_F
-	.db 75 ; WaveySpaceLines_15_Fast_F
-	.dl SG_SpacePlatform4 + 25
-	.db 18
-	.db 28 ; SpacePlatformsNew_0_Fast
-	.db 29 ; SpacePlatformsNew_4_Fast
-	.db 30 ; SpacePlatformsNew_8_Fast
-	.db 31 ; SpacePlatformsNew_12_Fast
-	.db 32 ; SpacePlatformsNew_1_Fast
-	.db 33 ; SpacePlatformsNew_5_Fast
-	.db 34 ; SpacePlatformsNew_9_Fast
-	.db 35 ; SpacePlatformsNew_13_Fast
-	.dl SG_SpacePlatform3 + 5
-	.db 18
-	.db 36 ; SpacePlatformsNew_2_Fast
-	.db 37 ; SpacePlatformsNew_6_Fast
-	.db 38 ; SpacePlatformsNew_10_Fast
-	.db 39 ; SpacePlatformsNew_14_Fast
-	.db 40 ; SpacePlatformsNew_3_Fast
-	.db 41 ; SpacePlatformsNew_7_Fast
-	.db 42 ; SpacePlatformsNew_11_Fast
-	.db 43 ; SpacePlatformsNew_15_Fast
-	.dl SG_SpacePlatform3 + 9
-	.db 18
-	.db 44 ; WaveySpaceLines_0_Fast
-	.db 45 ; WaveySpaceLines_1_Fast
-	.db 46 ; WaveySpaceLines_2_Fast
-	.db 47 ; WaveySpaceLines_3_Fast
-	.db 48 ; WaveySpaceLines_4_Fast
-	.db 49 ; WaveySpaceLines_5_Fast
-	.db 50 ; WaveySpaceLines_6_Fast
-	.db 51 ; WaveySpaceLines_7_Fast
-	.dl SG_SpacePlatform3 + 13
-	.db 18
-	.db 52 ; WaveySpaceLines_8_Fast
-	.db 53 ; WaveySpaceLines_9_Fast
-	.db 54 ; WaveySpaceLines_10_Fast
-	.db 55 ; WaveySpaceLines_11_Fast
-	.db 56 ; WaveySpaceLines_12_Fast
-	.db 57 ; WaveySpaceLines_13_Fast
-	.db 58 ; WaveySpaceLines_14_Fast
-	.db 59 ; WaveySpaceLines_15_Fast
-	.dl SG_SpacePlatform3 + 17
-	.db 18
-	.db 60 ; WaveySpaceLines_16_Fast
-	.db 61 ; WaveySpaceLines_17_Fast
-	.db 62 ; WaveySpaceLines_18_Fast
-	.db 63 ; WaveySpaceLines_19_Fast
-	.db 64 ; WaveySpaceLines_20_Fast
-	.db 65 ; WaveySpaceLines_21_Fast
-	.db 66 ; WaveySpaceLines_22_Fast
-	.db 67 ; WaveySpaceLines_23_Fast
-	.dl SG_SpacePlatform3 + 21
-	.db 18
-	.db 68 ; WaveySpaceLines_8_Fast_F
-	.db 69 ; WaveySpaceLines_9_Fast_F
-	.db 70 ; WaveySpaceLines_10_Fast_F
-	.db 71 ; WaveySpaceLines_11_Fast_F
-	.db 72 ; WaveySpaceLines_12_Fast_F
-	.db 73 ; WaveySpaceLines_13_Fast_F
-	.db 74 ; WaveySpaceLines_14_Fast_F
-	.db 75 ; WaveySpaceLines_15_Fast_F
-	.dl SG_SpacePlatform3 + 25
-	.db 11
-	.db 28 ; SpacePlatformsNew_0_Fast
-	.db 29 ; SpacePlatformsNew_4_Fast
-	.db 30 ; SpacePlatformsNew_8_Fast
-	.db 31 ; SpacePlatformsNew_12_Fast
-	.db 32 ; SpacePlatformsNew_1_Fast
-	.db 33 ; SpacePlatformsNew_5_Fast
-	.db 34 ; SpacePlatformsNew_9_Fast
-	.db 35 ; SpacePlatformsNew_13_Fast
-	.dl SG_SpacePlatform2 + 5
-	.db 11
-	.db 36 ; SpacePlatformsNew_2_Fast
-	.db 37 ; SpacePlatformsNew_6_Fast
-	.db 38 ; SpacePlatformsNew_10_Fast
-	.db 39 ; SpacePlatformsNew_14_Fast
-	.db 40 ; SpacePlatformsNew_3_Fast
-	.db 41 ; SpacePlatformsNew_7_Fast
-	.db 42 ; SpacePlatformsNew_11_Fast
-	.db 43 ; SpacePlatformsNew_15_Fast
-	.dl SG_SpacePlatform2 + 9
-	.db 11
-	.db 44 ; WaveySpaceLines_0_Fast
-	.db 45 ; WaveySpaceLines_1_Fast
-	.db 46 ; WaveySpaceLines_2_Fast
-	.db 47 ; WaveySpaceLines_3_Fast
-	.db 48 ; WaveySpaceLines_4_Fast
-	.db 49 ; WaveySpaceLines_5_Fast
-	.db 50 ; WaveySpaceLines_6_Fast
-	.db 51 ; WaveySpaceLines_7_Fast
-	.dl SG_SpacePlatform2 + 13
-	.db 11
-	.db 52 ; WaveySpaceLines_8_Fast
-	.db 53 ; WaveySpaceLines_9_Fast
-	.db 54 ; WaveySpaceLines_10_Fast
-	.db 55 ; WaveySpaceLines_11_Fast
-	.db 56 ; WaveySpaceLines_12_Fast
-	.db 57 ; WaveySpaceLines_13_Fast
-	.db 58 ; WaveySpaceLines_14_Fast
-	.db 59 ; WaveySpaceLines_15_Fast
-	.dl SG_SpacePlatform2 + 17
-	.db 11
-	.db 60 ; WaveySpaceLines_16_Fast
-	.db 61 ; WaveySpaceLines_17_Fast
-	.db 62 ; WaveySpaceLines_18_Fast
-	.db 63 ; WaveySpaceLines_19_Fast
-	.db 64 ; WaveySpaceLines_20_Fast
-	.db 65 ; WaveySpaceLines_21_Fast
-	.db 66 ; WaveySpaceLines_22_Fast
-	.db 67 ; WaveySpaceLines_23_Fast
-	.dl SG_SpacePlatform2 + 21
-	.db 11
-	.db 68 ; WaveySpaceLines_8_Fast_F
-	.db 69 ; WaveySpaceLines_9_Fast_F
-	.db 70 ; WaveySpaceLines_10_Fast_F
-	.db 71 ; WaveySpaceLines_11_Fast_F
-	.db 72 ; WaveySpaceLines_12_Fast_F
-	.db 73 ; WaveySpaceLines_13_Fast_F
-	.db 74 ; WaveySpaceLines_14_Fast_F
-	.db 75 ; WaveySpaceLines_15_Fast_F
-	.dl SG_SpacePlatform2 + 25
 	.db 4
-	.db 28 ; SpacePlatformsNew_0_Fast
-	.db 29 ; SpacePlatformsNew_4_Fast
-	.db 30 ; SpacePlatformsNew_8_Fast
-	.db 31 ; SpacePlatformsNew_12_Fast
-	.db 32 ; SpacePlatformsNew_1_Fast
-	.db 33 ; SpacePlatformsNew_5_Fast
-	.db 34 ; SpacePlatformsNew_9_Fast
-	.db 35 ; SpacePlatformsNew_13_Fast
+	.db 8 ; SpacePlatformsNew_0_Fast
+	.db 9 ; SpacePlatformsNew_4_Fast
+	.db 10 ; SpacePlatformsNew_8_Fast
+	.db 11 ; SpacePlatformsNew_12_Fast
+	.db 12 ; SpacePlatformsNew_1_Fast
+	.db 13 ; SpacePlatformsNew_5_Fast
+	.db 14 ; SpacePlatformsNew_9_Fast
+	.db 15 ; SpacePlatformsNew_13_Fast
 	.dl SG_SpacePlatform1 + 5
 	.db 4
-	.db 36 ; SpacePlatformsNew_2_Fast
-	.db 37 ; SpacePlatformsNew_6_Fast
-	.db 38 ; SpacePlatformsNew_10_Fast
-	.db 39 ; SpacePlatformsNew_14_Fast
-	.db 40 ; SpacePlatformsNew_3_Fast
-	.db 41 ; SpacePlatformsNew_7_Fast
-	.db 42 ; SpacePlatformsNew_11_Fast
-	.db 43 ; SpacePlatformsNew_15_Fast
+	.db 16 ; SpacePlatformsNew_2_Fast
+	.db 17 ; SpacePlatformsNew_6_Fast
+	.db 18 ; SpacePlatformsNew_10_Fast
+	.db 19 ; SpacePlatformsNew_14_Fast
+	.db 20 ; SpacePlatformsNew_3_Fast
+	.db 21 ; SpacePlatformsNew_7_Fast
+	.db 22 ; SpacePlatformsNew_11_Fast
+	.db 23 ; SpacePlatformsNew_15_Fast
 	.dl SG_SpacePlatform1 + 9
 	.db 4
-	.db 44 ; WaveySpaceLines_0_Fast
-	.db 45 ; WaveySpaceLines_1_Fast
-	.db 46 ; WaveySpaceLines_2_Fast
-	.db 47 ; WaveySpaceLines_3_Fast
-	.db 48 ; WaveySpaceLines_4_Fast
-	.db 49 ; WaveySpaceLines_5_Fast
-	.db 50 ; WaveySpaceLines_6_Fast
-	.db 51 ; WaveySpaceLines_7_Fast
+	.db 24 ; WaveySpaceLines_0_Fast
+	.db 25 ; WaveySpaceLines_1_Fast
+	.db 26 ; WaveySpaceLines_2_Fast
+	.db 27 ; WaveySpaceLines_3_Fast
+	.db 28 ; WaveySpaceLines_4_Fast
+	.db 29 ; WaveySpaceLines_5_Fast
+	.db 30 ; WaveySpaceLines_6_Fast
+	.db 31 ; WaveySpaceLines_7_Fast
 	.dl SG_SpacePlatform1 + 13
 	.db 4
-	.db 52 ; WaveySpaceLines_8_Fast
-	.db 53 ; WaveySpaceLines_9_Fast
-	.db 54 ; WaveySpaceLines_10_Fast
-	.db 55 ; WaveySpaceLines_11_Fast
-	.db 56 ; WaveySpaceLines_12_Fast
-	.db 57 ; WaveySpaceLines_13_Fast
-	.db 58 ; WaveySpaceLines_14_Fast
-	.db 59 ; WaveySpaceLines_15_Fast
+	.db 32 ; WaveySpaceLines_8_Fast
+	.db 33 ; WaveySpaceLines_9_Fast
+	.db 34 ; WaveySpaceLines_10_Fast
+	.db 35 ; WaveySpaceLines_11_Fast
+	.db 36 ; WaveySpaceLines_12_Fast
+	.db 37 ; WaveySpaceLines_13_Fast
+	.db 38 ; WaveySpaceLines_14_Fast
+	.db 39 ; WaveySpaceLines_15_Fast
 	.dl SG_SpacePlatform1 + 17
 	.db 4
-	.db 60 ; WaveySpaceLines_16_Fast
-	.db 61 ; WaveySpaceLines_17_Fast
-	.db 62 ; WaveySpaceLines_18_Fast
-	.db 63 ; WaveySpaceLines_19_Fast
-	.db 64 ; WaveySpaceLines_20_Fast
-	.db 65 ; WaveySpaceLines_21_Fast
-	.db 66 ; WaveySpaceLines_22_Fast
-	.db 67 ; WaveySpaceLines_23_Fast
+	.db 40 ; WaveySpaceLines_16_Fast
+	.db 41 ; WaveySpaceLines_17_Fast
+	.db 42 ; WaveySpaceLines_18_Fast
+	.db 43 ; WaveySpaceLines_19_Fast
+	.db 44 ; WaveySpaceLines_20_Fast
+	.db 45 ; WaveySpaceLines_21_Fast
+	.db 46 ; WaveySpaceLines_22_Fast
+	.db 47 ; WaveySpaceLines_23_Fast
 	.dl SG_SpacePlatform1 + 21
 	.db 4
-	.db 68 ; WaveySpaceLines_8_Fast_F
-	.db 69 ; WaveySpaceLines_9_Fast_F
-	.db 70 ; WaveySpaceLines_10_Fast_F
-	.db 71 ; WaveySpaceLines_11_Fast_F
-	.db 72 ; WaveySpaceLines_12_Fast_F
-	.db 73 ; WaveySpaceLines_13_Fast_F
-	.db 74 ; WaveySpaceLines_14_Fast_F
-	.db 75 ; WaveySpaceLines_15_Fast_F
+	.db 48 ; WaveySpaceLines_8_Fast_F
+	.db 49 ; WaveySpaceLines_9_Fast_F
+	.db 50 ; WaveySpaceLines_10_Fast_F
+	.db 51 ; WaveySpaceLines_11_Fast_F
+	.db 52 ; WaveySpaceLines_12_Fast_F
+	.db 53 ; WaveySpaceLines_13_Fast_F
+	.db 54 ; WaveySpaceLines_14_Fast_F
+	.db 55 ; WaveySpaceLines_15_Fast_F
 	.dl SG_SpacePlatform1 + 25
 
-	.db 32
+	.db 60
 	.db 117
 	.db 73 ; ZigsAndZags_12_Slow
 	.db 74 ; ZigsAndZags_13_Slow
 	.db 75 ; ZigsAndZags_12_Slow_O_F
 	.db 76 ; ZigsAndZags_13_Slow_O
-	.dl MG_Data_69 + 13
+	.dl MG_Data_69 + 9
 	.db 117
 	.db 81 ; ZigsAndZags_34_Slow_F
 	.db 82 ; ZigsAndZags_35_Slow_O_F
 	.db 83 ; ZigsAndZags_34_Slow_O_F
 	.db 82 ; ZigsAndZags_35_Slow_O_F
-	.dl MG_Data_69 + 29
+	.dl MG_Data_69 + 25
 	.db 117
 	.db 73 ; ZigsAndZags_12_Slow
 	.db 74 ; ZigsAndZags_13_Slow
 	.db 75 ; ZigsAndZags_12_Slow_O_F
 	.db 76 ; ZigsAndZags_13_Slow_O
-	.dl MG_Data_69 + 45
+	.dl MG_Data_69 + 41
 	.db 117
 	.db 54 ; ZigsAndZags_32_Slow_O
 	.db 55 ; ZigsAndZags_33_Slow_O
 	.db 56 ; ZigsAndZags_32_Slow
 	.db 55 ; ZigsAndZags_33_Slow_O
-	.dl MG_Data_69 + 97
+	.dl MG_Data_69 + 93
+	.db 117
+	.db 101 ; AntigravZone_2_Fast
+	.db 102 ; AntigravZone_7_Fast
+	.db 103 ; AntigravZone_8_Fast_F
+	.db 104 ; AntigravZone_6_Fast_F
+	.dl SG_AntigravZoneFG_3 + 5
+	.db 117
+	.db 105 ; AntigravZone_2_Fast_F
+	.db 106 ; AntigravZone_6_Fast
+	.db 107 ; AntigravZone_8_Fast
+	.db 108 ; AntigravZone_7_Fast_F
+	.dl SG_AntigravZoneFG_3 + 9
+	.db 117
+	.db 101 ; AntigravZone_2_Fast
+	.db 102 ; AntigravZone_7_Fast
+	.db 103 ; AntigravZone_8_Fast_F
+	.db 104 ; AntigravZone_6_Fast_F
+	.dl SG_AntigravZoneFG_3 + 13
+	.db 117
+	.db 105 ; AntigravZone_2_Fast_F
+	.db 106 ; AntigravZone_6_Fast
+	.db 107 ; AntigravZone_8_Fast
+	.db 108 ; AntigravZone_7_Fast_F
+	.dl SG_AntigravZoneFG_3 + 17
+	.db 117
+	.db 101 ; AntigravZone_2_Fast
+	.db 102 ; AntigravZone_7_Fast
+	.db 103 ; AntigravZone_8_Fast_F
+	.db 104 ; AntigravZone_6_Fast_F
+	.dl SG_AntigravZoneFG_3 + 21
+	.db 117
+	.db 105 ; AntigravZone_2_Fast_F
+	.db 106 ; AntigravZone_6_Fast
+	.db 107 ; AntigravZone_8_Fast
+	.db 108 ; AntigravZone_7_Fast_F
+	.dl SG_AntigravZoneFG_3 + 25
+	.db 117
+	.db 101 ; AntigravZone_2_Fast
+	.db 102 ; AntigravZone_7_Fast
+	.db 103 ; AntigravZone_8_Fast_F
+	.db 104 ; AntigravZone_6_Fast_F
+	.dl SG_AntigravZoneFG_3 + 29
+	.db 117
+	.db 105 ; AntigravZone_2_Fast_F
+	.db 106 ; AntigravZone_6_Fast
+	.db 107 ; AntigravZone_8_Fast
+	.db 108 ; AntigravZone_7_Fast_F
+	.dl SG_AntigravZoneFG_3 + 33
+	.db 142
+	.db 89 ; AntigravZone_15_Fast
+	.db 90 ; AntigravZone_16_Fast
+	.db 91 ; AntigravZone_17_Fast
+	.db 92 ; AntigravZone_18_Fast
+	.dl SG_AntigravZoneFG_3 + 37
+	.db 142
+	.db 89 ; AntigravZone_15_Fast
+	.db 90 ; AntigravZone_16_Fast
+	.db 91 ; AntigravZone_17_Fast
+	.db 92 ; AntigravZone_18_Fast
+	.dl SG_AntigravZoneFG_3 + 41
+	.db 117
+	.db 93 ; AntigravZone_1_Fast
+	.db 94 ; AntigravZone_4_Fast
+	.db 95 ; AntigravZone_5_Fast_F
+	.db 96 ; AntigravZone_3_Fast_F
+	.dl SG_AntigravZoneFG_2 + 5
+	.db 117
+	.db 97 ; AntigravZone_1_Fast_F
+	.db 98 ; AntigravZone_3_Fast
+	.db 99 ; AntigravZone_5_Fast
+	.db 100 ; AntigravZone_4_Fast_F
+	.dl SG_AntigravZoneFG_2 + 9
+	.db 117
+	.db 93 ; AntigravZone_1_Fast
+	.db 94 ; AntigravZone_4_Fast
+	.db 95 ; AntigravZone_5_Fast_F
+	.db 96 ; AntigravZone_3_Fast_F
+	.dl SG_AntigravZoneFG_2 + 13
+	.db 117
+	.db 97 ; AntigravZone_1_Fast_F
+	.db 98 ; AntigravZone_3_Fast
+	.db 99 ; AntigravZone_5_Fast
+	.db 100 ; AntigravZone_4_Fast_F
+	.dl SG_AntigravZoneFG_2 + 17
+	.db 117
+	.db 93 ; AntigravZone_1_Fast
+	.db 94 ; AntigravZone_4_Fast
+	.db 95 ; AntigravZone_5_Fast_F
+	.db 96 ; AntigravZone_3_Fast_F
+	.dl SG_AntigravZoneFG_2 + 21
+	.db 117
+	.db 97 ; AntigravZone_1_Fast_F
+	.db 98 ; AntigravZone_3_Fast
+	.db 99 ; AntigravZone_5_Fast
+	.db 100 ; AntigravZone_4_Fast_F
+	.dl SG_AntigravZoneFG_2 + 25
+	.db 117
+	.db 93 ; AntigravZone_1_Fast
+	.db 94 ; AntigravZone_4_Fast
+	.db 95 ; AntigravZone_5_Fast_F
+	.db 96 ; AntigravZone_3_Fast_F
+	.dl SG_AntigravZoneFG_2 + 29
+	.db 117
+	.db 97 ; AntigravZone_1_Fast_F
+	.db 98 ; AntigravZone_3_Fast
+	.db 99 ; AntigravZone_5_Fast
+	.db 100 ; AntigravZone_4_Fast_F
+	.dl SG_AntigravZoneFG_2 + 33
+	.db 142
+	.db 89 ; AntigravZone_15_Fast
+	.db 90 ; AntigravZone_16_Fast
+	.db 91 ; AntigravZone_17_Fast
+	.db 92 ; AntigravZone_18_Fast
+	.dl SG_AntigravZoneFG_2 + 37
+	.db 142
+	.db 89 ; AntigravZone_15_Fast
+	.db 90 ; AntigravZone_16_Fast
+	.db 91 ; AntigravZone_17_Fast
+	.db 92 ; AntigravZone_18_Fast
+	.dl SG_AntigravZoneFG_2 + 41
+	.db 142
+	.db 89 ; AntigravZone_15_Fast
+	.db 90 ; AntigravZone_16_Fast
+	.db 91 ; AntigravZone_17_Fast
+	.db 92 ; AntigravZone_18_Fast
+	.dl SG_AntigravZoneFG_1 + 9
+	.db 142
+	.db 89 ; AntigravZone_15_Fast
+	.db 90 ; AntigravZone_16_Fast
+	.db 91 ; AntigravZone_17_Fast
+	.db 92 ; AntigravZone_18_Fast
+	.dl SG_AntigravZoneFG_1 + 13
+	.db 142
+	.db 89 ; AntigravZone_15_Fast
+	.db 90 ; AntigravZone_16_Fast
+	.db 91 ; AntigravZone_17_Fast
+	.db 92 ; AntigravZone_18_Fast
+	.dl SG_AntigravZoneFG_1 + 17
+	.db 142
+	.db 89 ; AntigravZone_15_Fast
+	.db 90 ; AntigravZone_16_Fast
+	.db 91 ; AntigravZone_17_Fast
+	.db 92 ; AntigravZone_18_Fast
+	.dl SG_AntigravZoneFG_1 + 21
+	.db 142
+	.db 89 ; AntigravZone_15_Fast
+	.db 90 ; AntigravZone_16_Fast
+	.db 91 ; AntigravZone_17_Fast
+	.db 92 ; AntigravZone_18_Fast
+	.dl SG_AntigravZoneFG_1 + 25
+	.db 142
+	.db 89 ; AntigravZone_15_Fast
+	.db 90 ; AntigravZone_16_Fast
+	.db 91 ; AntigravZone_17_Fast
+	.db 92 ; AntigravZone_18_Fast
+	.dl SG_AntigravZoneFG_1 + 29
+	.db 142
+	.db 89 ; AntigravZone_15_Fast
+	.db 90 ; AntigravZone_16_Fast
+	.db 91 ; AntigravZone_17_Fast
+	.db 92 ; AntigravZone_18_Fast
+	.dl SG_AntigravZoneFG_1 + 93
+	.db 142
+	.db 89 ; AntigravZone_15_Fast
+	.db 90 ; AntigravZone_16_Fast
+	.db 91 ; AntigravZone_17_Fast
+	.db 92 ; AntigravZone_18_Fast
+	.dl SG_AntigravZoneFG_1 + 97
 	.db 117
 	.db 81 ; ZigsAndZags_34_Slow_F
 	.db 82 ; ZigsAndZags_35_Slow_O_F
@@ -1626,107 +1462,71 @@ sprite_animation_data:
 	.db 8 ; DualLeaf1_Fast_O
 	.dl SG_Branch3 + 25
 
-	.db 35
+	.db 26
 	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 9
+	.db 87 ; AntigravZone_0_Fast
+	.db 88 ; AntigravZone_0_Fast_F
+	.dl SG_AntigravZoneFG_1 + 5
 	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 13
+	.db 87 ; AntigravZone_0_Fast
+	.db 88 ; AntigravZone_0_Fast_F
+	.dl SG_AntigravZoneFG_1 + 33
 	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 17
+	.db 87 ; AntigravZone_0_Fast
+	.db 88 ; AntigravZone_0_Fast_F
+	.dl SG_AntigravZoneFG_1 + 37
 	.db 143
-	.db 106 ; BigFishbowl_17_Fast_F
-	.db 107 ; BigFishbowl_16_Fast_F
-	.dl SG_BigFishbowlWater + 21
+	.db 87 ; AntigravZone_0_Fast
+	.db 88 ; AntigravZone_0_Fast_F
+	.dl SG_AntigravZoneFG_1 + 41
 	.db 143
-	.db 108 ; BigFishbowl_16_Fast
-	.db 109 ; BigFishbowl_17_Fast
-	.dl SG_BigFishbowlWater + 25
+	.db 87 ; AntigravZone_0_Fast
+	.db 88 ; AntigravZone_0_Fast_F
+	.dl SG_AntigravZoneFG_1 + 45
 	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 45
+	.db 87 ; AntigravZone_0_Fast
+	.db 88 ; AntigravZone_0_Fast_F
+	.dl SG_AntigravZoneFG_1 + 49
 	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 49
+	.db 87 ; AntigravZone_0_Fast
+	.db 88 ; AntigravZone_0_Fast_F
+	.dl SG_AntigravZoneFG_1 + 53
 	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 53
+	.db 87 ; AntigravZone_0_Fast
+	.db 88 ; AntigravZone_0_Fast_F
+	.dl SG_AntigravZoneFG_1 + 57
 	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 57
+	.db 87 ; AntigravZone_0_Fast
+	.db 88 ; AntigravZone_0_Fast_F
+	.dl SG_AntigravZoneFG_1 + 61
 	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 61
+	.db 87 ; AntigravZone_0_Fast
+	.db 88 ; AntigravZone_0_Fast_F
+	.dl SG_AntigravZoneFG_1 + 65
 	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 65
+	.db 87 ; AntigravZone_0_Fast
+	.db 88 ; AntigravZone_0_Fast_F
+	.dl SG_AntigravZoneFG_1 + 69
 	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 69
+	.db 87 ; AntigravZone_0_Fast
+	.db 88 ; AntigravZone_0_Fast_F
+	.dl SG_AntigravZoneFG_1 + 73
 	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 73
+	.db 87 ; AntigravZone_0_Fast
+	.db 88 ; AntigravZone_0_Fast_F
+	.dl SG_AntigravZoneFG_1 + 77
 	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 77
+	.db 87 ; AntigravZone_0_Fast
+	.db 88 ; AntigravZone_0_Fast_F
+	.dl SG_AntigravZoneFG_1 + 81
 	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 81
+	.db 87 ; AntigravZone_0_Fast
+	.db 88 ; AntigravZone_0_Fast_F
+	.dl SG_AntigravZoneFG_1 + 85
 	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 85
-	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 89
-	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 93
-	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 97
-	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 101
-	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 105
-	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 109
-	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 113
-	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 117
-	.db 143
-	.db 104 ; BigFishbowl_7_Fast
-	.db 105 ; BigFishbowl_7_Fast_F
-	.dl SG_BigFishbowlWater + 125
+	.db 87 ; AntigravZone_0_Fast
+	.db 88 ; AntigravZone_0_Fast_F
+	.dl SG_AntigravZoneFG_1 + 89
 	.db 20
 	.db 116 ; Truetle_1_Fast
 	.db 117 ; Truetle_1_Fast_F
@@ -1771,39 +1571,7 @@ sprite_animation_data:
 
 
 disable_animation_data:
-	.db 48
-	.dl MG2_Data_69 + 11
-	.db 112
-	.db %11100000
-	.db 3
-	.dl MG2_Data_69 + 15
-	.db 119
-	.db %11100000
-	.db 3
-	.dl MG2_Data_69 + 19
-	.db 126
-	.db %11100000
-	.db 3
-	.dl MG2_Data_69 + 23
-	.db 133
-	.db %11100000
-	.db 3
-	.dl MG2_Data_69 + 31
-	.db 112
-	.db %11100000
-	.db 3
-	.dl MG2_Data_69 + 35
-	.db 119
-	.db %11100000
-	.db 3
-	.dl MG2_Data_69 + 39
-	.db 126
-	.db %11100000
-	.db 3
-	.dl MG2_Data_69 + 43
-	.db 133
-	.db %11100000
-	.db 3
+	.db 40
 	.dl MG2_Data_68 + 15
 	.db 112
 	.db %11100000
@@ -1817,70 +1585,6 @@ disable_animation_data:
 	.db %11100000
 	.db 3
 	.dl MG2_Data_68 + 27
-	.db 133
-	.db %11100000
-	.db 3
-	.dl MG2_Data_68 + 31
-	.db 112
-	.db %11100000
-	.db 3
-	.dl MG2_Data_68 + 35
-	.db 119
-	.db %11100000
-	.db 3
-	.dl MG2_Data_68 + 39
-	.db 126
-	.db %11100000
-	.db 3
-	.dl MG2_Data_68 + 43
-	.db 133
-	.db %11100000
-	.db 3
-	.dl SG_SpacePlatform4 + 11
-	.db 112
-	.db %11100000
-	.db 3
-	.dl SG_SpacePlatform4 + 15
-	.db 119
-	.db %11100000
-	.db 3
-	.dl SG_SpacePlatform4 + 19
-	.db 126
-	.db %11100000
-	.db 3
-	.dl SG_SpacePlatform4 + 23
-	.db 133
-	.db %11100000
-	.db 3
-	.dl SG_SpacePlatform3 + 11
-	.db 112
-	.db %11100000
-	.db 3
-	.dl SG_SpacePlatform3 + 15
-	.db 119
-	.db %11100000
-	.db 3
-	.dl SG_SpacePlatform3 + 19
-	.db 126
-	.db %11100000
-	.db 3
-	.dl SG_SpacePlatform3 + 23
-	.db 133
-	.db %11100000
-	.db 3
-	.dl SG_SpacePlatform2 + 11
-	.db 112
-	.db %11100000
-	.db 3
-	.dl SG_SpacePlatform2 + 15
-	.db 119
-	.db %11100000
-	.db 3
-	.dl SG_SpacePlatform2 + 19
-	.db 126
-	.db %11100000
-	.db 3
-	.dl SG_SpacePlatform2 + 23
 	.db 133
 	.db %11100000
 	.db 3
@@ -1900,6 +1604,70 @@ disable_animation_data:
 	.db 133
 	.db %11100000
 	.db 3
+	.dl SG_AntigravZoneFG_3 + 3
+	.db 140
+	.db %10000001
+	.db 12
+	.dl SG_AntigravZoneFG_3 + 7
+	.db 140
+	.db %00000001
+	.db 12
+	.dl SG_AntigravZoneFG_3 + 11
+	.db 140
+	.db %10000001
+	.db 12
+	.dl SG_AntigravZoneFG_3 + 15
+	.db 140
+	.db %00000001
+	.db 12
+	.dl SG_AntigravZoneFG_3 + 19
+	.db 140
+	.db %10000001
+	.db 12
+	.dl SG_AntigravZoneFG_3 + 23
+	.db 140
+	.db %00000001
+	.db 12
+	.dl SG_AntigravZoneFG_3 + 27
+	.db 140
+	.db %10000001
+	.db 12
+	.dl SG_AntigravZoneFG_3 + 31
+	.db 140
+	.db %00000001
+	.db 12
+	.dl SG_AntigravZoneFG_2 + 3
+	.db 140
+	.db %10000001
+	.db 12
+	.dl SG_AntigravZoneFG_2 + 7
+	.db 140
+	.db %00000001
+	.db 12
+	.dl SG_AntigravZoneFG_2 + 11
+	.db 140
+	.db %10000001
+	.db 12
+	.dl SG_AntigravZoneFG_2 + 15
+	.db 140
+	.db %00000001
+	.db 12
+	.dl SG_AntigravZoneFG_2 + 19
+	.db 140
+	.db %10000001
+	.db 12
+	.dl SG_AntigravZoneFG_2 + 23
+	.db 140
+	.db %00000001
+	.db 12
+	.dl SG_AntigravZoneFG_2 + 27
+	.db 140
+	.db %10000001
+	.db 12
+	.dl SG_AntigravZoneFG_2 + 31
+	.db 140
+	.db %00000001
+	.db 12
 	.dl SG_TurtleP3 + 7
 	.db 0
 	.db %01000000
@@ -1969,185 +1737,185 @@ disable_animation_data:
 
 breakaway_platform_data_0
 	.db 8
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_62 + 13
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_59 + 17
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_55 + 41
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_52 + 5
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_47 + 17
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_43 + 21
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_42 + 21
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_38 + 21
 
 
 breakaway_platform_data_1
 	.db 7
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_62 + 29
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_59 + 13
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_56 + 29
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_47 + 13
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_44 + 9
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_42 + 29
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_39 + 9
 
 
 breakaway_platform_data_2
 	.db 6
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_62 + 33
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_59 + 9
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_53 + 17
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_45 + 13
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_43 + 9
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_39 + 13
 
 
 breakaway_platform_data_3
 	.db 5
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_64 + 9
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_60 + 21
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_54 + 17
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_43 + 13
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_39 + 17
 
 
 breakaway_platform_data_4
 	.db 3
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_60 + 17
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_43 + 17
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_40 + 29
 
 
 breakaway_platform_data_5
 	.db 3
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_60 + 13
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_42 + 9
-	.db 9
-	.db 10
-	.db 11
-	.db 12
+	.db 152
+	.db 153
+	.db 154
+	.db 155
 	.dl MG2_Data_42 + 13
 
 
@@ -2173,77 +1941,77 @@ breakaway_platform_data_10
 
 breakaway_platform_data_11
 	.db 4
-	.db 11
-	.db 11
-	.db 11
-	.db 12
+	.db 154
+	.db 154
+	.db 154
+	.db 155
 	.dl MG2_Data_62 + 5
-	.db 11
-	.db 11
-	.db 11
-	.db 12
+	.db 154
+	.db 154
+	.db 154
+	.db 155
 	.dl MG2_Data_59 + 21
-	.db 11
-	.db 11
-	.db 11
-	.db 12
+	.db 154
+	.db 154
+	.db 154
+	.db 155
 	.dl MG2_Data_51 + 49
-	.db 11
-	.db 11
-	.db 11
-	.db 12
+	.db 154
+	.db 154
+	.db 154
+	.db 155
 	.dl MG2_Data_48 + 9
 
 
 breakaway_platform_data_12
 	.db 4
-	.db 11
-	.db 11
-	.db 11
-	.db 12
+	.db 154
+	.db 154
+	.db 154
+	.db 155
 	.dl MG2_Data_63 + 41
-	.db 11
-	.db 11
-	.db 11
-	.db 12
+	.db 154
+	.db 154
+	.db 154
+	.db 155
 	.dl MG2_Data_60 + 25
-	.db 11
-	.db 11
-	.db 11
-	.db 12
+	.db 154
+	.db 154
+	.db 154
+	.db 155
 	.dl MG2_Data_51 + 61
-	.db 11
-	.db 11
-	.db 11
-	.db 12
+	.db 154
+	.db 154
+	.db 154
+	.db 155
 	.dl MG2_Data_48 + 21
 
 
 breakaway_platform_data_13
 	.db 3
-	.db 11
-	.db 11
-	.db 11
-	.db 12
+	.db 154
+	.db 154
+	.db 154
+	.db 155
 	.dl MG2_Data_64 + 5
-	.db 11
-	.db 11
-	.db 11
-	.db 12
+	.db 154
+	.db 154
+	.db 154
+	.db 155
 	.dl MG2_Data_60 + 9
-	.db 11
-	.db 11
-	.db 11
-	.db 12
+	.db 154
+	.db 154
+	.db 154
+	.db 155
 	.dl MG2_Data_51 + 17
 
 
 breakaway_platform_data_14
 	.db 1
-	.db 11
-	.db 11
-	.db 11
-	.db 12
+	.db 154
+	.db 154
+	.db 154
+	.db 155
 	.dl MG2_Data_51 + 25
 
 
